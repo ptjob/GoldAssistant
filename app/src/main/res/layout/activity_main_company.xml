@@ -23,7 +23,7 @@
         android:background="@color/body_color"
         android:gravity="center"
         android:paddingTop="4dp"
-        android:weightSum="0.8" >
+        android:weightSum="0.9" >
 
    
         <LinearLayout
@@ -31,7 +31,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.2"
+            android:layout_weight="0.3"
             android:background="@color/body_color"
             android:gravity="center"
             android:orientation="vertical" >
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:drawableTop="@drawable/tab_btn_group_nor"
                     android:gravity="center"
-                    android:text="圈子"
+                    android:text="@string/message"
                     android:textColor="@color/menu_huise" />
 
                 <TextView
@@ -76,7 +76,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.2"
+            android:layout_weight="0.3"
             android:background="@color/body_color"
             android:gravity="center"
             android:orientation="vertical" >
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:drawableTop="@drawable/tab_btn_function_nor"
                     android:gravity="center"
-                    android:text="功能"
+                    android:text="@string/publish"
                     android:textColor="@color/menu_huise" />
 
                 <ImageView
@@ -118,7 +118,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.2"
+            android:layout_weight="0.3"
             android:background="@color/body_color"
             android:gravity="center"
             android:orientation="vertical" >
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/tab_btn_settings_nor"
                 android:gravity="center"
-                android:text="设置"
+                android:text="@string/mine"
                 android:textColor="@color/menu_huise" />
 
             <ImageView

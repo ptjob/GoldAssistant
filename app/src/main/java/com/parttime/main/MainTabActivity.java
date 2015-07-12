@@ -12,16 +12,11 @@ import java.util.Set;
 import java.util.UUID;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -109,6 +104,8 @@ import com.easemob.util.EMLog;
 import com.easemob.util.EasyUtils;
 import com.easemob.util.HanziToPinyin;
 import com.easemob.util.NetUtils;
+import com.parttime.common.update.UpdateUtils;
+import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
@@ -196,7 +193,7 @@ public class MainTabActivity extends FragmentActivity implements
 			R.drawable.tab_btn_settings_nor };
 
 	private int currentVerCode;// 当前应用版本号
-	private String is_force, is_alert;// 是否强制更新,是否弹框更新 : 1表示是
+	private String isForce, isAlert;// 是否强制更新,是否弹框更新 : 1表示是
 	private String server_apk_downloadUrl, update_contentStr;
 	private int server_vercode;// 服务器端版本号
 	private ProgressDialog pd;
@@ -478,7 +475,7 @@ public class MainTabActivity extends FragmentActivity implements
 	// =============极光的推送jpush=======================================
 	// 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
 	private void initpush() {
-		JPushInterface.init(getApplicationContext());
+		//JPushInterface.init(getApplicationContext());
 	}
 
 	/**
@@ -1136,8 +1133,8 @@ public class MainTabActivity extends FragmentActivity implements
 	/**
 	 * set head
 	 * 
-	 * @param username
-	 * @return
+	 * @param username String
+	 * @return User
 	 */
 	User setUserHead(String username) {
 		User user = new User();
@@ -1842,7 +1839,7 @@ public class MainTabActivity extends FragmentActivity implements
 			new Thread() {
 				public void run() {
 					currentVerCode = getAPKVersion();// 获取当前版本
-					String result = getJsonByPhp(updateUrl);
+					String result = new UpdateUtils().getJsonByPhp(updateUrl);
 					if (!"connect_fail".equals(result)) {
 						jsonjiexi(result);
 						mHandler.sendEmptyMessage(1);
@@ -1853,50 +1850,13 @@ public class MainTabActivity extends FragmentActivity implements
 
 	}
 
-	/**
-	 * 获取广告的json文件对象
-	 * 
-	 */
-	public String getJsonByPhp(String url) {
-		HttpPost httpPost = null;
-		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-		try {
-			httpPost = new HttpPost(url);
-			// 设置字符集
-			HttpEntity httpentity = new UrlEncodedFormEntity(params, "utf-8");
-			// 请求httpRequest
-			httpPost.setEntity(httpentity);
-			// 取得默认的HttpClient
-			HttpClient httpclient = new DefaultHttpClient();
-			// 请求超时
-			httpclient.getParams().setParameter(
-					CoreConnectionPNames.CONNECTION_TIMEOUT, 5000);
-			// 读取超时
-			httpclient.getParams().setParameter(
-					CoreConnectionPNames.SO_TIMEOUT, 5000);
-			// 取得HttpResponse
-			HttpResponse httpResponse = httpclient.execute(httpPost);
-			// HttpStatus.SC_OK表示连接成功
-			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				// 取得返回的字符串
-				String strResult = EntityUtils.toString(
-						httpResponse.getEntity(), "gbk");
-				return strResult;
-			}
-			// 关闭连接
-			httpclient.getConnectionManager().shutdown();
-		} catch (Exception e) {
-			return "connect_fail";
-		}
-		return "connect_fail";
-	}
 
 	/**
 	 * DOWNLOAD APK FILE BY URL
 	 * 
-	 * @param url
+	 * @param url String
 	 */
-	public void downloadApkFile(final String url) {
+	private void downloadApkFile(final String url) {
 		new Thread() {
 			public void run() {
 				HttpClient client = new DefaultHttpClient();
@@ -1971,7 +1931,7 @@ public class MainTabActivity extends FragmentActivity implements
 			public void onClick(DialogInterface dialog, int which) {
 				downFlag = true;
 				dialog.cancel();
-				if (is_force != null && "1".equals(is_force)) {
+				if (isForce != null && "1".equals(isForce)) {
 					if (FindPJLoginActivity.instance != null) {
 						FindPJLoginActivity.instance.finish();
 					}
@@ -1998,7 +1958,7 @@ public class MainTabActivity extends FragmentActivity implements
 			switch (msg.what) {
 			case 1:
 				if (currentVerCode < server_vercode) {
-					if (is_alert != null && "1".equals(is_alert)) {
+					if (isAlert != null && "1".equals(isAlert)) {
 						downFlag = false;// 重置下载标志
 						new AlertDialog.Builder(MainTabActivity.this)
 								.setTitle("检测到金牌助理有更新了")
@@ -2021,8 +1981,11 @@ public class MainTabActivity extends FragmentActivity implements
 											public void onClick(
 													DialogInterface arg0,
 													int arg1) {
-												if (is_force != null
-														&& "1".equals(is_force)) {
+                                                if(BuildConfig.DEBUG){
+                                                    isForce = "2";
+                                                }
+												if (isForce != null
+														&& "1".equals(isForce)) {
 													if (EnterActivity.instance != null) {
 														EnterActivity.instance
 																.finish();
@@ -2189,14 +2152,14 @@ public class MainTabActivity extends FragmentActivity implements
 				// String server_code_str = appInfo.getString("version");
 				// server_vercode = Integer.parseInt(server_code_str);
 				// update_contentStr = appInfo.getString("update_msg");
-				// is_force = appInfo.getString("is_force");// 是否强制更新1是强制更新
-				// is_alert = appInfo.getString("is_alert");// 是否弹出更新框
+				// isForce = appInfo.getString("is_force");// 是否强制更新1是强制更新
+				// isAlert = appInfo.getString("is_alert");// 是否弹出更新框
 				// server_apk_downloadUrl = appInfo.getString("update_url");
 				String server_code_str = appInfo.getString("agent_version");
 				server_vercode = Integer.parseInt(server_code_str);
 				update_contentStr = appInfo.getString("agent_update_msg");
-				is_force = appInfo.getString("agent_is_force");// 是否强制更新1是强制更新
-				is_alert = appInfo.getString("agent_is_alert");// 是否弹出更新框
+				isForce = appInfo.getString("agent_is_force");// 是否强制更新1是强制更新
+				isAlert = appInfo.getString("agent_is_alert");// 是否弹出更新框
 				server_apk_downloadUrl = appInfo.getString("agent_update_url");
 			}
 

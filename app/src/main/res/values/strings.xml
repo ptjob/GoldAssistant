@@ -2,6 +2,11 @@
 <resources>
 
     <string name="app_name">3金牌助理</string>
+    <!--主界面-->
+    <string name="publish">发布</string>
+    <string name="mine">我</string>
+    <string name="message">消息</string>
+
     <!-- 注册登陆 -->
     <string name="recruit_part_time">招兼职</string>
     <string name="regist_regist">注册</string>
