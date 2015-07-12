@@ -1172,7 +1172,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
      * @param view View
      */
     public void showGroupNotice(View view){
-        new ChatActivityHelper().showGroupNotice(this);
+        new ChatActivityHelper().showGroupNotice(this, view);
     }
 
 	/**

@@ -109,11 +109,48 @@
         <item name="android:textColor">@color/item_titleColor</item>
     </style>
 
+
+    <style name="popwin_anim_style_1">
+        <item name="android:windowEnterAnimation">@anim/menu_show</item>
+        <item name="android:windowExitAnimation">@anim/menu_hide</item>
+    </style>
+    <style name="popwin_anim_style_2">
+        <item name="android:windowEnterAnimation">@anim/menu_hide</item>
+        <item name="android:windowExitAnimation">@anim/menu_show</item>
+    </style>
     <!--
     <style name="AnimBottom" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
-    </style>
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     -->
 
 
@@ -216,7 +253,36 @@
     <!--
     <style name="horizontal_slide2" parent="android:style/Theme.Holo.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@style/AnimFade2</item>
-    </style>
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     -->
 
     <style name="MyDialogStyle">
