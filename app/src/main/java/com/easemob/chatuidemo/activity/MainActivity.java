@@ -45,6 +45,7 @@ import com.easemob.chatuidemo.utils.CommonUtils;
 import com.easemob.util.EMLog;
 import com.easemob.util.HanziToPinyin;
 import com.easemob.util.NetUtils;
+import com.parttime.IM.ChatActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.umeng.analytics.MobclickAgent;

@@ -38,6 +38,7 @@ import com.easemob.chat.EMMessage.ChatType;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.adapter.GroupAdapter;
 import com.easemob.exceptions.EaseMobException;
+import com.parttime.IM.ChatActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.ToastUtil;
 

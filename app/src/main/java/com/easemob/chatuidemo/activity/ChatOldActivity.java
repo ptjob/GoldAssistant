@@ -313,7 +313,7 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 		} else {
 			// 群聊
 			findViewById(R.id.container_to_group).setVisibility(View.VISIBLE);
-			findViewById(R.id.container_remove).setVisibility(View.GONE);
+			findViewById(R.id.container_contact_detail).setVisibility(View.GONE);
 			findViewById(R.id.container_voice_call).setVisibility(View.GONE);
 			toChatUsername = getIntent().getStringExtra("groupId");
 			group = EMGroupManager.getInstance().getGroup(toChatUsername);
@@ -520,7 +520,7 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 					more(more);
 					sendLocationMsg(latitude, longitude, "", locationAddress);
 				} else {
-					Toast.makeText(this, "无法获取到您的位置信息！", 0).show();
+					Toast.makeText(this, "无法获取到您的位置信息！", Toast.LENGTH_SHORT).show();
 				}
 				// 重发消息
 			} else if (requestCode == REQUEST_CODE_TEXT) {
@@ -595,7 +595,7 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 			selectFileFromLocal();
 		} else if (id == R.id.btn_voice_call) { //点击语音电话图标
 			if(!EMChatManager.getInstance().isConnected())
-				Toast.makeText(this, "尚未连接至服务器，请稍后重试", 0).show();
+				Toast.makeText(this, "尚未连接至服务器，请稍后重试", Toast.LENGTH_SHORT).show();
 			else
 				startActivity(new Intent(ChatOldActivity.this, VoiceCallActivity.class).
 						putExtra("username", toChatUsername).
@@ -608,7 +608,7 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 	 */
 	public void selectPicFromCamera() {
 		if (!CommonUtils.isExitsSdcard()) {
-			Toast.makeText(getApplicationContext(), "SD卡不存在，不能拍照", 0).show();
+			Toast.makeText(getApplicationContext(), "SD卡不存在，不能拍照", Toast.LENGTH_SHORT).show();
 			return;
 		}
 
@@ -655,8 +655,6 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 	 * 
 	 * @param content
 	 *            message content
-	 * @param isResend
-	 *            boolean resend
 	 */
 	private void sendText(String content) {
 
@@ -855,11 +853,11 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 		}
 		File file = new File(filePath);
 		if (file == null || !file.exists()) {
-			Toast.makeText(getApplicationContext(), "文件不存在", 0).show();
+			Toast.makeText(getApplicationContext(), "文件不存在", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if (file.length() > 10 * 1024 * 1024) {
-			Toast.makeText(getApplicationContext(), "文件不能大于10M", 0).show();
+			Toast.makeText(getApplicationContext(), "文件不能大于10M", Toast.LENGTH_SHORT).show();
 			return;
 		}
 
@@ -1139,7 +1137,7 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 							sendVoice(voiceRecorder.getVoiceFilePath(), voiceRecorder.getVoiceFileName(toChatUsername),
 									Integer.toString(length), false);
 						} else {
-							Toast.makeText(getApplicationContext(), "录音时间太短", 0).show();
+							Toast.makeText(getApplicationContext(), "录音时间太短", Toast.LENGTH_SHORT).show();
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -1166,7 +1164,7 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 	private View getGridChildView(int i) {
 		View view = View.inflate(this, R.layout.expression_gridview, null);
 		ExpandGridView gv = (ExpandGridView) view.findViewById(R.id.gridview);
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		if (i == 1) {
 			List<String> list1 = reslist.subList(0, 20);
 			list.addAll(list1);
@@ -1222,7 +1220,7 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 	}
 
 	public List<String> getExpressionRes(int getSum) {
-		List<String> reslist = new ArrayList<String>();
+		List<String> reslist = new ArrayList<>();
 		for (int x = 1; x <= getSum; x++) {
 			String filename = "ee_" + x;
 
@@ -1297,10 +1295,10 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 	private void addUserToBlacklist(String username) {
 		try {
 			EMContactManager.getInstance().addUserToBlackList(username, false);
-			Toast.makeText(getApplicationContext(), "移入黑名单成功", 0).show();
+			Toast.makeText(getApplicationContext(), "移入黑名单成功", Toast.LENGTH_SHORT).show();
 		} catch (EaseMobException e) {
 			e.printStackTrace();
-			Toast.makeText(getApplicationContext(), "移入黑名单失败", 0).show();
+			Toast.makeText(getApplicationContext(), "移入黑名单失败", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -1404,7 +1402,7 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 			runOnUiThread(new Runnable() {
 				public void run() {
 					if (toChatUsername.equals(groupId)) {
-						Toast.makeText(ChatOldActivity.this, "你被群创建者从此群中移除", 1).show();
+						Toast.makeText(ChatOldActivity.this, "你被群创建者从此群中移除", Toast.LENGTH_LONG).show();
 						if (GroupDetailsActivity.instance != null)
 							GroupDetailsActivity.instance.finish();
 						finish();
@@ -1419,7 +1417,7 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 			runOnUiThread(new Runnable() {
 				public void run() {
 					if (toChatUsername.equals(groupId)) {
-						Toast.makeText(ChatOldActivity.this, "当前群聊已被群创建者解散", 1).show();
+						Toast.makeText(ChatOldActivity.this, "当前群聊已被群创建者解散", Toast.LENGTH_LONG).show();
 						if (GroupDetailsActivity.instance != null)
 							GroupDetailsActivity.instance.finish();
 						finish();

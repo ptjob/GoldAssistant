@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.easemob.chatuidemo.adapter;
+package com.parttime.main.adapter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -294,9 +294,9 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 	/**
 	 * 根据消息内容和消息类型获取消息内容提示
 	 * 
-	 * @param message
-	 * @param context
-	 * @return
+	 * @param message EMMessage
+	 * @param context Context
+	 * @return String
 	 */
 	private String getMessageDigest(EMMessage message, Context context) {
 		String digest = "";
@@ -400,7 +400,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 			FilterResults results = new FilterResults();
 
 			if (mOriginalValues == null) {
-				mOriginalValues = new ArrayList<EMConversation>();
+				mOriginalValues = new ArrayList<>();
 			}
 			if (prefix == null || prefix.length() == 0) {
 				results.values = copyConversationList;
@@ -408,7 +408,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 			} else {
 				String prefixString = prefix.toString();
 				final int count = mOriginalValues.size();
-				final ArrayList<EMConversation> newValues = new ArrayList<EMConversation>();
+				final ArrayList<EMConversation> newValues = new ArrayList<>();
 
 				for (int i = 0; i < count; i++) {
 					final EMConversation value = mOriginalValues.get(i);

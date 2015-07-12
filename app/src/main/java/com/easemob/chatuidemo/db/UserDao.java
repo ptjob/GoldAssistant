@@ -42,7 +42,7 @@ public class UserDao {
 	/**
 	 * 保存好友list
 	 * 
-	 * @param contactList
+	 * @param contactList List<User>
 	 */
 	public void saveContactList(List<User> contactList) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -61,11 +61,11 @@ public class UserDao {
 	/**
 	 * 获取好友list
 	 * 
-	 * @return
+	 * @return Map<String, User>
 	 */
 	public Map<String, User> getContactList() {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		Map<String, User> users = new HashMap<String, User>();
+		Map<String, User> users = new HashMap<>();
 		if (db.isOpen()) {
 			Cursor cursor = db.rawQuery("select * from " + TABLE_NAME /* + " desc" */, null);
 			while (cursor.moveToNext()) {
@@ -102,7 +102,7 @@ public class UserDao {
 	
 	/**
 	 * 删除一个联系人
-	 * @param username
+	 * @param username String
 	 */
 	public void deleteContact(String username){
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -113,7 +113,7 @@ public class UserDao {
 	
 	/**
 	 * 保存一个联系人
-	 * @param user
+	 * @param user User
 	 */
 	public void saveContact(User user){
 		SQLiteDatabase db = dbHelper.getWritableDatabase();

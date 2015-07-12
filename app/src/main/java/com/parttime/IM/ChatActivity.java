@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.easemob.chatuidemo.activity;
+package com.parttime.IM;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -50,7 +50,6 @@ import android.text.ClipboardManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -95,6 +94,13 @@ import com.easemob.chat.NormalFileMessageBody;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.chat.VideoMessageBody;
 import com.easemob.chat.VoiceMessageBody;
+import com.easemob.chatuidemo.activity.AlertDialog;
+import com.easemob.chatuidemo.activity.BaiduMapActivity;
+import com.easemob.chatuidemo.activity.BaseActivity;
+import com.easemob.chatuidemo.activity.ForwardMessageActivity;
+import com.easemob.chatuidemo.activity.GroupDetailsActivity;
+import com.easemob.chatuidemo.activity.ImageGridActivity;
+import com.easemob.chatuidemo.activity.VoiceCallActivity;
 import com.easemob.chatuidemo.adapter.ExpressionAdapter;
 import com.easemob.chatuidemo.adapter.ExpressionPagerAdapter;
 import com.easemob.chatuidemo.adapter.MessageAdapter;
@@ -123,7 +129,7 @@ import com.quark.volley.VolleySington;
  */
 public class ChatActivity extends BaseActivity implements OnClickListener {
 
-	private static final int REQUEST_CODE_EMPTY_HISTORY = 2;
+    private static final int REQUEST_CODE_EMPTY_HISTORY = 2;
 	public static final int REQUEST_CODE_CONTEXT_MENU = 3;
 	private static final int REQUEST_CODE_MAP = 4;
 	public static final int REQUEST_CODE_TEXT = 5;
@@ -156,7 +162,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	public static final int CHATTYPE_SINGLE = 1;
 	public static final int CHATTYPE_GROUP = 2;
 	public static final String COPY_IMAGE = "EASEMOBIMG";
-	private View recordingContainer;
+    public static final String COM_CARSON_SHARE_JIANZHI = "com.carson.share.jianzhi";
+    private View recordingContainer;
 	private ImageView micImage;
 	private TextView recordingHint;
 	private ListView listView;
@@ -185,7 +192,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	private VoiceRecorder voiceRecorder;
 	private MessageAdapter adapter;
 	private File cameraFile;
-	static int resendPos;
+	public static int resendPos;
 	private GroupListener groupListener;
 	private ImageView iv_emoticons_normal;
 	private ImageView iv_emoticons_checked;
@@ -223,7 +230,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 		// 注册广播监听是否分享了我的兼职
 		receiveBroadCast = new ReceiveBroadCast();
 		IntentFilter filter = new IntentFilter();
-		filter.addAction("com.carson.share.jianzhi");
+		filter.addAction(COM_CARSON_SHARE_JIANZHI);
 		registerReceiver(receiveBroadCast, filter);
 	}
 
@@ -401,7 +408,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 		} else {
 			// 群聊
 			findViewById(R.id.container_to_group).setVisibility(View.VISIBLE);
-			findViewById(R.id.container_remove).setVisibility(View.GONE);
+            findViewById(R.id.container_group_notice).setVisibility(View.VISIBLE);
+			findViewById(R.id.container_contact_detail).setVisibility(View.GONE);
 			findViewById(R.id.container_voice_call).setVisibility(View.GONE);
 			toChatUsername = getIntent().getStringExtra("groupId");
 			group = EMGroupManager.getInstance().getGroup(toChatUsername);
@@ -449,7 +457,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 
 				if (username.equals(ApplicationControl.getInstance()
 						.getUserName()))
-					Toast.makeText(ChatActivity.this, "你自己", 1000).show();
+					Toast.makeText(ChatActivity.this, "你自己", Toast.LENGTH_SHORT).show();
 				else {
 					// 进入个人资料
 					Intent intent = new Intent(ChatActivity.this,
@@ -626,7 +634,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 					more(more);
 					sendLocationMsg(latitude, longitude, "", locationAddress);
 				} else {
-					Toast.makeText(this, "无法获取到您的位置信息！", 0).show();
+					Toast.makeText(this, "无法获取到您的位置信息！", Toast.LENGTH_SHORT).show();
 				}
 				// 重发消息
 			} else if (requestCode == REQUEST_CODE_TEXT
@@ -701,7 +709,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 			selectFileFromLocal();
 		} else if (id == R.id.btn_voice_call) { // 点击语音电话图标
 			if (!EMChatManager.getInstance().isConnected())
-				Toast.makeText(this, "尚未连接至服务器，请稍后重试", 0).show();
+				Toast.makeText(this, "尚未连接至服务器，请稍后重试", Toast.LENGTH_SHORT).show();
 			else
 				startActivity(new Intent(ChatActivity.this,
 						VoiceCallActivity.class).putExtra("username",
@@ -746,7 +754,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	 */
 	public void selectPicFromCamera() {
 		if (!CommonUtils.isExitsSdcard()) {
-			Toast.makeText(getApplicationContext(), "SD卡不存在，不能拍照", 0).show();
+			Toast.makeText(getApplicationContext(), "SD卡不存在，不能拍照", Toast.LENGTH_SHORT).show();
 			return;
 		}
 
@@ -800,8 +808,6 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	 * 
 	 * @param content
 	 *            message content
-	 * @param isResend
-	 *            boolean resend
 	 */
 	private void sendText(String content) {
 
@@ -1055,11 +1061,11 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 		}
 		File file = new File(filePath);
 		if (file == null || !file.exists()) {
-			Toast.makeText(getApplicationContext(), "文件不存在", 0).show();
+			Toast.makeText(getApplicationContext(), "文件不存在", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if (file.length() > 10 * 1024 * 1024) {
-			Toast.makeText(getApplicationContext(), "文件不能大于10M", 0).show();
+			Toast.makeText(getApplicationContext(), "文件不能大于10M", Toast.LENGTH_SHORT).show();
 			return;
 		}
 
@@ -1151,7 +1157,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	/**
 	 * 点击清空聊天记录
 	 * 
-	 * @param view
+	 * @param view View
 	 */
 	public void emptyHistory(View view) {
 		startActivityForResult(
@@ -1161,10 +1167,18 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 				REQUEST_CODE_EMPTY_HISTORY);
 	}
 
+    /**
+     * 显示群组通知
+     * @param view View
+     */
+    public void showGroupNotice(View view){
+        new ChatActivityHelper().showGroupNotice(this);
+    }
+
 	/**
 	 * 点击进入群组详情
 	 * 
-	 * @param view
+	 * @param view View
 	 */
 	public void toGroupDetails(View view) {
 		startActivityForResult(
@@ -1175,7 +1189,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	/**
 	 * 显示或隐藏图标按钮页
 	 * 
-	 * @param view
+	 * @param view View
 	 */
 	public void more(View view) {
 		if (more.getVisibility() == View.GONE) {
@@ -1201,7 +1215,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	/**
 	 * 点击文字输入框
 	 * 
-	 * @param v
+	 * @param v View
 	 */
 	public void editClick(View v) {
 		listView.setSelection(listView.getCount() - 1);
@@ -1392,8 +1406,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	/**
 	 * 获取表情的gridview的子view
 	 * 
-	 * @param i
-	 * @return
+	 * @param i int
+	 * @return View
 	 */
 	private View getGridChildView(int i) {
 		View view = View.inflate(this, R.layout.expression_gridview, null);
@@ -1550,10 +1564,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	private void addUserToBlacklist(String username) {
 		try {
 			EMContactManager.getInstance().addUserToBlackList(username, false);
-			Toast.makeText(getApplicationContext(), "移入黑名单成功", 0).show();
+			Toast.makeText(getApplicationContext(), "移入黑名单成功", Toast.LENGTH_SHORT).show();
 		} catch (EaseMobException e) {
 			e.printStackTrace();
-			Toast.makeText(getApplicationContext(), "移入黑名单失败", 0).show();
+			Toast.makeText(getApplicationContext(), "移入黑名单失败", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -1694,7 +1708,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 			runOnUiThread(new Runnable() {
 				public void run() {
 					if (toChatUsername.equals(groupId)) {
-						Toast.makeText(ChatActivity.this, "你被群创建者从此群中移除", 1)
+						Toast.makeText(ChatActivity.this, "你被群创建者从此群中移除", Toast.LENGTH_SHORT)
 								.show();
 						if (GroupDetailsActivity.instance != null)
 							GroupDetailsActivity.instance.finish();
@@ -1710,7 +1724,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 			runOnUiThread(new Runnable() {
 				public void run() {
 					if (toChatUsername.equals(groupId)) {
-						Toast.makeText(ChatActivity.this, "当前群聊已被群创建者解散", 1)
+						Toast.makeText(ChatActivity.this, "当前群聊已被群创建者解散", Toast.LENGTH_SHORT)
 								.show();
 						if (GroupDetailsActivity.instance != null)
 							GroupDetailsActivity.instance.finish();

@@ -16,7 +16,7 @@ public class CityDB {
 		int tempCityId = 1;
 		mDbCity = CityDatabase.openDatabase(context);
 		// 查找 省级
-		mProvinces = new ArrayList<String>();
+		mProvinces = new ArrayList<>();
 		String sql = "select * from area where area_parent_id =0";
 		Cursor cursor = mDbCity.rawQuery(sql, null);
 		// 遍历Cursor
@@ -40,7 +40,7 @@ public class CityDB {
 		// }
 
 		// 查找 区县级
-		mCountries = new ArrayList<String>();
+		mCountries = new ArrayList<>();
 		// 接口要求 去掉市字
 		String tempCity = city;
 		if (city.endsWith("市")) {

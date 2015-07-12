@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/more"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="#ffffff"
+android:orientation="vertical"
+android:visibility="gone" >
+
+<!-- 表情图片 -->
+
+<LinearLayout
+    android:id="@+id/ll_face_container"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:visibility="visible" >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
+<!-- 图片，表情，名片等按钮 -->
+
+<LinearLayout
+    android:id="@+id/ll_btn_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="gone" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="6dp"
+        android:weightSum="4" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp" >
+
+                <ImageView
+                    android:id="@+id/btn_take_picture"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/chat_takepic_selector"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:scaleType="fitCenter" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/attach_take_pic"
+                android:textColor="#727171" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp" >
+
+                <ImageView
+                    android:id="@+id/btn_picture"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/chat_image_selector"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:scaleType="fitCenter" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/attach_picture"
+                android:textColor="#727171" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp" >
+
+                <ImageView
+                    android:id="@+id/btn_location"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_centerInParent="true"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/chat_location_selector" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/attach_location"
+                android:textColor="#727171" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp" >
+
+                <ImageView
+                    android:id="@+id/btn_video"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_centerInParent="true"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/chat_video_selector" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="视频"
+                android:textColor="#727171" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="6dp"
+        android:weightSum="4" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp" >
+
+                <ImageView
+                    android:id="@+id/btn_file"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/chat_file_selector"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:scaleType="fitCenter" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/attach_file"
+                android:textColor="#727171" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_voice_call"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp" >
+
+                <ImageView
+                    android:id="@+id/btn_voice_call"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/chat_voice_call_selector"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:scaleType="fitCenter" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/attach_voice_call"
+                android:textColor="#727171" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_zidingyi_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp" >
+
+                <ImageView
+                    android:id="@+id/btn_zidingyi_msg"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/chat_zidingyi_selector"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:scaleType="fitCenter" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="分享兼职"
+                android:textColor="#727171" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>

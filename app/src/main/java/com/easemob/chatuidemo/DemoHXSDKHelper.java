@@ -27,7 +27,7 @@ import com.easemob.chat.EMMessage.ChatType;
 import com.easemob.chat.EMMessage.Type;
 import com.easemob.chat.OnMessageNotifyListener;
 import com.easemob.chat.OnNotificationClickListener;
-import com.easemob.chatuidemo.activity.ChatActivity;
+import com.parttime.IM.ChatActivity;
 import com.easemob.chatuidemo.activity.MainActivity;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.receiver.VoiceCallReceiver;

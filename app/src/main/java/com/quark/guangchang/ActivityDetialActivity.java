@@ -49,7 +49,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
-import com.easemob.chatuidemo.activity.ChatActivity;
+import com.parttime.IM.ChatActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;

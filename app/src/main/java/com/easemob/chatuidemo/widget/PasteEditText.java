@@ -23,7 +23,7 @@ import android.util.AttributeSet;
 import android.widget.EditText;
 
 import com.easemob.chatuidemo.activity.AlertDialog;
-import com.easemob.chatuidemo.activity.ChatActivity;
+import com.parttime.IM.ChatActivity;
 
 /**
  * 自定义的textview，用来处理复制粘贴的消息

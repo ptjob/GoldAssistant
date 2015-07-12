@@ -54,7 +54,7 @@ import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMContactManager;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.activity.AddContactActivity;
-import com.easemob.chatuidemo.activity.ChatActivity;
+import com.parttime.IM.ChatActivity;
 import com.easemob.chatuidemo.activity.GroupsActivity;
 import com.easemob.chatuidemo.activity.NewFriendsMsgActivity;
 import com.easemob.chatuidemo.adapter.ContactAdapter;
