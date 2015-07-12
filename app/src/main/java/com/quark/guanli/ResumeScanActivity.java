@@ -45,7 +45,7 @@ import com.quark.adapter.JianliScanAdapter;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.BaomingList;
 import com.quark.model.ResumeToCompany;
 import com.quark.model.UserCommentModle;
@@ -204,15 +204,15 @@ public class ResumeScanActivity extends BaseActivity {
 		female_count = (String) getValue4Intent("female_count");
 		male_count = (String) getValue4Intent("male_count");
 		navUrl = Url.USER_jianli_scan_nav + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		commentUrl = Url.USER_jianli_scan_comment + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		dataUrl = Url.COMPANY_applicantInfo + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		approveActivityUrl = Url.COMPANY_approveActivity + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		rejectActivityUrl = Url.COMPANY_rejectActivity + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 
 		picbottom.getBackground().setAlpha(100);
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);

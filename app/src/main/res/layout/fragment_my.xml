@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/body_color"
     android:orientation="vertical"
-    tools:context="com.quark.fragment.MyFragment" >
+    tools:context="com.parttime.main.MyFragment" >
 
     <ScrollView
         android:layout_width="fill_parent"

@@ -36,7 +36,7 @@ import com.quark.adapter.FunsAdapter;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.FunsBean;
 import com.quark.volley.VolleySington;
 
@@ -69,7 +69,7 @@ public class MyFunsActivity extends BaseActivity implements IXListViewListener {
 		queue = VolleySington.getInstance().getRequestQueue();
 		setTopTitle("我的粉丝");
 		setBackButton();
-		dataUrl = Url.MY_FOLLOWERS_LIST + "?token=" + MainCompanyActivity.token;
+		dataUrl = Url.MY_FOLLOWERS_LIST + "?token=" + MainTabActivity.token;
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
 		user_id = sp.getString("userId", "");
 		city = sp.getString("city", "");

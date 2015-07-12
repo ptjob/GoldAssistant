@@ -48,7 +48,7 @@ import com.quark.common.Url;
 import com.quark.http.image.CircularImage;
 import com.quark.http.image.LoadImage;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.BrokerBean;
 import com.quark.volley.VolleySington;
 
@@ -89,7 +89,7 @@ public class BrokerActivity extends BaseActivity implements IXListViewListener {
 		queue = VolleySington.getInstance().getRequestQueue();
 		setTopTitle("金牌助理排行榜");
 		setBackButton();
-		dataUrl = Url.BROKER_LIST + "?token=" + MainCompanyActivity.token;
+		dataUrl = Url.BROKER_LIST + "?token=" + MainTabActivity.token;
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
 		user_id = sp.getString("userId", "");
 		city = sp.getString("city", "");

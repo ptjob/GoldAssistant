@@ -31,7 +31,7 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.ui.widget.CommonWidget;
 import com.quark.ui.widget.CustomDialog;
 
@@ -62,7 +62,7 @@ public class SuggestActivity extends BaseActivity {
 		SharedPreferences sp = getSharedPreferences("jrdr.setting",
 				MODE_PRIVATE);
 		user_id = sp.getString("userId", "");
-		url = Url.COMPANY_coment + "?token=" + MainCompanyActivity.token;
+		url = Url.COMPANY_coment + "?token=" + MainTabActivity.token;
 		roleIdStr = "company_id";
 		RelativeLayout topLayout = (RelativeLayout) findViewById(R.id.top_title_layout);
 		topLayout.setBackgroundColor(getResources().getColor(

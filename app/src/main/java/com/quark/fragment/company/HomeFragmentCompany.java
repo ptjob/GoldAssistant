@@ -31,7 +31,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
-import com.droid.carson.Activity01;
 import com.qingmu.jianzhidaren.R;
 import com.quark.adapter.MyJianzhiAdapter;
 import com.quark.common.JsonUtil;
@@ -41,7 +40,7 @@ import com.quark.company.function.PersonAssessActivity;
 import com.quark.company.function.RosterActivity;
 import com.quark.guanli.PublishActivity;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.MyJianzhi;
 import com.quark.model.PublishAvailability;
 import com.quark.ui.widget.CustomDialog;
@@ -89,10 +88,10 @@ public class HomeFragmentCompany extends BaseActivity implements
 		city = sp.getString("city", "深圳");
 		// 当前城市
 		url = Url.COMPANY_MyJianzhi_List + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		// 获取是否能发布兼职
 		avalible_url = Url.COMPANY_availability + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		listView = (XListView) findViewById(R.id.list1);
 		listView.setPullLoadEnable(true);
 		mjzAdapter = new MyJianzhiAdapter(HomeFragmentCompany.this, jianzhis);

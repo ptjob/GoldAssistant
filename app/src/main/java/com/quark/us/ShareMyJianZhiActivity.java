@@ -39,7 +39,7 @@ import com.quark.common.ToastUtil;
 import com.quark.common.Url;
 import com.quark.guangchang.ActivityDetialActivity;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.GuangchangModle;
 import com.quark.volley.VolleySington;
 
@@ -72,7 +72,7 @@ public class ShareMyJianZhiActivity extends BaseActivity implements
 			setTopTitle("我的收藏");
 		}
 		setBackButton();
-		dataUrl = Url.USER_COLLECT_ACTIVITY + "?token=" + MainCompanyActivity.token;
+		dataUrl = Url.USER_COLLECT_ACTIVITY + "?token=" + MainTabActivity.token;
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
 		user_id = sp.getString("userId", "");
 		list = (XListView) findViewById(R.id.share_list);

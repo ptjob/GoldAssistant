@@ -45,7 +45,7 @@ import com.easemob.chatuidemo.adapter.ChatAllHistoryAdapter;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.quanzi.MyContactlistFragment;
 
 /**
@@ -209,7 +209,7 @@ public class ChatAllHistoryCompanyFragment extends Fragment {
 			adapter.notifyDataSetChanged();
 
 			// 更新消息未读数
-//			((MainCompanyActivity) getActivity()).updateUnreadLabel();
+//			((MainTabActivity) getActivity()).updateUnreadLabel();
 
 			return true;
 		}
@@ -283,7 +283,7 @@ public class ChatAllHistoryCompanyFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!hidden && ! ((MainCompanyActivity)getActivity()).isConflict) {
+		if (!hidden && ! ((MainTabActivity)getActivity()).isConflict) {
 			refresh();
 		}
 	}
@@ -291,9 +291,9 @@ public class ChatAllHistoryCompanyFragment extends Fragment {
 	@Override
     public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-        if(((MainCompanyActivity)getActivity()).isConflict){
+        if(((MainTabActivity)getActivity()).isConflict){
         	outState.putBoolean("isConflict", true);
-        }else if(((MainCompanyActivity)getActivity()).getCurrentAccountRemoved()){
+        }else if(((MainTabActivity)getActivity()).getCurrentAccountRemoved()){
         	outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
         }
     }

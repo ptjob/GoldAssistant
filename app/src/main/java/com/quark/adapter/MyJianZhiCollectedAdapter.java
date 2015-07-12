@@ -32,7 +32,7 @@ import com.carson.loadpic.SwipeLayout;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.ToastUtil;
 import com.quark.common.Url;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.GuangchangModle;
 import com.quark.volley.VolleySington;
 
@@ -54,7 +54,7 @@ public class MyJianZhiCollectedAdapter extends SwipeAdapter {
 		this.context = context;
 		this.isFromShareFlag = isFromShareFlag;
 		cancelCollectUrl = Url.USER_CANCEL_COLLECT + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		sp = context.getSharedPreferences("jrdr.setting", Context.MODE_PRIVATE);
 		user_id = sp.getString("userId", "");
 	}

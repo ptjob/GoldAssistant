@@ -1,4 +1,4 @@
-package com.quark.fragment;
+package com.parttime.main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
@@ -37,7 +37,6 @@ import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.jianzhidaren.FindPJLoginActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
 import com.quark.jianzhidaren.ModifyPwdActivity;
 import com.quark.model.HuanxinUser;
 import com.quark.setting.EditPhoneActivity;
@@ -47,10 +46,6 @@ import com.quark.ui.widget.CustomDialog;
 import com.quark.us.FeiJichiActivity;
 import com.quark.utils.WaitDialog;
 import com.quark.volley.VolleySington;
-import com.umeng.update.UmengUpdateAgent;
-import com.umeng.update.UmengUpdateListener;
-import com.umeng.update.UpdateResponse;
-import com.umeng.update.UpdateStatus;
 
 /**
  * 设置 商家 用户公用
@@ -153,10 +148,10 @@ public class MyFragment extends Fragment implements OnClickListener {
 
 		// 免打扰url
 		miandarao_url = Url.COMPANY_MIANDARAO + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		// 获取免打扰url
 		get_miandarao_status_url = Url.COMPANY_MIANDARAO_STATUS + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 
 		sp = getActivity().getSharedPreferences("jrdr.setting",
 				android.content.Context.MODE_PRIVATE);
@@ -219,7 +214,7 @@ public class MyFragment extends Fragment implements OnClickListener {
 		}
 		// 免打扰url
 		miandarao_url = Url.COMPANY_MIANDARAO + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		return view;
 	}
 
@@ -369,8 +364,8 @@ public class MyFragment extends Fragment implements OnClickListener {
 									FindPJLoginActivity.instance.finish();
 								}
 
-								if (MainCompanyActivity.instens != null) {
-									MainCompanyActivity.instens.finish();
+								if (MainTabActivity.instens != null) {
+									MainTabActivity.instens.finish();
 								}
 							}
 

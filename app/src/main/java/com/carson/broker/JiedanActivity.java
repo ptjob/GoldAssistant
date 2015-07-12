@@ -37,7 +37,7 @@ import com.quark.adapter.JiedanAdapter;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.JiedanBean;
 import com.quark.volley.VolleySington;
 
@@ -63,7 +63,7 @@ public class JiedanActivity extends BaseActivity implements IXListViewListener {
 		queue = VolleySington.getInstance().getRequestQueue();
 		setTopTitle("活动广场");
 		setBackButton();
-		dataUrl = Url.ACCEPT_ACT_LIST + "?token=" + MainCompanyActivity.token;
+		dataUrl = Url.ACCEPT_ACT_LIST + "?token=" + MainTabActivity.token;
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
 		user_id = sp.getString("userId", "");
 		city = sp.getString("city", "");

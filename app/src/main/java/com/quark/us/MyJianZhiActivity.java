@@ -38,7 +38,7 @@ import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.guangchang.ActivityDetialActivity;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.MyJianZhiModle;
 
 /**
@@ -111,7 +111,7 @@ public class MyJianZhiActivity extends BaseActivity implements
 		setTopTitle("我的兼职");
 		ViewUtils.inject(this);
 		setBackButton();
-		dataUrl = Url.COMPANY_requireActivity + "?token=" + MainCompanyActivity.token;
+		dataUrl = Url.COMPANY_requireActivity + "?token=" + MainTabActivity.token;
 		SharedPreferences sp = getSharedPreferences("jrdr.setting",
 				MODE_PRIVATE);
 		user_id = sp.getString("userId", "");

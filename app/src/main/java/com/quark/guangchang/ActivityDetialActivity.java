@@ -58,7 +58,7 @@ import com.quark.common.JsonUtil;
 import com.quark.common.ToastUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.AllJianzhiDetail;
 import com.quark.quanzi.UserInfo;
 import com.quark.setting.TousuActivity;
@@ -216,9 +216,9 @@ public class ActivityDetialActivity extends BaseActivity implements
 		tousu_imv.setVisibility(View.GONE);
 		collectedImv.setVisibility(View.GONE);
 		// 收藏、取消收藏
-		collectUrl = Url.USER_COLLECT + "?token=" + MainCompanyActivity.token;
+		collectUrl = Url.USER_COLLECT + "?token=" + MainTabActivity.token;
 		cancelCollectUrl = Url.USER_CANCEL_COLLECT + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 
 		activity_id = getIntent().getStringExtra("activity_id");
 		Editor spEdt = sp.edit();
@@ -226,13 +226,13 @@ public class ActivityDetialActivity extends BaseActivity implements
 		spEdt.commit();
 		ShareSDK.initSDK(this);
 		dataurl = Url.COMPANY_applyActivityDetail + "?token="
-				+ MainCompanyActivity.token;
-		applyUrl = Url.COMPANY_apply + "?token=" + MainCompanyActivity.token;
+				+ MainTabActivity.token;
+		applyUrl = Url.COMPANY_apply + "?token=" + MainTabActivity.token;
 		cancelUrl = Url.COMPANY_userCancelActivityApply + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		sendUrl = applyUrl;
-		sendMSMUrl = Url.COMPANY_sendMSM + "?token=" + MainCompanyActivity.token;
-		sendEmailUrl = Url.USER_send_mail + "?token=" + MainCompanyActivity.token;
+		sendMSMUrl = Url.COMPANY_sendMSM + "?token=" + MainTabActivity.token;
+		sendEmailUrl = Url.USER_send_mail + "?token=" + MainTabActivity.token;
 
 		setTopTitle("活动详细");
 		setBackButton();

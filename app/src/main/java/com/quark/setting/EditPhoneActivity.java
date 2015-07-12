@@ -39,7 +39,7 @@ import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
 import com.quark.jianzhidaren.FindPJLoginActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.ui.widget.CustomDialog;
 import com.quark.utils.Util;
 
@@ -86,14 +86,14 @@ public class EditPhoneActivity extends BaseActivity {
 		setContentView(R.layout.edit_telephone);
 		ViewUtils.inject(this);
 		url = Url.COMPANY_modifyTelephon + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		sendMSMUrl = Url.COMPANY_SEND_TEL_CODE + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		RelativeLayout topLayout = (RelativeLayout) findViewById(R.id.top_title_layout);
 		topLayout.setBackgroundColor(getResources().getColor(
 				R.color.guanli_common_color));
 		jiaoyanUrl = Url.MESSAGE_VALIDATE + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 
 		// 返回
 		imageBtn = (ImageButton) findViewById(R.id.back);

@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.qingmu.jianzhidaren.R;
 import com.quark.image.ImageWorker;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.utils.WaitDialog;
 import com.quark.volley.VolleySington;
 
@@ -29,7 +29,7 @@ public abstract class BaseFragment extends Fragment {
 	protected static final int DEFAULT_IMAGE_HIGHT = 128;
 	// protected static final int DEFAULT_IMAGE_RESID =
 	// R.drawable.default_avatar;
-	protected MainCompanyActivity mActivity;
+	protected MainTabActivity mActivity;
 	protected Resources res;
 	protected WaitDialog dialog;
 	protected RequestQueue queue = VolleySington.getInstance()
@@ -39,7 +39,7 @@ public abstract class BaseFragment extends Fragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		mActivity = (MainCompanyActivity) activity;
+		mActivity = (MainTabActivity) activity;
 		res = mActivity.getResources();
 	}
 

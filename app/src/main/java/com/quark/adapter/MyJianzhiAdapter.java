@@ -66,7 +66,7 @@ import com.quark.company.function.FullStarffedActivity;
 import com.quark.company.function.PersonAssessActivity;
 import com.quark.guanli.BaomingListActivity;
 import com.quark.guanli.MyJianzhiDetailActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.MyJianzhi;
 import com.quark.ui.widget.CustomDialog;
 import com.quark.ui.widget.CustomDialogThree;
@@ -106,9 +106,9 @@ public class MyJianzhiAdapter extends BaseAdapter {
 		company_id = sp.getString("userId", "");
 		queue = VolleySington.getInstance().getRequestQueue();
 		refreshUrl = Url.COMPANY_MyJianzhi_reflesh + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		previewRefreshUrl = Url.COMPANY_MyJianzhi_previewReflesh + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 	}
 
 	@Override
@@ -606,7 +606,7 @@ public class MyJianzhiAdapter extends BaseAdapter {
 				} else {
 					try {
 						sign_url = Url.COMPANY_sign + "?token="
-								+ MainCompanyActivity.token + "&company_id="
+								+ MainTabActivity.token + "&company_id="
 								+ company_id + "&activity_id="
 								+ list.get(i).getActivity_id();
 						initPopWindow(list.get(i).getActivity_id() + "");

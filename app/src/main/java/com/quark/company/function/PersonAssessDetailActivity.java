@@ -40,7 +40,7 @@ import com.quark.common.Url;
 import com.quark.http.image.CircularImage;
 import com.quark.http.image.LoadImage;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.CancelApply;
 import com.quark.ui.widget.CustomDialogThree;
 
@@ -91,9 +91,9 @@ public class PersonAssessDetailActivity extends BaseActivity {
 		user_id = getIntent().getStringExtra("user_id");
 
 		url_ziliao = Url.COMPANY_cancelApply + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		url_comtent = Url.COMPANY_commentRequirer + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		getData();
 		// 评价
 		gree_cancel = (Button) findViewById(R.id.gree_cancel);

@@ -1,4 +1,4 @@
-package com.easemob.chatuidemo.activity;
+package com.parttime.main;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,6 +61,10 @@ import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.chatuidemo.Constant;
+import com.easemob.chatuidemo.activity.AddContactActivity;
+import com.easemob.chatuidemo.activity.ChatActivity;
+import com.easemob.chatuidemo.activity.GroupsActivity;
+import com.easemob.chatuidemo.activity.NewFriendsMsgActivity;
 import com.easemob.chatuidemo.adapter.ChatAllHistoryAdapter;
 import com.easemob.chatuidemo.adapter.ContactAdapter;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
@@ -75,7 +79,6 @@ import com.quark.common.JsonUtil;
 import com.quark.common.ToastUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.ApplicationControl;
-import com.quark.jianzhidaren.MainCompanyActivity;
 import com.quark.model.HuanxinUser;
 import com.quark.quanzi.MyContactlistFragment;
 import com.quark.quanzi.PinyinComparator_quanzhi;
@@ -436,8 +439,8 @@ public class QuanzhiFragment extends Fragment {
 			adapter.notifyDataSetChanged();
 			// 长按聊天记录item,删除聊天记录
 			// 更新未读消息
-			if (MainCompanyActivity.isForeground) {
-				((MainCompanyActivity) getActivity()).update_unread_msg();
+			if (MainTabActivity.isForeground) {
+				((MainTabActivity) getActivity()).update_unread_msg();
 			}
 
 			return true;
@@ -942,7 +945,7 @@ public class QuanzhiFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!hidden && !((MainCompanyActivity) getActivity()).isConflict) {
+		if (!hidden && !((MainTabActivity) getActivity()).isConflict) {
 			EMGroupManager.getInstance().loadAllGroups();
 			EMChatManager.getInstance().loadAllConversations();
 			refresh();
@@ -955,9 +958,9 @@ public class QuanzhiFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if (((MainCompanyActivity) getActivity()).isConflict) {
+		if (((MainTabActivity) getActivity()).isConflict) {
 			outState.putBoolean("isConflict", true);
-		} else if (((MainCompanyActivity) getActivity())
+		} else if (((MainTabActivity) getActivity())
 				.getCurrentAccountRemoved()) {
 			outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
 		}

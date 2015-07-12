@@ -33,7 +33,7 @@ import com.quark.adapter.PersonAssessAdapter;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.RosterActivityList;
 import com.quark.model.RosterUser;
 
@@ -71,7 +71,7 @@ public class PersonAssessActivity extends BaseActivity {
 		company_id = sp.getString("userId", "");
 		//
 		url = Url.COMPANY_activityFaceBook + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		RelativeLayout topLayout = (RelativeLayout) findViewById(R.id.top_title_layout);
 		topLayout.setBackgroundColor(getResources().getColor(
 				R.color.guanli_common_color));

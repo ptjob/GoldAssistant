@@ -34,7 +34,7 @@ import com.carson.constant.ConstantForSaveList;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.MyResume;
 import com.quark.senab.us.image.HackyViewPager;
 import com.quark.senab.us.image.ImageDetailFragment;
@@ -120,7 +120,7 @@ public class ImagePopupWindow extends PopupWindow {
 		// 每次更新图片后重新获取一次图片url
 		// showWait(true);
 		StringRequest request = new StringRequest(Request.Method.POST,
-				Url.USER_jianli_show + "?token=" + MainCompanyActivity.token,
+				Url.USER_jianli_show + "?token=" + MainTabActivity.token,
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {

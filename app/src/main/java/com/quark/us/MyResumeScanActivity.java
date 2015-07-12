@@ -39,7 +39,7 @@ import com.quark.adapter.JianliScanAdapter;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.MyResume;
 import com.quark.model.UserCommentModle;
 import com.quark.senab.us.image.ImagePagerActivity;
@@ -154,9 +154,9 @@ public class MyResumeScanActivity extends BaseActivity {
 		topTitileLayout = (LinearLayout) findViewById(R.id.me_my_resume_scan_top);
 		setBackButton();
 		ViewUtils.inject(this);
-		navUrl = Url.USER_jianli_scan_nav + "?token=" + MainCompanyActivity.token;
+		navUrl = Url.USER_jianli_scan_nav + "?token=" + MainTabActivity.token;
 		commentUrl = Url.USER_jianli_scan_comment + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 
 		picbottom.getBackground().setAlpha(80);
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
@@ -263,7 +263,7 @@ public class MyResumeScanActivity extends BaseActivity {
 	public void getPicData() {
 		showWait(true);
 		StringRequest request = new StringRequest(Request.Method.POST,
-				Url.USER_jianli_show + "?token=" + MainCompanyActivity.token,
+				Url.USER_jianli_show + "?token=" + MainTabActivity.token,
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {

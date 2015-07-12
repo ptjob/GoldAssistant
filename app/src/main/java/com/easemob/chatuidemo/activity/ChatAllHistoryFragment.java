@@ -44,7 +44,7 @@ import com.easemob.chatuidemo.adapter.ChatAllHistoryAdapter;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.quanzi.MyContactlistFragment;
 
 /**
@@ -313,7 +313,7 @@ public class ChatAllHistoryFragment extends Fragment {
 		super.onResume();
 		SharedPreferences sp = getActivity().getSharedPreferences(
 				"jrdr.setting", getActivity().MODE_PRIVATE);
-		if (!hidden && !((MainCompanyActivity) getActivity()).isConflict) {
+		if (!hidden && !((MainTabActivity) getActivity()).isConflict) {
 			refresh();
 			update_unread_notication();
 		}
@@ -324,9 +324,9 @@ public class ChatAllHistoryFragment extends Fragment {
 		super.onSaveInstanceState(outState);
 		SharedPreferences sp = getActivity().getSharedPreferences(
 				"jrdr.setting", getActivity().MODE_PRIVATE);
-			if (((MainCompanyActivity) getActivity()).isConflict) {
+			if (((MainTabActivity) getActivity()).isConflict) {
 				outState.putBoolean("isConflict", true);
-			} else if (((MainCompanyActivity) getActivity())
+			} else if (((MainTabActivity) getActivity())
 					.getCurrentAccountRemoved()) {
 				outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
 			}

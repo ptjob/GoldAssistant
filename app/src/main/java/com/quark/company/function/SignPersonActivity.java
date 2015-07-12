@@ -55,7 +55,7 @@ import com.quark.adapter.FullStarffedAdapter;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.RosterUser;
 import com.quark.model.SignPersonList;
 
@@ -135,10 +135,10 @@ public class SignPersonActivity extends BaseActivity {
 		});
 
 		setTopTitle(activity_name);
-		sign_url = Url.COMPANY_sign + "?token=" + MainCompanyActivity.token
+		sign_url = Url.COMPANY_sign + "?token=" + MainTabActivity.token
 				+ "&company_id=" + company_id + "&activity_id=" + activity_id;
 		signUpList_url = Url.COMPANY_signUpList + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 
 	}
 

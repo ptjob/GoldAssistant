@@ -38,6 +38,7 @@ import com.carson.constant.JiaoyanUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.main.MainTabActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.ui.widget.CustomDialog;
@@ -86,7 +87,7 @@ public class ModifyPwdActivity extends BaseActivity {
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
 		user_id = sp.getString("userId", "");
 
-		url = Url.COMPANY_EDITPASSWORD + "?token=" + MainCompanyActivity.token;
+		url = Url.COMPANY_EDITPASSWORD + "?token=" + MainTabActivity.token;
 		RelativeLayout topLayout = (RelativeLayout) findViewById(R.id.top_title_layout);
 		topLayout.setBackgroundColor(getResources().getColor(
 				R.color.guanli_common_color));

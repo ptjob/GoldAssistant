@@ -45,6 +45,7 @@ import com.easemob.util.EMLog;
 import com.easemob.util.HanziToPinyin;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.main.MainTabActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.ui.widget.LineEditText;
@@ -92,7 +93,7 @@ public class FindPJLoginActivity extends BaseActivity {
 			if (carson_user_id != null && !"".equals(carson_user_id)) {
 				autoLogin = true;
 				startActivity(new Intent(FindPJLoginActivity.this,
-						MainCompanyActivity.class));
+						MainTabActivity.class));
 				FindPJLoginActivity.this.finish();
 				return;
 			}
@@ -108,7 +109,7 @@ public class FindPJLoginActivity extends BaseActivity {
 		logoImv.setBackgroundResource(R.drawable.login_logo_c);
 		Button button = (Button) findViewById(R.id.look);
 		button.setVisibility(View.GONE);
-		url = Url.COMPANY_LOGIN + "?token=" + MainCompanyActivity.token;
+		url = Url.COMPANY_LOGIN + "?token=" + MainTabActivity.token;
 
 		telephoneView = (LineEditText) findViewById(R.id.telephone);
 		passwordView = (LineEditText) findViewById(R.id.password);
@@ -271,7 +272,7 @@ public class FindPJLoginActivity extends BaseActivity {
 	@OnClick(R.id.look)
 	public void lookOnclick(View v) {
 		Intent intent = new Intent();
-		intent.setClass(FindPJLoginActivity.this, MainCompanyActivity.class);
+		intent.setClass(FindPJLoginActivity.this, MainTabActivity.class);
 		startActivity(intent);
 		FindPJLoginActivity.this.finish();
 	}
@@ -412,7 +413,7 @@ public class FindPJLoginActivity extends BaseActivity {
 							edit.commit();
 							Intent intent = new Intent();
 							intent.setClass(FindPJLoginActivity.this,
-									MainCompanyActivity.class);
+									MainTabActivity.class);
 							startActivity(intent);
 							finish();
 						}

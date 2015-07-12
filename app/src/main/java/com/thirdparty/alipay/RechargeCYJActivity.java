@@ -42,7 +42,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.ui.widget.ListViewForScrollView;
 
 /**
@@ -139,9 +139,9 @@ public class RechargeCYJActivity extends BaseActivity {
 		init();
 		setBackButton();
 		OrderIdUrl = Url.USER__recharge_product + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		aliPayResultUrl = Url.USER__recharge_AliPay + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		AliPayAsynNotifyUrl = Url.USER__recharge_AliPayAsynNotify;
 
 		Button submit = (Button) findViewById(R.id.submit);

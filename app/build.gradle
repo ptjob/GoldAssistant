@@ -24,4 +24,5 @@ dependencies {
     compile project(':xlistview')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.2'
+    compile 'com.android.support:support-v4:21.0.2'
 }

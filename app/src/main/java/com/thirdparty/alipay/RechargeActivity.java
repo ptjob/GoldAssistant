@@ -42,7 +42,7 @@ import com.qingmu.jianzhidaren.R;
 import com.quark.adapter.RechargeLogAdapter;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.ui.widget.ListViewForScrollView;
 
 /**
@@ -138,11 +138,11 @@ public class RechargeActivity extends BaseActivity {
 		userId = sp.getString("userId", "");
 
 		setBackButton();
-		url = Url.COMPANY_recharge_log + "?token=" + MainCompanyActivity.token;
+		url = Url.COMPANY_recharge_log + "?token=" + MainTabActivity.token;
 		OrderIdUrl = Url.COMPANY_recharge_lproduct + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		aliPayResultUrl = Url.COMPANY_recharge_AliPay + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 
 		radioGroup1 = (RadioGroup) findViewById(R.id.orderBy1);
 		radioGroup1

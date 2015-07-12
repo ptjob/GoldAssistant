@@ -3,7 +3,6 @@ package com.quark.fragment.company;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,8 +24,7 @@ import com.quark.common.Url;
 import com.quark.company.function.PersonAssessActivity;
 import com.quark.company.function.RosterActivity;
 import com.quark.guanli.PublishActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
-import com.quark.model.MyJianzhi;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.PublishAvailability;
 import com.quark.ui.widget.CustomDialog;
 import com.quark.us.AuthenticationActivity;
@@ -44,8 +42,6 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,7 +133,7 @@ public class ManageFragmentCompany extends BaseFragment implements
 					// 切换到指定城市,访问后台传输城市
 					String cityUrl;
 					cityUrl = Url.CHANGE_CITY_CUSTOM + "?token="
-							+ MainCompanyActivity.token;
+							+ MainTabActivity.token;
 
 					StringRequest request = new StringRequest(
 							Request.Method.POST, cityUrl,
@@ -208,10 +204,10 @@ public class ManageFragmentCompany extends BaseFragment implements
 			}
 		});
 		// 获取首页状态
-		url = Url.BROKER_MAIN_PAGE + "?token=" + MainCompanyActivity.token;
+		url = Url.BROKER_MAIN_PAGE + "?token=" + MainTabActivity.token;
 		// 获取是否能发布兼职
 		avalible_url = Url.COMPANY_availability + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		// 隐藏右侧发布按钮
 		LinearLayout right_layout = (LinearLayout) view
 				.findViewById(R.id.right_layout);

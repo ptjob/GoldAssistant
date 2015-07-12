@@ -40,7 +40,7 @@ import com.quark.common.JsonUtil;
 import com.quark.common.ToastUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.BaomingList;
 
 /**
@@ -99,7 +99,7 @@ public class BaomingListActivity extends BaseActivity {
 		ViewUtils.inject(this);
 		setBackButton();
 		title = (String) getValue4Intent("title");
-		url = Url.COMPANY_checkApply + "?token=" + MainCompanyActivity.token;
+		url = Url.COMPANY_checkApply + "?token=" + MainTabActivity.token;
 		activity_id = (String) getValue4Intent("activity_id");
 		allList = (ListView) findViewById(R.id.list1);
 		noseeList = (ListView) findViewById(R.id.list2);

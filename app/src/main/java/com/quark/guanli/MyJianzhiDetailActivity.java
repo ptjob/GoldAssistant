@@ -47,7 +47,7 @@ import com.quark.common.JsonUtil;
 import com.quark.common.ToastUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.PublishJianzhi;
 import com.quark.share.ShareModel;
 import com.quark.share.SharePopupWindow;
@@ -166,11 +166,11 @@ public class MyJianzhiDetailActivity extends BaseActivity implements
 		setContentView(R.layout.activity_my_jianzhi_detail);
 		ViewUtils.inject(this);
 		url = Url.COMPANY_MyJianzhi_detail + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		refreshUrl = Url.COMPANY_MyJianzhi_reflesh + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		previewRefreshUrl = Url.COMPANY_MyJianzhi_previewReflesh + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		activity_id = getIntent().getStringExtra("activity_id");
 		// 已确认、未处理
 		// yiqueren = getIntent().getStringExtra("yiqueren" + "");
@@ -518,7 +518,7 @@ public class MyJianzhiDetailActivity extends BaseActivity implements
 														// 上架
 														crUrl = Url.COMPANY_MyJianzhi_republish
 																+ "?token="
-																+ MainCompanyActivity.token;
+																+ MainTabActivity.token;
 														crJianzhi(1);
 													}
 												});
@@ -537,7 +537,7 @@ public class MyJianzhiDetailActivity extends BaseActivity implements
 								// 取消
 								pay = 0;
 								crUrl = Url.COMPANY_MyJianzhi_cancelActivity
-										+ "?token=" + MainCompanyActivity.token;
+										+ "?token=" + MainTabActivity.token;
 								crJianzhi(2);
 							}
 						} else {

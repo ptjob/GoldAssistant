@@ -60,7 +60,7 @@ import com.quark.common.ToastUtil;
 import com.quark.common.Url;
 import com.quark.image.UploadImg;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.MyResume;
 import com.quark.senab.us.image.ImagePagerActivity;
 import com.quark.ui.widget.ActionSheet;
@@ -191,10 +191,10 @@ public class MyResumeActivity extends BaseActivity implements
 		ViewUtils.inject(this);
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
 		userId = sp.getString("userId", "");
-		getResumeUrl = Url.USER_jianli_show + "?token=" + MainCompanyActivity.token;
-		submintUrl = Url.USER_jianli_submit + "?token=" + MainCompanyActivity.token;
+		getResumeUrl = Url.USER_jianli_show + "?token=" + MainTabActivity.token;
+		submintUrl = Url.USER_jianli_submit + "?token=" + MainTabActivity.token;
 		uploadPicUrl = Url.USER_jianli_uploadmypic + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		loadPicUrl = Url.GETPIC;
 		// 图片上传loading
 		loadProgressBar = (ProgressBar) findViewById(R.id.progressBar);// 加载框

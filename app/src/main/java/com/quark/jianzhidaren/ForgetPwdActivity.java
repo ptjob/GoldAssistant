@@ -37,6 +37,7 @@ import com.carson.constant.JiaoyanUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.main.MainTabActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.ui.widget.CustomDialog;
@@ -100,11 +101,11 @@ public class ForgetPwdActivity extends BaseActivity {
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
 
 		url = Url.COMPANY_FORGETPASSWORD + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		sendMSMUrl = Url.COMPANY_SENDMSM_FORGETPASSWORD + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		jiaoyanUrl = Url.MESSAGE_VALIDATE + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 
 		// 返回
 		imageBtn = (LinearLayout) findViewById(R.id.back);

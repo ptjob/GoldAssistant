@@ -43,7 +43,7 @@ import com.quark.common.ToastUtil;
 import com.quark.common.Url;
 import com.quark.guanli.QianDaoListActivity;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.RosterModel;
 import com.quark.model.SignPersonList;
 import com.quark.ui.widget.CustomDialog;
@@ -113,12 +113,12 @@ public class FullStarffedActivity extends BaseActivity {
 				R.color.guanli_common_color));
 		setBackButton();
 		url = Url.COMPANY_activityFaceBook + "?token="
-				+ MainCompanyActivity.token;
-		sign_url = Url.COMPANY_sign + "?token=" + MainCompanyActivity.token;
+				+ MainTabActivity.token;
+		sign_url = Url.COMPANY_sign + "?token=" + MainTabActivity.token;
 		signUpList_url = Url.COMPANY_signUpList + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		company_cancel_required_url = Url.COMPANY_CANCEL_REQUIRED + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		setRightImage(R.id.right, listener);
 		// 处理数据
 		//

@@ -31,7 +31,7 @@ import com.quark.common.JsonUtil;
 import com.quark.common.ToastUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.QianDaoListBean;
 
 public class QianDaoListActivity extends BaseActivity {
@@ -49,7 +49,7 @@ public class QianDaoListActivity extends BaseActivity {
 		setBackButton();
 		activity_id = getIntent().getStringExtra("activity_id");
 		url = Url.COMPANY_ACTIVITY_SIGNLIST + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		listview1 = (ListView) findViewById(R.id.list1);
 		listview2 = (ListView) findViewById(R.id.list2);
 		getData();

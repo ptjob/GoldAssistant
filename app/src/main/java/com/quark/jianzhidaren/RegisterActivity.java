@@ -47,6 +47,7 @@ import com.easemob.util.HanziToPinyin;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.main.MainTabActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.ui.widget.CustomDialog;
@@ -117,12 +118,12 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		setBackButton();
 		setTopTitle(getResources().getString(R.string.regist_regist));
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
-		url = Url.COMPANY_REGIST + "?token=" + MainCompanyActivity.token;
-		loginUrl = Url.COMPANY_LOGIN + "?token=" + MainCompanyActivity.token;
+		url = Url.COMPANY_REGIST + "?token=" + MainTabActivity.token;
+		loginUrl = Url.COMPANY_LOGIN + "?token=" + MainTabActivity.token;
 		sendMSMUrl = Url.COMPANY_SENDMSM + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		jiaoyanUrl = Url.MESSAGE_VALIDATE + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		TextView tx = (TextView) findViewById(R.id.rgtext);
 		tx.setOnClickListener(new OnClickListener() {
 
@@ -489,7 +490,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 							edit.commit();
 							Intent intent = new Intent();
 							intent.setClass(RegisterActivity.this,
-									MainCompanyActivity.class);
+									MainTabActivity.class);
 							startActivity(intent);
 							// setResult(Activity.RESULT_OK);
 							finish();

@@ -1,4 +1,4 @@
-package com.quark.fragment.company;
+package com.parttime.main;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -51,10 +51,10 @@ import com.carson.constant.ConstantForSaveList;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
+import com.quark.fragment.company.BaseFragment;
 import com.quark.http.image.CircularImage;
 import com.quark.http.image.LoadImage;
 import com.quark.image.UploadImg;
-import com.quark.jianzhidaren.MainCompanyActivity;
 import com.quark.model.Function;
 import com.quark.ui.widget.ActionSheet.OnActionSheetSelected;
 import com.quark.us.AuthenticationActivity;
@@ -120,9 +120,9 @@ public class IntroduceFragment extends BaseFragment implements
 		sp = getActivity().getSharedPreferences("jrdr.setting",
 				Context.MODE_PRIVATE);
 		company_id = sp.getString("userId", "");
-		url = Url.COMPANY_function + "?token=" + MainCompanyActivity.token;
+		url = Url.COMPANY_function + "?token=" + MainTabActivity.token;
 		uploadAvatarUrl = Url.COMPANY_upload_avatar + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 
 		// 初始化界面
 		// 花名册

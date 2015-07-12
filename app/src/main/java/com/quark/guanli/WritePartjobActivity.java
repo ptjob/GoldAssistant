@@ -45,7 +45,7 @@ import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.company.function.RosterActivity;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.PublishAvailability;
 import com.quark.model.PublishJianzhi;
 import com.quark.ui.widget.ActionSheet;
@@ -225,10 +225,10 @@ public class WritePartjobActivity extends BaseActivity implements
 		publishJianLi.setType(type.replace(" ", ""));
 		publishJianLi.setCompany_id(Integer.valueOf(user_id));
 
-		url = Url.COMPANY_availability + "?token=" + MainCompanyActivity.token;
-		submitUrl = Url.COMPANY_publish + "?token=" + MainCompanyActivity.token;
+		url = Url.COMPANY_availability + "?token=" + MainTabActivity.token;
+		submitUrl = Url.COMPANY_publish + "?token=" + MainTabActivity.token;
 		getJianzhiUrl = Url.COMPANY_MyJianzhi_modify + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		// 来自编辑
 		Bundle bundle = getIntent().getExtras();
 		if (bundle != null && bundle.containsKey("activity_id")) {
@@ -236,7 +236,7 @@ public class WritePartjobActivity extends BaseActivity implements
 			editActivity_id = bundle.getString("activity_id");
 			getDataJianzhi();
 			submitUrl = Url.COMPANY_MyJianzhi_modifyCommit + "?token="
-					+ MainCompanyActivity.token;
+					+ MainTabActivity.token;
 		} else {
 			String city_s = sp.getString("city", "深圳");
 			publishJianLi.setCity(city_s);

@@ -16,7 +16,7 @@ import cn.jpush.android.api.JPushInterface;
 import com.carson.broker.JiedanActivity;
 import com.carson.constant.ConstantForSaveList;
 import com.quark.guanli.BaomingListActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.jianzhidaren.StartUpActivity;
 
 /**
@@ -263,21 +263,21 @@ public class MyReceiver extends BroadcastReceiver {
 
 		if (null != ConstantForSaveList.userId) {
 			if (ConstantForSaveList.userId.contains("c")) {
-				if (MainCompanyActivity.isForeground) {
+				if (MainTabActivity.isForeground) {
 					String message = bundle
 							.getString(JPushInterface.EXTRA_MESSAGE);
 					String extras = bundle
 							.getString(JPushInterface.EXTRA_EXTRA);
 					Intent msgIntent = new Intent(
-							MainCompanyActivity.MESSAGE_RECEIVED_ACTION);
+							MainTabActivity.MESSAGE_RECEIVED_ACTION);
 					msgIntent
-							.putExtra(MainCompanyActivity.KEY_MESSAGE, message);
+							.putExtra(MainTabActivity.KEY_MESSAGE, message);
 					if (!isEmpty(extras)) {
 						try {
 							JSONObject extraJson = new JSONObject(extras);
 							if (null != extraJson && extraJson.length() > 0) {
 								msgIntent.putExtra(
-										MainCompanyActivity.KEY_EXTRAS, extras);
+										MainTabActivity.KEY_EXTRAS, extras);
 							}
 						} catch (JSONException e) {
 

@@ -33,7 +33,7 @@ import com.quark.adapter.RosterAdapter;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.Roster;
 
 /**
@@ -62,7 +62,7 @@ public class RosterActivity extends BaseActivity implements IXListViewListener {
 		setBackButton();
 		sp = getSharedPreferences("jrdr.setting", Activity.MODE_PRIVATE);
 		user_id = sp.getString("userId", "");
-		url = Url.COMPANY_roster + "?token=" + MainCompanyActivity.token;
+		url = Url.COMPANY_roster + "?token=" + MainTabActivity.token;
 		
 
 	}

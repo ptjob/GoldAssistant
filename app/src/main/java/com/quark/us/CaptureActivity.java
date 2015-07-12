@@ -38,7 +38,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.sweep.camera.CameraManager;
 import com.quark.sweep.decoding.CaptureActivityHandler;
 import com.quark.sweep.decoding.InactivityTimer;
@@ -81,7 +81,7 @@ public class CaptureActivity extends Activity implements Callback {
 		SharedPreferences sp = getSharedPreferences("jrdr.setting",
 				Activity.MODE_PRIVATE);
 		user_id = sp.getString("userId", "");
-		signUp_url = Url.USE_signUp + "?token=" + MainCompanyActivity.token;
+		signUp_url = Url.USE_signUp + "?token=" + MainTabActivity.token;
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 	}

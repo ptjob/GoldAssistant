@@ -96,7 +96,7 @@ public class EnterActivity extends Activity {
 				Intent intent = new Intent();
 				// if (role.equals("company")) {
 				// intent.setClass(EnterActivity.this,
-				// MainCompanyActivity.class);
+				// MainTabActivity.class);
 				// } else {
 				// intent.setClass(EnterActivity.this, MainActivity.class);
 				// }

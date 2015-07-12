@@ -1,4 +1,4 @@
-package com.quark.jianzhidaren;
+package com.parttime.main;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -98,7 +98,6 @@ import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.activity.ChatActivity;
 import com.easemob.chatuidemo.activity.GroupsActivity;
-import com.easemob.chatuidemo.activity.QuanzhiFragment;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.InviteMessage;
@@ -113,9 +112,11 @@ import com.easemob.util.NetUtils;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
-import com.quark.fragment.MyFragment;
-import com.quark.fragment.company.IntroduceFragment;
 import com.quark.fragment.company.ManageFragmentCompany;
+import com.quark.jianzhidaren.ApplicationControl;
+import com.quark.jianzhidaren.EnterActivity;
+import com.quark.jianzhidaren.FindPJLoginActivity;
+import com.quark.jianzhidaren.LaheiPageActivity;
 import com.quark.model.Function;
 import com.quark.model.HuanxinUser;
 import com.quark.ui.widget.CustomDialog;
@@ -125,7 +126,7 @@ import com.quark.utils.WaitDialog;
 import com.quark.volley.VolleySington;
 import com.umeng.analytics.MobclickAgent;
 
-public class MainCompanyActivity extends FragmentActivity implements
+public class MainTabActivity extends FragmentActivity implements
 		AMapLocationListener {
 
 	
@@ -134,9 +135,8 @@ public class MainCompanyActivity extends FragmentActivity implements
 	// 极光推送
 	private MessageReceiver jpushMessageReceiver;
 	
-	protected static final String TAG = "MainCompanyActivity";
+	protected static final String TAG = "MainTabActivity";
 	public static final String MESSAGE_RECEIVED_ACTION = "com.company.jpush.MESSAGE_RECEIVED_ACTION";
-	public static final String KEY_TITLE = "title";
 	public static final String KEY_MESSAGE = "message";
 	public static final String KEY_EXTRAS = "extras";
 	
@@ -178,14 +178,13 @@ public class MainCompanyActivity extends FragmentActivity implements
 	}
 
 	// =========环信end===========
-	public static MainCompanyActivity instens;
+	public static MainTabActivity instens;
 	private TextView  tv2, tv3, tv4;
 	private ImageView  tv2_boom, tv3_boom, tv4_boom;
 	private FragmentManager fm;
 	private static PAGER mPager = PAGER.SHARE;
-	private static PAGER mLastPager = PAGER.SHARE;
-	private List<TextView> lists = new ArrayList<TextView>();
-	private List<ImageView> lists_boom = new ArrayList<ImageView>();
+	private List<TextView> lists = new ArrayList<>();
+	private List<ImageView> lists_boom = new ArrayList<>();
 	public static String token = "notoken";
 	private int[] resIdActive = new int[] { 
 			R.drawable.tab_btn_manage_sel,
@@ -274,8 +273,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 		quanzhiFragment = new QuanzhiFragment();
 		
 		initEasemob();
-		// =========================环信end
-		// ===========================================================
+
 		// ************************如果登陆过，app长期在后台再进的时候也可能会导致加载到内存的群组和会话为空*************************************
 		if (company_id != null && !"".equals(company_id)) {
 			new Thread() {
@@ -288,7 +286,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 							usernames = EMContactManager.getInstance()
 									.getContactUserNames();
 						}
-						Map<String, com.easemob.chatuidemo.domain.User> userlist = new HashMap<String, com.easemob.chatuidemo.domain.User>();
+						Map<String, com.easemob.chatuidemo.domain.User> userlist = new HashMap<>();
 						for (String username : usernames) {
 							com.easemob.chatuidemo.domain.User user = new com.easemob.chatuidemo.domain.User();
 							user.setUsername(username);
@@ -312,7 +310,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 						ApplicationControl.getInstance().setContactList(
 								userlist);
 						// 存入db
-						UserDao dao = new UserDao(MainCompanyActivity.this);
+						UserDao dao = new UserDao(MainTabActivity.this);
 						List<com.easemob.chatuidemo.domain.User> users = new ArrayList<com.easemob.chatuidemo.domain.User>(
 								userlist.values());
 						dao.saveContactList(users);
@@ -335,8 +333,8 @@ public class MainCompanyActivity extends FragmentActivity implements
 
 
 	private void initUrl() {
-		company_infor_url = Url.COMPANY_function + "?token=" + MainCompanyActivity.token;
-		getFriendListUrl = Url.FRIEND_LIST + "?token=" + MainCompanyActivity.token;
+		company_infor_url = Url.COMPANY_function + "?token=" + MainTabActivity.token;
+		getFriendListUrl = Url.FRIEND_LIST + "?token=" + MainTabActivity.token;
 	}
 
 
@@ -419,7 +417,6 @@ public class MainCompanyActivity extends FragmentActivity implements
 	private View.OnClickListener bNavClickListner = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			mLastPager = mPager;
 			mPager = PAGER.getPager(v.getId());
 			selectedFragment(mPager);
 		}
@@ -452,8 +449,8 @@ public class MainCompanyActivity extends FragmentActivity implements
 	/**
 	 * 设置hearder属性，方便通讯中对联系人按header分类显示，以及通过右侧ABCD...字母栏快速定位联系人
 	 * 
-	 * @param username
-	 * @param user
+	 * @param username String
+	 * @param user com.easemob.chatuidemo.domain.User
 	 */
 	protected void setUserHearder(String username,
 			com.easemob.chatuidemo.domain.User user) {
@@ -637,7 +634,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 	}
 
 	Fragment manageFragment = null;
-	Fragment introduceFragment = null;
+    Fragment introduceFragment = null;
 	Fragment myFragment = null;
 
 	public void selectedFragment(PAGER pager) {
@@ -647,20 +644,21 @@ public class MainCompanyActivity extends FragmentActivity implements
 			currentTabIndex = 0;
 			f = quanzhiFragment = new QuanzhiFragment();
 			break;
+        case INTRODUCE:
+            currentTabIndex = 1;
+            if (introduceFragment == null) {
+                introduceFragment = PublishFragment.newInstance(null, null);
+            }
+            f = introduceFragment;
+            break;
 		case MY:
-			currentTabIndex = 1;
+			currentTabIndex = 2;
 			if (myFragment == null) {
 				myFragment = MyFragment.newInstance(null, null);
 			}
 			f = myFragment;
 			break;
-		case INTRODUCE:
-			currentTabIndex = 2;
-			if (introduceFragment == null) {
-				introduceFragment = IntroduceFragment.newInstance(null, null);
-			}
-			f = introduceFragment;
-			break;
+
 		default:
 			break;
 		}
@@ -893,7 +891,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 		// mBuilder.setTicker(message.getFrom()+": " + ticker);
 		mBuilder.setTicker(ticker);
 		// 必须设置pendingintent，否则在2.3的机器上会有bug
-		Intent intent = new Intent(this, MainCompanyActivity.class);
+		Intent intent = new Intent(this, MainTabActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, notifiId,
 				intent, PendingIntent.FLAG_ONE_SHOT);
@@ -961,7 +959,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 			EMLog.d(TAG,
 					String.format("透传消息：action:%s,message:%s", action,
 							message.toString()));
-			Toast.makeText(MainCompanyActivity.this, "收到透传：action：" + action,
+			Toast.makeText(MainTabActivity.this, "收到透传：action：" + action,
 					Toast.LENGTH_SHORT).show();
 		}
 	};
@@ -1038,10 +1036,10 @@ public class MainCompanyActivity extends FragmentActivity implements
 									.contains(ChatActivity.activityInstance
 											.getToChatUsername())) {
 						Toast mToast = Toast.makeText(
-								MainCompanyActivity.this,
+								MainTabActivity.this,
 								ChatActivity.activityInstance
 										.getToChatUsername() + "已把你从他好友列表里移除",
-								1);
+								Toast.LENGTH_SHORT);
 						mToast.setGravity(Gravity.CENTER, 0, 0);
 						mToast.show();
 
@@ -1196,11 +1194,11 @@ public class MainCompanyActivity extends FragmentActivity implements
 						showConflictDialog();
 					} else {
 						// chatHistoryFragment.errorItem.setVisibility(View.VISIBLE);
-						if (NetUtils.hasNetwork(MainCompanyActivity.this)) {
+						if (NetUtils.hasNetwork(MainTabActivity.this)) {
 							if (isConflict) {
 								// 账号在别处登陆时 重新打开app需要重新登陆
 								// Toast mToast = Toast.makeText(
-								// MainCompanyActivity.this, "请重新登陆", 1);
+								// MainTabActivity.this, "请重新登陆", 1);
 								// mToast.setGravity(Gravity.CENTER, 0, 0);
 								// mToast.show();
 								// Editor edit = sp.edit();
@@ -1212,8 +1210,8 @@ public class MainCompanyActivity extends FragmentActivity implements
 							}
 						} else {
 							Toast mToast = Toast.makeText(
-									MainCompanyActivity.this,
-									"当前网络不可用，请检查网络设置", 1);
+									MainTabActivity.this,
+									"当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT);
 							mToast.setGravity(Gravity.CENTER, 0, 0);
 							mToast.show();
 						}
@@ -1269,7 +1267,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 					if (currentTabIndex == 1) {
 						quanzhiFragment.refresh();
 					}
-					if (CommonUtils.getTopActivity(MainCompanyActivity.this)
+					if (CommonUtils.getTopActivity(MainTabActivity.this)
 							.equals(GroupsActivity.class.getName())) {
 						GroupsActivity.instance.onResume();
 					}
@@ -1301,7 +1299,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 						if (currentTabIndex == 1)
 							quanzhiFragment.refresh();
 						if (CommonUtils
-								.getTopActivity(MainCompanyActivity.this)
+								.getTopActivity(MainTabActivity.this)
 								.equals(GroupsActivity.class.getName())) {
 							GroupsActivity.instance.onResume();
 						}
@@ -1323,7 +1321,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 					// updateUnreadLabel();
 					if (currentTabIndex == 1)
 						quanzhiFragment.refresh();
-					if (CommonUtils.getTopActivity(MainCompanyActivity.this)
+					if (CommonUtils.getTopActivity(MainTabActivity.this)
 							.equals(GroupsActivity.class.getName())) {
 						GroupsActivity.instance.onResume();
 					}
@@ -1386,7 +1384,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 					if (currentTabIndex == 1) {
 						quanzhiFragment.refresh();
 					}
-					if (CommonUtils.getTopActivity(MainCompanyActivity.this)
+					if (CommonUtils.getTopActivity(MainTabActivity.this)
 							.equals(GroupsActivity.class.getName())) {
 						GroupsActivity.instance.onResume();
 					}
@@ -1495,12 +1493,12 @@ public class MainCompanyActivity extends FragmentActivity implements
 		isConflictDialogShow = true;
 		ApplicationControl.getInstance().logout(null);
 
-		if (!MainCompanyActivity.this.isFinishing()) {
+		if (!MainTabActivity.this.isFinishing()) {
 			// clear up global variables
 			try {
 				if (conflictBuilder == null)
 					conflictBuilder = new android.app.AlertDialog.Builder(
-							MainCompanyActivity.this);
+							MainTabActivity.this);
 				conflictBuilder.setTitle("下线通知");
 				conflictBuilder.setMessage(R.string.connect_conflict);
 				conflictBuilder.setPositiveButton(R.string.ok,
@@ -1518,7 +1516,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 								edit.commit();
 								finish();
 								// startActivity(new
-								// Intent(MainCompanyActivity.this,
+								// Intent(MainTabActivity.this,
 								// EnterActivity.class));
 							}
 						});
@@ -1541,12 +1539,12 @@ public class MainCompanyActivity extends FragmentActivity implements
 		isAccountRemovedDialogShow = true;
 		ApplicationControl.getInstance().logout(null);
 
-		if (!MainCompanyActivity.this.isFinishing()) {
+		if (!MainTabActivity.this.isFinishing()) {
 			// clear up global variables
 			try {
 				if (accountRemovedBuilder == null)
 					accountRemovedBuilder = new android.app.AlertDialog.Builder(
-							MainCompanyActivity.this);
+							MainTabActivity.this);
 				accountRemovedBuilder.setTitle("移除通知");
 				accountRemovedBuilder.setMessage(R.string.em_user_remove);
 				accountRemovedBuilder.setPositiveButton(R.string.ok,
@@ -1564,7 +1562,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 								edit.commit();
 								finish();
 								// startActivity(new
-								// Intent(MainCompanyActivity.this,
+								// Intent(MainTabActivity.this,
 								// EnterActivity.class));
 							}
 						});
@@ -1593,7 +1591,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
 		String c_company_id = sp.getString("userId", "");
 		if (!"".equals(c_company_id.trim())) {
-			if (NetWorkCheck.isOpenNetwork(MainCompanyActivity.this)) {
+			if (NetWorkCheck.isOpenNetwork(MainTabActivity.this)) {
 				checkForbidden(c_company_id);
 			}
 		}
@@ -1605,7 +1603,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 	 */
 	public void checkForbidden(final String c_company_id) {
 		StringRequest request = new StringRequest(Request.Method.POST,
-				Url.COMPANY_FORBIDDEN + "?token=" + MainCompanyActivity.token,
+				Url.COMPANY_FORBIDDEN + "?token=" + MainTabActivity.token,
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {
@@ -1619,7 +1617,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 								edit.putString("userId", "");
 								edit.putString("token", "");
 								edit.commit();
-								intent.setClass(MainCompanyActivity.this,
+								intent.setClass(MainTabActivity.this,
 										LaheiPageActivity.class);
 								startActivity(intent);
 								finish();
@@ -1713,7 +1711,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 							StringRequest request = new StringRequest(
 									Request.Method.POST, Url.CHANGE_CITY_CUSTOM
 											+ "?token="
-											+ MainCompanyActivity.token,
+											+ MainTabActivity.token,
 									new Response.Listener<String>() {
 										@Override
 										public void onResponse(String response) {
@@ -1796,7 +1794,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 						StringRequest request = new StringRequest(
 								Request.Method.POST,
 								Url.CHANGE_CITY_CUSTOM + "?token="
-										+ MainCompanyActivity.token,
+										+ MainTabActivity.token,
 								new Response.Listener<String>() {
 									@Override
 									public void onResponse(String response) {
@@ -1840,7 +1838,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 	 */
 	private void updateLog() {
 		final String updateUrl = Url.IS_UPDATE_APK;// 检测apk更新接口
-		if (NetWorkCheck.isOpenNetwork(MainCompanyActivity.this)) {
+		if (NetWorkCheck.isOpenNetwork(MainTabActivity.this)) {
 			new Thread() {
 				public void run() {
 					currentVerCode = getAPKVersion();// 获取当前版本
@@ -1961,7 +1959,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 	@SuppressWarnings("deprecation")
 	private void initPd() {
 		// 初始化下载的进度框
-		pd = new ProgressDialog(MainCompanyActivity.this);
+		pd = new ProgressDialog(MainTabActivity.this);
 		pd.setMessage("请稍后...");
 		pd.setTitle("正在下载兼职达人");
 		pd.setCancelable(false);
@@ -2002,7 +2000,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 				if (currentVerCode < server_vercode) {
 					if (is_alert != null && "1".equals(is_alert)) {
 						downFlag = false;// 重置下载标志
-						new AlertDialog.Builder(MainCompanyActivity.this)
+						new AlertDialog.Builder(MainTabActivity.this)
 								.setTitle("检测到金牌助理有更新了")
 								.setMessage(update_contentStr)
 								.setPositiveButton("马上更新",
@@ -2083,7 +2081,7 @@ public class MainCompanyActivity extends FragmentActivity implements
 					// 存入内存
 					ApplicationControl.getInstance().setContactList(userlist);
 					// 存入db
-					UserDao dao = new UserDao(MainCompanyActivity.this);
+					UserDao dao = new UserDao(MainTabActivity.this);
 					List<com.easemob.chatuidemo.domain.User> users = new ArrayList<com.easemob.chatuidemo.domain.User>(
 							userlist.values());
 					dao.saveContactList(users);

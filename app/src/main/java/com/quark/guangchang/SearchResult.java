@@ -36,7 +36,7 @@ import com.quark.adapter.GuangchangListAdapter;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.GuangchangModle;
 import com.quark.ui.widget.CommonWidget;
 
@@ -82,7 +82,7 @@ public class SearchResult extends BaseActivity implements IXListViewListener {
 		SharedPreferences sp = getSharedPreferences("jrdr.setting",
 				MODE_PRIVATE);
 		user_id = sp.getString("userId", "");
-		url = Url.COMPANY_filter + "?token=" + MainCompanyActivity.token;
+		url = Url.COMPANY_filter + "?token=" + MainTabActivity.token;
 
 		choosetimeStr = getIntent().getStringExtra("choosetimeStr");
 		chooseCityStr = getIntent().getStringExtra("chooseCityStr");

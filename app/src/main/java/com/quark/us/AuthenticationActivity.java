@@ -19,7 +19,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -27,14 +26,11 @@ import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -58,7 +54,7 @@ import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.image.UploadImg;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.MainCompanyActivity;
+import com.parttime.main.MainTabActivity;
 import com.quark.model.AuthenticationResponse;
 import com.quark.ui.widget.ActionSheet.OnActionSheetSelected;
 import com.quark.ui.widget.CustomDialog;
@@ -160,14 +156,14 @@ public class AuthenticationActivity extends BaseActivity implements
 		topLayout.setBackgroundColor(getResources().getColor(
 				R.color.guanli_common_color));
 
-		url = Url.COMPANY_yanzheng + "?token=" + MainCompanyActivity.token;
+		url = Url.COMPANY_yanzheng + "?token=" + MainTabActivity.token;
 		parameter = "company_id";
 		uploadidUrl_zheng = Url.COMPANY_uploadIdcard_zheng + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		uploadidUrl_fan = Url.COMPANY_uploadIdcard_fan + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		urlSubmit = Url.COMPANY_shenheSubmit + "?token="
-				+ MainCompanyActivity.token;
+				+ MainTabActivity.token;
 		getStatus();
 
 	}
