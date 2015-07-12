@@ -485,7 +485,7 @@
         </activity>
         <!-- 微信分享回调 -->
         <activity
-            android:name="com.quark.sharesdk.wxapi.WXEntryActivity"
+            android:name="com.thirdparty.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />

@@ -5,7 +5,7 @@
  * @version:  V1.0
  */
 
-package com.quark.sharesdk.wxapi;
+package com.thirdparty.wxapi;
 
 import android.content.Intent;
 import android.widget.Toast;
