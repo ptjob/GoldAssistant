@@ -93,12 +93,12 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 			List<EMConversation> objects) {
 		super(context, textViewResourceId, objects);
 		this.conversationList = objects;
-		copyConversationList = new ArrayList<EMConversation>();
+		copyConversationList = new ArrayList<>();
 		copyConversationList.addAll(objects);
 		inflater = LayoutInflater.from(context);
 		this.tcontext = context;
 		sp = context.getSharedPreferences("jrdr.setting", context.MODE_PRIVATE);
-		realNames = new ArrayList<String>();// 真实名字
+		realNames = new ArrayList<>();// 真实名字
 	}
 
 	@Override
@@ -118,6 +118,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 			holder.avatar = (CircularImage) convertView
 					.findViewById(R.id.avatar);
 			holder.msgState = convertView.findViewById(R.id.msg_state);
+            holder.quit = (ImageView)convertView.findViewById(R.id.quit);
 			holder.list_item_layout = (RelativeLayout) convertView
 					.findViewById(R.id.list_item_layout);
 			convertView.setTag(holder);
@@ -129,116 +130,128 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 			holder.list_item_layout
 					.setBackgroundResource(R.drawable.mm_listitem_grey);
 		}
+        bindValue(position, holder);
 
-		// 获取与此用户/群组的会话
-		EMConversation conversation = getItem(position);
-		// 获取用户username或者群组groupid
-		String username = conversation.getUserName();
-		List<EMGroup> groups = EMGroupManager.getInstance().getAllGroups();
-		EMContact contact = null;
-		boolean isGroup = false;
-		for (EMGroup group : groups) {
-			if (group.getGroupId().equals(username)) {
-				isGroup = true;
-				contact = group;
-				break;
-			}
-		}
-		if (isGroup) {
-			// 群聊消息，显示群聊头像
-			holder.avatar.setImageResource(R.drawable.group_icon);
-			holder.name.setText(contact.getNick() != null ? contact.getNick()
-					: username);
-		} else {
-			// 本地或者服务器获取用户详情，以用来显示头像和nick
-			// 先加载本地头像和名字
-			if (username.equals("jianzhidaren")) {
-				holder.name.setText("兼职达人团队");
-				Drawable draw1 = tcontext.getResources().getDrawable(
-						R.drawable.job_photo);
-				BitmapDrawable bd = (BitmapDrawable) draw1;
-				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.avatar.setImageBitmap(bit);
-			} else if (username.equals("caiwu")) {
-				holder.name.setText("财务小管家");
-				Drawable draw1 = tcontext.getResources().getDrawable(
-						R.drawable.custom_caiwu);
-				BitmapDrawable bd = (BitmapDrawable) draw1;
-				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.avatar.setImageBitmap(bit);
-			} else if (username.equals("dingyue")) {
-				holder.name.setText("订阅小助手");
-				Drawable draw1 = tcontext.getResources().getDrawable(
-						R.drawable.custom_xiaozhushou);
-				BitmapDrawable bd = (BitmapDrawable) draw1;
-				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.avatar.setImageBitmap(bit);
-			} else if (username.equals("kefu")) {
-				holder.name.setText("兼职达人客服");
-				Drawable draw1 = tcontext.getResources().getDrawable(
-						R.drawable.custom_kefu);
-				BitmapDrawable bd = (BitmapDrawable) draw1;
-				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.avatar.setImageBitmap(bit);
-			} else if (username.equals("tongzhi")) {
-				holder.name.setText("通知中心");
-				Drawable draw1 = tcontext.getResources().getDrawable(
-						R.drawable.custom_tongzhi);
-				BitmapDrawable bd = (BitmapDrawable) draw1;
-				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.avatar.setImageBitmap(bit);
-			} else {
-				loadNativePhoto(username, holder.avatar, holder.name);
-			}
 
-			if (username.equals(Constant.GROUP_USERNAME)) {
-				holder.name.setText("群聊");
-
-			} else if (username.equals(Constant.NEW_FRIENDS_USERNAME)) {
-				holder.name.setText("申请与通知");
-			}
-			// holder.name.setText(username);
-		}
-
-		if (conversation.getUnreadMsgCount() > 0) {
-			// 显示与此用户的消息未读数
-			holder.unreadLabel.setText(String.valueOf(conversation
-					.getUnreadMsgCount()));
-			holder.unreadLabel.setVisibility(View.VISIBLE);
-		} else {
-			holder.unreadLabel.setVisibility(View.INVISIBLE);
-		}
-
-		if (conversation.getMsgCount() != 0) {
-			// 把最后一条消息的内容作为item的message内容
-			EMMessage lastMessage = conversation.getLastMessage();
-			holder.message
-					.setText(
-							SmileUtils.getSmiledText(
-									getContext(),
-									getMessageDigest(lastMessage,
-											(this.getContext()))),
-							BufferType.SPANNABLE);
-
-			holder.time.setText(DateUtils.getTimestampString(new Date(
-					lastMessage.getMsgTime())));
-			if (lastMessage.direct == EMMessage.Direct.SEND
-					&& lastMessage.status == EMMessage.Status.FAIL) {
-				holder.msgState.setVisibility(View.VISIBLE);
-			} else {
-				holder.msgState.setVisibility(View.GONE);
-			}
-		}
-
-		return convertView;
+        return convertView;
 	}
 
-	/**
+    private void bindValue(int position, ViewHolder holder) {
+        // 获取与此用户/群组的会话
+        EMConversation conversation = getItem(position);
+        // 获取用户username或者群组groupid
+        String username = conversation.getUserName();
+        List<EMGroup> groups = EMGroupManager.getInstance().getAllGroups();
+        EMContact contact = null;
+        boolean isGroup = false;
+        boolean isMsgBlocked = false;
+        for (EMGroup group : groups) {
+            if (group.getGroupId().equals(username)) {
+                isGroup = true;
+                contact = group;
+                isMsgBlocked = group.getMsgBlocked();
+                break;
+            }
+        }
+        if (isGroup) {
+            // 群聊消息，显示群聊头像
+            holder.avatar.setImageResource(R.drawable.group_icon);
+            holder.name.setText(contact.getNick() != null ? contact.getNick()
+                    : username);
+            if(isMsgBlocked){
+                holder.quit.setVisibility(View.VISIBLE);
+            }else{
+                holder.quit.setVisibility(View.GONE);
+            }
+        } else {
+            holder.quit.setVisibility(View.GONE);
+            // 本地或者服务器获取用户详情，以用来显示头像和nick
+            // 先加载本地头像和名字
+            if (username.equals("jianzhidaren")) {
+                holder.name.setText("兼职达人团队");
+                Drawable draw1 = tcontext.getResources().getDrawable(
+                        R.drawable.job_photo);
+                BitmapDrawable bd = (BitmapDrawable) draw1;
+                Bitmap bitmap = bd.getBitmap();
+                Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
+                holder.avatar.setImageBitmap(bit);
+            } else if (username.equals("caiwu")) {
+                holder.name.setText("财务小管家");
+                Drawable draw1 = tcontext.getResources().getDrawable(
+                        R.drawable.custom_caiwu);
+                BitmapDrawable bd = (BitmapDrawable) draw1;
+                Bitmap bitmap = bd.getBitmap();
+                Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
+                holder.avatar.setImageBitmap(bit);
+            } else if (username.equals("dingyue")) {
+                holder.name.setText("订阅小助手");
+                Drawable draw1 = tcontext.getResources().getDrawable(
+                        R.drawable.custom_xiaozhushou);
+                BitmapDrawable bd = (BitmapDrawable) draw1;
+                Bitmap bitmap = bd.getBitmap();
+                Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
+                holder.avatar.setImageBitmap(bit);
+            } else if (username.equals("kefu")) {
+                holder.name.setText("兼职达人客服");
+                Drawable draw1 = tcontext.getResources().getDrawable(
+                        R.drawable.custom_kefu);
+                BitmapDrawable bd = (BitmapDrawable) draw1;
+                Bitmap bitmap = bd.getBitmap();
+                Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
+                holder.avatar.setImageBitmap(bit);
+            } else if (username.equals("tongzhi")) {
+                holder.name.setText("通知中心");
+                Drawable draw1 = tcontext.getResources().getDrawable(
+                        R.drawable.custom_tongzhi);
+                BitmapDrawable bd = (BitmapDrawable) draw1;
+                Bitmap bitmap = bd.getBitmap();
+                Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
+                holder.avatar.setImageBitmap(bit);
+            } else {
+                loadNativePhoto(username, holder.avatar, holder.name);
+            }
+
+            if (username.equals(Constant.GROUP_USERNAME)) {
+                holder.name.setText("群聊");
+
+            } else if (username.equals(Constant.NEW_FRIENDS_USERNAME)) {
+                holder.name.setText("申请与通知");
+            }
+            // holder.name.setText(username);
+        }
+
+        if (conversation.getUnreadMsgCount() > 0) {
+            // 显示与此用户的消息未读数
+            holder.unreadLabel.setText(String.valueOf(conversation
+                    .getUnreadMsgCount()));
+            holder.unreadLabel.setVisibility(View.VISIBLE);
+        } else {
+            holder.unreadLabel.setVisibility(View.INVISIBLE);
+        }
+
+        if (conversation.getMsgCount() != 0) {
+            // 把最后一条消息的内容作为item的message内容
+            EMMessage lastMessage = conversation.getLastMessage();
+            holder.message
+                    .setText(
+                            SmileUtils.getSmiledText(
+                                    getContext(),
+                                    getMessageDigest(lastMessage,
+                                            (this.getContext()))),
+                            BufferType.SPANNABLE);
+
+            holder.time.setText(DateUtils.getTimestampString(new Date(
+                    lastMessage.getMsgTime())));
+            if (lastMessage.direct == EMMessage.Direct.SEND
+                    && lastMessage.status == EMMessage.Status.FAIL) {
+                holder.msgState.setVisibility(View.VISIBLE);
+            } else {
+                holder.msgState.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    /**
 	 * 加载本地头像和名字
 	 */
 	private void loadNativePhoto(final String id, final CircularImage avatar,
@@ -358,6 +371,8 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 		View msgState;
 		/** 整个list中每一行总布局 */
 		RelativeLayout list_item_layout;
+        /** 静音设置 */
+        ImageView quit;
 
 	}
 

@@ -45,7 +45,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Process;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
@@ -126,8 +125,9 @@ import com.umeng.analytics.MobclickAgent;
 public class MainTabActivity extends FragmentActivity implements
 		AMapLocationListener {
 
-	
-	protected RequestQueue queue;
+
+    public static final String PINGBI = "pingbi";
+    protected RequestQueue queue;
 	protected WaitDialog dialog;
 	// 极光推送
 	private MessageReceiver jpushMessageReceiver;
@@ -150,7 +150,7 @@ public class MainTabActivity extends FragmentActivity implements
 	protected NotificationManager notificationManager;
 	private static final int notifiId = 11;
 	
-	private QuanzhiFragment quanzhiFragment;
+	private MessageAndAddressFragment messageAndAddressFragment;
 	// 当前fragment的index
 	private int currentTabIndex;
 	private NewMessageBroadcastReceiver msgReceiver;
@@ -164,7 +164,7 @@ public class MainTabActivity extends FragmentActivity implements
 	private SharedPreferences sp;
 	private MyGroupChangeListener myGroupChangeListener;
 	private String getFriendListUrl;// 获取服务端好友列表url
-	List<String> usernames = new ArrayList<String>();// 好友列表显示的是uid
+	List<String> usernames = new ArrayList<>();// 好友列表显示的是uid
 														// u1007或者c100之类
 
 	/**
@@ -179,7 +179,7 @@ public class MainTabActivity extends FragmentActivity implements
 	private TextView  tv2, tv3, tv4;
 	private ImageView  tv2_boom, tv3_boom, tv4_boom;
 	private FragmentManager fm;
-	private static PAGER mPager = PAGER.SHARE;
+	private static PAGER mPager = PAGER.MESSAGE;
 	private List<TextView> lists = new ArrayList<>();
 	private List<ImageView> lists_boom = new ArrayList<>();
 	public static String token = "notoken";
@@ -216,8 +216,8 @@ public class MainTabActivity extends FragmentActivity implements
 		
 		initJiGuangPush();
 
-		selectedFragment(PAGER.SHARE);
-		updatebNav(PAGER.SHARE.getResId());
+		selectedFragment(PAGER.MESSAGE);
+		updatebNav(PAGER.MESSAGE.getResId());
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		ConfigDataUtil.getInstance().setDisplayMetrics(dm);
@@ -267,7 +267,7 @@ public class MainTabActivity extends FragmentActivity implements
 
 		inviteMessgeDao = new InviteMessgeDao(this);
 		userDao = new UserDao(this);
-		quanzhiFragment = new QuanzhiFragment();
+		messageAndAddressFragment = new MessageAndAddressFragment();
 		
 		initEasemob();
 
@@ -377,7 +377,7 @@ public class MainTabActivity extends FragmentActivity implements
 		// 通知sdk，UI 已经初始化完毕，注册了相应的receiver和listener, 可以接受broadcast了
 		EMChat.getInstance().setAppInited();
 		// 获取本地所有群组并且设置保存的消息免打扰
-		setXiaoxiMianDaRao();
+		setMessageMainDaRao();
 	}
 	
 
@@ -423,7 +423,7 @@ public class MainTabActivity extends FragmentActivity implements
 	// 初始化极光
 	private void initJiGuangPush() {
 		registerMessageReceiver(); // used for receive msg
-		initpush();// 初始化
+		initPush();// 初始化
 		ConstantForSaveList.userId = "c" + company_id;// 记录用户名
 		JPushInterface.setAlias(getApplicationContext(), "c" + company_id,
 				new TagAliasCallback() {
@@ -474,7 +474,7 @@ public class MainTabActivity extends FragmentActivity implements
 
 	// =============极光的推送jpush=======================================
 	// 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
-	private void initpush() {
+	private void initPush() {
 		//JPushInterface.init(getApplicationContext());
 	}
 
@@ -482,21 +482,22 @@ public class MainTabActivity extends FragmentActivity implements
 	 * 获取消息免打扰群组并设置
 	 * 
 	 */
-	private void setXiaoxiMianDaRao() {
-		List<String> pingbiListGroup = new ArrayList<String>();
-		List<EMGroup> grouplist = EMGroupManager.getInstance().getAllGroups();
-		if (grouplist != null) {
-			for (EMGroup emGroup : grouplist) {
-				if (emGroup.getGroupId() != "") {
+	private void setMessageMainDaRao() {
+        //屏蔽组
+		List<String> blockedListGroup = new ArrayList<>();
+		List<EMGroup> groupList = EMGroupManager.getInstance().getAllGroups();
+		if (groupList != null) {
+			for (EMGroup emGroup : groupList) {
+				if (!"".equals(emGroup.getGroupId())) {
 					if (sp.getBoolean(
 							ConstantForSaveList.userId + emGroup.getGroupId()
-									+ "pingbi", false)) {
-						pingbiListGroup.add(emGroup.getGroupId());
+									+ PINGBI, false)) {
+						blockedListGroup.add(emGroup.getGroupId());
 					}
 				}
 			}
 			EMChatManager.getInstance().getChatOptions()
-					.setReceiveNotNoifyGroup(pingbiListGroup);
+					.setReceiveNotNoifyGroup(blockedListGroup);
 		}
 	}
 
@@ -630,25 +631,24 @@ public class MainTabActivity extends FragmentActivity implements
 		}
 	}
 
-	Fragment manageFragment = null;
     Fragment introduceFragment = null;
 	Fragment myFragment = null;
 
 	public void selectedFragment(PAGER pager) {
 		Fragment f = null;
 		switch (pager) {
-		case SHARE:
+		case MESSAGE:
 			currentTabIndex = 0;
-			f = quanzhiFragment = new QuanzhiFragment();
+			f = messageAndAddressFragment = new MessageAndAddressFragment();
 			break;
-        case INTRODUCE:
+        case PUBLISH:
             currentTabIndex = 1;
             if (introduceFragment == null) {
                 introduceFragment = PublishFragment.newInstance(null, null);
             }
             f = introduceFragment;
             break;
-		case MY:
+		case MINE:
 			currentTabIndex = 2;
 			if (myFragment == null) {
 				myFragment = MyFragment.newInstance(null, null);
@@ -666,37 +666,6 @@ public class MainTabActivity extends FragmentActivity implements
 			updatebNav(pager.getResId());
 		}
 	}
-
-	// @Override
-	// protected void onDestroy() {
-	// super.onDestroy();
-	// if(null!=mLocationClient){
-	// mLocationClient.stop();
-	// }
-	// if (null == lists) {
-	// lists.clear();
-	// }
-	// }
-
-	// @Override
-	// public void onReceiveLocation(BDLocation location) {
-	// if(null != mLocationClient){
-	// mLocationClient.stop();
-	// }
-	// }
-
-	// @Override
-	// public boolean onKeyDown(int keyCode, KeyEvent event) {
-	// if(keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
-	// exitApp();
-	// return true;
-	// } else if(keyCode == KeyEvent.KEYCODE_MENU) {
-	// //监控/拦截菜单键
-	// } else if(keyCode == KeyEvent.KEYCODE_HOME) {
-	// //由于Home键为系统键，此处不能捕获，需要重写onAttachedToWindow()
-	// }
-	// return super.onKeyDown(keyCode, event);
-	// }
 
 	private void exitApp() {
 		final AlertDialog dlg = new AlertDialog.Builder(this).create();
@@ -727,12 +696,6 @@ public class MainTabActivity extends FragmentActivity implements
 
 	}
 
-	private void doExit() {
-		((ApplicationControl) getApplication()).clearLoginInfo();
-		android.os.Process.killProcess(Process.myPid());
-		System.exit(0);
-	}
-
 	@Override
 	public void onAttachedToWindow() {
 		super.onAttachedToWindow();
@@ -747,19 +710,19 @@ public class MainTabActivity extends FragmentActivity implements
 		// 注销广播接收者
 		try {
 			unregisterReceiver(msgReceiver);
-		} catch (Exception e) {
+		} catch (Exception ignore) {
 		}
 		try {
 			unregisterReceiver(ackMessageReceiver);
-		} catch (Exception e) {
+		} catch (Exception ignore) {
 		}
 		try {
 			unregisterReceiver(cmdMessageReceiver);
-		} catch (Exception e) {
+		} catch (Exception ignore) {
 		}
 		try {
 			unregisterReceiver(jpushMessageReceiver);
-		} catch (Exception e) {
+		} catch (Exception ignore) {
 
 		}
 		if (myGroupChangeListener != null) {
@@ -858,8 +821,8 @@ public class MainTabActivity extends FragmentActivity implements
 			update_unread_msg();
 			if (currentTabIndex == 1) {
 				// 当前页面如果为聊天历史页面，刷新此页面
-				if (quanzhiFragment != null) {
-					quanzhiFragment.refresh();
+				if (messageAndAddressFragment != null) {
+					messageAndAddressFragment.refresh();
 				}
 			}
 
@@ -1045,7 +1008,7 @@ public class MainTabActivity extends FragmentActivity implements
 					}
 					update_unread_msg();// 刷新圈子
 					if (currentTabIndex == 1)
-						quanzhiFragment.refresh();
+						messageAndAddressFragment.refresh();
 				}
 			});
 
@@ -1262,7 +1225,7 @@ public class MainTabActivity extends FragmentActivity implements
 					// 刷新ui
 					// 有新群建立时
 					if (currentTabIndex == 1) {
-						quanzhiFragment.refresh();
+						messageAndAddressFragment.refresh();
 					}
 					if (CommonUtils.getTopActivity(MainTabActivity.this)
 							.equals(GroupsActivity.class.getName())) {
@@ -1294,7 +1257,7 @@ public class MainTabActivity extends FragmentActivity implements
 					try {
 						// updateUnreadLabel();
 						if (currentTabIndex == 1)
-							quanzhiFragment.refresh();
+							messageAndAddressFragment.refresh();
 						if (CommonUtils
 								.getTopActivity(MainTabActivity.this)
 								.equals(GroupsActivity.class.getName())) {
@@ -1317,7 +1280,7 @@ public class MainTabActivity extends FragmentActivity implements
 				public void run() {
 					// updateUnreadLabel();
 					if (currentTabIndex == 1)
-						quanzhiFragment.refresh();
+						messageAndAddressFragment.refresh();
 					if (CommonUtils.getTopActivity(MainTabActivity.this)
 							.equals(GroupsActivity.class.getName())) {
 						GroupsActivity.instance.onResume();
@@ -1379,7 +1342,7 @@ public class MainTabActivity extends FragmentActivity implements
 					// updateUnreadLabel();
 					// 刷新ui
 					if (currentTabIndex == 1) {
-						quanzhiFragment.refresh();
+						messageAndAddressFragment.refresh();
 					}
 					if (CommonUtils.getTopActivity(MainTabActivity.this)
 							.equals(GroupsActivity.class.getName())) {
@@ -2183,7 +2146,7 @@ public class MainTabActivity extends FragmentActivity implements
 	
 
 	public enum PAGER {
-		/*HOME(R.id.tv1),*/ SHARE(R.id.tv2), INTRODUCE(R.id.tv3), MY(R.id.tv4);
+		/*HOME(R.id.tv1),*/ MESSAGE(R.id.tv2), PUBLISH(R.id.tv3), MINE(R.id.tv4);
 
 		private PAGER(int resId) {
 			this.resId = resId;
@@ -2198,12 +2161,12 @@ public class MainTabActivity extends FragmentActivity implements
 		public static PAGER getPager(int resId) {
 			/*if (resId == HOME.getResId()) {
 				return HOME;
-			} else */if (resId == SHARE.getResId()) {
-				return SHARE;
-			} else if (resId == INTRODUCE.getResId()) {
-				return INTRODUCE;
-			} else if (resId == MY.getResId()) {
-				return MY;
+			} else */if (resId == MESSAGE.getResId()) {
+				return MESSAGE;
+			} else if (resId == PUBLISH.getResId()) {
+				return PUBLISH;
+			} else if (resId == MINE.getResId()) {
+				return MINE;
 			}
 			throw new RuntimeException("not has redId (" + resId + ") pager.");
 		}

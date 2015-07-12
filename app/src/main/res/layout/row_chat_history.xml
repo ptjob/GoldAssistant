@@ -21,6 +21,14 @@
             android:layout_marginLeft="10dp"
             android:scaleType="fitXY"
             android:src="@drawable/default_avatar" />
+        <!--<ImageView
+            android:id="@+id/avatar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_avatar" />-->
 
         <TextView
             android:id="@+id/unread_msg_number"
@@ -33,7 +41,8 @@
             android:gravity="center"
             android:text="7"
             android:textColor="@android:color/white"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            />
     </RelativeLayout>
 
     <TextView
@@ -47,7 +56,8 @@
         android:maxLength="12"
         android:singleLine="true"
         android:textColor="#000"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:text="name"/>
 
     <TextView
         android:id="@+id/time"
@@ -57,7 +67,8 @@
         android:layout_marginRight="7dp"
         android:layout_marginTop="6dp"
         android:textColor="#888888"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        android:text="time"/>
 
     <ImageView
         android:id="@+id/msg_state"
@@ -81,6 +92,18 @@
         android:padding="7dp"
         android:singleLine="true"
         android:textColor="#888888"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:text="message"/>
+
+    <ImageView
+        android:id="@+id/quit"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="7dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/msg_state_fail_resend"
+        android:visibility="visible" />
 
 </RelativeLayout>

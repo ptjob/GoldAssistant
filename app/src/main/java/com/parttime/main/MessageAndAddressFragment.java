@@ -19,7 +19,6 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
@@ -85,13 +84,13 @@ import com.quark.quanzi.PinyinComparator_quanzhi;
 import com.quark.quanzi.PinyinComparator_quanzhitwo;
 import com.quark.volley.VolleySington;
 
-public class QuanzhiFragment extends Fragment {
+public class MessageAndAddressFragment extends Fragment {
 	private RequestQueue queue;
 	private ViewPager viewPager; // viewpager
 	private ArrayList<View> pageViews; // 2个viewpager 页面
 	private ViewGroup buttonsLine;
 	private TextView msgTv, contactsTv;// 消息、联系人
-	private ImageView quanziShenqingHongdianImv;
+	private ImageView quanziShenqingHongdianImv , addContactView;
 	private View page1, page2; // 消息、联系人
 	private boolean hidden;
 	// 消息
@@ -109,7 +108,7 @@ public class QuanzhiFragment extends Fragment {
 	private ListView contactlistView;
 	private Sidebar sidebar;
 	private List<String> blackList;
-	ArrayList<HuanxinUser> usersNick = new ArrayList<HuanxinUser>();
+	ArrayList<HuanxinUser> usersNick = new ArrayList<>();
 	// =========转拼音========
 	private CharacterParser characterParser;
 
@@ -120,8 +119,8 @@ public class QuanzhiFragment extends Fragment {
 	private PinyinComparator_quanzhitwo pinyinComparatorTwo;
 	private RelativeLayout topRelativeLayout;// 上方
 
-	public static QuanzhiFragment newInstance(String param1, String param2) {
-		QuanzhiFragment fragment = new QuanzhiFragment();
+	public static MessageAndAddressFragment newInstance(String param1, String param2) {
+		MessageAndAddressFragment fragment = new MessageAndAddressFragment();
 		return fragment;
 	}
 
@@ -134,16 +133,14 @@ public class QuanzhiFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		pageViews = new ArrayList<View>();
+		pageViews = new ArrayList<>();
 		page1 = inflater.inflate(R.layout.fragment_conversation_history, null);
 		page2 = inflater.inflate(R.layout.fragment_contact_list, null);
 		pageViews.add(page1);
 		pageViews.add(page2);
 		buttonsLine = (ViewGroup) inflater.inflate(
-				R.layout.fragment_quanzi_layout, null);
+				R.layout.fragment_message_and_address_layout, null);
 
-		SharedPreferences sp = getActivity().getSharedPreferences(
-				"jrdr.setting", Context.MODE_PRIVATE);
 		// top上方颜色变灰
 		topRelativeLayout = (RelativeLayout) buttonsLine
 				.findViewById(R.id.quanzi_top_relayout);
@@ -230,7 +227,7 @@ public class QuanzhiFragment extends Fragment {
 				String username = conversation.getUserName();
 				if (username.equals(ApplicationControl.getInstance()
 						.getUserName()))
-					Toast.makeText(getActivity(), "不能和自己聊天", 0).show();
+					Toast.makeText(getActivity(), "不能和自己聊天", Toast.LENGTH_SHORT).show();
 				else {
 					// 进入聊天页面
 					Intent intent = new Intent(getActivity(),
@@ -279,10 +276,11 @@ public class QuanzhiFragment extends Fragment {
 		sidebar.setListView(contactlistView);
 		// 黑名单列表
 		blackList = EMContactManager.getInstance().getBlackListUsernames();
-		contactList = new ArrayList<User>();
-		contactIds = new ArrayList<String>();
-		ImageView addContactView = (ImageView) buttonsLine
+		contactList = new ArrayList<>();
+		contactIds = new ArrayList<>();
+		addContactView = (ImageView) buttonsLine
 				.findViewById(R.id.iv_new_contact);
+        addContactView.setVisibility(View.GONE);
 		// 进入添加好友页
 		addContactView.setOnClickListener(new OnClickListener() {
 
@@ -379,6 +377,15 @@ public class QuanzhiFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
+            if(index == 0){
+                if(addContactView != null){
+                    addContactView.setVisibility(View.GONE);
+                }
+            }else if(index == 1){
+                if(addContactView != null){
+                    addContactView.setVisibility(View.VISIBLE);
+                }
+            }
 			viewPager.setCurrentItem(index, true);
 		}
 	}
@@ -487,14 +494,13 @@ public class QuanzhiFragment extends Fragment {
 	/**
 	 * 获取所有会话
 	 * 
-	 * @param context
-	 * @return
+	 * @return List<EMConversation>
 	 */
 	private List<EMConversation> loadConversationsWithRecentChat() {
 		// 获取所有会话，包括陌生人
 		Hashtable<String, EMConversation> conversations = EMChatManager
 				.getInstance().getAllConversations();
-		List<EMConversation> list = new ArrayList<EMConversation>();
+		List<EMConversation> list = new ArrayList<>();
 		// 过滤掉messages seize为0的conversation
 		for (EMConversation conversation : conversations.values()) {
 			if (conversation.getAllMessages().size() != 0)
@@ -508,7 +514,7 @@ public class QuanzhiFragment extends Fragment {
 	/**
 	 * 根据最后一条消息的时间排序
 	 * 
-	 * @param usernames
+	 * @param conversationList List<EMConversation>
 	 */
 	private void sortConversationByLastChatTime(
 			List<EMConversation> conversationList) {
@@ -544,8 +550,6 @@ public class QuanzhiFragment extends Fragment {
 
 	/**
 	 * 获取未读申请与通知消息
-	 * 
-	 * @return
 	 */
 	private int getUnreadNotionCountTotal() {
 		int unreadAddressCountTotal = 0;
@@ -666,7 +670,7 @@ public class QuanzhiFragment extends Fragment {
 	/**
 	 * 删除联系人
 	 * 
-	 * @param toDeleteUser
+	 * @param tobeDeleteUser User
 	 */
 	public void deleteContact(final User tobeDeleteUser) {
 		final ProgressDialog pd = new ProgressDialog(getActivity());
@@ -692,7 +696,7 @@ public class QuanzhiFragment extends Fragment {
 
 						}
 					});
-				} catch (final Exception e) {
+				} catch (final Exception ignore) {
 
 				}
 			}
@@ -702,7 +706,7 @@ public class QuanzhiFragment extends Fragment {
 	/**
 	 * 删除联系人
 	 * 
-	 * @param toDeleteUser
+	 * @param uid  String
 	 */
 	public void deleteContact(final String uid) {
 		final ProgressDialog pd = new ProgressDialog(getActivity());
@@ -734,7 +738,7 @@ public class QuanzhiFragment extends Fragment {
 
 						}
 					});
-				} catch (final Exception e) {
+				} catch (final Exception ignore) {
 
 				}
 			}
@@ -816,7 +820,7 @@ public class QuanzhiFragment extends Fragment {
 			@Override
 			protected Map<String, String> getParams() throws AuthFailureError {
 
-				Map<String, String> map = new HashMap<String, String>();
+				Map<String, String> map = new HashMap<>();
 				map.put("user_ids", contactIdsStr);
 				return map;
 			}
@@ -898,9 +902,6 @@ public class QuanzhiFragment extends Fragment {
 
 	/**
 	 * 转化拼音
-	 * 
-	 * @param date
-	 * @return
 	 */
 	private void filledData() {
 
