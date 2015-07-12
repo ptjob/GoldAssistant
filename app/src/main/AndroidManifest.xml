@@ -113,20 +113,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.quark.jianzhidaren.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
-        <activity
-            android:name="com.quark.jianzhidaren.MainCompanyActivity"
+            android:name="com.parttime.main.MainTabActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name="com.quark.fragment.HomeFragment"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.parttime.login.FindPJLoginActivity"
             android:label="@string/app_name"
@@ -246,10 +237,6 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name=".BaseActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.quark.guangchang.SaiXuanActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
@@ -297,10 +284,6 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="com.quark.us.MyAchievementActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.quark.us.MyResumeScanActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -309,19 +292,6 @@
             android:name="com.quark.jianzhidaren.ModifyPwdActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-        <!-- 加主题 -->
-        <activity
-            android:name="com.quark.us.AuthenticationUserActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.quark.share.ShareActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" >
-        </activity>
         <!-- 商家管理 -->
         <activity
             android:name="com.quark.fragment.company.HomeFragmentCompany"
