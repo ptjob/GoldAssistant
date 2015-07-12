@@ -1,0 +1,19 @@
+<resources>
+
+    <dimen name="center_big">17sp</dimen>
+ <!-- 中間文字 -->
+    <dimen name="headtitle">20sp</dimen>
+    <dimen name="chengyijin">14sp</dimen>
+    <dimen name="name">16sp</dimen>
+    <dimen name="spadding">24dp</dimen>
+    <dimen name="scan_jianli_pic_height">200dp</dimen>
+    <dimen name="img_icon_size_border">115px</dimen>
+    <dimen name="img_icon_size">110px</dimen>
+    <!-- 列表头像 -->
+    <dimen name="defaul_icon_size_small_border">110px</dimen>
+    <dimen name="defaul_icon_size_small">107px</dimen>
+    <dimen name="defaul_icon_size_96">109px</dimen>
+    <dimen name="head_right">14dip</dimen>
+    <dimen name="myjianli">16sp</dimen>
+
+</resources>

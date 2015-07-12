@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:id="@+id/top_title_layout"
+    android:background="@color/head_color"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/left"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/common_tab_bg"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            style="@style/imgTopLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dip"
+            android:background="@drawable/nav_btn_back" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/bTopTitleCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:maxLength="14"
+        android:text="兼职达人" />
+
+    <LinearLayout
+        android:id="@+id/right_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/common_tab_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="3dp"
+        android:paddingRight="16dip" >
+
+        <ImageView
+            android:id="@+id/right"
+            style="@style/imgTopRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nav_btn_share"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+</RelativeLayout>

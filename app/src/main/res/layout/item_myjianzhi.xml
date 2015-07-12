@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ECECEC"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_marginRight="12dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/body_color"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.65"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="京东谈客串京东"
+                    android:textColor="@color/item_titleColor"
+                    android:textSize="@dimen/fontsize_40px" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.35"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="1dip"
+                    android:layout_weight="1"
+                    android:background="#FEF9F5"
+                    android:orientation="vertical"
+                    android:paddingTop="10dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="需 要"
+                        android:textColor="@color/item_orangeban"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.7dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/body_color" />
+
+                    <TextView
+                        android:id="@+id/totalNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="10"
+                        android:textColor="#8E8D8B"
+                        android:textSize="@dimen/xingchou" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#FEF9F5"
+                    android:orientation="vertical"
+                    android:paddingTop="10dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="已确认"
+                        android:textColor="@color/item_orangeban"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.7dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/body_color" />
+
+                    <TextView
+                        android:id="@+id/yescount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="8"
+                        android:textColor="@color/ziti_orange"
+                        android:textSize="@dimen/xingchou" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:id="@+id/nosee_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/manage_icon_people"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="未处理"
+                            android:textColor="@color/body_color" />
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="0.7dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/body_color" />
+
+                        <TextView
+                            android:id="@+id/nosee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textColor="@color/body_color"
+                            android:textSize="30sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="13dp"
+        android:src="@drawable/manage_icon_ed" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/img"
+        android:layout_alignRight="@id/img"
+        android:paddingRight="15dp"
+        android:text="11-10"
+        android:textColor="@color/item_huise"
+        android:textSize="@dimen/fontsize_28px" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@id/content"
+        android:layout_marginTop="10dp"
+        android:background="@color/nav_huise" />
+
+</RelativeLayout>

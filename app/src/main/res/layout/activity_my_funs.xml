@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/body_color"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <LinearLayout
+        android:id="@+id/my_funs_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="粉丝数:"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/my_funs_num_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line" />
+
+    <ImageView
+        android:id="@+id/nodata_img"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/no_followers"
+        android:visibility="gone" />
+
+    <me.maxwin.view.XListView
+        android:id="@+id/my_funs_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/body_color"
+        android:divider="#fff"
+        android:dividerHeight="1px" >
+    </me.maxwin.view.XListView>
+
+</LinearLayout>

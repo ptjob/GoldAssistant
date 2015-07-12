@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/body_color"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/head"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp" >
+
+            <com.quark.http.image.CircularImage
+                android:id="@+id/bm_headpic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/photo_female" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/bm_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:id="@+id/item_sex_imv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="6dp"
+                        android:src="@drawable/my_women" />
+
+                    <TextView
+                        android:id="@+id/bm_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/ziti_huise" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/bm_cyj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/my_ordinary" />
+
+                    <ImageView
+                        android:id="@+id/bm_yan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:src="@drawable/my_certified" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="信誉值" />
+
+                    <LinearLayout
+                        android:id="@+id/top_star"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="2dip"
+                        android:paddingTop="2dip" >
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt1"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt2"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt3"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt4"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt5"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt6"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt7"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt8"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt9"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt10"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/btn_go" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#F7F6F1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="35dp"
+            android:paddingTop="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="兼职留言" />
+
+            <TextView
+                android:id="@+id/bm_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="我做过的很多"
+                android:textColor="@color/ziti_huise" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/bottom_block" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bm_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/myjob_icon_pass" />
+
+</RelativeLayout>

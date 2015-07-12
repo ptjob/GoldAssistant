@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:indeterminateDrawable="@drawable/wait_load"
+        android:indeterminateOnly="true"
+        android:indeterminateBehavior="repeat"
+        android:layout_height="wrap_content" />
+
+  <!--  2）android:indeterminate="false"//进度条确定
+
+    进度条分不确定（indeterminate=true）和确定（indeterminate=false）2种，默认值是不确定（indeterminate=true）Android进度条。
+
+    3）android:indeterminateDrawable="@anim/loading"//这个属性指向的是你自定义的样式
+-->
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="正在加载....." />
+
+</LinearLayout>

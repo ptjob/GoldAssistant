@@ -1,0 +1,835 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.qingmu.jianzhidaren"
+    android:versionCode="31"
+    android:versionName="2.0.2" >
+
+    <uses-sdk android:minSdkVersion="8" />
+
+    <application
+        android:name="com.quark.jianzhidaren.ApplicationControl"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- android:launchMode="singleTask" -->
+        <activity
+            android:name="com.quark.jianzhidaren.StartUpActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/appActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="androidapp"
+                    android:scheme="jianzhidaren" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.quark.jianzhidaren.EnterActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.quark.jianzhidaren.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.quark.jianzhidaren.MainCompanyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.quark.fragment.HomeFragment"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.quark.jianzhidaren.FindPJLoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.jianzhidaren.RegisterActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.jianzhidaren.AgreementActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.jianzhidaren.ForgetPwdActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.jianzhidaren.ZhaoPJLoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <!-- 不能加主题 -->
+        <activity
+            android:name="com.quark.us.AuthenticationActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.quark.guanli.QianDaoListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.quark.us.MyWalletActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.quark.us.MyWalletPreTixianActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.quark.us.MyWalletHisTixianActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.quark.us.MyWalletTixianActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.quark.us.MyWalletBillRecordDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.quark.us.ShareMyJianZhiActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.quark.us.ReputationAuthorityActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.us.LocalCarouselActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.us.FeiJichiActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.us.HowRaiseAuthorityActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.us.MyResumeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name=".BaseActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.quark.guangchang.SaiXuanActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.quark.guangchang.ActivityDetialActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.quark.setting.EditPhoneActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.quark.setting.SuggestActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.quark.setting.TousuActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+
+        <!-- 当前窗口的内容将自动移动以便当前焦点从不被键盘覆盖和用户能总是看到输入内容的部分 -->
+        <activity
+            android:name="com.quark.citylistview.ChooseCityActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.droid.carson.BankActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.droid.carson.Activity01"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.droid.carson.Activity02"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.quark.us.MyJianZhiActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.quark.us.MyAchievementActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.quark.us.MyResumeScanActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.quark.jianzhidaren.ModifyPwdActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <!-- 加主题 -->
+        <activity
+            android:name="com.quark.us.AuthenticationUserActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.quark.share.ShareActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <!-- 商家管理 -->
+        <activity
+            android:name="com.quark.fragment.company.HomeFragmentCompany"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.guanli.GuanliListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.guanli.PublishActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.guanli.JianzhiShowActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.quark.guanli.MyJianzhiDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.quark.company.function.CancelBaomingActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.guanli.WritePartjobActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.quark.company.function.RosterActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.company.function.FullStarffedActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.company.function.SignPersonActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.company.function.PersonAssessActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.quark.company.function.PersonAssessDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.thirdparty.alipay.RechargeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.quark.guangchang.SearchResult"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.quark.guanli.BaomingListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.quark.guanli.ResumeScanActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.thirdparty.alipay.RechargeCYJActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.quark.quanzi.UserInfo"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.quark.jianzhidaren.FeiJiPageActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.quark.jianzhidaren.LaheiPageActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 我的粉丝 金牌助理排行榜 接单广场 -->
+        <activity
+            android:name="com.carson.broker.BrokerActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.carson.broker.MyFunsActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.carson.broker.JiedanActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.carson.broker.JiedanDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <!-- 查看图像 -->
+        <activity
+            android:name="com.quark.senab.us.image.ImagePagerActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.quark.senab.us.image.ImagePagerScanActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.quark.us.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+
+        <!-- 一键分享 -->
+        <activity
+            android:name="cn.sharesdk.framework.ShareSDKUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <!-- 微信分享回调 -->
+        <activity
+            android:name="com.quark.sharesdk.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- 环信 -->
+        <activity
+            android:name="com.quark.quanzi.MyContactlistFragment"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+
+        <!-- 登陆 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+
+        <!-- 注册 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+
+        <!-- 聊天页面 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.ChatActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <!-- 添加好友 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.AddContactActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 群组详情 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.GroupDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 导出群组邮箱详情 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.ExportGroupListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 群组列表 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.GroupsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 新建群组 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.NewGroupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 退出群组提示框 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.ExitGroupDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyleBottom" >
+        </activity>
+        <!-- 群组选人 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.GroupPickContactsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 地图 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.BaiduMapActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+
+        <!-- 新的朋友邀请消息页面 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.NewFriendsMsgActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 转发消息用户列表页面 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.ForwardMessageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 自定义的contextmenu -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.ContextMenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+        <!-- 自定义的alertdialog -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.AlertDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+        <!-- 显示下载大图页面 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.ShowBigImage"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 下载文件 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.ShowNormalFileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 黑名单 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.BlacklistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+
+        <!-- 公开的群聊列表 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.PublicGroupsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 语音通话页面 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.VoiceCallActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/nornal_style" >
+        </activity>
+        <!-- 群聊简单信息 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.GroupSimpleDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 群组黑名单用户列表 -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.GroupBlacklistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <activity
+            android:name="com.easemob.chatuidemo.activity.EditActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+    
+        <activity
+            android:name="com.easemob.chatuidemo.activity.ShowVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- choose video -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.ImageGridActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name="com.easemob.chatuidemo.activity.RecorderVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- upload error log -->
+        <activity
+            android:name="com.easemob.chatuidemo.activity.DiagnoseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+
+        <!-- 开机自启动服务 -->
+        <receiver android:name="com.easemob.chat.StartServiceReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 设置环信应用的appkey -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="jobdiy#jianzhidaren" />
+        <!-- 声明sdk所需的service -->
+        <service android:name="com.easemob.chat.EMChatService" />
+
+        <!-- 百度地图所需的service -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+        <!-- umeng appkey，可忽略 -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="55755cb167e58e0554001adc" >
+        </meta-data>
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="3ecea51f560650b1ed8a4b99808f52e8" />
+        <!-- 高德地图apikey -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="1f74b3b1a6b20509df7a729fe6a2f317" />
+
+        <!-- 支付宝 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <!-- 支付宝end -->
+        <!-- 友盟 -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="55755cb167e58e0554001adc" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="jzdr_android" />
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+
+        <!-- *****************极光推送******************** -->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.qingmu.jianzhidaren" />
+            </intent-filter>
+        </activity>
+        <!-- Required  SDK核心功能 -->
+        <service
+            android:name="cn.jpush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+
+        <!-- Required SDK 核心功能 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true" >
+            <intent-filter android:priority="1000" >
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+                <!-- Required  显示通知栏 -->
+                <category android:name="com.qingmu.jianzhidaren" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required SDK核心功能 -->
+        <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
+
+        <!-- User defined.  For test only  用户自定义的广播接收器 -->
+        <receiver
+            android:name="com.carson.push.MyReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
+                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+
+                <category android:name="com.qingmu.jianzhidaren" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="8da70cea9ea99ac826e2567e" />
+        <!-- </>值来自开发者平台取得的AppKey -->
+    </application>
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- 摄像头功能 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <!-- 分享 功能 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <!-- 环信 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READPHONESTATE" />
+
+    <permission
+        android:name="com.qingmu.jianzhidaren.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.navigation.permission.JPUSH_MESSAGE" />
+
+    <!-- 极光推送 -->
+    <uses-permission android:name="com.qingmu.jianzhidaren.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+</manifest>

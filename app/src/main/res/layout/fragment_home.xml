@@ -1,0 +1,112 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:viewFlow="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.quark.fragment.HomeFragment" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="@color/head_color" >
+
+        <RelativeLayout
+            android:id="@+id/home_page_city_relayout"
+            android:layout_width="wrap_content"
+            android:layout_height="50dip" >
+
+            <TextView
+                android:id="@+id/home_page_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dip"
+                android:gravity="center_vertical"
+                android:text="深圳"
+                android:textColor="@color/bottom_text_color_normal"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="6dip"
+                android:layout_toRightOf="@id/home_page_city"
+                android:src="@drawable/city_xiala" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dip"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="50dip"
+            android:layout_marginTop="10dip"
+            android:layout_toRightOf="@id/home_page_city_relayout"
+            android:background="@drawable/guangchang_search_edt"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/guangchang_search" />
+
+            <EditText
+                android:id="@+id/search_key"
+                android:layout_width="0dip"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@null"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/guangchang_search_del_imv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/emotionstore_progresscancelbtn"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/guangchang_search_or_cancel_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:text="搜索"
+            android:textColor="@color/body_color"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/right_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/common_tab_bg"
+            android:gravity="center"
+            android:visibility="visible" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/guangchang_saixuan" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <me.maxwin.view.XListView
+        android:id="@+id/list1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="#fff"
+        android:dividerHeight="1px" >
+    </me.maxwin.view.XListView>
+
+</LinearLayout>

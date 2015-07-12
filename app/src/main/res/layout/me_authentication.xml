@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <ScrollView
+        android:id="@+id/me_authentication_scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdge="none" >
+
+        <LinearLayout
+            android:id="@+id/activity_me_auth"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/isPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/pic_yan_success"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/realname"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_weight="0.9"
+                    android:background="@drawable/brownborder_top"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:id="@+id/name_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15dp"
+                        android:text="真实姓名"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/name" />
+
+                    <TextView
+                        android:layout_width="1dip"
+                        android:layout_height="20dip"
+                        android:layout_marginLeft="10dip"
+                        android:background="@color/bottom_line" />
+
+                    <EditText
+                        android:id="@+id/real_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/name" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/icon_warn_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginLeft="10dip"
+                    android:background="@drawable/other_icon_warn"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_weight="0.9"
+                    android:background="@drawable/brownborder_bottom"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:id="@+id/idcode_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:text="身份证号"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/name" />
+
+                    <TextView
+                        android:layout_width="1dip"
+                        android:layout_height="20dip"
+                        android:layout_marginLeft="10dip"
+                        android:background="@color/bottom_line" />
+
+                    <EditText
+                        android:id="@+id/idCode"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:padding="10dp"
+                        android:textSize="@dimen/name" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/icon_warn_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginLeft="10dip"
+                    android:background="@drawable/other_icon_warn"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+
+                    <ImageView
+                        android:id="@+id/pic_idCard"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/pic_idcard_front" />
+
+                    <Button
+                        android:id="@+id/icon_warn_idCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/pic_idCard"
+                        android:background="@drawable/other_icon_warn"
+                        android:visibility="visible" />
+                </RelativeLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="2dp"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/updateIdCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:background="@drawable/bordyellow"
+                    android:padding="10dip"
+                    android:text="上传正面"
+                    android:textColor="@color/yellow_bg"
+                    android:textSize="@dimen/name" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+
+                    <ImageView
+                        android:id="@+id/pic_idCard_back"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/pic_idcard_back" />
+
+                    <Button
+                        android:id="@+id/icon_warn_idCard_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/pic_idCard_back"
+                        android:background="@drawable/other_icon_warn"
+                        android:visibility="visible" />
+                </RelativeLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressBar2"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="2dp"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/updateIdCard_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:background="@drawable/bordyellow"
+                    android:padding="10dip"
+                    android:text="上传反面"
+                    android:textColor="@color/yellow_bg"
+                    android:textSize="@dimen/name" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/verify"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="30dp"
+                android:background="@drawable/bord_submin"
+                android:onClick="showAlertDialog"
+                android:padding="20dp"
+                android:text="@string/comfirm"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/name" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

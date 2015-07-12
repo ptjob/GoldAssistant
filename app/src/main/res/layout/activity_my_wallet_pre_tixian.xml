@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/liulanhenji"
+        android:paddingBottom="10dip"
+        android:paddingLeft="8dip"
+        android:paddingTop="10dip"
+        android:text="@string/tixian_tips" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/my_wallet_pre_zfb_imv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dip"
+                android:src="@drawable/pre_tixian_zfb" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/my_wallet_pre_zfb_imv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dip"
+                android:text="支付宝提现" />
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:background="@color/bottom_line2" />
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/my_wallet_pre_yhk_imv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dip"
+                android:src="@drawable/pre_tixian_bank" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/my_wallet_pre_yhk_imv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dip"
+                android:text="银行卡提现" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"
+        android:background="@color/bottom_block2" />
+
+    <ListView
+        android:id="@+id/my_wallet_pre_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </ListView>
+
+</LinearLayout>

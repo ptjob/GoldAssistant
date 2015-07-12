@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dip"
+    android:background="@color/yellow_bg" >
+    <Button
+        android:id="@+id/btn_cancel_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:paddingLeft="20dip"
+        android:background="@drawable/nav_btn_back"/>
+    <TextView 
+        android:id="@+id/textview_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:text="二维码扫描"
+        android:textColor="#ffffff"
+        android:textSize="20sp"/>
+
+</RelativeLayout>

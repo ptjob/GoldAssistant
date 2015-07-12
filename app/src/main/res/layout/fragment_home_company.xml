@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:viewFlow="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/homefragment_company_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/guanli_item_top_background_2_color"
+    android:orientation="vertical"
+    tools:context="com.quark.fragment.HomeFragment" >
+
+   <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <me.maxwin.view.XListView
+        android:id="@+id/list1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@null" >
+    </me.maxwin.view.XListView>
+
+</LinearLayout>

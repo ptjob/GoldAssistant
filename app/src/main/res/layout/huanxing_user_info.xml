@@ -1,0 +1,250 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:orientation="vertical"
+    tools:context="com.quark.fragment.IntroduceActivity" >
+
+    <LinearLayout
+        android:id="@+id/fragment_intro_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pic_bg_750"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dp" >
+
+            <ImageView
+                android:id="@+id/left"
+                style="@style/imgTopLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/nav_btn_back_2" />
+
+            <FrameLayout
+                android:id="@+id/iconFrameLayout"
+                android:layout_width="110dip"
+                android:layout_height="110dip"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="30dp" >
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="95dip"
+                    android:layout_height="95dip"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/pic_default_user" />
+
+                <ImageView
+                    android:layout_width="101dip"
+                    android:layout_height="101dip"
+                    android:src="@drawable/pic_default_circle" />
+
+                <com.quark.http.image.CircularImage
+                    android:id="@+id/cover_user_photo"
+                    android:layout_width="95dip"
+                    android:layout_height="95dip"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="3dp" />
+
+                <ImageView
+                    android:id="@+id/my_sex_imv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="75dip"
+                    android:layout_marginTop="75dip"
+                    android:src="@drawable/my_men" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/icon1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iconFrameLayout"
+                android:orientation="vertical"
+                android:paddingTop="25dp" >
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="45dp"
+                    android:ellipsize="end"
+                    android:maxEms="4"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp" >
+
+                    <ImageView
+                        android:id="@+id/yan_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/my_unauthorized" />
+
+                    <ImageView
+                        android:id="@+id/cyj_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/my_ordinary" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/icon3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon1"
+                android:layout_marginLeft="5dip"
+                android:layout_toRightOf="@+id/iconFrameLayout"
+                android:orientation="horizontal"
+                android:paddingTop="5dip" >
+
+                <TextView
+                    android:id="@+id/sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:text=""
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/name" />
+
+                <TextView
+                    android:id="@+id/age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:text=""
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/name" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/xinyu_linearlayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="13dip"
+            android:background="@drawable/my_box"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:paddingTop="15dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="5dip"
+                android:text="信誉值"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/name" />
+
+            <LinearLayout
+                android:id="@+id/icon_heart_one"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/xinyi_bt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_heart"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/xinyi_bt2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_heart"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/xinyi_bt3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_heart"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/xinyi_bt4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_heart"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/xinyi_bt5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_heart"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/xinyi_bt6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_heart"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/xinyi_bt7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_heart"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/xinyi_bt8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_heart"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/xinyi_bt9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_heart"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/xinyi_bt10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_heart"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add_friend_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/btn_hangingcolor_orange"
+        android:text="发送好友申请"
+        android:textColor="#ffffff" />
+
+</LinearLayout>

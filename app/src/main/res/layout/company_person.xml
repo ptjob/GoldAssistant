@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/full_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+    <!-- 无人签到 -->
+
+    <ScrollView
+        android:id="@+id/nosign"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="17dip" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:paddingLeft="10dip"
+                    android:text="男" />
+
+                <TextView
+                    android:id="@+id/men_num"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:text="0人" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="女" />
+
+                <TextView
+                    android:id="@+id/woman_num"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:text="0人" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="总数" />
+
+                <TextView
+                    android:id="@+id/total_num"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:text="0人" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="20dip"
+                android:background="@color/bottom_block" />
+
+            <com.quark.ui.widget.ListViewForScrollView
+                android:id="@+id/list_view1"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </ScrollView>
+    <!-- 无人签到end -->
+
+
+    <!-- 有人签到 -->
+
+    <ScrollView
+        android:id="@+id/sign"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="17dip" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:text="未签订扫码" />
+
+                <TextView
+                    android:id="@+id/total_nosign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9人"
+                    android:textColor="@color/ziti_orange" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <com.quark.ui.widget.ListViewForScrollView
+                android:id="@+id/list_view2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="20dip"
+                android:background="@color/bottom_block" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="17dip" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:text="已签订扫码" />
+
+                <TextView
+                    android:id="@+id/total_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7人"
+                    android:textColor="@color/ziti_orange" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <com.quark.ui.widget.ListViewForScrollView
+                android:id="@+id/list_view3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+    <!-- 有人签到end -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/preview_qiandao_record_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal"
+            android:layout_margin="15dip"
+            android:background="@drawable/bord_while"
+            android:gravity="center"
+            android:paddingBottom="10dip"
+            android:paddingLeft="25dip"
+            android:paddingRight="25dip"
+            android:paddingTop="10dip"
+            android:text="签到记录"
+            android:textColor="@drawable/selector_setting_btn"
+            android:textSize="@dimen/myjianli" />
+    </LinearLayout>
+
+</LinearLayout>

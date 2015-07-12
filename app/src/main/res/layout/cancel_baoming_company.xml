@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/body_color"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:paddingBottom="15dp" >
+
+        <FrameLayout
+            android:id="@+id/iconFrameLayout"
+            android:layout_width="@dimen/defaul_icon_size_border"
+            android:layout_height="@dimen/defaul_icon_size_border"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="18dp" >
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/defaul_icon_size"
+                android:layout_height="@dimen/defaul_icon_size"
+                android:layout_gravity="center"
+                android:src="@drawable/pic_default_user" />
+
+            <ImageView
+                android:id="@+id/iconc"
+                android:layout_width="@dimen/defaul_icon_size_border"
+                android:layout_height="@dimen/defaul_icon_size_border"
+                android:layout_gravity="center"
+                android:background="@drawable/login_logo"
+                android:scaleType="center" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/name_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/iconFrameLayout"
+            android:orientation="horizontal"
+            android:paddingTop="5dip" >
+
+            <TextView
+                android:id="@+id/cancel_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="6dip"
+                android:paddingRight="6dip"
+                android:paddingTop="6dip"
+                android:text="贝尔"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/attestation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:background="@drawable/authenticationborder"
+                android:paddingBottom="5dip"
+                android:paddingLeft="7dip"
+                android:paddingRight="7dip"
+                android:paddingTop="5dip"
+                android:text="验"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/myjianli"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/chengyijin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dip"
+                android:background="@drawable/chengyijinborder"
+                android:paddingBottom="5dip"
+                android:paddingLeft="7dip"
+                android:paddingRight="7dip"
+                android:paddingTop="5dip"
+                android:text="诚意金"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/myjianli"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/xinyi_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_layout"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dip"
+            android:layout_toRightOf="@id/iconFrameLayout"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="信誉值"
+                android:textColor="@color/ziti_head"
+                android:textSize="@dimen/myjianli" />
+
+            <RatingBar
+                android:id="@+id/ratingBarStatff"
+                style="@style/ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:rating="3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/xinyi_layout"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dip"
+            android:layout_toRightOf="@id/iconFrameLayout"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="女"
+                android:textColor="@color/ziti_huise"
+                android:textSize="@dimen/myjianli" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dip"
+                android:text="21"
+                android:textColor="@color/ziti_huise"
+                android:textSize="@dimen/myjianli" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#F9F6F1"
+        android:orientation="horizontal"
+        android:padding="15dip" >
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.4"
+            android:gravity="center_horizontal"
+            android:text="取消申请" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:paddingLeft="15dip"
+            android:text="@string/cancel_reason"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dip"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:text="评价"
+                android:textColor="@color/ziti_orange"
+                android:textSize="@dimen/myjianli" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:layout_marginLeft="35dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <RadioGroup
+                    android:id="@+id/orderBy1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/zhongping"
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="中  评"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli" />
+
+                    <RadioButton
+                        android:id="@+id/chaping"
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="差  评"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli" />
+
+                    <RadioButton
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="周  结"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli"
+                        android:visibility="invisible" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dip"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:text="评语"
+                    android:textColor="@color/ziti_orange"
+                    android:textSize="@dimen/myjianli" />
+
+                <EditText
+                    android:id="@+id/cancel_neirong"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dip"
+                    android:layout_marginRight="10dip"
+                    android:background="@drawable/bord_saixun"
+                    android:gravity="left"
+                    android:hint="在这里写你的评价吧 "
+                    android:minHeight="40dip"
+                    android:padding="20dp"
+                    android:text="做的很好，非常感谢你对本次活动的支持与配合;"
+                    android:textColorHint="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/gree_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dip"
+                android:layout_marginTop="20dip"
+                android:background="@drawable/bordbtn"
+                android:gravity="center"
+                android:paddingBottom="15dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:paddingTop="15dip"
+                android:text="同意申请"
+                android:textColor="@color/body_color" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

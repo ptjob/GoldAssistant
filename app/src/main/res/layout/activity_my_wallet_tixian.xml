@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/liulanhenji"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip" >
+
+        <TextView
+            android:id="@+id/tt_v1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:text="可用提现金额:" />
+
+        <TextView
+            android:id="@+id/my_wallet_tixian_jine_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dip"
+            android:layout_toRightOf="@id/tt_v1"
+            android:text="99.99"
+            android:textColor="@color/head_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/my_wallet_tixian_jine_tv"
+            android:text="元" />
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line2" />
+
+    <LinearLayout
+        android:id="@+id/my_wallet_tixian_zhifubao_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip" >
+
+            <TextView
+                android:id="@+id/zfb_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dip"
+                android:text="支付帐号" />
+
+            <EditText
+                android:id="@+id/my_wallet_tixian_zhifubao_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/zfb_tv"
+                android:background="@color/body_color"
+                android:hint="请输入支付宝帐号"
+                android:singleLine="true"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/my_wallet_tixian_zhifubao_del_imv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:src="@drawable/emotionstore_progresscancelbtn"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/my_wallet_tixian_bank_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/my_wallet_tixian_bank_name_relayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip" >
+
+            <TextView
+                android:id="@+id/bank_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dip"
+                android:text="银行名称" />
+
+            <ImageView
+                android:id="@+id/my_wallet_tixian_bank_icon_imv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dip"
+                android:src="@drawable/bank_01"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/my_wallet_tixian_bank_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/bank_tv"
+                android:background="@color/body_color"
+                android:textCursorDrawable="@color/head_color"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/iii_imv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dip"
+                android:src="@drawable/bank_go" />
+
+            <TextView
+                android:id="@+id/my_wallet_tixian_input_bank_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/iii_imv"
+                android:hint="请选择银行" />
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_marginLeft="15dip"
+            android:background="@color/bottom_line2" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip" >
+
+            <TextView
+                android:id="@+id/bank_card_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dip"
+                android:text="银行卡号" />
+
+            <EditText
+                android:id="@+id/my_wallet_tixian_bank_card_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/bank_card_tv"
+                android:background="@color/body_color"
+                android:hint="提款储蓄卡号"
+                android:inputType="number"
+                android:padding="2dp"
+                android:singleLine="true"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/my_wallet_tixian_bank_card_del_imv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:src="@drawable/emotionstore_progresscancelbtn"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_marginLeft="15dip"
+            android:background="@color/bottom_line2" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip" >
+
+            <TextView
+                android:id="@+id/kaihu_zhihang_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dip"
+                android:text="开户支行" />
+
+            <EditText
+                android:id="@+id/my_wallet_tixian_bank_zhihang_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/kaihu_zhihang_tv"
+                android:background="@color/body_color"
+                android:hint="请输入开户支行"
+                android:padding="2dp"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/my_wallet_tixian_bank_zhihang_del_imv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:src="@drawable/emotionstore_progresscancelbtn"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="15dip"
+        android:background="@color/bottom_line2" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip" >
+
+        <TextView
+            android:id="@+id/zfb_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:text="开户姓名" />
+
+        <TextView
+            android:id="@+id/my_wallet_tixian_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@id/zfb_name_tv"
+            android:background="@color/body_color"
+            android:singleLine="true"
+            android:textCursorDrawable="@color/head_color"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="15dip"
+        android:background="@color/bottom_line2" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip" >
+
+        <TextView
+            android:id="@+id/zfb_tiqu_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:text="提取金额" />
+
+        <EditText
+            android:id="@+id/my_wallet_tixian_money_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@id/zfb_tiqu_tv"
+            android:background="@color/body_color"
+            android:hint="请输入提现金额"
+            android:inputType="numberDecimal"
+            android:padding="2dp"
+            android:singleLine="true"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line2" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dip"
+        android:text="@string/wallet_youqing_tips"
+        android:textColor="@color/head_color" />
+
+    <TextView
+        android:id="@+id/tixiantips_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dip"
+        android:layout_marginTop="-10dip"
+        android:text="@string/wallet_zfb_tt_tips"
+        android:textColor="@color/head_color" />
+
+    <Button
+        android:id="@+id/my_wallet_tixian_submit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dip"
+        android:layout_marginRight="40dip"
+        android:background="@drawable/my_wallet_his_tixian"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:text="提交"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+</LinearLayout>

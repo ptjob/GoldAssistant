@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/yes_no_full_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dip" >
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:paddingLeft="10dip"
+            android:text="未签到扫码" />
+
+        <TextView
+            android:id="@+id/no_sign_num"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:gravity="right"
+            android:text="9人"
+            android:textColor="@color/head_color" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line" />
+
+    <ListView
+        android:id="@+id/ListView_no"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="15dip"
+        android:background="@color/bottom_block" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dip" >
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:paddingLeft="10dip"
+            android:text="已签到扫码" />
+
+        <TextView
+            android:id="@+id/yes_sign_num"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:gravity="right"
+            android:text="9人"
+            android:textColor="@color/head_color" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ListView
+            android:id="@+id/ListView_yes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:layout_above="@+id/qiandao_layout"
+                    android:background="@color/bottom_line" />
+
+                <LinearLayout
+                    android:id="@+id/qiandao_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:id="@+id/codeLayout"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.44"
+                        android:background="@drawable/btn_selector"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingBottom="20dip"
+                        android:paddingTop="20dip" >
+
+                        <Button
+                            android:id="@+id/roster_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:drawableLeft="@drawable/roster_icon_code"
+                            android:drawablePadding="5dip"
+                            android:paddingLeft="20dip"
+                            android:text="二维码签到"
+                            android:textColor="@color/head_color" />
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="1dip"
+                        android:layout_height="fill_parent"
+                        android:background="@color/bottom_line" />
+
+                    <LinearLayout
+                        android:id="@+id/penLayout"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.44"
+                        android:background="@drawable/btn_selector"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingBottom="20dip"
+                        android:paddingTop="20dip" >
+
+                        <Button
+                            android:id="@+id/roster_pen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:drawableLeft="@drawable/roster_icon_pen"
+                            android:drawablePadding="5dip"
+                            android:text="评价人员"
+                            android:textColor="@color/head_color" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

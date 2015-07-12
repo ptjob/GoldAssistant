@@ -1,0 +1,176 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/body_color"
+    android:orientation="vertical"
+    tools:context=".ShareActivity" >
+
+    <!-- center -->
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <!-- Bottom -->
+
+    <LinearLayout
+        android:id="@+id/menu_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/body_color"
+        android:gravity="center"
+        android:paddingTop="4dp"
+        android:weightSum="0.8" >
+
+        <LinearLayout
+            android:id="@+id/l_one"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:background="@color/body_color"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv1"
+                style="@style/bNavText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/tab_btn_work_sel"
+                android:gravity="center"
+                android:text="广场"
+                android:textColor="@color/menu_orange" />
+
+            <ImageView
+                android:id="@+id/tv1_boomt"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@color/head_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/l_two"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:background="@color/body_color"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv2"
+                    style="@style/bNavText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/tab_btn_group_nor"
+                    android:gravity="center"
+                    android:text="圈子"
+                    android:textColor="@color/menu_huise" />
+
+                <TextView
+                    android:id="@+id/unread_quanzi_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="18dip"
+                    android:background="@drawable/unread_count_bg"
+                    android:gravity="center"
+                    android:text="9"
+                    android:textColor="@android:color/white"
+                    android:textSize="9sp"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/tv2_boomt"
+                android:layout_width="fill_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/body_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/l_three"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:background="@color/body_color"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv3"
+                    style="@style/bNavText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/tab_btn_me_nor"
+                    android:gravity="center"
+                    android:text="我"
+                    android:textColor="@color/menu_huise" />
+
+                <ImageView
+                    android:id="@+id/me_hongdian_imv"
+                    android:layout_width="11dip"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="27dip"
+                    android:layout_marginTop="-3dip"
+                    android:src="@drawable/unread_count_bg"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/tv3_boomt"
+                android:layout_width="fill_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/body_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/l_four"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:background="@color/body_color"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv4"
+                style="@style/bNavText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/tab_btn_settings_nor"
+                android:gravity="center"
+                android:text="设置"
+                android:textColor="@color/menu_huise" />
+
+            <ImageView
+                android:id="@+id/tv4_boomt"
+                android:layout_width="fill_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/body_color" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignTop="@id/menu_layout"
+        android:background="@color/ziti_huise" />
+
+</RelativeLayout>

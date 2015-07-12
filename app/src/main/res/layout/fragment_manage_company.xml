@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_guangchang" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/relayout_1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="20dp" >
+
+                <ImageView
+                    android:id="@+id/imv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/paihangbang" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/imv1"
+                    android:text="排行榜"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/paihangbang_mingci_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:text=""
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line2" />
+
+            <RelativeLayout
+                android:id="@+id/relayout_2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="20dp" >
+
+                <ImageView
+                    android:id="@+id/imv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/my_funs" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/imv2"
+                    android:text="我的粉丝"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/my_funs_num_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:text=""
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line2" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="8dip"
+                android:background="@color/bottom_block2" />
+
+            <RelativeLayout
+                android:id="@+id/relayout_3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="20dp" >
+
+                <ImageView
+                    android:id="@+id/imv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/accept_act" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/imv3"
+                    android:text="开始接单"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/accept_act_number_tv"
+                    android:layout_width="11dip"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dip"
+                    android:src="@drawable/unread_count_bg"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line2" />
+
+            <RelativeLayout
+                android:id="@+id/relayout_4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="20dp" >
+
+                <ImageView
+                    android:id="@+id/imv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/publish_act" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/imv4"
+                    android:text="发布兼职"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line2" />
+
+            <RelativeLayout
+                android:id="@+id/relayout_5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="20dp" >
+
+                <ImageView
+                    android:id="@+id/imv5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/manage_act" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/imv5"
+                    android:text="活动管理"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/manage_act_number_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dip"
+                    android:background="@drawable/unread_count_bg"
+                    android:gravity="center"
+                    android:text="99"
+                    android:textColor="@android:color/white"
+                    android:textSize="9sp"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line2" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

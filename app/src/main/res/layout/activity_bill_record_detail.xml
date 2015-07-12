@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/bill_record_detail_imv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dip"
+            android:src="@drawable/my_wallet_withdrawal" />
+
+        <TextView
+            android:id="@+id/bill_record_detail_company_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/bill_record_detail_imv"
+            android:text="深圳市青木网络科技有限公司" />
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line2" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/bill_record_detail_tt_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dip"
+            android:text="交易金额" />
+
+        <TextView
+            android:id="@+id/bill_record_detail_money_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/bill_record_detail_tt_tv"
+            android:layout_marginRight="15dip"
+            android:textColor="@color/head_color"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="15dip"
+        android:background="@color/bottom_line2" />
+
+    <RelativeLayout
+        android:id="@+id/fukuanfangsi_relayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/bill_record_detail_fkfs_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dip"
+            android:text="付款方式" />
+
+        <TextView
+            android:id="@+id/bill_record_detail_pay_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/bill_record_detail_fkfs_tv" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/bill_record_detail_charge_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dip"
+            android:text="交易类型" />
+
+        <TextView
+            android:id="@+id/bill_record_detail_charge_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/bill_record_detail_charge_tv" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/bill_record_detail_create_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dip"
+            android:text="创建时间" />
+
+        <TextView
+            android:id="@+id/bill_record_detail_create_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/bill_record_detail_create_tv" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/bill_record_detail_jiaoy_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dip"
+            android:text="交  易  号" />
+
+        <TextView
+            android:id="@+id/bill_record_detail_charge_num_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/bill_record_detail_jiaoy_tv" />
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line2" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/bill_record_detail_charge_status_imv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@color/body_color"
+            android:padding="5dp"
+            android:src="@drawable/pop_btn_ok" />
+
+        <TextView
+            android:id="@+id/bill_record_detail_charge_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/bill_record_detail_charge_status_imv" />
+    </RelativeLayout>
+
+</LinearLayout>

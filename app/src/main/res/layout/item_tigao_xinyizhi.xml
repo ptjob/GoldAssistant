@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/myxinyizhi"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/item_selector"
+    android:paddingBottom="15dip"
+    android:paddingTop="15dip" >
+
+    <TextView
+        android:id="@+id/me_title"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="0.6"
+        android:gravity="left|center_vertical"
+        android:text="我的兼职" />
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.1"
+         android:gravity="center"
+        android:text="+1" />
+    <Button
+        android:id="@+id/activity_count"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.1"
+        android:background="@drawable/heart_all"
+        android:gravity="center"
+        android:minHeight="20dip"
+        android:textColor="#ffffff"
+        android:textSize="14dip" />
+
+    <ImageView
+        android:id="@+id/me_enter_activity"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.2"
+        android:src="@drawable/btn_go" />
+
+</LinearLayout>

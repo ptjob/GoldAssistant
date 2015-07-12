@@ -1,0 +1,157 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:viewFlow="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/body_color"
+    android:orientation="vertical"
+    tools:context="com.quark.fragment.HomeFragment" >
+
+    <RelativeLayout
+        android:id="@+id/top_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/head_color"
+        android:gravity="center" >
+
+        <LinearLayout
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/common_tab_bg"
+            android:gravity="center_vertical" >
+
+            <ImageView
+                style="@style/imgTopLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dip"
+                android:background="@drawable/nav_btn_back" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/bTopTitleCenter"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="查看报名人员"
+            android:textSize="@dimen/tt" />
+
+        <LinearLayout
+            android:id="@+id/right_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="45dip"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/common_tab_bg"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="20dp" >
+
+            <ImageView
+                android:id="@+id/right"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:src="@drawable/nav_btn_refresh" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/top_baoming_layout"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/head_color"
+        android:gravity="center" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/bord_baoming"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/nosee"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="未查看  3"
+                android:textColor="@color/body_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@color/body_color" />
+
+            <TextView
+                android:id="@+id/pass"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center"
+                android:text="已录取  3"
+                android:textColor="@color/body_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@color/body_color" />
+
+            <TextView
+                android:id="@+id/all"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bord_baomingright"
+                android:gravity="center"
+                android:text="全部 16"
+                android:textColor="@color/ziti_orange"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="已加载完全部"
+        android:textColor="@color/ziti_huise" />
+
+    <ListView
+        android:id="@+id/list1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="#fff"
+        android:dividerHeight="1px"
+        android:visibility="gone" >
+    </ListView>
+
+    <ListView
+        android:id="@+id/list2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="#fff"
+        android:dividerHeight="1px"
+        android:visibility="gone" >
+    </ListView>
+
+    <ListView
+        android:id="@+id/list3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="#fff"
+        android:dividerHeight="1px"
+        android:visibility="gone" >
+    </ListView>
+
+</LinearLayout>

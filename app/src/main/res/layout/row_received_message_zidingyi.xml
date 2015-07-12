@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="13dp" >
+
+    <TextView
+        android:id="@+id/timestamp"
+        style="@style/chat_text_date_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_chat_activity" >
+
+        <!-- 换成圆形 -->
+        <!-- <com.quark.http.image.CircularImage -->
+
+        <ImageView
+            android:id="@+id/iv_userhead"
+            android:layout_width="@dimen/size_avatar"
+            android:layout_height="@dimen/size_avatar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/margin_chat_activity"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_avatar" />
+
+        <TextView
+            android:id="@+id/tv_userid"
+            style="@style/chat_text_name_carson_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_userhead" />
+
+        <RelativeLayout
+            android:id="@+id/zidingyi_chat_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_userid"
+            android:layout_marginLeft="@dimen/margin_chat_activity"
+            android:layout_toRightOf="@id/iv_userhead"
+            android:background="@drawable/chatfrom_bg"
+            android:maxWidth="225.0dip"
+            android:minHeight="50dp"
+            android:paddingLeft="8dip" >
+
+            <TextView
+                android:id="@+id/tv_chatcontent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left|center"
+                android:lineSpacingExtra="2dp"
+                android:maxWidth="215.0dip"
+                android:paddingLeft="8dip"
+                android:text="荷尔美试吃促销 110元/日"
+                android:textColor="#ff000000"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/zidingyi_chat_imv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_chatcontent"
+                android:paddingLeft="8dip"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_job_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_chatcontent"
+                android:layout_toRightOf="@id/zidingyi_chat_imv"
+                android:paddingLeft="8dip"
+                android:text="工作地点:全深圳"
+                android:textColor="#ff000000"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_job_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_job_place"
+                android:layout_toRightOf="@id/zidingyi_chat_imv"
+                android:paddingLeft="8dip"
+                android:text="工作时间:04-24至05-26"
+                android:textColor="#ff000000"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_job_zhaomu_renshu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_job_date"
+                android:layout_toRightOf="@id/zidingyi_chat_imv"
+                android:paddingLeft="8dip"
+                android:text="招募人数:男 10，女 10"
+                android:textColor="#ff000000"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

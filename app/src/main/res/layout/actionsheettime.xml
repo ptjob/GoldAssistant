@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F0F0F0"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+
+    <DatePicker 
+        android:id="@+id/date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        />
+	<ImageView 
+	    android:id="@+id/submit"
+	    android:layout_width="fill_parent"
+	    android:layout_gravity="center"
+	    android:padding="5dp"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/pop_btn_ok"
+	    android:background="@color/body_color"
+	    />
+</LinearLayout>

@@ -1,0 +1,474 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/body_color"
+    android:orientation="vertical"
+    tools:context="com.quark.fragment.IntroduceActivity" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dip" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- 我 -->
+
+            <LinearLayout
+                android:id="@+id/fragment_intro_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pic_bg_750"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dip"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="30dip" >
+
+                    <FrameLayout
+                        android:id="@+id/iconFrameLayout"
+                        android:layout_width="110dip"
+                        android:layout_height="110dip"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="18dp" >
+
+                        <ImageView
+                            android:id="@+id/icon"
+                            android:layout_width="95dip"
+                            android:layout_height="95dip"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/pic_default_user" />
+
+                        <ImageView
+                            android:layout_width="101dip"
+                            android:layout_height="101dip"
+                            android:src="@drawable/pic_default_circle" />
+
+                        <com.quark.http.image.CircularImage
+                            android:id="@+id/cover_user_photo"
+                            android:layout_width="95dip"
+                            android:layout_height="95dip"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="3dp" />
+
+                        <ImageView
+                            android:id="@+id/my_sex_imv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="75dip"
+                            android:layout_marginTop="75dip"
+                            android:src="@drawable/my_men" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:id="@+id/icon1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/iconFrameLayout"
+                        android:orientation="vertical"
+                        android:paddingTop="25dp" >
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="45dp"
+                            android:ellipsize="end"
+                            android:maxEms="4"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp" >
+
+                            <ImageView
+                                android:id="@+id/yan_img"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/my_unauthorized" />
+
+                            <ImageView
+                                android:id="@+id/cyj_img"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:src="@drawable/my_ordinary" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/icon3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/icon1"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@+id/iconFrameLayout"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dip" >
+
+                        <TextView
+                            android:id="@+id/sex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dip"
+                            android:text=""
+                            android:textColor="#ffffff"
+                            android:textSize="@dimen/name" />
+
+                        <TextView
+                            android:id="@+id/age"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text=""
+                            android:textColor="#ffffff"
+                            android:textSize="@dimen/name" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="13dip"
+                    android:background="@drawable/my_box"
+                    android:orientation="horizontal"
+                    android:paddingBottom="15dip"
+                    android:paddingLeft="10dip"
+                    android:paddingRight="10dip"
+                    android:paddingTop="15dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="5dip"
+                        android:paddingTop="5dip"
+                        android:text="信誉值"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/name" />
+
+                    <RelativeLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.3" >
+
+                        <LinearLayout
+                            android:id="@+id/icon_heart_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <ImageView
+                                android:id="@+id/xinyi_bt1"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:src="@drawable/icon_heart"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/xinyi_bt2"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:src="@drawable/icon_heart"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/xinyi_bt3"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:src="@drawable/icon_heart"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/xinyi_bt4"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:src="@drawable/icon_heart"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/xinyi_bt5"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:src="@drawable/icon_heart"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/icon_heart_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/icon_heart_one"
+                            android:orientation="horizontal"
+                            android:visibility="gone" >
+
+                            <ImageView
+                                android:id="@+id/xinyi_bt6"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:src="@drawable/icon_heart"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/xinyi_bt7"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:src="@drawable/icon_heart"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/xinyi_bt8"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:src="@drawable/icon_heart"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/xinyi_bt9"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:src="@drawable/icon_heart"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/xinyi_bt10"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:src="@drawable/icon_heart"
+                                android:visibility="gone" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <Button
+                        android:layout_width="1dip"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="5dip"
+                        android:background="#ffffff" />
+
+                    <TextView
+                        android:id="@+id/cyjin"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dip"
+                        android:layout_weight="0.4"
+                        android:paddingRight="2dip"
+                        android:paddingTop="5dip"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/name" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <include
+                android:id="@+id/my_wallet"
+                layout="@layout/common_icon_text_raw" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="20dip"
+                android:background="@color/bottom_block2" />
+            <!-- 我的钱包结束 -->
+
+            <include
+                android:id="@+id/sweep"
+                layout="@layout/common_icon_text_raw" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="60dip"
+                android:background="@color/bottom_line2" />
+
+            <LinearLayout
+                android:id="@+id/myjob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_selector"
+                android:orientation="horizontal"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip" >
+
+                <ImageView
+                    android:id="@+id/my_jianzhi_imv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dip"
+                    android:src="@drawable/my_parttime" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="0.7"
+                    android:gravity="left|center_vertical"
+                    android:text="我的兼职" />
+
+                <Button
+                    android:id="@+id/activity_count"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/redboxborder"
+                    android:gravity="center"
+                    android:minHeight="20dip"
+                    android:text="0"
+                    android:textColor="#ffffff"
+                    android:textSize="14dip"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/me_enter_activity"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.2"
+                    android:src="@drawable/btn_go" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="60dip"
+                android:background="@color/bottom_line2" />
+
+            <include
+                android:id="@+id/my_collected"
+                layout="@layout/common_icon_text_raw" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="60dip"
+                android:background="@color/bottom_line2" />
+
+            <LinearLayout
+                android:id="@+id/myjob_ach"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_selector"
+                android:orientation="horizontal"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip" >
+
+                <ImageView
+                    android:id="@+id/my_jianzhi_ach_imv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dip"
+                    android:src="@drawable/my_performance" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="0.7"
+                    android:gravity="left|center_vertical"
+                    android:text="兼职成就" />
+
+                <Button
+                    android:id="@+id/comment_count"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/redboxborder"
+                    android:gravity="center"
+                    android:minHeight="20dip"
+                    android:text="0"
+                    android:textColor="#ffffff"
+                    android:textSize="14dip"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/me_enter_comment"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.2"
+                    android:src="@drawable/btn_go" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line2" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="20dip"
+                android:background="@color/bottom_block2" />
+            <!-- 兼职成就结束 -->
+
+            <include
+                android:id="@+id/myResume"
+                layout="@layout/common_icon_text_raw" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="60dip"
+                android:background="@color/bottom_line2" />
+
+            <include
+                android:id="@+id/realname"
+                layout="@layout/company_icon_text_raw" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="60dip"
+                android:background="@color/bottom_line2" />
+
+            <include
+                android:id="@+id/reputationvalue"
+                layout="@layout/common_icon_text_raw" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="60dip"
+                android:background="@color/bottom_line2" />
+
+            <include
+                android:id="@+id/raisereputationvalue"
+                layout="@layout/common_icon_text_raw" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line2" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

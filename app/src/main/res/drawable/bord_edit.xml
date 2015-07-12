@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<shape xmlns:android="http://schemas.android.com/apk/res/android">    
+    <!-- 日期 1px橙色边框 白底  无圆角-->
+    <solid android:color="@color/body_color" />  
+    
+    <stroke  
+        android:width="1dp"         
+        android:color="@color/ziti_huise" />  
+        
+    <corners android:topLeftRadius="0dp"   
+                android:topRightRadius="0dp"    
+                android:bottomRightRadius="0dp"   
+                android:bottomLeftRadius="0dp"/>    
+</shape> 

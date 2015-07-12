@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <!-- 建议 -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@color/yellow_bg" >
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16.0dip"
+            android:background="@drawable/nav_btn_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="投诉兼职"
+            android:textColor="#ffffff"
+            android:textSize="18.0dip" />
+
+        <TextView
+            android:id="@+id/tousu_tijiao_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:text="提交"
+            android:textColor="#ffffff"
+            android:textSize="18.0dip" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/forget_main"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_marginTop="20dp"
+            android:background="@color/bottom_line" />
+
+        <EditText
+            android:id="@+id/content"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:gravity="left|top"
+            android:hint="请填写投诉理由"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="8dip"
+            android:maxLength="200"
+            android:padding="5dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/zi_number"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:gravity="right"
+            android:text="0/200"
+            android:textColor="@color/ziti_huise" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="@color/bottom_line" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dip"
+        android:layout_marginTop="5dip"
+        android:text="*请不要进行恶意投诉哦"
+        android:textColor="@color/head_color"
+        android:textSize="16sp" />
+
+</LinearLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/item_selector"
+    android:orientation="horizontal"
+    android:paddingBottom="10dip"
+    android:paddingTop="10dip" >
+
+    <ImageView
+        android:id="@+id/left_icon_imv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dip"
+        android:src="@drawable/my_realname" />
+
+    <TextView
+        android:id="@+id/me_title"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="0.6"
+        android:gravity="left|center_vertical"
+        android:text="@string/authentication_data" />
+
+    <Button
+        android:id="@+id/jobtitlenum"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0"
+        android:background="@drawable/redboxborder"
+        android:gravity="center"
+        android:minHeight="20dip"
+        android:text="3"
+        android:textColor="#ffffff"
+        android:textSize="14dip" />
+
+    <TextView
+        android:id="@+id/renzheng"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.2"
+        android:gravity="right|center"
+        android:minHeight="20dip"
+        android:text="已认证"
+        android:textColor="@color/ziti_huise"
+        android:textSize="14dip" />
+
+    <ImageView
+        android:id="@+id/me_enter"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.2"
+        android:src="@drawable/btn_go" />
+
+</LinearLayout>

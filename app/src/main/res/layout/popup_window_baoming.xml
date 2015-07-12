@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="#c0000000"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/hp"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/wbg_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/body_color"
+        android:orientation="vertical" >
+
+        <!-- android:layout_marginBottom="88dp" -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0.5dp"
+                android:text="给商家留言"
+                android:textColor="@color/ziti_orange"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right" >
+
+                <ImageView
+                    android:id="@+id/send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="20dp"
+                    android:src="@drawable/pop_btn_send_on" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bord_saixun"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:maxLength="50"
+                android:minHeight="50dp"
+                android:padding="10dp"
+                android:text="你好,我会努力做好这份工作的!"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/zi_number"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:gravity="right"
+                android:text="15/50"
+                android:textColor="@color/ziti_huise" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

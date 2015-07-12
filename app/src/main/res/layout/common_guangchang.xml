@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_common_guangchang_relayout"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/head_color"
+    android:gravity="center" >
+
+    <LinearLayout
+        android:id="@+id/left"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/common_tab_bg"
+        android:gravity="center_vertical"
+        android:visibility="invisible" >
+
+        <ImageView
+            style="@style/imgTopLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dip"
+            android:background="@drawable/nav_btn_back" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/home_page_city_relayout"
+        android:layout_width="wrap_content"
+        android:layout_height="45dip" >
+
+        <TextView
+            android:id="@+id/home_page_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:gravity="center_vertical"
+            android:text="深圳"
+            android:textColor="@color/bottom_text_color_normal"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dip"
+            android:layout_toRightOf="@id/home_page_city"
+            android:src="@drawable/city_xiala" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/bTopTitleCenter"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="兼职达人"
+        android:textSize="@dimen/tt" />
+
+    <LinearLayout
+        android:id="@+id/right_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="45dip"
+        android:layout_alignParentRight="true"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bord"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="筛选"
+            android:textColor="@color/body_color"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</RelativeLayout>

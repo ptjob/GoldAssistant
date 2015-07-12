@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="17dip" >
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:paddingLeft="10dip"
+            android:text="男" />
+
+        <TextView
+            android:id="@+id/men_num"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="0人" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:text="女" />
+
+        <TextView
+            android:id="@+id/woman_num"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="0人" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:gravity="center"
+            android:text="总数" />
+
+        <TextView
+            android:id="@+id/total_num"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="0人" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"
+        android:background="@color/bottom_block" />
+    
+      <ListView android:layout_width="fill_parent"   
+          android:layout_height="wrap_content"   
+          android:id="@+id/ListView01"  
+          />  
+
+<!--     <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <include
+                android:id="@+id/person_evaluate1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/company_person_evaluate" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/company_person_evaluate" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+        </LinearLayout>
+    </ScrollView>  -->
+
+  
+</LinearLayout>

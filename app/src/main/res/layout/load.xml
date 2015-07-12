@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.8"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dip"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:src="@drawable/start_login" >
+        </ImageView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dip"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:src="@drawable/start_title" >
+        </ImageView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="35dip"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:src="@drawable/start_logan" >
+        </ImageView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.2"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal|bottom"
+            android:background="@drawable/start_cloud"
+            android:src="@drawable/start_cloud" >
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="20dip"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal|bottom"
+                android:background="#ffffff"
+                android:src="@drawable/start_company" >
+            </ImageView>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

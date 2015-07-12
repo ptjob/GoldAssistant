@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/body_color"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:text="鞋码"
+        android:textColor="@color/ziti_orange"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/one"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="33"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/two"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="34"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/three"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="35"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/four"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="36"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/five"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="37"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/six"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="38"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/seven"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="39"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/eight"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="40"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/nine"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="41"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/ten"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="42"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/eleven"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="43"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/twelve"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="44"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+         >
+
+        <TextView
+            android:id="@+id/thirteen"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="45"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="46"
+            android:textColor="@color/ziti_huise" 
+            android:visibility="invisible"
+            />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="47"
+            android:textColor="@color/ziti_huise" 
+             android:visibility="invisible"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bottom_line" />
+
+    <ImageView
+        android:id="@+id/submit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/body_color"
+        android:padding="5dp"
+        android:src="@drawable/pop_btn_ok" />
+
+</LinearLayout>

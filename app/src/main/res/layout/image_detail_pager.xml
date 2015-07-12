@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#b0000000"   >
+
+    <RelativeLayout
+        android:id="@+id/image_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="#b0000000" >
+
+        <TextView
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/viewpager_indicator"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/image_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="20dip"
+            android:src="@drawable/pop_btn_close"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.8" >
+
+        <com.quark.senab.us.image.HackyViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#9D9D9D" />
+    </FrameLayout>
+  
+    
+      <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.18"
+        android:layout_gravity="bottom"
+        android:background="#b0000000"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/spadding" >
+
+        <ImageView
+            android:id="@+id/image_btn_add"
+            android:layout_width="wrap_content"
+          	android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:src="@drawable/pop_btn_add" />
+
+        <TextView
+            android:id="@+id/image_btn_add_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:text="换一张"
+            android:textColor="@color/body_color"
+            android:textSize="@dimen/name" />
+    </LinearLayout>
+
+</LinearLayout>

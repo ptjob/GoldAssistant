@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/quanzi_top_relayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/head_color"
+        android:gravity="center_vertical" >
+
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip" >
+
+            <TextView
+                android:id="@+id/fragment_quanzi_msg_tv"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/quanzi_btn_bar_left_on"
+                android:gravity="center"
+                android:text="消息"
+                android:textColor="@color/head_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/fragment_quanzi_contacts_tv"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/quanzi_btn_bar_right_off"
+                android:gravity="center"
+                android:text="通讯录"
+                android:textColor="@color/body_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/quanzi_shenqing_hongdian_imv"
+            android:layout_width="11dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-15dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/linearlayout"
+            android:src="@drawable/unread_count_bg"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_new_contact"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/common_tab_bg"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/add" />
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/guidePages"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" />
+
+</LinearLayout>

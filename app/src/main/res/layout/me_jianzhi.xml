@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/body_color"
+    >
+
+    <!-- 我的兼职 -->
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/all_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/body_color"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="全部"
+                android:textColor="@color/ziti_orange"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/all_img"
+                android:layout_width="fill_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/head_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/agree_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/body_color"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="已录取"
+                android:textColor="@color/ziti_huise"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/agree_img"
+                android:layout_width="fill_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/nav_huise" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/wait_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/body_color"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="待录取"
+                android:textColor="@color/ziti_huise"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/wait_img"
+                android:layout_width="fill_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/nav_huise" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/reject_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/body_color"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="被拒绝"
+                android:textColor="@color/ziti_huise"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/reject_img"
+                android:layout_width="fill_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/nav_huise" />
+        </LinearLayout>
+    </LinearLayout>
+
+     <ImageView
+        android:id="@+id/nodata_img"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/myjob_pic_tips" /> 
+
+    <me.maxwin.view.XListView
+        android:id="@+id/list1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/body_color"
+        android:divider="#fff"
+        android:dividerHeight="1px"
+        >
+    </me.maxwin.view.XListView>
+
+    <me.maxwin.view.XListView
+        android:id="@+id/list2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/body_color"
+        android:divider="#fff"
+        android:dividerHeight="1px"
+        android:visibility="gone" >
+    </me.maxwin.view.XListView>
+
+    <me.maxwin.view.XListView
+        android:id="@+id/list3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/body_color"
+        android:divider="#fff"
+        android:dividerHeight="1px"
+        android:visibility="gone" >
+    </me.maxwin.view.XListView>
+
+    <me.maxwin.view.XListView
+        android:id="@+id/list4"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/body_color"
+        android:divider="#fff"
+        android:dividerHeight="1px"
+        android:visibility="gone" >
+    </me.maxwin.view.XListView>
+
+</LinearLayout>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/body_color"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:text="语言"
+        android:textColor="@color/ziti_orange"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/xueli_xiaoxue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="普通话"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_chuzhong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="粤语"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_gaozhong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="英语"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/xueli_zhiyegaozhong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="德语"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_jixiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="韩语"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_zhongzhuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="法语"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/xueli_dazhuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="日语"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_benke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="意大利语"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_shuoshi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="俄语"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/xueli_boshi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="阿拉伯语"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="意大利语"
+            android:textColor="@color/ziti_huise"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:minEms="4"
+            android:padding="5dp"
+            android:text="俄语"
+            android:textColor="@color/ziti_huise"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bottom_line" />
+
+    <ImageView
+        android:id="@+id/submit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/body_color"
+        android:padding="5dp"
+        android:src="@drawable/pop_btn_ok" />
+
+</LinearLayout>

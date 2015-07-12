@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/body_color"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:text="学历"
+        android:textColor="@color/ziti_orange"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/xueli_xiaoxue"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="小学"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_chuzhong"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="初中"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_gaozhong"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="高中"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/xueli_zhiyegaozhong"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="职业高中"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_jixiao"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="技校"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_zhongzhuan"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="中专"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/xueli_dazhuan"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="大专"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_benke"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="本科"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/xueli_shuoshi"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="硕士"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" 
+         android:layout_marginBottom="10dp"
+        >
+
+        <TextView
+            android:id="@+id/xueli_boshi"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="博士"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="本科"
+            android:textColor="@color/ziti_huise" 
+            android:visibility="invisible"
+            />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="硕士"
+            android:textColor="@color/ziti_huise" 
+            android:visibility="invisible"
+            />
+    </LinearLayout>
+    
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bottom_line"
+        />
+<ImageView 
+	    android:id="@+id/submit"
+	    android:layout_width="fill_parent"
+	    android:layout_gravity="center"
+	    android:padding="5dp"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/pop_btn_ok"
+	    android:background="@color/body_color"
+	    />
+</LinearLayout>

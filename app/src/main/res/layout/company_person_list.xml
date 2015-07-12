@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="12dip"
+        android:paddingTop="12dip" >
+
+        <FrameLayout
+            android:id="@+id/iconFrameLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dip" >
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/defaul_icon_size_small"
+                android:layout_height="@dimen/defaul_icon_size_small"
+                android:layout_gravity="center"
+                android:src="@drawable/pic_default_user" />
+
+            <ImageView
+                android:layout_width="@dimen/defaul_icon_size_96"
+                android:layout_height="@dimen/defaul_icon_size_96"
+                android:layout_gravity="center"
+                android:src="@drawable/pic_default_circle" />
+
+            <com.quark.http.image.CircularImage
+                android:id="@+id/cover_user_photo"
+                android:layout_width="@dimen/defaul_icon_size_small_border"
+                android:layout_height="@dimen/defaul_icon_size_small_border"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="20dip" >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="李涛涛" />
+
+            <TextView
+                android:id="@+id/telephone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:text="13760273951"
+                android:textColor="@color/ziti_huise" />
+
+            <TextView
+                android:id="@+id/sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/telephone"
+                android:text="女 "
+                android:textColor="@color/ziti_huise"
+                android:textSize="@dimen/myjianli" />
+
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/telephone"
+                android:layout_toRightOf="@+id/sex"
+                android:paddingLeft="4dip"
+                android:text="21 "
+                android:textColor="@color/ziti_huise"
+                android:textSize="@dimen/myjianli" />
+
+            <ImageView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="20dip"
+                android:background="@drawable/roster_btn_phone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line" />
+
+</LinearLayout>

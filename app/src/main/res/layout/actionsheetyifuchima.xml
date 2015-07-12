@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/body_color"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:text="衣服码"
+        android:textColor="@color/ziti_orange"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/one"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="S"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/two"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="M"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/three"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="L"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center" 
+         android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/four"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="XL"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/five"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="XXL"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/six"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="XXXL"
+            android:textColor="@color/ziti_huise" />
+    </LinearLayout>
+
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bottom_line"
+        />
+<ImageView 
+	    android:id="@+id/submit"
+	    android:layout_width="fill_parent"
+	    android:layout_gravity="center"
+	    android:padding="5dp"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/pop_btn_ok"
+	    android:background="@color/body_color"
+	    />
+</LinearLayout>

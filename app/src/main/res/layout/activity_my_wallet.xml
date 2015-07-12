@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <FrameLayout
+            android:id="@+id/iconFrameLayout"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dip" >
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="70dip"
+                android:layout_height="70dip"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/pic_default_user" />
+
+            <ImageView
+                android:layout_width="74dip"
+                android:layout_height="74dip"
+                android:src="@drawable/pic_default_circle" />
+
+            <com.quark.http.image.CircularImage
+                android:id="@+id/my_wallet_cover_user_photo"
+                android:layout_width="70dip"
+                android:layout_height="70dip"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dip"
+            android:layout_toRightOf="@id/iconFrameLayout"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/my_wallet_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张三"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/my_wallet_tel_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="137****1234"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/my_wallet_yue_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dip"
+            android:textColor="@color/head_color"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/my_wallet_jiaona_tv"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="诚意金"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:background="@color/bottom_line2" />
+
+        <TextView
+            android:id="@+id/my_wallet_tixian_tv"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="我要提现"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"
+        android:background="@color/bottom_block2" />
+
+    <me.maxwin.view.XListView
+        android:id="@+id/liushui_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="#fff"
+        android:dividerHeight="1px" >
+    </me.maxwin.view.XListView>
+
+</LinearLayout>

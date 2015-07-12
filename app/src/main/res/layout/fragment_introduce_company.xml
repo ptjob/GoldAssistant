@@ -1,0 +1,185 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/body_color"
+    android:orientation="vertical"
+    tools:context="com.quark.fragment.IntroduceActivity" >
+
+    <!-- 我 -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dip" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="180dip"
+                android:background="@drawable/pic_bg_750"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dip"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="30dip" >
+
+                    <FrameLayout
+                        android:id="@+id/iconFrameLayout"
+                        android:layout_width="110dip"
+                        android:layout_height="110dip"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="18dp" >
+
+                        <ImageView
+                            android:id="@+id/icon"
+                            android:layout_width="95dip"
+                            android:layout_height="95dip"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/pic_default_user" />
+
+                        <ImageView
+                            android:layout_width="101dip"
+                            android:layout_height="101dip"
+                            android:src="@drawable/pic_default_circle" />
+
+                        <com.quark.http.image.CircularImage
+                            android:id="@+id/cover_user_photo"
+                            android:layout_width="95dip"
+                            android:layout_height="95dip"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="3dp" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:id="@+id/icon1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/iconFrameLayout"
+                        android:orientation="horizontal"
+                        android:paddingTop="15dp" >
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxEms="4"
+                            android:singleLine="true"
+                            android:text="fsf"
+                            android:textColor="#ffffff"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/yan_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/icon1"
+                        android:layout_toRightOf="@+id/iconFrameLayout"
+                        android:src="@drawable/my_certified" />
+
+                    <LinearLayout
+                        android:id="@+id/icon3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/yan_img"
+                        android:layout_toRightOf="@+id/iconFrameLayout"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dip" >
+
+                        <TextView
+                            android:id="@+id/sex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dip"
+                            android:text="余额"
+                            android:textColor="#ffffff"
+                            android:textSize="@dimen/name" />
+
+                        <TextView
+                            android:id="@+id/money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dip"
+                            android:text="0元"
+                            android:textColor="#ffffff"
+                            android:textSize="@dimen/name" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/recharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/head_right"
+                        android:layout_marginTop="10dip"
+                        android:background="@drawable/bord_recharge"
+                        android:minHeight="35dip"
+                        android:text="去充值"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/name" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:gravity="left|center_vertical"
+                android:paddingBottom="10dip"
+                android:paddingTop="20dip"
+                android:text="收费项目" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dip"
+                android:gravity="left|center_vertical"
+                android:lineSpacingExtra="2dp"
+                android:paddingBottom="20dip"
+                android:text="@string/chargedescrip"
+                android:textColor="@color/ziti_huise" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <include
+                android:id="@+id/authdata_layout"
+                layout="@layout/company_icon_text_raw" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+            <!-- 关于信誉值与诚意金 -->
+
+            <include
+                android:id="@+id/reputationvalue_com"
+                layout="@layout/common_icon_text_raw" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

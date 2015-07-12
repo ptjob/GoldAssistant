@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dip"
+    android:padding="10dip" >
+
+    <com.droid.carson.ClearEditText
+        android:id="@+id/sh"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="20dip"
+        android:background="@drawable/cityhot_edittext_bg"
+        android:drawableLeft="@drawable/wb_search_icon"
+        android:hint="请输入城市名称"
+        android:padding="10dip"
+        android:textColor="#515151"
+        android:textSize="13dp" >
+    </com.droid.carson.ClearEditText>
+
+</RelativeLayout>

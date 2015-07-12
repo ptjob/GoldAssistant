@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#f5f5f5"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="#F8943C" >
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/nav_btn_back"
+            android:paddingLeft="16.0dip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="切换城市"
+            android:textColor="#ffffff"
+            android:textSize="20.0dip" />
+    </RelativeLayout>
+
+    <com.quark.citylistview.ClearEditText
+        android:id="@+id/filter_edit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/search_bar_edit_selector"
+        android:drawableLeft="@drawable/search_bar_icon_normal"
+        android:drawablePadding="5dp"
+        android:hint="请输入关键字"
+        android:singleLine="true"
+        android:textSize="15.0dip" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dip"
+        android:text="定位城市"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="35dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginTop="5dip"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dingweicity"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="15dip"
+            android:layout_weight="1"
+            android:background="@drawable/search_select_city_normal"
+            android:drawableLeft="@drawable/ic_citylist_gps"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dip"
+            android:text="深圳市"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="15dip"
+            android:layout_weight="1"
+            android:text="深圳市"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="15dip"
+            android:layout_weight="1"
+            android:text="深圳市"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fadingEdge="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="5dip"
+                android:text="热门城市"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="35dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="5dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/hot1"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="15dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_select_city_normal"
+                    android:gravity="center"
+                    android:text="北京市"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/hot2"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="15dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_select_city_normal"
+                    android:gravity="center"
+                    android:text="上海市"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/hot3"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="15dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_select_city_normal"
+                    android:gravity="center"
+                    android:text="广州市"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="35dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="5dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/hot4"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="15dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_select_city_normal"
+                    android:gravity="center"
+                    android:text="深圳市"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/hot5"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="15dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_select_city_normal"
+                    android:gravity="center"
+                    android:text="杭州市"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/hot6"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="15dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_select_city_normal"
+                    android:gravity="center"
+                    android:text="南京市"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="35dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="5dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/hot7"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="15dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_select_city_normal"
+                    android:gravity="center"
+                    android:text="成都市"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/hot8"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="15dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_select_city_normal"
+                    android:gravity="center"
+                    android:text="武汉市"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/hot9"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="15dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_select_city_normal"
+                    android:gravity="center"
+                    android:text="重庆市"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="2dip" >
+
+                <ListView
+                    android:id="@+id/country_lvcountry"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:divider="@null" />
+
+                <TextView
+                    android:id="@+id/dialog"
+                    android:layout_width="80.0dip"
+                    android:layout_height="80.0dip"
+                    android:layout_gravity="center"
+                    android:background="@drawable/show_head_toast_bg"
+                    android:gravity="center"
+                    android:textColor="#ffffffff"
+                    android:textSize="30.0dip"
+                    android:visibility="invisible" />
+
+                <com.quark.citylistview.SideBar
+                    android:id="@+id/sidrbar"
+                    android:layout_width="30.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="right|center" />
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

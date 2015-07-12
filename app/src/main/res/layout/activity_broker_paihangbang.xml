@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/body_color"
+    android:orientation="vertical" >
+
+    <!-- 我的兼职 -->
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <RelativeLayout
+        android:id="@+id/my_funs_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+
+        <FrameLayout
+            android:id="@+id/iconFrameLayout"
+            android:layout_width="110dip"
+            android:layout_height="110dip"
+            android:layout_marginLeft="18dp" >
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="95dip"
+                android:layout_height="95dip"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/pic_default_user" />
+
+            <ImageView
+                android:layout_width="101dip"
+                android:layout_height="101dip"
+                android:src="@drawable/pic_default_circle2" />
+
+            <com.quark.http.image.CircularImage
+                android:id="@+id/cover_user_photo"
+                android:layout_width="95dip"
+                android:layout_height="95dip"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iconFrameLayout"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/broker_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:src="@drawable/funs" />
+
+                <TextView
+                    android:id="@+id/broker_fans_num_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text=""
+                    android:textColor="@color/ziti_huise" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="您的地区排名：" />
+
+                <TextView
+                    android:id="@+id/broker_paiming_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/broker_top_content_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="做的不错，继续加油："
+                android:textColor="@color/ziti_huise" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line" />
+
+    <ImageView
+        android:id="@+id/nodata_img"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/no_broker"
+        android:visibility="gone" />
+
+    <me.maxwin.view.XListView
+        android:id="@+id/my_broker_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/body_color"
+        android:divider="#fff"
+        android:dividerHeight="1px" >
+    </me.maxwin.view.XListView>
+
+</LinearLayout>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/body_color"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/my_wallet_tixian_his_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dip"
+            android:gravity="center_horizontal"
+            android:text="成潜"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/my_wallet_tixian_his_bankcard_num_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dip"
+            android:gravity="center_horizontal"
+            android:text="6212264000003412456"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/my_wallet_tixian_his_bank_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="15dip"
+            android:gravity="center_horizontal"
+            android:text="中国工商银行"
+            android:textColor="@color/ziti_huise"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"
+        android:background="@color/bottom_block2" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="@color/body_color" >
+
+        <TextView
+            android:id="@+id/my_wallet_tixian_his_tt_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip"
+            android:text="金额"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/my_wallet_tixian_his_money_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@id/my_wallet_tixian_his_tt_tv"
+            android:background="@null"
+            android:hint="请输入提现金额"
+            android:inputType="numberDecimal"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bottom_block2" >
+
+        <RelativeLayout
+            android:id="@+id/my_wallet_tixian_his_reslayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="20dip" >
+
+            <TextView
+                android:id="@+id/my_wallet_tixian_his_ttt_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="可提现金额" />
+
+            <TextView
+                android:id="@+id/my_wallet_tixian_his_current_money_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/my_wallet_tixian_his_ttt_tv"
+                android:text="455.00"
+                android:textColor="@color/head_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/my_wallet_tixian_his_current_money_tv"
+                android:text="元" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/my_wallet_tixian_his_submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/my_wallet_tixian_his_reslayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dip"
+            android:layout_marginRight="40dip"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/my_wallet_his_tixian"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="提现"
+            android:textColor="@color/body_color"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</LinearLayout>

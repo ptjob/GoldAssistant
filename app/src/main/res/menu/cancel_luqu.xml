@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/cancel_luqu"
+        android:title="取消录取"/>
+
+</menu>

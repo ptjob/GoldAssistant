@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+   <!-- 点击的时候显示不同的图片，一个是绿色的，一个是白色: -->
+    <item android:state_checked="false"
+        android:drawable="@drawable/btn_checkbox_off"></item>
+    <item android:state_checked="true"
+        android:drawable="@drawable/btn_checkbox_on"></item>
+
+</selector>

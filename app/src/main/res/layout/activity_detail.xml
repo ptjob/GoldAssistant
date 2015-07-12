@@ -1,0 +1,619 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:viewFlow="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/body_color"
+    android:orientation="vertical"
+    tools:context="com.quark.fragment.HomeFragment" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:id="@+id/view_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dip"
+                android:background="@color/body_color"
+                android:paddingTop="20dp" >
+
+                <TextView
+                    android:id="@+id/jz_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/icon_jobtype_1"
+                    android:gravity="center"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="8dp"
+                    android:text="全部"
+                    android:textColor="@color/body_color" />
+
+                <TextView
+                    android:id="@+id/jz_title"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="【兼职达人】"
+                    android:textSize="@dimen/fontsize_40px" />
+
+                <ImageView
+                    android:id="@+id/activity_collect_imv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="2dip"
+                    android:src="@drawable/activity_un_collected"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/mini_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/body_color" >
+
+                    <TextView
+                        android:id="@+id/jz_publish_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="25dp"
+                        android:text="发布时间 "
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/ziti_huise"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/number1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/head_color"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/number2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="人"
+                            android:textColor="@color/ziti_huise"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/act_split_iv"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dip"
+                android:background="@color/nav_huise" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/act_chaoji_tv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/chaoji_color"
+                android:gravity="center"
+                android:text="最好的活动给最好的你，超级兼职绝对给力!"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/act_baozhengjin_tv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/baozhengjin_color"
+                android:gravity="center"
+                android:text="商家已为本次活动缴纳了保证金。"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:background="@color/body_color"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingTop="5dp" >
+
+                            <TextView
+                                android:id="@+id/jz_pay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/ziti_orange"
+                                android:textSize="@dimen/ziti_19" />
+
+                            <TextView
+                                android:id="@+id/jz_pay_type"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="元/日"
+                                android:textColor="@color/ziti_head"
+                                android:textSize="@dimen/ziti_19" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingTop="5dp" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="活动商家"
+                                android:textColor="@color/ziti_huise"
+                                android:textSize="@dimen/fontsize_30px" />
+
+                            <TextView
+                                android:id="@+id/jz_company"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="20dp"
+                                android:text=""
+                                android:textColor="@color/ziti_head"
+                                android:textSize="@dimen/fontsize_30px" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right" >
+
+                        <ImageView
+                            android:id="@+id/jobstatuts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/myjob_icon_pass"
+                            android:visibility="invisible" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="工作时间"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/jz_shijian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="工作区域"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/work_zone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="结算方式"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/jz_jieshuan_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="招募人数"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/jz_worker_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/nav_huise" >
+                </ImageView>
+
+                <LinearLayout
+                    android:id="@+id/jz_layout_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="身高要求"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/jz_heigh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/jz_layout_shoe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="鞋子尺码"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/jz_shoe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/jz_layout_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="衣服尺码"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/jz_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/jz_layout_sanwei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="三围要求"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/jz_sanwei"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/jz_health_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="健康证件"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/jz_health_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/jz_layout_language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="擅长语言"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/jz_language"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="详细地址"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/jz_addressdetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="兼职描述"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/fontsize_30px" />
+
+                    <TextView
+                        android:id="@+id/jz_work_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/ziti_head"
+                        android:textSize="@dimen/fontsize_30px" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/jz_layout_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp" >
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bord_tishi" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="8dp"
+                            android:padding="20dp"
+                            android:text="凡收取费用，需缴纳押金的企业均有欺诈嫌疑，请您警惕！"
+                            android:textColor="@color/ziti_huise" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@color/body_color"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="温馨提示"
+                        android:textColor="@color/ziti_orange"
+                        android:textSize="@dimen/ziti_19" />
+
+                    <ImageView
+                        android:id="@+id/activity_tousu_imv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:visibility="invisible"
+                        android:paddingBottom="10dip"
+                        android:paddingRight="10dip"
+                        android:src="@drawable/complainicon1" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/nav_huise" >
+    </ImageView>
+
+    <LinearLayout
+        android:id="@+id/bootm_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="1dp"
+        android:background="#ffffff"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/contactshangjia"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/bord_lianxishangjia"
+            android:gravity="center"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="联系商家"
+            android:textColor="@color/lianxshengjia"
+            android:textSize="@dimen/fontsize_40px" />
+
+        <TextView
+            android:id="@+id/baoming"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bord_baomingcanjia"
+            android:gravity="center"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="报名参加"
+            android:textColor="@color/ziti_orange"
+            android:textSize="@dimen/fontsize_40px" />
+    </LinearLayout>
+
+</LinearLayout>

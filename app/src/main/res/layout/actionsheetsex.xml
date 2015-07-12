@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/body_color"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:text="性别"
+        android:textColor="@color/ziti_orange"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+         android:layout_marginBottom="15dp"
+      >
+
+        <TextView
+            android:id="@+id/sex_man"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="男性"
+            android:textColor="@color/ziti_huise" />
+
+        <TextView
+            android:id="@+id/sex_lady"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/xueli_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="女性"
+            android:textColor="@color/ziti_huise" />
+
+    </LinearLayout>
+
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bottom_line"
+        />
+<ImageView 
+	    android:id="@+id/submit"
+	    android:layout_width="fill_parent"
+	    android:layout_gravity="center"
+	    android:padding="5dp"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/pop_btn_ok"
+	    android:background="@color/body_color"
+	    />
+</LinearLayout>

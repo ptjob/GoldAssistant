@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <!-- 建议 -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:id="@+id/top_title_layout"
+        android:background="@color/yellow_bg" >
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16.0dip"
+            android:background="@drawable/nav_btn_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="反馈和建议"
+            android:textColor="#ffffff"
+            android:textSize="20.0dip" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/forget_main"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_marginTop="20dp"
+            android:background="@color/bottom_line" />
+
+        <EditText
+            android:id="@+id/content"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:gravity="left|top"
+            android:hint="在这里输入你对我们的建议吧"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="8dip"
+            android:maxLength="200"
+            android:padding="5dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/zi_number"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:gravity="right"
+            android:text="0/200"
+            android:textColor="@color/ziti_huise" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="@color/bottom_line" />
+
+        <Button
+            android:id="@+id/regin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_hangingcolor_orange"
+            android:paddingLeft="30dp"
+            android:text="发送给我们"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

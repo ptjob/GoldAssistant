@@ -1,0 +1,64 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="bgRadius">4dp</dimen>
+
+    <dimen name="fontsize_20px">15sp</dimen>
+    <dimen name="fontsize_28px">14sp</dimen>
+    <dimen name="fontsize_24px">12sp</dimen>
+    <dimen name="fontsize_30px">15sp</dimen>
+    <dimen name="fontsize_36px">18sp</dimen>
+    <dimen name="ziti_19">19sp</dimen>
+    <dimen name="fontsize_40px">20sp</dimen>
+ 	<dimen name="tt">22sp</dimen>
+	<dimen name="xingchou">25sp</dimen>
+	<dimen name="xiaohui">16sp</dimen>
+
+	<dimen name="img_icon_size_border">135px</dimen>
+    <dimen name="img_icon_size">130px</dimen>
+    <!-- icon -->
+    <!-- 个人详情 头像-->
+    <dimen name="defaul_icon_size_border">145px</dimen>
+    <dimen name="defaul_icon_size">140px</dimen>
+    <dimen name="defaul_icon_size_my_data">116px</dimen>
+<!-- 列表头像 -->
+    <dimen name="defaul_icon_size_small_border">120px</dimen>
+    <dimen name="defaul_icon_size_small">117px</dimen>
+    <dimen name="defaul_icon_size_96">119px</dimen>
+
+    <!-- RatingBar Height-->
+    <dimen name="ratingbarHeight">13dp</dimen>
+    
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+    
+    <dimen name="chengyijin">16sp</dimen>
+    <dimen name="center_big">18sp</dimen> 
+    <dimen name="name">18sp</dimen>
+    
+     <dimen name="menu_setting">14sp</dimen>
+     <!-- 我的简历 -->
+      <dimen name="myjianli">16sp</dimen>
+      <dimen name="myjianli_size">15sp</dimen>
+       
+     <dimen name="scan_jianli_pic_height">180dp</dimen>
+     
+     <!-- 环信 -->
+      <dimen name="height_top_bar">46dp</dimen>
+    <dimen name="padding_search_bar">5dp</dimen>
+    <dimen name="height_row_weixin">59dp</dimen>
+    <dimen name="size_avatar">50dp</dimen>
+    <dimen name="margin_chat_activity">5dp</dimen>
+    <dimen name="field_textsize">14sp</dimen>
+    <dimen name="field_margin_right">5dp</dimen>
+    <dimen name="call_button_padding_vertical">10dp</dimen>
+    <dimen name="call_button_padding_left">25dp</dimen>
+    <dimen name="call_button_padding_right">25dp</dimen>
+    <dimen name="sidebar_text_size">10dp</dimen>
+     <dimen name="image_thumbnail_size">100dp</dimen>
+    <dimen name="image_thumbnail_spacing">1dp</dimen>
+</resources>

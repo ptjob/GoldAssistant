@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="liulanhenji">#F6F6F6</color>
+    <color name="guanli_common_color">#1b1d29</color>
+    <!-- 管理广场兼职活动状态 -->
+    <color name="guanli_zhaorenzhong_color">#f85151</color>
+    <!-- 管理广场招人 -->
+    <color name="guanli_shenhe_color">#de9955</color>
+    <!-- 管理广场审核中 -->
+    <color name="guanli_yimanyuan_color">#92ca30</color>
+    <!-- 管理广场已满员 -->
+    <color name="guanli_yixiajia_color">#989898</color>
+    <!-- 管理广场已下架 -->
+    <color name="guanli_weitongguo_color">#436c86</color>
+    <!-- 管理广场未通过 -->
+    <color name="guanli_beiqudi_color">#ff0000</color>
+    <!-- 管理广场被取缔 -->
+
+    <color name="quxiao_jianzhi_back_color">#f8f6f1</color>
+    <!-- 管理头部 -->
+    <color name="baozhengjin_color">#79b2fb</color>
+    <color name="chaoji_color">#fdbb77</color>
+    <!-- 保证金 超级 -->
+    <color name="head_color">#F8943C</color>
+    <!-- 皇冠123名 -->
+    <color name="king_first">#F54545</color>
+    <color name="king_second">#F77938</color>
+    <color name="king_third">#F8943C</color>
+    <!-- 主体橙色 -->
+    <color name="body_color">#FFFFFF</color>
+    <!-- 主体白色 -->
+    <color name="nav_huise">#ECECEC</color>
+    <!-- 中间色块灰色 -->
+    <color name="ziti_head">#727272</color>
+    <!-- 黑色字体 -->
+    <color name="ziti_huise">#B3B3B3</color>
+    <!-- 黑色字体 -->
+    <color name="ziti_black">#000000</color>
+    <!-- 灰色字体 -->
+    <!-- 灰色字体 -->
+    <color name="ziti_orange">#F8943C</color>
+    <!-- 橙色字体 -->
+    <color name="menu_huise">#5B5B5B</color>
+    <!-- 菜单灰色字体 -->
+    <color name="menu_orange">#F8943C</color>
+    <!-- 菜单橙色字体 -->
+    <color name="qita">#00ACAC</color>
+    <!-- 广场色块 其他 -->
+    <color name="chuxiao">#0699CC</color>
+    <!-- 广场色块促销 -->
+    <color name="liyi">#CE58CA</color>
+    <!-- 广场色礼仪 -->
+    <color name="yellow_bg">#F8943C</color>
+    <!-- 联系商家 -->
+    <color name="lianxshengjia">#2DC7FE</color>
+
+    <!-- 筛选时间 -->
+    <color name="saixuan_sjian">#FA8C2B</color>
+    <!-- 筛选地址 -->
+    <color name="saixuan_dizhi">#63B1F7</color>
+
+    <!-- 筛选类型 -->
+    <color name="saixuan_leixing">#9FCE42</color>
+    <!-- 结算 -->
+    <color name="saixuan_jiesuan">#FBC42C</color>
+    <color name="bottom_line">#D2D2D2</color>
+    <color name="bottom_line2">#D9D9D9</color>
+    <color name="bottom_block">#ECECEC</color>
+    <color name="bottom_block2">#EFEFF4</color>
+    <color name="codebac">#B4B4B4</color>
+    <!-- 错误提示红色 -->
+    <color name="erro">#FD2C2C</color>
+    <color name="guanli_item_titile_color">#505050</color>
+    <color name="guanli_item_intro_color">#7f7f7f</color>
+    <color name="guanli_item_top_background_color">#fbfbfb</color>
+    <color name="guanli_item_top_background_2_color">#f1f1f1</color>
+    <!-- 兼职列表 -->
+    <!-- 标题 -->
+    <color name="item_titleColor">#262626</color>
+    <!-- 灰色字 -->
+    <color name="item_huise">#999898</color>
+    <!-- 橙色字 -->
+    <color name="item_orange">#f78d2a</color>
+    <!-- 还差人数 字 -->
+    <color name="item_orangeban">#807e7e</color>
+    <!-- 优秀 -->
+    <color name="item_youxiu">#fe695d</color>
+    <!-- 好评 -->
+    <color name="item_haoping">#fb8d29</color>
+    <!-- 差评 -->
+    <color name="item_chaping">#575757</color>
+    <!-- 放飞机 -->
+    <color name="item_feiji">#2d2d2d</color>
+    <!-- 中评 -->
+    <color name="item_zhongping">#9b7857</color>
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="viewfinder_mask">#80000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="possible_result_points">#66E001</color>
+
+    <!-- 环信 -->
+    <!-- 改成橙色 -->
+    <!-- <color name="common_top_bar_blue">#4ebcd3</color> -->
+    <color name="common_top_bar_blue">#F8943C</color>
+    <color name="btn_login_normal">#007086</color>
+    <color name="btn_login_pressed">#303744</color>
+    <color name="btn_logout_normal">#d33f3f</color>
+    <color name="btn_logout_pressed">#DA5A4D</color>
+    <color name="btn_register_normal">#2dafa3</color>
+    <color name="btn_register_pressed">#4ebcd3</color>
+    <color name="common_bottom_bar_normal_bg">#2d2f31</color>
+    <color name="common_bottom_bar_selected_bg">#161718</color>
+    <color name="common_botton_bar_blue">#2ea7e0</color>
+    <color name="common_bg">#fcfcfc</color>
+    <color name="btn_pressed_green_solid">#B6DA53</color>
+    <color name="divider_list">#cccccc</color>
+
+    <!-- 改为橙色 -->
+    <!-- <color name="top_bar_normal_bg">#4ebcd3</color> -->
+    <color name="top_bar_normal_bg">#F8943C</color>
+    <color name="error_item_color">#F6EBE6</color>
+    <color name="bottom_bar_normal_bg">#2D2F31</color>
+    <color name="bottom_text_color_normal">#ffffff</color>
+    <color name="btn_white_normal">#f7f8f8</color>
+    <color name="btn_white_pressed">#b5b5b6</color>
+    <color name="btn_green_noraml">#68C270</color>
+    <color name="btn_green_pressed">#6FCD78</color>
+    <color name="btn_gray_normal">#c0c0c0</color>
+    <color name="btn_gray_pressed_status">#b5b5b6</color>
+    <color name="btn_gray_pressed">#666667</color>
+    <color name="btn_blue_normal">#1e90ff</color>
+    <color name="btn_blue_pressed">#0066FF</color>
+    <color name="orange">#FFA500</color>
+    <color name="gray_pressed">#b5b5b6</color>
+    <color name="gray_normal">#666667</color>
+    <color name="grid_state_pressed">#1Affffff</color>
+    <color name="grid_state_focused">#80000000</color>
+    <color name="voip_interface_text_color">#bababa</color>
+    <color name="black_deep">#FF000000</color>
+
+    <!-- 兼职类型色块 -->
+    <color name="type_paifa">#e64d3d</color>
+    <color name="type_chuxiao">#f39c11</color>
+    <color name="type_qita">#2893fe</color>
+    <color name="type_jiajiao">#19bd9b</color>
+    <color name="type_fuwuyuan">#ecd139</color>
+    <color name="type_liyi">#ff79b8</color>
+    <color name="type_baoanrenyuan">#1e3e57</color>
+    <color name="type_mote">#f02db2</color>
+    <color name="type_zhuchi">#8d46ac</color>
+    <color name="type_fanyi">#22c4f3</color>
+    <color name="type_gongzuorenyuan">#bbc670</color>
+    <color name="type_huawu">#a59aca</color>
+    <color name="type_chongchang">#7386a2</color>
+    <color name="type_yanyi">#fbdac8</color>
+    <color name="type_fangtan">#70586f</color>
+    <!-- 筛选 -->
+    <color name="choose_city">#63B2F7</color>
+    <color name="choose_type">#9FCE42</color>
+    <color name="choose_paytype">#FBC42C</color>
+
+</resources>

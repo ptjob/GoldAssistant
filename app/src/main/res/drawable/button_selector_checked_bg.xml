@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- 选中的时候每个RadioButtton的背景颜色 -->
+    <item 
+        android:state_checked="true"
+        android:drawable="@color/head_color"></item>
+    
+    <!-- 点击的时候显示不同的图片，一个是绿色的，一个是白色: -->
+    <item android:state_checked="false" android:drawable="@drawable/type_selector" ></item>
+   
+     
+
+</selector>

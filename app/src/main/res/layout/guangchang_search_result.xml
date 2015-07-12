@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:viewFlow="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/body_color"
+    tools:context="com.quark.fragment.HomeFragment" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/head_color"
+        android:gravity="center" >
+
+        <LinearLayout
+        android:id="@+id/left"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical" 
+        android:background="@drawable/common_tab_bg"
+        >
+        <ImageView
+            style="@style/imgTopLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dip"
+            android:background="@drawable/nav_btn_back" />
+    </LinearLayout>
+        
+        <!-- <ImageView
+            android:id="@+id/left"
+            style="@style/imgTopLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dip"
+            android:background="@drawable/nav_btn_back" /> -->
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/bTopTitleCenter"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="兼职达人"
+            android:textSize="@dimen/tt" />
+
+        <LinearLayout
+            android:id="@+id/right_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="45dip"
+            android:layout_alignParentRight="true"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/right"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/bord"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="筛选"
+                android:textColor="@color/body_color"
+                android:textSize="15sp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <me.maxwin.view.XListView
+        android:id="@+id/list1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="#fff"
+        android:dividerHeight="1px" >
+    </me.maxwin.view.XListView>
+
+</LinearLayout>

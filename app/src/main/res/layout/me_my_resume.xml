@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/me_my_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@color/yellow_bg" >
+
+        <ImageView
+            android:id="@+id/me_top_left_img"
+            style="@style/imgTopLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dip"
+            android:background="@drawable/nav_btn_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/mysresume"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/mePreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/submit"
+            android:paddingRight="10dip"
+            android:src="@drawable/nav_btn_preview"
+            android:textColor="#ffffff" />
+
+        <ImageView
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="10dip"
+            android:src="@drawable/icon_finish"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="80dp" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="15dip"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:paddingTop="20dip" >
+
+                <TextView
+                    android:id="@+id/my_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的照片（2/6）"
+                    android:textSize="@dimen/name" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/text_pic_intr"
+                    android:textColor="@color/codebac" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginRight="2dp"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pic_header"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/spadding"
+                    android:paddingRight="@dimen/spadding" >
+
+                    <ImageView
+                        android:id="@+id/button1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center_horizontal|center"
+                        android:src="@drawable/pic_photo_1" />
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center"
+                        android:padding="5dip"
+                        android:text="正面近脸"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/name" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/spadding"
+                    android:paddingRight="@dimen/spadding" >
+
+                    <ImageView
+                        android:id="@+id/button2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center_horizontal|center"
+                        android:src="@drawable/pic_photo_2" />
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center"
+                        android:padding="5dip"
+                        android:text="正面半身"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/name" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/spadding"
+                    android:paddingRight="@dimen/spadding" >
+
+                    <ImageView
+                        android:id="@+id/button3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center_horizontal|center"
+                        android:src="@drawable/pic_photo_3" />
+
+                    <TextView
+                        android:id="@+id/tv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center"
+                        android:padding="5dip"
+                        android:text="正面全身"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/name" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pic_arb"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/spadding" >
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/spadding"
+                    android:paddingRight="@dimen/spadding" >
+
+                    <ImageView
+                        android:id="@+id/button4"
+                        android:layout_width="fill_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center_horizontal|center"
+                        android:src="@drawable/pic_photo_4" />
+
+                    <TextView
+                        android:id="@+id/tv4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center"
+                        android:padding="5dip"
+                        android:text="任意个照"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/name" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/spadding"
+                    android:paddingRight="@dimen/spadding" >
+
+                    <ImageView
+                        android:id="@+id/button5"
+                        android:layout_width="fill_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center_horizontal|center"
+                        android:src="@drawable/pic_photo_4" />
+
+                    <TextView
+                        android:id="@+id/tv5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center"
+                        android:padding="5dip"
+                        android:text="任意个照"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/name" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/spadding"
+                    android:paddingRight="@dimen/spadding" >
+
+                    <ImageView
+                        android:id="@+id/button6"
+                        android:layout_width="fill_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center_horizontal|center"
+                        android:src="@drawable/pic_photo_4" />
+
+                    <TextView
+                        android:id="@+id/tv6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center"
+                        android:padding="5dip"
+                        android:text="任意个照"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/name" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dip"
+                android:background="@color/bottom_line" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="20dip"
+                android:background="@color/bottom_block" />
+
+            <LinearLayout
+                android:id="@+id/name_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="我叫"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="（必填）"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/my_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="20dp"
+                    android:text=""
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+            <!-- 我是一个 -->
+
+            <LinearLayout
+                android:id="@+id/sex_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="我是一个"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="（必填）"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/my_sex"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="20dp"
+                    android:text="未填写"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+            <!-- 我的生日是 -->
+
+            <LinearLayout
+                android:id="@+id/borthday_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="我的生日是"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="（必填）"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/my_borthyday"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="20dp"
+                    android:text="未填写"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+            <!-- 我的身高有 -->
+
+            <LinearLayout
+                android:id="@+id/shengao_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="我的身高有"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="（必填）"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+                <!-- 只能输入140cm-200cm ^1[4-9][0-9]|200cm\b$ -->
+
+                <EditText
+                    android:id="@+id/my_shengao"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="未填写"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingRight="20dp"
+                    android:textColorHint="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <!-- 我就读/毕业于 -->
+
+            <LinearLayout
+                android:id="@+id/biye_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="就读/毕业于"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="（必填）"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <EditText
+                    android:id="@+id/my_biye"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="未填写"
+                    android:paddingRight="20dp"
+                    android:textColorHint="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+            <!-- 我的学历是 -->
+
+            <LinearLayout
+                android:id="@+id/my_xueli_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="我的学历是"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="（必填）"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/my_xueli"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="20dp"
+                    android:text="未填写"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+            <!-- 我的三围是 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="我的三围是"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingRight="20dp" >
+
+                    <EditText
+                        android:id="@+id/my_sanwei"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="right"
+                        android:hint="(模特、礼仪必填)如90-40-45"
+                        android:singleLine="true"
+                        android:textColorHint="@color/ziti_huise"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+            <!-- 是否哟健康证 -->
+
+            <LinearLayout
+                android:id="@+id/my_jiankongzheng_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="是否有健康证"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/my_jiankongzheng"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="20dp"
+                    android:text="未填写"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+            <!-- 我的衣服尺码 -->
+
+            <LinearLayout
+                android:id="@+id/my_yifuchima_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="我的衣服尺码是"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/my_yifuchima"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="20dp"
+                    android:text="未填写"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <!-- 我的鞋码是 -->
+
+            <LinearLayout
+                android:id="@+id/my_shoos_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="我的鞋码是"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/my_shoos"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="20dp"
+                    android:text="未填写"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <!-- 我擅长的语言是 -->
+
+            <LinearLayout
+                android:id="@+id/my_language_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="我擅长的语言是"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/my_language"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="20dp"
+                    android:text="未填写"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+            <!--  -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="经历简述"
+                    android:textColor="@color/menu_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="（必填）"
+                    android:textColor="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bord_saixun" >
+
+                <EditText
+                    android:id="@+id/my_jinyan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@null"
+                    android:gravity="left|top"
+                    android:hint="包括工作经验+性格特长等，认真填写，会增大你的通过率噢(不少于20字)"
+                    android:lineSpacingExtra="8dip"
+                    android:textColor="@color/menu_huise"
+                    android:textColorHint="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

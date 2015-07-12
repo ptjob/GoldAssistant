@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/company_person_back_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="12dip"
+        android:paddingTop="12dip" >
+
+        <FrameLayout
+            android:id="@+id/iconFrameLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dip" >
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/img_icon_size"
+                android:layout_height="@dimen/img_icon_size"
+                android:layout_gravity="center"
+                android:src="@drawable/pic_default_user" />
+
+            <ImageView
+                android:layout_width="@dimen/defaul_icon_size_96"
+                android:layout_height="@dimen/defaul_icon_size_96"
+                android:layout_gravity="center"
+                android:src="@drawable/pic_default_circle" />
+
+            <com.quark.http.image.CircularImage
+                android:id="@+id/cover_user_photo"
+                android:layout_width="@dimen/defaul_icon_size_small_border"
+                android:layout_height="@dimen/defaul_icon_size_small_border"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20dip" >
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="李涛涛"
+                        android:textSize="@dimen/myjianli" />
+
+                    <TextView
+                        android:id="@+id/quxiao_jianzhi_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/name"
+                        android:text="(取消兼职)"
+                        android:textColor="#ff0000"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/xinyi_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dip"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/xinyizhi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="信誉值"
+                        android:textColor="@color/ziti_head" />
+
+                    <LinearLayout
+                        android:id="@+id/top_star"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/xinyizhi"
+                        android:orientation="horizontal"
+                        android:paddingLeft="2dip"
+                        android:paddingTop="2dip" >
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt1"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt2"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt3"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt4"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt5"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt6"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt7"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt8"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt9"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/xinyi_bt10"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:src="@drawable/icon_heart"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="2dip"
+                    android:paddingTop="2dip" >
+
+                    <TextView
+                        android:id="@+id/sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="女 "
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/myjianli" />
+
+                    <TextView
+                        android:id="@+id/age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dip"
+                        android:text="21 "
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/myjianli" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dip"
+                    android:background="@drawable/roster_btn_advice" />
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已评价"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/bottom_line" />
+
+</LinearLayout>

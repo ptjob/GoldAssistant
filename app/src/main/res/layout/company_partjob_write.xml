@@ -1,0 +1,1217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_guangchang" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/name_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="兼职标题"
+                    android:textColor="@color/head_color"
+                    android:textSize="@dimen/myjianli" />
+
+                <EditText
+                    android:id="@+id/my_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:hint="未输入"
+                    android:paddingLeft="20dp"
+                    android:textColorHint="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <!-- 开始时间 -->
+
+            <LinearLayout
+                android:id="@+id/begin_time_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="开始时间"
+                    android:textColor="@color/head_color"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/begin_time"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="0.7"
+                    android:hint="未选择"
+                    android:padding="2dip"
+                    android:paddingLeft="20dp"
+                    android:textColorHint="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <ImageView
+                    android:id="@+id/begin_time_img"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:src="@drawable/btn_go" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+            <!-- 结束时间 -->
+
+            <LinearLayout
+                android:id="@+id/end_time_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="结束时间"
+                    android:textColor="@color/head_color"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/end_time"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="0.7"
+                    android:hint="未选择"
+                    android:padding="2dip"
+                    android:paddingLeft="20dp"
+                    android:textColorHint="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <ImageView
+                    android:id="@+id/end_time_img"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:src="@drawable/btn_go" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <LinearLayout
+                android:id="@+id/area_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="工作区域"
+                    android:textColor="@color/head_color"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/area"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="0.7"
+                    android:hint="未选择"
+                    android:padding="2dip"
+                    android:paddingLeft="20dp"
+                    android:textColorHint="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <ImageView
+                    android:id="@+id/area_img"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:src="@drawable/btn_go" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <LinearLayout
+                android:id="@+id/area_detailed_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="详细地点"
+                    android:textColor="@color/head_color"
+                    android:textSize="@dimen/myjianli" />
+
+                <EditText
+                    android:id="@+id/area_detail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@null"
+                    android:hint="@string/detail_txt"
+                    android:maxLength="20"
+                    android:padding="2dip"
+                    android:paddingLeft="20dp"
+                    android:textColorHint="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <LinearLayout
+                android:id="@+id/salary_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="工资薪酬"
+                    android:textColor="@color/head_color"
+                    android:textSize="@dimen/myjianli" />
+
+                <EditText
+                    android:id="@+id/salary"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="0.11"
+                    android:background="@null"
+                    android:hint="未输入"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:padding="2dip"
+                    android:paddingLeft="20dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+
+                <TextView
+                    android:id="@+id/yuanshi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="11dip"
+                    android:text="元/时"
+                    android:textSize="@dimen/myjianli" />
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="15dip"
+                    android:layout_weight="0.2"
+                    android:gravity="right"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/salary_choose_rixing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_tab_left_on"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="5dp"
+                        android:text="日薪"
+                        android:textColor="@color/body_color"
+                        android:textSize="@dimen/myjianli" />
+
+                    <TextView
+                        android:id="@+id/salary_choose_shixing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_tab_right_off"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="5dp"
+                        android:text="时薪"
+                        android:textColor="@color/ziti_orange"
+                        android:textSize="@dimen/myjianli" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="结算方式"
+                android:textColor="@color/ziti_orange"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <RadioGroup
+                    android:id="@+id/orderBy1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/wind_type_buxian"
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="不  限"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli" />
+
+                    <RadioButton
+                        android:id="@+id/wind_type_rijie"
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="日  结"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli" />
+
+                    <RadioButton
+                        android:id="@+id/wind_type_zhoujie"
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="周  结"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dip"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <RadioGroup
+                    android:id="@+id/orderBy2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/wind_type_yuejie"
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="月  结"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli" />
+
+                    <RadioButton
+                        android:id="@+id/wind_type_wangongjie"
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.27"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="完工结"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli" />
+
+                    <RadioButton
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="周  结"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli"
+                        android:visibility="invisible" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="时间标签"
+                android:textColor="@color/ziti_orange"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dip"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <RadioGroup
+                    android:id="@+id/radioGroup3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/time_zhoumo"
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="周 末"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli" />
+
+                    <RadioButton
+                        android:id="@+id/time_jiejiari"
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="节假日"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli" />
+
+                    <RadioButton
+                        android:id="@+id/time_zhiding"
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="指定日期"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dip"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <RadioGroup
+                    android:id="@+id/radioGroup4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/time_shuqi"
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="暑 期"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli" />
+
+                    <RadioButton
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="节假日"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli"
+                        android:visibility="invisible" />
+
+                    <RadioButton
+                        style="@style/paddingtype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/button_selector_checked_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="指定日期"
+                        android:textColor="@drawable/selector_setting_txt"
+                        android:textSize="@dimen/myjianli"
+                        android:visibility="invisible" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:text="工作人数"
+                    android:textColor="@color/head_color"
+                    android:textSize="@dimen/myjianli" />
+
+                <Button
+                    android:layout_width="1dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/bottom_line" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <!-- 性别选择 -->
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <RadioGroup
+                            android:id="@+id/sexRadioGroup"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <RadioButton
+                                android:id="@+id/radio1"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dip"
+                                android:layout_weight="0.55"
+                                android:background="@null"
+                                android:button="@null"
+                                android:checked="true"
+                                android:clickable="true"
+                                android:drawableLeft="@drawable/tab_selector_btn"
+                                android:paddingBottom="12dip"
+                                android:paddingTop="12dip"
+                                android:text="不限制性别"
+                                android:textColor="@color/ziti_huise" />
+
+                            <Button
+                                android:layout_width="1dip"
+                                android:layout_height="fill_parent"
+                                android:background="@color/bottom_line" />
+
+                            <RadioButton
+                                android:id="@+id/radio2"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dip"
+                                android:layout_weight="0.45"
+                                android:background="@null"
+                                android:button="@null"
+                                android:drawableLeft="@drawable/tab_selector_btn"
+                                android:paddingBottom="12dip"
+                                android:paddingTop="12dip"
+                                android:text="限制性别"
+                                android:textColor="@color/ziti_huise" />
+                        </RadioGroup>
+                    </LinearLayout>
+                    <!-- 性别beign -->
+
+                    <Button
+                        android:id="@+id/sex_button"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dip"
+                        android:background="@color/bottom_line" />
+
+                    <LinearLayout
+                        android:id="@+id/sex_total_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:text="总人数"
+                                android:textColor="@color/ziti_huise"
+                                android:textSize="@dimen/myjianli" />
+
+                            <EditText
+                                android:id="@+id/total_num"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:gravity="left"
+                                android:hint="0  "
+                                android:inputType="number"
+                                android:maxLength="5"
+                                android:paddingLeft="20dp"
+                                android:textColorHint="@color/ziti_huise"
+                                android:textSize="@dimen/myjianli" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/sex_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone" >
+
+                        <LinearLayout
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:paddingTop="10dp" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:text="男"
+                                android:textColor="@color/ziti_huise"
+                                android:textSize="@dimen/myjianli" />
+
+                            <EditText
+                                android:id="@+id/men_num"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:gravity="left"
+                                android:hint="0  "
+                                android:inputType="number"
+                                android:maxLength="5"
+                                android:paddingLeft="20dp"
+                                android:textColorHint="@color/ziti_huise"
+                                android:textSize="@dimen/myjianli" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dip"
+                            android:layout_weight="0.5"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:text="女"
+                                android:textColor="@color/ziti_huise"
+                                android:textSize="@dimen/myjianli" />
+
+                            <EditText
+                                android:id="@+id/female_num"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:gravity="left"
+                                android:hint="0  "
+                                android:inputType="number"
+                                android:maxLength="5"
+                                android:paddingLeft="20dp"
+                                android:textColorHint="@color/ziti_huise"
+                                android:textSize="@dimen/myjianli" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!-- 性别end -->
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 工作人数end -->
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="工作要求及内容"
+                    android:textColor="@color/ziti_orange"
+                    android:textSize="@dimen/myjianli" />
+
+                <EditText
+                    android:id="@+id/neirong"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dip"
+                    android:background="@drawable/bord_saixun"
+                    android:gravity="left|top"
+                    android:hint="请输入10到1000字的工作要求和内容 "
+                    android:lineSpacingExtra="5dp"
+                    android:minHeight="90dp"
+                    android:padding="15dp"
+                    android:textColorHint="@color/ziti_huise"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/bottom_line" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="20dip"
+                android:background="@color/bottom_block" />
+
+            <LinearLayout
+                android:id="@+id/show_more_request"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:layout_weight="0.7"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="更多兼职要求"
+                    android:textColor="@color/ziti_orange"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/more_req_on"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="20dip"
+                    android:background="@drawable/other_btn_on" />
+
+                <ImageView
+                    android:id="@+id/more_req_off"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="20dip"
+                    android:background="@drawable/other_btn_off"
+                    android:visibility="gone" />
+            </LinearLayout>
+            <!-- 身高要求开始 -->
+
+            <LinearLayout
+                android:id="@+id/more_request"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dip"
+                android:background="@drawable/bord_request"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <LinearLayout
+                    android:id="@+id/height_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:text="身高"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/myjianli" />
+
+                    <TextView
+                        android:layout_width="1dip"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dip"
+                        android:background="@color/bottom_line" />
+
+                    <EditText
+                        android:id="@+id/height"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:textSize="@dimen/myjianli" />
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dip"
+                        android:layout_weight="0.2"
+                        android:gravity="right"
+                        android:text="(cm)"
+                        android:textSize="@dimen/myjianli" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/bottom_line" />
+
+                <LinearLayout
+                    android:id="@+id/bwh_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:text="三围"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/myjianli" />
+
+                    <TextView
+                        android:layout_width="1dip"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dip"
+                        android:background="@color/bottom_line" />
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dip"
+                            android:gravity="right"
+                            android:text="胸"
+                            android:textColor="@color/ziti_huise"
+                            android:textSize="@dimen/myjianli" />
+
+                        <EditText
+                            android:id="@+id/require_bust"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:textSize="@dimen/myjianli" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dip"
+                            android:layout_weight="0.4"
+                            android:gravity="right"
+                            android:text="腰"
+                            android:textColor="@color/ziti_huise"
+                            android:textSize="@dimen/myjianli" />
+
+                        <EditText
+                            android:id="@+id/require_beltline"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.6"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:textSize="@dimen/myjianli" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dip"
+                            android:layout_weight="0.4"
+                            android:gravity="right"
+                            android:text="臀"
+                            android:textColor="@color/ziti_huise"
+                            android:textSize="@dimen/myjianli" />
+
+                        <EditText
+                            android:id="@+id/require_hipline"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.6"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:textSize="@dimen/myjianli" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dip"
+                        android:layout_weight="0.15"
+                        android:gravity="right"
+                        android:text="(cm)"
+                        android:textSize="@dimen/myjianli" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/bottom_line" />
+
+                <LinearLayout
+                    android:id="@+id/yifuma_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp" >
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="衣服码"
+                            android:textColor="@color/ziti_huise"
+                            android:textSize="@dimen/myjianli" />
+
+                        <TextView
+                            android:layout_width="1dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dip"
+                            android:background="@color/bottom_line" />
+
+                        <TextView
+                            android:id="@+id/require_cloth_weight"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.6"
+                            android:background="@null"
+                            android:textSize="@dimen/myjianli" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="鞋码"
+                            android:textColor="@color/ziti_huise"
+                            android:textSize="@dimen/myjianli" />
+
+                        <TextView
+                            android:layout_width="1dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dip"
+                            android:background="@color/bottom_line" />
+
+                        <TextView
+                            android:id="@+id/require_shoe_weigth"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.6"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:textSize="@dimen/myjianli" />
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- 衣服 -->
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/bottom_line" />
+
+                <LinearLayout
+                    android:id="@+id/jiankang_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:text="是否要求有健康证"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/myjianli" />
+
+                    <TextView
+                        android:layout_width="1dip"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@color/bottom_line" />
+
+                    <RadioGroup
+                        android:id="@+id/radiogroup_jkz"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <RadioButton
+                            android:id="@+id/require_health_record_btn1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dip"
+                            android:background="@null"
+                            android:button="@null"
+                            android:clickable="true"
+                            android:drawableLeft="@drawable/tab_selector_btn"
+                            android:gravity="center_vertical"
+                            android:text="需要"
+                            android:textColor="@color/ziti_huise" />
+
+                        <RadioButton
+                            android:id="@+id/require_health_record_btn2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dip"
+                            android:background="@null"
+                            android:button="@null"
+                            android:drawableLeft="@drawable/tab_selector_btn"
+                            android:gravity="center_vertical"
+                            android:text="不需要"
+                            android:textColor="@color/ziti_huise" />
+                    </RadioGroup>
+                </LinearLayout>
+                <!-- 健康证 -->
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/bottom_line" />
+
+                <LinearLayout
+                    android:id="@+id/require_language_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:text="擅长的语言"
+                        android:textColor="@color/ziti_huise"
+                        android:textSize="@dimen/myjianli" />
+
+                    <TextView
+                        android:layout_width="1dip"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dip"
+                        android:background="@color/bottom_line" />
+
+                    <TextView
+                        android:id="@+id/require_language"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="left"
+                        android:textColorHint="@color/ziti_huise"
+                        android:textSize="@dimen/myjianli" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 结束 -->
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_marginBottom="30dip"
+                android:layout_marginTop="20dip"
+                android:background="@color/bottom_line" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/head_color"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/publish_job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_margin="15dip"
+                    android:background="@drawable/bord_while"
+                    android:gravity="center"
+                    android:paddingBottom="10dip"
+                    android:paddingLeft="25dip"
+                    android:paddingRight="25dip"
+                    android:paddingTop="10dip"
+                    android:text="发布兼职"
+                    android:textColor="@drawable/selector_setting_btn"
+                    android:textSize="@dimen/myjianli" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
