@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 
+import com.parttime.login.FindPJLoginActivity;
 import com.qingmu.jianzhidaren.R;
 import com.umeng.analytics.MobclickAgent;
 

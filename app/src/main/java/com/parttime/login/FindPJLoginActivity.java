@@ -1,4 +1,4 @@
-package com.quark.jianzhidaren;
+package com.parttime.login;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +48,11 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.main.MainTabActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
+import com.quark.jianzhidaren.ApplicationControl;
+import com.quark.jianzhidaren.BaseActivity;
+import com.quark.jianzhidaren.FeiJiPageActivity;
+import com.quark.jianzhidaren.ForgetPwdActivity;
+import com.quark.jianzhidaren.RegisterActivity;
 import com.quark.ui.widget.LineEditText;
 import com.quark.utils.Util;
 import com.umeng.analytics.MobclickAgent;
@@ -60,7 +65,11 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class FindPJLoginActivity extends BaseActivity {
 
-	private Button login, regin, forgetPwd;
+    public static final String SP_JRDR_SETTING = "jrdr.setting";
+    public static final String EXTRA_USER_ID = "userId";
+    public static final String EXTRA_REMEMBER_TELE = "remember_tele";
+    public static final String EXTRA_REMEMBER_PWD = "remember_pwd";
+    private Button login, regin, forgetPwd;
 	static String url;
 	private ImageView logoImv;// 图标 商家端的头像换为红色、用户端蓝色
 	private TextView logoTextView;// 找兼职、招兼职
@@ -86,10 +95,10 @@ public class FindPJLoginActivity extends BaseActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
+		sp = getSharedPreferences(SP_JRDR_SETTING, MODE_PRIVATE);
 		// 如果用户名密码都有，直接进入主页面
 		if (DemoHXSDKHelper.getInstance().isLogined()) {
-			carson_user_id = sp.getString("userId", "");
+			carson_user_id = sp.getString(EXTRA_USER_ID, "");
 			if (carson_user_id != null && !"".equals(carson_user_id)) {
 				autoLogin = true;
 				startActivity(new Intent(FindPJLoginActivity.this,
@@ -100,12 +109,12 @@ public class FindPJLoginActivity extends BaseActivity {
 		}
 		setContentView(R.layout.entry_findpartjob);
 		getWindow().setSoftInputMode(
-				WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);// 隐藏软键盘
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);// 隐藏软键盘
 		ViewUtils.inject(this);
 		instance = this;
 		logoImv = (ImageView) findViewById(R.id.login_logo_imv);
 		logoTextView = (TextView) findViewById(R.id.lognText);
-		logoTextView.setText("招兼职");
+		logoTextView.setText(R.string.recruit_part_time);
 		logoImv.setBackgroundResource(R.drawable.login_logo_c);
 		Button button = (Button) findViewById(R.id.look);
 		button.setVisibility(View.GONE);
@@ -114,8 +123,8 @@ public class FindPJLoginActivity extends BaseActivity {
 		telephoneView = (LineEditText) findViewById(R.id.telephone);
 		passwordView = (LineEditText) findViewById(R.id.password);
 		// 设置默认帐号、密码
-		String remember_tele = sp.getString("remember_tele", "");
-		String remember_pwd = sp.getString("remember_pwd", "");
+		String remember_tele = sp.getString(EXTRA_REMEMBER_TELE, "");
+		String remember_pwd = sp.getString(EXTRA_REMEMBER_PWD, "");
 		if (remember_tele != null && !"".equals(remember_tele)
 				&& remember_pwd != null && !"".equals(remember_pwd)) {
 			telephoneView.setText(remember_tele);
@@ -379,7 +388,7 @@ public class FindPJLoginActivity extends BaseActivity {
 										DemoApplication.getInstance().logout(
 												null);
 										Toast.makeText(getApplicationContext(),
-												"登录失败", 1).show();
+												"登录失败", Toast.LENGTH_SHORT).show();
 
 									}
 								});
@@ -445,8 +454,8 @@ public class FindPJLoginActivity extends BaseActivity {
 	/**
 	 * 设置hearder属性，方便通讯中对联系人按header分类显示，以及通过右侧ABCD...字母栏快速定位联系人
 	 * 
-	 * @param username
-	 * @param user
+	 * @param username String
+	 * @param user com.easemob.chatuidemo.domain.User
 	 */
 	protected void setUserHearder(String username,
 			com.easemob.chatuidemo.domain.User user) {

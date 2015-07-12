@@ -1,13 +1,12 @@
 package com.quark.jianzhidaren;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 import cn.jpush.android.api.JPushInterface;
 
+import com.parttime.login.FindPJLoginActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.utils.NetWorkCheck;
 

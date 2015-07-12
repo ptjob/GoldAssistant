@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">金牌助理</string>
+    <string name="app_name">3金牌助理</string>
     <!-- 注册登陆 -->
+    <string name="recruit_part_time">招兼职</string>
     <string name="regist_regist">注册</string>
     <string name="regist_sendcode">发送验证码</string>
     <string name="regist_getcode_fail">获取验证码失败</string>

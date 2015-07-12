@@ -38,6 +38,7 @@ import com.carson.constant.JiaoyanUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.login.FindPJLoginActivity;
 import com.parttime.main.MainTabActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;

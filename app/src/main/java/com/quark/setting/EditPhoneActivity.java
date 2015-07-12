@@ -38,7 +38,7 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.jianzhidaren.FindPJLoginActivity;
+import com.parttime.login.FindPJLoginActivity;
 import com.parttime.main.MainTabActivity;
 import com.quark.ui.widget.CustomDialog;
 import com.quark.utils.Util;

@@ -19,9 +19,8 @@ public class Url {
 	// 项目名称
 	public static final String SUBJECT = "app/v1_2";
 	// 获取图片url
-	// public static final String GETPIC =
-	// "http://jzdr-test.oss-cn-shenzhen.aliyuncs.com/";
-	public static final String GETPIC = "http://jzdr-pic.oss-cn-shenzhen.aliyuncs.com/";
+	public static final String GETPIC = "http://jzdr-test.oss-cn-shenzhen.aliyuncs.com/";
+	//public static final String GETPIC = "http://jzdr-pic.oss-cn-shenzhen.aliyuncs.com/";
 	// 8 用户登录
 	public static final String USER_LOGIN = HOST + SUBJECT + "/UserCenter/in";
 	// 9 用户注册

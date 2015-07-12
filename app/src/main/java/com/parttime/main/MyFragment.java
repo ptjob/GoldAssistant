@@ -36,7 +36,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.ApplicationControl;
-import com.quark.jianzhidaren.FindPJLoginActivity;
+import com.parttime.login.FindPJLoginActivity;
 import com.quark.jianzhidaren.ModifyPwdActivity;
 import com.quark.model.HuanxinUser;
 import com.quark.setting.EditPhoneActivity;

@@ -115,7 +115,7 @@ import com.quark.common.Url;
 import com.quark.fragment.company.ManageFragmentCompany;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.jianzhidaren.EnterActivity;
-import com.quark.jianzhidaren.FindPJLoginActivity;
+import com.parttime.login.FindPJLoginActivity;
 import com.quark.jianzhidaren.LaheiPageActivity;
 import com.quark.model.Function;
 import com.quark.model.HuanxinUser;

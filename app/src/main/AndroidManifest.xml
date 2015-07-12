@@ -128,7 +128,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.quark.jianzhidaren.FindPJLoginActivity"
+            android:name="com.parttime.login.FindPJLoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
