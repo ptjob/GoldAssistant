@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
+import com.parttime.constants.ActivityExtraAndKeys;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
 
@@ -19,7 +20,7 @@ public class ChatActivityHelper {
      * 群聊通知
      * @param activity ChatActivity
      */
-    public void showGroupNotice(ChatActivity activity, View view){
+    public void showGroupNotice(final ChatActivity activity, View view){
         View popView = activity.getLayoutInflater().inflate(R.layout.activity_chat_group_notice_popup, null);
         PopupWindow popupWindow = new PopupWindow(popView,
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -31,6 +32,7 @@ public class ChatActivityHelper {
             public void onClick(View v) {
                 Intent intent = new Intent(ApplicationControl.getInstance(),EditGroupNoticeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(ActivityExtraAndKeys.ChatGroupNotice.GROUP_NOTICE_CONTENT,activity.noticeContent);
                 ApplicationControl.getInstance().startActivity(intent);
             }
         });

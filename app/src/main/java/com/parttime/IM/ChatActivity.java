@@ -117,6 +117,7 @@ import com.easemob.util.VoiceRecorder;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
+import com.quark.company.function.PersonAssessDetailActivity;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.HuanxinUser;
 import com.quark.quanzi.UserInfo;
@@ -163,6 +164,9 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	public static final int CHATTYPE_GROUP = 2;
 	public static final String COPY_IMAGE = "EASEMOBIMG";
     public static final String COM_CARSON_SHARE_JIANZHI = "com.carson.share.jianzhi";
+
+    public static ChatActivity activityInstance = null;
+
     private View recordingContainer;
 	private ImageView micImage;
 	private TextView recordingHint;
@@ -177,47 +181,50 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	private LinearLayout btnContainer;
 	private ImageView locationImgview;
 	private View more;
-	private int position;
-	private ClipboardManager clipboard;
-	private ViewPager expressionViewpager;
-	private InputMethodManager manager;
-	private List<String> reslist;
-	private Drawable[] micImages;
-	private int chatType;
+    private ImageView iv_emoticons_normal;
+    private ImageView iv_emoticons_checked;
+    private RelativeLayout edittext_layout;
+    private ProgressBar loadmorePB;
+    private Button btnMore;
+    private LinearLayout container_zidingyi_msg;// 分享兼职布局,商家端隐藏、客户端显示
+    TextView nameVeiw;
+    private RelativeLayout topLayout;
+
+    private ClipboardManager clipboard;
+    private InputMethodManager manager;
 	private EMConversation conversation;
 	private NewMessageBroadcastReceiver receiver;
-	public static ChatActivity activityInstance = null;
+    private ViewPager expressionViewpager;
+    private MessageAdapter adapter;
+    private VoiceRecorder voiceRecorder;
+    private GroupListener groupListener;
+    private ReceiveBroadCast receiveBroadCast;// 注册监听是否分享我的兼职
+    private SharedPreferences sp;
+
+    RequestQueue queue = VolleySington.getInstance().getRequestQueue();
+    private Handler micImageHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            // 切换msg切换图片
+            micImage.setImageDrawable(micImages[msg.what]);
+        }
+    };
+
 	// 给谁发送消息
 	private String toChatUsername;
-	private VoiceRecorder voiceRecorder;
-	private MessageAdapter adapter;
 	private File cameraFile;
 	public static int resendPos;
-	private GroupListener groupListener;
-	private ImageView iv_emoticons_normal;
-	private ImageView iv_emoticons_checked;
-	private RelativeLayout edittext_layout;
-	private ProgressBar loadmorePB;
 	private boolean isloading;
 	private final int pagesize = 20;
 	private boolean haveMoreData = true;
-	private Button btnMore;
-	private LinearLayout container_zidingyi_msg;// 分享兼职布局,商家端隐藏、客户端显示
+    private int position;
+    private List<String> reslist;
+    private Drawable[] micImages;
+    private int chatType;
 	public String playMsgId;
-	TextView nameVeiw;
-	RequestQueue queue = VolleySington.getInstance().getRequestQueue();
-	private Handler micImageHandler = new Handler() {
-		@Override
-		public void handleMessage(android.os.Message msg) {
-			// 切换msg切换图片
-			micImage.setImageDrawable(micImages[msg.what]);
-		}
-	};
 	private EMGroup group;
-	private SharedPreferences sp;
 	private String user_id;// id 商家or用户
-	private ReceiveBroadCast receiveBroadCast;// 注册监听是否分享我的兼职
-	private RelativeLayout topLayout;
+    protected String noticeContent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -1155,16 +1162,19 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	}
 
 	/**
-	 * 点击清空聊天记录
+	 * 联系人详情
 	 * 
 	 * @param view View
 	 */
-	public void emptyHistory(View view) {
-		startActivityForResult(
+	public void contactDetail(View view) {
+		/*startActivityForResult(
 				new Intent(this, AlertDialog.class)
 						.putExtra("titleIsCancel", true)
-						.putExtra("msg", "是否清空所有聊天记录").putExtra("cancel", true),
-				REQUEST_CODE_EMPTY_HISTORY);
+						.putExtra("msg", "是否清空所有聊天记录")
+                        .putExtra("cancel", true),
+				REQUEST_CODE_EMPTY_HISTORY);*/
+        startActivity(new Intent(this, PersonAssessDetailActivity.class));
+
 	}
 
     /**
