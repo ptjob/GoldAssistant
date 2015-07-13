@@ -475,7 +475,7 @@ public class MainTabActivity extends FragmentActivity implements
 	// =============极光的推送jpush=======================================
 	// 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
 	private void initPush() {
-		//JPushInterface.init(getApplicationContext());
+		JPushInterface.init(getApplicationContext());
 	}
 
 	/**
