@@ -3,10 +3,11 @@
 
     <string name="app_name">3金牌助理</string>
 
-    <!--公共-->
+    <!-- 公共 -->
     <string name="edit">编辑</string>
+    <string name="done">完成</string>
 
-    <!--主界面-->
+    <!-- 主界面 -->
     <string name="publish">发布</string>
     <string name="mine">我</string>
     <string name="message">消息</string>
@@ -75,8 +76,14 @@
     <string name="pull_to_refresh_release_label">松开，开始加载…</string>
     <string name="pull_to_refresh_refreshing_label">正在加载…</string>
 
-    <!--IM-->
+    <!-- IM -->
     <string name="group_notice">群通知</string>
+    <string name="content_text_count">%1$s/%2$s</string>
+
+
+    <!--编辑群通知-->
+    <string name="group_notice_function_declare">群通知是XXX的功能</string>
+    <string name="group_notice_max_count_tip">限制输入数为%1$d</string>
 
     <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
     <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
@@ -196,5 +203,8 @@
     <string name="fangfeiji">放飞机基金池</string>
     <string name="jiaonachengyijin">缴纳诚意金</string>
     <string name="quhuichengyijin">取回诚意金</string>
+    <string name="title_activity_edit_group_notice">EditGroupNotice</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

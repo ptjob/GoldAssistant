@@ -117,7 +117,6 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name="com.parttime.login.FindPJLoginActivity"
             android:label="@string/app_name"
@@ -800,6 +799,10 @@
             android:name="JPUSH_APPKEY"
             android:value="8da70cea9ea99ac826e2567e" />
         <!-- </>值来自开发者平台取得的AppKey -->
+        <activity
+            android:name="com.parttime.IM.EditGroupNoticeActivity"
+            android:label="@string/title_activity_edit_group_notice" >
+        </activity>
     </application>
 
 </manifest>
