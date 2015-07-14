@@ -28,6 +28,18 @@
              android:src="@drawable/default_avatar"
             />
 
+
+        <TextView
+            android:id="@+id/tv_ack"
+            style="@style/chat_text_name_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_ack_msg"
+            android:layout_alignRight="@+id/tv_chatcontent"
+            android:textSize="12sp"
+            android:visibility="gone"
+            />
+
        <TextView
             android:id="@+id/tv_chatcontent"
             style="@style/chat_content_date_style"
@@ -35,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_chat_activity"
             android:layout_toLeftOf="@id/iv_userhead"
+            android:layout_below="@+id/tv_ack"
             android:autoLink="web"
             android:background="@drawable/chatto_bg"
             android:gravity="left|center"
@@ -53,17 +66,6 @@
             android:clickable="true"
             android:src="@drawable/msg_state_failed_resend"
             android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/tv_ack"
-            style="@style/chat_text_name_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/tv_chatcontent"
-            android:text="@string/text_ack_msg"
-            android:textSize="12sp"
-            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/tv_delivered"

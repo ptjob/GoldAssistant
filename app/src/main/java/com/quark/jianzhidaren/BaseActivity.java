@@ -21,6 +21,7 @@ import com.quark.volley.VolleySington;
 import com.umeng.analytics.MobclickAgent;
 
 /**
+ *
  * Created by Administrator on 10/31 0031.
  */
 public abstract class BaseActivity extends Activity {
@@ -42,25 +43,7 @@ public abstract class BaseActivity extends Activity {
 	/**
 	 * 设置右边按钮
 	 * 
-	 * @param name
-	 *            按钮名称
-	 * @param listener
-	 *            按钮事件
-	 */
-	public void setRightButton(View.OnClickListener listener) {
-		Button right_button = (Button) findViewById(R.id.right);
-		right_button.setVisibility(View.VISIBLE);
-		if (null != listener) {
-			right_button.setOnClickListener(listener);
-		} else {
-			Log.e(TAG, "set right button error! listener is null");
-		}
-	}
-
-	/**
-	 * 设置右边按钮
-	 * 
-	 * @param name
+	 * @param id int
 	 *            按钮名称
 	 * @param listener
 	 *            按钮事件
@@ -103,15 +86,6 @@ public abstract class BaseActivity extends Activity {
 				finish();
 			}
 		});
-	}
-
-	/**
-	 * 跳转Activity
-	 * 
-	 * @param clazz
-	 */
-	public void startActivityByClass(Class clazz) {
-		startActivityByClass(clazz, null);
 	}
 
 	public void startActivityByClass(Class clazz, Bundle bundle) {

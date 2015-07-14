@@ -183,13 +183,13 @@ public class MainTabActivity extends FragmentActivity implements
 	private List<TextView> lists = new ArrayList<>();
 	private List<ImageView> lists_boom = new ArrayList<>();
 	public static String token = "notoken";
-	private int[] resIdActive = new int[] { 
+	private int[] resIdActive = new int[] {
+            R.drawable.tab_btn_group_sel,
 			R.drawable.tab_btn_manage_sel,
-			R.drawable.tab_btn_group_sel, 
 			R.drawable.tab_btn_setting_sel };
-	private int[] resId = new int[] { 
-			R.drawable.tab_btn_manage_nor,
-			R.drawable.tab_btn_group_nor, 
+	private int[] resId = new int[] {
+            R.drawable.tab_btn_group_nor,
+            R.drawable.tab_btn_manage_nor,
 			R.drawable.tab_btn_settings_nor };
 
 	private int currentVerCode;// 当前应用版本号
@@ -409,6 +409,8 @@ public class MainTabActivity extends FragmentActivity implements
 		lists_boom.add(tv2_boom);
 		lists_boom.add(tv3_boom);
 		lists_boom.add(tv4_boom);
+
+        updatebNav(R.id.tv2);
 	}
 
 	private View.OnClickListener bNavClickListner = new View.OnClickListener() {
@@ -680,7 +682,7 @@ public class MainTabActivity extends FragmentActivity implements
 						if (FindPJLoginActivity.instance != null) {
 							FindPJLoginActivity.instance.finish();
 						}
-						ConstantForSaveList.usersNick = new ArrayList<HuanxinUser>();
+						ConstantForSaveList.usersNick = new ArrayList<>();
 						finish();
 					}
 				});
@@ -2146,7 +2148,7 @@ public class MainTabActivity extends FragmentActivity implements
 	
 
 	public enum PAGER {
-		/*HOME(R.id.tv1),*/ MESSAGE(R.id.tv2), PUBLISH(R.id.tv3), MINE(R.id.tv4);
+		MESSAGE(R.id.tv2), PUBLISH(R.id.tv3), MINE(R.id.tv4);
 
 		private PAGER(int resId) {
 			this.resId = resId;
@@ -2159,9 +2161,7 @@ public class MainTabActivity extends FragmentActivity implements
 		}
 
 		public static PAGER getPager(int resId) {
-			/*if (resId == HOME.getResId()) {
-				return HOME;
-			} else */if (resId == MESSAGE.getResId()) {
+            if (resId == MESSAGE.getResId()) {
 				return MESSAGE;
 			} else if (resId == PUBLISH.getResId()) {
 				return PUBLISH;
