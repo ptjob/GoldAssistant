@@ -1,18 +1,13 @@
 package com.parttime.main;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.parttime.common.head.ActivityHead;
-import com.parttime.publish.PublishJobActivity;
 import com.qingmu.jianzhidaren.R;
 
 /**
@@ -31,9 +26,6 @@ public class PublishFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
-
-    private ActivityHead mActivityHeader;
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -69,23 +61,7 @@ public class PublishFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_publish, container, false);
-        mActivityHeader = new ActivityHead();
-        mActivityHeader.initHeadLeftTxt(getActivity(), view);
-        ((TextView)mActivityHeader.getLeft()).setText("深圳");
-        mActivityHeader.getLeft().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "深圳", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        // 发布兼职
-        view.findViewById(R.id.btn_publish_job).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PublishJobActivity.class));
-            }
-        });
 
         return view;
     }
