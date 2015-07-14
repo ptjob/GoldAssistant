@@ -61,4 +61,25 @@
     <dimen name="sidebar_text_size">10dp</dimen>
      <dimen name="image_thumbnail_size">100dp</dimen>
     <dimen name="image_thumbnail_spacing">1dp</dimen>
+
+
+
+
+    <dimen name="common_margin">17dp</dimen>
+    <dimen name="commopn_inner_margin">10dp</dimen>
+    <dimen name="form_item_height">49dp</dimen>
+    <dimen name="divider_width">0.5dp</dimen>
+    <dimen name="form_items_margin">17dp</dimen>
+    
+    <dimen name="form_item_icon_edge">30dp</dimen>
+
+    <dimen name="title_height">49dp</dimen>
+    <dimen name="title_padding">17dp</dimen>
+    <dimen name="head_img_edge">78dp</dimen>
+    
+    <dimen name="my_intro_block_height">200dp</dimen>
+
+    <dimen name="counting_edit_text_height">150dp</dimen>
+    <dimen name="counting_text_default_size">15dp</dimen>
+    <dimen name="counting_bar_default_height">30dp</dimen>
 </resources>

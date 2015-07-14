@@ -18,4 +18,10 @@
     <item name="search_book_contents_failed" type="id"/>
     <item name="search_book_contents_succeeded" type="id"/>
 
+
+    <item name="form_item_icon" type="id"/>
+    <item name="form_item_title" type="id"/>
+    <item name="form_item_value" type="id"/>
+    <item name="form_item_arrow" type="id"/>
+
 </resources>

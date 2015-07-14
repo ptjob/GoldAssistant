@@ -12,10 +12,10 @@ package com.quark.common;
 public class Url {
 
 	// 服务器地址及端口
-	// public static String HOST = "http://app.jobdiy.cn/";
+//	 public static String HOST = "http://app.jobdiy.cn/";
 	public static String HOST = "http://120.24.215.117/";
 	public static String HOST2 = "https://120.24.215.117/";
-	// public static String HOST2 = "https://app.jobdiy.cn/";
+//	 public static String HOST2 = "https://app.jobdiy.cn/";
 	// 项目名称
 	private static final String SUBJECT = "app/v2_0";
 	// 获取图片url

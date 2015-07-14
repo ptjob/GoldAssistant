@@ -207,4 +207,35 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+
+    <!-- 我 -->
+    <string name="my_intro">我的简介</string>
+    <string name="my_balance">我的余额</string>
+    <string name="praise_recved">收到的评价</string>
+    <string name="real_name_cert">实名认证</string>
+    <string name="fresh_man_guide">新手指引</string>
+    <string name="suggestion">提出建议</string>
+    <string name="setting">设置</string>
+
+    <!-- 我的简介 -->
+    <string name="click_to_upload_head_img">点击上传头像</string>
+    <string name="brief_intro">简介</string>
+    <string name="enter_your_intro_here">请在此输入您的自我介绍</string>
+    <string name="preview">预览</string>
+
+    <!-- 我的钱包 -->
+    <string name="account_balance">账户余额（元）</string>
+    <string name="recharge">充值</string>
+
+    <string name="total_praise">总好评率</string>
+    <string name="on_work">职称相符</string>
+    <string name="reply_quickly">回复速度</string>
+    <string name="sastifition_rate">满意程度</string>
+    <string name="edit_intro">编辑简介</string>
+    <string name="which_kind_of_cert">您需要进行哪种实名认证？</string>
+    <string name="enterprise_cert">企业认证</string>
+    <string name="personal_cert">个人认证</string>
+    <string name="contact_customer_service">联系客服</string>
+    <string name="welcome_to_join_in_qq_group">欢迎加入兼职达人用户QQ群: %1$s</string>
+    <string name="enter_suggestion_hint">请在此输入您的建议或者意见</string>
 </resources>
