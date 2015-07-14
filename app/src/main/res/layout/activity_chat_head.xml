@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/top_bar"
+android:layout_width="match_parent"
+android:layout_height="@dimen/height_top_bar"
+android:background="@color/top_bar_normal_bg"
+android:gravity="center_vertical" >
+
+<include layout="@layout/commom_back_btn" />
+
+<TextView
+    android:id="@+id/name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:ellipsize="end"
+    android:maxLength="12"
+    android:singleLine="true"
+    android:textColor="#ffffff"
+    android:textSize="20sp" />
+
+<RelativeLayout
+    android:id="@+id/container_contact_detail"
+    android:layout_width="50dp"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"
+    android:background="@drawable/common_tab_bg"
+    android:onClick="contactDetail"
+    android:visibility="visible">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="9dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/nav_btn_delete" />
+</RelativeLayout>
+
+<RelativeLayout
+    android:id="@+id/container_group_notice"
+    android:layout_width="50dp"
+    android:layout_height="match_parent"
+    android:background="@drawable/common_tab_bg"
+    android:layout_toLeftOf="@+id/container_to_group"
+    android:onClick="showGroupNotice"
+    android:visibility="gone">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="9dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ee_1" />
+</RelativeLayout>
+
+<RelativeLayout
+    android:id="@+id/container_to_group"
+    android:layout_width="50dp"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"
+    android:background="@drawable/common_tab_bg"
+    android:onClick="toGroupDetails"
+    android:visibility="gone" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/nav_friends_btn_chatsettings" />
+</RelativeLayout>
+</RelativeLayout>

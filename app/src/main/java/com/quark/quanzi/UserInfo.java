@@ -43,7 +43,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMContactManager;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.activity.ChatActivity;
+import com.parttime.IM.ChatActivity;
 import com.easemob.chatuidemo.domain.User;
 import com.lidroid.xutils.ViewUtils;
 import com.qingmu.jianzhidaren.R;

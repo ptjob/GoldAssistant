@@ -55,6 +55,7 @@ import com.easemob.chat.EMMessage;
 import com.easemob.chatuidemo.adapter.ChatHistoryAdapter;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.domain.User;
+import com.parttime.IM.ChatActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
 

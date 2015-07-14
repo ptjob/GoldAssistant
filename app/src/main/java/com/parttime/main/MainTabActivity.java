@@ -90,7 +90,7 @@ import com.easemob.chat.EMNotifier;
 import com.easemob.chat.GroupChangeListener;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.activity.ChatActivity;
+import com.parttime.IM.ChatActivity;
 import com.easemob.chatuidemo.activity.GroupsActivity;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.UserDao;
@@ -475,7 +475,7 @@ public class MainTabActivity extends FragmentActivity implements
 	// =============极光的推送jpush=======================================
 	// 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
 	private void initPush() {
-		//JPushInterface.init(getApplicationContext());
+		JPushInterface.init(getApplicationContext());
 	}
 
 	/**
@@ -822,7 +822,7 @@ public class MainTabActivity extends FragmentActivity implements
 			if (currentTabIndex == 1) {
 				// 当前页面如果为聊天历史页面，刷新此页面
 				if (messageAndAddressFragment != null) {
-					messageAndAddressFragment.refresh();
+					messageAndAddressFragment.message.refresh();
 				}
 			}
 
@@ -1008,7 +1008,7 @@ public class MainTabActivity extends FragmentActivity implements
 					}
 					update_unread_msg();// 刷新圈子
 					if (currentTabIndex == 1)
-						messageAndAddressFragment.refresh();
+						messageAndAddressFragment.message.refresh();
 				}
 			});
 
@@ -1225,7 +1225,7 @@ public class MainTabActivity extends FragmentActivity implements
 					// 刷新ui
 					// 有新群建立时
 					if (currentTabIndex == 1) {
-						messageAndAddressFragment.refresh();
+						messageAndAddressFragment.message.refresh();
 					}
 					if (CommonUtils.getTopActivity(MainTabActivity.this)
 							.equals(GroupsActivity.class.getName())) {
@@ -1257,7 +1257,7 @@ public class MainTabActivity extends FragmentActivity implements
 					try {
 						// updateUnreadLabel();
 						if (currentTabIndex == 1)
-							messageAndAddressFragment.refresh();
+							messageAndAddressFragment.message.refresh();
 						if (CommonUtils
 								.getTopActivity(MainTabActivity.this)
 								.equals(GroupsActivity.class.getName())) {
@@ -1280,7 +1280,7 @@ public class MainTabActivity extends FragmentActivity implements
 				public void run() {
 					// updateUnreadLabel();
 					if (currentTabIndex == 1)
-						messageAndAddressFragment.refresh();
+						messageAndAddressFragment.message.refresh();
 					if (CommonUtils.getTopActivity(MainTabActivity.this)
 							.equals(GroupsActivity.class.getName())) {
 						GroupsActivity.instance.onResume();
@@ -1342,7 +1342,7 @@ public class MainTabActivity extends FragmentActivity implements
 					// updateUnreadLabel();
 					// 刷新ui
 					if (currentTabIndex == 1) {
-						messageAndAddressFragment.refresh();
+						messageAndAddressFragment.message.refresh();
 					}
 					if (CommonUtils.getTopActivity(MainTabActivity.this)
 							.equals(GroupsActivity.class.getName())) {
@@ -1391,7 +1391,7 @@ public class MainTabActivity extends FragmentActivity implements
 				}) {
 			@Override
 			protected Map<String, String> getParams() {
-				Map<String, String> map = new HashMap<String, String>();
+				Map<String, String> map = new HashMap<>();
 				map.put("company_id", company_id);
 				return map;
 			}

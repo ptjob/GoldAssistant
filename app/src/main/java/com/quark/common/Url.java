@@ -17,7 +17,7 @@ public class Url {
 	public static String HOST2 = "https://120.24.215.117/";
 //	 public static String HOST2 = "https://app.jobdiy.cn/";
 	// 项目名称
-	public static final String SUBJECT = "app/v1_2";
+	private static final String SUBJECT = "app/v2_0";
 	// 获取图片url
 	public static final String GETPIC = "http://jzdr-test.oss-cn-shenzhen.aliyuncs.com/";
 	//public static final String GETPIC = "http://jzdr-pic.oss-cn-shenzhen.aliyuncs.com/";
@@ -32,9 +32,9 @@ public class Url {
 	// 9 商家注册
 	public static final String COMPANY_REGIST = HOST + SUBJECT
 			+ "/AgentCenter/registe";
-	// 8 商家登录
-	public static final String COMPANY_LOGIN = HOST + SUBJECT
-			+ "/AgentCenter/in";
+	// 8 商家登录 and 经纪人登陆
+    public static final String COMPANY_LOGIN = HOST + SUBJECT
+			+"/CompanyCenter/in";
 	// 商家 注册发送验证码
 	public static final String COMPANY_SENDMSM = HOST + SUBJECT
 			+ "/Message/send_company_regist_code";

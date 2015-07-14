@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.easemob.chatuidemo.task.DownloadImageTask;
 import com.easemob.chatuidemo.utils.ImageCache;
 import com.easemob.util.ImageUtils;
+import com.parttime.IM.ChatActivity;
 import com.qingmu.jianzhidaren.R;
 
 public class AlertDialog extends BaseActivity {

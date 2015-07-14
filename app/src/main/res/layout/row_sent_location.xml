@@ -27,6 +27,16 @@
             android:scaleType="fitXY" 
              android:src="@drawable/default_avatar"
             />
+        <TextView
+            android:id="@+id/tv_ack"
+            style="@style/chat_text_name_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_ack_msg"
+            android:layout_alignRight="@+id/ll_location"
+            android:textSize="12sp"
+            android:visibility="visible"
+            />
 
         <LinearLayout
             android:id="@+id/ll_location"
@@ -34,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_chat_activity"
             android:layout_toLeftOf="@id/iv_userhead"
+            android:layout_below="@+id/tv_ack"
             android:background="@drawable/chatto_bg" >
 
             <TextView
@@ -56,17 +67,7 @@
             android:src="@drawable/msg_state_failed_resend"
             android:visibility="gone" />
         
-        <TextView
-            android:id="@+id/tv_ack"
-            style="@style/chat_text_name_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/text_ack_msg"
-            android:textSize="12sp"
-            android:layout_toLeftOf="@id/ll_location"
-            android:visibility="invisible"
-            />
+
 
         <TextView
             android:id="@+id/tv_delivered"

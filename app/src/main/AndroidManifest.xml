@@ -117,7 +117,6 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name="com.parttime.login.FindPJLoginActivity"
             android:label="@string/app_name"
@@ -483,7 +482,7 @@
 
         <!-- 聊天页面 -->
         <activity
-            android:name="com.easemob.chatuidemo.activity.ChatActivity"
+            android:name="com.parttime.IM.ChatActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
@@ -800,49 +799,10 @@
             android:name="JPUSH_APPKEY"
             android:value="8da70cea9ea99ac826e2567e" />
         <!-- </>值来自开发者平台取得的AppKey -->
-
-
-        <activity android:name="com.parttime.test.TestActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        
-        <activity android:name="com.parttime.mine.EditMyIntroActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-
-        <activity android:name="com.parttime.mine.MyWalletActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-
-        <activity android:name="com.parttime.mine.PraiseRecvedActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="com.parttime.mine.RealNameCertActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="com.parttime.mine.FreshManGuideActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="com.parttime.mine.SuggestionActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        SuggestionActivity
-
+        <activity
+            android:name="com.parttime.IM.EditGroupNoticeActivity"
+            android:label="@string/title_activity_edit_group_notice" >
+        </activity>
     </application>
 
 </manifest>

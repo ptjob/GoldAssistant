@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.easemob.chat.EMMessage;
+import com.parttime.IM.ChatActivity;
 import com.qingmu.jianzhidaren.R;
 
 public class ContextMenu extends BaseActivity {

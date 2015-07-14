@@ -44,7 +44,7 @@ public class InviteMessgeDao {
 	
 	/**
 	 * 保存message
-	 * @param message
+	 * @param message InviteMessage
 	 * @return  返回这条messaged在db中的id
 	 */
 	public synchronized Integer saveMessage(InviteMessage message){
@@ -72,8 +72,8 @@ public class InviteMessgeDao {
 	
 	/**
 	 * 更新message
-	 * @param msgId
-	 * @param values
+	 * @param msgId int
+	 * @param values ContentValues
 	 */
 	public void updateMessage(int msgId,ContentValues values){
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -84,11 +84,11 @@ public class InviteMessgeDao {
 	
 	/**
 	 * 获取messges
-	 * @return
+	 * @return List<InviteMessage>
 	 */
 	public List<InviteMessage> getMessagesList(){
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		List<InviteMessage> msgs = new ArrayList<InviteMessage>();
+		List<InviteMessage> msgs = new ArrayList<>();
 		if(db.isOpen()){
 			Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " desc",null);
 			while(cursor.moveToNext()){
