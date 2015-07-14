@@ -7,11 +7,21 @@
     android:onClick="back" >
 
     <ImageView
+        android:id="@+id/imgvi_head_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="11dp"
         android:scaleType="centerInside"
         android:src="@drawable/back" />
+
+    <TextView
+        android:id="@+id/txt_head_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="11dp"
+        android:scaleType="centerInside"
+        android:visibility="gone"/>
 
 </LinearLayout>
