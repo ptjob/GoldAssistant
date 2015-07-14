@@ -34,7 +34,12 @@
         <attr name="vpiTabPageIndicatorStyle" format="reference" />
         Style of the underline indicator.
         <attr name="vpiUnderlinePageIndicatorStyle" format="reference" />
-    </declare-styleable>
+    </declare-styleable>
+
+
+
+
+
     -->
 
     <declare-styleable name="Emojicon">
@@ -53,6 +58,22 @@
             <enum name="lay_down" value="0" />
             <enum name="pull_out" value="1" />
         </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FormItem">
+        <attr name="topLine_shown" format="boolean"/>
+        <attr name="bottomLine_shown" format="boolean"/>
+        <attr name="form_icon" format="reference"/>
+        <attr name="form_title" format="string"/>
+        <attr name="form_value" format="string"/>
+        <attr name="form_tips" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="CountingEditText">
+        <attr name="cet_countTextSize" format="dimension"/>
+        <attr name="cet_countTextColor" format="color"/>
+        <attr name="cet_maxLen" format="integer"/>
+        <attr name="cet_countBarHeight" format="dimension"/>
     </declare-styleable>
 
 </resources>

@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:toggle="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,396 +24,105 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="200dp"
-                android:layout_gravity="center"
                 android:background="@color/head_color"
-                android:gravity="center"
-                android:orientation="vertical" >
+                >
 
                 <ImageView
-                    android:id="@+id/infoOperating"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/pic_fundpool_all" />
-
+                    android:id="@+id/iv_head"
+                    android:layout_width="@dimen/head_img_edge"
+                    android:layout_height="@dimen/head_img_edge"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:background="#aaffff00"
+                    android:layout_centerVertical="true"/>
                 <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="140dp"
-                    android:gravity="center"
-                    android:text="放飞机基金池"
-                    android:textColor="@color/body_color"
-                    android:textSize="15sp" />
+                    android:id="@+id/tv_businessman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iv_head"
+                    android:layout_alignTop="@id/iv_head"
+                    android:textColor="#fff"
+                    android:text="Businessman"/>
+                <TextView
+                    android:id="@+id/tv_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iv_head"
+                    android:layout_marginTop="14dp"
+                    android:layout_below="@id/tv_businessman"
+                    android:textColor="#fff"
+                    android:text="score 4.75/5"/>
+                <TextView
+                    android:id="@+id/tv_cert_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iv_head"
+                    android:layout_below="@id/tv_score"
+                    android:layout_marginTop="14dp"
+                    android:textColor="#fff"
+                    android:text="已个人认证"/>
 
-                <LinearLayout
-                    android:id="@+id/feijichi"
-                    android:layout_width="fill_parent"
-                    android:layout_height="180dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="￥"
-                        android:textColor="@color/body_color"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/moneyPool"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textColor="@color/body_color"
-                        android:textSize="30sp" />
-                </LinearLayout>
             </RelativeLayout>
 
-            <!-- 检查更新 -->
 
-            <LinearLayout
-                android:id="@+id/checkUpdate"
+            <com.parttime.widget.FormItem
+                android:id="@+id/fi_my_intro"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/form_item_height"
                 android:background="@drawable/item_selector"
-                android:orientation="horizontal"
-                android:paddingBottom="15dip"
-                android:paddingTop="15dip" >
+                app:form_title="@string/my_intro"/>
 
-                <ImageView
-                    android:id="@+id/my_update_imv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dip"
-                    android:src="@drawable/my_update" />
-
-                <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="检查更新"
-                    android:textSize="@dimen/menu_setting" />
-
-                <TextView
-                    android:id="@+id/update_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="5dp"
-                    android:gravity="center"
-                    android:minHeight="20dip"
-                    android:text="已是最新版本"
-                    android:textColor="@color/ziti_huise"
-                    android:textSize="@dimen/menu_setting" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/btn_go" />
-            </LinearLayout>
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"
-                android:background="@color/bottom_line2" />
-            <!-- 商家设置非好友免打扰 -->
-
-            <LinearLayout
-                android:id="@+id/checkMianDaRao"
+            <com.parttime.widget.FormItem
+                android:id="@+id/fi_my_balance"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/form_item_height"
                 android:background="@drawable/item_selector"
-                android:orientation="horizontal"
-                android:paddingBottom="15dip"
-                android:paddingTop="15dip" >
+                app:form_title="@string/my_balance"
+                android:layout_marginTop="@dimen/form_items_margin"/>
 
-                <ImageView
-                    android:id="@+id/my_activity_miandarao_imv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dip"
-                    android:src="@drawable/my_haoyou_yanzheng" />
 
-                <TextView
-                    android:id="@+id/me_miandarao_title"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="联系我时需验证" />
-
-                <ImageView
-                    android:id="@+id/miandarao_kaiguan_on"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/settings_btn_switch_on"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:id="@+id/miandarao_kaiguan_off"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/settings_btn_switch_off" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/miandarao_butn"
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"
-                android:background="@color/bottom_line2" />
-            <!-- 商家免打扰结束 -->
-
-            <LinearLayout
-                android:id="@+id/company_hit1"
+            <com.parttime.widget.FormItem
+                android:id="@+id/fi_praise_recved"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/form_item_height"
                 android:background="@drawable/item_selector"
-                android:orientation="horizontal"
-                android:paddingBottom="14dip"
-                android:paddingTop="14dip" >
+                app:form_title="@string/praise_recved"
+                android:layout_marginTop="@dimen/form_items_margin"/>
 
-                <ImageView
-                    android:id="@+id/my_activity_tips_imv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dip"
-                    android:src="@drawable/my_activity_tips" />
-
-                <TextView
-                    android:id="@+id/me_title"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="每日活动提醒" />
-                <!-- 每日活动提醒 -->
-
-                <ImageView
-                    android:id="@+id/kaiguan_on"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/settings_btn_switch_on"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:id="@+id/kaiguan_off"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/settings_btn_switch_off" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/company_hit2"
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"
-                android:background="@color/bottom_line2" />
-
-            <Button
-                android:id="@+id/company_hit3"
-                android:layout_width="fill_parent"
-                android:layout_height="20dip"
-                android:background="@color/bottom_block" />
-            <!-- 修改登陆手机号码 -->
-
-            <LinearLayout
-                android:id="@+id/editTelephone"
+            <com.parttime.widget.FormItem
+                android:id="@+id/fi_real_name_cert"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/form_item_height"
                 android:background="@drawable/item_selector"
-                android:orientation="horizontal"
-                android:paddingBottom="15dip"
-                android:paddingTop="15dip" >
+                app:form_title="@string/real_name_cert"
+                app:topLine_shown="false"/>
 
-                <ImageView
-                    android:id="@+id/my_change_tel_imv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dip"
-                    android:src="@drawable/my_change_tel" />
-
-                <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="修改登录手机号码"
-                    android:textSize="@dimen/menu_setting" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/btn_go" />
-            </LinearLayout>
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"
-                android:background="@color/bottom_line2" />
-
-            <!-- 修改密码 -->
-
-            <LinearLayout
-                android:id="@+id/editPassword"
+            <com.parttime.widget.FormItem
+                android:id="@+id/fi_fresh_man_guide"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/form_item_height"
                 android:background="@drawable/item_selector"
-                android:orientation="horizontal"
-                android:paddingBottom="15dip"
-                android:paddingTop="15dip" >
+                app:form_title="@string/fresh_man_guide"
+                android:layout_marginTop="@dimen/form_items_margin"/>
 
-                <ImageView
-                    android:id="@+id/my_change_pwd_imv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dip"
-                    android:src="@drawable/my_change_pwd" />
-
-                <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="修改密码"
-                    android:textSize="@dimen/menu_setting" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/btn_go" />
-            </LinearLayout>
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"
-                android:background="@color/bottom_line" />
-
-            <Button
-                android:id="@+id/company_hit4"
-                android:layout_width="fill_parent"
-                android:layout_height="20dip"
-                android:background="@color/bottom_block" />
-            <!-- 提出建议 -->
-
-            <LinearLayout
-                android:id="@+id/jianyi"
+            <com.parttime.widget.FormItem
+                android:id="@+id/fi_suggestion"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/form_item_height"
                 android:background="@drawable/item_selector"
-                android:orientation="horizontal"
-                android:paddingBottom="15dip"
-                android:paddingTop="15dip" >
+                app:form_title="@string/suggestion"
+                android:layout_marginTop="@dimen/form_items_margin"/>
 
-                <ImageView
-                    android:id="@+id/my_suggest_imv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dip"
-                    android:src="@drawable/my_suggest" />
-
-                <LinearLayout
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="left|center_vertical"
-                        android:text="提出建议"
-                        android:textSize="@dimen/menu_setting" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:minHeight="20dip"
-                        android:text="(采纳有奖~)"
-                        android:textColor="@color/ziti_orange"
-                        android:textSize="@dimen/menu_setting" />
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/btn_go" />
-            </LinearLayout>
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"
-                android:background="@color/bottom_line" />
-            <!-- 退出登陆 -->
-
-            <LinearLayout
-                android:id="@+id/loginOut"
+            <com.parttime.widget.FormItem
+                android:id="@+id/fi_setting"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/form_item_height"
                 android:background="@drawable/item_selector"
-                android:orientation="horizontal"
-                android:paddingBottom="15dip"
-                android:paddingTop="15dip" >
+                app:form_title="@string/setting"
+                app:topLine_shown="false"/>
 
-                <ImageView
-                    android:id="@+id/my_loginout_imv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dip"
-                    android:src="@drawable/my_loginout" />
 
-                <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:gravity="left|center_vertical"
-                    android:text="退出登录"
-                    android:textSize="@dimen/menu_setting" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/btn_go" />
-            </LinearLayout>
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"
-                android:background="@color/bottom_line" />
         </LinearLayout>
     </ScrollView>
 

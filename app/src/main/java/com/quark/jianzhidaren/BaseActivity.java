@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ public abstract class BaseActivity extends Activity {
 	private boolean isInit = false;
 	protected RequestQueue queue;
 	protected WaitDialog dialog;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -183,4 +186,6 @@ public abstract class BaseActivity extends Activity {
 		super.onPause();
 		MobclickAgent.onPause(this);// 友盟
 	}
+
+
 }

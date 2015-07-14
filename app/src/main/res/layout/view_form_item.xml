@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <ImageView
+        android:id="@id/form_item_icon"
+        style="@style/FormItem_Common.FormItem_Icon" />
+
+    <TextView
+        android:id="@id/form_item_title"
+        style="@style/FormItem_Common.FormItem_Title"
+        android:layout_toRightOf="@id/form_item_icon"
+        android:text="Title"/>
+    
+    <ImageView
+        android:id="@id/form_item_arrow"
+        style="@style/FormItem_Common.FormItem_Arrow" />
+
+    <TextView
+        android:id="@id/form_item_value"
+        style="@style/FormItem_Common.FormItem_Value"
+        android:layout_toLeftOf="@id/form_item_arrow"
+        android:layout_toRightOf="@id/form_item_title" />
+</RelativeLayout>

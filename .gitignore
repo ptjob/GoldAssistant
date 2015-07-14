@@ -5,3 +5,8 @@
 /.idea/libraries
 .DS_Store
 /build
+app/app.iml
+app/app.iml
+*.iml
+app/src/main/res/layout/aaa.xml
+app/src/main/java/com/parttime/test/TestActivity.java

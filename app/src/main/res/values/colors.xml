@@ -162,4 +162,12 @@
     <color name="choose_type">#9FCE42</color>
     <color name="choose_paytype">#FBC42C</color>
 
+
+
+
+    <color name="divider_color">#dadada</color>
+
+    <color name="my_intro_block_background">#33123412</color>
+    <color name="my_intro_take_img_bg">#222222</color>
+    <color name="common_txt_color">#fff</color>
 </resources>
