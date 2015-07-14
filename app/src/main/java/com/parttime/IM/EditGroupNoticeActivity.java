@@ -1,6 +1,5 @@
 package com.parttime.IM;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,10 +9,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.easemob.chatuidemo.activity.BaseActivity;
 import com.parttime.common.head.ActivityHead;
 import com.qingmu.jianzhidaren.R;
 
-public class EditGroupNoticeActivity extends FragmentActivity implements View.OnClickListener{
+public class EditGroupNoticeActivity extends BaseActivity implements View.OnClickListener{
 
     private static final int MAX_COUNT = 10;
 
