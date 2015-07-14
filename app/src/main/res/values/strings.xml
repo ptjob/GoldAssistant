@@ -8,7 +8,7 @@
     <string name="done">完成</string>
 
     <!-- 主界面 -->
-    <string name="publish">发布</string>
+    <string name="publish">招人</string>
     <string name="mine">我</string>
     <string name="message">消息</string>
 
@@ -80,8 +80,7 @@
     <string name="group_notice">群通知</string>
     <string name="content_text_count">%1$s/%2$s</string>
 
-
-    <!--编辑群通知-->
+    <!-- 编辑群通知 -->
     <string name="group_notice_function_declare">群通知是XXX的功能</string>
     <string name="group_notice_max_count_tip">限制输入数为%1$d</string>
 
@@ -207,7 +206,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-
     <!-- 我 -->
     <string name="my_intro">我的简介</string>
     <string name="my_balance">我的余额</string>
@@ -238,4 +236,22 @@
     <string name="contact_customer_service">联系客服</string>
     <string name="welcome_to_join_in_qq_group">欢迎加入兼职达人用户QQ群: %1$s</string>
     <string name="enter_suggestion_hint">请在此输入您的建议或者意见</string>
+    
+    <!-- 招人Tab -->
+    <string name="publish_job">发布兼职</string>
+    <string name="manage_job">管理兼职</string>
+    <string name="job_plaza">兼职广场</string>
+    <string name="broker_charts">经纪人排行榜</string>
+    <string name="publish_tip_about_publish">*请发布真实活动。\n若遭到用户投诉，我们可能会做封号处理。</string>
+
+    <!-- 发布兼职 -->
+    <string name="publish_job_choose_type_label">请选择兼职类型</string>
+    <string name="publish_job_title">发布兼职</string>
+
+    <!-- 管理兼职 -->
+
+    <!-- 兼职广场 -->
+
+    <!-- 经纪人排行榜 -->
+
 </resources>

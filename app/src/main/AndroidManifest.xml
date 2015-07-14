@@ -843,6 +843,11 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"/>
+        <!-- 发布兼职 -->
+        <activity
+            android:name="com.parttime.publish.PublishJobActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
     </application>
 
 </manifest>

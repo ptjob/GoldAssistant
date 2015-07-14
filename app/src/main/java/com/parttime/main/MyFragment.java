@@ -1,17 +1,7 @@
 package com.parttime.main;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,10 +23,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -52,14 +38,13 @@ import com.carson.constant.ConstantForSaveList;
 import com.easemob.EMCallBack;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.login.FindPJLoginActivity;
 import com.parttime.mine.EditMyIntroActivity;
 import com.parttime.mine.FreshManGuideActivity;
 import com.parttime.mine.MyWalletActivity;
 import com.parttime.mine.PraiseRecvedActivity;
 import com.parttime.mine.RealNameCertActivity;
 import com.parttime.mine.SuggestionActivity;
-import com.parttime.test.TestActivity;
 import com.parttime.widget.FormItem;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -67,17 +52,21 @@ import com.quark.fragment.company.BaseFragment;
 import com.quark.http.image.LoadImage;
 import com.quark.image.UploadImg;
 import com.quark.jianzhidaren.ApplicationControl;
-import com.parttime.login.FindPJLoginActivity;
-import com.quark.jianzhidaren.ModifyPwdActivity;
 import com.quark.model.HuanxinUser;
-import com.quark.setting.EditPhoneActivity;
-import com.quark.setting.SuggestActivity;
 import com.quark.ui.widget.CommonWidget;
 import com.quark.ui.widget.CustomDialog;
-import com.quark.us.FeiJichiActivity;
 import com.quark.utils.Util;
 import com.quark.utils.WaitDialog;
 import com.quark.volley.VolleySington;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 设置 商家 用户公用
