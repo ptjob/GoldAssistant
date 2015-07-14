@@ -43,9 +43,12 @@ import com.easemob.chatuidemo.DemoHXSDKHelper;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.util.EMLog;
 import com.easemob.util.HanziToPinyin;
+import com.google.gson.Gson;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.main.MainTabActivity;
+import com.parttime.net.ResponseBaseCommonError;
+import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.jianzhidaren.ApplicationControl;
@@ -118,7 +121,7 @@ public class FindPJLoginActivity extends BaseActivity {
 		logoImv.setBackgroundResource(R.drawable.login_logo_c);
 		Button button = (Button) findViewById(R.id.look);
 		button.setVisibility(View.GONE);
-		url = Url.COMPANY_LOGIN + "?token=" + MainTabActivity.token;
+		url = Url.COMPANY_LOGIN ;
 
 		telephoneView = (LineEditText) findViewById(R.id.telephone);
 		passwordView = (LineEditText) findViewById(R.id.password);
@@ -141,6 +144,9 @@ public class FindPJLoginActivity extends BaseActivity {
 				passwordStr = passwordView.getText().toString();
 				if (check()) {
 					login.setClickable(false);
+                    if(BuildConfig.DEBUG){
+                        login.setClickable(true);
+                    }
 					login();
 				}
 			}
@@ -211,35 +217,25 @@ public class FindPJLoginActivity extends BaseActivity {
 						showWait(false);
 						try {
 							JSONObject json = new JSONObject(response);
-							JSONObject jsont = json
-									.getJSONObject("ResponseStatus");
-							int status = jsont.getInt("status");
+							int status = json.getInt("status");
 							if (status == 1) {
-								login.setClickable(true);
-								showToast("该手机号尚未注册商家版。");
-							} else if (status == 2) {
-								login.setClickable(true);
-								showToast("登录密码不正确");
-							} else if (status == 4) { // 放飞机
-								String activity_title = jsont
-										.getString("run_over_activity_title");
-								Intent intent = new Intent();
-								intent.setClass(FindPJLoginActivity.this,
-										FeiJiPageActivity.class);
-								intent.putExtra("title", activity_title + "");
-								startActivity(intent);
-								finish();
+                                // 记录用户id 环信登陆id 密码 昵称 头像
+                                JSONObject jsonts = json
+                                        .getJSONObject("loginResponse");
+                                token = jsonts.getString("token");
+                                user_id = jsonts.getInt("company_id");
+                                IM_PASSWORD = jsonts.getString("IM_PASSWORD");
+                                IM_USERID = jsonts.getString("IM_USERID");
+                                IM_AVATAR = jsonts.getString("IM_AVATAR");
+                                IM_NIKENAME = jsonts.getString("IM_NIKENAME");
+                                loginIM(IM_USERID, IM_PASSWORD);
+
 							} else {
-								// 记录用户id 环信登陆id 密码 昵称 头像
-								JSONObject jsonts = json
-										.getJSONObject("LoginResponse");
-								token = jsonts.getString("token");
-								user_id = jsonts.getInt("company_id");
-								IM_PASSWORD = jsonts.getString("IM_PASSWORD");
-								IM_USERID = jsonts.getString("IM_USERID");
-								IM_AVATAR = jsonts.getString("IM_AVATAR");
-								IM_NIKENAME = jsonts.getString("IM_NIKENAME");
-								loginIM(IM_USERID, IM_PASSWORD);
+                                login.setClickable(true);
+                                ResponseBaseCommonError error = new Gson().fromJson(response, ResponseBaseCommonError.class);
+                                if(error != null) {
+                                    showToast(error.msg);
+                                }
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -254,7 +250,7 @@ public class FindPJLoginActivity extends BaseActivity {
 				}) {
 			@Override
 			protected Map<String, String> getParams() throws AuthFailureError {
-				Map<String, String> map = new HashMap<String, String>();
+				Map<String, String> map = new HashMap<>();
 				map.put("telephone", telephoneStr);
 				map.put("password", JiaoyanUtil.MD5(passwordStr));
 				return map;
