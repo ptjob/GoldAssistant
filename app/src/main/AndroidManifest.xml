@@ -803,6 +803,12 @@
             android:name="com.parttime.IM.EditGroupNoticeActivity"
             android:label="@string/title_activity_edit_group_notice" >
         </activity>
+
+        <!-- 发布兼职 -->
+        <activity
+            android:name="com.parttime.publish.PublishJobActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
     </application>
 
 </manifest>
