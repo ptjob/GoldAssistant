@@ -156,6 +156,15 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
                 break;
             }
         }
+
+        if(messageSetMap != null){
+            MessageSet messageSet = messageSetMap.get(username);
+            if(messageSet != null){
+                holder.list_item_layout
+                        .setBackgroundResource(R.drawable.mm_listitem_yellow);
+            }
+        }
+
         if (isGroup) {
             // 群聊消息，显示群聊头像
             holder.avatar.setImageResource(R.drawable.group_icon);

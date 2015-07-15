@@ -162,7 +162,9 @@
     <color name="choose_type">#9FCE42</color>
     <color name="choose_paytype">#FBC42C</color>
 
-
+    <!--消息列表-->
+    <!--置顶背景颜色-->
+    <color name="message_top">#FFE8AB</color>
 
 
     <color name="divider_color">#dadada</color>
