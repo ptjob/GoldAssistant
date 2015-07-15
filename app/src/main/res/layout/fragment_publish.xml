@@ -3,7 +3,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/activity_common_head" />
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_guangchang" />
 
     <ScrollView
         android:layout_width="match_parent"

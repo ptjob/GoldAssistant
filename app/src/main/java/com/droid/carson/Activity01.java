@@ -42,6 +42,8 @@ import com.droid.carson.MyLetterListView.OnTouchingLetterChangedListener;
 import com.qingmu.jianzhidaren.R;
 
 public class Activity01 extends Activity {
+    public static final String EXTRA_CITYLIST_CITY = "citylist_city";
+    public static final String EXTRA_CITY = "city";
     private BaseAdapter adapter;
     private ListView personList;
     private TextView overlay; // 对话框首字母textview
@@ -67,7 +69,7 @@ public class Activity01 extends Activity {
         topLayout.setBackgroundColor(getResources().getColor(
                 R.color.guanli_common_color));
         lngCityName = getIntent().getExtras()
-                .getString("citylist_city", "定位失败");
+                .getString(EXTRA_CITYLIST_CITY, "定位失败");
         backImb = (ImageButton) findViewById(R.id.backImb);
         backImb.setOnClickListener(new OnClickListener() {
             @Override
@@ -115,7 +117,7 @@ public class Activity01 extends Activity {
                             "成功切换到城市:" + allCity_lists.get(arg2).getName(),
                             Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
-                    intent.putExtra("city", allCity_lists.get(arg2).getName());
+                    intent.putExtra(EXTRA_CITY, allCity_lists.get(arg2).getName());
                     Activity01.this.setResult(RESULT_OK, intent);
                     Activity01.this.finish();
                 }
@@ -327,7 +329,7 @@ public class Activity01 extends Activity {
                                     Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent();
                             // intent.putExtra("province", province);
-                            intent.putExtra("city", lngCityName);
+                            intent.putExtra(EXTRA_CITY, lngCityName);
                             Activity01.this.setResult(RESULT_OK, intent);
                             Activity01.this.finish();
                         }

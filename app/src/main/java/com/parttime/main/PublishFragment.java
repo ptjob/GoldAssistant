@@ -1,38 +1,59 @@
 package com.parttime.main;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.parttime.common.head.ActivityHead;
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.carson.constant.ConstantForSaveList;
+import com.droid.carson.Activity01;
+import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.publish.PublishJobActivity;
+import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
+import com.quark.common.Url;
+import com.quark.volley.VolleySington;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * A fragment with a Google +1 button.
- * Activities that contain this fragment must implement the
- * {@link PublishFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link PublishFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * 招人主界面
+ * @author wyw
  */
-public class PublishFragment extends Fragment {
+public class PublishFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String DEF_CITY = "深圳";
+    public static final String DEF_LOCATION_FAIL = "定位失败";
+    public static final int REQUEST_CODE_LOCATION = 100;
 
     private String mParam1;
     private String mParam2;
 
-    private ActivityHead mActivityHeader;
+    private TextView mTxtCity;
+    private String city;
+    private String user_id;
+    private RelativeLayout mRLCity;
+    protected RequestQueue queue = VolleySington.getInstance()
+            .getRequestQueue();
+
 
     /**
      * Use this factory method to create a new instance of
@@ -62,6 +83,9 @@ public class PublishFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        user_id = SharePreferenceUtil.getInstance(getActivity()).loadStringSharedPreference(
+                SharedPreferenceConstants.USER_ID, "");
+
     }
 
     @Override
@@ -69,15 +93,7 @@ public class PublishFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_publish, container, false);
-        mActivityHeader = new ActivityHead();
-        mActivityHeader.initHeadLeftTxt(getActivity(), view);
-        ((TextView)mActivityHeader.getLeft()).setText("深圳");
-        mActivityHeader.getLeft().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "深圳", Toast.LENGTH_SHORT).show();
-            }
-        });
+        initTitle(view);
 
         // 发布兼职
         view.findViewById(R.id.btn_publish_job).setOnClickListener(new View.OnClickListener() {
@@ -87,7 +103,33 @@ public class PublishFragment extends Fragment {
             }
         });
 
+        mRLCity = (RelativeLayout) view
+                .findViewById(R.id.home_page_city_relayout);
+        mRLCity.setOnClickListener(this);
+
+        bindCity(view);
+
         return view;
+    }
+
+    private void initTitle(View view) {
+        // 左侧文本框
+        mTxtCity = (TextView) view.findViewById(R.id.home_page_city);
+        // 隐藏标题右侧按钮
+        LinearLayout right_layout = (LinearLayout) view
+                .findViewById(R.id.right_layout);
+        right_layout.setVisibility(View.GONE);
+        // 头部设置成灰色
+        RelativeLayout reLayout = (RelativeLayout) view
+                .findViewById(R.id.home_common_guangchang_relayout);
+        reLayout.setBackgroundColor(getResources().getColor(
+                R.color.guanli_common_color));
+    }
+
+    private void bindCity(View view) {
+        // 当前城市
+        city = SharePreferenceUtil.getInstance(getActivity()).loadStringSharedPreference(SharedPreferenceConstants.CITY, DEF_CITY);
+        mTxtCity.setText(city);
     }
 
 
@@ -105,6 +147,75 @@ public class PublishFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.home_page_city_relayout:
+                Intent intent = new Intent();
+                // 传值当前定位城市
+                intent.putExtra(Activity01.EXTRA_CITYLIST_CITY,
+                        SharePreferenceUtil.getInstance(getActivity()).loadStringSharedPreference(
+                                SharedPreferenceConstants.DINGWEICITY, DEF_LOCATION_FAIL));
+                intent.setClass(getActivity(), Activity01.class);
+                startActivityForResult(intent, REQUEST_CODE_LOCATION);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CODE_LOCATION) {
+                // String province = data.getExtras().getString("province");
+                city = data.getExtras().getString(Activity01.EXTRA_CITY);
+                if ((city != null) && (!city.equals(""))) {
+                    mTxtCity.setText(city);
+                    // 跟原来保存的城市对比
+                    String old_city = SharePreferenceUtil.getInstance(getActivity()).loadStringSharedPreference(
+                            SharedPreferenceConstants.CITY, DEF_CITY);
+                    ConstantForSaveList.change_city = !old_city.equals(city);
+                    SharePreferenceUtil.getInstance(getActivity()).saveSharedPreferences(SharedPreferenceConstants.CITY, city);
+                    // requestChangeCity();
+                }
+            }
+        }
+    }
+
+    private void requestChangeCity() {
+        // 切换到指定城市,访问后台传输城市
+        String cityUrl;
+        cityUrl = Url.CHANGE_CITY_CUSTOM + "?token="
+                + MainTabActivity.token;
+
+        StringRequest request = new StringRequest(
+                Request.Method.POST, cityUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(
+                    VolleyError volleyError) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams()
+                    throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("company_id", user_id);
+                map.put("city", city);
+                return map;
+            }
+        };
+        queue.add(request);
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1,
+                1.0f));
     }
 
     /**

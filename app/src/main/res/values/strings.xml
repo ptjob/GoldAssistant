@@ -236,7 +236,7 @@
     <string name="contact_customer_service">联系客服</string>
     <string name="welcome_to_join_in_qq_group">欢迎加入兼职达人用户QQ群: %1$s</string>
     <string name="enter_suggestion_hint">请在此输入您的建议或者意见</string>
-    
+
     <!-- 招人Tab -->
     <string name="publish_job">发布兼职</string>
     <string name="manage_job">管理兼职</string>
