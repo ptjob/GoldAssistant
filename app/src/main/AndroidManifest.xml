@@ -85,6 +85,7 @@
         android:theme="@style/AppTheme" >
 
         <!-- android:launchMode="singleTask" -->
+        <!--启动界面-->
         <activity
             android:name="com.quark.jianzhidaren.StartUpActivity"
             android:configChanges="orientation|screenSize"
@@ -112,6 +113,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
+        <!--主界面-->
         <activity
             android:name="com.parttime.main.MainTabActivity"
             android:label="@string/app_name"
@@ -488,6 +490,13 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustResize" >
         </activity>
+        <!--群通知设置-->
+        <activity
+            android:name="com.parttime.IM.EditGroupNoticeActivity"
+            android:label="@string/title_activity_edit_group_notice"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide">
+        </activity>
         <!-- 添加好友 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.AddContactActivity"
@@ -799,16 +808,6 @@
             android:name="JPUSH_APPKEY"
             android:value="8da70cea9ea99ac826e2567e" />
         <!-- </>值来自开发者平台取得的AppKey -->
-        <activity
-            android:name="com.parttime.IM.EditGroupNoticeActivity"
-            android:label="@string/title_activity_edit_group_notice" >
-        </activity>
-
-        <activity android:name="com.parttime.test.TestActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
 
         <activity android:name="com.parttime.mine.EditMyIntroActivity"
             android:configChanges="orientation|keyboardHidden|navigation"

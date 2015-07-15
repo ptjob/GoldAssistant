@@ -65,6 +65,7 @@ import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.utils.SmileUtils;
 import com.easemob.util.DateUtils;
+import com.parttime.pojo.MessageSet;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
@@ -88,8 +89,10 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 	RequestQueue queue = VolleySington.getInstance().getRequestQueue();
 	Context tcontext;
 	SharedPreferences sp;
+	//置顶设置，显示背景有用
+    public Map<String, MessageSet> messageSetMap;
 
-	public ChatAllHistoryAdapter(Context context, int textViewResourceId,
+    public ChatAllHistoryAdapter(Context context, int textViewResourceId,
 			List<EMConversation> objects) {
 		super(context, textViewResourceId, objects);
 		this.conversationList = objects;

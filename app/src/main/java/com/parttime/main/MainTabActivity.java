@@ -1986,7 +1986,7 @@ public class MainTabActivity extends FragmentActivity implements
 		new Thread() {
 			public void run() {
 				try {
-					Map<String, com.easemob.chatuidemo.domain.User> userlist = new HashMap<String, com.easemob.chatuidemo.domain.User>();
+					Map<String, com.easemob.chatuidemo.domain.User> userlist = new HashMap<>();
 					for (String username : serverList) {
 						com.easemob.chatuidemo.domain.User user = new com.easemob.chatuidemo.domain.User();
 						user.setUsername(username);
@@ -2035,14 +2035,13 @@ public class MainTabActivity extends FragmentActivity implements
 					public void onResponse(String response) {
 						try {
 							JSONObject js = new JSONObject(response);
-							JSONObject jss = js.getJSONObject("responseStatus");
-							String status = jss.getString("status");
+							String status = js.getString("status");
 							if ("1".equals(status)) {
-								JSONArray friendListArray = jss
-										.getJSONArray("list");
+								JSONArray friendListArray = js
+										.getJSONArray("userList");
 								if (friendListArray != null
 										&& friendListArray.length() > 0) {
-									List<String> serverFriendList = new ArrayList<String>();
+									List<String> serverFriendList = new ArrayList<>();
 									for (int i = 0; i < friendListArray
 											.length(); i++) {
 										serverFriendList.add(friendListArray
@@ -2069,7 +2068,7 @@ public class MainTabActivity extends FragmentActivity implements
 				}) {
 			@Override
 			protected Map<String, String> getParams() {
-				Map<String, String> map = new HashMap<String, String>();
+				Map<String, String> map = new HashMap<>();
 				map.put("user_id", "c" + company_id);
 				return map;
 			}
@@ -2109,11 +2108,10 @@ public class MainTabActivity extends FragmentActivity implements
 	private void jsonjiexi(String jsonStr) {
 		try {
 			JSONObject js = new JSONObject(jsonStr);
-			JSONObject jss = js.getJSONObject("responseStatus");
-			String status = jss.getString("status");
+			String status = js.getString("status");
 			if (status != null && "1".equals(status)) {
 				// 服务端获取的都是string类型,需要转换
-				JSONObject appInfo = jss.getJSONObject("apkInfo");
+				JSONObject appInfo = js.getJSONObject("apkInfo");
 				// String server_code_str = appInfo.getString("version");
 				// server_vercode = Integer.parseInt(server_code_str);
 				// update_contentStr = appInfo.getString("update_msg");

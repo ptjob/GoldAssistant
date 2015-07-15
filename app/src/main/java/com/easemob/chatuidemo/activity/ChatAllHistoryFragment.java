@@ -189,7 +189,7 @@ public class ChatAllHistoryFragment extends Fragment {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		getActivity().getMenuInflater().inflate(R.menu.delete_message, menu);
+		getActivity().getMenuInflater().inflate(R.menu.delete_message_and_top, menu);
 	}
 
 	@Override

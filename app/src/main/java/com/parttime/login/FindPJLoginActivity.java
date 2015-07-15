@@ -368,7 +368,7 @@ public class FindPJLoginActivity extends BaseActivity {
 								// 存入db
 								UserDao dao = new UserDao(
 										FindPJLoginActivity.this);
-								List<com.easemob.chatuidemo.domain.User> users = new ArrayList<com.easemob.chatuidemo.domain.User>(
+								List<com.easemob.chatuidemo.domain.User> users = new ArrayList<>(
 										userlist.values());
 								dao.saveContactList(users);
 								// 获取群聊列表(群聊里只有groupid和groupname等简单信息，不包含members),sdk会把群组存入到内存和db中
@@ -381,7 +381,7 @@ public class FindPJLoginActivity extends BaseActivity {
 										if (!FindPJLoginActivity.this
 												.isFinishing())
 											pd.dismiss();
-										DemoApplication.getInstance().logout(
+										ApplicationControl.getInstance().logout(
 												null);
 										Toast.makeText(getApplicationContext(),
 												"登录失败", Toast.LENGTH_SHORT).show();

@@ -22,7 +22,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.easemob.applib.utils.HXPreferenceUtils;
-import com.easemob.chatuidemo.db.UserDao;
 
 /**
  * HuanXin default SDK Model implementation
@@ -33,7 +32,6 @@ import com.easemob.chatuidemo.db.UserDao;
 public class DefaultHXSDKModel extends HXSDKModel {
 	private static final String PREF_USERNAME = "username";
 	private static final String PREF_PWD = "pwd";
-	UserDao dao = null;
 	protected Context context = null;
 
 	public DefaultHXSDKModel(Context ctx) {
@@ -43,61 +41,60 @@ public class DefaultHXSDKModel extends HXSDKModel {
 
 	@Override
 	public void setSettingMsgNotification(boolean paramBoolean) {
-		// TODO Auto-generated method stub
 		HXPreferenceUtils.getInstance().setSettingMsgNotification(paramBoolean);
 	}
 
 	@Override
 	public boolean getSettingMsgNotification() {
-		// TODO Auto-generated method stub
+		
 		return HXPreferenceUtils.getInstance().getSettingMsgNotification();
 	}
 
 	@Override
 	public void setSettingMsgSound(boolean paramBoolean) {
-		// TODO Auto-generated method stub
+		
 		HXPreferenceUtils.getInstance().setSettingMsgSound(paramBoolean);
 	}
 
 	@Override
 	public boolean getSettingMsgSound() {
-		// TODO Auto-generated method stub
+		
 		return HXPreferenceUtils.getInstance().getSettingMsgSound();
 	}
 
 	@Override
 	public void setSettingMsgVibrate(boolean paramBoolean) {
-		// TODO Auto-generated method stub
+		
 		HXPreferenceUtils.getInstance().setSettingMsgVibrate(paramBoolean);
 	}
 
 	@Override
 	public boolean getSettingMsgVibrate() {
-		// TODO Auto-generated method stub
+		
 		return HXPreferenceUtils.getInstance().getSettingMsgVibrate();
 	}
 
 	@Override
 	public void setSettingMsgSpeaker(boolean paramBoolean) {
-		// TODO Auto-generated method stub
+		
 		HXPreferenceUtils.getInstance().setSettingMsgSpeaker(paramBoolean);
 	}
 
 	@Override
 	public boolean getSettingMsgSpeaker() {
-		// TODO Auto-generated method stub
+		
 		return HXPreferenceUtils.getInstance().getSettingMsgSpeaker();
 	}
 
 	@Override
 	public boolean getUseHXRoster() {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public boolean saveHXId(String hxId) {
-		// TODO Auto-generated method stub
+		
 		SharedPreferences preferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		return preferences.edit().putString(PREF_USERNAME, hxId).commit();
@@ -105,7 +102,7 @@ public class DefaultHXSDKModel extends HXSDKModel {
 
 	@Override
 	public String getHXId() {
-		// TODO Auto-generated method stub
+		
 		SharedPreferences preferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		return preferences.getString(PREF_USERNAME, null);
@@ -113,7 +110,7 @@ public class DefaultHXSDKModel extends HXSDKModel {
 
 	@Override
 	public boolean savePassword(String pwd) {
-		// TODO Auto-generated method stub
+		
 		SharedPreferences preferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		return preferences.edit().putString(PREF_PWD, pwd).commit();
@@ -128,7 +125,7 @@ public class DefaultHXSDKModel extends HXSDKModel {
 
 	@Override
 	public String getAppProcessName() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 }

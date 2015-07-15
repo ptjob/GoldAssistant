@@ -43,16 +43,6 @@ public class ApplicationControl extends Application {
 	public static String currentUserNick = "";
 	public static DemoHXSDKHelper hxSDKHelper = new DemoHXSDKHelper();
 
-	private boolean netWorkEnable = true;
-
-	public boolean isNetWorkEnable() {
-		return netWorkEnable;
-	}
-
-	public void setNetWorkEnable(boolean netWorkEnable) {
-		this.netWorkEnable = netWorkEnable;
-	}
-
 	// 用户登入后不为null
 	public LoginResponse loginResponse;// 全局用户对象
 
@@ -61,10 +51,6 @@ public class ApplicationControl extends Application {
 			return false;
 		}
 		return true;
-	}
-
-	public void clearLoginInfo() {
-		loginResponse = null;
 	}
 
 	@Override
@@ -131,7 +117,7 @@ public class ApplicationControl extends Application {
 	/**
 	 * 获取内存中好友user list
 	 * 
-	 * @return
+	 * @return Map<String, User>
 	 */
 	public Map<String, User> getContactList() {
 		return hxSDKHelper.getContactList();
@@ -140,7 +126,7 @@ public class ApplicationControl extends Application {
 	/**
 	 * 设置好友user list到内存中
 	 * 
-	 * @param contactList
+	 * @param contactList Map<String, User>
 	 */
 	public void setContactList(Map<String, User> contactList) {
 		hxSDKHelper.setContactList(contactList);
@@ -149,7 +135,7 @@ public class ApplicationControl extends Application {
 	/**
 	 * 获取当前登陆用户名
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String getUserName() {
 		return hxSDKHelper.getHXId();
@@ -158,7 +144,7 @@ public class ApplicationControl extends Application {
 	/**
 	 * 获取密码
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String getPassword() {
 		return hxSDKHelper.getPassword();
@@ -167,7 +153,7 @@ public class ApplicationControl extends Application {
 	/**
 	 * 设置用户名
 	 * 
-	 * @param user
+	 * @param username String
 	 */
 	public void setUserName(String username) {
 		hxSDKHelper.setHXId(username);
@@ -175,7 +161,7 @@ public class ApplicationControl extends Application {
 
 	/**
 	 * 内部的自动登录需要的密码，已经加密存储了
-	 * @param pwd
+	 * @param pwd String
 	 */
 	public void setPassword(String pwd) {
 		hxSDKHelper.setPassword(pwd);

@@ -40,9 +40,18 @@ public class DbOpenHelper extends SQLiteOpenHelper{
 			+ InviteMessgeDao.COLUMN_NAME_ISINVITEFROMME + " INTEGER, "
 			+ InviteMessgeDao.COLUMN_NAME_TIME + " TEXT); ";
 			
-			
-	
-	private DbOpenHelper(Context context) {
+    private static final String MESSAGE_SET_TABLE_CREATE = "CREATE TABLE "
+            + MessageSetDao.TABLE_NAME + "("
+            + MessageSetDao.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + MessageSetDao.COLUMN_NAME + " TEXT, "
+            + MessageSetDao.COLUMN_TYPE + " TEXT, "
+            + MessageSetDao.COLUMN_TOP + " INTEGER, "
+            + MessageSetDao.COLUMN_TIME + " LONG); ";
+    private static final String MESSAGE_SET_UNION_KEY = " create unique index "
+            + " 'message_set_union_key' on " +  MessageSetDao.TABLE_NAME
+            + " ("+MessageSetDao.COLUMN_NAME + "," + MessageSetDao.COLUMN_TYPE +");";
+
+    private DbOpenHelper(Context context) {
 		super(context, getUserDatabaseName(), null, DATABASE_VERSION);
 	}
 	
@@ -61,7 +70,8 @@ public class DbOpenHelper extends SQLiteOpenHelper{
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(USERNAME_TABLE_CREATE);
 		db.execSQL(INIVTE_MESSAGE_TABLE_CREATE);
-		
+        db.execSQL(MESSAGE_SET_TABLE_CREATE);
+        db.execSQL(MESSAGE_SET_UNION_KEY);
 	}
 
 	@Override

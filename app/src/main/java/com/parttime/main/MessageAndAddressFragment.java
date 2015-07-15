@@ -24,6 +24,7 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -61,6 +62,7 @@ import com.easemob.chat.EMGroupManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.activity.AddContactActivity;
+import com.easemob.chatuidemo.db.MessageSetDao;
 import com.parttime.IM.ChatActivity;
 import com.easemob.chatuidemo.activity.GroupsActivity;
 import com.easemob.chatuidemo.activity.NewFriendsMsgActivity;
@@ -72,6 +74,7 @@ import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
 import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.NetUtils;
+import com.parttime.pojo.MessageSet;
 import com.qingmu.jianzhidaren.R;
 import com.quark.citylistview.CharacterParser;
 import com.quark.common.JsonUtil;
@@ -85,6 +88,8 @@ import com.quark.quanzi.PinyinComparator_quanzhitwo;
 import com.quark.volley.VolleySington;
 
 public class MessageAndAddressFragment extends Fragment {
+    final String TAG = "MessageAndAddressFragment";
+
 	private RequestQueue queue;
 	private ViewPager viewPager; // viewpager
 	private ArrayList<View> pageViews; // 2个viewpager 页面
@@ -108,6 +113,7 @@ public class MessageAndAddressFragment extends Fragment {
 	private ListView contactlistView;
 	private Sidebar sidebar;
 	private List<String> blackList;
+    private Map<String, MessageSet> messageSetMap;
 	ArrayList<HuanxinUser> usersNick = new ArrayList<>();
 	// =========转拼音========
 	private CharacterParser characterParser;
@@ -221,9 +227,15 @@ public class MessageAndAddressFragment extends Fragment {
         // 联系人小红点
         contact_hongdian_imv = (ImageView) page1
                 .findViewById(R.id.contacts_hongdian_imv);
+        //获取置顶设置
+        messageSetMap = new MessageSetDao(ApplicationControl.getInstance()).getMessageSetList();
         conversationList = message.loadConversationsWithRecentChat();
+        //对列表更具置顶设置排序
+        sortMessages(conversationList, messageSetMap);
         messageListView = (ListView) page1.findViewById(R.id.list);
         messageAdapter = new ChatAllHistoryAdapter(getActivity(), 1, conversationList);
+        messageAdapter.messageSetMap = messageSetMap;
+
         // 设置adapter
         messageListView.setAdapter(messageAdapter);
 
@@ -271,6 +283,33 @@ public class MessageAndAddressFragment extends Fragment {
         });
         registerForContextMenu(contactlistView);
     }
+
+
+    private void sortMessages(List<EMConversation> conversationList, Map<String, MessageSet> messageSetMap) {
+        if(messageSetMap == null || conversationList == null){
+            return ;
+        }
+        //缓存在置顶中存在的消息列表
+        Map<String ,EMConversation> temp = new HashMap<>();
+        for(EMConversation emConversation : conversationList){
+            if(emConversation == null){
+                continue;
+            }
+            String userName = emConversation.getUserName();
+            if(messageSetMap.containsKey(userName)){
+                temp.put(userName, emConversation);
+            }
+        }
+        for(Entry<String ,EMConversation> entry : temp.entrySet()){
+            conversationList.remove(entry.getValue());
+        }
+
+        for(Entry<String ,MessageSet> entry : messageSetMap.entrySet()){
+            String key = entry.getKey();
+            conversationList.add(0, temp.get(key));
+        }
+    }
+
 
     /**
 	 * viewpager适配器
@@ -436,8 +475,19 @@ public class MessageAndAddressFragment extends Fragment {
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		if (v == messageListView) {
-			getActivity().getMenuInflater()
-					.inflate(R.menu.delete_message, menu);
+            //获取已经置顶的项
+            int size = 0;
+            if(messageSetMap != null){
+                size = messageSetMap.size();
+            }
+            Log.i(TAG, "messageSetMap =" + messageSetMap + ", size = " + size);
+            if(((AdapterContextMenuInfo) menuInfo).position >= size) {
+                getActivity().getMenuInflater()
+                        .inflate(R.menu.delete_message_and_top, menu);
+            }else{
+                getActivity().getMenuInflater()
+                        .inflate(R.menu.delete_message_and_no_top, menu);
+            }
 		} else if (v == contactlistView) {
 			// 长按前两个不弹menu
 			if (((AdapterContextMenuInfo) menuInfo).position >= 2) {
@@ -458,6 +508,13 @@ public class MessageAndAddressFragment extends Fragment {
 			InviteMessgeDao inviteMessgeDao = new InviteMessgeDao(getActivity());
 			inviteMessgeDao.deleteMessage(tobeDeleteCons.getUserName());
 			messageAdapter.remove(tobeDeleteCons);
+            //删除置顶
+            String name = tobeDeleteCons.getUserName();
+            String type = tobeDeleteCons.getType().name();
+            if(messageSetMap != null){
+                messageSetMap.remove(name);
+            }
+            new MessageSetDao(ApplicationControl.getInstance()).delete(name, type);
 			messageAdapter.notifyDataSetChanged();
 			// 长按聊天记录item,删除聊天记录
 			// 更新未读消息
@@ -490,7 +547,37 @@ public class MessageAndAddressFragment extends Fragment {
 					.getMenuInfo()).position);
             addressbook.moveToBlacklist(user.getUid());
 			return true;
-		}
+		} else if (item.getItemId() == R.id.to_top){
+            EMConversation tobeddInSetCons = messageAdapter
+                    .getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
+            String name = tobeddInSetCons.getUserName();
+            String type = tobeddInSetCons.getType().name();
+            MessageSet messageSet = new MessageSet();
+            messageSet.name = name;
+            messageSet.type = type;
+            messageSet.isTop = true;
+            messageSet.createTime = System.currentTimeMillis();
+            new MessageSetDao(ApplicationControl.getInstance()).save(messageSet);
+            if(messageSetMap != null){
+                messageSetMap.put(name,messageSet);
+            }
+            //重新排序
+            sortMessages(conversationList, messageSetMap);
+            messageAdapter.notifyDataSetChanged();
+        } else if(item.getItemId() == R.id.remove_from_top){
+            EMConversation tobeDeleteCons = messageAdapter
+                    .getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
+            //删除置顶
+            String name = tobeDeleteCons.getUserName();
+            String type = tobeDeleteCons.getType().name();
+            if(messageSetMap != null){
+                messageSetMap.remove(name);
+            }
+            new MessageSetDao(ApplicationControl.getInstance()).delete(name, type);
+            //重新排序
+            message.sortConversationByLastChatTime(conversationList);
+            messageAdapter.notifyDataSetChanged();
+        }
 		return super.onContextItemSelected(item);
 	}
 
@@ -503,6 +590,7 @@ public class MessageAndAddressFragment extends Fragment {
                 conversationList.clear();
                 List<EMConversation> sd = loadConversationsWithRecentChat();
                 conversationList.addAll(sd);
+                sortMessages(conversationList,messageSetMap);
                 messageAdapter.notifyDataSetChanged();
             }
         }
@@ -532,7 +620,7 @@ public class MessageAndAddressFragment extends Fragment {
          *
          * @param conversationList List<EMConversation>
          */
-        private void sortConversationByLastChatTime(
+        void sortConversationByLastChatTime(
                 List<EMConversation> conversationList) {
             Collections.sort(conversationList, new Comparator<EMConversation>() {
                 @Override

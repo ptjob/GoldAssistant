@@ -151,7 +151,7 @@ public class DemoHXSDKHelper extends HXSDKHelper{
      */
     public Map<String, User> getContactList() {
         if (getHXId() != null && contactList == null) {
-            contactList = ((DemoHXSDKModel) getModel()).getContactList();
+            contactList = getModel().getContactList();
         }
         
         return contactList;
