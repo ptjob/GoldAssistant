@@ -287,7 +287,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 												+ "人)");
 										progressDialog.dismiss();
 										Toast.makeText(getApplicationContext(),
-												"修改群名称成功", 0).show();
+												"修改群名称成功", Toast.LENGTH_SHORT).show();
 									}
 								});
 
@@ -297,7 +297,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 									public void run() {
 										progressDialog.dismiss();
 										Toast.makeText(getApplicationContext(),
-												"改变群名称失败，请检查网络或稍后重试", 0).show();
+												"改变群名称失败，请检查网络或稍后重试", Toast.LENGTH_SHORT).show();
 									}
 								});
 							}
@@ -318,7 +318,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 									adapter.notifyDataSetChanged();
 									progressDialog.dismiss();
 									Toast.makeText(getApplicationContext(),
-											"移入黑名单成功", 0).show();
+											"移入黑名单成功", Toast.LENGTH_SHORT).show();
 								}
 							});
 						} catch (EaseMobException e) {
@@ -326,7 +326,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 								public void run() {
 									progressDialog.dismiss();
 									Toast.makeText(getApplicationContext(),
-											"移入黑名单失败,请检查网络或稍后重试", 0).show();
+											"移入黑名单失败,请检查网络或稍后重试", Toast.LENGTH_SHORT).show();
 								}
 							});
 						}
@@ -377,7 +377,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 							}) {
 						@Override
 						protected Map<String, String> getParams() {
-							Map<String, String> map = new HashMap<String, String>();
+							Map<String, String> map = new HashMap<>();
 							map.put("group_id", groupId);
 							map.put("email", emailStr);
 							map.put("group_name", group.getGroupName());
@@ -400,7 +400,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 	/**
 	 * 点击退出群组按钮
 	 * 
-	 * @param view
+	 * @param view View
 	 */
 	// 修改为 兼职自己的弹窗
 	public void exitGroup(View view) {
@@ -412,7 +412,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 	/**
 	 * 点击解散群组按钮
 	 * 
-	 * @param view
+	 * @param view View
 	 */
 	// // 修改为 兼职自己的弹窗
 	public void exitDeleteGroup(View view) {
@@ -426,8 +426,8 @@ public class GroupDetailsActivity extends BaseActivity implements
 	/**
 	 * 群主解散
 	 * 
-	 * @param str
-	 * @param str2
+	 * @param str String
+	 * @param str2 String
 	 */
 	public void showAlertDialog(String str, final String str2) {
 
@@ -460,8 +460,8 @@ public class GroupDetailsActivity extends BaseActivity implements
 	/**
 	 * 退出
 	 * 
-	 * @param str
-	 * @param str2
+	 * @param str String
+	 * @param str2 String
 	 */
 	public void showAlertDialog2(String str, final String str2) {
 
@@ -505,7 +505,6 @@ public class GroupDetailsActivity extends BaseActivity implements
 	/**
 	 * 退出群组
 	 * 
-	 * @param groupId
 	 */
 	private void exitGrop() {
 		new Thread(new Runnable() {
@@ -526,7 +525,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 						public void run() {
 							progressDialog.dismiss();
 							Toast.makeText(getApplicationContext(),
-									"退出群聊失败: " + e.getMessage(), 1).show();
+									"退出群聊失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
 						}
 					});
 				}
@@ -537,7 +536,6 @@ public class GroupDetailsActivity extends BaseActivity implements
 	/**
 	 * 解散群组
 	 * 
-	 * @param groupId
 	 */
 	private void deleteGrop() {
 		new Thread(new Runnable() {
@@ -567,7 +565,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 						public void run() {
 							progressDialog.dismiss();
 							Toast.makeText(getApplicationContext(),
-									"解散群聊失败: " + e.getMessage(), 1).show();
+									"解散群聊失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
 						}
 					});
 				}
@@ -578,7 +576,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 	/**
 	 * 增加群成员
 	 * 
-	 * @param newmembers
+	 * @param newmembers String[]
 	 */
 	private void addMembersToGroup(final String[] newmembers) {
 		new Thread(new Runnable() {
@@ -610,7 +608,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 						public void run() {
 							progressDialog.dismiss();
 							Toast.makeText(getApplicationContext(),
-									"添加群成员失败: " + e.getMessage(), 1).show();
+									"添加群成员失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
 						}
 					});
 				}
@@ -891,7 +889,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 									Toast.makeText(
 											getApplicationContext(),
 											getString(R.string.network_unavailable),
-											0).show();
+                                            Toast.LENGTH_SHORT).show();
 									return;
 								}
 								EMLog.d("group", "remove user from group:"
@@ -904,14 +902,12 @@ public class GroupDetailsActivity extends BaseActivity implements
 									Toast.makeText(
 											getApplicationContext(),
 											getString(R.string.network_unavailable),
-											0).show();
-									return;
+                                            Toast.LENGTH_SHORT).show();
 								} else {
 									if (EMChatManager.getInstance()
 											.getCurrentUser().equals(username)) {
 										Toast.makeText(getApplicationContext(),
-												"您点击了自己", 0).show();
-										return;
+												"您点击了自己", Toast.LENGTH_SHORT).show();
 									} else {
 										// 正常情况下点击user，可以进入用户详情或者聊天页面等等
 										// Intent intent = new Intent(
@@ -932,7 +928,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 						/**
 						 * 删除群成员
 						 * 
-						 * @param username
+						 * @param username String
 						 */
 						protected void deleteMembersFromGroup(
 								final String username) {
@@ -971,7 +967,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 														getApplicationContext(),
 														"删除失败："
 																+ e.getMessage(),
-														1).show();
+														Toast.LENGTH_LONG).show();
 											}
 										});
 									}
