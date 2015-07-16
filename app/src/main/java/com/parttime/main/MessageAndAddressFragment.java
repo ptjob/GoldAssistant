@@ -60,6 +60,9 @@ import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
 import com.parttime.main.adapter.ChatAllHistoryAdapter;
+import com.parttime.net.BaseResponse;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.MessageSet;
 import com.qingmu.jianzhidaren.R;
 import com.quark.citylistview.CharacterParser;
@@ -109,7 +112,7 @@ public class MessageAndAddressFragment extends Fragment {
 	private ContactAdapter contactAdapter;
 	private List<User> contactList;
 	private List<String> contactIds;
-	private String contactIdsStr = "";
+	private StringBuilder contactIdsStr = new StringBuilder("");
 	private ListView contactlistView;
 	private Sidebar sidebar;
 	private List<String> blackList;
@@ -734,14 +737,16 @@ public class MessageAndAddressFragment extends Fragment {
             getContactList();
 
             if (contactIds.size() > 0) {
-                contactIdsStr = "{";
-                for (int i = 0; i < contactIds.size(); i++) {
-                    contactIdsStr += contactIds.get(i) + "、";
+                int size = contactIds.size();
+                for (int i = 0; i < size; i++) {
+                    if(i < size -1 ) {
+                        contactIdsStr.append(contactIds.get(i)).append(",");
+                    }else{
+                        contactIdsStr.append(contactIds.get(i));
+                    }
                 }
-                contactIdsStr = contactIdsStr.substring(0,
-                        contactIdsStr.length() - 1) + "}";
 
-                if (contactIdsStr.equals("{}")) {
+                if ("".equals(contactIdsStr)) {
                     filledData();
                 } else {
                     // filledData();
@@ -913,54 +918,23 @@ public class MessageAndAddressFragment extends Fragment {
 
         public void getNick() {
             // showWait(true);
-            StringRequest request = new StringRequest(Request.Method.POST,
-                    Url.HUANXIN_avatars_pic, new Response.Listener<String>() {
+            new HuanXinRequest().getHuanxinUserList(contactIdsStr.toString(), queue, new DefaultCallback(){
                 @Override
-                public void onResponse(String response) {
-                    // showWait(false);
-                    try {
-                        JSONObject js = new JSONObject(response);
-                        JSONArray jss = js.getJSONArray("avatars");
+                public void success(Object obj) {
+                    super.success(obj);
+                    if(obj instanceof ArrayList){
+                        @SuppressLint("Unchecked")
+                        ArrayList<HuanxinUser> list = (ArrayList<HuanxinUser>)obj;
                         usersNick.clear();
-                        for (int i = 0; i < jss.length(); i++) {
-                            HuanxinUser us = (HuanxinUser) JsonUtil
-                                    .jsonToBean(jss.getJSONObject(i),
-                                            HuanxinUser.class);
-                            if (us.getName() == null
-                                    || us.getName().equals("")) {
-                                us.setName("未知好友");
-                            }
-                            usersNick.add(us);
-
-                        }
+                        usersNick.addAll(list);
                         if (usersNick.size() > 0) {
                             ConstantForSaveList.usersNick = usersNick;// 保存缓存
 
                         }
                         filledData(); // 转化拼音
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    // showWait(false);
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-
-                    Map<String, String> map = new HashMap<>();
-                    map.put("user_ids", contactIdsStr);
-                    return map;
-                }
-            };
-            queue.add(request);
-            request.setRetryPolicy(new DefaultRetryPolicy(
-                    ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
-
+            });
         }
 
         public void setlist() {

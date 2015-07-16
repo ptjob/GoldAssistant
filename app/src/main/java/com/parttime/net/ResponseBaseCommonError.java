@@ -4,7 +4,7 @@ package com.parttime.net;
  *
  * Created by luhua on 15/7/14.
  */
-public class ResponseBaseCommonError {
+public class ResponseBaseCommonError extends BaseResponse{
 
     /*｛status：1，msg : '', title : '', confirm : '', cancel : '', xx：｛｝，xxx：｛｝｝*/
 

@@ -24,7 +24,7 @@ import android.preference.PreferenceManager;
 import com.easemob.applib.utils.HXPreferenceUtils;
 
 /**
- * HuanXin default SDK Model implementation
+ * HuanXinRequest default SDK Model implementation
  * 
  * @author easemob
  * 

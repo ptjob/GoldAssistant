@@ -14,6 +14,10 @@ public class HuanxinUser implements Serializable {
 	private String uid;//	String	返回环信id。用户认u开头，商家以c开头
 	private String name;//	String	姓名
 	private String avatar;//	String	头像
+    /*
+    -1-普通商户，0-个人认证，1-企业认证，3-经纪人认证
+     */
+    private int type ; //用户类型
 	private String namePinyin;  //名字转化为拼音 为了列表显示
 	
 	public String getNamePinyin() {
@@ -40,11 +44,18 @@ public class HuanxinUser implements Serializable {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-	
-	
-	@Override
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    @Override
 	public String toString() {
 		return "HuanxinUser [uid=" + uid + ", name=" + name + ", avatar="
-				+ avatar + "]";
+				+ avatar + ", type= "+ type +"]";
 	}
 }

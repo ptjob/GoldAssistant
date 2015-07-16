@@ -273,6 +273,7 @@ public class Url {
 			+ "/Huanxin/search";
 	// 批量获取环信用户姓名头像
 	public static final String HUANXIN_avatars_pic = HOST + SUBJECT
+            //+ "/Huanxin/avatars";
 			+ "/Huanxin/userBriefInfo";
 	// 环信用户信息
 	public static final String HUANXIN_user_info = HOST + SUBJECT

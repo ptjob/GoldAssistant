@@ -34,7 +34,7 @@ import com.easemob.chat.OnMessageNotifyListener;
 import com.easemob.chat.OnNotificationClickListener;
 
 /**
- * The developer can derive from this class to talk with HuanXin SDK
+ * The developer can derive from this class to talk with HuanXinRequest SDK
  * All the Huan Xin related initialization and global listener are implemented in this class which will 
  * help developer to speed up the SDK integration。
  * this is a global instance class which can be obtained in any codes through getInstance()
@@ -54,7 +54,7 @@ public abstract class HXSDKHelper {
     protected Context appContext = null;
     
     /**
-     * HuanXin mode helper, which will manage the user data and user preferences
+     * HuanXinRequest mode helper, which will manage the user data and user preferences
      */
     protected HXSDKModel hxModel = null;
     
@@ -64,7 +64,7 @@ public abstract class HXSDKHelper {
     protected EMConnectionListener connectionListener = null;
     
     /**
-     * HuanXin ID in cache
+     * HuanXinRequest ID in cache
      */
     protected String hxId = null;
     
@@ -88,9 +88,9 @@ public abstract class HXSDKHelper {
     }
     
     /**
-     * this function will initialize the HuanXin SDK
+     * this function will initialize the HuanXinRequest SDK
      * 
-     * @return boolean true if caller can continue to call HuanXin related APIs after calling onInit, otherwise false.
+     * @return boolean true if caller can continue to call HuanXinRequest related APIs after calling onInit, otherwise false.
      * 
      * 环信初始化SDK帮助函数
      * 返回true如果正确初始化，否则false，如果返回为false，请在后续的调用中不要调用任何和环信相关的代码
@@ -102,7 +102,7 @@ public abstract class HXSDKHelper {
      * 
      * HXHelper = new DemoHXSDKHelper();
      * if(HXHelper.onInit(context)){
-     *     // do HuanXin related work
+     *     // do HuanXinRequest related work
      * }
      */
     public synchronized boolean onInit(Context context){
@@ -221,7 +221,7 @@ public abstract class HXSDKHelper {
      *      EMChatOptions options = EMChatManager.getInstance().getChatOptions();
      */
     protected void initHXOptions(){
-        Log.d(TAG, "init HuanXin Options");
+        Log.d(TAG, "init HuanXinRequest Options");
         
         // 获取到EMChatOptions对象
         EMChatOptions options = EMChatManager.getInstance().getChatOptions();
@@ -247,7 +247,7 @@ public abstract class HXSDKHelper {
     }
     
     /**
-     * logout HuanXin SDK
+     * logout HuanXinRequest SDK
      */
     public void logout(final EMCallBack callback){
         EMChatManager.getInstance().logout(new EMCallBack(){
@@ -306,7 +306,7 @@ public abstract class HXSDKHelper {
     }
 
     /**
-     * init HuanXin listeners
+     * init HuanXinRequest listeners
      */
     protected void initListener(){
         Log.d(TAG, "init listener");

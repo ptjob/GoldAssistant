@@ -29,7 +29,7 @@ public class DemoHXSDKModel extends DefaultHXSDKModel{
         super(ctx);
     }
 
-    // demo will use HuanXin roster
+    // demo will use HuanXinRequest roster
     public boolean getUseHXRoster() {
         return true;
     }

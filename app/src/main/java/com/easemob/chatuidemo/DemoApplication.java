@@ -41,9 +41,9 @@ public class DemoApplication extends Application {
         instance = this;
 
         /**
-         * this function will initialize the HuanXin SDK
+         * this function will initialize the HuanXinRequest SDK
          * 
-         * @return boolean true if caller can continue to call HuanXin related APIs after calling onInit, otherwise false.
+         * @return boolean true if caller can continue to call HuanXinRequest related APIs after calling onInit, otherwise false.
          * 
          * 环信初始化SDK帮助函数
          * 返回true如果正确初始化，否则false，如果返回为false，请在后续的调用中不要调用任何和环信相关的代码
@@ -55,7 +55,7 @@ public class DemoApplication extends Application {
          * 
          * HXHelper = new DemoHXSDKHelper();
          * if(HXHelper.onInit(context)){
-         *     // do HuanXin related work
+         *     // do HuanXinRequest related work
          * }
          */
         hxSDKHelper.onInit(applicationContext);
