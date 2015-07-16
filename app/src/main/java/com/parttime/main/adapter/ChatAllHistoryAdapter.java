@@ -26,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -65,6 +66,8 @@ import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.utils.SmileUtils;
 import com.easemob.util.DateUtils;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.MessageSet;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
@@ -474,46 +477,30 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 	// ====================================howe=========================
 	public void getNick(final String id, final CircularImage avatar,
 			final TextView name) {
-		StringRequest request = new StringRequest(Request.Method.POST,
-				Url.HUANXIN_avatars_pic, new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						try {
-							JSONObject js = new JSONObject(response);
-							JSONArray jss = js.getJSONArray("avatars");
-							HuanxinUser us = (HuanxinUser) JsonUtil.jsonToBean(
-									jss.getJSONObject(0), HuanxinUser.class);
-							name.setText(us.getName());
-							if ((us.getAvatar() != null)
-									&& (!us.getAvatar().equals(""))) {
-								loadpersonPic(id, us.getAvatar(), us.getName(),
-										avatar, 1);
-							} else {
-								avatar.setImageResource(R.drawable.default_avatar);
-							}
-							realNames.add(us.getName());// 记录所有真实用户名 用于搜索
-
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				}, new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError volleyError) {
-
-					}
-				}) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("user_ids", "{" + id + "}");
-				return map;
-			}
-		};
-		queue.add(request);
-		request.setRetryPolicy(new DefaultRetryPolicy(
-				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
-
+        new HuanXinRequest().getHuanxinUserList(String.valueOf(id), queue, new DefaultCallback(){
+            @Override
+            public void success(Object obj) {
+                super.success(obj);
+                if(obj instanceof ArrayList){
+                    @SuppressLint("Unchecked")
+                    ArrayList<HuanxinUser> list = (ArrayList<HuanxinUser>)obj;
+                    if(list.size() == 1) {
+                        if (name != null) {
+                            HuanxinUser us = list.get(0);
+                            name.setText(us.getName());
+                            if ((us.getAvatar() != null)
+                                    && (!us.getAvatar().equals(""))) {
+                                loadpersonPic(id, us.getAvatar(), us.getName(),
+                                        avatar, 1);
+                            } else {
+                                avatar.setImageResource(R.drawable.default_avatar);
+                            }
+                            realNames.add(us.getName());// 记录所有真实用户名 用于搜索
+                        }
+                    }
+                }
+            }
+        });
 	}
 
 	/**

@@ -26,12 +26,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -45,6 +47,8 @@ import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.adapter.ContactAdapter;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.HuanXinRequest;
 import com.qingmu.jianzhidaren.R;
 import com.quark.citylistview.CharacterParser;
 import com.quark.common.JsonUtil;
@@ -71,8 +75,8 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 	protected ContactAdapter contactAdapter;
 	private List<User> contactList;
 	private List<String> contactIds;
-	private String contactIdsStr = "";
-	ArrayList<HuanxinUser> usersNick = new ArrayList<HuanxinUser>();
+	private StringBuilder contactIdsStr = new StringBuilder("");
+	ArrayList<HuanxinUser> usersNick = new ArrayList<>();
 	// =========转拼音========
 	private CharacterParser characterParser;
 
@@ -93,8 +97,8 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 		sidebar = (Sidebar) findViewById(R.id.sidebar);
 		sidebar.setListView(listView);
 		queue = VolleySington.getInstance().getRequestQueue();
-		contactList = new ArrayList<User>();
-		contactIds = new ArrayList<String>();
+		contactList = new ArrayList<>();
+		contactIds = new ArrayList<>();
 		// 实例化汉字转拼音类 加
 		characterParser = CharacterParser.getInstance();
 		pinyinComparator = new PinyinComparator_quanzhi();
@@ -151,14 +155,16 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 		}
 
 		if (contactIds.size() > 0) {
-			contactIdsStr = "{";
-			for (int i = 0; i < contactIds.size(); i++) {
-				contactIdsStr += contactIds.get(i) + "、";
-			}
-			contactIdsStr = contactIdsStr.substring(0,
-					contactIdsStr.length() - 1) + "}";
+            int size = contactIds.size();
+            for (int i = 0; i < size; i++) {
+                if(i < size -1 ) {
+                    contactIdsStr.append(contactIds.get(i)).append(",");
+                }else{
+                    contactIdsStr.append(contactIds.get(i));
+                }
+            }
 
-			if (contactIdsStr.equals("{}")) {
+            if ("".equals(contactIdsStr)) {
 				filledData();
 				// setlist();
 				// refresh();
@@ -175,7 +181,6 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 	/**
 	 * 转化拼音
 	 * 
-	 * @param date
 	 * @return
 	 */
 	private void filledData() {
@@ -232,46 +237,30 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 	public void getNick() {
 
 		showWait(true);
-		StringRequest request = new StringRequest(Request.Method.POST,
-				Url.HUANXIN_avatars_pic, new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						showWait(false);
-						try {
-							JSONObject js = new JSONObject(response);
-							JSONArray jss = js.getJSONArray("avatars");
-							for (int i = 0; i < jss.length(); i++) {
-								HuanxinUser us = (HuanxinUser) JsonUtil
-										.jsonToBean(jss.getJSONObject(i),
-												HuanxinUser.class);
-								usersNick.add(us);
-							}
-							filledData(); // 转化拼音
+        new HuanXinRequest().getHuanxinUserList(contactIdsStr.toString(), queue, new DefaultCallback(){
+            @Override
+            public void success(Object obj) {
+                super.success(obj);
+                showWait(false);
+                if(obj instanceof ArrayList){
+                    @SuppressLint("Unchecked")
+                    ArrayList<HuanxinUser> list = (ArrayList<HuanxinUser>)obj;
+                    usersNick.clear();
+                    usersNick.addAll(list);
+                    if (usersNick.size() > 0) {
+                        ConstantForSaveList.usersNick = usersNick;// 保存缓存
 
-						} catch (JSONException e) {
-							e.printStackTrace();
-							System.out
-									.println("==================reg json 异常===========");
-						}
-					}
-				}, new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError volleyError) {
-						showWait(false);
-						// showToast("你的网络不够给力，获取数据失败！");
-					}
-				}) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
+                    }
+                    filledData(); // 转化拼音
+                }
+            }
 
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("user_ids", contactIdsStr);
-
-				return map;
-			}
-		};
-		queue.add(request);
-		request.setRetryPolicy(new DefaultRetryPolicy(ConstantForSaveList.DEFAULTRETRYTIME*1000, 1, 1.0f));
+            @Override
+            public void failed(Object obj) {
+                super.failed(obj);
+                showWait(false);
+            }
+        });
 
 	}
 

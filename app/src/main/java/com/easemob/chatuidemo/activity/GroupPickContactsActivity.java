@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,6 +51,8 @@ import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.adapter.ContactAdapter;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.HuanXinRequest;
 import com.qingmu.jianzhidaren.R;
 import com.quark.citylistview.CharacterParser;
 import com.quark.common.JsonUtil;
@@ -81,9 +84,9 @@ public class GroupPickContactsActivity extends BaseActivity {
 	private List<String> exitingMembers;
 	protected WaitDialog dialog;
 	RequestQueue queue = VolleySington.getInstance().getRequestQueue();
-	ArrayList<HuanxinUser> usersNick = new ArrayList<HuanxinUser>();
+	ArrayList<HuanxinUser> usersNick = new ArrayList<>();
 	ArrayList<String> contactIds;
-	private String contactIdsStr;
+	private StringBuilder contactIdsStr = new StringBuilder();
 	List<User> alluserList;
 	// =========转拼音========
 	private CharacterParser characterParser;
@@ -135,7 +138,7 @@ public class GroupPickContactsActivity extends BaseActivity {
 		// }
 		// });
 
-		contactIds = new ArrayList<String>();
+		contactIds = new ArrayList<>();
 		for (int i = 0; i < alluserList.size(); i++) {
 			contactIds.add(alluserList.get(i).getUsername());
 		}
@@ -143,13 +146,16 @@ public class GroupPickContactsActivity extends BaseActivity {
 		// 获取设置contactlist howe
 		// 获取头像及昵称
 		if (contactIds.size() > 0) {
-			contactIdsStr = "{";
-			for (int i = 0; i < contactIds.size(); i++) {
-				contactIdsStr += contactIds.get(i) + "、";
-			}
-			contactIdsStr = contactIdsStr.substring(0,
-					contactIdsStr.length() - 1) + "}";
-			if (contactIdsStr.equals("{}")) {
+            int size = contactIds.size();
+            for (int i = 0; i < size; i++) {
+                if(i < size -1 ) {
+                    contactIdsStr.append(contactIds.get(i)).append(",");
+                }else{
+                    contactIdsStr.append(contactIds.get(i));
+                }
+            }
+
+            if ("".equals(contactIdsStr)) {
 				filledData();
 			} else {
 				getNick();
@@ -170,7 +176,7 @@ public class GroupPickContactsActivity extends BaseActivity {
 					getToBeAddMembers().toArray(new String[0])));
 			finish();
 		} else {
-			Toast.makeText(getApplicationContext(), "请检查网络连接设置", 0).show();
+			Toast.makeText(getApplicationContext(), "请检查网络连接设置", Toast.LENGTH_SHORT).show();
 			finish();
 		}
 	}
@@ -298,48 +304,32 @@ public class GroupPickContactsActivity extends BaseActivity {
 
 	public void getNick() {
 		showWait(true);
-		StringRequest request = new StringRequest(Request.Method.POST,
-				Url.HUANXIN_avatars_pic, new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						showWait(false);
-						try {
-							JSONObject js = new JSONObject(response);
-							JSONArray jss = js.getJSONArray("avatars");
-							for (int i = 0; i < jss.length(); i++) {
-								HuanxinUser us = (HuanxinUser) JsonUtil
-										.jsonToBean(jss.getJSONObject(i),
-												HuanxinUser.class);
-								usersNick.add(us);
-							}
-							filledData(); // 转化拼音
-							// setlist();
-						} catch (JSONException e) {
-							e.printStackTrace();
-							System.out
-									.println("==================reg json 异常===========");
-						}
-					}
-				}, new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError volleyError) {
-						showWait(false);
-						Toast.makeText(GroupPickContactsActivity.this,
-								"你的网络不够给力，获取数据失败！", 0).show();
-					}
-				}) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
+        new HuanXinRequest().getHuanxinUserList(contactIdsStr.toString(), queue, new DefaultCallback(){
+            @Override
+            public void success(Object obj) {
+                super.success(obj);
+                showWait(false);
+                if(obj instanceof ArrayList){
+                    @SuppressLint("Unchecked")
+                    ArrayList<HuanxinUser> list = (ArrayList<HuanxinUser>)obj;
+                    usersNick.clear();
+                    usersNick.addAll(list);
+                    if (usersNick.size() > 0) {
+                        ConstantForSaveList.usersNick = usersNick;// 保存缓存
 
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("user_ids", contactIdsStr);
+                    }
+                    filledData(); // 转化拼音
+                }
+            }
 
-				return map;
-			}
-		};
-		queue.add(request);
-		request.setRetryPolicy(new DefaultRetryPolicy(
-				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
+            @Override
+            public void failed(Object obj) {
+                super.failed(obj);
+                showWait(false);
+                Toast.makeText(GroupPickContactsActivity.this,
+                        "你的网络不够给力，获取数据失败！", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 	}
 
@@ -359,7 +349,6 @@ public class GroupPickContactsActivity extends BaseActivity {
 	/**
 	 * 转化拼音
 	 * 
-	 * @param date
 	 * @return
 	 */
 	private void filledData() {

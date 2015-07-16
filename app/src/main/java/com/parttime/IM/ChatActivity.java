@@ -13,6 +13,7 @@
  */
 package com.parttime.IM;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -98,6 +99,8 @@ import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.EMLog;
 import com.easemob.util.PathUtil;
 import com.easemob.util.VoiceRecorder;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.HuanXinRequest;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
@@ -1748,45 +1751,23 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     }
 
     public void getNick(final String id, final TextView name) {
-        StringRequest request = new StringRequest(Request.Method.POST,
-                Url.HUANXIN_avatars_pic, new Response.Listener<String>() {
+        new HuanXinRequest().getHuanxinUserList(String.valueOf(id), queue, new DefaultCallback(){
             @Override
-            public void onResponse(String response) {
-                // id的格式是u667或者c209之类的
-                try {
-                    JSONObject js = new JSONObject(response);
-                    JSONArray jss = js.getJSONArray("avatars");
-                    if (jss != null && jss.length() > 0) {
-                        HuanxinUser us = (HuanxinUser) JsonUtil
-                                .jsonToBean(jss.getJSONObject(0),
-                                        HuanxinUser.class);
+            public void success(Object obj) {
+                super.success(obj);
+                if(obj instanceof ArrayList){
+                    @SuppressLint("Unchecked")
+                    ArrayList<HuanxinUser> list = (ArrayList<HuanxinUser>)obj;
+                    if(list.size() == 1) {
                         if (name != null) {
+                            HuanxinUser us = list.get(0);
                             name.setText(us.getName());
                             sp.saveSharedPreferences(id + "realname", us.getName());
                         }
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put("user_ids", "{" + id + "}");
-
-                return map;
-            }
-        };
-        queue.add(request);
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
-
+        });
     }
 
 }

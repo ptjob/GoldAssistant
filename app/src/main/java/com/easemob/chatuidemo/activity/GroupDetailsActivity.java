@@ -16,6 +16,7 @@ package com.easemob.chatuidemo.activity;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -72,6 +74,8 @@ import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.EMLog;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.HuanXinRequest;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.ToastUtil;
@@ -1096,64 +1100,45 @@ public class GroupDetailsActivity extends BaseActivity implements
 
 	// =============================================================
 	public void getNick(final String id, final Button button) {
-		StringRequest request = new StringRequest(Request.Method.POST,
-				Url.HUANXIN_avatars_pic, new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						try {
-							JSONObject js = new JSONObject(response);
-							JSONArray jss = js.getJSONArray("avatars");
-							HuanxinUser us = (HuanxinUser) JsonUtil.jsonToBean(
-									jss.getJSONObject(0), HuanxinUser.class);
-							if (button != null) {
-								if (us.getName() != null
-										&& !"".equals(us.getName())) {
-									if (button.getTag() != null
-											&& button.getTag().equals(id)) {
-										button.setText(us.getName());
-									}
-									Editor edt = sp.edit();
-									edt.putString(id + "realname", us.getName());
-									edt.commit();
-								} else {
-									button.setText("");
-								}
-							}
-							if ((us.getAvatar() != null)
-									&& (!us.getAvatar().equals(""))) {
-								loadpersonPic(id, us.getAvatar(), button, 1);
+        new HuanXinRequest().getHuanxinUserList(String.valueOf(id), queue, new DefaultCallback(){
+            @Override
+            public void success(Object obj) {
+                super.success(obj);
+                if(obj instanceof ArrayList){
+                    @SuppressLint("Unchecked")
+                    ArrayList<HuanxinUser> list = (ArrayList<HuanxinUser>)obj;
+                    if(list.size() == 1) {
+                        HuanxinUser us = list.get(0);
+                        if (button != null) {
+                            if (us.getName() != null
+                                    && !"".equals(us.getName())) {
+                                if (button.getTag() != null
+                                        && button.getTag().equals(id)) {
+                                    button.setText(us.getName());
+                                }
+                                Editor edt = sp.edit();
+                                edt.putString(id + "realname", us.getName());
+                                edt.commit();
+                            } else {
+                                button.setText("");
+                            }
+                        }
+                        if ((us.getAvatar() != null)
+                                && (!us.getAvatar().equals(""))) {
+                            loadpersonPic(id, us.getAvatar(), button, 1);
 
-							} else {
-								Drawable avatar = getResources().getDrawable(
-										R.drawable.default_avatar);
-								avatar.setBounds(0, 0, referenceWidth,
-										referenceHeight);
-								button.setCompoundDrawables(null, avatar, null,
-										null);
-							}
-
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				}, new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError volleyError) {
-
-					}
-				}) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("user_ids", "{" + id + "}");
-
-				return map;
-			}
-		};
-		queue.add(request);
-		request.setRetryPolicy(new DefaultRetryPolicy(
-				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
-
+                        } else {
+                            Drawable avatar = getResources().getDrawable(
+                                    R.drawable.default_avatar);
+                            avatar.setBounds(0, 0, referenceWidth,
+                                    referenceHeight);
+                            button.setCompoundDrawables(null, avatar, null,
+                                    null);
+                        }
+                    }
+                }
+            }
+        });
 	}
 
 	/**
