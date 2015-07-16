@@ -1,19 +1,5 @@
 package com.parttime.main;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -62,18 +48,18 @@ import com.easemob.chat.EMGroupManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.activity.AddContactActivity;
-import com.easemob.chatuidemo.db.MessageSetDao;
-import com.parttime.IM.ChatActivity;
 import com.easemob.chatuidemo.activity.GroupsActivity;
 import com.easemob.chatuidemo.activity.NewFriendsMsgActivity;
-import com.parttime.main.adapter.ChatAllHistoryAdapter;
 import com.easemob.chatuidemo.adapter.ContactAdapter;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
+import com.easemob.chatuidemo.db.MessageSetDao;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
 import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.NetUtils;
+import com.parttime.IM.ChatActivity;
+import com.parttime.main.adapter.ChatAllHistoryAdapter;
 import com.parttime.pojo.MessageSet;
 import com.qingmu.jianzhidaren.R;
 import com.quark.citylistview.CharacterParser;
@@ -86,6 +72,20 @@ import com.quark.quanzi.MyContactlistFragment;
 import com.quark.quanzi.PinyinComparator_quanzhi;
 import com.quark.quanzi.PinyinComparator_quanzhitwo;
 import com.quark.volley.VolleySington;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class MessageAndAddressFragment extends Fragment {
     final String TAG = "MessageAndAddressFragment";
@@ -519,7 +519,7 @@ public class MessageAndAddressFragment extends Fragment {
 			// 长按聊天记录item,删除聊天记录
 			// 更新未读消息
 			if (MainTabActivity.isForeground) {
-				((MainTabActivity) getActivity()).update_unread_msg();
+				((MainTabActivity) getActivity()).updateUnreadMsg();
 			}
 
 			return true;

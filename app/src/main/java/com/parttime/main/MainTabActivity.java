@@ -1,25 +1,5 @@
 package com.parttime.main;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.CoreConnectionPNames;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -34,8 +14,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -56,8 +34,6 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
@@ -90,7 +66,6 @@ import com.easemob.chat.EMNotifier;
 import com.easemob.chat.GroupChangeListener;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.Constant;
-import com.parttime.IM.ChatActivity;
 import com.easemob.chatuidemo.activity.GroupsActivity;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.UserDao;
@@ -103,7 +78,10 @@ import com.easemob.util.EMLog;
 import com.easemob.util.EasyUtils;
 import com.easemob.util.HanziToPinyin;
 import com.easemob.util.NetUtils;
+import com.parttime.IM.ChatActivity;
 import com.parttime.common.update.UpdateUtils;
+import com.parttime.login.FindPJLoginActivity;
+import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
@@ -111,16 +89,39 @@ import com.quark.common.Url;
 import com.quark.fragment.company.ManageFragmentCompany;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.jianzhidaren.EnterActivity;
-import com.parttime.login.FindPJLoginActivity;
 import com.quark.jianzhidaren.LaheiPageActivity;
 import com.quark.model.Function;
-import com.quark.model.HuanxinUser;
 import com.quark.ui.widget.CustomDialog;
 import com.quark.utils.ConfigDataUtil;
 import com.quark.utils.NetWorkCheck;
 import com.quark.utils.WaitDialog;
 import com.quark.volley.VolleySington;
 import com.umeng.analytics.MobclickAgent;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreConnectionPNames;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 public class MainTabActivity extends FragmentActivity implements
 		AMapLocationListener {
@@ -161,7 +162,7 @@ public class MainTabActivity extends FragmentActivity implements
 	// 账号被移除
 	public static boolean isForeground = false;// 界面是否在前端运行
 	private boolean isCurrentAccountRemoved = false;
-	private SharedPreferences sp;
+	private SharePreferenceUtil sp;
 	private MyGroupChangeListener myGroupChangeListener;
 	private String getFriendListUrl;// 获取服务端好友列表url
 	List<String> usernames = new ArrayList<>();// 好友列表显示的是uid
@@ -233,10 +234,8 @@ public class MainTabActivity extends FragmentActivity implements
 			// 防止被移除后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
 			// 三个fragment里加的判断同理
 			ApplicationControl.getInstance().logout(null);
-			Editor edit = sp.edit();
-			edit.putString("userId", "");
-			edit.putString("token", "");
-			edit.commit();
+            sp.saveSharedPreferences("userId", "");
+            sp.saveSharedPreferences("token", "");
 
 			finish();
 			return;
@@ -244,10 +243,8 @@ public class MainTabActivity extends FragmentActivity implements
 				&& savedInstanceState.getBoolean("isConflict", false)) {
 			// 防止被T后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
 			// 三个fragment里加的判断同理
-			Editor edit = sp.edit();
-			edit.putString("userId", "");
-			edit.putString("token", "");
-			edit.commit();
+			sp.saveSharedPreferences("userId", "");
+			sp.saveSharedPreferences("token", "");
 			finish();
 			return;
 		}
@@ -336,9 +333,9 @@ public class MainTabActivity extends FragmentActivity implements
 
 
 	private void initSpAndParam() {
-		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
-		company_id = sp.getString("userId", "");// 获取商家id
-		token = sp.getString("token", "notoken");
+		sp = SharePreferenceUtil.getInstance(ApplicationControl.getInstance());
+		company_id = sp.loadStringSharedPreference("userId", "");// 获取商家id
+		token = sp.loadStringSharedPreference("token", "notoken");
 	}
 
 
@@ -491,9 +488,9 @@ public class MainTabActivity extends FragmentActivity implements
 		if (groupList != null) {
 			for (EMGroup emGroup : groupList) {
 				if (!"".equals(emGroup.getGroupId())) {
-					if (sp.getBoolean(
-							ConstantForSaveList.userId + emGroup.getGroupId()
-									+ PINGBI, false)) {
+					if (sp.loadBooleanSharedPreference(
+                            ConstantForSaveList.userId + emGroup.getGroupId()
+                                    + PINGBI)) {
 						blockedListGroup.add(emGroup.getGroupId());
 					}
 				}
@@ -522,7 +519,6 @@ public class MainTabActivity extends FragmentActivity implements
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
-				Editor edt = sp.edit();
 				int target = 0;
 				// String messge = intent.getStringExtra(KEY_MESSAGE);
 				String extras = intent.getStringExtra(KEY_EXTRAS);
@@ -540,19 +536,19 @@ public class MainTabActivity extends FragmentActivity implements
 					// 接单推送
 					if (type != null) {
 						if ("2".equals(type)) {
-							edt.putBoolean(ConstantForSaveList.userId + "type",
-									true);
+							sp.saveSharedPreferences(ConstantForSaveList.userId + "type",
+                                    true);
 						} else if ("1".equals(type)) {
-							edt.putBoolean(ConstantForSaveList.userId + "type",
-									false);
+							sp.saveSharedPreferences(ConstantForSaveList.userId + "type",
+                                    false);
 						}
 					}
 
 					if (null != todo) {
 						try {
 							target = Integer.parseInt(todo);
-							edt.putInt(ConstantForSaveList.userId + "todo",
-									target);
+							sp.saveSharedPreferences(ConstantForSaveList.userId + "todo",
+                                    target);
 						} catch (Exception e) {
 
 						}
@@ -561,15 +557,14 @@ public class MainTabActivity extends FragmentActivity implements
 					}
 					if (null != comment_activity_id) {
 						try {
-							edt.putBoolean(ConstantForSaveList.userId
-									+ comment_activity_id, true);
+							sp.saveSharedPreferences(ConstantForSaveList.userId
+                                    + comment_activity_id, true);
 						} catch (Exception e) {
 
 						}
 					} else {
 
 					}
-					edt.commit();
 				} catch (Exception e) {
 					return;
 				}
@@ -747,25 +742,13 @@ public class MainTabActivity extends FragmentActivity implements
 	 * 更新我的小红点信息和管理数目
 	 */
 	public void update_gongneng_xiaohongdian() {
-		// 更新管理数目
-		/*if (sp.getInt(ConstantForSaveList.userId + "todo", 0) > 0) {
-			unread_guanli_msg_tv.setVisibility(View.VISIBLE);
-			if (sp.getInt(ConstantForSaveList.userId + "todo", 0) > 99) {
-				unread_guanli_msg_tv.setText("99");
-			} else {
-				unread_guanli_msg_tv.setText(sp.getInt(
-						ConstantForSaveList.userId + "todo", 0) + "");
-			}
-		} else {
-			unread_guanli_msg_tv.setVisibility(View.GONE);
-		}*/
 
 	}
 
 	/**
 	 * 更新圈子图标的字数 carson
 	 */
-	public void update_unread_msg() {
+	public void updateUnreadMsg() {
 		int carson_unread_msg_count = EMChatManager.getInstance()
 				.getUnreadMsgsCount();
 		if (carson_unread_msg_count > 0) {
@@ -815,12 +798,12 @@ public class MainTabActivity extends FragmentActivity implements
 			abortBroadcast();
 			// message.getTo表示消息来自对象(单聊是uid,群聊是群组id)
 			// 解决消息免打扰时还是弹出通知栏的bug
-			if (!sp.getBoolean(ConstantForSaveList.userId + message.getTo()
-					+ "pingbi", false)) {
+			if (!sp.loadBooleanSharedPreference(ConstantForSaveList.userId + message.getTo()
+                    + "pingbi")) {
 				// 显示群聊通知
 				notifyNewMessage(message);
 			}
-			update_unread_msg();
+			updateUnreadMsg();
 			if (currentTabIndex == 1) {
 				// 当前页面如果为聊天历史页面，刷新此页面
 				if (messageAndAddressFragment != null) {
@@ -1008,7 +991,7 @@ public class MainTabActivity extends FragmentActivity implements
 						ChatActivity.activityInstance.finish();
 
 					}
-					update_unread_msg();// 刷新圈子
+					updateUnreadMsg();// 刷新圈子
 					if (currentTabIndex == 1)
 						messageAndAddressFragment.message.refresh();
 				}
@@ -1164,8 +1147,8 @@ public class MainTabActivity extends FragmentActivity implements
 								// mToast.setGravity(Gravity.CENTER, 0, 0);
 								// mToast.show();
 								// Editor edit = sp.edit();
-								// edit.putString("userId", "");
-								// edit.putString("token", "");
+								// sp.saveSharedPreferences("userId", "");
+								// sp.saveSharedPreferences("token", "");
 								// edit.commit();
 								// finish();
 
@@ -1378,7 +1361,7 @@ public class MainTabActivity extends FragmentActivity implements
 						try {
 							JSONObject js = new JSONObject(response);
 							function = (Function) JsonUtil.jsonToBean(js,
-									Function.class);
+                                    Function.class);
 							update_gongneng_xiaohongdian();// 隐藏或显示小红点
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -1411,7 +1394,7 @@ public class MainTabActivity extends FragmentActivity implements
 			EMChatManager.getInstance().activityResumed();
 		}
 		MobclickAgent.onPause(this);// 友盟
-		update_unread_msg();// 刷新圈子
+		updateUnreadMsg();// 刷新圈子
 		initMy();// 刷新功能小红点
 	}
 
@@ -1472,10 +1455,8 @@ public class MainTabActivity extends FragmentActivity implements
 								dialog.dismiss();
 								conflictBuilder = null;
 
-								Editor edit = sp.edit();
-								edit.putString("userId", "");
-								edit.putString("token", "");
-								edit.commit();
+								sp.saveSharedPreferences("userId", "");
+								sp.saveSharedPreferences("token", "");
 								finish();
 								// startActivity(new
 								// Intent(MainTabActivity.this,
@@ -1518,10 +1499,8 @@ public class MainTabActivity extends FragmentActivity implements
 								dialog.dismiss();
 								accountRemovedBuilder = null;
 
-								Editor edit = sp.edit();
-								edit.putString("userId", "");
-								edit.putString("token", "");
-								edit.commit();
+								sp.saveSharedPreferences("userId", "");
+								sp.saveSharedPreferences("token", "");
 								finish();
 								// startActivity(new
 								// Intent(MainTabActivity.this,
@@ -1550,8 +1529,8 @@ public class MainTabActivity extends FragmentActivity implements
 	@Override
 	protected void onResumeFragments() {
 		super.onResumeFragments();
-		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
-		String c_company_id = sp.getString("userId", "");
+		sp = SharePreferenceUtil.getInstance(ApplicationControl.getInstance());
+		String c_company_id = sp.loadStringSharedPreference("userId", "");
 		if (!"".equals(c_company_id.trim())) {
 			if (NetWorkCheck.isOpenNetwork(MainTabActivity.this)) {
 				checkForbidden(c_company_id);
@@ -1575,10 +1554,8 @@ public class MainTabActivity extends FragmentActivity implements
 							if (zt == 2) {
 								// zt 2表示商家已经被拉黑了
 								Intent intent = new Intent();
-								Editor edit = sp.edit();
-								edit.putString("userId", "");
-								edit.putString("token", "");
-								edit.commit();
+								sp.saveSharedPreferences("userId", "");
+								sp.saveSharedPreferences("token", "");
 								intent.setClass(MainTabActivity.this,
 										LaheiPageActivity.class);
 								startActivity(intent);
@@ -1595,7 +1572,7 @@ public class MainTabActivity extends FragmentActivity implements
 				}) {
 			@Override
 			protected Map<String, String> getParams() throws AuthFailureError {
-				Map<String, String> map = new HashMap<String, String>();
+				Map<String, String> map = new HashMap<>();
 				map.put("company_id", c_company_id);
 				return map;
 			}
@@ -1649,21 +1626,19 @@ public class MainTabActivity extends FragmentActivity implements
 			// 定位成功回调信息，设置相关消息
 			if (amapLocation.getCity() != null) {
 				mLocationManagerProxy.removeUpdates(this);
-				boolean flag = sp.getBoolean("firstdingwei", true);
+				boolean flag = sp.loadBooleanSharedPreference("firstdingwei", true);
 				String curCity = amapLocation.getCity();
 				if (curCity.endsWith("市")) {
 					curCity = curCity.substring(0, curCity.length() - 1);
 				}
-				Editor edt_city = sp.edit();
-				edt_city.putBoolean("firstdingwei", false);
-				edt_city.putString("dingweicity", curCity);
-				edt_city.commit();
+                sp.saveSharedPreferences("firstdingwei", false);
+                sp.saveSharedPreferences("dingweicity", curCity);
 				final String thisCity = curCity;
 				if (flag) {
 					// 弹出第一次定位的城市弹出框
 					showAlertDialog(curCity, "温馨提示");
 				} else {
-					if (!sp.getString("city", "深圳").equals(thisCity)) {
+					if (!sp.loadStringSharedPreference("city", "深圳").equals(thisCity)) {
 						showAlertDialog2("您当前定位城市:" + curCity, "定位城市有改变",
 								thisCity);
 					} else {
@@ -1688,7 +1663,7 @@ public class MainTabActivity extends FragmentActivity implements
 								@Override
 								protected Map<String, String> getParams()
 										throws AuthFailureError {
-									Map<String, String> map = new HashMap<String, String>();
+									Map<String, String> map = new HashMap<>();
 									map.put("company_id", company_id);
 									map.put("city", thisCity);
 									return map;
@@ -1702,7 +1677,6 @@ public class MainTabActivity extends FragmentActivity implements
 						}
 					}
 				}
-			} else {
 			}
 		}
 	}
@@ -1720,9 +1694,7 @@ public class MainTabActivity extends FragmentActivity implements
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
-						Editor edt = sp.edit();
-						edt.putString("city", str);
-						edt.commit();
+                        sp.saveSharedPreferences("city", str);
 						Intent intent = new Intent(); // Itent就是我们要发送的内容
 						intent.setAction("com.carson.company.changgecity"); // 设置你这个广播的action
 						intent.putExtra("changgecity", str);
@@ -1745,9 +1717,7 @@ public class MainTabActivity extends FragmentActivity implements
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
-						Editor edt = sp.edit();
-						edt.putString("city", str3);
-						edt.commit();
+                        sp.saveSharedPreferences("city", str3);
 						Intent intent = new Intent(); // Itent就是我们要发送的内容
 						intent.setAction("com.carson.company.changgecity"); // 设置你这个广播的action
 						intent.putExtra("changgecity", str3);

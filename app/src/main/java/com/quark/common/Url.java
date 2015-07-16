@@ -18,6 +18,7 @@ public class Url {
 //	 public static String HOST2 = "https://app.jobdiy.cn/";
 	// 项目名称
 	private static final String SUBJECT = "app/v2_0";
+	private static final String SUBJECT1_2 = "app/v1_2";
 	// 获取图片url
 	public static final String GETPIC = "http://jzdr-test.oss-cn-shenzhen.aliyuncs.com/";
 	//public static final String GETPIC = "http://jzdr-pic.oss-cn-shenzhen.aliyuncs.com/";
@@ -243,7 +244,7 @@ public class Url {
 			+ "/UserCenter/AliPayAsynNotify";
 	// 商家端 -功能
 	public static final String COMPANY_function = HOST + SUBJECT
-			+ "/AgentCenter/function";
+			+ "/CompanyCenter/me";
 	// 放飞机基金
 	public static final String moneyPool = HOST + SUBJECT
 			+ "/Activity/moneyPool";
@@ -270,9 +271,9 @@ public class Url {
 	// 环信查找
 	public static final String HUANXIN_search = HOST + SUBJECT
 			+ "/Huanxin/search";
-	// 环信头像昵称
+	// 批量获取环信用户姓名头像
 	public static final String HUANXIN_avatars_pic = HOST + SUBJECT
-			+ "/Huanxin/avatars";
+			+ "/Huanxin/userBriefInfo";
 	// 环信用户信息
 	public static final String HUANXIN_user_info = HOST + SUBJECT
 			+ "/Huanxin/user_info";
@@ -306,9 +307,9 @@ public class Url {
 	// 商家取消已录取人员
 	public static final String COMPANY_CANCEL_REQUIRED = HOST + SUBJECT
 			+ "/Activity/cancel_require";
-	// 拉黑商家
+	// 是否被拉黑(包括上传版本信息)
 	public static final String COMPANY_FORBIDDEN = HOST + SUBJECT
-			+ "/AgentCenter/is_forbidden";
+			+ "/CompanyCenter/isForbidden";
 	// 设置商家消息免打扰
 	public static final String COMPANY_MIANDARAO = HOST + SUBJECT
 			+ "/AgentCenter/setDisturb";
