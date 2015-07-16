@@ -209,6 +209,7 @@
 
     <!-- 我 -->
     <string name="my_intro">我的简介</string>
+    <string name="my_fans">我的粉丝</string>
     <string name="my_balance">我的余额</string>
     <string name="praise_recved">收到的评价</string>
     <string name="real_name_cert">实名认证</string>
@@ -237,6 +238,15 @@
     <string name="contact_customer_service">联系客服</string>
     <string name="welcome_to_join_in_qq_group">欢迎加入兼职达人用户QQ群: %1$s</string>
     <string name="enter_suggestion_hint">请在此输入您的建议或者意见</string>
+
+    <!-- 设置 -->
+    <string name="account_setting">账号设置</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="give_a_praise">赏个好评</string>
+    <string name="about">关于</string>
+    <string name="modify_phone_number">修改手机号码</string>
+    <string name="modify_pwd">修改密码</string>
+
 
     <!-- 招人Tab -->
     <string name="publish_job">发布兼职</string>

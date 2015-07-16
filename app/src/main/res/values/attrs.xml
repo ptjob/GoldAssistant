@@ -76,4 +76,11 @@
         <attr name="cet_countBarHeight" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="FormButton">
+        <attr name="fb_topLine_shown" format="boolean"/>
+        <attr name="fb_bottomLine_show" format="boolean"/>
+        <attr name="fb_line_color" format="color"/>
+        <attr name="fb_line_width" format="dimension"/>
+    </declare-styleable>
+
 </resources>

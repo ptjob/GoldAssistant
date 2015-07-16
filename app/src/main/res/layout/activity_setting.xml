@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/title"/>
+    <com.parttime.widget.FormItem
+        android:id="@+id/fi_account_setting"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@drawable/item_selector"
+        app:form_title="@string/account_setting"/>
+
+    <com.parttime.widget.FormItem
+        android:id="@+id/fi_clear_cache"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@drawable/item_selector"
+        android:layout_marginTop="@dimen/form_items_margin"
+        app:form_title="@string/clear_cache"/>
+
+    <!--<com.parttime.widget.FormItem
+        android:id="@+id/fi_give_a_praise"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@drawable/item_selector"
+        android:layout_marginTop="@dimen/form_items_margin"
+        app:form_title="@string/give_a_praise"/>-->
+
+    <com.parttime.widget.FormItem
+        android:id="@+id/fi_about"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@drawable/item_selector"
+        android:layout_marginTop="@dimen/form_items_margin"
+        app:form_title="@string/about"/>
+    
+    <com.parttime.widget.FormButton
+        android:id="@+id/fb_logout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:layout_marginTop="@dimen/form_items_margin"
+        android:gravity="center"
+        android:background="@drawable/item_selector"
+        android:text="@string/button_logout"/>
+
+</LinearLayout>

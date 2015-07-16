@@ -41,10 +41,12 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.parttime.login.FindPJLoginActivity;
 import com.parttime.mine.EditMyIntroActivity;
 import com.parttime.mine.FreshManGuideActivity;
+import com.parttime.mine.MyFansActivity;
 import com.parttime.mine.MyWalletActivity;
 import com.parttime.mine.PraiseRecvedActivity;
 import com.parttime.mine.RealNameCertActivity;
 import com.parttime.mine.SuggestionActivity;
+import com.parttime.mine.setting.SettingActivity;
 import com.parttime.widget.FormItem;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -119,6 +121,9 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	@ViewInject(R.id.fi_my_intro)
 	private FormItem fiMyIntro;
 
+	@ViewInject(R.id.fi_my_fans)
+	private FormItem fiMyFans;
+
 	@ViewInject(R.id.fi_my_balance)
 	private FormItem fiMyBalance;
 
@@ -151,6 +156,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 
 	private void bindListeners(){
 		fiMyIntro.setOnClickListener(this);
+		fiMyFans.setOnClickListener(this);
 		fiFreshManGuide.setOnClickListener(this);
 		fiMyBalance.setOnClickListener(this);
 		fiPraiseRecved.setOnClickListener(this);
@@ -773,6 +779,10 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 		goToActivity(EditMyIntroActivity.class);
 	}
 
+	private void myFans(){
+		goToActivity(MyFansActivity.class);
+	}
+
 	private void myBalance(){
         goToActivity(MyWalletActivity.class);
 	}
@@ -794,7 +804,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void setting(){
-
+		goToActivity(SettingActivity.class);
 	}
 
 	/**
@@ -809,6 +819,9 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 			switch (v.getId()){
 				case R.id.fi_my_intro:
 					myIntro();
+					break;
+				case R.id.fi_my_fans:
+					myFans();
 					break;
 				case R.id.fi_my_balance:
 					myBalance();

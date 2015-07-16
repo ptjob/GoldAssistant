@@ -23,4 +23,9 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:layout_centerHorizontal="true"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/divider_color"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

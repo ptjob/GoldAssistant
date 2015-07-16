@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/title"/>
+    <com.parttime.widget.FormItem
+        android:id="@+id/fi_modify_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@drawable/item_selector"
+        app:form_title="@string/modify_phone_number"/>
+    <com.parttime.widget.FormItem
+        android:id="@+id/fi_modify_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@drawable/item_selector"
+        app:form_title="@string/modify_pwd"
+        app:topLine_shown="false"/>
+
+</LinearLayout>
