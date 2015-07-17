@@ -57,14 +57,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.carson.constant.ConstantForSaveList;
 import com.easemob.EMError;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMContactManager;
@@ -103,8 +96,6 @@ import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
-import com.quark.common.JsonUtil;
-import com.quark.common.Url;
 import com.quark.company.function.PersonAssessDetailActivity;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.HuanxinUser;
@@ -112,18 +103,12 @@ import com.quark.quanzi.UserInfo;
 import com.quark.us.ShareMyJianZhiActivity;
 import com.quark.volley.VolleySington;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 聊天页面
@@ -407,6 +392,14 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             findViewById(R.id.container_voice_call).setVisibility(View.GONE);
             toChatUsername = getIntent().getStringExtra("groupId");
             group = EMGroupManager.getInstance().getGroup(toChatUsername);
+            try {
+                EMGroup returnGroup = EMGroupManager.getInstance()
+                        .getGroupFromServer(toChatUsername);
+                // 更新本地数据
+                EMGroupManager.getInstance().createOrUpdateLocalGroup(
+                        returnGroup);
+            }catch (Exception ignore){
+            }
             if (group != null) {
                 setGroupChatTitle();
             }
@@ -518,11 +511,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         StringBuilder chatGroupNameAndMemberCount = new StringBuilder();
         String groupName = group.getGroupName();
         chatGroupNameAndMemberCount.append(groupName).append("(");
+        //数量包括群主
         int memberCount = group.getAffiliationsCount();
         if(memberCount > 0){
-            chatGroupNameAndMemberCount.append(memberCount + 1).append(")");
-        }else{
-            chatGroupNameAndMemberCount.append(1).append(")");
+            chatGroupNameAndMemberCount.append(memberCount).append(")");
         }
         ((TextView) findViewById(R.id.name)).setText(chatGroupNameAndMemberCount.toString());
     }

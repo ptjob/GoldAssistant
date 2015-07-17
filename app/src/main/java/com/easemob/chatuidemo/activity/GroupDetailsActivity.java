@@ -13,25 +13,11 @@
  */
 package com.easemob.chatuidemo.activity;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -58,9 +44,9 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
@@ -76,16 +62,28 @@ import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
+import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
-import com.quark.common.JsonUtil;
 import com.quark.common.ToastUtil;
 import com.quark.common.Url;
 import com.quark.http.image.LoadImage;
 import com.quark.image.UploadImg;
+import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.HuanxinUser;
 import com.quark.ui.widget.CustomDialog;
 import com.quark.utils.NetWorkCheck;
 import com.quark.volley.VolleySington;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -138,14 +136,14 @@ public class GroupDetailsActivity extends BaseActivity implements
 	private RelativeLayout export_relayout;// 导出群员名单
 	private RelativeLayout changeGroupNameLayout;
 	protected RequestQueue queue;
-	private SharedPreferences sp;
+	private SharePreferenceUtil sp;
 	private RelativeLayout topLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_group_details);
-		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
+		sp = SharePreferenceUtil.getInstance(ApplicationControl.getInstance());
 		exportUrl = Url.EXPORT_GROUP_LIST;
 		topLayout = (RelativeLayout) findViewById(R.id.title);
 		topLayout.setBackgroundColor(getResources().getColor(
@@ -199,11 +197,6 @@ public class GroupDetailsActivity extends BaseActivity implements
 			// 如果是群主不显示 屏蔽群消息 加
 			rl_switch_block_groupmsg.setVisibility(View.GONE);
 		}
-		// ((TextView)
-		// findViewById(R.id.group_name)).setText(group.getGroupName()
-		// + "(" + group.getAffiliationsCount() + "人)");
-		// adapter = new GridAdapter(this, R.layout.grid, group.getMembers());
-		// userGridview.setAdapter(adapter);
 		// 保证每次进详情看到的都是最新的group
 		updateGroup();
 		// 设置OnTouchListener
@@ -638,10 +631,8 @@ public class GroupDetailsActivity extends BaseActivity implements
 					}
 					EMChatManager.getInstance().getChatOptions()
 							.setReceiveNotNoifyGroup(pingbiListGroup);
-					Editor edt = sp.edit();
-					edt.putBoolean(ConstantForSaveList.userId + groupId
+                    sp.saveSharedPreferences(ConstantForSaveList.userId + groupId
 							+ "pingbi", false);
-					edt.commit();
 					iv_switch_block_groupmsg.setVisibility(View.INVISIBLE);
 					iv_switch_unblock_groupmsg.setVisibility(View.VISIBLE);
 				} catch (Exception e) {
@@ -655,10 +646,8 @@ public class GroupDetailsActivity extends BaseActivity implements
 				pingbiListGroup.add(groupId);
 				EMChatManager.getInstance().getChatOptions()
 						.setReceiveNotNoifyGroup(pingbiListGroup);
-				Editor edt = sp.edit();
-				edt.putBoolean(ConstantForSaveList.userId + groupId + "pingbi",
+                sp.saveSharedPreferences(ConstantForSaveList.userId + groupId + "pingbi",
 						true);
-				edt.commit();
 				// 屏蔽群组
 				try {
 					// EMGroupManager.getInstance().blockGroupMessage(groupId);
@@ -823,7 +812,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 					viewhold.btn.setCompoundDrawables(null, avatar, null, null);
 					// 加载缓存头像、名称
 					if (viewhold.btn != null) {
-						viewhold.btn.setText(sp.getString(
+						viewhold.btn.setText(sp.loadStringSharedPreference(
 								username + "realname", ""));
 					}
 
@@ -837,7 +826,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 					File picture_1 = new File(
 							Environment.getExternalStorageDirectory() + "/"
 									+ "jzdr/" + "image/"
-									+ sp.getString(username + "_photo", "c"));
+									+ sp.loadStringSharedPreference(username + "_photo", "c"));
 					if (picture_1.exists()) {
 						// 加载本地图片
 						Bitmap bb_bmp = BitmapFactory.decodeFile(Environment
@@ -845,10 +834,10 @@ public class GroupDetailsActivity extends BaseActivity implements
 								+ "/"
 								+ "jzdr/"
 								+ "image/"
-								+ sp.getString(username + "_photo", "c"));
+								+ sp.loadStringSharedPreference(username + "_photo", "c"));
 						if (bb_bmp != null) {
 							if (viewhold.btn != null) {
-								viewhold.btn.setText(sp.getString(username
+								viewhold.btn.setText(sp.loadStringSharedPreference(username
 										+ "realname", ""));
 							}
 							Drawable drawable = new BitmapDrawable(
@@ -1051,7 +1040,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 							System.out.println("group msg is blocked:"
 									+ group.getMsgBlocked());
 							// 显示消息免打扰或者非免打扰
-							boolean flag = sp.getBoolean(
+							boolean flag = sp.loadBooleanSharedPreference(
 									ConstantForSaveList.userId + groupId
 											+ "pingbi", false);
 							if (flag) {
@@ -1116,9 +1105,7 @@ public class GroupDetailsActivity extends BaseActivity implements
                                         && button.getTag().equals(id)) {
                                     button.setText(us.getName());
                                 }
-                                Editor edt = sp.edit();
-                                edt.putString(id + "realname", us.getName());
-                                edt.commit();
+                                sp.saveSharedPreferences(id + "realname", us.getName());
                             } else {
                                 button.setText("");
                             }
@@ -1184,14 +1171,10 @@ public class GroupDetailsActivity extends BaseActivity implements
 										output);
 								output.flush();
 								output.close();
-								Editor edt = sp.edit();
-								edt.putString(id + "_photo", url);
-								edt.commit();
+								sp.saveSharedPreferences(id + "_photo", url);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-						} else {
-
 						}
 					}
 				}, 300, 200, Config.ARGB_8888, new ErrorListener() {
