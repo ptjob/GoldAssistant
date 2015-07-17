@@ -13,20 +13,6 @@
  */
 package com.easemob.chatuidemo.adapter;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -83,7 +69,6 @@ import com.easemob.chat.VoiceMessageBody;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.activity.AlertDialog;
 import com.easemob.chatuidemo.activity.BaiduMapActivity;
-import com.parttime.IM.ChatActivity;
 import com.easemob.chatuidemo.activity.ContextMenu;
 import com.easemob.chatuidemo.activity.ShowBigImage;
 import com.easemob.chatuidemo.activity.ShowNormalFileActivity;
@@ -99,6 +84,9 @@ import com.easemob.util.EMLog;
 import com.easemob.util.FileUtils;
 import com.easemob.util.LatLng;
 import com.easemob.util.TextFormater;
+import com.parttime.IM.ChatActivity;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.HuanXinRequest;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.ToastUtil;
@@ -109,6 +97,21 @@ import com.quark.image.UploadImg;
 import com.quark.model.HuanxinUser;
 import com.quark.volley.VolleySington;
 import com.umeng.analytics.MobclickAgent;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MessageAdapter extends BaseAdapter {
 
@@ -1847,100 +1850,43 @@ public class MessageAdapter extends BaseAdapter {
 
 	}
 
-	// ====================获取网络信息存储到本地======================
-	public void getNick2(final String id) {
-		StringRequest request = new StringRequest(Request.Method.POST,
-				Url.HUANXIN_avatars_pic, new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						try {
-							JSONObject js = new JSONObject(response);
-							JSONArray jss = js.getJSONArray("avatars");
-							HuanxinUser us = (HuanxinUser) JsonUtil.jsonToBean(
-									jss.getJSONObject(0), HuanxinUser.class);
-							if ((us.getAvatar() != null)
-									&& (!us.getAvatar().equals(""))) {
-								Editor edt = sp.edit();
-								edt.putString(id + "_photo", us.getAvatar());
-								edt.putString(id + "realname", us.getName());
-								edt.commit();
-							}
-
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				}, new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError volleyError) {
-					}
-				}) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("user_ids", "{" + id + "}");
-				return map;
-			}
-		};
-		queue.add(request);
-		request.setRetryPolicy(new DefaultRetryPolicy(
-				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
-
-	}
-
 	// ================================================
 	public void getNick(final String id, final ImageView avatar,
 			final TextView name) {
-		StringRequest request = new StringRequest(Request.Method.POST,
-				Url.HUANXIN_avatars_pic, new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						try {
-							JSONObject js = new JSONObject(response);
-							JSONArray jss = js.getJSONArray("avatars");
-							HuanxinUser us = (HuanxinUser) JsonUtil.jsonToBean(
-									jss.getJSONObject(0), HuanxinUser.class);
-							if (name != null) {
-								name.setText(us.getName());
-								if (us.getName() != null
-										&& !"".equals(us.getName())) {
-									Editor edt = sp.edit();
-									edt.putString(id + "realname", us.getName());
-									edt.commit();
-								}
-							}
-							if ((us.getAvatar() != null)
-									&& (!us.getAvatar().equals(""))) {
-								loadpersonPic(id, us.getAvatar(), avatar, 1);
 
-							} else {
-								if (us.getUid().startsWith("u")) {
-									avatar.setImageResource(R.drawable.default_avatar);
-								} else {
-									avatar.setImageResource(R.drawable.default_avatar_business);
-								}
-							}
+        new HuanXinRequest().getHuanxinUserList(String.valueOf(id), queue, new DefaultCallback(){
+            @Override
+            public void success(Object obj) {
+                super.success(obj);
+                if(obj instanceof ArrayList){
+                    @SuppressLint("Unchecked")
+                    ArrayList<HuanxinUser> list = (ArrayList<HuanxinUser>)obj;
+                    if(list.size() == 1) {
+                        HuanxinUser us = list.get(0);
+                        if (name != null) {
+                            name.setText(us.getName());
+                            if (us.getName() != null
+                                    && !"".equals(us.getName())) {
+                                Editor edt = sp.edit();
+                                edt.putString(id + "realname", us.getName());
+                                edt.commit();
+                            }
+                        }
+                        if ((us.getAvatar() != null)
+                                && (!us.getAvatar().equals(""))) {
+                            loadpersonPic(id, us.getAvatar(), avatar, 1);
 
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				}, new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError volleyError) {
-						// Toast.makeText(context, "你的网络不够给力，获取数据失败！",0).show();
-					}
-				}) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("user_ids", "{" + id + "}");
-				return map;
-			}
-		};
-		queue.add(request);
-		request.setRetryPolicy(new DefaultRetryPolicy(
-				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
+                        } else {
+                            if (us.getUid().startsWith("u")) {
+                                avatar.setImageResource(R.drawable.default_avatar);
+                            } else {
+                                avatar.setImageResource(R.drawable.default_avatar_business);
+                            }
+                        }
+                    }
+                }
+            }
+        });
 
 	}
 

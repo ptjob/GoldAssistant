@@ -13,18 +13,7 @@
  */
 package com.quark.quanzi;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -54,7 +43,6 @@ import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMContactManager;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.activity.AddContactActivity;
-import com.parttime.IM.ChatActivity;
 import com.easemob.chatuidemo.activity.GroupsActivity;
 import com.easemob.chatuidemo.activity.NewFriendsMsgActivity;
 import com.easemob.chatuidemo.adapter.ContactAdapter;
@@ -63,6 +51,9 @@ import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
 import com.easemob.exceptions.EaseMobException;
+import com.parttime.IM.ChatActivity;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.HuanXinRequest;
 import com.qingmu.jianzhidaren.R;
 import com.quark.citylistview.CharacterParser;
 import com.quark.common.JsonUtil;
@@ -70,6 +61,18 @@ import com.quark.common.Url;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.jianzhidaren.BaseActivity;
 import com.quark.model.HuanxinUser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * 联系人列表页
@@ -87,13 +90,13 @@ public class MyContactlistFragment extends BaseActivity {
 	private ContactAdapter adapter;
 	private List<User> contactList;
 	private List<String> contactIds;
-	private String contactIdsStr = "";
+	private StringBuilder contactIdsStr = new StringBuilder();
 	private ListView listView;
 	private boolean hidden;
 	private Sidebar sidebar;
 	private InputMethodManager inputMethodManager;
 	private List<String> blackList;
-	ArrayList<HuanxinUser> usersNick = new ArrayList<HuanxinUser>();
+	ArrayList<HuanxinUser> usersNick = new ArrayList<>();
 	// =========转拼音========
 	private CharacterParser characterParser;
 
@@ -151,14 +154,16 @@ public class MyContactlistFragment extends BaseActivity {
 		// 获取头像及昵称
 		getContactList();
 		if (contactIds.size() > 0) {
-			contactIdsStr = "{";
-			for (int i = 0; i < contactIds.size(); i++) {
-				contactIdsStr += contactIds.get(i) + "、";
-			}
-			contactIdsStr = contactIdsStr.substring(0,
-					contactIdsStr.length() - 1) + "}";
+            int size = contactIds.size();
+            for (int i = 0; i < size; i++) {
+                if(i < size -1 ) {
+                    contactIdsStr.append(contactIds.get(i)).append(",");
+                }else{
+                    contactIdsStr.append(contactIds.get(i));
+                }
+            }
 
-			if (contactIdsStr.equals("{}")) {
+            if ("".equals(contactIdsStr)) {
 				filledData();
 			} else {
 				getNick();
@@ -370,48 +375,24 @@ public class MyContactlistFragment extends BaseActivity {
 	// ====================================howe=========================
 
 	public void getNick() {
-		StringRequest request = new StringRequest(Request.Method.POST,
-				Url.HUANXIN_avatars_pic, new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						try {
-							JSONObject js = new JSONObject(response);
-							JSONArray jss = js.getJSONArray("avatars");
-							for (int i = 0; i < jss.length(); i++) {
-								HuanxinUser us = (HuanxinUser) JsonUtil
-										.jsonToBean(jss.getJSONObject(i),
-												HuanxinUser.class);
-								if (us.getName() == null
-										|| us.getName().equals("")) {
-									us.setName("未知好友");
-								}
-								usersNick.add(us);
+        new HuanXinRequest().getHuanxinUserList(contactIdsStr.toString(), queue, new DefaultCallback(){
+            @Override
+            public void success(Object obj) {
+                super.success(obj);
+                if(obj instanceof ArrayList){
+                    @SuppressLint("Unchecked")
+                    ArrayList<HuanxinUser> list = (ArrayList<HuanxinUser>)obj;
+                    usersNick.clear();
+                    usersNick.addAll(list);
+                    if (usersNick.size() > 0) {
+                        ConstantForSaveList.usersNick = usersNick;// 保存缓存
 
-							}
-							filledData(); // 转化拼音
-
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				}, new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError volleyError) {
-						// showWait(false);
-					}
-				}) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("user_ids", contactIdsStr);
-				return map;
-			}
-		};
-		queue.add(request);
-		request.setRetryPolicy(new DefaultRetryPolicy(ConstantForSaveList.DEFAULTRETRYTIME*1000, 1, 1.0f));
-
-	}
+                    }
+                    filledData(); // 转化拼音
+                }
+            }
+        });
+    }
 
 	public void setlist() {
 		// 设置adapter

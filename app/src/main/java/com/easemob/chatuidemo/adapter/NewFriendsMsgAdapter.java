@@ -13,14 +13,7 @@
  */
 package com.easemob.chatuidemo.adapter;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -54,12 +47,23 @@ import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.domain.InviteMessage;
 import com.easemob.chatuidemo.domain.InviteMessage.InviteMesageStatus;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.HuanXinRequest;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.http.image.CircularImage;
 import com.quark.model.HuanxinUser;
 import com.quark.volley.VolleySington;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -316,48 +320,29 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 	// ====================================howe=========================
 	public void getNick(final String id, final CircularImage avatar,
 			final TextView name) {
-		StringRequest request = new StringRequest(Request.Method.POST,
-				Url.HUANXIN_avatars_pic, new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						try {
-							JSONObject js = new JSONObject(response);
-							JSONArray jss = js.getJSONArray("avatars");
-							HuanxinUser us = (HuanxinUser) JsonUtil.jsonToBean(
-									jss.getJSONObject(0), HuanxinUser.class);
-							name.setText(us.getName());
-							Log.e("erros", "返bean=" + us.toString());
-							if ((us.getAvatar() != null)
-									&& (!us.getAvatar().equals(""))) {
-								loadpersonPic(Url.GETPIC + us.getAvatar(),
-										avatar, 1);
-							} else {
-								avatar.setImageResource(R.drawable.default_avatar);
-							}
 
-						} catch (JSONException e) {
-							e.printStackTrace();
-							System.out
-									.println("==================reg json 异常===========");
-						}
-					}
-				}, new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError volleyError) {
-						Toast.makeText(context, "你的网络不够给力，获取数据失败！", 0).show();
-					}
-				}) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("user_ids", "{" + id + "}");
-
-				return map;
-			}
-		};
-		queue.add(request);
-		request.setRetryPolicy(new DefaultRetryPolicy(ConstantForSaveList.DEFAULTRETRYTIME*1000, 1, 1.0f));
-
+        new HuanXinRequest().getHuanxinUserList(String.valueOf(id), queue, new DefaultCallback(){
+            @Override
+            public void success(Object obj) {
+                super.success(obj);
+                if(obj instanceof ArrayList){
+                    @SuppressLint("Unchecked")
+                    ArrayList<HuanxinUser> list = (ArrayList<HuanxinUser>)obj;
+                    if(list.size() == 1) {
+                        HuanxinUser us = list.get(0);
+                        name.setText(us.getName());
+                        Log.e("erros", "返bean=" + us.toString());
+                        if ((us.getAvatar() != null)
+                                && (!us.getAvatar().equals(""))) {
+                            loadpersonPic(Url.GETPIC + us.getAvatar(),
+                                    avatar, 1);
+                        } else {
+                            avatar.setImageResource(R.drawable.default_avatar);
+                        }
+                    }
+                }
+            }
+        });
 	}
 
 	/**
