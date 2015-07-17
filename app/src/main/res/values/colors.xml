@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--公共颜色表-->
+    <color name="c_F5F5F5">#F5F5F5</color> <!-- 很浅的灰色背景&菜单分隔线 -->
+    <color name="c_E2E2E2">#E2E2E2</color> <!-- 菜单和选项的边线 -->
+    <color name="c_C7C8CD">#C7C8CD</color> <!-- 浅灰色字体，输入边框线 -->
+    <color name="c_363636">#363636</color> <!-- 深色文字 -->
+    <color name="c_FF5D56">#FF5D56</color> <!--  -->
+    <color name="c_FE8800">#FE8800</color> <!--  -->
+    <color name="c_A6CF4F">#A6CF4F</color> <!--  -->
+    <color name="c_4BA4DE">#4BA4DE</color> <!--  -->
+
     <color name="liulanhenji">#F6F6F6</color>
     <color name="guanli_common_color">#1b1d29</color>
     <!-- 管理广场兼职活动状态 -->
