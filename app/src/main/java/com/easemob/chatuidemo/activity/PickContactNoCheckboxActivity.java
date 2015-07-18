@@ -16,15 +16,10 @@ package com.easemob.chatuidemo.activity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -33,30 +28,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.adapter.ContactAdapter;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
+import com.parttime.main.PinyinComparator;
+import com.parttime.main.PinyinComparatorByHeader;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
 import com.qingmu.jianzhidaren.R;
 import com.quark.citylistview.CharacterParser;
-import com.quark.common.JsonUtil;
-import com.quark.common.Url;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.HuanxinUser;
-import com.quark.quanzi.PinyinComparator_quanzhi;
-import com.quark.quanzi.PinyinComparator_quanzhitwo;
 import com.quark.utils.WaitDialog;
 import com.quark.volley.VolleySington;
 
@@ -83,8 +69,8 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 	/**
 	 * 根据拼音来排列ListView里面的数据类
 	 */
-	private PinyinComparator_quanzhi pinyinComparator;
-	private PinyinComparator_quanzhitwo pinyinComparatorTwo;
+	private PinyinComparator pinyinComparator;
+	private PinyinComparatorByHeader pinyinComparatorTwo;
 	// =======转拼音========
 	protected WaitDialog dialog;
 	protected RequestQueue queue;
@@ -101,8 +87,8 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 		contactIds = new ArrayList<>();
 		// 实例化汉字转拼音类 加
 		characterParser = CharacterParser.getInstance();
-		pinyinComparator = new PinyinComparator_quanzhi();
-		pinyinComparatorTwo = new PinyinComparator_quanzhitwo();
+		pinyinComparator = new PinyinComparator();
+		pinyinComparatorTwo = new PinyinComparatorByHeader();
 
 		// 获取设置contactlist
 		getContactList();

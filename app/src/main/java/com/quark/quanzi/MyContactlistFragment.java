@@ -33,12 +33,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMContactManager;
 import com.easemob.chatuidemo.Constant;
@@ -52,23 +46,18 @@ import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
 import com.easemob.exceptions.EaseMobException;
 import com.parttime.IM.ChatActivity;
+import com.parttime.main.PinyinComparatorByHeader;
+import com.parttime.main.PinyinComparator;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
 import com.qingmu.jianzhidaren.R;
 import com.quark.citylistview.CharacterParser;
-import com.quark.common.JsonUtil;
-import com.quark.common.Url;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.jianzhidaren.BaseActivity;
 import com.quark.model.HuanxinUser;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -103,8 +92,8 @@ public class MyContactlistFragment extends BaseActivity {
 	/**
 	 * 根据拼音来排列ListView里面的数据类
 	 */
-	private PinyinComparator_quanzhi pinyinComparator;
-	private PinyinComparator_quanzhitwo pinyinComparatorTwo;
+	private PinyinComparator pinyinComparator;
+	private PinyinComparatorByHeader pinyinComparatorTwo;
 
 	// =======转拼音========
 	@Override
@@ -113,8 +102,8 @@ public class MyContactlistFragment extends BaseActivity {
 		setContentView(R.layout.fragment_contact_list);
 		// 实例化汉字转拼音类 加
 		characterParser = CharacterParser.getInstance();
-		pinyinComparator = new PinyinComparator_quanzhi();
-		pinyinComparatorTwo = new PinyinComparator_quanzhitwo();
+		pinyinComparator = new PinyinComparator();
+		pinyinComparatorTwo = new PinyinComparatorByHeader();
 		// 增加返回键 加
 		ImageView left = (ImageView) findViewById(R.id.left);
 		left.setOnClickListener(backOnclick);

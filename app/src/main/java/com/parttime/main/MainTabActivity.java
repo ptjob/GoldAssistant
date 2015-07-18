@@ -73,6 +73,7 @@ import com.easemob.chatuidemo.domain.InviteMessage;
 import com.easemob.chatuidemo.domain.InviteMessage.InviteMesageStatus;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.utils.CommonUtils;
+import com.easemob.exceptions.EMNetworkUnconnectedException;
 import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.EMLog;
 import com.easemob.util.EasyUtils;
@@ -313,7 +314,8 @@ public class MainTabActivity extends FragmentActivity implements
 						EMGroupManager.getInstance().getGroupsFromServer();
 					} catch (EaseMobException e) {
 						e.printStackTrace();
-					}
+					} catch (Exception ignore){
+                    }
 					// 更新当前用户的nickname 此方法的作用是在ios离线推送时能够显示用户nick
 					EMChatManager.getInstance().updateCurrentUserNick(
 							ApplicationControl.currentUserNick);
