@@ -386,7 +386,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             // EMChatManager.getInstance().getConversation(toChatUsername,false);
         } else {
             // 群聊
-            findViewById(R.id.container_to_group).setVisibility(View.VISIBLE);
+            findViewById(R.id.container_right2_image).setVisibility(View.VISIBLE);
             findViewById(R.id.container_group_notice).setVisibility(View.VISIBLE);
             findViewById(R.id.container_contact_detail).setVisibility(View.GONE);
             findViewById(R.id.container_voice_call).setVisibility(View.GONE);
@@ -1743,14 +1743,14 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     }
 
     public void getNick(final String id, final TextView name) {
-        new HuanXinRequest().getHuanxinUserList(String.valueOf(id), queue, new DefaultCallback(){
+        new HuanXinRequest().getHuanxinUserList(String.valueOf(id), queue, new DefaultCallback() {
             @Override
             public void success(Object obj) {
                 super.success(obj);
-                if(obj instanceof ArrayList){
+                if (obj instanceof ArrayList) {
                     @SuppressLint("Unchecked")
-                    ArrayList<HuanxinUser> list = (ArrayList<HuanxinUser>)obj;
-                    if(list.size() == 1) {
+                    ArrayList<HuanxinUser> list = (ArrayList<HuanxinUser>) obj;
+                    if (list.size() == 1) {
                         if (name != null) {
                             HuanxinUser us = list.get(0);
                             name.setText(us.getName());

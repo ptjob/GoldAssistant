@@ -312,7 +312,7 @@ public class ChatOldActivity extends BaseActivity implements OnClickListener {
 			// EMChatManager.getInstance().getConversation(toChatUsername,false);
 		} else {
 			// 群聊
-			findViewById(R.id.container_to_group).setVisibility(View.VISIBLE);
+			findViewById(R.id.container_right2_image).setVisibility(View.VISIBLE);
 			findViewById(R.id.container_contact_detail).setVisibility(View.GONE);
 			findViewById(R.id.container_voice_call).setVisibility(View.GONE);
 			toChatUsername = getIntent().getStringExtra("groupId");

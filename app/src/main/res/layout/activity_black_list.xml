@@ -42,7 +42,7 @@
         </RelativeLayout> -->
 
         <RelativeLayout
-            android:id="@+id/container_to_group"
+            android:id="@+id/container_right2_image"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"

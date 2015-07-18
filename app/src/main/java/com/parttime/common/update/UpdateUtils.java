@@ -16,6 +16,8 @@ import java.util.ArrayList;
 /**
  *
  * Created by luhua on 15/7/12.
+ *
+ * 更新应用
  */
 public class UpdateUtils {
     /**

@@ -41,7 +41,7 @@ public class EditGroupNoticeActivity extends BaseActivity implements View.OnClic
         //设置头部
         ActivityHead activityHead = new ActivityHead();
         activityHead.initHead(this);
-        activityHead.setCenterTxt(R.string.group_notice);
+        activityHead.setCenterTxt1(R.string.group_notice);
 
         noticeContent = (EditText)findViewById(R.id.notice_content);
         contentCount = (TextView)findViewById(R.id.text_count);

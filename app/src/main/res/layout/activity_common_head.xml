@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 左边返回， 中间文字 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/title"
     android:layout_width="match_parent"
@@ -8,7 +9,7 @@
 
     <include layout="@layout/commom_back_btn" android:id="@+id/left_back"/>
 
-    <TextView android:id="@+id/center_txt"
+    <TextView android:id="@+id/center_txt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

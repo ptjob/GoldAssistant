@@ -60,6 +60,7 @@ import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.EMLog;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
+import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.utils.SharePreferenceUtil;
@@ -87,7 +88,7 @@ import java.util.Map;
 
 /**
  * 
- * @ClassName: GroupDetailsActivity
+ * @ClassName: GroupSettingActivity
  * @Description: 群设置
  * @author howe
  * @date 2015-2-12 下午12:19:16
@@ -632,7 +633,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 					EMChatManager.getInstance().getChatOptions()
 							.setReceiveNotNoifyGroup(pingbiListGroup);
                     sp.saveSharedPreferences(ConstantForSaveList.userId + groupId
-							+ "pingbi", false);
+                            + "pingbi", false);
 					iv_switch_block_groupmsg.setVisibility(View.INVISIBLE);
 					iv_switch_unblock_groupmsg.setVisibility(View.VISIBLE);
 				} catch (Exception e) {
@@ -647,7 +648,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 				EMChatManager.getInstance().getChatOptions()
 						.setReceiveNotNoifyGroup(pingbiListGroup);
                 sp.saveSharedPreferences(ConstantForSaveList.userId + groupId + "pingbi",
-						true);
+                        true);
 				// 屏蔽群组
 				try {
 					// EMGroupManager.getInstance().blockGroupMessage(groupId);
@@ -816,42 +817,24 @@ public class GroupDetailsActivity extends BaseActivity implements
 								username + "realname", ""));
 					}
 
-					File mePhotoFold = new File(
-							Environment.getExternalStorageDirectory() + "/"
-									+ "jzdr/" + "image");
-					if (!mePhotoFold.exists()) {
-						mePhotoFold.mkdirs();
-					}
-					// 当前聊天对象的头像更改,要先联网验证头像路径是否更改
-					File picture_1 = new File(
-							Environment.getExternalStorageDirectory() + "/"
-									+ "jzdr/" + "image/"
-									+ sp.loadStringSharedPreference(username + "_photo", "c"));
-					if (picture_1.exists()) {
-						// 加载本地图片
-						Bitmap bb_bmp = BitmapFactory.decodeFile(Environment
-								.getExternalStorageDirectory()
-								+ "/"
-								+ "jzdr/"
-								+ "image/"
-								+ sp.loadStringSharedPreference(username + "_photo", "c"));
-						if (bb_bmp != null) {
-							if (viewhold.btn != null) {
-								viewhold.btn.setText(sp.loadStringSharedPreference(username
-										+ "realname", ""));
-							}
-							Drawable drawable = new BitmapDrawable(
-									LoadImage.toRoundBitmap(bb_bmp));
-							drawable.setBounds(0, 0, referenceWidth,
-									referenceHeight);
-							viewhold.btn.setCompoundDrawables(null, drawable,
-									null, null);
-						} else {
-							getNick(username, viewhold.btn);
-						}
-					} else {
-						getNick(username, viewhold.btn);
-					}
+
+                    // 加载本地图片
+                    Bitmap bitmap = ContactImageLoader.get(username);
+
+                    if (bitmap != null) {
+                        if (viewhold.btn != null) {
+                            viewhold.btn.setText(sp.loadStringSharedPreference(username
+                                    + "realname", ""));
+                        }
+                        Drawable drawable = new BitmapDrawable(
+                                LoadImage.toRoundBitmap(bitmap));
+                        drawable.setBounds(0, 0, referenceWidth,
+                                referenceHeight);
+                        viewhold.btn.setCompoundDrawables(null, drawable,
+                                null, null);
+                    } else {
+                        getNick(username, viewhold.btn);
+                    }
 
 					// button.setText(username);
 
@@ -904,7 +887,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 									} else {
 										// 正常情况下点击user，可以进入用户详情或者聊天页面等等
 										// Intent intent = new Intent(
-										// GroupDetailsActivity.this,
+										// GroupSettingActivity.this,
 										// UserInfo.class);
 										// intent.putExtra("hxId", username);
 										// startActivity(intent);
@@ -1041,8 +1024,8 @@ public class GroupDetailsActivity extends BaseActivity implements
 									+ group.getMsgBlocked());
 							// 显示消息免打扰或者非免打扰
 							boolean flag = sp.loadBooleanSharedPreference(
-									ConstantForSaveList.userId + groupId
-											+ "pingbi", false);
+                                    ConstantForSaveList.userId + groupId
+                                            + "pingbi", false);
 							if (flag) {
 								iv_switch_block_groupmsg
 										.setVisibility(View.VISIBLE);

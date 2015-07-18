@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 左边返回， 中间文字 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_top_bar"
+    android:background="@color/top_bar_normal_bg"
+    android:gravity="center_vertical" >
+
+    <include layout="@layout/commom_back_btn" android:id="@+id/left_back"/>
+
+    <TextView android:id="@+id/center_txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text=""
+        android:textColor="@color/bottom_text_color_normal"
+        android:layout_toLeftOf="@+id/center_txt2"
+        android:textSize="18sp" />
+    <TextView android:id="@+id/center_txt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text=""
+        android:textColor="@color/bottom_text_color_normal"
+        android:layout_toLeftOf="@+id/container_right1_image"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:id="@+id/container_right1_image"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/common_tab_bg"
+        android:layout_toLeftOf="@+id/container_right2_image"
+        android:onClick="showGroupNotice"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_right1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="9dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ee_1" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/container_right2_image"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/common_tab_bg"
+        android:onClick="toGroupDetails"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/img_right2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/nav_friends_btn_chatsettings" />
+    </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="7dp" />
+</RelativeLayout>
