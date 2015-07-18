@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:id="@+id/head_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:onClick="back" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/head"
+                android:background="@drawable/contact_list_selected"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:id="@+id/name"
+            android:layout_toRightOf="@+id/head_container"
+            android:layout_toEndOf="@+id/head_container"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="resume_status"
+            android:id="@+id/resume_status"
+            android:layout_below="@+id/name"
+            android:layout_toRightOf="@+id/head_container"
+            android:layout_toEndOf="@+id/head_container"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="money status/account status"
+            android:id="@+id/money_account_status"
+            android:layout_below="@+id/resume_status"
+            android:layout_toRightOf="@+id/head_container"
+            android:layout_toEndOf="@+id/head_container"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reputation_value"
+            android:id="@+id/reputation_value"
+            android:layout_below="@+id/money_account_status"
+            android:layout_toRightOf="@+id/head_container"
+            android:layout_toEndOf="@+id/head_container"/>
+
+        <LinearLayout
+            android:id="@+id/reputation_value_star_container"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/money_account_status"
+            android:layout_toRightOf="@+id/reputation_value"
+            android:layout_toEndOf="@+id/reputation_value">
+
+            </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/button"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</LinearLayout>
