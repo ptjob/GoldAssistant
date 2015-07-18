@@ -12,12 +12,12 @@ import java.util.List;
 /**
  * Created by cjz on 2015/7/14.
  */
-public class WorkTypeAdapter extends BaseAdapter{
+public class SingleTextAdapter extends BaseAdapter{
 
     private Context context;
     private List<Object> datas;
     private LayoutInflater inflater;
-    public WorkTypeAdapter(Context context, List<Object> datas) {
+    public SingleTextAdapter(Context context, List<Object> datas) {
         this.context = context;
         this.datas = datas;
         inflater = LayoutInflater.from(context);
@@ -44,6 +44,6 @@ public class WorkTypeAdapter extends BaseAdapter{
     }
 
     public class ViewHolder {
-
+        public TextView tvName;
     }
 }

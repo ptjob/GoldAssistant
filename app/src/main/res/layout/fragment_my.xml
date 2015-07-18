@@ -27,14 +27,21 @@
                 android:background="@color/head_color"
                 >
 
-                <ImageView
+                <com.quark.http.image.CircularImage
+                    android:id="@+id/iv_head"
+                    android:layout_width="95dip"
+                    android:layout_height="95dip"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/common_margin"/>
+                <!--<ImageView
                     android:id="@+id/iv_head"
                     android:layout_width="@dimen/head_img_edge"
                     android:layout_height="@dimen/head_img_edge"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="@dimen/common_margin"
                     android:background="#aaffff00"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"/>-->
                 <TextView
                     android:id="@+id/tv_businessman"
                     android:layout_width="wrap_content"
@@ -60,7 +67,7 @@
                     android:layout_below="@id/tv_score"
                     android:layout_marginTop="14dp"
                     android:textColor="#fff"
-                    android:text="已个人认证"/>
+                    android:text="@string/not_certed"/>
 
 
             </RelativeLayout>

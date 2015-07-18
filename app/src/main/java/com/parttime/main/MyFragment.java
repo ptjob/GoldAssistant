@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ import com.parttime.mine.PraiseRecvedActivity;
 import com.parttime.mine.RealNameCertActivity;
 import com.parttime.mine.SuggestionActivity;
 import com.parttime.mine.setting.SettingActivity;
+import com.parttime.type.AccountType;
 import com.parttime.widget.FormItem;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
@@ -82,6 +84,8 @@ import java.util.Map;
 public class MyFragment extends BaseFragment implements OnClickListener {
 	private static final String IMAGE_FILE_NAME = "faceImage.jpg";// 图片名称
 
+	private static final int CERT_PASSED = 2;
+
 	private static final int IMAGE_REQUEST_CODE = 0;
 	private static final int CAMERA_REQUEST_CODE = 1;
 	private static final int RESULT_REQUEST_CODE = 2;
@@ -112,6 +116,8 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 
 	}
 
+
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -129,6 +135,34 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 		getMyInfo();
 	}
 
+	private void updateView(){
+		if(function != null){
+			tvName.setText(function.getName());
+			tvScore.setText(getString(R.string.x_scores, function.getPoint()));
+			String certString = getCertString();
+			tvCertState.setText(certString);
+			fiMyFans.setValue(getString(R.string.x_ge_in_chinese, function.getFollowers()));
+			fiMyFans.setValue(getString(R.string.x_rmb, function.getMoney()));
+			fiRealNameCert.setValue(certString);
+		}
+	}
+
+	private String getCertString(){
+		if(function != null){
+			int company_status = function.getCompany_status();
+			if(company_status == CERT_PASSED){
+				int type = function.getType();
+				if(type == AccountType.PERSONAL){
+					return getString(R.string.personal_certed);
+				}else if(type == AccountType.ENTERPRISE){
+					return getString(R.string.enterprise_certed);
+				}
+			}
+		}
+		return getString(R.string.not_certed);
+
+	}
+
 	private void getMyInfo(){
 		StringRequest request = new StringRequest(Method.POST, url, new Response.Listener<String>() {
 			@Override
@@ -136,6 +170,8 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 				try {
 					JSONObject json = new JSONObject(s);
 					function = (Function) JsonUtil.jsonToBean(json, Function.class);
+					updateView();
+					saveInfor();
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -387,10 +423,16 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	/**
 	 * sava info
 	 */
-	private void saveInfor(int moneypool) {
-		Editor pool_edt = sp.edit();
-		pool_edt.putInt("pool_money", moneypool);
-		pool_edt.commit();
+	private void saveInfor() {
+		Editor edt = sp.edit();
+		edt.putString(company_id + "name", function.getName());
+//		edt.putString("c" + company_id + "realname", function.getName());
+		edt.putInt(company_id + "status", function.getStatus());
+		edt.putFloat(company_id + "money",
+				function.getMoney() > 0 ? function.getMoney() : 0);
+		edt.putString("c" + company_id + "_photo", function.getAvatar());
+		edt.putString(company_id + "_photo", function.getAvatar());
+		edt.commit();
 	}
 
 	// 默认消息免打扰

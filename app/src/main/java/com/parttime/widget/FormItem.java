@@ -149,4 +149,16 @@ public class FormItem extends FrameLayout{
         divider.setLayoutParams(fllp);
         return divider;
     }
+
+    public void setValue(String value){
+        if(tvValue != null){
+            tvValue.setText(value);
+        }
+    }
+
+    public void setValue(int txtId){
+        if(tvValue != null){
+            tvValue.setText(txtId);
+        }
+    }
 }

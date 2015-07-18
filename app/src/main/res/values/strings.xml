@@ -219,6 +219,12 @@
     <string name="fresh_man_guide">新手指引</string>
     <string name="suggestion">提出建议</string>
     <string name="setting">设置</string>
+    <string name="x_ge_in_chinese">%1$d</string>
+    <string name="x_rmb">￥ %1$.2f</string>
+    <string name="not_certed">未认证</string>
+    <string name="personal_certed">已个人认证</string>
+    <string name="enterprise_certed">已企业认证</string>
+    <string name="x_scores">评分 %1$.2f/5</string>
 
     <!-- 我的简介 -->
     <string name="click_to_upload_head_img">点击上传头像</string>
@@ -252,6 +258,7 @@
     <string name="logout_prompt_content">确认退出后，将无法接收新消确定息</string>
     <string name="logout_tips_title">退出提示</string>
     <string name="wrong_click">点错了</string>
+
 
     <!-- 招人Tab -->
     <string name="publish_job">发布兼职</string>

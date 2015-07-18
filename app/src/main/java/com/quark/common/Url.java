@@ -255,7 +255,7 @@ public class Url {
 	public static final String USE_signUp = HOST + SUBJECT + "/Activity/signUp";
 	// 商家上传头像
 	public static final String COMPANY_upload_avatar = HOST + SUBJECT
-			+ "/AgentCenter/upload_avatar";
+			+ "/CompanyCenter/uploadPhoto";
 
 	// 商家端 二维码签到列表
 	public static final String COMPANY_signUpList = HOST + SUBJECT

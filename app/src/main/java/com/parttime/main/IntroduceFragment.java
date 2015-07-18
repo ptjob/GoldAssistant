@@ -215,7 +215,7 @@ public class IntroduceFragment extends BaseFragment implements
 		edt.putString(company_id + "name", function.getName());
 		edt.putString("c" + company_id + "realname", function.getName());
 		edt.putInt(company_id + "status", function.getStatus());
-		edt.putInt(company_id + "money",
+		edt.putFloat(company_id + "money",
 				function.getMoney() > 0 ? function.getMoney() : 0);
 		edt.putString("c" + company_id + "_photo", function.getAvatar());
 		edt.putString(company_id + "_photo", function.getAvatar());

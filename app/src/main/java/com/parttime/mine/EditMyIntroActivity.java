@@ -1,18 +1,15 @@
 package com.parttime.mine;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.parttime.base.WithTitleActivity;
-import com.parttime.common.adapters.WorkTypeAdapter;
+import com.parttime.common.adapters.SingleTextAdapter;
 import com.parttime.widget.CountingEditText;
 import com.qingmu.jianzhidaren.R;
-import com.quark.jianzhidaren.BaseActivity;
 
 /**
  * Created by cjz on 2015/7/12.
@@ -24,7 +21,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
 
     private CountingEditText cetIntro;
     private GridView gv;
-    private WorkTypeAdapter adapter;
+    private SingleTextAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -88,9 +88,9 @@ public class SettingActivity extends WithTitleActivity{
                                 edit.putString("token", "");
                                 edit.clear();
                                 edit.commit();
-                                ConstantForSaveList.usersNick = new ArrayList<HuanxinUser>();// 置空
+                                ConstantForSaveList.usersNick = new ArrayList<HuanxinUser>();//
                                 finish();
-                                // carson 点击退出账号时，关闭之前的界面
+                                // carson 鐐瑰嚮閫�鍑鸿处鍙锋椂锛屽叧闂箣鍓嶇殑鐣岄潰
 
 								/*if (FindPJLoginActivity.instance != null) {
 									FindPJLoginActivity.instance.finish();
