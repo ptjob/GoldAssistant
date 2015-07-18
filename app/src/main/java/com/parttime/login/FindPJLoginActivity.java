@@ -46,8 +46,10 @@ import com.easemob.util.HanziToPinyin;
 import com.google.gson.Gson;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.main.MainTabActivity;
 import com.parttime.net.ResponseBaseCommonError;
+import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -228,7 +230,9 @@ public class FindPJLoginActivity extends BaseActivity {
                                 IM_USERID = jsonts.getString("IM_USERID");
                                 IM_AVATAR = jsonts.getString("IM_AVATAR");
                                 IM_NIKENAME = jsonts.getString("IM_NIKENAME");
-                                loginIM(IM_USERID, IM_PASSWORD);
+								int type = jsonts.getInt("type");
+								SharePreferenceUtil.getInstance(FindPJLoginActivity.this).saveSharedPreferences(SharedPreferenceConstants.USER_TYPE, type);
+								loginIM(IM_USERID, IM_PASSWORD);
 
 							} else {
                                 login.setClickable(true);

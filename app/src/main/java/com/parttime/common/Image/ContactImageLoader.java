@@ -37,12 +37,11 @@ public class ContactImageLoader {
         }
         SharePreferenceUtil sp = SharePreferenceUtil.getInstance(ApplicationControl.getInstance());
         // 当前聊天对象的头像更改,要先联网验证头像路径是否更改
-        File picture = new File(Image_Path +
+        File picture = new File(Image_Path,
                 sp.loadStringSharedPreference(name + "_photo", "c"));
         if (picture.exists()) {
             // 加载本地图片
-            return  BitmapFactory.decodeFile(Image_Path +
-                    sp.loadStringSharedPreference(name + "_photo", "c"));
+            return  BitmapFactory.decodeFile(picture.getAbsolutePath());
         }
         return null;
     }

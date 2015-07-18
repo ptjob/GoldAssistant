@@ -8,4 +8,6 @@ public class SharedPreferenceConstants {
     public static final String CITY = "city";
     public static final String DINGWEICITY = "dingweicity";
     public static final String USER_ID = "user_id";
+
+    public static final String USER_TYPE = "user_type";
 }

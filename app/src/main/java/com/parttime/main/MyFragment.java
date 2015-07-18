@@ -707,6 +707,76 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 		}
 	}
 
+	private void afterTakePhoto(Intent data){
+		if (Util.hasSdcard()) {
+			File tempFile = new File(
+					Environment.getExternalStorageDirectory() + "/"
+							+ IMAGE_FILE_NAME);
+			//
+			BitmapFactory.Options opt = new BitmapFactory.Options();
+			opt.inJustDecodeBounds = true;
+			userPhotoBmp = BitmapFactory.decodeFile(
+					Environment.getExternalStorageDirectory() + "/"
+							+ IMAGE_FILE_NAME, opt);
+			// 获取到这个图片的原始宽度和高度
+			int picWidth = opt.outWidth;
+			int picHeight = opt.outHeight;
+
+			// 获取屏的宽度和高度
+			WindowManager windowManager = mActivity.getWindowManager();
+			Display display = windowManager.getDefaultDisplay();
+			int screenWidth = display.getWidth();
+			int screenHeight = display.getHeight();
+			opt.inSampleSize = 2;
+			if (picWidth > picHeight) {
+				if (picWidth > screenWidth)
+					opt.inSampleSize = picWidth / screenWidth;
+			} else {
+				if (picHeight > screenHeight)
+
+					opt.inSampleSize = picHeight / screenHeight;
+			}
+			int degree = getBitmapDegree(Environment
+					.getExternalStorageDirectory()
+					+ "/"
+					+ IMAGE_FILE_NAME);
+			opt.inJustDecodeBounds = false;
+			userPhotoBmp = BitmapFactory.decodeFile(
+					Environment.getExternalStorageDirectory() + "/"
+							+ IMAGE_FILE_NAME, opt);
+			userPhotoBmp = rotateBitmapByDegree(userPhotoBmp, degree);
+
+			Uri tt_uri = null;
+			try {
+				// tt_uri =
+				// Uri.parse(MediaStore.Images.Media.insertImage(
+				// getActivity().getContentResolver(),
+				// Environment.getExternalStorageDirectory() + "/"
+				// + IMAGE_FILE_NAME, null, null));
+				tt_uri = Uri.parse(MediaStore.Images.Media.insertImage(
+						getActivity().getContentResolver(),
+						userPhotoBmp, null, null));
+			} catch (Exception e) {
+				e.printStackTrace();
+				tt_uri = Uri.fromFile(tempFile);
+			}
+			if (tt_uri != null) {
+				startPhotoZoom(tt_uri, 300, 300);
+			} else {
+				Toast mToast = Toast.makeText(getActivity(),
+						"未找到存储卡，无法存储照片！", Toast.LENGTH_LONG);
+				mToast.setGravity(Gravity.CENTER, 0, 0);
+				mToast.show();
+			}
+		} else {
+
+			Toast mToast = Toast.makeText(getActivity(),
+					"未找到存储卡，无法存储照片！", Toast.LENGTH_LONG);
+			mToast.setGravity(Gravity.CENTER, 0, 0);
+			mToast.show();
+		}
+	}
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -723,11 +793,11 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 					afterGetPhoto(data);
 					break;
 				case CAMERA_REQUEST_CODE:
-
+					afterTakePhoto(data);
 					break;
 				case RESULT_REQUEST_CODE:
 					if (data != null) {
-						Toast mToast = Toast.makeText(getActivity(), "正在上传头像,请稍候。",
+						Toast mToast = Toast.makeText(getActivity(), R.string.wait_while_uploading_avatar,
 								Toast.LENGTH_LONG);
 						mToast.setGravity(Gravity.CENTER, 0, 0);
 						mToast.show();
