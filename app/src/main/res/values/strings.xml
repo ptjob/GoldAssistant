@@ -249,7 +249,9 @@
     <string name="about">关于</string>
     <string name="modify_phone_number">修改手机号码</string>
     <string name="modify_pwd">修改密码</string>
-
+    <string name="logout_prompt_content">确认退出后，将无法接收新消确定息</string>
+    <string name="logout_tips_title">退出提示</string>
+    <string name="wrong_click">点错了</string>
 
     <!-- 招人Tab -->
     <string name="publish_job">发布兼职</string>

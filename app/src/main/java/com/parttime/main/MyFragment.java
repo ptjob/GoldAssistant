@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
@@ -49,11 +50,13 @@ import com.parttime.mine.SuggestionActivity;
 import com.parttime.mine.setting.SettingActivity;
 import com.parttime.widget.FormItem;
 import com.qingmu.jianzhidaren.R;
+import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.fragment.company.BaseFragment;
 import com.quark.http.image.LoadImage;
 import com.quark.image.UploadImg;
 import com.quark.jianzhidaren.ApplicationControl;
+import com.quark.model.Function;
 import com.quark.model.HuanxinUser;
 import com.quark.ui.widget.CommonWidget;
 import com.quark.ui.widget.CustomDialog;
@@ -97,6 +100,8 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	private String uploadAvatarUrl;
 	private String company_id, url;
 
+	Function function;
+
 	public static MyFragment newInstance(String param1, String param2) {
 		MyFragment fragment = new MyFragment();
 
@@ -116,6 +121,42 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 		url = Url.COMPANY_function + "?token=" + MainTabActivity.token;
 		uploadAvatarUrl = Url.COMPANY_upload_avatar + "?token="
 				+ MainTabActivity.token;
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		getMyInfo();
+	}
+
+	private void getMyInfo(){
+		StringRequest request = new StringRequest(Method.POST, url, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String s) {
+				try {
+					JSONObject json = new JSONObject(s);
+					function = (Function) JsonUtil.jsonToBean(json, Function.class);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError volleyError) {
+
+			}
+		}){
+			@Override
+			protected Map<String, String> getParams() throws AuthFailureError {
+				Map<String, String> params = new HashMap<String, String>();
+				params.put("company_id", company_id);
+				return params;
+			}
+		};
+
+		queue.add(request);
+		request.setRetryPolicy(new DefaultRetryPolicy(
+				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
 	}
 
 	@ViewInject(R.id.fi_my_intro)
@@ -658,67 +699,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 		}
 	}
 
-	// 登出
-	public void loginOut() {
-		showAlertDialog();
-	}
 
-	public void showAlertDialog() {
-
-		CustomDialog.Builder builder = new CustomDialog.Builder(getActivity());
-		builder.setMessage("确认退出后，将无法接收新消息");
-		builder.setTitle("退出提示");
-		builder.setNegativeButton("确 定", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				ApplicationControl.getInstance().logout(new EMCallBack() {
-					@Override
-					public void onSuccess() {
-						getActivity().runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								Editor edit = sp.edit();
-								edit.putString("userId", "");
-								edit.putString("token", "");
-								edit.commit();
-								ConstantForSaveList.usersNick = new ArrayList<HuanxinUser>();// 置空
-								getActivity().finish();
-								// carson 点击退出账号时，关闭之前的界面
-
-								if (FindPJLoginActivity.instance != null) {
-									FindPJLoginActivity.instance.finish();
-								}
-
-								if (MainTabActivity.instens != null) {
-									MainTabActivity.instens.finish();
-								}
-							}
-
-						});
-					}
-
-					@Override
-					public void onProgress(int arg0, String arg1) {
-
-					}
-
-					@Override
-					public void onError(int arg0, String arg1) {
-
-					}
-				});
-
-			}
-		});
-
-		builder.setPositiveButton("点错了", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-
-			}
-		});
-		builder.create().show();
-	}
 
 //	protected void getMoneyPool() {
 //		TextView text = (TextView) view.findViewById(R.id.moneyPool);
