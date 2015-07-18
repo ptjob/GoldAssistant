@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.parttime.publish.PublishJobActivity">
+    tools:context="com.parttime.publish.JobTypeActivity">
 
     <include layout="@layout/activity_common_head" />
 

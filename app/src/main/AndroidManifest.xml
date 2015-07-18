@@ -869,7 +869,11 @@
 
         <!-- 发布兼职 -->
         <activity
-            android:name="com.parttime.publish.PublishJobActivity"
+            android:name="com.parttime.publish.JobTypeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.publish.WriteJobActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
     </application>

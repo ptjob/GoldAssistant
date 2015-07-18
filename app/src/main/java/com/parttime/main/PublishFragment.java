@@ -22,7 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.droid.carson.Activity01;
 import com.parttime.constants.SharedPreferenceConstants;
-import com.parttime.publish.PublishJobActivity;
+import com.parttime.publish.JobTypeActivity;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -99,7 +99,7 @@ public class PublishFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.btn_publish_job).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PublishJobActivity.class));
+                startActivity(new Intent(getActivity(), JobTypeActivity.class));
             }
         });
 

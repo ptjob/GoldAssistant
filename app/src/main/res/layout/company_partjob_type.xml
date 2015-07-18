@@ -36,7 +36,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="派  发"
+            android:text="派发"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
 
@@ -49,7 +49,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="促  销"
+            android:text="促销"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
 
@@ -62,7 +62,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="家  教"
+            android:text="礼仪"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
     </LinearLayout>
@@ -83,7 +83,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="服务员"
+            android:text="家教"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
 
@@ -96,7 +96,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="礼  仪"
+            android:text="服务员"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
 
@@ -109,7 +109,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="安保人员"
+            android:text="主持"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
     </LinearLayout>
@@ -130,7 +130,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="模  特"
+            android:text="安保人员"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
 
@@ -143,7 +143,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="主  持"
+            android:text="模特"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
 
@@ -156,7 +156,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="翻  译"
+            android:text="话务员"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
     </LinearLayout>
@@ -177,7 +177,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="工作人员"
+            android:text="翻译"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
 
@@ -190,7 +190,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="话  务"
+            android:text="工作人员"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
 
@@ -203,7 +203,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="充  场"
+            android:text="访谈"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
     </LinearLayout>
@@ -225,7 +225,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="演  艺"
+            android:text="充场"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
 
@@ -238,7 +238,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="访  谈"
+            android:text="演艺"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
 
@@ -251,7 +251,7 @@
             android:layout_weight="0.3"
             android:background="@drawable/type_selector"
             android:gravity="center"
-            android:text="其  他"
+            android:text="其他"
             android:textColor="@drawable/selector_setting_txt"
             android:textSize="@dimen/myjianli" />
     </LinearLayout>

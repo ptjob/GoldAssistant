@@ -16,12 +16,12 @@ import com.quark.guanli.WritePartjobActivity;
 import com.quark.jianzhidaren.BaseActivity;
 
 /**
- * 发布兼职
+ * 选择兼职类型
  * 
  * @author Administrator
  * 
  */
-public class PublishJobActivity extends BaseActivity {
+public class JobTypeActivity extends BaseActivity {
 
 	@ViewInject(R.id.type_paifa)
 	Button type_paifa;
@@ -53,7 +53,7 @@ public class PublishJobActivity extends BaseActivity {
 	Button type_fangtan;
 	@ViewInject(R.id.type_qita)
 	Button type_qita;
-	public static PublishJobActivity intanse;
+	public static JobTypeActivity intanse;
 	private SharedPreferences sp;
 	private RelativeLayout topLayout;
 
@@ -136,7 +136,7 @@ public class PublishJobActivity extends BaseActivity {
 	public void publicPartjob(final Button button) {
 		Intent intent = new Intent();
 		intent.putExtra("type", button.getText().toString());
-		intent.setClass(PublishJobActivity.this, WritePartjobActivity.class);
+		intent.setClass(JobTypeActivity.this, WritePartjobActivity.class);
 		startActivity(intent);
 	}
 
