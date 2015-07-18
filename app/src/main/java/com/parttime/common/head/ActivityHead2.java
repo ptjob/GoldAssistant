@@ -40,6 +40,11 @@ public class ActivityHead2 extends ActivityHead {
         centerTxt2.setVisibility(View.VISIBLE);
     }
 
+    public void setCenterTxt2(String text){
+        centerTxt2.setText(text);
+        centerTxt2.setVisibility(View.VISIBLE);
+    }
+
     public void setImgRight1(int resDrawable){
         imgRight1.setImageResource(resDrawable);
         imgRightContainer1.setVisibility(View.VISIBLE);

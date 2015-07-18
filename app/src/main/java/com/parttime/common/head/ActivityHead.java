@@ -31,4 +31,10 @@ public class ActivityHead{
         centerTxt1.setText(resStr);
         centerTxt1.setVisibility(View.VISIBLE);
     }
+
+    public void setCenterTxt1(String text){
+        centerTxt1.setText(text);
+        centerTxt1.setVisibility(View.VISIBLE);
+    }
+
 }

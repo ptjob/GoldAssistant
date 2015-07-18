@@ -497,6 +497,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide">
         </activity>
+        <!--群组设置-->
+        <activity
+            android:name="com.parttime.IM.setting.GroupSettingActivity"
+            android:label="@string/title_activity_edit_group_notice"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide">
+        </activity>
         <!-- 添加好友 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.AddContactActivity"

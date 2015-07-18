@@ -31,13 +31,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMContact;
@@ -60,25 +54,16 @@ import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
 import com.parttime.main.adapter.ChatAllHistoryAdapter;
-import com.parttime.net.BaseResponse;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.MessageSet;
 import com.qingmu.jianzhidaren.R;
 import com.quark.citylistview.CharacterParser;
-import com.quark.common.JsonUtil;
 import com.quark.common.ToastUtil;
-import com.quark.common.Url;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.HuanxinUser;
 import com.quark.quanzi.MyContactlistFragment;
-import com.quark.quanzi.PinyinComparator_quanzhi;
-import com.quark.quanzi.PinyinComparator_quanzhitwo;
 import com.quark.volley.VolleySington;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -124,8 +109,8 @@ public class MessageAndAddressFragment extends Fragment {
 	/**
 	 * 根据拼音来排列ListView里面的数据类
 	 */
-	private PinyinComparator_quanzhi pinyinComparator;
-	private PinyinComparator_quanzhitwo pinyinComparatorTwo;
+	private PinyinComparator pinyinComparator;
+	private PinyinComparatorByHeader pinyinComparatorTwo;
 	private RelativeLayout topRelativeLayout;// 上方
 
     protected Addressbook addressbook = new Addressbook();
@@ -263,8 +248,8 @@ public class MessageAndAddressFragment extends Fragment {
         // ******************通讯录、联系人****************************
         // 实例化汉字转拼音类 加
         characterParser = CharacterParser.getInstance();
-        pinyinComparator = new PinyinComparator_quanzhi();
-        pinyinComparatorTwo = new PinyinComparator_quanzhitwo();
+        pinyinComparator = new PinyinComparator();
+        pinyinComparatorTwo = new PinyinComparatorByHeader();
         contactlistView = (ListView) page2.findViewById(R.id.list);
         sidebar = (Sidebar) page2.findViewById(R.id.sidebar);
         sidebar.setListView(contactlistView);
@@ -986,8 +971,12 @@ public class MessageAndAddressFragment extends Fragment {
                     contactList.get(i).setHeader("#");
                 }
             }
-            Collections.sort(usersNick, pinyinComparator);
-            Collections.sort(contactList, pinyinComparatorTwo);
+            if(usersNick != null && pinyinComparator != null) {
+                Collections.sort(usersNick, pinyinComparator);
+            }
+            if(contactList != null && pinyinComparatorTwo != null) {
+                Collections.sort(contactList, pinyinComparatorTwo);
+            }
 
             // 列表中头两条是群和通知 所以从联系人进来的 usersNick真实数据应该从第三条开始（开始两条为空）
             HuanxinUser nullhx = new HuanxinUser();

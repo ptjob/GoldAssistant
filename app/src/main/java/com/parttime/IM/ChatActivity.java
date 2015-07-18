@@ -92,6 +92,7 @@ import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.EMLog;
 import com.easemob.util.PathUtil;
 import com.easemob.util.VoiceRecorder;
+import com.parttime.IM.setting.GroupSettingActivity;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.utils.SharePreferenceUtil;
@@ -392,14 +393,23 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             findViewById(R.id.container_voice_call).setVisibility(View.GONE);
             toChatUsername = getIntent().getStringExtra("groupId");
             group = EMGroupManager.getInstance().getGroup(toChatUsername);
-            try {
-                EMGroup returnGroup = EMGroupManager.getInstance()
-                        .getGroupFromServer(toChatUsername);
-                // 更新本地数据
-                EMGroupManager.getInstance().createOrUpdateLocalGroup(
-                        returnGroup);
-            }catch (Exception ignore){
-            }
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        EMGroup returnGroup = EMGroupManager.getInstance()
+                                .getGroupFromServer(toChatUsername);
+                        // 更新本地数据
+                        EMGroupManager.getInstance().createOrUpdateLocalGroup(
+                                returnGroup);
+                        if (group != null) {
+                            setGroupChatTitle();
+                        }
+                    }catch (Exception ignore){
+
+                    }
+                }
+            }).start();
             if (group != null) {
                 setGroupChatTitle();
             }
@@ -510,10 +520,11 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     private void setGroupChatTitle() {
         StringBuilder chatGroupNameAndMemberCount = new StringBuilder();
         String groupName = group.getGroupName();
-        chatGroupNameAndMemberCount.append(groupName).append("(");
+        chatGroupNameAndMemberCount.append(groupName);
         //数量包括群主
         int memberCount = group.getAffiliationsCount();
         if(memberCount > 0){
+            chatGroupNameAndMemberCount.append("(");
             chatGroupNameAndMemberCount.append(memberCount).append(")");
         }
         ((TextView) findViewById(R.id.name)).setText(chatGroupNameAndMemberCount.toString());
@@ -1182,8 +1193,11 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
      * @param view View
      */
     public void toGroupDetails(View view) {
-        startActivityForResult(
+        /*startActivityForResult(
                 (new Intent(this, GroupDetailsActivity.class).putExtra(
+                        "groupId", toChatUsername)), REQUEST_CODE_GROUP_DETAIL);*/
+        startActivityForResult(
+                (new Intent(this, GroupSettingActivity.class).putExtra(
                         "groupId", toChatUsername)), REQUEST_CODE_GROUP_DETAIL);
     }
 
