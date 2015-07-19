@@ -1,18 +1,15 @@
 package com.parttime.publish;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.common.head.ActivityHead;
 import com.qingmu.jianzhidaren.R;
-import com.quark.guanli.WritePartjobActivity;
 import com.quark.jianzhidaren.BaseActivity;
 
 /**
@@ -53,23 +50,16 @@ public class JobTypeActivity extends BaseActivity {
 	Button type_fangtan;
 	@ViewInject(R.id.type_qita)
 	Button type_qita;
-	public static JobTypeActivity intanse;
-	private SharedPreferences sp;
-	private RelativeLayout topLayout;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.company_partjob_type);
+		setContentView(R.layout.activity_job_type);
 		ViewUtils.inject(this);
-		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
-		topLayout = (RelativeLayout) findViewById(R.id.top_title_layout);
-			topLayout.setBackgroundColor(getResources().getColor(
-					R.color.guanli_common_color));
-		TextView tv = (TextView) findViewById(R.id.title);
-		tv.setText("发布兼职");
+        ActivityHead activityHead = new ActivityHead();
+        activityHead.initHead(this);
+        activityHead.setCenterTxt1("发布兼职");
 		setBackButton();
-		intanse = this;
 	}
 
 	@OnClick({ R.id.type_paifa, R.id.type_cxiao, R.id.type_jiajiao,
@@ -135,9 +125,14 @@ public class JobTypeActivity extends BaseActivity {
 
 	public void publicPartjob(final Button button) {
 		Intent intent = new Intent();
-		intent.putExtra("type", button.getText().toString());
-		intent.setClass(JobTypeActivity.this, WritePartjobActivity.class);
+		intent.putExtra(WriteJobActivity.EXTRA_TYPE, button.getText().toString());
+		intent.setClass(JobTypeActivity.this, WriteJobActivity.class);
 		startActivity(intent);
 	}
+
+    @Override
+    public void setBackButton() {
+
+    }
 
 }

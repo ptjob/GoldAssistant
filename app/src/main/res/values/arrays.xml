@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string-array name="pay_type">
+        <item>日结</item>
+        <item>月结</item>
+        <item>周结</item>
+        <item>完工结</item>
+    </string-array>
 </resources>

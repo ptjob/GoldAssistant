@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/public_button_hollow_pressed_solod" />
+
+    <stroke
+        android:width="@dimen/public_line_0.5"
+        android:color="@color/public_button_hollow_stroke" />
+
+    <corners android:radius="@dimen/public_button_radius" />
+</shape> 

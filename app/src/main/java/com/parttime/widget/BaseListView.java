@@ -22,5 +22,8 @@ public class BaseListView extends ListView {
     private void init() {
         setOverScrollMode(OVER_SCROLL_NEVER);
         setBackgroundColor(Color.WHITE);
+        setFadingEdgeLength(0);
+        setScrollingCacheEnabled(false);
+        setCacheColorHint(0);
     }
 }

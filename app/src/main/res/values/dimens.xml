@@ -1,4 +1,25 @@
 <resources>
+
+    <!-- 公共 -->
+    <dimen name="public_button_radius">3dp</dimen>
+    <dimen name="public_button_radius_1">5dp</dimen>
+    <dimen name="public_line_0.5">0.5dp</dimen>
+    <dimen name="public_line_1">1dp</dimen>
+
+    <!-- 表单 -->
+    <dimen name="form_label_height">32dp</dimen>
+    <dimen name="form_label_padding_left_right">15dp</dimen>
+    <dimen name="form_label_padding_top_bottom">9dp</dimen>
+    <dimen name="form_label_text_size">13sp</dimen>
+    <dimen name="form_input_padding_left_right">15dp</dimen>
+    <dimen name="form_input_padding_top_bottom">13dp</dimen>
+    <dimen name="form_text_size">15sp</dimen>
+    <dimen name="form_input_s_height">179dp</dimen>
+    <dimen name="form_input_s_padding_top_bottom">10dp</dimen>
+    <dimen name="form_input_s_tip_text_size">13sp</dimen>
+    <dimen name="form_divider_height">20dp</dimen>
+
+
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
@@ -82,4 +103,16 @@
     <dimen name="counting_edit_text_height">150dp</dimen>
     <dimen name="counting_text_default_size">15dp</dimen>
     <dimen name="counting_bar_default_height">30dp</dimen>
+
+    <!-- 招人 -->
+    <dimen name="job_type_content_padding_left_right">37dp</dimen>
+    <dimen name="job_type_item_height">33dp</dimen>
+    <dimen name="job_type_title_text_size">16sp</dimen>
+    <dimen name="job_type_item_text_size">14sp</dimen>
+    <dimen name="job_type_tip_text_size">12sp</dimen>
+    <dimen name="job_type_item_margin_left_right">15dp</dimen>
+    <dimen name="job_type_item_margin_top_bottom">10dp</dimen>
+
+
+
 </resources>

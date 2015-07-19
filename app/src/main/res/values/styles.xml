@@ -402,5 +402,103 @@
         <item name="android:gravity">right</item>
     </style>
 
+    <!-- 表单 -->
+    <style name="PublicLineH">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/public_line_1</item>
+        <item name="android:background">@color/public_line</item>
+    </style>
+
+    <style name="PublicLineH_1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/public_line_0.5</item>
+        <item name="android:background">@color/public_line</item>
+    </style>
+
+    <style name="PublicLineV">
+        <item name="android:layout_width">@dimen/public_line_1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/public_line</item>
+    </style>
+
+    <style name="FormLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">@dimen/form_label_height</item>
+        <item name="android:paddingBottom">@dimen/form_label_padding_top_bottom</item>
+        <item name="android:paddingLeft">@dimen/form_label_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/form_label_padding_left_right</item>
+        <item name="android:paddingTop">@dimen/form_label_padding_top_bottom</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:textColor">@color/black_1</item>
+        <item name="android:textSize">@dimen/form_label_text_size</item>
+    </style>
+
+    <style name="FormInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/form_input_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/form_input_padding_left_right</item>
+        <item name="android:background">@color/bg_1</item>
+        <item name="android:textColorHint">@color/form_input_hint_color</item>
+        <item name="android:paddingTop">@dimen/form_input_padding_top_bottom</item>
+        <item name="android:paddingBottom">@dimen/form_input_padding_top_bottom</item>
+        <item name="android:textSize">@dimen/form_text_size</item>
+        <item name="android:textColor">@color/black_1</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="FormInput_S" parent="FormInput">
+        <item name="android:layout_height">@dimen/form_input_s_height</item>
+        <item name="android:paddingTop">@dimen/form_input_s_padding_top_bottom</item>
+        <item name="android:paddingBottom">@dimen/form_input_s_padding_top_bottom</item>
+        <item name="android:gravity">top|left</item>
+    </style>
+
+    <style name="FormInput_S_Tip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">right|bottom</item>
+        <item name="android:layout_marginRight">@dimen/form_input_padding_left_right</item>
+        <item name="android:layout_marginBottom">@dimen/form_input_s_padding_top_bottom</item>
+        <item name="android:textColor">@color/form_input_hint_color</item>
+        <item name="android:textSize">@dimen/form_input_s_tip_text_size</item>
+    </style>
+
+    <style name="FormSelect">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/form_input_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/form_input_padding_left_right</item>
+        <item name="android:background">@color/bg_1</item>
+        <item name="android:textColorHint">@color/form_input_hint_color</item>
+        <item name="android:paddingTop">@dimen/form_input_padding_top_bottom</item>
+        <item name="android:paddingBottom">@dimen/form_input_padding_top_bottom</item>
+        <item name="android:drawableRight">@drawable/btn_go</item>
+        <item name="android:textColor">@color/black_1</item>
+        <item name="android:textSize">@dimen/form_text_size</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="FormCheckbox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/form_input_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/form_input_padding_left_right</item>
+        <item name="android:background">@drawable/selector_form_checkbox</item>
+        <item name="android:paddingTop">@dimen/form_input_padding_top_bottom</item>
+        <item name="android:paddingBottom">@dimen/form_input_padding_top_bottom</item>
+        <item name="android:textSize">@dimen/form_text_size</item>
+        <item name="android:textColor">@color/color_form_checkbox_text</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+    </style>
+
+    <style name="FormDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/form_divider_height</item>
+    </style>
+
 
 </resources>
