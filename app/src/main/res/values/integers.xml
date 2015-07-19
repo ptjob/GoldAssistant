@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="work_require_max_length">1000</integer>
+    <integer name="work_require_min_length">10</integer>
+    <integer name="work_address_max_length">20</integer>
+    <integer name="work_address_min_length">4</integer>
 </resources>

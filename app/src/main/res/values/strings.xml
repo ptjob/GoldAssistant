@@ -288,6 +288,7 @@
     <string name="publish_job_label_work_area">工作区域</string>
     <string name="publish_job_label_work_address">详细地点</string>
     <string name="publish_job_label_salary">工资薪酬</string>
+    <string name="publish_job_label_salary_unit">薪酬单位</string>
     <string name="publish_job_label_sex">指定性别</string>
     <string name="publish_job_label_work_require">工作要求和内容</string>
     <string name="publish_job_label_more_require">更多要求（语言、身材、健康证）</string>
@@ -304,6 +305,9 @@
     <string name="publish_job_label_male_num">男生人数</string>
     <string name="publish_job_label_female_num">女生人数</string>
     <string name="publish_job_tip_work_require">%1$d/1000</string>
+    <string name="publish_job_form_uninput_warn_format">%1$s尚未填写</string>
+    <string name="publish_job_form_salary_format_error">工资薪酬必须是整数</string>
+    <string name="publish_job_preview_title">活动预览</string>
 
     <!-- 管理兼职 -->
 

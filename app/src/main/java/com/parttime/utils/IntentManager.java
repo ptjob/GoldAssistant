@@ -1,9 +1,12 @@
 package com.parttime.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 import com.parttime.common.activity.ChooseListActivity;
+import com.parttime.pojo.PartJob;
+import com.parttime.publish.JobDetailActivity;
 
 /**
  * Intent启动辅助类
@@ -19,5 +22,18 @@ public class IntentManager {
         intent.putExtra(ChooseListActivity.EXTRA_TITLE, title);
         intent.putExtra(ChooseListActivity.EXTRA_DATA, data);
         activity.startActivityForResult(intent, requestCode);
+    }
+
+    public static void openJobDetailActivity(Context context, PartJob partJob) {
+        Intent intent = new Intent(context, JobDetailActivity.class);
+        intent.putExtra(JobDetailActivity.EXTRA_PART_JOB, partJob);
+        context.startActivity(intent);
+    }
+
+    public static void openJobDetailActivity(Context context, int jobId, int companyId) {
+        Intent intent = new Intent(context, JobDetailActivity.class);
+        intent.putExtra(JobDetailActivity.EXTRA_ID, jobId);
+        intent.putExtra(JobDetailActivity.EXTRA_COMPANY_ID, companyId);
+        context.startActivity(intent);
     }
 }

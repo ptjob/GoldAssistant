@@ -137,11 +137,11 @@ public class EditMyIntroActivity extends WithTitleActivity {
         final int cFullFillWidth = 10000;
         layout.setMinimumWidth(cFullFillWidth);
 
-        TextView mContent = (TextView) layout.findViewById(R.id.content);// ÅÄÕÕÉÏ´«
+        TextView mContent = (TextView) layout.findViewById(R.id.content);// ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½
         TextView mCancel = (TextView) layout.findViewById(R.id.cancel);
-        TextView mTitle = (TextView) layout.findViewById(R.id.title);// Ïà²áÖÐÑ¡Ôñ
+        TextView mTitle = (TextView) layout.findViewById(R.id.title);// ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
 
-        // ÅÄÕÕÉÏ´«
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½
         mContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,7 +156,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
                 } else {
 
                     Toast mToast = Toast.makeText(EditMyIntroActivity.this,
-                            "Î´ÕÒµ½´æ´¢¿¨£¬ÎÞ·¨´æ´¢ÕÕÆ¬£¡", Toast.LENGTH_LONG);
+                            "Î´ï¿½Òµï¿½ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½æ´¢ï¿½ï¿½Æ¬ï¿½ï¿½", Toast.LENGTH_LONG);
                     mToast.setGravity(Gravity.CENTER, 0, 0);
                     mToast.show();
                 }
@@ -170,7 +170,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
             @Override
             public void onClick(View v) {
                 Intent intentFromGallery = new Intent();
-                intentFromGallery.setType("image/*"); // ÉèÖÃÎÄ¼þÀàÐÍ
+                intentFromGallery.setType("image/*"); // ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
                 intentFromGallery.setAction(Intent.ACTION_PICK);
                 startActivityForResult(intentFromGallery, IMAGE_REQUEST_CODE);
                 dlg.dismiss();
@@ -203,7 +203,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
         if (data.getData() != null) {
             startPhotoZoom(data.getData(), 300, 300);
         } else {
-            Toast mToast = Toast.makeText(this, "»ñÈ¡Í¼Æ¬Ê§°Ü¡£¡£¡£",
+            Toast mToast = Toast.makeText(this, "ï¿½ï¿½È¡Í¼Æ¬Ê§ï¿½Ü¡ï¿½ï¿½ï¿½ï¿½ï¿½",
                     Toast.LENGTH_LONG);
             mToast.setGravity(Gravity.CENTER, 0, 0);
             mToast.show();
@@ -221,11 +221,11 @@ public class EditMyIntroActivity extends WithTitleActivity {
             userPhotoBmp = BitmapFactory.decodeFile(
                     Environment.getExternalStorageDirectory() + "/"
                             + IMAGE_FILE_NAME, opt);
-            // »ñÈ¡µ½Õâ¸öÍ¼Æ¬µÄÔ­Ê¼¿í¶ÈºÍ¸ß¶È
+            // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ÈºÍ¸ß¶ï¿½
             int picWidth = opt.outWidth;
             int picHeight = opt.outHeight;
 
-            // »ñÈ¡ÆÁµÄ¿í¶ÈºÍ¸ß¶È
+            // ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ä¿ï¿½ÈºÍ¸ß¶ï¿½
             WindowManager windowManager = getWindowManager();
             Display display = windowManager.getDefaultDisplay();
             int screenWidth = display.getWidth();
@@ -267,32 +267,32 @@ public class EditMyIntroActivity extends WithTitleActivity {
                 startPhotoZoom(tt_uri, 300, 300);
             } else {
                 Toast mToast = Toast.makeText(this,
-                        "Î´ÕÒµ½´æ´¢¿¨£¬ÎÞ·¨´æ´¢ÕÕÆ¬£¡", Toast.LENGTH_LONG);
+                        "Î´ï¿½Òµï¿½ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½æ´¢ï¿½ï¿½Æ¬ï¿½ï¿½", Toast.LENGTH_LONG);
                 mToast.setGravity(Gravity.CENTER, 0, 0);
                 mToast.show();
             }
         } else {
 
             Toast mToast = Toast.makeText(this,
-                    "Î´ÕÒµ½´æ´¢¿¨£¬ÎÞ·¨´æ´¢ÕÕÆ¬£¡", Toast.LENGTH_LONG);
+                    "Î´ï¿½Òµï¿½ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½æ´¢ï¿½ï¿½Æ¬ï¿½ï¿½", Toast.LENGTH_LONG);
             mToast.setGravity(Gravity.CENTER, 0, 0);
             mToast.show();
         }
     }
 
     /**
-     * ¶ÁÈ¡Í¼Æ¬µÄÐý×ªµÄ½Ç¶È
+     * ï¿½ï¿½È¡Í¼Æ¬ï¿½ï¿½ï¿½ï¿½×ªï¿½Ä½Ç¶ï¿½
      *
      * @param path
-     *            Í¼Æ¬¾ø¶ÔÂ·¾¶
-     * @return Í¼Æ¬µÄÐý×ª½Ç¶È
+     *            Í¼Æ¬ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+     * @return Í¼Æ¬ï¿½ï¿½ï¿½ï¿½×ªï¿½Ç¶ï¿½
      */
     private int getBitmapDegree(String path) {
         int degree = 0;
         try {
-            // ´ÓÖ¸¶¨Â·¾¶ÏÂ¶ÁÈ¡Í¼Æ¬£¬²¢»ñÈ¡ÆäEXIFÐÅÏ¢
+            // ï¿½ï¿½Ö¸ï¿½ï¿½Â·ï¿½ï¿½ï¿½Â¶ï¿½È¡Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½EXIFï¿½ï¿½Ï¢
             ExifInterface exifInterface = new ExifInterface(path);
-            // »ñÈ¡Í¼Æ¬µÄÐý×ªÐÅÏ¢
+            // ï¿½ï¿½È¡Í¼Æ¬ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Ï¢
             int orientation = exifInterface.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION,
                     ExifInterface.ORIENTATION_NORMAL);
@@ -314,22 +314,22 @@ public class EditMyIntroActivity extends WithTitleActivity {
     }
 
     /**
-     * ½«Í¼Æ¬°´ÕÕÄ³¸ö½Ç¶È½øÐÐÐý×ª
+     * ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½Ç¶È½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
      *
      * @param bm
-     *            ÐèÒªÐý×ªµÄÍ¼Æ¬
+     *            ï¿½ï¿½Òªï¿½ï¿½×ªï¿½ï¿½Í¼Æ¬
      * @param degree
-     *            Ðý×ª½Ç¶È
-     * @return Ðý×ªºóµÄÍ¼Æ¬
+     *            ï¿½ï¿½×ªï¿½Ç¶ï¿½
+     * @return ï¿½ï¿½×ªï¿½ï¿½ï¿½Í¼Æ¬
      */
     private Bitmap rotateBitmapByDegree(Bitmap bm, int degree) {
         Bitmap returnBm = null;
 
-        // ¸ù¾ÝÐý×ª½Ç¶È£¬Éú³ÉÐý×ª¾ØÕó
+        // ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½Ç¶È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
         Matrix matrix = new Matrix();
         matrix.postRotate(degree);
         try {
-            // ½«Ô­Ê¼Í¼Æ¬°´ÕÕÐý×ª¾ØÕó½øÐÐÐý×ª£¬²¢µÃµ½ÐÂµÄÍ¼Æ¬
+            // ï¿½ï¿½Ô­Ê¼Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½Âµï¿½Í¼Æ¬
             returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(),
                     bm.getHeight(), matrix, true);
         } catch (OutOfMemoryError e) {
@@ -344,23 +344,23 @@ public class EditMyIntroActivity extends WithTitleActivity {
     }
 
     /**
-     * ²Ã¼ôÍ¼Æ¬·½·¨ÊµÏÖ
+     * ï¿½Ã¼ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
      *
      * @param uri
      */
     public void startPhotoZoom(Uri uri, int x, int y) {
-        ConstantForSaveList.uploadUri = uri;// ÔÝÊ±´æ´¢uri Èçhtc²»ÄÜ±£´æuri
+        ConstantForSaveList.uploadUri = uri;// ï¿½ï¿½Ê±ï¿½æ´¢uri ï¿½ï¿½htcï¿½ï¿½ï¿½Ü±ï¿½ï¿½ï¿½uri
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
-        // ÉèÖÃ²Ã¼ô
+        // ï¿½ï¿½ï¿½Ã²Ã¼ï¿½
         intent.putExtra("crop", "true");
-        // aspectX aspectY ÊÇ¿í¸ßµÄ±ÈÀý
+        // aspectX aspectY ï¿½Ç¿ï¿½ßµÄ±ï¿½ï¿½ï¿½
         intent.putExtra("aspectX", x);
         intent.putExtra("aspectY", y);
-        // outputX outputY ÊÇ²Ã¼ôÍ¼Æ¬¿í¸ß
+        // outputX outputY ï¿½Ç²Ã¼ï¿½Í¼Æ¬ï¿½ï¿½ï¿½
         intent.putExtra("outputX", x);
         intent.putExtra("outputY", y);
-        intent.putExtra("noFaceDetection", true);// È¡ÏûÈËÁ³Ê¶±ð
+        intent.putExtra("noFaceDetection", true);// È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
         intent.putExtra("return-data", false);
         startActivityForResult(intent, RESULT_REQUEST_CODE);
     }

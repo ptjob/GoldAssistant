@@ -99,6 +99,7 @@
             <EditText
                 android:id="@+id/edittxt_work_address"
                 style="@style/FormInput"
+                android:maxLength="@integer/work_address_max_length"
                 android:hint="@string/publish_job_hint_work_address" />
 
             <ImageView style="@style/PublicLineH" />
@@ -108,6 +109,8 @@
                 style="@style/FormLabel"
                 android:text="@string/publish_job_label_salary" />
 
+            <ImageView style="@style/PublicLineH" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,9 +119,10 @@
                 <EditText
                     android:id="@+id/edittxt_salary"
                     style="@style/FormInput"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:hint="@string/uninput"
-                    android:inputType="numberDecimal" />
+                    android:inputType="number" />
 
                 <ImageView style="@style/PublicLineV" />
 
@@ -312,7 +316,6 @@
                         android:id="@+id/radio_need_health_prove"
                         style="@style/FormCheckbox"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:text="@string/need" />
 
                     <ImageView style="@style/PublicLineV" />

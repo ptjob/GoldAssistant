@@ -50,4 +50,8 @@ public class ActivityHead{
         rightTxt.setText(text);
         rightTxt.setVisibility(View.VISIBLE);
     }
+
+    public void setRightTxtOnClickListener(View.OnClickListener onClickListener){
+        rightTxt.setOnClickListener(onClickListener);
+    }
 }

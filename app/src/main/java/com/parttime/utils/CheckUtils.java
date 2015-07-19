@@ -1,5 +1,7 @@
 package com.parttime.utils;
 
+import android.text.TextUtils;
+
 import java.util.List;
 
 /**
@@ -17,6 +19,16 @@ public class CheckUtils {
         if (data == null || data.size() == 0) {
             return true;
         }
+        return false;
+    }
+
+    public static boolean isEmpty(String charSequence) {
+        if (charSequence == null) {
+            return true;
+        } else if (TextUtils.isEmpty(charSequence.trim())) {
+            return true;
+        }
+
         return false;
     }
 }

@@ -6,4 +6,10 @@
         <item>周结</item>
         <item>完工结</item>
     </string-array>
+
+    <string-array name="salary_unit">
+        <item>日薪</item>
+        <item>时薪</item>
+    </string-array>
+
 </resources>
