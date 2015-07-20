@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_0"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/activity_common_head" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/job_type_item_margin_top_bottom"
+        android:text="@string/publish_job_choose_type_label"
+        android:textColor="@color/black_1"
+        android:textSize="@dimen/job_type_title_text_size" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/job_type_item_margin_top_bottom"
+        android:gravity="center"
+        android:paddingLeft="@dimen/job_type_content_padding_left_right"
+        android:paddingRight="@dimen/job_type_content_padding_left_right">
+
+        <Button
+            android:id="@+id/type_paifa"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="派发"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/job_type_item_text_size" />
+
+        <Button
+            android:id="@+id/type_cxiao"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_marginLeft="@dimen/job_type_item_margin_left_right"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="促销"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/job_type_item_text_size" />
+
+        <Button
+            android:id="@+id/type_jiajiao"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_marginLeft="@dimen/job_type_item_margin_left_right"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="礼仪"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/job_type_item_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/job_type_item_margin_top_bottom"
+        android:gravity="center"
+        android:paddingLeft="@dimen/job_type_content_padding_left_right"
+        android:paddingRight="@dimen/job_type_content_padding_left_right">
+
+        <Button
+            android:id="@+id/type_fwy"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="家教"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+
+        <Button
+            android:id="@+id/type_liyi"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_marginLeft="@dimen/job_type_item_margin_left_right"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="服务员"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+
+        <Button
+            android:id="@+id/type_bary"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_marginLeft="@dimen/job_type_item_margin_left_right"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="主持"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/job_type_item_margin_top_bottom"
+        android:gravity="center"
+        android:paddingLeft="@dimen/job_type_content_padding_left_right"
+        android:paddingRight="@dimen/job_type_content_padding_left_right">
+
+        <Button
+            android:id="@+id/type_mote"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="安保人员"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+
+        <Button
+            android:id="@+id/type_zhuchi"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_marginLeft="@dimen/job_type_item_margin_left_right"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="模特"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+
+        <Button
+            android:id="@+id/type_fanyi"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_marginLeft="@dimen/job_type_item_margin_left_right"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="话务员"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/job_type_item_margin_top_bottom"
+        android:gravity="center"
+        android:paddingLeft="@dimen/job_type_content_padding_left_right"
+        android:paddingRight="@dimen/job_type_content_padding_left_right">
+
+        <Button
+            android:id="@+id/type_gongzuorenyuan"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="翻译"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+
+        <Button
+            android:id="@+id/type_huawu"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_marginLeft="@dimen/job_type_item_margin_left_right"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="工作人员"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+
+        <Button
+            android:id="@+id/type_chongchang"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_marginLeft="@dimen/job_type_item_margin_left_right"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="访谈"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/job_type_item_margin_top_bottom"
+        android:gravity="center"
+        android:paddingLeft="@dimen/job_type_content_padding_left_right"
+        android:paddingRight="@dimen/job_type_content_padding_left_right">
+
+        <Button
+            android:id="@+id/type_yanyi"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="充场"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+
+        <Button
+            android:id="@+id/type_fangtan"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_marginLeft="@dimen/job_type_item_margin_left_right"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="演艺"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+
+        <Button
+            android:id="@+id/type_qita"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_type_item_height"
+            android:layout_marginLeft="@dimen/job_type_item_margin_left_right"
+            android:layout_weight="1"
+            android:background="@drawable/selector_select"
+            android:gravity="center"
+            android:text="其他"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/myjianli" />
+    </LinearLayout>
+
+</LinearLayout>

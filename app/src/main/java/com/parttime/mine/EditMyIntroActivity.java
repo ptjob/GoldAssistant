@@ -36,8 +36,7 @@ import com.parttime.main.MainTabActivity;
 import com.parttime.type.AccountType;
 import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.widget.CountingEditText;
-import com.parttime.widget.SelectItem;
-import com.parttime.widget.CommonShowItemLayout;
+
 import com.parttime.widget.SelectLayout;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -154,7 +153,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
         TextView mCancel = (TextView) layout.findViewById(R.id.cancel);
         TextView mTitle = (TextView) layout.findViewById(R.id.title);// 相册中选择
 
-        // 拍照上传
+
         mContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -238,7 +237,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
             int picWidth = opt.outWidth;
             int picHeight = opt.outHeight;
 
-            // 获取屏的宽度和高度
+
             WindowManager windowManager = getWindowManager();
             Display display = windowManager.getDefaultDisplay();
             int screenWidth = display.getWidth();

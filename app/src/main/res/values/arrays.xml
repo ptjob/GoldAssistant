@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="pay_type">
+        <item>日结</item>
+        <item>月结</item>
+        <item>周结</item>
+        <item>完工结</item>
+    </string-array>
+
+    <string-array name="salary_unit">
+        <item>日薪</item>
+        <item>时薪</item>
+    </string-array>
 
     <string-array name="work_types">
         <item>派发</item>

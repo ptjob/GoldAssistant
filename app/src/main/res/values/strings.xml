@@ -6,9 +6,18 @@
     <!-- 公共 -->
     <string name="edit">编辑</string>
     <string name="done">完成</string>
+    <string name="unfill">未填写</string>
+    <string name="unselect">未选择</string>
+    <string name="uninput">未输入</string>
+    <string name="canblank">可留空</string>
+    <string name="unshow">不显示</string>
+    <string name="show">显示</string>
+    <string name="need">需要</string>
+    <string name="unneed">不需要</string>
+    <string name="publish">发布</string>
 
     <!-- 主界面 -->
-    <string name="publish">招人</string>
+    <string name="hiring">招人</string>
     <string name="mine">我</string>
     <string name="message">消息</string>
 
@@ -273,6 +282,33 @@
     <!-- 发布兼职 -->
     <string name="publish_job_choose_type_label">请选择兼职类型</string>
     <string name="publish_job_title">发布兼职</string>
+    <string name="publish_job_label_job_title">兼职标题</string>
+    <string name="publish_job_label_begin_time">开始时间</string>
+    <string name="publish_job_label_end_time">结束时间</string>
+    <string name="publish_job_label_pay_type">结算方式</string>
+    <string name="publish_job_label_work_area">工作区域</string>
+    <string name="publish_job_label_work_address">详细地点</string>
+    <string name="publish_job_label_salary">工资薪酬</string>
+    <string name="publish_job_label_salary_unit">薪酬单位</string>
+    <string name="publish_job_label_sex">指定性别</string>
+    <string name="publish_job_label_work_require">工作要求和内容</string>
+    <string name="publish_job_label_more_require">更多要求（语言、身材、健康证）</string>
+    <string name="publish_job_label_health_book">健康证</string>
+    <string name="publish_job_label_language">擅长语言（可多选）</string>
+    <string name="publish_job_label_height">身高</string>
+    <string name="publish_job_label_measurements">三围</string>
+    <string name="publish_job_hint_work_address">请输入4到20字详细地点</string>
+    <string name="publish_job_hint_salary_unit">请输入薪酬单位</string>
+    <string name="publish_job_hint_work_require">请输入10到1000字的工作内容和要求</string>
+    <string name="publish_job_hint_is_show_tel">是否显示您的手机号</string>
+    <string name="publish_job_checkbox_sex_unlimited">不限性别</string>
+    <string name="publish_job_checkbox_sex_limited">分招男女</string>
+    <string name="publish_job_label_male_num">男生人数</string>
+    <string name="publish_job_label_female_num">女生人数</string>
+    <string name="publish_job_tip_work_require">%1$d/1000</string>
+    <string name="publish_job_form_uninput_warn_format">%1$s尚未填写</string>
+    <string name="publish_job_form_salary_format_error">工资薪酬必须是整数</string>
+    <string name="publish_job_preview_title">活动预览</string>
 
     <!-- 管理兼职 -->
 

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- 布局 -->
+    <color name="white">#ffffff</color>
+    <color name="bg_0">#f2f2f2</color>
+    <color name="bg_1">#ffffff</color>
+
     <!--公共颜色表-->
     <color name="c_F5F5F5">#F5F5F5</color> <!-- 很浅的灰色背景&菜单分隔线 -->
     <color name="c_E2E2E2">#E2E2E2</color> <!-- 菜单和选项的边线 -->
@@ -10,6 +15,22 @@
     <color name="c_FE8800">#FE8800</color> <!--  -->
     <color name="c_A6CF4F">#A6CF4F</color> <!--  -->
     <color name="c_4BA4DE">#4BA4DE</color> <!--  -->
+
+    <!-- 文本 -->
+    <color name="black_0">#000000</color>
+    <color name="black_1">#333333</color>
+
+    <!-- 按钮 -->
+    <color name="public_button_hollow_normal_solod">#ffffff</color>
+    <color name="public_button_hollow_stroke">#e2e2e2</color>
+    <color name="public_button_hollow_pressed_solod">#c7c8cd</color>
+
+    <!-- 表单 -->
+    <color name="public_line">#cbcbcb</color>
+    <color name="form_input_hint_color">#c6cbc9</color>
+    <color name="form_checkbox_pressed">#4ba4dd</color>
+    <color name="form_button">#4ba4dd</color>
+    <color name="form_button_pressed">#31709a</color>
 
     <color name="liulanhenji">#F6F6F6</color>
     <color name="guanli_common_color">#1b1d29</color>
