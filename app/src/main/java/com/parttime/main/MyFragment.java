@@ -371,7 +371,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 //		company_hit2.setVisibility(View.GONE);
 //		company_hit3.setVisibility(View.GONE);
 //		company_hit4.setVisibility(View.GONE);
-		init_miandarao();// 获取免打扰状态
+//		init_miandarao();// 获取免打扰状态
 //		miandarao_kaiguan_on.setOnClickListener(new OnClickListener() {
 //			@Override
 //			public void onClick(View arg0) {
@@ -436,7 +436,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	}
 
 	// 默认消息免打扰
-	private void init_miandarao() {
+	/*private void init_miandarao() {
 		// showWait(true);
 		StringRequest stringRequest = new StringRequest(Method.POST,
 				get_miandarao_status_url, new Response.Listener<String>() {
@@ -476,7 +476,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 		queue.add(stringRequest);
 		stringRequest.setRetryPolicy(new DefaultRetryPolicy(
 				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
-	}
+	}*/
 
 	/**
 	 * 预加载免打扰开关

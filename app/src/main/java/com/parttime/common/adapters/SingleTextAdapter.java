@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.qingmu.jianzhidaren.R;
+
 import java.util.List;
 
 /**
@@ -40,7 +42,18 @@ public class SingleTextAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        ViewHolder holder;
+        if(convertView == null){
+            holder = new ViewHolder();
+            convertView = inflater.inflate(R.layout.item_single_text, null);
+            holder.tvName = (TextView) convertView;
+            convertView.setTag(holder);
+        }else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        Object item = getItem(position);
+        holder.tvName.setText(item.toString());
+        return convertView;
     }
 
     public class ViewHolder {

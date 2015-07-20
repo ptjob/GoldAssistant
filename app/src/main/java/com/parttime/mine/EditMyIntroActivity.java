@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,12 +31,14 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.base.WithTitleActivity;
 import com.parttime.common.Image.ContactImageLoader;
-import com.parttime.common.adapters.SingleTextAdapter;
 import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.main.MainTabActivity;
 import com.parttime.type.AccountType;
 import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.widget.CountingEditText;
+import com.parttime.widget.SelectItem;
+import com.parttime.widget.CommonShowItemLayout;
+import com.parttime.widget.SelectLayout;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.image.UploadImg;
@@ -45,6 +46,8 @@ import com.quark.utils.Util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cjz on 2015/7/12.
@@ -61,16 +64,17 @@ public class EditMyIntroActivity extends WithTitleActivity {
 
     @ViewInject(R.id.cet_intro)
     private CountingEditText cetIntro;
-    @ViewInject(R.id.gv_types)
-    private GridView gv;
+    @ViewInject(R.id.sl_work_types)
+    private SelectLayout slWorkTypes;
     @ViewInject(R.id.iv_head_image)
     private ImageView ivHead;
-    private SingleTextAdapter adapter;
 
     private Bitmap userPhotoBmp = null;
     private String userId;
     private int userType;
     private Bitmap head;
+//    private List<Object> workTypes;
+    private String[] workTypes;
 
 
 
@@ -93,8 +97,9 @@ public class EditMyIntroActivity extends WithTitleActivity {
         if(head != null) {
             ivHead.setImageBitmap(head);
         }
-        if(userType != AccountType.AGENT){
-            gv.setVisibility(View.GONE);
+        if(userType == AccountType.AGENT){
+
+            slWorkTypes.setVisibility(View.VISIBLE);
         }
     }
 
@@ -120,7 +125,14 @@ public class EditMyIntroActivity extends WithTitleActivity {
     }
 
     protected void loadData(){
+        if(userType == AccountType.AGENT){
+            workTypes = getResources().getStringArray(R.array.work_types);
 
+            for(int i = 0; i < workTypes.length; ++i){
+                slWorkTypes.add(workTypes[i]);
+            }
+
+        }
     }
 
     @OnClick(R.id.iv_head_image)
@@ -137,11 +149,12 @@ public class EditMyIntroActivity extends WithTitleActivity {
         final int cFullFillWidth = 10000;
         layout.setMinimumWidth(cFullFillWidth);
 
-        TextView mContent = (TextView) layout.findViewById(R.id.content);// ÅÄÕÕÉÏ´«
+        TextView mContent = (TextView) layout.findViewById(R.id.content);//
+        // æ‹ç…§ä¸Šä¼ 
         TextView mCancel = (TextView) layout.findViewById(R.id.cancel);
-        TextView mTitle = (TextView) layout.findViewById(R.id.title);// Ïà²áÖÐÑ¡Ôñ
+        TextView mTitle = (TextView) layout.findViewById(R.id.title);// ç›¸å†Œä¸­é€‰æ‹©
 
-        // ÅÄÕÕÉÏ´«
+        // æ‹ç…§ä¸Šä¼ 
         mContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,7 +169,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
                 } else {
 
                     Toast mToast = Toast.makeText(EditMyIntroActivity.this,
-                            "Î´ÕÒµ½´æ´¢¿¨£¬ÎÞ·¨´æ´¢ÕÕÆ¬£¡", Toast.LENGTH_LONG);
+                            "æœªæ‰¾åˆ°å­˜å‚¨å¡ï¼Œæ— æ³•å­˜å‚¨ç…§ç‰‡ï¼", Toast.LENGTH_LONG);
                     mToast.setGravity(Gravity.CENTER, 0, 0);
                     mToast.show();
                 }
@@ -170,7 +183,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
             @Override
             public void onClick(View v) {
                 Intent intentFromGallery = new Intent();
-                intentFromGallery.setType("image/*"); // ÉèÖÃÎÄ¼þÀàÐÍ
+                intentFromGallery.setType("image/*"); // è®¾ç½®æ–‡ä»¶ç±»åž‹
                 intentFromGallery.setAction(Intent.ACTION_PICK);
                 startActivityForResult(intentFromGallery, IMAGE_REQUEST_CODE);
                 dlg.dismiss();
@@ -203,7 +216,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
         if (data.getData() != null) {
             startPhotoZoom(data.getData(), 300, 300);
         } else {
-            Toast mToast = Toast.makeText(this, "»ñÈ¡Í¼Æ¬Ê§°Ü¡£¡£¡£",
+            Toast mToast = Toast.makeText(this, "èŽ·å–å›¾ç‰‡å¤±è´¥ã€‚ã€‚ã€‚",
                     Toast.LENGTH_LONG);
             mToast.setGravity(Gravity.CENTER, 0, 0);
             mToast.show();
@@ -221,11 +234,11 @@ public class EditMyIntroActivity extends WithTitleActivity {
             userPhotoBmp = BitmapFactory.decodeFile(
                     Environment.getExternalStorageDirectory() + "/"
                             + IMAGE_FILE_NAME, opt);
-            // »ñÈ¡µ½Õâ¸öÍ¼Æ¬µÄÔ­Ê¼¿í¶ÈºÍ¸ß¶È
+            // èŽ·å–åˆ°è¿™ä¸ªå›¾ç‰‡çš„åŽŸå§‹å®½åº¦å’Œé«˜åº¦
             int picWidth = opt.outWidth;
             int picHeight = opt.outHeight;
 
-            // »ñÈ¡ÆÁµÄ¿í¶ÈºÍ¸ß¶È
+            // èŽ·å–å±çš„å®½åº¦å’Œé«˜åº¦
             WindowManager windowManager = getWindowManager();
             Display display = windowManager.getDefaultDisplay();
             int screenWidth = display.getWidth();
@@ -267,32 +280,32 @@ public class EditMyIntroActivity extends WithTitleActivity {
                 startPhotoZoom(tt_uri, 300, 300);
             } else {
                 Toast mToast = Toast.makeText(this,
-                        "Î´ÕÒµ½´æ´¢¿¨£¬ÎÞ·¨´æ´¢ÕÕÆ¬£¡", Toast.LENGTH_LONG);
+                        "æœªæ‰¾åˆ°å­˜å‚¨å¡ï¼Œæ— æ³•å­˜å‚¨ç…§ç‰‡ï¼", Toast.LENGTH_LONG);
                 mToast.setGravity(Gravity.CENTER, 0, 0);
                 mToast.show();
             }
         } else {
 
             Toast mToast = Toast.makeText(this,
-                    "Î´ÕÒµ½´æ´¢¿¨£¬ÎÞ·¨´æ´¢ÕÕÆ¬£¡", Toast.LENGTH_LONG);
+                    "æœªæ‰¾åˆ°å­˜å‚¨å¡ï¼Œæ— æ³•å­˜å‚¨ç…§ç‰‡ï¼", Toast.LENGTH_LONG);
             mToast.setGravity(Gravity.CENTER, 0, 0);
             mToast.show();
         }
     }
 
     /**
-     * ¶ÁÈ¡Í¼Æ¬µÄÐý×ªµÄ½Ç¶È
+     * è¯»å–å›¾ç‰‡çš„æ—‹è½¬çš„è§’åº¦
      *
      * @param path
-     *            Í¼Æ¬¾ø¶ÔÂ·¾¶
-     * @return Í¼Æ¬µÄÐý×ª½Ç¶È
+     *            å›¾ç‰‡ç»å¯¹è·¯å¾„
+     * @return å›¾ç‰‡çš„æ—‹è½¬è§’åº¦
      */
     private int getBitmapDegree(String path) {
         int degree = 0;
         try {
-            // ´ÓÖ¸¶¨Â·¾¶ÏÂ¶ÁÈ¡Í¼Æ¬£¬²¢»ñÈ¡ÆäEXIFÐÅÏ¢
+            // ä»ŽæŒ‡å®šè·¯å¾„ä¸‹è¯»å–å›¾ç‰‡ï¼Œå¹¶èŽ·å–å…¶EXIFä¿¡æ¯
             ExifInterface exifInterface = new ExifInterface(path);
-            // »ñÈ¡Í¼Æ¬µÄÐý×ªÐÅÏ¢
+            // èŽ·å–å›¾ç‰‡çš„æ—‹è½¬ä¿¡æ¯
             int orientation = exifInterface.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION,
                     ExifInterface.ORIENTATION_NORMAL);
@@ -314,22 +327,22 @@ public class EditMyIntroActivity extends WithTitleActivity {
     }
 
     /**
-     * ½«Í¼Æ¬°´ÕÕÄ³¸ö½Ç¶È½øÐÐÐý×ª
+     * å°†å›¾ç‰‡æŒ‰ç…§æŸä¸ªè§’åº¦è¿›è¡Œæ—‹è½¬
      *
      * @param bm
-     *            ÐèÒªÐý×ªµÄÍ¼Æ¬
+     *            éœ€è¦æ—‹è½¬çš„å›¾ç‰‡
      * @param degree
-     *            Ðý×ª½Ç¶È
-     * @return Ðý×ªºóµÄÍ¼Æ¬
+     *            æ—‹è½¬è§’åº¦
+     * @return æ—‹è½¬åŽçš„å›¾ç‰‡
      */
     private Bitmap rotateBitmapByDegree(Bitmap bm, int degree) {
         Bitmap returnBm = null;
 
-        // ¸ù¾ÝÐý×ª½Ç¶È£¬Éú³ÉÐý×ª¾ØÕó
+        // æ ¹æ®æ—‹è½¬è§’åº¦ï¼Œç”Ÿæˆæ—‹è½¬çŸ©é˜µ
         Matrix matrix = new Matrix();
         matrix.postRotate(degree);
         try {
-            // ½«Ô­Ê¼Í¼Æ¬°´ÕÕÐý×ª¾ØÕó½øÐÐÐý×ª£¬²¢µÃµ½ÐÂµÄÍ¼Æ¬
+            // å°†åŽŸå§‹å›¾ç‰‡æŒ‰ç…§æ—‹è½¬çŸ©é˜µè¿›è¡Œæ—‹è½¬ï¼Œå¹¶å¾—åˆ°æ–°çš„å›¾ç‰‡
             returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(),
                     bm.getHeight(), matrix, true);
         } catch (OutOfMemoryError e) {
@@ -344,23 +357,23 @@ public class EditMyIntroActivity extends WithTitleActivity {
     }
 
     /**
-     * ²Ã¼ôÍ¼Æ¬·½·¨ÊµÏÖ
+     * è£å‰ªå›¾ç‰‡æ–¹æ³•å®žçŽ°
      *
      * @param uri
      */
     public void startPhotoZoom(Uri uri, int x, int y) {
-        ConstantForSaveList.uploadUri = uri;// ÔÝÊ±´æ´¢uri Èçhtc²»ÄÜ±£´æuri
+        ConstantForSaveList.uploadUri = uri;// æš‚æ—¶å­˜å‚¨uri å¦‚htcä¸èƒ½ä¿å­˜uri
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
-        // ÉèÖÃ²Ã¼ô
+        // è®¾ç½®è£å‰ª
         intent.putExtra("crop", "true");
-        // aspectX aspectY ÊÇ¿í¸ßµÄ±ÈÀý
+        // aspectX aspectY æ˜¯å®½é«˜çš„æ¯”ä¾‹
         intent.putExtra("aspectX", x);
         intent.putExtra("aspectY", y);
-        // outputX outputY ÊÇ²Ã¼ôÍ¼Æ¬¿í¸ß
+        // outputX outputY æ˜¯è£å‰ªå›¾ç‰‡å®½é«˜
         intent.putExtra("outputX", x);
         intent.putExtra("outputY", y);
-        intent.putExtra("noFaceDetection", true);// È¡ÏûÈËÁ³Ê¶±ð
+        intent.putExtra("noFaceDetection", true);// å–æ¶ˆäººè„¸è¯†åˆ«
         intent.putExtra("return-data", false);
         startActivityForResult(intent, RESULT_REQUEST_CODE);
     }

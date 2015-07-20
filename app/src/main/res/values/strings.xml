@@ -233,6 +233,7 @@
     <string name="brief_intro">简介</string>
     <string name="enter_your_intro_here">请在此输入您的自我介绍</string>
     <string name="preview">预览</string>
+    <string name="select_work_types_tips">承招类型（最多选五个）</string>
 
     <!-- 我的钱包 -->
     <string name="account_balance">账户余额（元）</string>

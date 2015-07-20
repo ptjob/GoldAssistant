@@ -402,5 +402,16 @@
         <item name="android:gravity">right</item>
     </style>
 
+    <style name="CommonButton">
+        <item name="android:layout_width">@dimen/btn_width</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:textColor">@color/btn_txt_color</item>
+        <item name="android:textSize">@dimen/btn_txt_size</item>
+    </style>
+
+    <style name="CommonButton.Blue">
+        <item name="android:background">@drawable/selector_btn_blue</item>
+    </style>
+
 
 </resources>
