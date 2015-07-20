@@ -29,7 +29,8 @@
                 android:id="@+id/edittxt_job_title"
                 style="@style/FormInput"
                 android:layout_height="match_parent"
-                android:hint="@string/uninput" />
+                android:hint="@string/uninput"
+                android:text="测试兼职标题"/>
 
             <ImageView style="@style/PublicLineH" />
 
@@ -43,7 +44,8 @@
             <TextView
                 android:id="@+id/txt_begin_time"
                 style="@style/FormSelect"
-                android:hint="@string/unselect" />
+                android:hint="@string/unselect"
+                android:text="2015-08-01" />
 
             <ImageView style="@style/PublicLineH" />
 
@@ -57,7 +59,8 @@
             <TextView
                 android:id="@+id/txt_end_time"
                 style="@style/FormSelect"
-                android:hint="@string/unselect" />
+                android:hint="@string/unselect"
+                android:text="2015-08-07"/>
 
             <ImageView style="@style/PublicLineH" />
 
@@ -71,7 +74,8 @@
             <TextView
                 android:id="@+id/txt_pay_type"
                 style="@style/FormSelect"
-                android:hint="@string/unselect" />
+                android:hint="@string/unselect"
+                android:text="日结"/>
 
             <ImageView style="@style/PublicLineH" />
 
@@ -85,7 +89,8 @@
             <TextView
                 android:id="@+id/txt_work_area"
                 style="@style/FormSelect"
-                android:hint="@string/unselect" />
+                android:hint="@string/unselect"
+                android:text="南山区"/>
 
             <ImageView style="@style/PublicLineH" />
 
@@ -100,7 +105,8 @@
                 android:id="@+id/edittxt_work_address"
                 style="@style/FormInput"
                 android:maxLength="@integer/work_address_max_length"
-                android:hint="@string/publish_job_hint_work_address" />
+                android:hint="@string/publish_job_hint_work_address"
+                android:text="南山区科技园高新中二道软件园二期12栋501"/>
 
             <ImageView style="@style/PublicLineH" />
 
@@ -122,7 +128,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:hint="@string/uninput"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="200"/>
 
                 <ImageView style="@style/PublicLineV" />
 
@@ -130,7 +137,8 @@
                     android:id="@+id/txt_salary_unit"
                     style="@style/FormSelect"
                     android:layout_weight="1"
-                    android:hint="@string/publish_job_hint_salary_unit" />
+                    android:hint="@string/publish_job_hint_salary_unit"
+                    android:text="日薪"/>
 
             </LinearLayout>
 
@@ -167,6 +175,33 @@
 
 
             <ImageView style="@style/PublicLineH" />
+
+            <!-- 总人数  -->
+            <LinearLayout
+                android:id="@+id/ll_head_sum_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    style="@style/FormLabel"
+                    android:layout_weight="1"
+                    android:text="@string/publish_job_label_head_sum" />
+
+
+                <ImageView style="@style/PublicLineH" />
+
+                <EditText
+                    android:id="@+id/edittxt_head_sum"
+                    style="@style/FormInput"
+                    android:layout_weight="1"
+                    android:hint="@string/canblank"
+                    android:inputType="number"
+                    android:text="12"/>
+
+                <ImageView style="@style/PublicLineH" />
+            </LinearLayout>
 
             <!-- 性别选择  -->
             <LinearLayout
@@ -228,7 +263,7 @@
                 style="@style/FormLabel"
                 android:text="@string/publish_job_label_work_require" />
 
-            <ImageView style="@style/PublicLineH_1" />
+            <ImageView style="@style/PublicLineH" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -238,15 +273,23 @@
                     android:id="@+id/edittxt_work_require_content"
                     style="@style/FormInput_S"
                     android:hint="@string/publish_job_hint_work_require"
-                    android:maxLength="@integer/work_require_max_length" />
+                    android:maxLength="@integer/work_require_max_length"
+                    android:text="教育
+具有大专及以上毕业文凭者
+经验
+六个月以上销售工作经验，具有团队意识，热爱销售
+技能要求
+能够熟练使用Microsoft Office办公软件
+熟悉计算机、手机的基本结构，并能够自主维护
+具备市场营销、人力资源、统计学等方面的知识"/>
 
                 <TextView
                     android:id="@+id/edittxt_work_require_tip"
                     style="@style/FormInput_S_Tip"
-                    android:text="@string/publish_job_tip_work_require" />
+                    android:text="@string/publish_job_tip_work_require_default" />
             </FrameLayout>
 
-            <ImageView style="@style/PublicLineH_1" />
+            <ImageView style="@style/PublicLineH" />
 
             <!-- 是否显示您的手机号 -->
             <TextView
@@ -281,7 +324,7 @@
 
             <View style="@style/FormDivider" />
 
-            <ImageView style="@style/PublicLineH_1" />
+            <ImageView style="@style/PublicLineH" />
 
             <!-- 更多要求 -->
             <TextView
@@ -290,7 +333,7 @@
                 android:drawableRight="@drawable/other_btn_on"
                 android:text="@string/publish_job_label_more_require" />
 
-            <ImageView style="@style/PublicLineH_1" />
+            <ImageView style="@style/PublicLineH" />
 
             <LinearLayout
                 android:id="@+id/ll_more_require_container"
@@ -378,12 +421,8 @@
 
             <Button
                 android:id="@+id/btn_publish"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/selector_form_button"
                 android:text="@string/publish"
-                android:textColor="@color/white" />
+                style="@style/FormBlueButton" />
 
             <View style="@style/FormDivider" />
 

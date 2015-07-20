@@ -13,11 +13,18 @@
     <dimen name="form_label_text_size">13sp</dimen>
     <dimen name="form_input_padding_left_right">15dp</dimen>
     <dimen name="form_input_padding_top_bottom">13dp</dimen>
-    <dimen name="form_text_size">15sp</dimen>
+    <dimen name="form_text_size_0">15sp</dimen>
     <dimen name="form_input_s_height">179dp</dimen>
     <dimen name="form_input_s_padding_top_bottom">10dp</dimen>
     <dimen name="form_input_s_tip_text_size">13sp</dimen>
     <dimen name="form_divider_height">20dp</dimen>
+    <dimen name="form_divider_height_1">8dp</dimen>
+    <dimen name="form_text_size_1">17sp</dimen>
+    <dimen name="form_container_padding">15dp</dimen>
+    <dimen name="form_item_container_height">40dp</dimen>
+    <dimen name="form_button_width">200dp</dimen>
+    <dimen name="form_button_height">40dp</dimen>
+    <dimen name="form_item_in_margin">15dp</dimen>
 
 
     <!-- Default screen margins, per the Android Design guidelines. -->
