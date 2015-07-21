@@ -62,8 +62,7 @@ public class ChooseListActivity extends BaseActivity {
     }
 
     private void initControls() {
-        activityHead = new ActivityHead();
-        activityHead.initHead(this);
+        activityHead = new ActivityHead(this);
         mListViewMain = (ListView) findViewById(R.id.listview_main);
 
     }

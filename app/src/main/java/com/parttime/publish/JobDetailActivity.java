@@ -43,8 +43,7 @@ public class JobDetailActivity extends BaseActivity {
     }
 
     private void initControls() {
-        ActivityHead activityHead = new ActivityHead();
-        activityHead.initHead(this);
+        ActivityHead activityHead = new ActivityHead(this);
         if (partJob != null) {
             activityHead.setCenterTxt1(R.string.publish_job_preview_title);
         }
