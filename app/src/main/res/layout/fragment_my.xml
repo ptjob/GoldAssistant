@@ -4,9 +4,9 @@
     xmlns:toggle="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/body_color"
     android:orientation="vertical"
     tools:context="com.parttime.main.MyFragment" >
+    <include layout="@layout/title"/>
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -15,59 +15,56 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/body_color"
             android:orientation="vertical"
-            android:paddingBottom="80dp" >
+            android:paddingBottom="@dimen/form_items_margin" >
 
             <!-- 设置 -->
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="200dp"
-                android:background="@color/head_color"
-                >
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:layout_marginTop="@dimen/form_items_margin">
 
-                <com.quark.http.image.CircularImage
+                <ImageView
                     android:id="@+id/iv_head"
-                    android:layout_width="95dip"
-                    android:layout_height="95dip"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="@dimen/common_margin"/>
-                <!--<ImageView
-                    android:id="@+id/iv_head"
-                    android:layout_width="@dimen/head_img_edge"
-                    android:layout_height="@dimen/head_img_edge"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="@dimen/common_margin"
-                    android:background="#aaffff00"
-                    android:layout_centerVertical="true"/>-->
                 <TextView
                     android:id="@+id/tv_businessman"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/iv_head"
                     android:layout_alignTop="@id/iv_head"
-                    android:textColor="#fff"
+                    android:textSize="15sp"
+                    android:layout_marginTop="18dp"
                     android:text="Businessman"/>
-                <TextView
-                    android:id="@+id/tv_score"
+                <com.parttime.widget.RankView
+                    android:id="@+id/rv_rank"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="16dp"
                     android:layout_toRightOf="@id/iv_head"
-                    android:layout_marginTop="14dp"
                     android:layout_below="@id/tv_businessman"
-                    android:textColor="#fff"
-                    android:text="score 4.75/5"/>
+                    android:layout_marginTop="8dp"/>
+
                 <TextView
                     android:id="@+id/tv_cert_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/iv_head"
-                    android:layout_below="@id/tv_score"
-                    android:layout_marginTop="14dp"
+                    android:layout_below="@id/rv_rank"
+                    android:layout_marginTop="9dp"
                     android:textColor="#fff"
                     android:text="@string/not_certed"/>
+                
+                <TextView
+                    android:id="@+id/tv_sincere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
 
             </RelativeLayout>
@@ -77,6 +74,7 @@
                 android:id="@+id/fi_my_intro"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/form_item_height"
+                android:layout_marginTop="@dimen/form_items_margin"
                 android:background="@drawable/item_selector"
                 app:form_title="@string/my_intro"/>
 

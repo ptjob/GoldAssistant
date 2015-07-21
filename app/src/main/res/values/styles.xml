@@ -383,18 +383,19 @@
     <style name="FormItem_Common.FormItem_Icon">
         <item name="android:layout_width">@dimen/form_item_icon_edge</item>
         <item name="android:layout_height">@dimen/form_item_icon_edge</item>
-        <item name="android:layout_marginLeft">@dimen/common_margin</item>
+        <item name="android:layout_marginLeft">@dimen/form_item_margin_left</item>
         <item name="android:layout_alignParentLeft">true</item>
     </style>
 
     <style name="FormItem_Common.FormItem_Title">
-        <item name="android:layout_marginLeft">@dimen/commopn_inner_margin</item>
+        <item name="android:layout_marginLeft">@dimen/form_item_title_margin_left</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
     <style name="FormItem_Common.FormItem_Arrow">
         <item name="android:src">@drawable/btn_go</item>
         <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_marginRight">@dimen/common_margin</item>
+        <item name="android:layout_marginRight">@dimen/form_item_margin_left</item>
         <item name="android:layout_marginLeft">@dimen/commopn_inner_margin</item>
     </style>
 

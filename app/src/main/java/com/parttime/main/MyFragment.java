@@ -51,6 +51,7 @@ import com.parttime.mine.SuggestionActivity;
 import com.parttime.mine.setting.SettingActivity;
 import com.parttime.type.AccountType;
 import com.parttime.widget.FormItem;
+import com.parttime.widget.RankView;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
@@ -138,11 +139,12 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	private void updateView(){
 		if(function != null){
 			tvName.setText(function.getName());
-			tvScore.setText(getString(R.string.x_scores, function.getPoint()));
+//			tvScore.setText(getString(R.string.x_scores, function.getPoint()));
+			rvRank.rank((int) /*function.getPoint()*/4);
 			String certString = getCertString();
 			tvCertState.setText(certString);
 			fiMyFans.setValue(getString(R.string.x_ge_in_chinese, function.getFollowers()));
-			fiMyFans.setValue(getString(R.string.x_rmb, function.getMoney()));
+			fiMyBalance.setValue(getString(R.string.x_rmb, function.getMoney()));
 			fiRealNameCert.setValue(certString);
 		}
 	}
@@ -225,11 +227,17 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	@ViewInject(R.id.tv_businessman)
 	private TextView tvName;
 
-	@ViewInject(R.id.tv_score)
-	private TextView tvScore;
+//	@ViewInject(R.id.tv_score)
+//	private TextView tvScore;
+	@ViewInject(R.id.rv_rank)
+	private RankView rvRank;
 
 	@ViewInject(R.id.tv_cert_state)
 	private TextView tvCertState;
+
+	@ViewInject(R.id.tv_title)
+	private TextView tvTitle;
+
 
 	private void bindListeners(){
 		fiMyIntro.setOnClickListener(this);
@@ -314,7 +322,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 					+ sp.getString("c" + company_id + "_photo", "a"));
 			if (bb_bmp != null) {
 				ivHead
-						.setImageBitmap(LoadImage.toRoundBitmap(bb_bmp));
+						.setImageBitmap(bb_bmp);
 			}
 		}
 	}
@@ -333,6 +341,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_my, container, false);
 		ViewUtils.inject(this, view);
+		tvTitle.setText(R.string.mine);
 		bindListeners();
 //		// carson初始化控件
 //		check_lineLayout = (LinearLayout) view.findViewById(R.id.checkUpdate);

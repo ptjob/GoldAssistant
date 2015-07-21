@@ -97,4 +97,10 @@
         <attr name="sl_maxSelectCount" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="RankView">
+        <attr name="rv_empty_img" format="reference"/>
+        <attr name="rv_full_img" format="reference"/>
+        <attr name="rv_total_score" format="integer"/>
+        <attr name="rv_inner_margin" format="dimension"/>
+    </declare-styleable>
 </resources>
