@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.easemob.chatuidemo.activity;
+package com.parttime.addresslist;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,6 +45,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
+import com.easemob.chatuidemo.activity.AlertDialog;
+import com.easemob.chatuidemo.activity.BaseActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.adapter.HuanxingSearchUserAdapter;
 import com.quark.common.JsonUtil;

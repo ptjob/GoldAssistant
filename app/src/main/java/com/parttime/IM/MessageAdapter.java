@@ -11,22 +11,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.easemob.chatuidemo.adapter;
+package com.parttime.IM;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Environment;
 import android.text.Spannable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,15 +38,7 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
@@ -73,6 +60,7 @@ import com.easemob.chatuidemo.activity.ContextMenu;
 import com.easemob.chatuidemo.activity.ShowBigImage;
 import com.easemob.chatuidemo.activity.ShowNormalFileActivity;
 import com.easemob.chatuidemo.activity.ShowVideoActivity;
+import com.easemob.chatuidemo.adapter.VoicePlayClickListener;
 import com.easemob.chatuidemo.task.LoadImageTask;
 import com.easemob.chatuidemo.task.LoadVideoImageTask;
 import com.easemob.chatuidemo.utils.ImageCache;
@@ -84,38 +72,35 @@ import com.easemob.util.EMLog;
 import com.easemob.util.FileUtils;
 import com.easemob.util.LatLng;
 import com.easemob.util.TextFormater;
-import com.parttime.IM.ChatActivity;
+import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.net.DefaultCallback;
+import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
+import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
-import com.quark.common.JsonUtil;
 import com.quark.common.ToastUtil;
-import com.quark.common.Url;
 import com.quark.guangchang.ActivityDetialActivity;
 import com.quark.http.image.LoadImage;
 import com.quark.image.UploadImg;
+import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.HuanxinUser;
 import com.quark.volley.VolleySington;
 import com.umeng.analytics.MobclickAgent;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MessageAdapter extends BaseAdapter {
 
-	private final static String TAG = "msg";
+	private final static String TAG = "MessageAdapter";
 
 	private static final int MESSAGE_TYPE_RECV_TXT = 0;
 	private static final int MESSAGE_TYPE_SENT_TXT = 1;
@@ -141,14 +126,15 @@ public class MessageAdapter extends BaseAdapter {
 	private String username;
 	private LayoutInflater inflater;
 	private Activity activity;
-	private SharedPreferences sp;
+	private SharePreferenceUtil sp;
 	// reference to conversation object in chatsdk
 	private EMConversation conversation;
 
 	private Context context;
 	RequestQueue queue = VolleySington.getInstance().getRequestQueue();
 
-	private Map<String, Timer> timers = new Hashtable<String, Timer>();
+	private Map<String, Timer> timers = new Hashtable<>();
+    List<MessageData> messageData = Collections.synchronizedList(new ArrayList<MessageData>());
 
 	public MessageAdapter(Context context, String username, int chatType) {
 		this.username = username;
@@ -157,28 +143,72 @@ public class MessageAdapter extends BaseAdapter {
 		activity = (Activity) context;
 		this.conversation = EMChatManager.getInstance().getConversation(
 				username);
-		sp = context.getSharedPreferences("jrdr.setting", context.MODE_PRIVATE);
+        buildMessageData();
+		sp = SharePreferenceUtil.getInstance(ApplicationControl.getInstance());
 	}
 
-	/**
+    /**
+     * 构建Adapter的数据
+     */
+    public void buildMessageData() {
+
+        List<EMMessage> allMessages = conversation.getAllMessages();
+        GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(username);
+        if(appliantResult == null || appliantResult.userList == null || appliantResult.userList.size() == 0){
+            for(EMMessage message : allMessages){
+                MessageData data = new MessageData();
+                data.message = message;
+                messageData.add(data);
+            }
+        }else{
+            List<GroupSettingRequest.UserVO> userVOList = appliantResult.userList;
+            Map<String, GroupSettingRequest.UserVO> temp = new HashMap<>();
+            for(GroupSettingRequest.UserVO vo : userVOList){
+                if(vo == null){
+                    continue;
+                }
+                temp.put(String.valueOf(vo.userId), vo);
+            }
+            for(EMMessage message : allMessages){
+                MessageData data = new MessageData();
+                data.message = message;
+
+                String contactUID = message.getFrom();
+                GroupSettingRequest.UserVO userVO = temp.get(contactUID);
+                if(userVO != null){
+                    data.userId = contactUID;
+                    data.name = userVO.name;
+                    data.picture = userVO.picture;
+                    data.apply = userVO.apply;
+                }
+
+                messageData.add(data);
+            }
+        }
+    }
+
+
+    /**
 	 * 获取item数
 	 */
 	public int getCount() {
-		return conversation.getMsgCount();
+		return messageData.size();
 	}
 
 	/**
 	 * 刷新页面
 	 */
 	public void refresh() {
+        messageData.clear();
+        buildMessageData();
 		notifyDataSetChanged();
 	}
 
-	public EMMessage getItem(int position) {
-		return conversation.getMessage(position);
+	public MessageData getItem(int position) {
+		return messageData.get(position);
 	}
 
-	public EMConversation getEMConversationItem(int position) {
+	public EMConversation getEMConversationItem() {
 		return conversation;
 	}
 
@@ -190,7 +220,7 @@ public class MessageAdapter extends BaseAdapter {
 	 * 获取item类型
 	 */
 	public int getItemViewType(int position) {
-		EMMessage message = conversation.getMessage(position);
+		EMMessage message = messageData.get(position).message;
 		if (message.getType() == EMMessage.Type.TXT) {
 			if (!message.getBooleanAttribute(
 					Constant.MESSAGE_ATTR_IS_VOICE_CALL, false)) {
@@ -236,7 +266,7 @@ public class MessageAdapter extends BaseAdapter {
 		return 16;
 	}
 
-	private View createViewByMessage(EMMessage message, int position) {
+	private View createViewByMessage(EMMessage message) {
 		switch (message.getType()) {
 		case LOCATION:
 			return message.direct == EMMessage.Direct.RECEIVE ? inflater
@@ -285,12 +315,12 @@ public class MessageAdapter extends BaseAdapter {
 
 	@SuppressLint("NewApi")
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		final EMMessage message = getItem(position);
+		final EMMessage message = getItem(position).message;
 		ChatType chatType = message.getChatType();
 		final ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = createViewByMessage(message, position);
+			convertView = createViewByMessage(message);
 			if (message.getType() == EMMessage.Type.IMAGE) {
 				try {
 					holder.iv = ((ImageView) convertView
@@ -305,7 +335,7 @@ public class MessageAdapter extends BaseAdapter {
 							.findViewById(R.id.msg_status);
 					holder.tv_userId = (TextView) convertView
 							.findViewById(R.id.tv_userid);
-				} catch (Exception e) {
+				} catch (Exception ignore) {
 				}
 
 			} else if (message.getType() == EMMessage.Type.TXT) {
@@ -322,7 +352,7 @@ public class MessageAdapter extends BaseAdapter {
 							.findViewById(R.id.tv_chatcontent);
 					holder.tv_userId = (TextView) convertView
 							.findViewById(R.id.tv_userid);
-				} catch (Exception e) {
+				} catch (Exception ignore) {
 				}
 
 				// 语音通话
@@ -364,7 +394,7 @@ public class MessageAdapter extends BaseAdapter {
 							.findViewById(R.id.tv_userid);
 					holder.iv_read_status = (ImageView) convertView
 							.findViewById(R.id.iv_unread_voice);
-				} catch (Exception e) {
+				} catch (Exception ignore) {
 				}
 			} else if (message.getType() == EMMessage.Type.LOCATION) {
 				try {
@@ -378,7 +408,7 @@ public class MessageAdapter extends BaseAdapter {
 							.findViewById(R.id.msg_status);
 					holder.tv_userId = (TextView) convertView
 							.findViewById(R.id.tv_userid);
-				} catch (Exception e) {
+				} catch (Exception ignore) {
 				}
 			} else if (message.getType() == EMMessage.Type.VIDEO) {
 				try {
@@ -403,7 +433,7 @@ public class MessageAdapter extends BaseAdapter {
 					holder.tv_userId = (TextView) convertView
 							.findViewById(R.id.tv_userid);
 
-				} catch (Exception e) {
+				} catch (Exception ignore) {
 				}
 			} else if (message.getType() == EMMessage.Type.FILE) {
 				try {
@@ -424,12 +454,12 @@ public class MessageAdapter extends BaseAdapter {
 					// 这里是进度值
 					holder.tv = (TextView) convertView
 							.findViewById(R.id.percentage);
-				} catch (Exception e) {
+				} catch (Exception ignore) {
 				}
 				try {
 					holder.tv_userId = (TextView) convertView
 							.findViewById(R.id.tv_userid);
-				} catch (Exception e) {
+				} catch (Exception ignore) {
 				}
 			}
 			convertView.setTag(holder);
@@ -737,9 +767,9 @@ public class MessageAdapter extends BaseAdapter {
 	/**
 	 * 文本消息
 	 * 
-	 * @param message
-	 * @param holder
-	 * @param position
+	 * @param message EMMessage
+	 * @param holder ViewHolder
+	 * @param position int
 	 */
 	private void handleTextMessage(EMMessage message, ViewHolder holder,
 			final int position) {
@@ -826,9 +856,9 @@ public class MessageAdapter extends BaseAdapter {
 	/**
 	 * 语音通话记录
 	 * 
-	 * @param message
-	 * @param holder
-	 * @param position
+	 * @param message EMMessage
+	 * @param holder ViewHolder
+	 * @param position int
 	 */
 	private void handleVoiceCallMessage(EMMessage message, ViewHolder holder,
 			final int position) {
@@ -840,10 +870,10 @@ public class MessageAdapter extends BaseAdapter {
 	/**
 	 * 图片消息
 	 * 
-	 * @param message
-	 * @param holder
-	 * @param position
-	 * @param convertView
+	 * @param message EMMessage
+	 * @param holder ViewHolder
+	 * @param position int
+	 * @param convertView View
 	 */
 	private void handleImageMessage(final EMMessage message,
 			final ViewHolder holder, final int position, View convertView) {
@@ -944,7 +974,7 @@ public class MessageAdapter extends BaseAdapter {
 										activity.getString(R.string.send_fail)
 												+ activity
 														.getString(R.string.connect_failuer_toast),
-										0).show();
+										Toast.LENGTH_SHORT).show();
 								timer.cancel();
 							}
 
@@ -962,10 +992,10 @@ public class MessageAdapter extends BaseAdapter {
 	/**
 	 * 视频消息
 	 * 
-	 * @param message
-	 * @param holder
-	 * @param position
-	 * @param convertView
+	 * @param message EMMessage
+	 * @param holder ViewHolder
+	 * @param position int
+	 * @param convertView View
 	 */
 	private void handleVideoMessage(final EMMessage message,
 			final ViewHolder holder, final int position, View convertView) {
@@ -1080,7 +1110,7 @@ public class MessageAdapter extends BaseAdapter {
 										activity.getString(R.string.send_fail)
 												+ activity
 														.getString(R.string.connect_failuer_toast),
-										0).show();
+										Toast.LENGTH_SHORT).show();
 								timer.cancel();
 							}
 
@@ -1101,10 +1131,10 @@ public class MessageAdapter extends BaseAdapter {
 	/**
 	 * 语音消息
 	 * 
-	 * @param message
-	 * @param holder
-	 * @param position
-	 * @param convertView
+	 * @param message EMMessage
+	 * @param holder ViewHolder
+	 * @param position int
+	 * @param convertView View
 	 */
 	private void handleVoiceMessage(final EMMessage message,
 			final ViewHolder holder, final int position, View convertView) {
@@ -1214,10 +1244,10 @@ public class MessageAdapter extends BaseAdapter {
 	/**
 	 * 文件消息
 	 * 
-	 * @param message
-	 * @param holder
-	 * @param position
-	 * @param convertView
+	 * @param message EMMessage
+	 * @param holder  ViewHolder
+	 * @param position int
+	 * @param convertView View
 	 */
 	private void handleFileMessage(final EMMessage message,
 			final ViewHolder holder, int position, View convertView) {
@@ -1232,7 +1262,7 @@ public class MessageAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View view) {
 				File file = new File(filePath);
-				if (file != null && file.exists()) {
+				if (file.exists()) {
 					// 文件存在，直接打开
 					FileUtils.openFile(file, (Activity) context);
 				} else {
@@ -1248,7 +1278,6 @@ public class MessageAdapter extends BaseAdapter {
 								message.getFrom(), message.getMsgId());
 						message.isAcked = true;
 					} catch (EaseMobException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -1258,7 +1287,7 @@ public class MessageAdapter extends BaseAdapter {
 		if (message.direct == EMMessage.Direct.RECEIVE) { // 接收的消息
 			System.err.println("it is receive msg");
 			File file = new File(filePath);
-			if (file != null && file.exists()) {
+			if (file.exists()) {
 				holder.tv_file_download_state.setText("已下载");
 			} else {
 				holder.tv_file_download_state.setText("未下载");
@@ -1308,7 +1337,7 @@ public class MessageAdapter extends BaseAdapter {
 										activity.getString(R.string.send_fail)
 												+ activity
 														.getString(R.string.connect_failuer_toast),
-										0).show();
+                                        Toast.LENGTH_SHORT).show();
 								timer.cancel();
 							}
 
@@ -1328,10 +1357,10 @@ public class MessageAdapter extends BaseAdapter {
 	/**
 	 * 处理位置消息
 	 * 
-	 * @param message
-	 * @param holder
-	 * @param position
-	 * @param convertView
+	 * @param message EMMessage
+	 * @param holder ViewHolder
+	 * @param position int
+	 * @param convertView View
 	 */
 	private void handleLocationMessage(final EMMessage message,
 			final ViewHolder holder, final int position, View convertView) {
@@ -1377,9 +1406,8 @@ public class MessageAdapter extends BaseAdapter {
 	/**
 	 * 发送消息
 	 * 
-	 * @param message
-	 * @param holder
-	 * @param position
+	 * @param message EMMessage
+	 * @param holder ViewHolder
 	 */
 	public void sendMsgInBackground(final EMMessage message,
 			final ViewHolder holder) {
@@ -1513,7 +1541,7 @@ public class MessageAdapter extends BaseAdapter {
 									activity.getString(R.string.send_fail)
 											+ activity
 													.getString(R.string.connect_failuer_toast),
-									0).show();
+									Toast.LENGTH_SHORT).show();
 						}
 					});
 				}
@@ -1536,8 +1564,8 @@ public class MessageAdapter extends BaseAdapter {
 	/**
 	 * 更新ui上消息发送状态
 	 * 
-	 * @param message
-	 * @param holder
+	 * @param message EMMessage
+	 * @param holder ViewHolder
 	 */
 	private void updateSendedView(final EMMessage message,
 			final ViewHolder holder) {
@@ -1569,7 +1597,7 @@ public class MessageAdapter extends BaseAdapter {
 							activity.getString(R.string.send_fail)
 									+ activity
 											.getString(R.string.connect_failuer_toast),
-							0).show();
+							Toast.LENGTH_SHORT).show();
 				}
 
 				notifyDataSetChanged();
@@ -1580,9 +1608,11 @@ public class MessageAdapter extends BaseAdapter {
 	/**
 	 * load image into image view
 	 * 
-	 * @param thumbernailPath
-	 * @param iv
-	 * @param position
+	 * @param thumbernailPath String
+	 * @param iv ImageView
+	 * @param localFullSizePath String
+	 * @param remoteDir String
+	 * @param message EMMessage
 	 * @return the image exists or not
 	 */
 	private boolean showImageView(final String thumbernailPath,
@@ -1652,10 +1682,10 @@ public class MessageAdapter extends BaseAdapter {
 	 * 
 	 * @param localThumb
 	 *            本地缩略图路径
-	 * @param iv
+	 * @param iv ImageView
 	 * @param thumbnailUrl
 	 *            远程缩略图路径
-	 * @param message
+	 * @param message EMMessage
 	 */
 	private void showVideoThumbView(String localThumb, ImageView iv,
 			String thumbnailUrl, final EMMessage message) {
@@ -1677,8 +1707,7 @@ public class MessageAdapter extends BaseAdapter {
 					intent.putExtra("localpath", videoBody.getLocalUrl());
 					intent.putExtra("secret", videoBody.getSecret());
 					intent.putExtra("remotepath", videoBody.getRemoteUrl());
-					if (message != null
-							&& message.direct == EMMessage.Direct.RECEIVE
+					if (message.direct == EMMessage.Direct.RECEIVE
 							&& !message.isAcked
 							&& message.getChatType() != ChatType.GroupChat) {
 						message.isAcked = true;
@@ -1757,13 +1786,13 @@ public class MessageAdapter extends BaseAdapter {
 	/**
 	 * umeng自定义事件统计
 	 * 
-	 * @param message
+	 * @param message EMMessage
 	 */
 	private void sendEvent2Umeng(final EMMessage message, final long start) {
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
 				long costTime = System.currentTimeMillis() - start;
-				Map<String, String> params = new HashMap<String, String>();
+				Map<String, String> params = new HashMap<>();
 				if (message.status == EMMessage.Status.SUCCESS)
 					params.put("status", "success");
 				else
@@ -1803,50 +1832,28 @@ public class MessageAdapter extends BaseAdapter {
 		});
 	}
 
-	// /*************************carson add on
-	// 4-9-19:47****************************************
+	//*************************carson add on 4-9-19:47****************************************
 	/**
 	 * 加载本地头像和名字
 	 */
 	private void loadNativePhoto(final String id, final ImageView avatar,
 			final TextView name) {
 		// 先获取本地名字和头像
-		String nativeName = sp.getString(id + "realname", "");
-		if (name == null) {
-
-		} else {
+		String nativeName = sp.loadStringSharedPreference(id + "realname", "");
+		if (name != null) {
 			if (!"".equals(nativeName)) {
 				name.setText(nativeName);
 			}
 		}
-		File mePhotoFold = new File(Environment.getExternalStorageDirectory()
-				+ "/" + "jzdr/" + "image");
-		if (!mePhotoFold.exists()) {
-			mePhotoFold.mkdirs();
-		}
-		// 当前聊天对象的头像更改,要先联网验证头像路径是否更改
-		File picture_1 = new File(Environment.getExternalStorageDirectory()
-				+ "/" + "jzdr/" + "image/" + sp.getString(id + "_photo", "c"));
-		if (picture_1.exists()) {
-			// 加载本地图片
-			// Bitmap bb_bmp = MyResumeActivity.zoomImg(picture_1, 300, 300);
-			Bitmap bb_bmp = BitmapFactory.decodeFile(Environment
-					.getExternalStorageDirectory()
-					+ "/"
-					+ "jzdr/"
-					+ "image/"
-					+ sp.getString(id + "_photo", "c"));
-			if (bb_bmp != null) {
-				avatar.setImageBitmap(LoadImage.toRoundBitmap(bb_bmp));
-				// getNick2(id);// 更新本地数据
-			} else {
-				avatar.setImageResource(R.drawable.default_avatar);
-				getNick(id, avatar, name);
-			}
-		} else {
-			avatar.setImageResource(R.drawable.default_avatar);
-			getNick(id, avatar, name);
-		}
+        Bitmap bitmap = ContactImageLoader.get(id);
+        if (bitmap != null) {
+            avatar.setImageBitmap(LoadImage.toRoundBitmap(bitmap));
+            // getNick2(id);// 更新本地数据
+        } else {
+            avatar.setImageResource(R.drawable.default_avatar);
+            getNick(id, avatar, name);
+        }
+
 
 	}
 
@@ -1867,14 +1874,12 @@ public class MessageAdapter extends BaseAdapter {
                             name.setText(us.getName());
                             if (us.getName() != null
                                     && !"".equals(us.getName())) {
-                                Editor edt = sp.edit();
-                                edt.putString(id + "realname", us.getName());
-                                edt.commit();
+                                sp.loadStringSharedPreference(id + "realname", us.getName());
                             }
                         }
                         if ((us.getAvatar() != null)
                                 && (!us.getAvatar().equals(""))) {
-                            loadpersonPic(id, us.getAvatar(), avatar, 1);
+                            ContactImageLoader.loadpersonPic(queue, id, us.getAvatar(), avatar, 1);
 
                         } else {
                             if (us.getUid().startsWith("u")) {
@@ -1890,54 +1895,15 @@ public class MessageAdapter extends BaseAdapter {
 
 	}
 
-	/**
-	 * @Description: 加载图片
-	 * @author howe
-	 * @date 2014-7-30 下午5:57:52
-	 * 
-	 */
-	public void loadpersonPic(final String id, final String url,
-			final ImageView imageView, final int isRound) {
-		ImageRequest imgRequest = new ImageRequest(Url.GETPIC + url,
-				new Response.Listener<Bitmap>() {
-					@Override
-					public void onResponse(Bitmap arg0) {
-						String picName = url;
-						imageView.setImageBitmap(LoadImage.toRoundBitmap(arg0));
-						OutputStream output = null;
-						try {
-							File mePhotoFold = new File(Environment
-									.getExternalStorageDirectory()
-									+ "/"
-									+ "jzdr/" + "image");
-							if (!mePhotoFold.exists()) {
-								mePhotoFold.mkdirs();
-							}
-							output = new FileOutputStream(Environment
-									.getExternalStorageDirectory()
-									+ "/"
-									+ "jzdr/" + "image/" + picName);
-							arg0.compress(Bitmap.CompressFormat.JPEG, 100,
-									output);
-							output.flush();
-							output.close();
-							Editor edt = sp.edit();
-							edt.putString(id + "_photo", url);
-							edt.commit();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-
-					}
-				}, 300, 200, Config.ARGB_8888, new ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError arg0) {
-					}
-				});
-		queue.add(imgRequest);
-		imgRequest.setRetryPolicy(new DefaultRetryPolicy(
-				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
-
-	}
 	// ================howe end==================
+
+    class MessageData{
+        //picture , name , apply 都是from的属性
+        public String userId ;
+        public String picture; //头像
+        public String name;     //姓名
+        public int apply ;      //录取状态（0-没查看，1-已录取，2-、已拒绝，3-已查看）
+
+        public EMMessage message;
+    }
 }

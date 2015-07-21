@@ -101,4 +101,37 @@ public class MessageSetDao {
     }
 
 
+    /**
+     * 获取消息置顶设置list
+     *
+     * @return Map<String, MessageSet>
+     */
+    public MessageSet getMessageSet(String name, String type) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " where " + COLUMN_NAME + " = ? and " + COLUMN_TYPE + " = ? ", new String[]{name, type});
+            try {
+                if (cursor.moveToNext()) {
+                    int id = cursor.getInt(cursor.getColumnIndex(ID));
+                    String n = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                    String t = cursor.getString(cursor.getColumnIndex(COLUMN_TYPE));
+                    int isTop = cursor.getInt(cursor.getColumnIndex(COLUMN_TOP));
+                    long createTime = cursor.getLong(cursor.getColumnIndex(COLUMN_TIME));
+                    MessageSet messageSet = new MessageSet();
+                    messageSet.id = id;
+                    messageSet.name = n;
+                    messageSet.type = t;
+                    messageSet.isTop = isTop == 1;
+                    messageSet.createTime = createTime;
+
+                    return messageSet;
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        return null;
+    }
+
+
 }

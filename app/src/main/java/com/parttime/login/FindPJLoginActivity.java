@@ -345,7 +345,7 @@ public class FindPJLoginActivity extends BaseActivity {
 								// demo中简单的处理成每次登陆都去获取好友username，开发者自己根据情况而定
 								List<String> usernames = EMContactManager
 										.getInstance().getContactUserNames();
-								Map<String, com.easemob.chatuidemo.domain.User> userlist = new HashMap<String, com.easemob.chatuidemo.domain.User>();
+								Map<String, com.easemob.chatuidemo.domain.User> userlist = new HashMap<>();
 								for (String username : usernames) {
 									com.easemob.chatuidemo.domain.User user = new com.easemob.chatuidemo.domain.User();
 									user.setUsername(username);
@@ -356,16 +356,22 @@ public class FindPJLoginActivity extends BaseActivity {
 								com.easemob.chatuidemo.domain.User newFriends = new com.easemob.chatuidemo.domain.User();
 								newFriends
 										.setUsername(Constant.NEW_FRIENDS_USERNAME);
-								newFriends.setNick("申请与通知");
+								newFriends.setNick(getString(R.string.apply_notify));
 								newFriends.setHeader("");
 								userlist.put(Constant.NEW_FRIENDS_USERNAME,
 										newFriends);
 								// 添加"群聊"
 								com.easemob.chatuidemo.domain.User groupUser = new com.easemob.chatuidemo.domain.User();
 								groupUser.setUsername(Constant.GROUP_USERNAME);
-								groupUser.setNick("群聊");
+								groupUser.setNick(getString(R.string.group_chat));
 								groupUser.setHeader("");
 								userlist.put(Constant.GROUP_USERNAME, groupUser);
+								// 添加"官方账号"
+								com.easemob.chatuidemo.domain.User publicCount = new com.easemob.chatuidemo.domain.User();
+                                publicCount.setUsername(Constant.PUBLIC_COUNT);
+                                publicCount.setNick(getString(R.string.public_count));
+                                publicCount.setHeader("");
+								userlist.put(Constant.PUBLIC_COUNT, publicCount);
 								// 存入内存
 								ApplicationControl.getInstance()
 										.setContactList(userlist);

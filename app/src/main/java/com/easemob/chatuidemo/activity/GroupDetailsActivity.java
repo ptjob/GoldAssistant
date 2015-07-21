@@ -20,7 +20,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -60,6 +59,7 @@ import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.EMLog;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
+import com.parttime.addresslist.GroupPickContactsActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
@@ -88,7 +88,7 @@ import java.util.Map;
 
 /**
  * 
- * @ClassName: GroupSettingActivity
+ * @ClassName: GroupResumeSettingActivity
  * @Description: 群设置
  * @author howe
  * @date 2015-2-12 下午12:19:16
@@ -887,7 +887,7 @@ public class GroupDetailsActivity extends BaseActivity implements
 									} else {
 										// 正常情况下点击user，可以进入用户详情或者聊天页面等等
 										// Intent intent = new Intent(
-										// GroupSettingActivity.this,
+										// GroupResumeSettingActivity.this,
 										// UserInfo.class);
 										// intent.putExtra("hxId", username);
 										// startActivity(intent);

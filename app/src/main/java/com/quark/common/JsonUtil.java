@@ -25,8 +25,8 @@ public class JsonUtil {
 	/**
 	 * JSONObject对象转JavaBean
 	 * 
-	 * @param JSONObject
-	 * @param JavaBean的class
+	 * @param  json JSONObject
+	 * @param cls JavaBean的class
 	 * @return 转换结果（异常情况下返回null）
 	 */
 

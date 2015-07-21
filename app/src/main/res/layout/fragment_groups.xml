@@ -23,7 +23,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tv_new_contact"
+            android:id="@+id/create_new_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -31,11 +31,13 @@
             android:layout_marginRight="10dip"
             android:clickable="true"
             android:gravity="center_vertical"
-            android:onClick="onPublicGroups"
-            android:text="公开群"
+            android:onClick="createGroup"
+            android:text="@string/create_new_group"
             android:textColor="@color/bottom_text_color_normal"
             android:textSize="16sp" />
     </RelativeLayout>
+
+    <include layout="@layout/search_bar" android:id="@+id/search"/>
 
     <ListView
         android:id="@+id/list"

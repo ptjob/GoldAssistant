@@ -56,8 +56,7 @@ public class JobTypeActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_job_type);
 		ViewUtils.inject(this);
-        ActivityHead activityHead = new ActivityHead();
-        activityHead.initHead(this);
+        ActivityHead activityHead = new ActivityHead(this);
         activityHead.setCenterTxt1("发布兼职");
 		setBackButton();
 	}

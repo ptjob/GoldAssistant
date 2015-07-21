@@ -17,7 +17,7 @@ import com.carson.broker.JiedanActivity;
 import com.carson.constant.ConstantForSaveList;
 import com.quark.guanli.BaomingListActivity;
 import com.parttime.main.MainTabActivity;
-import com.quark.jianzhidaren.StartUpActivity;
+import com.parttime.login.StartUpActivity;
 
 /**
  * 自定义接收器

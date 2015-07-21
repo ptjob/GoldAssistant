@@ -43,7 +43,8 @@
             android:onClick="save"
             android:text="@string/button_save"
             android:textColor="#fff"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <EditText
@@ -80,6 +81,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/button_normal_shape"
+        android:visibility="gone"
         >
         <TextView 
             android:layout_marginLeft="5dp"
@@ -111,6 +113,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/button_normal_shape"
+        android:visibility="gone"
         >
         <TextView 
             android:layout_marginLeft="5dp"
@@ -133,5 +136,14 @@
             />
         
     </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_member"
+        android:id="@+id/choose_member"
+        android:onClick="chooseMember"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

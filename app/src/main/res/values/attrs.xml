@@ -69,6 +69,13 @@
         <attr name="form_tips" format="string"/>
     </declare-styleable>
 
+    <declare-styleable name="FormSetting">
+        <attr name="set_topLine_shown" format="boolean"/>
+        <attr name="set_bottomLine_shown" format="boolean"/>
+        <attr name="form_left_txt" format="string"/>
+        <attr name="form_Right_Img" format="reference"/>
+    </declare-styleable>
+
     <declare-styleable name="CountingEditText">
         <attr name="cet_countTextSize" format="dimension"/>
         <attr name="cet_countTextColor" format="color"/>

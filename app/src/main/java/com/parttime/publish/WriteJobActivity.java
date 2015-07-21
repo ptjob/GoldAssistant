@@ -25,10 +25,6 @@ import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.BaseActivity;
 import com.quark.ui.widget.ActionSheet;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
-
 /**
  * 发布兼职页
  */
@@ -46,9 +42,9 @@ public class WriteJobActivity extends BaseActivity implements
     private TextView mTxtSalaryUnit, mTxtLanguage, mTxtHeight, mTxtMeasurements;
     private TextView mTxtWorkRequireTip;
     private EditText mEditJobTitle, mEditWorkAddress, mEditSalary;
-    private EditText mEditMaleNum, mEditFemaleNum;
+    private EditText mEditHeadSum, mEditMaleNum, mEditFemaleNum;
     private EditText mEditWorkRequire;
-    private LinearLayout mLLSexContainer, mLLMoreRequireContainer;
+    private LinearLayout mLLHeadSumContainer, mLLSexContainer, mLLMoreRequireContainer;
     private RadioButton mRadioSexUnlimited, mRadioSexLimited;
     private RadioButton mRadioUnShowTel, mRadioShowTel;
     private RadioButton mRadioNeedHealthProve, mRadioUnNeedHealthProve;
@@ -67,7 +63,6 @@ public class WriteJobActivity extends BaseActivity implements
     }
 
     private void bindData() {
-        mEditWorkRequire.setText("");
     }
 
     private void bindListener() {
@@ -142,8 +137,7 @@ public class WriteJobActivity extends BaseActivity implements
     }
 
     private void initControls() {
-        activityHead = new ActivityHead();
-        activityHead.initHead(this);
+        activityHead = new ActivityHead(this);
         activityHead.setRightTxt(R.string.preview);
         activityHead.setCenterTxt1(type);
 
@@ -162,10 +156,12 @@ public class WriteJobActivity extends BaseActivity implements
         mEditJobTitle = (EditText) findViewById(R.id.edittxt_job_title);
         mEditWorkAddress = (EditText) findViewById(R.id.edittxt_work_address);
         mEditSalary = (EditText) findViewById(R.id.edittxt_salary);
+        mEditHeadSum = (EditText) findViewById(R.id.edittxt_head_sum);
         mEditMaleNum = (EditText) findViewById(R.id.edittxt_male_num);
         mEditFemaleNum = (EditText) findViewById(R.id.edittxt_female_num);
         mEditWorkRequire = (EditText) findViewById(R.id.edittxt_work_require_content);
 
+        mLLHeadSumContainer = (LinearLayout) findViewById(R.id.ll_head_sum_container);
         mLLSexContainer = (LinearLayout) findViewById(R.id.ll_sex_container);
         mLLMoreRequireContainer = (LinearLayout) findViewById(R.id.ll_more_require_container);
 
@@ -254,8 +250,10 @@ public class WriteJobActivity extends BaseActivity implements
      */
     private void toggleSex() {
         if (mRadioSexUnlimited.isChecked()) {
+            mLLHeadSumContainer.setVisibility(View.VISIBLE);
             mLLSexContainer.setVisibility(View.GONE);
         } else if (mRadioSexLimited.isChecked()) {
+            mLLHeadSumContainer.setVisibility(View.GONE);
             mLLSexContainer.setVisibility(View.VISIBLE);
         }
     }
@@ -381,6 +379,9 @@ public class WriteJobActivity extends BaseActivity implements
 
             String femaleNumStr = mEditFemaleNum.getText().toString();
             partJob.femaleNum = CheckUtils.isEmpty(femaleNumStr) ? 0 : FormatUtils.parseToInt(femaleNumStr);
+        } else {
+            String headSumStr = mEditHeadSum.getText().toString();
+            partJob.headSum = CheckUtils.isEmpty(headSumStr) ? 0 : FormatUtils.parseToInt(headSumStr);
         }
 
         partJob.workRequire =  FormatUtils.formatStr(mEditWorkRequire.getText().toString());

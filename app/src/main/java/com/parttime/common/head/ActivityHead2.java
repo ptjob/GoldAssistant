@@ -22,6 +22,10 @@ public class ActivityHead2 extends ActivityHead {
     public ImageView imgRight1 , imgRight2;
     public ProgressBar progressBar;
 
+    public ActivityHead2(Activity activity){
+        super(activity);
+    }
+
     @Override
     public void initHead(Activity activity) {
         super.initHead(activity);

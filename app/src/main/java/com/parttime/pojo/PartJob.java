@@ -20,6 +20,7 @@ public class PartJob implements Serializable {
     public SalaryUnit salaryUnit;
     public String payType;
     public boolean apartSex;
+    public int headSum;
     public int maleNum;
     public int femaleNum;
     public String workRequire;
@@ -28,11 +29,14 @@ public class PartJob implements Serializable {
     /* 更多要求里面的 */
     public Boolean healthProve;
     /**
-     * 用、隔开
+     *  用、隔开
      */
     public String language;
     public Integer height;
-    public String measurements;
+    public Integer bust;
+    public Integer beltline;
+    public Integer hipline;
+
     /* ---- */
 
     @Override
@@ -55,6 +59,7 @@ public class PartJob implements Serializable {
         return result;
     }
 
+
     @Override
     public String toString() {
         return "PartJob{" +
@@ -71,6 +76,7 @@ public class PartJob implements Serializable {
                 ", salaryUnit=" + salaryUnit +
                 ", payType='" + payType + '\'' +
                 ", apartSex=" + apartSex +
+                ", headSum=" + headSum +
                 ", maleNum=" + maleNum +
                 ", femaleNum=" + femaleNum +
                 ", workRequire='" + workRequire + '\'' +
@@ -78,7 +84,9 @@ public class PartJob implements Serializable {
                 ", healthProve=" + healthProve +
                 ", language='" + language + '\'' +
                 ", height=" + height +
-                ", measurements='" + measurements + '\'' +
+                ", bust=" + bust +
+                ", beltline=" + beltline +
+                ", hipline=" + hipline +
                 '}';
     }
 }
