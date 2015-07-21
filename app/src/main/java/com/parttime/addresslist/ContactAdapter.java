@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.easemob.chatuidemo.adapter;
+package com.parttime.addresslist;
 
 import java.io.File;
 import java.io.FileOutputStream;

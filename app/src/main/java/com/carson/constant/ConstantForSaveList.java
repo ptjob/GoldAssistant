@@ -1,16 +1,19 @@
 package com.carson.constant;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.net.Uri;
 
+import com.parttime.net.GroupSettingRequest;
 import com.quark.model.GuangchangModle;
 import com.quark.model.HuanxinUser;
 
 public class ConstantForSaveList {
 	public static boolean re_load = true;// 是否重新加载
 	public static int pageNumber = 1;// 当前页数
-	public static ArrayList<GuangchangModle> jianzhis = new ArrayList<GuangchangModle>();// 保存的list
+	public static ArrayList<GuangchangModle> jianzhis = new ArrayList<>();// 保存的list
 	public static boolean change_city = false;// 默认没有切换城市
 	public static Uri uploadUri;// 保存图库中裁剪后的图片路径(有的手机不能传输uri 如htc)
 	// 所有的请求可以设置请求超时如:
@@ -30,5 +33,7 @@ public class ConstantForSaveList {
 			"中国人民银行", "华夏银行" };
 	public static long regist_time;// 注册时的验证码监听时间
 	public static final String CARSON_CALL_NUMBER = "0755-23742220";// 联系客服电话
-	public static ArrayList<HuanxinUser> usersNick = new ArrayList<HuanxinUser>();
+	public static ArrayList<HuanxinUser> usersNick = new ArrayList<>();
+    //缓存群组的活动的报名人员列表
+    public static Map<String,GroupSettingRequest.AppliantResult> groupAppliantCache = new HashMap<>();
 }

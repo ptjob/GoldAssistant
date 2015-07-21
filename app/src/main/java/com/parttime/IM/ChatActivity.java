@@ -58,6 +58,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.carson.constant.ConstantForSaveList;
 import com.easemob.EMError;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMContactManager;
@@ -81,7 +82,6 @@ import com.easemob.chatuidemo.activity.ImageGridActivity;
 import com.easemob.chatuidemo.activity.VoiceCallActivity;
 import com.easemob.chatuidemo.adapter.ExpressionAdapter;
 import com.easemob.chatuidemo.adapter.ExpressionPagerAdapter;
-import com.easemob.chatuidemo.adapter.MessageAdapter;
 import com.easemob.chatuidemo.adapter.VoicePlayClickListener;
 import com.easemob.chatuidemo.utils.CommonUtils;
 import com.easemob.chatuidemo.utils.ImageUtils;
@@ -92,8 +92,9 @@ import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.EMLog;
 import com.easemob.util.PathUtil;
 import com.easemob.util.VoiceRecorder;
-import com.parttime.IM.setting.GroupSettingActivity;
+import com.parttime.IM.setting.GroupResumeSettingActivity;
 import com.parttime.net.DefaultCallback;
+import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
@@ -226,6 +227,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         IntentFilter filter = new IntentFilter();
         filter.addAction(COM_CARSON_SHARE_JIANZHI);
         registerReceiver(receiveBroadCast, filter);
+        if(ConstantForSaveList.groupAppliantCache.get(toChatUsername) == null){
+            //获取报名列表
+            getGroupApliantResult(toChatUsername);
+        }
     }
 
     /**
@@ -448,7 +453,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 EMConversation conversation = adapter
-                        .getEMConversationItem(position);
+                        .getEMConversationItem();
                 String username = conversation.getUserName();
 
                 if (username.equals(ApplicationControl.getInstance()
@@ -544,7 +549,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             switch (resultCode) {
                 case RESULT_CODE_COPY: // 复制消息
                     EMMessage copyMsg = (adapter.getItem(data
-                            .getIntExtra("position", -1)));
+                            .getIntExtra("position", -1))).message;
                     // clipboard.setText(SmileUtils.getSmiledText(ChatActivity.this,
                     // ((TextMessageBody) copyMsg.getBody()).getMessage()));
                     clipboard.setText(((TextMessageBody) copyMsg.getBody())
@@ -552,7 +557,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                     break;
                 case RESULT_CODE_DELETE: // 删除消息
                     EMMessage deleteMsg = adapter.getItem(data
-                            .getIntExtra("position", -1));
+                            .getIntExtra("position", -1)).message;
                     conversation.removeMessage(deleteMsg.getMsgId());
                     adapter.refresh();
                     listView.setSelection(data.getIntExtra("position",
@@ -561,7 +566,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 
                 case RESULT_CODE_FORWARD: // 转发消息
                     EMMessage forwardMsg = adapter.getItem(data
-                            .getIntExtra("position", 0));
+                            .getIntExtra("position", 0)).message;
                     Intent intent = new Intent(this, ForwardMessageActivity.class);
                     intent.putExtra("forward_msg_id", forwardMsg.getMsgId());
                     startActivity(intent);
@@ -665,7 +670,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                 }
             } else if (requestCode == REQUEST_CODE_ADD_TO_BLACKLIST) { // 移入黑名单
                 EMMessage deleteMsg = (EMMessage) adapter.getItem(data
-                        .getIntExtra("position", -1));
+                        .getIntExtra("position", -1)).message;
                 addUserToBlacklist(deleteMsg.getFrom());
             } else if (conversation.getMsgCount() > 0) {
                 adapter.refresh();
@@ -1197,7 +1202,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                 (new Intent(this, GroupDetailsActivity.class).putExtra(
                         "groupId", toChatUsername)), REQUEST_CODE_GROUP_DETAIL);*/
         startActivityForResult(
-                (new Intent(this, GroupSettingActivity.class).putExtra(
+                (new Intent(this, GroupResumeSettingActivity.class).putExtra(
                         "groupId", toChatUsername)), REQUEST_CODE_GROUP_DETAIL);
     }
 
@@ -1630,10 +1635,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                             // sdk会自动存入到此conversation中
                             if (chatType == CHATTYPE_SINGLE)
                                 messages = conversation.loadMoreMsgFromDB(adapter
-                                        .getItem(0).getMsgId(), pagesize);
+                                        .getItem(0).message.getMsgId(), pagesize);
                             else
                                 messages = conversation.loadMoreGroupMsgFromDB(
-                                        adapter.getItem(0).getMsgId(), pagesize);
+                                        adapter.getItem(0).message.getMsgId(), pagesize);
                         } catch (Exception e1) {
                             loadmorePB.setVisibility(View.GONE);
                             return;
@@ -1774,6 +1779,24 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                 }
             }
         });
+    }
+
+    public void getGroupApliantResult(final String id){
+        try {
+            new GroupSettingRequest().getUserList(id, queue, new DefaultCallback() {
+                @Override
+                public void success(Object obj) {
+                    super.success(obj);
+                    if (obj instanceof GroupSettingRequest.AppliantResult) {
+                        GroupSettingRequest.AppliantResult result = (GroupSettingRequest.AppliantResult) obj;
+                        List<GroupSettingRequest.UserVO> userList = result.userList;
+                    }
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }

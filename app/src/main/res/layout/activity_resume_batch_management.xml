@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.parttime.IM.setting.ResumeBatchManagementActivity">
+
+    <include layout="@layout/activity_common_head2" android:id="@+id/title"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_above="@+id/bottom"
+        android:id="@+id/listView"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="@dimen/title_height"
+            android:text="@string/pass"
+            android:layout_weight="1"
+            android:id="@+id/pass" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="@dimen/title_height"
+            android:text="@string/refused"
+            android:layout_weight="1"
+            android:id="@+id/refused" />
+    </LinearLayout>
+
+
+</RelativeLayout>

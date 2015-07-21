@@ -41,10 +41,10 @@ import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.activity.AddContactActivity;
-import com.easemob.chatuidemo.activity.GroupsActivity;
+import com.parttime.addresslist.AddContactActivity;
+import com.parttime.addresslist.GroupsActivity;
 import com.easemob.chatuidemo.activity.NewFriendsMsgActivity;
-import com.easemob.chatuidemo.adapter.ContactAdapter;
+import com.parttime.addresslist.ContactAdapter;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.MessageSetDao;
 import com.easemob.chatuidemo.db.UserDao;
@@ -564,10 +564,34 @@ public class MessageAndAddressFragment extends Fragment {
             new MessageSetDao(ApplicationControl.getInstance()).delete(name, type);
             //重新排序
             message.sortConversationByLastChatTime(conversationList);
+            //重新排序
+            sortMessages(conversationList, messageSetMap);
             messageAdapter.notifyDataSetChanged();
         }
 		return super.onContextItemSelected(item);
 	}
+
+    /**
+     * 刷新置顶设置
+     */
+    public void reflashMessageTop(){
+       Map<String, MessageSet> map = new MessageSetDao(ApplicationControl.getInstance()).getMessageSetList();
+       if(messageSetMap.size() < map.size()){
+           messageSetMap.clear();
+           messageSetMap.putAll(map);
+           //重新排序
+           sortMessages(conversationList, messageSetMap);
+           messageAdapter.notifyDataSetChanged();
+       }else if(messageSetMap.size() > map.size()){
+           messageSetMap.clear();
+           messageSetMap.putAll(map);
+           //重新排序
+           message.sortConversationByLastChatTime(conversationList);
+           //重新排序
+           sortMessages(conversationList, messageSetMap);
+           messageAdapter.notifyDataSetChanged();
+       }
+    }
 
      class Message{
         /**
@@ -988,7 +1012,10 @@ public class MessageAndAddressFragment extends Fragment {
             Map<String, User> users = ApplicationControl.getInstance()
                     .getContactList();
             // 加入"申请与通知"和"群聊"
+            //添加群聊
             contactList.add(0, users.get(Constant.GROUP_USERNAME));
+            //添加官方账号
+            contactList.add(0, users.get(Constant.PUBLIC_COUNT));
             // 把"申请与通知"添加到首位
             contactList.add(0, users.get(Constant.NEW_FRIENDS_USERNAME));
             setlist();

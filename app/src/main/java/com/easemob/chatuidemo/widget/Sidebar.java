@@ -24,7 +24,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.easemob.chatuidemo.adapter.ContactAdapter;
+import com.parttime.addresslist.ContactAdapter;
 import com.easemob.util.DensityUtil;
 import com.qingmu.jianzhidaren.R;
 

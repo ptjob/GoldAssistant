@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.parttime.IM.setting.GroupSettingActivity"
+    android:orientation="vertical"
+    android:background="@color/c_F5F5F5">
+
+    <include layout="@layout/activity_common_head"/>
+
+    <com.parttime.widget.SetItem
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@drawable/item_selector"
+        app:form_left_txt="@string/group_top"
+        app:topLine_shown="false"/>
+
+    <com.parttime.widget.SetItem
+        android:id="@+id/undisturb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@drawable/item_selector"
+        app:form_left_txt="@string/group_msg_undisturb"
+        app:topLine_shown="false"/>
+
+    <com.parttime.widget.SetItem
+        android:id="@+id/gag"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@drawable/item_selector"
+        app:form_left_txt="@string/group_not_allow_send_msg"
+        app:topLine_shown="false"
+        app:form_Right_Img="@drawable/btn_go"/>
+</LinearLayout>

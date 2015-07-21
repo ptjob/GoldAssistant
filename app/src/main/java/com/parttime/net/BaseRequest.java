@@ -30,9 +30,9 @@ public class BaseRequest {
      *                 success回调：obj 是 JSONObject
      *                 failed 回调：obj 是 ResponseBaseCommonError or JSONException or VolleyError
      */
-    public void request(final Map<String,String> reqParams, RequestQueue queue , final Callback callback){
-        StringRequest request = new StringRequest(Request.Method.POST,
-                Url.HUANXIN_avatars_pic, new Response.Listener<String>() {
+    public void request(String url, final Map<String,String> reqParams, RequestQueue queue , final Callback callback){
+        StringRequest request = new StringRequest(Request.Method.POST,url
+                , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 // showWait(false);

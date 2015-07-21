@@ -402,6 +402,17 @@
         <item name="android:gravity">right</item>
     </style>
 
+    <style name="FormItem_Common.FormItem_Kick_Off">
+        <item name="android:src">@drawable/settings_btn_switch_off</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">@dimen/common_margin</item>
+        <item name="android:layout_marginLeft">@dimen/commopn_inner_margin</item>
+    </style>
+
+    <style name="FormItem_Common.FormItem_Left_Txt">
+        <item name="android:layout_marginLeft">@dimen/common_margin</item>
+    </style>
+
 
     <style name="CommonButton">
         <item name="android:layout_width">@dimen/btn_width</item>

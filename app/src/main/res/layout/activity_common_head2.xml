@@ -9,22 +9,28 @@
 
     <include layout="@layout/commom_back_btn" android:id="@+id/left_back"/>
 
-    <TextView android:id="@+id/center_txt1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text=""
-        android:textColor="@color/bottom_text_color_normal"
-        android:layout_toLeftOf="@+id/center_txt2"
-        android:textSize="18sp" />
-    <TextView android:id="@+id/center_txt2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text=""
-        android:textColor="@color/bottom_text_color_normal"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/left_back"
         android:layout_toLeftOf="@+id/container_right1_image"
-        android:textSize="18sp" />
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView android:id="@+id/center_txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/bottom_text_color_normal"
+            android:singleLine="true"
+            android:textSize="18sp" />
+        <TextView android:id="@+id/center_txt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/bottom_text_color_normal"
+
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/container_right1_image"
@@ -70,5 +76,6 @@
         android:layout_height="26dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="7dp" />
+        android:layout_marginRight="7dp"
+        android:visibility="gone"/>
 </RelativeLayout>

@@ -16,6 +16,7 @@ package com.easemob.chatuidemo;
 public class Constant {
 	public static final String NEW_FRIENDS_USERNAME = "item_new_friends";
 	public static final String GROUP_USERNAME = "item_groups";
+    public static final String PUBLIC_COUNT = "public_count";
 	public static final String MESSAGE_ATTR_IS_VOICE_CALL = "is_voice_call";
 	public static final String MESSAGE_ATTR_IS_EXTRA = "activityExtra";
 	public static final String ACCOUNT_REMOVED = "account_removed";

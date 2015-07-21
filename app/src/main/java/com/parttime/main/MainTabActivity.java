@@ -66,14 +66,13 @@ import com.easemob.chat.EMNotifier;
 import com.easemob.chat.GroupChangeListener;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.activity.GroupsActivity;
+import com.parttime.addresslist.GroupsActivity;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.InviteMessage;
 import com.easemob.chatuidemo.domain.InviteMessage.InviteMesageStatus;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.utils.CommonUtils;
-import com.easemob.exceptions.EMNetworkUnconnectedException;
 import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.EMLog;
 import com.easemob.util.EasyUtils;
@@ -81,6 +80,7 @@ import com.easemob.util.HanziToPinyin;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
 import com.parttime.common.update.UpdateUtils;
+import com.parttime.constants.ActionConstants;
 import com.parttime.login.FindPJLoginActivity;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.BuildConfig;
@@ -168,6 +168,7 @@ public class MainTabActivity extends FragmentActivity implements
 	private String getFriendListUrl;// 获取服务端好友列表url
 	List<String> usernames = new ArrayList<>();// 好友列表显示的是uid
 														// u1007或者c100之类
+    private MainBroadCastReceiver mainBroadCastReceiver;
 
 	/**
 	 * 检查当前用户是否被删除
@@ -325,6 +326,9 @@ public class MainTabActivity extends FragmentActivity implements
 			}.start();
 
 		}
+
+        mainBroadCastReceiver = new MainBroadCastReceiver();
+        registerReceiver(mainBroadCastReceiver, new IntentFilter(ActionConstants.ACTION_MESSAGE_TO_TOP));
 	}
 
 
@@ -722,8 +726,12 @@ public class MainTabActivity extends FragmentActivity implements
 		try {
 			unregisterReceiver(jpushMessageReceiver);
 		} catch (Exception ignore) {
-
 		}
+        try{
+            unregisterReceiver(mainBroadCastReceiver);
+        }catch (Exception ignore){
+
+        }
 		if (myGroupChangeListener != null) {
 			EMGroupManager.getInstance().removeGroupChangeListener(
 					myGroupChangeListener);
@@ -2173,5 +2181,17 @@ public class MainTabActivity extends FragmentActivity implements
 			e.printStackTrace();
 		}
 	}
+
+    private class MainBroadCastReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            //刷新置顶
+            if(ActionConstants.ACTION_MESSAGE_TO_TOP.equals(action)){
+                messageAndAddressFragment.reflashMessageTop();
+            }
+        }
+    }
 
 }

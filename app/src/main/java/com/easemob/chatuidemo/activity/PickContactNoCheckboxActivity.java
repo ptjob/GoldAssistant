@@ -32,7 +32,7 @@ import android.widget.ListView;
 import com.android.volley.RequestQueue;
 import com.carson.constant.ConstantForSaveList;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.adapter.ContactAdapter;
+import com.parttime.addresslist.ContactAdapter;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
 import com.parttime.main.PinyinComparator;
