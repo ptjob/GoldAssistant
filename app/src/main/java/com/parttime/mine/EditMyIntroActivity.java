@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,12 +31,13 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.base.WithTitleActivity;
 import com.parttime.common.Image.ContactImageLoader;
-import com.parttime.common.adapters.SingleTextAdapter;
 import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.main.MainTabActivity;
 import com.parttime.type.AccountType;
 import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.widget.CountingEditText;
+
+import com.parttime.widget.SelectLayout;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.image.UploadImg;
@@ -45,6 +45,8 @@ import com.quark.utils.Util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cjz on 2015/7/12.
@@ -61,16 +63,17 @@ public class EditMyIntroActivity extends WithTitleActivity {
 
     @ViewInject(R.id.cet_intro)
     private CountingEditText cetIntro;
-    @ViewInject(R.id.gv_types)
-    private GridView gv;
+    @ViewInject(R.id.sl_work_types)
+    private SelectLayout slWorkTypes;
     @ViewInject(R.id.iv_head_image)
     private ImageView ivHead;
-    private SingleTextAdapter adapter;
 
     private Bitmap userPhotoBmp = null;
     private String userId;
     private int userType;
     private Bitmap head;
+//    private List<Object> workTypes;
+    private String[] workTypes;
 
 
 
@@ -93,8 +96,9 @@ public class EditMyIntroActivity extends WithTitleActivity {
         if(head != null) {
             ivHead.setImageBitmap(head);
         }
-        if(userType != AccountType.AGENT){
-            gv.setVisibility(View.GONE);
+        if(userType == AccountType.AGENT){
+
+            slWorkTypes.setVisibility(View.VISIBLE);
         }
     }
 
@@ -120,7 +124,14 @@ public class EditMyIntroActivity extends WithTitleActivity {
     }
 
     protected void loadData(){
+        if(userType == AccountType.AGENT){
+            workTypes = getResources().getStringArray(R.array.work_types);
 
+            for(int i = 0; i < workTypes.length; ++i){
+                slWorkTypes.add(workTypes[i]);
+            }
+
+        }
     }
 
     @OnClick(R.id.iv_head_image)
@@ -137,11 +148,12 @@ public class EditMyIntroActivity extends WithTitleActivity {
         final int cFullFillWidth = 10000;
         layout.setMinimumWidth(cFullFillWidth);
 
-        TextView mContent = (TextView) layout.findViewById(R.id.content);// �����ϴ�
+        TextView mContent = (TextView) layout.findViewById(R.id.content);//
+        // 拍照上传
         TextView mCancel = (TextView) layout.findViewById(R.id.cancel);
-        TextView mTitle = (TextView) layout.findViewById(R.id.title);// �����ѡ��
+        TextView mTitle = (TextView) layout.findViewById(R.id.title);// 相册中选择
 
-        // �����ϴ�
+
         mContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,7 +168,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
                 } else {
 
                     Toast mToast = Toast.makeText(EditMyIntroActivity.this,
-                            "δ�ҵ��洢�����޷��洢��Ƭ��", Toast.LENGTH_LONG);
+                            "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG);
                     mToast.setGravity(Gravity.CENTER, 0, 0);
                     mToast.show();
                 }
@@ -170,7 +182,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
             @Override
             public void onClick(View v) {
                 Intent intentFromGallery = new Intent();
-                intentFromGallery.setType("image/*"); // �����ļ�����
+                intentFromGallery.setType("image/*"); // 设置文件类型
                 intentFromGallery.setAction(Intent.ACTION_PICK);
                 startActivityForResult(intentFromGallery, IMAGE_REQUEST_CODE);
                 dlg.dismiss();
@@ -203,7 +215,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
         if (data.getData() != null) {
             startPhotoZoom(data.getData(), 300, 300);
         } else {
-            Toast mToast = Toast.makeText(this, "��ȡͼƬʧ�ܡ�����",
+            Toast mToast = Toast.makeText(this, "获取图片失败。。。",
                     Toast.LENGTH_LONG);
             mToast.setGravity(Gravity.CENTER, 0, 0);
             mToast.show();
@@ -221,11 +233,11 @@ public class EditMyIntroActivity extends WithTitleActivity {
             userPhotoBmp = BitmapFactory.decodeFile(
                     Environment.getExternalStorageDirectory() + "/"
                             + IMAGE_FILE_NAME, opt);
-            // ��ȡ�����ͼƬ��ԭʼ��Ⱥ͸߶�
+            // 获取到这个图片的原始宽度和高度
             int picWidth = opt.outWidth;
             int picHeight = opt.outHeight;
 
-            // ��ȡ���Ŀ�Ⱥ͸߶�
+
             WindowManager windowManager = getWindowManager();
             Display display = windowManager.getDefaultDisplay();
             int screenWidth = display.getWidth();
@@ -267,32 +279,32 @@ public class EditMyIntroActivity extends WithTitleActivity {
                 startPhotoZoom(tt_uri, 300, 300);
             } else {
                 Toast mToast = Toast.makeText(this,
-                        "δ�ҵ��洢�����޷��洢��Ƭ��", Toast.LENGTH_LONG);
+                        "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG);
                 mToast.setGravity(Gravity.CENTER, 0, 0);
                 mToast.show();
             }
         } else {
 
             Toast mToast = Toast.makeText(this,
-                    "δ�ҵ��洢�����޷��洢��Ƭ��", Toast.LENGTH_LONG);
+                    "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG);
             mToast.setGravity(Gravity.CENTER, 0, 0);
             mToast.show();
         }
     }
 
     /**
-     * ��ȡͼƬ����ת�ĽǶ�
+     * 读取图片的旋转的角度
      *
      * @param path
-     *            ͼƬ���·��
-     * @return ͼƬ����ת�Ƕ�
+     *            图片绝对路径
+     * @return 图片的旋转角度
      */
     private int getBitmapDegree(String path) {
         int degree = 0;
         try {
-            // ��ָ��·���¶�ȡͼƬ������ȡ��EXIF��Ϣ
+            // 从指定路径下读取图片，并获取其EXIF信息
             ExifInterface exifInterface = new ExifInterface(path);
-            // ��ȡͼƬ����ת��Ϣ
+            // 获取图片的旋转信息
             int orientation = exifInterface.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION,
                     ExifInterface.ORIENTATION_NORMAL);
@@ -314,22 +326,22 @@ public class EditMyIntroActivity extends WithTitleActivity {
     }
 
     /**
-     * ��ͼƬ����ĳ���ǶȽ�����ת
+     * 将图片按照某个角度进行旋转
      *
      * @param bm
-     *            ��Ҫ��ת��ͼƬ
+     *            需要旋转的图片
      * @param degree
-     *            ��ת�Ƕ�
-     * @return ��ת���ͼƬ
+     *            旋转角度
+     * @return 旋转后的图片
      */
     private Bitmap rotateBitmapByDegree(Bitmap bm, int degree) {
         Bitmap returnBm = null;
 
-        // �����ת�Ƕȣ������ת����
+        // 根据旋转角度，生成旋转矩阵
         Matrix matrix = new Matrix();
         matrix.postRotate(degree);
         try {
-            // ��ԭʼͼƬ������ת���������ת�����õ��µ�ͼƬ
+            // 将原始图片按照旋转矩阵进行旋转，并得到新的图片
             returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(),
                     bm.getHeight(), matrix, true);
         } catch (OutOfMemoryError e) {
@@ -344,23 +356,23 @@ public class EditMyIntroActivity extends WithTitleActivity {
     }
 
     /**
-     * �ü�ͼƬ����ʵ��
+     * 裁剪图片方法实现
      *
      * @param uri
      */
     public void startPhotoZoom(Uri uri, int x, int y) {
-        ConstantForSaveList.uploadUri = uri;// ��ʱ�洢uri ��htc���ܱ���uri
+        ConstantForSaveList.uploadUri = uri;// 暂时存储uri 如htc不能保存uri
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
-        // ���òü�
+        // 设置裁剪
         intent.putExtra("crop", "true");
-        // aspectX aspectY �ǿ�ߵı���
+        // aspectX aspectY 是宽高的比例
         intent.putExtra("aspectX", x);
         intent.putExtra("aspectY", y);
-        // outputX outputY �ǲü�ͼƬ���
+        // outputX outputY 是裁剪图片宽高
         intent.putExtra("outputX", x);
         intent.putExtra("outputY", y);
-        intent.putExtra("noFaceDetection", true);// ȡ������ʶ��
+        intent.putExtra("noFaceDetection", true);// 取消人脸识别
         intent.putExtra("return-data", false);
         startActivityForResult(intent, RESULT_REQUEST_CODE);
     }

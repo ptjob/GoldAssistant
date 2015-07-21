@@ -242,6 +242,7 @@
     <string name="brief_intro">简介</string>
     <string name="enter_your_intro_here">请在此输入您的自我介绍</string>
     <string name="preview">预览</string>
+    <string name="select_work_types_tips">承招类型（最多选五个）</string>
 
     <!-- 我的钱包 -->
     <string name="account_balance">账户余额（元）</string>
@@ -302,9 +303,11 @@
     <string name="publish_job_hint_is_show_tel">是否显示您的手机号</string>
     <string name="publish_job_checkbox_sex_unlimited">不限性别</string>
     <string name="publish_job_checkbox_sex_limited">分招男女</string>
+    <string name="publish_job_label_head_sum">总人数</string>
     <string name="publish_job_label_male_num">男生人数</string>
     <string name="publish_job_label_female_num">女生人数</string>
     <string name="publish_job_tip_work_require">%1$d/1000</string>
+    <string name="publish_job_tip_work_require_default">0/1000</string>
     <string name="publish_job_form_uninput_warn_format">%1$s尚未填写</string>
     <string name="publish_job_form_salary_format_error">工资薪酬必须是整数</string>
     <string name="publish_job_preview_title">活动预览</string>

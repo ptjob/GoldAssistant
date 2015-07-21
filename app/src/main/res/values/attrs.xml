@@ -83,4 +83,18 @@
         <attr name="fb_line_width" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="CommonShowItemLayout">
+        <attr name="csil_columnCount" format="integer"/>
+        <attr name="csil_itemHeight" format="dimension"/>
+        <attr name="csil_horizontalInnerMargin" format="dimension"/>
+        <attr name="csil_verticleInnerMargin" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="SelectLayout">
+        <attr name="sl_textColor" format="color|reference"/>
+        <attr name="sl_textSize" format="dimension"/>
+        <attr name="sl_itemBackground" format="color|reference"/>
+        <attr name="sl_maxSelectCount" format="integer"/>
+    </declare-styleable>
+
 </resources>

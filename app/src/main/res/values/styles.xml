@@ -402,25 +402,87 @@
         <item name="android:gravity">right</item>
     </style>
 
-    <!-- 表单 -->
-    <style name="PublicLineH">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/public_line_1</item>
-        <item name="android:background">@color/public_line</item>
+
+    <style name="CommonButton">
+        <item name="android:layout_width">@dimen/btn_width</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:textColor">@color/btn_txt_color</item>
+        <item name="android:textSize">@dimen/btn_txt_size</item>
     </style>
 
-    <style name="PublicLineH_1">
+    <style name="CommonButton.Blue">
+        <item name="android:background">@drawable/selector_btn_blue</item>
+    </style>
+
+    <!-- 表单 -->
+
+    <!-- 容器：标准使用，四周的padding一样 -->
+    <style name="FormNormalContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/form_container_padding</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@color/form_bg</item>
+    </style>
+
+    <!-- 容器：单项使用，固定高度，横向布局 -->
+    <style name="FormItemContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/form_item_container_height</item>
+        <item name="android:background">@color/form_bg</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/form_container_padding</item>
+        <item name="android:paddingRight">@dimen/form_container_padding</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- 容器：单项使用，适配高度，横向布局 -->
+    <style name="FormItemContainer_Wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/form_bg</item>
+        <item name="android:gravity">top|left</item>
+        <item name="android:paddingTop">@dimen/form_input_padding_top_bottom</item>
+        <item name="android:paddingBottom">@dimen/form_input_padding_top_bottom</item>
+        <item name="android:paddingLeft">@dimen/form_container_padding</item>
+        <item name="android:paddingRight">@dimen/form_container_padding</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- 容器：单项使用，适配高度，竖向布局 -->
+    <style name="FormItemContainer_Wrap.V" parent="FormItemContainer_Wrap">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- 横线 -->
+    <style name="PublicLineH">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/public_line_0.5</item>
         <item name="android:background">@color/public_line</item>
     </style>
 
+    <!-- 横线（较粗） -->
+    <style name="PublicLineH_1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/public_line_1</item>
+        <item name="android:background">@color/public_line</item>
+    </style>
+
+    <!-- 竖线 -->
     <style name="PublicLineV">
+        <item name="android:layout_width">@dimen/public_line_0.5</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/public_line</item>
+    </style>
+
+    <!-- 竖线（较粗） -->
+    <style name="PublicLineV_1">
         <item name="android:layout_width">@dimen/public_line_1</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/public_line</item>
     </style>
 
+    <!-- 单行表单标签 -->
     <style name="FormLabel">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -435,6 +497,7 @@
         <item name="android:textSize">@dimen/form_label_text_size</item>
     </style>
 
+    <!-- 单行表单输入框 -->
     <style name="FormInput">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -444,11 +507,12 @@
         <item name="android:textColorHint">@color/form_input_hint_color</item>
         <item name="android:paddingTop">@dimen/form_input_padding_top_bottom</item>
         <item name="android:paddingBottom">@dimen/form_input_padding_top_bottom</item>
-        <item name="android:textSize">@dimen/form_text_size</item>
+        <item name="android:textSize">@dimen/form_text_size_0</item>
         <item name="android:textColor">@color/black_1</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <!-- 大表单输入框 -->
     <style name="FormInput_S" parent="FormInput">
         <item name="android:layout_height">@dimen/form_input_s_height</item>
         <item name="android:paddingTop">@dimen/form_input_s_padding_top_bottom</item>
@@ -456,6 +520,7 @@
         <item name="android:gravity">top|left</item>
     </style>
 
+    <!-- 大表单输入框提示语 -->
     <style name="FormInput_S_Tip">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -466,6 +531,7 @@
         <item name="android:textSize">@dimen/form_input_s_tip_text_size</item>
     </style>
 
+    <!-- 单行选择框 -->
     <style name="FormSelect">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -477,10 +543,11 @@
         <item name="android:paddingBottom">@dimen/form_input_padding_top_bottom</item>
         <item name="android:drawableRight">@drawable/btn_go</item>
         <item name="android:textColor">@color/black_1</item>
-        <item name="android:textSize">@dimen/form_text_size</item>
+        <item name="android:textSize">@dimen/form_text_size_0</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <!-- 单选多选按钮 -->
     <style name="FormCheckbox">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -489,16 +556,67 @@
         <item name="android:background">@drawable/selector_form_checkbox</item>
         <item name="android:paddingTop">@dimen/form_input_padding_top_bottom</item>
         <item name="android:paddingBottom">@dimen/form_input_padding_top_bottom</item>
-        <item name="android:textSize">@dimen/form_text_size</item>
+        <item name="android:textSize">@dimen/form_text_size_0</item>
         <item name="android:textColor">@color/color_form_checkbox_text</item>
         <item name="android:gravity">center</item>
         <item name="android:button">@null</item>
     </style>
 
+    <!-- 蓝色按钮 -->
+    <style name="FormBlueButton">
+        <item name="android:layout_width">@dimen/form_button_width</item>
+        <item name="android:layout_height">@dimen/form_button_height</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@drawable/selector_form_button</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Item间的空间分割 -->
     <style name="FormDivider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/form_divider_height</item>
     </style>
 
+    <!-- Item间的空间分割（较小） -->
+    <style name="FormDivider_1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/form_divider_height_1</item>
+    </style>
+
+    <!-- 灰色文字 -->
+    <style name="FormGrayText_0">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/form_text_size_0</item>
+        <item name="android:textColor">@color/black_2</item>
+    </style>
+
+    <!-- 灰色文字（较大） -->
+    <style name="FormGrayText_1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/form_text_size_1</item>
+        <item name="android:textColor">@color/black_2</item>
+    </style>
+
+    <!-- 黑色文字 -->
+    <style name="FormBlackText_0">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/form_text_size_0</item>
+        <item name="android:textColor">@color/black_1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- 黑色文字（较大） -->
+    <style name="FormBlackText_1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/form_text_size_1</item>
+        <item name="android:textColor">@color/black_1</item>
+    </style>
+
+    <!-- end 表单 -->
 
 </resources>

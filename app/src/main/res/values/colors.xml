@@ -19,6 +19,7 @@
     <!-- 文本 -->
     <color name="black_0">#000000</color>
     <color name="black_1">#333333</color>
+    <color name="black_2">#c4c4c4</color>
 
     <!-- 按钮 -->
     <color name="public_button_hollow_normal_solod">#ffffff</color>
@@ -31,6 +32,8 @@
     <color name="form_checkbox_pressed">#4ba4dd</color>
     <color name="form_button">#4ba4dd</color>
     <color name="form_button_pressed">#31709a</color>
+    <color name="form_bg">#ffffff</color>
+    <color name="form_orange">#ee8c0e</color>
 
     <color name="liulanhenji">#F6F6F6</color>
     <color name="guanli_common_color">#1b1d29</color>
@@ -200,7 +203,10 @@
 
     <color name="divider_color">#e2e2e2</color>
 
-    <color name="my_intro_block_background">#33123412</color>
-    <color name="my_intro_take_img_bg">#222222</color>
+    <color name="my_intro_block_background">@color/common_gray</color>
+    <color name="my_intro_take_img_bg">@color/common_gray</color>
     <color name="common_txt_color">#fff</color>
+
+    <color name="btn_txt_color">#ffffff</color>
+    <color name="common_gray">#c7c8cd</color>
 </resources>

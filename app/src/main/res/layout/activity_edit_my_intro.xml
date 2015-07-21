@@ -14,8 +14,7 @@
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/my_intro_block_height"
-                android:background="@color/my_intro_block_background">
+                android:layout_height="wrap_content">
 
                 <!--<com.quark.http.image.CircularImage
                     android:id="@+id/cover_user_photo"
@@ -23,41 +22,78 @@
                     android:layout_height="95dip"
                     android:layout_marginLeft="3dp"
                     android:layout_marginTop="3dp" />-->
-                <TextView
+                <FrameLayout
                     android:layout_width="@dimen/head_img_edge"
                     android:layout_height="@dimen/head_img_edge"
-                    android:gravity="center"
-                    android:layout_centerInParent="true"
-                    android:background="@color/my_intro_take_img_bg"
-                    android:textColor="@color/common_txt_color"
-                    android:text="@string/click_to_upload_head_img"/>
-                <ImageView
-                    android:id="@+id/iv_head_image"
-                    android:layout_width="@dimen/head_img_edge"
-                    android:layout_height="@dimen/head_img_edge"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/my_intro_take_img_bg">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:textColor="@color/common_txt_color"
+                        android:text="@string/click_to_upload_head_img"/>
+                    <ImageView
+                        android:id="@+id/iv_head_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+                </FrameLayout>
+
 
             </RelativeLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
                 android:text="@string/brief_intro"
-                android:layout_gravity="center_horizontal"/>
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:textSize="13sp"
+                android:paddingTop="9dp"/>
 
             <com.parttime.widget.CountingEditText
                 android:id="@+id/cet_intro"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 app:cet_maxLen="500"
-                android:background="#ffffff"
+                android:background="@drawable/shape_intro_enter_bg"
                 android:gravity="top"
-                android:hint="@string/enter_your_intro_here"/>
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
 
-            <GridView
-                android:id="@+id/gv_types"
+                android:hint="@string/enter_your_intro_here"/>
+            
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="32dp"
+                android:textSize="13sp"
+                android:paddingTop="9dp"
+                android:gravity="center_horizontal"
+                android:text="@string/select_work_types_tips"/>
+
+
+            <com.parttime.widget.SelectLayout
+                android:id="@+id/sl_work_types"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin"
+                android:layout_marginRight="@dimen/common_margin"
+                app:sl_textColor="@color/select_layout_text_color"
+                app:sl_textSize="14sp"
+                app:sl_itemBackground="@drawable/selector_select_item"
+                app:sl_maxSelectCount="5"/>
+
+            <Button
+                android:id="@+id/btn_finish"
+                style="@style/CommonButton.Blue"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/done"/>
         </LinearLayout>
     </ScrollView>
 

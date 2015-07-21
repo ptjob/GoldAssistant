@@ -12,4 +12,21 @@
         <item>时薪</item>
     </string-array>
 
+    <string-array name="work_types">
+        <item>派发</item>
+        <item>促销</item>
+        <item>礼仪</item>
+        <item>家教</item>
+        <item>服务员</item>
+        <item>主持</item>
+        <item>安保人员</item>
+        <item>模特</item>
+        <item>话务员</item>
+        <item>翻译</item>
+        <item>工作人员</item>
+        <item>访谈</item>
+        <item>充场</item>
+        <item>演艺</item>
+        <item>其他</item>
+    </string-array>
 </resources>
