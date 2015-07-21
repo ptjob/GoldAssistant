@@ -273,6 +273,16 @@
     <string name="preview">预览</string>
     <string name="select_work_types_tips">承招类型（最多选五个）</string>
 
+    <!-- 我的粉丝 -->
+    <string name="credit_value">信誉值</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="sincere_money_paid">已交诚意金</string>
+    <string name="sincere_money_not_paid">未交诚意金</string>
+    <string name="real_name_certed">已实名认证</string>
+    <string name="real_name_not_certed">未实名认证</string>
+
+
     <!-- 我的钱包 -->
     <string name="account_balance">账户余额（元）</string>
     <string name="recharge">充值</string>
