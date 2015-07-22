@@ -275,7 +275,7 @@ public class MessageAndAddressFragment extends Fragment {
 
 
     private void sortMessages(List<EMConversation> conversationList, Map<String, MessageSet> messageSetMap) {
-        if(messageSetMap == null || conversationList == null){
+        if(messageSetMap == null || conversationList == null || conversationList.size() == 0 || messageSetMap.size() == 0){
             return ;
         }
         //缓存在置顶中存在的消息列表
@@ -577,21 +577,23 @@ public class MessageAndAddressFragment extends Fragment {
      */
     public void reflashMessageTop(){
        Map<String, MessageSet> map = new MessageSetDao(ApplicationControl.getInstance()).getMessageSetList();
-       if(messageSetMap.size() < map.size()){
-           messageSetMap.clear();
-           messageSetMap.putAll(map);
-           //重新排序
-           sortMessages(conversationList, messageSetMap);
-           messageAdapter.notifyDataSetChanged();
-       }else if(messageSetMap.size() > map.size()){
-           messageSetMap.clear();
-           messageSetMap.putAll(map);
-           //重新排序
-           message.sortConversationByLastChatTime(conversationList);
-           //重新排序
-           sortMessages(conversationList, messageSetMap);
-           messageAdapter.notifyDataSetChanged();
-       }
+        if(messageSetMap != null) {
+            if (messageSetMap.size() < map.size()) {
+                messageSetMap.clear();
+                messageSetMap.putAll(map);
+                //重新排序
+                sortMessages(conversationList, messageSetMap);
+                messageAdapter.notifyDataSetChanged();
+            } else if (messageSetMap.size() > map.size()) {
+                messageSetMap.clear();
+                messageSetMap.putAll(map);
+                //重新排序
+                message.sortConversationByLastChatTime(conversationList);
+                //重新排序
+                sortMessages(conversationList, messageSetMap);
+                messageAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
      class Message{

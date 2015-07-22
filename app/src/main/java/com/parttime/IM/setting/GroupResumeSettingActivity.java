@@ -124,7 +124,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             data.addAll(appliantResult.userList);
             adapter.notifyDataSetChanged();
         }else{
-            //getGroupApliantResult(groupId);
+            getGroupApliantResult(groupId);
         }
         // 保证每次进详情看到的都是最新的group
         //updateGroup();
@@ -341,6 +341,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                 holder.reputationValueStar = (LinearLayout) view.findViewById(R.id.reputation_value_star_container);
                 holder.resumeButton = (Button) view.findViewById(R.id.button);
 
+                view.setTag(holder);
             }else{
                 view = convertView;
                 holder = (ViewHolder)convertView.getTag();

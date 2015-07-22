@@ -38,7 +38,6 @@
         android:layout_height="match_parent"
         android:background="@drawable/common_tab_bg"
         android:layout_toLeftOf="@+id/container_right2_image"
-        android:onClick="showGroupNotice"
         android:visibility="gone">
 
         <ImageView
@@ -58,7 +57,6 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:background="@drawable/common_tab_bg"
-        android:onClick="toGroupDetails"
         android:visibility="gone" >
 
         <ImageView

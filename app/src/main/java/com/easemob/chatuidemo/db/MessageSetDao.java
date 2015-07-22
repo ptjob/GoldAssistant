@@ -4,9 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.parttime.pojo.MessageSet;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -109,7 +109,8 @@ public class MessageSetDao {
     public MessageSet getMessageSet(String name, String type) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " where " + COLUMN_NAME + " = ? and " + COLUMN_TYPE + " = ? ", new String[]{name, type});
+            Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " where " + COLUMN_NAME + " = ? and " + COLUMN_TYPE + " = ? ",
+                    new String[]{name, type});
             try {
                 if (cursor.moveToNext()) {
                     int id = cursor.getInt(cursor.getColumnIndex(ID));

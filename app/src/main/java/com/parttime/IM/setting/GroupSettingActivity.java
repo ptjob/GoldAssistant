@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
-import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMGroup;
@@ -79,8 +78,10 @@ public class GroupSettingActivity extends BaseActivity implements View.OnClickLi
             }else{
                 groupType = EMConversation.EMConversationType.GroupChat.name();
             }
-            //查询置顶
-            messageSet = dao.getMessageSet(groupId, groupType);
+            if( groupType != null) {
+                //查询置顶
+                messageSet = dao.getMessageSet(groupId, groupType);
+            }
         }
 
         headView.setCenterTxt1(R.string.group_setting);
