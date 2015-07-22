@@ -27,6 +27,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -66,7 +67,6 @@ import com.easemob.chat.EMNotifier;
 import com.easemob.chat.GroupChangeListener;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.Constant;
-import com.parttime.addresslist.GroupsActivity;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.InviteMessage;
@@ -79,6 +79,7 @@ import com.easemob.util.EasyUtils;
 import com.easemob.util.HanziToPinyin;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
+import com.parttime.addresslist.GroupsActivity;
 import com.parttime.common.update.UpdateUtils;
 import com.parttime.constants.ActionConstants;
 import com.parttime.login.FindPJLoginActivity;
@@ -279,8 +280,12 @@ public class MainTabActivity extends FragmentActivity implements
 					// demo中每次登陆都去获取好友username，开发者自己根据情况而定
 					try {
 						if (EMContactManager.getInstance() != null) {
-							usernames = EMContactManager.getInstance()
-									.getContactUserNames();
+                            try {
+                                usernames = EMContactManager.getInstance()
+                                        .getContactUserNames();
+                            }catch (com.easemob.exceptions.EMNetworkUnconnectedException ignore){
+                                Log.e(TAG, Log.getStackTraceString(ignore));
+                            }
 						}
 						Map<String, com.easemob.chatuidemo.domain.User> userlist = new HashMap<>();
 						for (String username : usernames) {

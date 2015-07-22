@@ -36,6 +36,7 @@ import android.text.ClipboardManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -93,6 +94,7 @@ import com.easemob.util.EMLog;
 import com.easemob.util.PathUtil;
 import com.easemob.util.VoiceRecorder;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.parttime.IM.setting.GroupResumeSettingActivity;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
@@ -119,6 +121,8 @@ import java.util.List;
  *
  */
 public class ChatActivity extends BaseActivity implements OnClickListener {
+
+    private static String TAG = "ChatActivity";
 
     private static final int REQUEST_CODE_EMPTY_HISTORY = 2;
     public static final int REQUEST_CODE_CONTEXT_MENU = 3;
@@ -235,10 +239,14 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                 ){
             String description = group.getDescription();
             if(! TextUtils.isEmpty(description)){
-                GroupDescription gd = new Gson().fromJson(description, GroupDescription.class);
-                if(gd != null && gd.type == GroupDescription.ACTIVITY_GROUP){
-                    //获取报名列表
-                    getGroupApliantResult(toChatUsername);
+                try {
+                    GroupDescription gd = new Gson().fromJson(description, GroupDescription.class);
+                    if (gd != null && gd.type == GroupDescription.ACTIVITY_GROUP) {
+                        //获取报名列表
+                        getGroupApliantResult(toChatUsername);
+                    }
+                }catch(IllegalStateException | JsonSyntaxException ignore){
+                    Log.e(TAG, "description format is error , description = " + description);
                 }
             }
         }
