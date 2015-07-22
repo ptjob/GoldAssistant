@@ -502,25 +502,32 @@
             android:name="com.parttime.IM.setting.GroupGagActivity"
             android:label="@string/title_activity_group_gag"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide">
+            android:theme="@style/horizontal_slide" >
         </activity>
         <activity
             android:name="com.parttime.IM.setting.ResumeBatchManagementActivity"
             android:label="@string/title_activity_resume_batch_management"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide">
+            android:theme="@style/horizontal_slide" >
         </activity>
         <activity
             android:name="com.parttime.IM.setting.SendAdmitToEmailActivity"
             android:label="@string/title_activity_send_admit_to_email"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide">
+            android:theme="@style/horizontal_slide" >
         </activity>
         <!-- 添加好友 -->
         <activity
             android:name="com.parttime.addresslist.AddContactActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
+        </activity>
+        <!--官方账号-->
+        <activity
+            android:name="com.parttime.addresslist.PublicCountListActivity"
+            android:label="@string/title_activity_public_count_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide">
         </activity>
         <!-- 群组详情 -->
         <activity
@@ -893,13 +900,14 @@
             android:name="com.parttime.publish.WriteJobActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
-        <activity android:name="com.parttime.publish.JobDetailActivity"
+        <activity
+            android:name="com.parttime.publish.JobDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 
         <!-- 公共页面 -->
-        <activity android:name="com.parttime.common.activity.ChooseListActivity"
+        <activity
+            android:name="com.parttime.common.activity.ChooseListActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 

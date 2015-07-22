@@ -42,6 +42,7 @@ import com.easemob.chat.EMContactManager;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.db.UserDao;
+import com.easemob.chatuidemo.domain.User;
 import com.easemob.util.EMLog;
 import com.easemob.util.HanziToPinyin;
 import com.lidroid.xutils.ViewUtils;
@@ -434,20 +435,24 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 									setUserHearder(username, user);
 									userlist.put(username, user);
 								}
-								// 添加user"申请与通知"
-								com.easemob.chatuidemo.domain.User newFriends = new com.easemob.chatuidemo.domain.User();
-								newFriends
-										.setUsername(Constant.NEW_FRIENDS_USERNAME);
-								newFriends.setNick("申请与通知");
-								newFriends.setHeader("");
-								userlist.put(Constant.NEW_FRIENDS_USERNAME,
-										newFriends);
-								// 添加"群聊"
-								com.easemob.chatuidemo.domain.User groupUser = new com.easemob.chatuidemo.domain.User();
-								groupUser.setUsername(Constant.GROUP_USERNAME);
-								groupUser.setNick("群聊");
-								groupUser.setHeader("");
-								userlist.put(Constant.GROUP_USERNAME, groupUser);
+                                // 添加user"申请与通知"
+                                User newFriends = new User();
+                                newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
+                                newFriends.setNick(getString(R.string.apply_notify));
+                                newFriends.setHeader("");
+                                userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
+                                // 添加"群聊"
+                                User groupUser = new User();
+                                groupUser.setUsername(Constant.GROUP_USERNAME);
+                                groupUser.setNick(getString(R.string.group_chat));
+                                groupUser.setHeader("");
+                                userlist.put(Constant.GROUP_USERNAME, groupUser);
+                                // 添加"官方账号"
+                                User publicCount = new User();
+                                publicCount.setUsername(Constant.PUBLIC_COUNT);
+                                publicCount.setNick(getString(R.string.public_count));
+                                publicCount.setHeader("");
+                                userlist.put(Constant.PUBLIC_COUNT, publicCount);
 
 								// 存入内存
 								ApplicationControl.getInstance()

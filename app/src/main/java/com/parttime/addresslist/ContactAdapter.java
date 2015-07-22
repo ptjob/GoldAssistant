@@ -144,7 +144,11 @@ public class ContactAdapter extends ArrayAdapter<User> implements
 				} else {
 					unreadMsgView.setVisibility(View.INVISIBLE);
 				}
-			} else if (username.equals(Constant.GROUP_USERNAME)) {
+			} else if (username.equals(Constant.PUBLIC_COUNT)) {
+				// 官方账号
+				nameTextview.setText(user.getNick());
+				avatar.setImageResource(R.drawable.peoplephoto);
+            } else if (username.equals(Constant.GROUP_USERNAME)) {
 				// 群聊item
 				nameTextview.setText(user.getNick());
 				avatar.setImageResource(R.drawable.peoplephoto);

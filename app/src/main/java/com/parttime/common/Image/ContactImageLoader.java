@@ -55,7 +55,7 @@ public class ContactImageLoader {
 
         File picture = new File(Image_Path,
                 sp.loadStringSharedPreference(id + "_photo", "c"));
-        if (picture.exists()) {
+        if (! picture.isDirectory() && picture.exists()) {
             // 加载本地图片
             return  BitmapFactory.decodeFile(picture.getAbsolutePath());
         }

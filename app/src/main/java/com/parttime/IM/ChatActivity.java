@@ -92,10 +92,12 @@ import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.EMLog;
 import com.easemob.util.PathUtil;
 import com.easemob.util.VoiceRecorder;
+import com.google.gson.Gson;
 import com.parttime.IM.setting.GroupResumeSettingActivity;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
+import com.parttime.pojo.GroupDescription;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.company.function.PersonAssessDetailActivity;
@@ -227,9 +229,18 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         IntentFilter filter = new IntentFilter();
         filter.addAction(COM_CARSON_SHARE_JIANZHI);
         registerReceiver(receiveBroadCast, filter);
-        if(ConstantForSaveList.groupAppliantCache.get(toChatUsername) == null){
-            //获取报名列表
-            getGroupApliantResult(toChatUsername);
+        if(ConstantForSaveList.groupAppliantCache.get(toChatUsername) == null
+                && chatType != CHATTYPE_SINGLE //群聊
+                && group != null
+                ){
+            String description = group.getDescription();
+            if(! TextUtils.isEmpty(description)){
+                GroupDescription gd = new Gson().fromJson(description, GroupDescription.class);
+                if(gd != null && gd.type == GroupDescription.ACTIVITY_GROUP){
+                    //获取报名列表
+                    getGroupApliantResult(toChatUsername);
+                }
+            }
         }
     }
 

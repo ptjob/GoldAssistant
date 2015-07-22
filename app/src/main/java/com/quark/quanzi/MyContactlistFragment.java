@@ -327,6 +327,7 @@ public class MyContactlistFragment extends BaseActivity {
 			Entry<String, User> entry = iterator.next();
 			if (!entry.getKey().equals(Constant.NEW_FRIENDS_USERNAME)
 					&& !entry.getKey().equals(Constant.GROUP_USERNAME)
+					&& !entry.getKey().equals(Constant.PUBLIC_COUNT)
 					&& !blackList.contains(entry.getKey())) {
 				// 这里有bug，会有好友列表有uid,没有名字的情况
 				if (!entry.getKey().equals("jianzhidaren")) {
@@ -403,6 +404,10 @@ public class MyContactlistFragment extends BaseActivity {
 					startActivity(new Intent(MyContactlistFragment.this,
 							NewFriendsMsgActivity.class));
 				} else if (Constant.GROUP_USERNAME.equals(username)) {
+					// 进入群聊列表页面
+					startActivity(new Intent(MyContactlistFragment.this,
+							GroupsActivity.class));
+                } else if (Constant.PUBLIC_COUNT.equals(username)) {
 					// 进入群聊列表页面
 					startActivity(new Intent(MyContactlistFragment.this,
 							GroupsActivity.class));

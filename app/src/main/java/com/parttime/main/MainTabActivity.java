@@ -289,18 +289,8 @@ public class MainTabActivity extends FragmentActivity implements
 							setUserHearder(username, user);
 							userlist.put(username, user);
 						}
-						// 添加user"申请与通知"
-						com.easemob.chatuidemo.domain.User newFriends = new com.easemob.chatuidemo.domain.User();
-						newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
-						newFriends.setNick("申请与通知");
-						newFriends.setHeader("");
-						userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
-						// 添加"群聊"
-						com.easemob.chatuidemo.domain.User groupUser = new com.easemob.chatuidemo.domain.User();
-						groupUser.setUsername(Constant.GROUP_USERNAME);
-						groupUser.setNick("群聊");
-						groupUser.setHeader("");
-						userlist.put(Constant.GROUP_USERNAME, groupUser);
+
+                        addCustomerDefinedItem(userlist);
 
 						// 存入内存
 						ApplicationControl.getInstance().setContactList(
@@ -1973,20 +1963,10 @@ public class MainTabActivity extends FragmentActivity implements
 						setUserHearder(username, user);
 						userlist.put(username, user);
 					}
-					// 添加user"申请与通知"
-					com.easemob.chatuidemo.domain.User newFriends = new com.easemob.chatuidemo.domain.User();
-					newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
-					newFriends.setNick("申请与通知");
-					newFriends.setHeader("");
-					userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
-					// 添加"群聊"
-					com.easemob.chatuidemo.domain.User groupUser = new com.easemob.chatuidemo.domain.User();
-					groupUser.setUsername(Constant.GROUP_USERNAME);
-					groupUser.setNick("群聊");
-					groupUser.setHeader("");
-					userlist.put(Constant.GROUP_USERNAME, groupUser);
+                    addCustomerDefinedItem(userlist);
 
-					// 存入内存
+
+                    // 存入内存
 					ApplicationControl.getInstance().setContactList(userlist);
 					// 存入db
 					UserDao dao = new UserDao(MainTabActivity.this);
@@ -2004,7 +1984,28 @@ public class MainTabActivity extends FragmentActivity implements
 
 	}
 
-	/**
+    private void addCustomerDefinedItem(Map<String, User> userlist) {
+        // 添加user"申请与通知"
+        User newFriends = new User();
+        newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
+        newFriends.setNick(getString(R.string.apply_notify));
+        newFriends.setHeader("");
+        userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
+        // 添加"群聊"
+        User groupUser = new User();
+        groupUser.setUsername(Constant.GROUP_USERNAME);
+        groupUser.setNick(getString(R.string.group_chat));
+        groupUser.setHeader("");
+        userlist.put(Constant.GROUP_USERNAME, groupUser);
+        // 添加"官方账号"
+        User publicCount = new User();
+        publicCount.setUsername(Constant.PUBLIC_COUNT);
+        publicCount.setNick(getString(R.string.public_count));
+        publicCount.setHeader("");
+        userlist.put(Constant.PUBLIC_COUNT, publicCount);
+    }
+
+    /**
 	 * 获取服务器端好友列表
 	 * 
 	 */

@@ -227,10 +227,10 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
             }
 
             if (username.equals(Constant.GROUP_USERNAME)) {
-                holder.name.setText("群聊");
+                holder.name.setText(R.string.group_chat);
 
             } else if (username.equals(Constant.NEW_FRIENDS_USERNAME)) {
-                holder.name.setText("申请与通知");
+                holder.name.setText(R.string.apply_notify);
             }
             // holder.name.setText(username);
         }

@@ -24,6 +24,14 @@
     <string name="mine">我</string>
     <string name="message">消息</string>
 
+    <!--公共账号环信UserId-->
+    <string name="kefu">kefu</string> <!--客服-->
+    <string name="caiwu">caiwu</string> <!--财务-->
+    <string name="dingyue">dingyue</string> <!--订阅-->
+    <string name="kefu_value">兼职达人客服</string> <!--客服-->
+    <string name="caiwu_value">财务小助手</string> <!--财务-->
+    <string name="dingyue_value">活动小助手</string> <!--订阅-->
+
     <!-- 注册登陆 -->
     <string name="recruit_part_time">招兼职</string>
     <string name="regist_regist">注册</string>
@@ -118,7 +126,7 @@
     <string name="group_cancel_gag">取消禁言</string>
     <string name="pls_check_first">请先选择</string>
 
-    <!--通讯录-->
+    <!-- 通讯录 -->
     <string name="create_new_group">创建群</string>
     <string name="choose_member">选择成员</string>
     <string name="create_group">创建</string>
@@ -309,7 +317,6 @@
     <string name="logout_tips_title">退出提示</string>
     <string name="wrong_click">点错了</string>
 
-
     <!-- 招人Tab -->
     <string name="publish_job">发布兼职</string>
     <string name="manage_job">管理兼职</string>
@@ -362,5 +369,6 @@
     <string name="title_activity_group_gag">GroupGagActivity</string>
     <string name="title_activity_resume_batch_management">ResumeBatchManagementActivity</string>
     <string name="title_activity_send_admit_to_email">SendAdmitToEmailActivity</string>
+    <string name="title_activity_public_count_list">PublicCountListActivity</string>
 
 </resources>

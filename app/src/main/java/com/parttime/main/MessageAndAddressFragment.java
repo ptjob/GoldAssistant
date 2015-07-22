@@ -53,6 +53,7 @@ import com.easemob.chatuidemo.widget.Sidebar;
 import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
+import com.parttime.addresslist.PublicCountListActivity;
 import com.parttime.main.adapter.ChatAllHistoryAdapter;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
@@ -798,6 +799,7 @@ public class MessageAndAddressFragment extends Fragment {
                 Entry<String, User> entry = iterator.next();
                 if (!entry.getKey().equals(Constant.NEW_FRIENDS_USERNAME)
                         && !entry.getKey().equals(Constant.GROUP_USERNAME)
+                        && !entry.getKey().equals(Constant.PUBLIC_COUNT)
                         && !blackList.contains(entry.getKey())) {
                     // 这里有bug，会有好友列表有uid,没有名字的情况
                     if (!entry.getKey().equals("jianzhidaren")) {
@@ -1048,6 +1050,11 @@ public class MessageAndAddressFragment extends Fragment {
                         Intent intent = new Intent(getActivity(),
                                 GroupsActivity.class);
                         intent.putExtra("isFromShare", false);
+                        startActivity(intent);
+                    } else if (Constant.PUBLIC_COUNT.equals(username)) {
+                        // 进入官方账号页面
+                        Intent intent = new Intent(getActivity(),
+                                PublicCountListActivity.class);
                         startActivity(intent);
                     } else {
 
