@@ -39,9 +39,9 @@
             android:layout_height="fill_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-              android:background="@drawable/common_tab_bg"
+            android:background="@drawable/common_tab_bg"
             android:onClick="save"
-            android:text="@string/button_save"
+            android:text="@string/create_group"
             android:textColor="#fff"
             android:textSize="14sp" />
     </RelativeLayout>

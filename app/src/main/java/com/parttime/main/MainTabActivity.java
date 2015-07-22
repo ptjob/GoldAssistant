@@ -27,6 +27,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -66,21 +67,21 @@ import com.easemob.chat.EMNotifier;
 import com.easemob.chat.GroupChangeListener;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.activity.GroupsActivity;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.InviteMessage;
 import com.easemob.chatuidemo.domain.InviteMessage.InviteMesageStatus;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.utils.CommonUtils;
-import com.easemob.exceptions.EMNetworkUnconnectedException;
 import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.EMLog;
 import com.easemob.util.EasyUtils;
 import com.easemob.util.HanziToPinyin;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
+import com.parttime.addresslist.GroupsActivity;
 import com.parttime.common.update.UpdateUtils;
+import com.parttime.constants.ActionConstants;
 import com.parttime.login.FindPJLoginActivity;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.BuildConfig;
@@ -168,6 +169,7 @@ public class MainTabActivity extends FragmentActivity implements
 	private String getFriendListUrl;// 获取服务端好友列表url
 	List<String> usernames = new ArrayList<>();// 好友列表显示的是uid
 														// u1007或者c100之类
+    private MainBroadCastReceiver mainBroadCastReceiver;
 
 	/**
 	 * 检查当前用户是否被删除
@@ -278,8 +280,12 @@ public class MainTabActivity extends FragmentActivity implements
 					// demo中每次登陆都去获取好友username，开发者自己根据情况而定
 					try {
 						if (EMContactManager.getInstance() != null) {
-							usernames = EMContactManager.getInstance()
-									.getContactUserNames();
+                            try {
+                                usernames = EMContactManager.getInstance()
+                                        .getContactUserNames();
+                            }catch (com.easemob.exceptions.EMNetworkUnconnectedException ignore){
+                                Log.e(TAG, Log.getStackTraceString(ignore));
+                            }
 						}
 						Map<String, com.easemob.chatuidemo.domain.User> userlist = new HashMap<>();
 						for (String username : usernames) {
@@ -288,18 +294,8 @@ public class MainTabActivity extends FragmentActivity implements
 							setUserHearder(username, user);
 							userlist.put(username, user);
 						}
-						// 添加user"申请与通知"
-						com.easemob.chatuidemo.domain.User newFriends = new com.easemob.chatuidemo.domain.User();
-						newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
-						newFriends.setNick("申请与通知");
-						newFriends.setHeader("");
-						userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
-						// 添加"群聊"
-						com.easemob.chatuidemo.domain.User groupUser = new com.easemob.chatuidemo.domain.User();
-						groupUser.setUsername(Constant.GROUP_USERNAME);
-						groupUser.setNick("群聊");
-						groupUser.setHeader("");
-						userlist.put(Constant.GROUP_USERNAME, groupUser);
+
+                        addCustomerDefinedItem(userlist);
 
 						// 存入内存
 						ApplicationControl.getInstance().setContactList(
@@ -325,6 +321,9 @@ public class MainTabActivity extends FragmentActivity implements
 			}.start();
 
 		}
+
+        mainBroadCastReceiver = new MainBroadCastReceiver();
+        registerReceiver(mainBroadCastReceiver, new IntentFilter(ActionConstants.ACTION_MESSAGE_TO_TOP));
 	}
 
 
@@ -722,8 +721,12 @@ public class MainTabActivity extends FragmentActivity implements
 		try {
 			unregisterReceiver(jpushMessageReceiver);
 		} catch (Exception ignore) {
-
 		}
+        try{
+            unregisterReceiver(mainBroadCastReceiver);
+        }catch (Exception ignore){
+
+        }
 		if (myGroupChangeListener != null) {
 			EMGroupManager.getInstance().removeGroupChangeListener(
 					myGroupChangeListener);
@@ -1965,20 +1968,10 @@ public class MainTabActivity extends FragmentActivity implements
 						setUserHearder(username, user);
 						userlist.put(username, user);
 					}
-					// 添加user"申请与通知"
-					com.easemob.chatuidemo.domain.User newFriends = new com.easemob.chatuidemo.domain.User();
-					newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
-					newFriends.setNick("申请与通知");
-					newFriends.setHeader("");
-					userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
-					// 添加"群聊"
-					com.easemob.chatuidemo.domain.User groupUser = new com.easemob.chatuidemo.domain.User();
-					groupUser.setUsername(Constant.GROUP_USERNAME);
-					groupUser.setNick("群聊");
-					groupUser.setHeader("");
-					userlist.put(Constant.GROUP_USERNAME, groupUser);
+                    addCustomerDefinedItem(userlist);
 
-					// 存入内存
+
+                    // 存入内存
 					ApplicationControl.getInstance().setContactList(userlist);
 					// 存入db
 					UserDao dao = new UserDao(MainTabActivity.this);
@@ -1996,7 +1989,28 @@ public class MainTabActivity extends FragmentActivity implements
 
 	}
 
-	/**
+    private void addCustomerDefinedItem(Map<String, User> userlist) {
+        // 添加user"申请与通知"
+        User newFriends = new User();
+        newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
+        newFriends.setNick(getString(R.string.apply_notify));
+        newFriends.setHeader("");
+        userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
+        // 添加"群聊"
+        User groupUser = new User();
+        groupUser.setUsername(Constant.GROUP_USERNAME);
+        groupUser.setNick(getString(R.string.group_chat));
+        groupUser.setHeader("");
+        userlist.put(Constant.GROUP_USERNAME, groupUser);
+        // 添加"官方账号"
+        User publicCount = new User();
+        publicCount.setUsername(Constant.PUBLIC_COUNT);
+        publicCount.setNick(getString(R.string.public_count));
+        publicCount.setHeader("");
+        userlist.put(Constant.PUBLIC_COUNT, publicCount);
+    }
+
+    /**
 	 * 获取服务器端好友列表
 	 * 
 	 */
@@ -2173,5 +2187,17 @@ public class MainTabActivity extends FragmentActivity implements
 			e.printStackTrace();
 		}
 	}
+
+    private class MainBroadCastReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            //刷新置顶
+            if(ActionConstants.ACTION_MESSAGE_TO_TOP.equals(action)){
+                messageAndAddressFragment.reflashMessageTop();
+            }
+        }
+    }
 
 }

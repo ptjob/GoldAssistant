@@ -26,12 +26,6 @@ import com.parttime.utils.IntentManager;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.BaseActivity;
 import com.quark.ui.widget.ActionSheet;
-import com.quark.volley.VolleySington;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.HashMap;
 
 /**
  * 发布兼职页
@@ -145,8 +139,7 @@ public class WriteJobActivity extends BaseActivity implements
     }
 
     private void initControls() {
-        activityHead = new ActivityHead();
-        activityHead.initHead(this);
+        activityHead = new ActivityHead(this);
         activityHead.setRightTxt(R.string.preview);
         activityHead.setCenterTxt1(type);
 

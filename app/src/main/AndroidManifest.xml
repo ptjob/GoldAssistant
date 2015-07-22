@@ -10,20 +10,10 @@
         android:name="android.hardware.touchscreen"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <!-- 摄像头功能 -->
-    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
@@ -37,8 +27,6 @@
     <!-- 环信 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -85,9 +73,9 @@
         android:theme="@style/AppTheme" >
 
         <!-- android:launchMode="singleTask" -->
-        <!--启动界面-->
+        <!-- 启动界面 -->
         <activity
-            android:name="com.quark.jianzhidaren.StartUpActivity"
+            android:name="com.parttime.login.StartUpActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -113,7 +101,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
-        <!--主界面-->
+        <!-- 主界面 -->
         <activity
             android:name="com.parttime.main.MainTabActivity"
             android:label="@string/app_name"
@@ -490,25 +478,56 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustResize" >
         </activity>
-        <!--群通知设置-->
+        <!-- 群通知设置 -->
         <activity
             android:name="com.parttime.IM.EditGroupNoticeActivity"
             android:label="@string/title_activity_edit_group_notice"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide">
+            android:theme="@style/horizontal_slide" >
         </activity>
-        <!--群组设置-->
+        <!-- 群组设置 -->
         <activity
-            android:name="com.parttime.IM.setting.GroupSettingActivity"
+            android:name="com.parttime.IM.setting.GroupResumeSettingActivity"
             android:label="@string/title_activity_edit_group_notice"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide">
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <activity
+            android:name="com.parttime.IM.setting.GroupSettingActivity"
+            android:label="@string/title_activity_group_setting"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <activity
+            android:name="com.parttime.IM.setting.GroupGagActivity"
+            android:label="@string/title_activity_group_gag"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <activity
+            android:name="com.parttime.IM.setting.ResumeBatchManagementActivity"
+            android:label="@string/title_activity_resume_batch_management"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <activity
+            android:name="com.parttime.IM.setting.SendAdmitToEmailActivity"
+            android:label="@string/title_activity_send_admit_to_email"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
         </activity>
         <!-- 添加好友 -->
         <activity
-            android:name="com.easemob.chatuidemo.activity.AddContactActivity"
+            android:name="com.parttime.addresslist.AddContactActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
+        </activity>
+        <!--官方账号-->
+        <activity
+            android:name="com.parttime.addresslist.PublicCountListActivity"
+            android:label="@string/title_activity_public_count_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide">
         </activity>
         <!-- 群组详情 -->
         <activity
@@ -524,14 +543,14 @@
         </activity>
         <!-- 群组列表 -->
         <activity
-            android:name="com.easemob.chatuidemo.activity.GroupsActivity"
+            android:name="com.parttime.addresslist.GroupsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <!-- 新建群组 -->
         <activity
-            android:name="com.easemob.chatuidemo.activity.NewGroupActivity"
+            android:name="com.parttime.addresslist.NewGroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustPan" >
@@ -544,7 +563,7 @@
         </activity>
         <!-- 群组选人 -->
         <activity
-            android:name="com.easemob.chatuidemo.activity.GroupPickContactsActivity"
+            android:name="com.parttime.addresslist.GroupPickContactsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustPan" >
@@ -816,56 +835,61 @@
             android:value="8da70cea9ea99ac826e2567e" />
         <!-- </>值来自开发者平台取得的AppKey -->
 
-        <activity android:name="com.parttime.mine.EditMyIntroActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-
-        <activity android:name="com.parttime.mine.MyWalletActivity"
+        <activity
+            android:name="com.parttime.mine.EditMyIntroActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-
-        <activity android:name="com.parttime.mine.PraiseRecvedActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.parttime.mine.MyWalletActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="com.parttime.mine.RealNameCertActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.mine.PraiseRecvedActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="com.parttime.mine.FreshManGuideActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.mine.RealNameCertActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="com.parttime.mine.SuggestionActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.mine.FreshManGuideActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="com.parttime.mine.MyFansActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.mine.SuggestionActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="com.parttime.mine.setting.SettingActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.mine.MyFansActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="com.parttime.mine.setting.AccountSettingActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.mine.setting.SettingActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-
-
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.mine.setting.AccountSettingActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
 
         <!-- 发布兼职 -->
         <activity
@@ -876,13 +900,14 @@
             android:name="com.parttime.publish.WriteJobActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
-        <activity android:name="com.parttime.publish.JobDetailActivity"
+        <activity
+            android:name="com.parttime.publish.JobDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 
         <!-- 公共页面 -->
-        <activity android:name="com.parttime.common.activity.ChooseListActivity"
+        <activity
+            android:name="com.parttime.common.activity.ChooseListActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 

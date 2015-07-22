@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.easemob.chatuidemo.activity;
+package com.parttime.addresslist;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -26,6 +26,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.easemob.chat.EMGroupManager;
+import com.easemob.chatuidemo.activity.AlertDialog;
+import com.easemob.chatuidemo.activity.BaseActivity;
 import com.easemob.exceptions.EaseMobException;
 import com.qingmu.jianzhidaren.R;
 
@@ -64,7 +66,7 @@ public class NewGroupActivity extends BaseActivity {
 	/**
 	 * @param v
 	 */
-	public void save(View v) {
+	public void chooseMember(View v) {
 		String name = groupNameEditText.getText().toString().trim();
 		if (TextUtils.isEmpty(name)) {
 			Intent intent = new Intent(this, AlertDialog.class);

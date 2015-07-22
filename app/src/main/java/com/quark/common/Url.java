@@ -199,6 +199,9 @@ public class Url {
 	// 查看报名
 	public static final String COMPANY_applicantInfo = HOST + SUBJECT
 			+ "/Activity/applicantInfo";
+	// 查看报名人员列表3.0
+	public static final String COMPANY_ACTIVITYFACEBOOK = HOST + SUBJECT
+			+ "/Activity/activityFaceBook";
 	// 通过报名
 	public static final String COMPANY_approveActivity = HOST + SUBJECT
 			+ "/Activity/approveActivity";
@@ -307,6 +310,15 @@ public class Url {
 	// 商家取消已录取人员
 	public static final String COMPANY_CANCEL_REQUIRED = HOST + SUBJECT
 			+ "/Activity/cancel_require";
+    // 录取人员3.0
+    public static final String COMPANY_APPROVEACTIVITY = HOST + SUBJECT
+			+ "/Activity/approveActivity";
+	// 拒绝人员3.0
+    public static final String COMPANY_REJECTACTIVITY = HOST + SUBJECT
+			+ "/Activity/rejectActivity";
+	// 发送录取人员到邮箱 3.0
+    public static final String COMPANY_GETGROUPEXCEL = HOST + SUBJECT
+			+ "/Activity/getGroupExcel";
 	// 是否被拉黑(包括上传版本信息)
 	public static final String COMPANY_FORBIDDEN = HOST + SUBJECT
 			+ "/CompanyCenter/isForbidden";

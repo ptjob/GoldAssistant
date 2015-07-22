@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.easemob.chatuidemo.activity;
+package com.parttime.addresslist;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +37,7 @@ import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.adapter.ContactAdapter;
+import com.easemob.chatuidemo.activity.BaseActivity;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
 import com.parttime.main.PinyinComparator;
@@ -104,13 +104,14 @@ public class GroupPickContactsActivity extends BaseActivity {
 			exitingMembers = group.getMembers();
 		}
 		if (exitingMembers == null)
-			exitingMembers = new ArrayList<String>();
+			exitingMembers = new ArrayList<>();
 		// 获取好友列表
-		alluserList = new ArrayList<User>();
+		alluserList = new ArrayList<>();
 		for (User user : ApplicationControl.getInstance().getContactList()
 				.values()) {
 			if (!user.getUsername().equals(Constant.NEW_FRIENDS_USERNAME)
-					& !user.getUsername().equals(Constant.GROUP_USERNAME)) {
+					&& !user.getUsername().equals(Constant.GROUP_USERNAME)
+                    && !user.getUsername().equals(Constant.PUBLIC_COUNT)) {
 				if (!user.getUsername().equals("jianzhidaren")) {
 					alluserList.add(user);
 				}

@@ -93,13 +93,15 @@
 
 
 
-    <dimen name="common_margin">17dp</dimen>
+    <dimen name="common_margin">15dp</dimen>
     <dimen name="commopn_inner_margin">10dp</dimen>
-    <dimen name="form_item_height">49dp</dimen>
+    <dimen name="form_item_height">45dp</dimen>
     <dimen name="divider_width">1dp</dimen>
-    <dimen name="form_items_margin">17dp</dimen>
+    <dimen name="form_items_margin">8dp</dimen>
+    <dimen name="form_item_margin_left">12dp</dimen>
+    <dimen name="form_item_title_margin_left">20dp</dimen>
     
-    <dimen name="form_item_icon_edge">30dp</dimen>
+    <dimen name="form_item_icon_edge">22dp</dimen>
 
     <dimen name="title_height">49dp</dimen>
     <dimen name="title_padding">17dp</dimen>
@@ -121,6 +123,8 @@
     <dimen name="csil_horizontal_inner_margin_default">10dp</dimen>
     <dimen name="csil_verticle_inner_margin_default">10dp</dimen>
     <dimen name="csil_item_height_default">33dp</dimen>
+
+    <dimen name="rank_view_inner_margin_default">2dp</dimen>
 
     <!-- 招人 -->
     <dimen name="job_type_content_padding_left_right">37dp</dimen>

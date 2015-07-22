@@ -3,9 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/my_fans"
-        android:gravity="center"/>
+    <include layout="@layout/title"/>
+    <me.maxwin.view.XListView
+        android:id="@+id/xlv_my_fans"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/body_color"
+        android:divider="@color/divider_color"
+        android:dividerHeight="1px" />
 </LinearLayout>

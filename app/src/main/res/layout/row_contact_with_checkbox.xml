@@ -15,20 +15,13 @@
         android:textSize="15sp"
         android:visibility="gone" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/mm_listitem"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:layout_gravity="center_vertical">
 
-        <CheckBox
-            android:id="@+id/checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:focusable="false"
-            android:button="@drawable/checkbox_bg_selector" />
 
         <com.quark.http.image.CircularImage
             android:id="@+id/avatar"
@@ -43,13 +36,28 @@
             android:maxWidth="110dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@+id/avatar"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
             android:singleLine="true"
             android:ellipsize="end"
             android:textColor="@android:color/black"
+            android:text="sss"
             android:textSize="20sp" />
 
-    </LinearLayout>
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp"
+            android:focusable="false"
+            android:button="@drawable/checkbox_bg_selector"
+            android:layout_centerVertical="true"
+            />
+
+
+    </RelativeLayout>
 
 </LinearLayout>

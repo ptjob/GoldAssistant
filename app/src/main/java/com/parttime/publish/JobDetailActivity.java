@@ -134,7 +134,7 @@ public class JobDetailActivity extends BaseActivity {
         mLLLanguageContainer = (LinearLayout) findViewById(R.id.ll_language_container);
         mLLHealthProveContainer = (LinearLayout) findViewById(R.id.ll_health_prove_container);
 
-        ActivityHead activityHead = new ActivityHead();
+        ActivityHead activityHead = new ActivityHead(this);
         activityHead.initHead(this);
         if (type == Type.REVIEW) {
             activityHead.setCenterTxt1(R.string.publish_job_preview_title);

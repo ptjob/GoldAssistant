@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.easemob.chatuidemo.adapter;
+package com.parttime.addresslist;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -144,7 +144,11 @@ public class ContactAdapter extends ArrayAdapter<User> implements
 				} else {
 					unreadMsgView.setVisibility(View.INVISIBLE);
 				}
-			} else if (username.equals(Constant.GROUP_USERNAME)) {
+			} else if (username.equals(Constant.PUBLIC_COUNT)) {
+				// 官方账号
+				nameTextview.setText(user.getNick());
+				avatar.setImageResource(R.drawable.peoplephoto);
+            } else if (username.equals(Constant.GROUP_USERNAME)) {
 				// 群聊item
 				nameTextview.setText(user.getNick());
 				avatar.setImageResource(R.drawable.peoplephoto);

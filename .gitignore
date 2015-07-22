@@ -10,3 +10,8 @@ app/app.iml
 *.iml
 app/src/main/res/layout/aaa.xml
 app/src/main/java/com/parttime/test/TestActivity.java
+app/src/main/java/com/parttime/publish/WriteJobActivity.java
+app/src/main/java/com/parttime/publish/JobDetailActivity.java
+app/src/main/java/com/parttime/publish/WriteJobActivity.java
+app/src/main/java/com/parttime/publish/JobDetailActivity.java
+app/src/main/java/com/parttime/publish/JobDetailActivity.java

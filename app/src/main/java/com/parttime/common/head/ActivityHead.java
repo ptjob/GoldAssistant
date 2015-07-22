@@ -19,6 +19,10 @@ public class ActivityHead{
     public TextView centerTxt1;
     public TextView rightTxt;
 
+    public ActivityHead(Activity activity){
+        initHead(activity);
+    }
+
     public void initHead(final Activity activity){
         centerTxt1 = (TextView)activity.findViewById(R.id.center_txt1);
         leftBack = activity.findViewById(R.id.left_back);

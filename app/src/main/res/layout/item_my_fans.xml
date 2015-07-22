@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="@dimen/common_margin"
+    android:paddingRight="@dimen/common_margin">
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginRight="@dimen/common_margin"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_head"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:text="用户名123"/>
+
+    <TextView
+        android:id="@+id/tv_sincere_moneys"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_name"
+        android:layout_below="@id/tv_name"
+        android:layout_marginTop="4dp"
+        android:text="未交诚意金"/>
+
+    <TextView
+        android:id="@+id/tv_cert_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_sincere_moneys"
+        android:layout_alignTop="@id/tv_sincere_moneys"
+        android:layout_marginLeft="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/tv_sincere_moneys"
+        android:layout_alignLeft="@id/tv_name"
+        android:layout_marginTop="4dp" >
+        <TextView
+            android:id="@+id/tv_credit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/credit_value"/>
+
+        <com.parttime.widget.RankView
+            android:id="@+id/rv_credit"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            app:rv_total_score="5"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

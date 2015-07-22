@@ -41,10 +41,10 @@ import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.activity.AddContactActivity;
-import com.easemob.chatuidemo.activity.GroupsActivity;
+import com.parttime.addresslist.AddContactActivity;
+import com.parttime.addresslist.GroupsActivity;
 import com.easemob.chatuidemo.activity.NewFriendsMsgActivity;
-import com.easemob.chatuidemo.adapter.ContactAdapter;
+import com.parttime.addresslist.ContactAdapter;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.MessageSetDao;
 import com.easemob.chatuidemo.db.UserDao;
@@ -53,6 +53,7 @@ import com.easemob.chatuidemo.widget.Sidebar;
 import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
+import com.parttime.addresslist.PublicCountListActivity;
 import com.parttime.main.adapter.ChatAllHistoryAdapter;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
@@ -274,7 +275,7 @@ public class MessageAndAddressFragment extends Fragment {
 
 
     private void sortMessages(List<EMConversation> conversationList, Map<String, MessageSet> messageSetMap) {
-        if(messageSetMap == null || conversationList == null){
+        if(messageSetMap == null || conversationList == null || conversationList.size() == 0 || messageSetMap.size() == 0){
             return ;
         }
         //缓存在置顶中存在的消息列表
@@ -564,10 +565,36 @@ public class MessageAndAddressFragment extends Fragment {
             new MessageSetDao(ApplicationControl.getInstance()).delete(name, type);
             //重新排序
             message.sortConversationByLastChatTime(conversationList);
+            //重新排序
+            sortMessages(conversationList, messageSetMap);
             messageAdapter.notifyDataSetChanged();
         }
 		return super.onContextItemSelected(item);
 	}
+
+    /**
+     * 刷新置顶设置
+     */
+    public void reflashMessageTop(){
+       Map<String, MessageSet> map = new MessageSetDao(ApplicationControl.getInstance()).getMessageSetList();
+        if(messageSetMap != null) {
+            if (messageSetMap.size() < map.size()) {
+                messageSetMap.clear();
+                messageSetMap.putAll(map);
+                //重新排序
+                sortMessages(conversationList, messageSetMap);
+                messageAdapter.notifyDataSetChanged();
+            } else if (messageSetMap.size() > map.size()) {
+                messageSetMap.clear();
+                messageSetMap.putAll(map);
+                //重新排序
+                message.sortConversationByLastChatTime(conversationList);
+                //重新排序
+                sortMessages(conversationList, messageSetMap);
+                messageAdapter.notifyDataSetChanged();
+            }
+        }
+    }
 
      class Message{
         /**
@@ -774,6 +801,7 @@ public class MessageAndAddressFragment extends Fragment {
                 Entry<String, User> entry = iterator.next();
                 if (!entry.getKey().equals(Constant.NEW_FRIENDS_USERNAME)
                         && !entry.getKey().equals(Constant.GROUP_USERNAME)
+                        && !entry.getKey().equals(Constant.PUBLIC_COUNT)
                         && !blackList.contains(entry.getKey())) {
                     // 这里有bug，会有好友列表有uid,没有名字的情况
                     if (!entry.getKey().equals("jianzhidaren")) {
@@ -988,7 +1016,10 @@ public class MessageAndAddressFragment extends Fragment {
             Map<String, User> users = ApplicationControl.getInstance()
                     .getContactList();
             // 加入"申请与通知"和"群聊"
+            //添加群聊
             contactList.add(0, users.get(Constant.GROUP_USERNAME));
+            //添加官方账号
+            contactList.add(0, users.get(Constant.PUBLIC_COUNT));
             // 把"申请与通知"添加到首位
             contactList.add(0, users.get(Constant.NEW_FRIENDS_USERNAME));
             setlist();
@@ -1021,6 +1052,11 @@ public class MessageAndAddressFragment extends Fragment {
                         Intent intent = new Intent(getActivity(),
                                 GroupsActivity.class);
                         intent.putExtra("isFromShare", false);
+                        startActivity(intent);
+                    } else if (Constant.PUBLIC_COUNT.equals(username)) {
+                        // 进入官方账号页面
+                        Intent intent = new Intent(getActivity(),
+                                PublicCountListActivity.class);
                         startActivity(intent);
                     } else {
 

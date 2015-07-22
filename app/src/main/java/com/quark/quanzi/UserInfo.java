@@ -214,7 +214,9 @@ public class UserInfo extends BaseActivity {
 			while (iterator.hasNext()) {
 				Entry<String, User> entry = iterator.next();
 				if (!entry.getKey().equals(Constant.NEW_FRIENDS_USERNAME)
-						&& !entry.getKey().equals(Constant.GROUP_USERNAME)) {
+						&& !entry.getKey().equals(Constant.GROUP_USERNAME)
+						&& !entry.getKey().equals(Constant.PUBLIC_COUNT)
+                        ) {
 					// 这里有bug，会有好友列表有uid,没有名字的情况
 					if (!entry.getKey().equals("jianzhidaren")) {
 						// userName ==nick 都是u661或者c221之类的

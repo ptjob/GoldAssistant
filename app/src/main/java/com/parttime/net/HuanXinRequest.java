@@ -40,7 +40,7 @@ public class HuanXinRequest extends BaseRequest{
         Map<String, String> map = new HashMap<>();
         map.put("user_ids", reqData);
 
-        request(map, queue, new Callback() {
+        request(Url.HUANXIN_avatars_pic,map, queue, new Callback() {
             @Override
             public void success(Object obj) {
                 JSONObject js = null ;

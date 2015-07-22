@@ -36,10 +36,10 @@ import android.widget.ListView;
 import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMContactManager;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.activity.AddContactActivity;
-import com.easemob.chatuidemo.activity.GroupsActivity;
+import com.parttime.addresslist.AddContactActivity;
+import com.parttime.addresslist.GroupsActivity;
 import com.easemob.chatuidemo.activity.NewFriendsMsgActivity;
-import com.easemob.chatuidemo.adapter.ContactAdapter;
+import com.parttime.addresslist.ContactAdapter;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.User;
@@ -327,6 +327,7 @@ public class MyContactlistFragment extends BaseActivity {
 			Entry<String, User> entry = iterator.next();
 			if (!entry.getKey().equals(Constant.NEW_FRIENDS_USERNAME)
 					&& !entry.getKey().equals(Constant.GROUP_USERNAME)
+					&& !entry.getKey().equals(Constant.PUBLIC_COUNT)
 					&& !blackList.contains(entry.getKey())) {
 				// 这里有bug，会有好友列表有uid,没有名字的情况
 				if (!entry.getKey().equals("jianzhidaren")) {
@@ -403,6 +404,10 @@ public class MyContactlistFragment extends BaseActivity {
 					startActivity(new Intent(MyContactlistFragment.this,
 							NewFriendsMsgActivity.class));
 				} else if (Constant.GROUP_USERNAME.equals(username)) {
+					// 进入群聊列表页面
+					startActivity(new Intent(MyContactlistFragment.this,
+							GroupsActivity.class));
+                } else if (Constant.PUBLIC_COUNT.equals(username)) {
 					// 进入群聊列表页面
 					startActivity(new Intent(MyContactlistFragment.this,
 							GroupsActivity.class));

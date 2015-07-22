@@ -2,16 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/body_color"
     android:orientation="vertical"
     tools:context=".ShareActivity" >
 
-    <!-- center -->
-
-    <FrameLayout
-        android:id="@+id/content"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
 
     <!-- Bottom -->
 
@@ -140,6 +133,12 @@
                 android:background="@color/body_color" />
         </LinearLayout>
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/menu_layout"/>
 
     <View
         android:layout_width="fill_parent"

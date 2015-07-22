@@ -22,7 +22,7 @@ import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 
-import com.easemob.chatuidemo.activity.GroupsActivity;
+import com.parttime.addresslist.GroupsActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.ToastUtil;
 import com.umeng.analytics.MobclickAgent;

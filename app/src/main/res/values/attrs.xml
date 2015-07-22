@@ -69,6 +69,13 @@
         <attr name="form_tips" format="string"/>
     </declare-styleable>
 
+    <declare-styleable name="FormSetting">
+        <attr name="set_topLine_shown" format="boolean"/>
+        <attr name="set_bottomLine_shown" format="boolean"/>
+        <attr name="form_left_txt" format="string"/>
+        <attr name="form_Right_Img" format="reference"/>
+    </declare-styleable>
+
     <declare-styleable name="CountingEditText">
         <attr name="cet_countTextSize" format="dimension"/>
         <attr name="cet_countTextColor" format="color"/>
@@ -97,4 +104,10 @@
         <attr name="sl_maxSelectCount" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="RankView">
+        <attr name="rv_empty_img" format="reference"/>
+        <attr name="rv_full_img" format="reference"/>
+        <attr name="rv_total_score" format="integer"/>
+        <attr name="rv_inner_margin" format="dimension"/>
+    </declare-styleable>
 </resources>

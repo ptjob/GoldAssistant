@@ -1,4 +1,4 @@
-package com.quark.jianzhidaren;
+package com.parttime.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,8 +6,8 @@ import android.os.Handler;
 import android.widget.Toast;
 import cn.jpush.android.api.JPushInterface;
 
-import com.parttime.login.FindPJLoginActivity;
 import com.qingmu.jianzhidaren.R;
+import com.quark.jianzhidaren.BaseActivity;
 import com.quark.utils.NetWorkCheck;
 
 /**
@@ -35,7 +35,7 @@ public class StartUpActivity extends BaseActivity {
 				}
 			}, SPLASH_DISPLAY_LENGHT);
 		} else {
-			Toast.makeText(getApplicationContext(), "网络连接失败，请确认网络连接", 0).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.no_net_tip), Toast.LENGTH_SHORT).show();
 		}
 
 	}
