@@ -101,7 +101,6 @@ import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.GroupDescription;
 import com.parttime.utils.SharePreferenceUtil;
-import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
 import com.quark.company.function.PersonAssessDetailActivity;
 import com.quark.jianzhidaren.ApplicationControl;
@@ -242,15 +241,13 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             if(! TextUtils.isEmpty(description)){
                 try {
                     GroupDescription gd = new Gson().fromJson(description, GroupDescription.class);
-                    if (gd != null && gd.type == GroupDescription.ACTIVITY_GROUP) {
+                    if (gd != null && gd.type == GroupDescription.ACTIVITY_GROUP ||
+                            gd.type == GroupDescription.ACTIVITY_CONSULTATION_GROUP) {
                         //获取报名列表
                         getGroupApliantResult(toChatUsername);
                     }
                 }catch(IllegalStateException | JsonSyntaxException ignore){
                     Log.e(TAG, "description format is error , description = " + description);
-                    if(BuildConfig.DEBUG){ //测试保留的
-                        getGroupApliantResult(toChatUsername);
-                    }
                 }
             }
         }
