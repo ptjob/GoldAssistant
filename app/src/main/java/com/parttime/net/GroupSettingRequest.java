@@ -92,7 +92,7 @@ public class GroupSettingRequest extends BaseRequest {
     public static class UserVO{
 
         public int userId;  //活动ID
-        public String creditworthiness; //信誉值
+        public String creditworthiness; //信誉值  对10取整
         public String picture; //头像
         public String name;     //姓名
         public int sex;         //性别（0-女，1-男）
@@ -102,7 +102,7 @@ public class GroupSettingRequest extends BaseRequest {
         public int ableComment; //是否可评价（0-否，1-是)
         public int isCommented; //评价状态（0-未评价，1-已评价）
         public int earnestMoney;    //诚意金
-        public int certification;   //认证状态
+        public int certification;   //认证状态  0:未认证 1:已提交认证 2:认证通过 3:认证不通过
     }
 
     /**
@@ -200,6 +200,7 @@ public class GroupSettingRequest extends BaseRequest {
             }
         }) ;
     }
+
 
 
 }

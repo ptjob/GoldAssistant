@@ -114,6 +114,12 @@
     <string name="resume">录取</string>
     <string name="cancel_resume">取消录取</string>
     <string name="group_setting_batch">批量管理</string>
+    <string name="no_money">未交诚意金/</string>
+    <string name="had_money">已交诚意金</string>
+    <string name="no_certification">未实名认证</string>
+    <string name="submit_certification">已提交认证</string>
+    <string name="had_certification">已实名认证</string>
+    <string name="reject_certification">认证不通过</string>
     <string name="group_setting_send_email">发送已录取人员名单至您的邮箱</string>
     <string name="your_email">您的电子邮箱</string>
     <string name="enter_email">请在此输入您的邮箱地址</string>

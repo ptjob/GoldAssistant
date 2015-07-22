@@ -74,8 +74,6 @@ public class GroupResumeSettingActivity extends BaseActivity implements
 	private SharePreferenceUtil sp;
 
     private ArrayList<GroupSettingRequest.UserVO> data = new ArrayList<>();
-    private int admitted; //已录取
-    private int pending; //待处理
     private String groupId;
     private EMGroup group;
 
@@ -86,8 +84,6 @@ public class GroupResumeSettingActivity extends BaseActivity implements
 		sp = SharePreferenceUtil.getInstance(ApplicationControl.getInstance());
 
         Intent intent = getIntent();
-        admitted = intent.getIntExtra(ActivityExtraAndKeys.GroupSetting.ADMITTED,0);
-        pending = intent.getIntExtra(ActivityExtraAndKeys.GroupSetting.PENDING,0);
         groupId = intent.getStringExtra(ActivityExtraAndKeys.GroupSetting.GROUPID);
 
         initView();
@@ -374,6 +370,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
 
             holder.name.setText(userVO.name);
 
+            holder.resumeButton.setVisibility(View.VISIBLE);
             //待处理
             int apply = userVO.apply;
             if(apply == 1){
@@ -385,11 +382,29 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             }
             holder.resumeButton.setTag(userVO);
 
-            //int moneyStatus = userVO.moneyStatus;
-            //int accountStatus = userVO.accountStatus;
+            StringBuilder moneyAndCertification = new StringBuilder();
+            int moneyStatus = userVO.earnestMoney;
+            int accountStatus = userVO.certification;
+            if(moneyStatus == 0) {
+                moneyAndCertification.append(getString(R.string.no_money));
+            }else {
+                moneyAndCertification.append(getString(R.string.had_money));
+            }
+            moneyAndCertification.append("/");
+
+            if(accountStatus == 0){
+                moneyAndCertification.append(getString(R.string.no_certification));
+            }else if(accountStatus == 1){
+                moneyAndCertification.append(getString(R.string.submit_certification));
+            }else if(accountStatus == 2){
+                moneyAndCertification.append(getString(R.string.had_certification));
+            }else if(accountStatus == 3){
+                moneyAndCertification.append(getString(R.string.reject_certification));
+            }
+            holder.moneyAccountStatus.setText(moneyAndCertification.toString());
 
             String creditworthiness = userVO.creditworthiness;
-
+            addStars(creditworthiness, holder.reputationValueStar);
         }
     }
 
@@ -401,6 +416,26 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         public LinearLayout reputationValueStar; //信誉值
         public Button resumeButton;
 
+    }
+
+    public void addStars(String creditworthiness,LinearLayout container){
+        int cre = Integer.valueOf(creditworthiness);
+        container.removeAllViews();
+        int num = cre / 10 ;
+        for(int i = 0 ; i < num; i ++){
+            container.addView(newStar());
+        }
+
+    }
+
+    private ImageView newStar(){
+        ImageView star = new ImageView(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        star.setLayoutParams(params);
+        star.setImageResource(R.drawable.ee_27);
+        return star;
     }
 
 }
