@@ -49,6 +49,8 @@ import com.parttime.mine.PraiseRecvedActivity;
 import com.parttime.mine.RealNameCertActivity;
 import com.parttime.mine.SuggestionActivity;
 import com.parttime.mine.setting.SettingActivity;
+import com.parttime.net.BaseRequest;
+import com.parttime.net.Callback;
 import com.parttime.type.AccountType;
 import com.parttime.widget.FormItem;
 import com.parttime.widget.RankView;
@@ -166,35 +168,52 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void getMyInfo(){
-		StringRequest request = new StringRequest(Method.POST, url, new Response.Listener<String>() {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("company_id", company_id);
+		new BaseRequest().request(url, params, VolleySington.getInstance()
+				.getRequestQueue(), new Callback() {
 			@Override
-			public void onResponse(String s) {
-				try {
-					JSONObject json = new JSONObject(s);
+			public void success(Object obj) {
+				JSONObject json = (JSONObject) obj;
 					function = (Function) JsonUtil.jsonToBean(json, Function.class);
 					updateView();
 					saveInfor();
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
 			}
-		}, new Response.ErrorListener() {
+
 			@Override
-			public void onErrorResponse(VolleyError volleyError) {
+			public void failed(Object obj) {
 
 			}
-		}){
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-				Map<String, String> params = new HashMap<String, String>();
-				params.put("company_id", company_id);
-				return params;
-			}
-		};
-
-		queue.add(request);
-		request.setRetryPolicy(new DefaultRetryPolicy(
-				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
+		});
+//		StringRequest request = new StringRequest(Method.POST, url, new Response.Listener<String>() {
+//			@Override
+//			public void onResponse(String s) {
+//				try {
+//					JSONObject json = new JSONObject(s);
+//					function = (Function) JsonUtil.jsonToBean(json, Function.class);
+//					updateView();
+//					saveInfor();
+//				} catch (JSONException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}, new Response.ErrorListener() {
+//			@Override
+//			public void onErrorResponse(VolleyError volleyError) {
+//
+//			}
+//		}){
+//			@Override
+//			protected Map<String, String> getParams() throws AuthFailureError {
+//				Map<String, String> params = new HashMap<String, String>();
+//				params.put("company_id", company_id);
+//				return params;
+//			}
+//		};
+//
+//		queue.add(request);
+//		request.setRetryPolicy(new DefaultRetryPolicy(
+//				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
 	}
 
 	@ViewInject(R.id.fi_my_intro)

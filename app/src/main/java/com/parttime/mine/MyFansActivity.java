@@ -9,15 +9,29 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.parttime.base.WithTitleActivity;
+import com.parttime.constants.SharedPreferenceConstants;
+import com.parttime.net.BaseRequest;
+import com.parttime.net.Callback;
 import com.parttime.pojo.Fans;
+import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.widget.RankView;
 import com.qingmu.jianzhidaren.R;
+import com.quark.common.JsonUtil;
+import com.quark.common.Url;
+import com.quark.volley.VolleySington;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import me.maxwin.view.XListView;
@@ -26,19 +40,107 @@ import me.maxwin.view.XListView;
  * Created by cjz on 2015/7/16.
  */
 public class MyFansActivity extends WithTitleActivity implements XListView.IXListViewListener{
+    private static final int PAGE_SIZE = 10;
     @ViewInject(R.id.xlv_my_fans)
     private XListView lv;
 
     private MyFansAdapter adapter;
     private List<Fans> fanses = new ArrayList<Fans>();
 
+    private int pageIndex = 1;
+    private int totalPage;
+    private int totalRow;
+
+    private String cId;
+
+    private Callback cbAdd = new Callback() {
+        @Override
+        public void success(Object obj) {
+            JSONObject json = (JSONObject) obj;
+            try {
+                List<Fans> fs  = new ArrayList<Fans>();
+                JSONObject followerPage = json.getJSONObject("followerPage");
+                if(followerPage != null){
+                    pageIndex = followerPage.getInt("pageNumber") + 1;
+                    totalPage = followerPage.getInt("totalPage");
+                    totalRow = followerPage.getInt("totalRow");
+                    JSONArray list = followerPage.getJSONArray("list");
+                    Gson gson = new Gson();
+                    for(int i = 0; i < list.length(); ++i){
+                        String s = list.getJSONObject(i).toString();
+                        Fans fans = gson.fromJson(s, Fans.class);
+                        fs.add(fans);
+                    }
+//                    updateViews(fs);
+                    fanses.clear();
+                    fanses.addAll(fs);
+                    adapter.notifyDataSetChanged();
+                    updateViews();
+                    lv.stopRefresh();
+                    showWait(false);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void failed(Object obj) {
+
+        }
+    };
+
+    private Callback cbAppend = new Callback() {
+        @Override
+        public void success(Object obj) {
+            JSONObject json = (JSONObject) obj;
+            try {
+                List<Fans> fs  = new ArrayList<Fans>();
+                JSONObject followerPage = json.getJSONObject("followerPage");
+                if(followerPage != null){
+                    pageIndex = followerPage.getInt("pageNumber") + 1;
+                    totalPage = followerPage.getInt("totalPage");
+                    totalRow = followerPage.getInt("totalRow");
+                    int pageSize = followerPage.getInt("pageSize");
+                    JSONArray list = followerPage.getJSONArray("list");
+                    for(int i = 0; i < list.length(); ++i){
+                        Fans fans = (Fans) JsonUtil.jsonToBean(list.getJSONObject(i), Fans.class);
+                        fs.add(fans);
+                    }
+//                    updateViews(fs);
+//                    fanses.clear();
+                    fanses.addAll(fs);
+                    adapter.notifyDataSetChanged();
+                    updateViews();
+                    lv.setLoadOver(pageSize, PAGE_SIZE);
+                    lv.stopLoadMore();
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void failed(Object obj) {
+
+        }
+    };
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_my_fans);
         ViewUtils.inject(this);
         super.onCreate(savedInstanceState);
-
+        loadLocalData();
         loadData();
+    }
+
+    private void loadLocalData(){
+        SharePreferenceUtil spu = SharePreferenceUtil.getInstance(this);
+        cId = spu.loadStringSharedPreference(SharedPreferenceConstants.COMPANY_ID);
     }
 
 
@@ -54,46 +156,23 @@ public class MyFansActivity extends WithTitleActivity implements XListView.IXLis
         lv.setAdapter(adapter);
     }
 
-    private void updateViews(List<Fans> fs){
-        fanses.clear();
-        if(fs != null){
-            fanses.addAll(fs);
-        }
-        adapter.notifyDataSetChanged();
+    private void updateViews(){
+
     }
+
+    private void load(Callback cb){
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("company_id", cId);
+        params.put("pn", pageIndex + "");
+        params.put("page_size", PAGE_SIZE + "");
+        new BaseRequest().request(Url.MY_FOLLOWERS_LIST, params, VolleySington.getInstance()
+                .getRequestQueue(), cb);
+    }
+
 
     private void loadData(){
         showWait(true);
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        List<Fans> fs = new ArrayList<Fans>();
-                        Fans f;
-                        Random random = new Random();
-                        for(int i = 0; i < 20; ++i){
-                            f = new Fans();
-                            f.user_name = "User-" + i;
-                            f.sex = random.nextInt(2);
-                            f.earnest_money = random.nextInt(2);
-                            f.certification = random.nextInt(4);
-                            f.creditworthiness = random.nextInt(60);
-                            fs.add(f);
-                        }
-                        showWait(false);
-                        updateViews(fs);
-                    }
-                });
-            }
-        }.start();
+        load(cbAdd);
     }
 
     @Override
@@ -113,12 +192,13 @@ public class MyFansActivity extends WithTitleActivity implements XListView.IXLis
 
     @Override
     public void onRefresh() {
-
+        pageIndex = 1;
+        load(cbAdd);
     }
 
     @Override
     public void onLoadMore() {
-
+        load(cbAppend);
     }
 
     private class MyFansAdapter extends BaseAdapter {
