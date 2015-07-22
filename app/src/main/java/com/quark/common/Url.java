@@ -342,7 +342,7 @@ public class Url {
 			+ "/AgentCenter/agentList";
 	// 我的粉丝
 	public static final String MY_FOLLOWERS_LIST = HOST + SUBJECT
-			+ "/AgentCenter/myFollowers";
+			+ "/CompanyCenter/myFollowers";
 	// 接受活动
 	public static final String ACCEPT_ACT_LIST = HOST + SUBJECT
 			+ "/AgentCenter/activityList";
@@ -354,6 +354,8 @@ public class Url {
 			+ "/Activity/kickNotify";
 
 	// 我的钱包
+	public static final String MY_BALANCE = HOST + SUBJECT
+			+ "CompanyCenter/myWallet";
 	// 取回诚意金
 	public static final String TAKE_EARNEST_MONEY = HOST2 + SUBJECT
 			+ "/UserCenter/take_earnest_moeny";
