@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class PartJob implements Serializable {
     public int id;
     public int companyId;
+    public String companyName;
     public String type;
     public String title;
     public String beginTime;
@@ -27,14 +28,29 @@ public class PartJob implements Serializable {
     public boolean isShowTel;
 
     /* 更多要求里面的 */
+    /**
+     * 是否有健康证
+     */
     public Boolean healthProve;
     /**
      *  用、隔开
      */
     public String language;
+    /**
+     * 身高
+     */
     public Integer height;
+    /**
+     * 胸围
+     */
     public Integer bust;
+    /**
+     * 腰围
+     */
     public Integer beltline;
+    /**
+     * 臀围
+     */
     public Integer hipline;
 
     /* ---- */
@@ -65,6 +81,7 @@ public class PartJob implements Serializable {
         return "PartJob{" +
                 "id=" + id +
                 ", companyId=" + companyId +
+                ", companyName=" + companyName +
                 ", type='" + type + '\'' +
                 ", title='" + title + '\'' +
                 ", beginTime='" + beginTime + '\'' +
@@ -88,5 +105,19 @@ public class PartJob implements Serializable {
                 ", beltline=" + beltline +
                 ", hipline=" + hipline +
                 '}';
+    }
+
+    public boolean isHasMeasurements() {
+        if (bust != null && beltline != null && hipline != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isHasMoreRequire() {
+        if (height != null || isHasMeasurements() || healthProve != null) {
+            return true;
+        }
+        return false;
     }
 }

@@ -22,18 +22,23 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/category" />
 
                     <TextView
                         android:id="@+id/txt_type"
                         style="@style/FormGrayText_1"
-                        android:text="xxx" />
+                        android:layout_marginLeft="6dp" />
 
                     <TextView
                         android:id="@+id/txt_title"
                         style="@style/FormBlackText_1"
-                        android:layout_marginLeft="9dp"
-                        android:text="xxx" />
+                        android:layout_marginLeft="9dp" />
                 </LinearLayout>
 
                 <TextView
@@ -41,7 +46,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="sdgsdg"
                     android:textColor="@color/form_orange"
                     android:textSize="@dimen/form_text_size_1" />
 
@@ -64,13 +68,12 @@
 
                     <TextView
                         style="@style/FormGrayText_0"
-                        android:text="发布商家" />
+                        android:text="@string/job_detail_company_label" />
 
                     <TextView
                         android:id="@+id/txt_company"
                         style="@style/FormBlackText_0"
-                        android:layout_marginLeft="@dimen/form_item_in_margin"
-                        android:text="sdgsdg" />
+                        android:layout_marginLeft="@dimen/form_item_in_margin" />
 
                 </LinearLayout>
 
@@ -87,13 +90,12 @@
 
                     <TextView
                         style="@style/FormGrayText_0"
-                        android:text="所在区域" />
+                        android:text="@string/job_detail_work_area_label" />
 
                     <TextView
                         android:id="@+id/txt_work_area"
                         style="@style/FormBlackText_0"
-                        android:layout_marginLeft="@dimen/form_item_in_margin"
-                        android:text="sdgsdg" />
+                        android:layout_marginLeft="@dimen/form_item_in_margin" />
 
                 </LinearLayout>
 
@@ -110,13 +112,12 @@
 
                     <TextView
                         style="@style/FormGrayText_0"
-                        android:text="工作时间" />
+                        android:text="@string/job_detail_work_time_label" />
 
                     <TextView
                         android:id="@+id/txt_work_time"
                         style="@style/FormBlackText_0"
-                        android:layout_marginLeft="@dimen/form_item_in_margin"
-                        android:text="sdgsdg" />
+                        android:layout_marginLeft="@dimen/form_item_in_margin" />
 
                 </LinearLayout>
 
@@ -133,13 +134,12 @@
 
                     <TextView
                         style="@style/FormGrayText_0"
-                        android:text="结算方式" />
+                        android:text="@string/job_detail_pay_type_label" />
 
                     <TextView
                         android:id="@+id/txt_pay_type"
                         style="@style/FormBlackText_0"
-                        android:layout_marginLeft="@dimen/form_item_in_margin"
-                        android:text="sdgsdg" />
+                        android:layout_marginLeft="@dimen/form_item_in_margin" />
 
                 </LinearLayout>
 
@@ -156,13 +156,12 @@
 
                     <TextView
                         style="@style/FormGrayText_0"
-                        android:text="招募人数" />
+                        android:text="@string/job_detail_head_sum_label" />
 
                     <TextView
                         android:id="@+id/txt_head_sum"
                         style="@style/FormBlackText_0"
-                        android:layout_marginLeft="@dimen/form_item_in_margin"
-                        android:text="sdgsdg" />
+                        android:layout_marginLeft="@dimen/form_item_in_margin" />
 
                 </LinearLayout>
 
@@ -179,14 +178,13 @@
 
                     <TextView
                         style="@style/FormGrayText_0"
-                        android:text="详细地址" />
+                        android:text="@string/job_detail_work_address" />
 
                     <TextView
                         android:id="@+id/txt_work_address"
                         style="@style/FormBlackText_0"
                         android:layout_marginLeft="@dimen/form_item_in_margin"
-                        android:singleLine="false"
-                        android:text="说的故事都很说的故事都很舒服的很舒服的华盛顿凤凰的凤凰说的故事都很舒服的很舒服的华盛顿凤凰的凤凰说的故事都很舒服的很舒服的华盛顿凤凰的凤凰舒服的很舒服的华盛顿凤凰的凤凰" />
+                        android:singleLine="false" />
 
                 </LinearLayout>
 
@@ -205,7 +203,7 @@
 
                 <!-- 身高要求 -->
                 <LinearLayout
-                    android:id="@+id/ll_height"
+                    android:id="@+id/ll_height_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -214,13 +212,12 @@
 
                         <TextView
                             style="@style/FormGrayText_0"
-                            android:text="身高要求" />
+                            android:text="@string/job_detail_height_label" />
 
                         <TextView
                             android:id="@+id/txt_height"
                             style="@style/FormBlackText_0"
-                            android:layout_marginLeft="@dimen/form_item_in_margin"
-                            android:text="sdgsdg" />
+                            android:layout_marginLeft="@dimen/form_item_in_margin" />
 
                     </LinearLayout>
 
@@ -238,13 +235,12 @@
 
                         <TextView
                             style="@style/FormGrayText_0"
-                            android:text="三围要求" />
+                            android:text="@string/job_detail_measurements_label" />
 
                         <TextView
                             android:id="@+id/txt_measurements"
                             style="@style/FormBlackText_0"
-                            android:layout_marginLeft="@dimen/form_item_in_margin"
-                            android:text="sdgsdg" />
+                            android:layout_marginLeft="@dimen/form_item_in_margin" />
 
                     </LinearLayout>
 
@@ -262,13 +258,12 @@
 
                         <TextView
                             style="@style/FormGrayText_0"
-                            android:text="健康证件" />
+                            android:text="@string/job_detail_health_prove_label" />
 
                         <TextView
                             android:id="@+id/txt_health_prove"
                             style="@style/FormBlackText_0"
-                            android:layout_marginLeft="@dimen/form_item_in_margin"
-                            android:text="sdgsdg" />
+                            android:layout_marginLeft="@dimen/form_item_in_margin" />
 
                     </LinearLayout>
 
@@ -286,13 +281,12 @@
 
                         <TextView
                             style="@style/FormGrayText_0"
-                            android:text="语言要求" />
+                            android:text="@string/job_detail_language_label" />
 
                         <TextView
                             android:id="@+id/txt_language"
                             style="@style/FormBlackText_0"
-                            android:layout_marginLeft="@dimen/form_item_in_margin"
-                            android:text="sdgsdg" />
+                            android:layout_marginLeft="@dimen/form_item_in_margin" />
 
                     </LinearLayout>
 
@@ -305,21 +299,22 @@
             <View style="@style/FormDivider" />
 
             <ImageView style="@style/PublicLineH" />
-`
+            `
             <!-- 兼职描述 -->
             <LinearLayout style="@style/FormItemContainer_Wrap.V">
 
                 <TextView
                     style="@style/FormGrayText_0"
-                    android:text="兼职描述" />
+                    android:text="@string/job_detail_work_require_label" />
 
                 <TextView
                     android:id="@+id/txt_work_require"
                     style="@style/FormBlackText_0"
                     android:layout_marginTop="10dp"
-                    android:singleLine="false"
-                    android:text="对子公司的粉红色的粉红色的粉红色的返回到很多人会啥地方很多人" />
+                    android:singleLine="false" />
             </LinearLayout>
+
+            <ImageView style="@style/PublicLineH" />
         </LinearLayout>
     </ScrollView>
 

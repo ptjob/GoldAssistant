@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.parttime.common.activity.ChooseListActivity;
 import com.parttime.common.head.ActivityHead;
+import com.parttime.net.BaseRequest;
+import com.parttime.net.Callback;
 import com.parttime.pojo.PartJob;
 import com.parttime.pojo.SalaryUnit;
 import com.parttime.utils.CheckUtils;
@@ -24,10 +26,12 @@ import com.parttime.utils.IntentManager;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.BaseActivity;
 import com.quark.ui.widget.ActionSheet;
+import com.quark.volley.VolleySington;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * 发布兼职页
@@ -363,7 +367,7 @@ public class WriteJobActivity extends BaseActivity implements
     }
 
     private void publish() {
-
+       
     }
 
     private void preview() {

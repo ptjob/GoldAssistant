@@ -312,6 +312,25 @@
     <string name="publish_job_form_salary_format_error">工资薪酬必须是整数</string>
     <string name="publish_job_preview_title">活动预览</string>
 
+    <!-- 活动详情 -->
+    <string name="job_detail_company_label">发布商家</string>
+    <string name="job_detail_work_area_label">所在区域</string>
+    <string name="job_detail_work_time_label">工作时间</string>
+    <string name="job_detail_pay_type_label">结算方式</string>
+    <string name="job_detail_head_sum_label">招募人数</string>
+    <string name="job_detail_work_address">详细地址</string>
+    <string name="job_detail_height_label">身高要求</string>
+    <string name="job_detail_measurements_label">三围要求</string>
+    <string name="job_detail_health_prove_label">健康证件</string>
+    <string name="job_detail_language_label">语言要求</string>
+    <string name="job_detail_work_require_label">兼职描述</string>
+    <string name="job_detail_work_time_format">%1$s 至 %2$s</string>
+    <string name="job_detail_head_sum_format">%1$d人</string>
+    <string name="job_detail_apart_sex_format">男%1$d人，女%2$d人</string>
+    <string name="job_detail_height_format">%1$dcm以上</string>
+    <string name="job_detail_measurements_format">胸%1$dcm/腰%2$dcm/腿%3$dcm</string>
+
+
     <!-- 管理兼职 -->
 
     <!-- 兼职广场 -->
