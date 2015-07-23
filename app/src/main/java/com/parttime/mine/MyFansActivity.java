@@ -72,9 +72,7 @@ public class MyFansActivity extends WithTitleActivity implements XListView.IXLis
                         fs.add(fans);
                     }
 //                    updateViews(fs);
-                    fanses.clear();
-                    fanses.addAll(fs);
-                    adapter.notifyDataSetChanged();
+                    setDatas(fs, false);
                     updateViews();
                     lv.stopRefresh();
                     showWait(false);
@@ -107,10 +105,7 @@ public class MyFansActivity extends WithTitleActivity implements XListView.IXLis
                         Fans fans = (Fans) JsonUtil.jsonToBean(list.getJSONObject(i), Fans.class);
                         fs.add(fans);
                     }
-//                    updateViews(fs);
-//                    fanses.clear();
-                    fanses.addAll(fs);
-                    adapter.notifyDataSetChanged();
+                    setDatas(fs, true);
                     updateViews();
                     lv.setLoadOver(pageSize, PAGE_SIZE);
                     lv.stopLoadMore();
@@ -126,6 +121,14 @@ public class MyFansActivity extends WithTitleActivity implements XListView.IXLis
 
         }
     };
+
+    private void setDatas(List<Fans> datas, boolean append){
+        if(!append){
+            fanses.clear();
+        }
+        fanses.addAll(datas);
+        adapter.notifyDataSetChanged();
+    }
 
 
 

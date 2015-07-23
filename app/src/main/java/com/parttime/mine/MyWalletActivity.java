@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.parttime.base.WithTitleActivity;
@@ -20,6 +21,11 @@ import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.volley.VolleySington;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,12 +46,46 @@ public class MyWalletActivity extends WithTitleActivity implements XListView.IXL
 
     private String cId;
     private int pageIndex = 1;
+    private int totalRecord;
+
+    private double balance;
+    private List<WalletItem> walletItems = new ArrayList<WalletItem>();
+    private MoneyAdapter adapter;
 
 
     private Callback cbAdd = new Callback() {
         @Override
         public void success(Object obj) {
+            JSONObject json = (JSONObject) obj;
+            try {
+                balance = json.getDouble("company_money");
+                JSONObject billPage = json.getJSONObject("billPage");
+                if(billPage != null){
+                    pageIndex = billPage.getInt("pageNumber") + 1;
+                    int pageSize = billPage.getInt("pageSize");
+                    int totalPage = billPage.getInt("totalPage");
+                    totalRecord = billPage.getInt("totalRow");
+                    JSONArray bills = billPage.getJSONArray("list");
+                    if(bills != null){
+                        Gson gson = new Gson();
+                        String s;
+                        WalletItem wi;
+                        List<WalletItem> wis = new ArrayList<WalletItem>();
+                        for(int i = 0; i < bills.length(); ++i){
+                            s = bills.get(i).toString();
+                            wi = gson.fromJson(s, WalletItem.class);
+                            wis.add(wi);
+                        }
+                        setDatas(wis, false);
+                        updateViews();
+                    }
+                }
 
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } finally {
+                showWait(false);
+            }
         }
 
         @Override
@@ -57,6 +97,35 @@ public class MyWalletActivity extends WithTitleActivity implements XListView.IXL
     private Callback cbAppend = new Callback() {
         @Override
         public void success(Object obj) {
+            JSONObject json = (JSONObject) obj;
+            try {
+                balance = json.getDouble("company_money");
+                JSONObject billPage = json.getJSONObject("billPage");
+                if(billPage != null){
+                    pageIndex = billPage.getInt("pageNumber") + 1;
+                    int pageSize = billPage.getInt("pageSize");
+                    int totalPage = billPage.getInt("totalPage");
+                    totalRecord = billPage.getInt("totalRow");
+                    JSONArray bills = billPage.getJSONArray("list");
+                    if(bills != null){
+                        Gson gson = new Gson();
+                        String s;
+                        WalletItem wi;
+                        List<WalletItem> wis = new ArrayList<WalletItem>();
+                        for(int i = 0; i < bills.length(); ++i){
+                            s = bills.get(i).toString();
+                            wi = gson.fromJson(s, WalletItem.class);
+                            wis.add(wi);
+                        }
+                        setDatas(wis, true);
+                        xlv.stopLoadMore();
+                        updateViews();
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
 
@@ -76,6 +145,13 @@ public class MyWalletActivity extends WithTitleActivity implements XListView.IXL
     }
 
 
+    private void setDatas(List<WalletItem> datas,  boolean append){
+        if(!append){
+            walletItems.clear();
+        }
+        walletItems.addAll(datas);
+        adapter.notifyDataSetChanged();
+    }
 
     private void loadLocalData(){
         cId = SharePreferenceUtil.getInstance(this).loadStringSharedPreference(SharedPreferenceConstants.COMPANY_ID);
@@ -94,6 +170,10 @@ public class MyWalletActivity extends WithTitleActivity implements XListView.IXL
         new BaseRequest().request(Url.MY_BALANCE, params, VolleySington.getInstance().getRequestQueue(), cb);
     }
 
+    private void updateViews(){
+        tvBalance.setText(balance + "");
+    }
+
     @Override
     protected void initViews() {
         super.initViews();
@@ -102,6 +182,9 @@ public class MyWalletActivity extends WithTitleActivity implements XListView.IXL
         center(R.string.myWallet);
 
         xlv.setXListViewListener(this);
+        xlv.setPullLoadEnable(true);
+        adapter = new MoneyAdapter(this, walletItems);
+        xlv.setAdapter(adapter);
     }
 
     @Override
@@ -158,7 +241,22 @@ public class MyWalletActivity extends WithTitleActivity implements XListView.IXL
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            return null;
+            ViewHolder holder;
+            if(convertView == null){
+                holder = new ViewHolder();
+                convertView = inflater.inflate(R.layout.item_my_wallet, xlv, false);
+                holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
+                holder.tvType = (TextView) convertView.findViewById(R.id.tv_type);
+                holder.tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
+                holder.tvTime = (TextView) convertView.findViewById(R.id.tv_time);
+                convertView.setTag(holder);
+            }else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            WalletItem wi = (WalletItem) getItem(position);
+            holder.tvTitle.setText(wi.title);
+//            holder.tvType.setText(wi.type);
+            return convertView;
         }
 
         private class ViewHolder {
