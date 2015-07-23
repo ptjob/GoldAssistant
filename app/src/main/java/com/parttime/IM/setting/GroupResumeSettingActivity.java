@@ -15,7 +15,9 @@ package com.parttime.IM.setting;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -30,15 +32,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.carson.constant.ConstantForSaveList;
+import com.easemob.EMCallBack;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead2;
 import com.parttime.constants.ActivityExtraAndKeys;
+import com.parttime.login.FindPJLoginActivity;
+import com.parttime.main.MainTabActivity;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
@@ -46,6 +52,7 @@ import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.HuanxinUser;
+import com.quark.ui.widget.CustomDialog;
 import com.quark.volley.VolleySington;
 
 import java.util.ArrayList;
@@ -124,6 +131,16 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         }
         // 保证每次进详情看到的都是最新的group
         //updateGroup();
+    }
+
+    /**
+     * 更新已录取，和待处理的数量
+     */
+    public void updateTip(){
+        GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
+        if(appliantResult != null) {
+            tip.setText(getString(R.string.admitted_pending_tip, appliantResult.approvedCount, appliantResult.unApprovedCount));
+        }
     }
 
     public void getGroupApliantResult(String id){
@@ -345,8 +362,10 @@ public class GroupResumeSettingActivity extends BaseActivity implements
 
             bindData(position, holder, view);
 
+
             return view;
         }
+
 
         private void bindData(int position, ViewHolder holder, View view) {
             GroupSettingRequest.UserVO userVO = getItem(position);
@@ -373,15 +392,17 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             holder.resumeButton.setVisibility(View.VISIBLE);
             //待处理
             int apply = userVO.apply;
-            if(apply == 1){
+            if(apply == GroupSettingRequest.UserVO.APPLY_OK){
                 holder.resumeStatus.setText(R.string.already_resume);
                 holder.resumeButton.setText(R.string.cancel_resume);
-            }else if(apply == 0 || apply == 3){
+            }else if(apply == GroupSettingRequest.UserVO.APPLY_UNLOOK || apply == GroupSettingRequest.UserVO.APPLY_LOOKED){
                 holder.resumeStatus.setText(R.string.unresume);
                 holder.resumeButton.setText(R.string.resume);
             }
             holder.resumeButton.setTag(userVO);
+            holder.head.setTag(userVO);
 
+            //设置诚意金和认证
             StringBuilder moneyAndCertification = new StringBuilder();
             int moneyStatus = userVO.earnestMoney;
             int accountStatus = userVO.certification;
@@ -403,9 +424,141 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             }
             holder.moneyAccountStatus.setText(moneyAndCertification.toString());
 
+            //设置信誉
             String creditworthiness = userVO.creditworthiness;
             addStars(creditworthiness, holder.reputationValueStar);
+
+
+            setListener(holder);
         }
+
+
+        private void setListener(ViewHolder holder) {
+            //录取和取消录取点击事件
+            holder.resumeButton.setOnClickListener(new OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    if(v instanceof Button) {
+                        GroupSettingRequest.UserVO userVO = (GroupSettingRequest.UserVO)v.getTag();
+                        int apply = userVO.apply;
+                        if (apply == GroupSettingRequest.UserVO.APPLY_OK) {
+                            //取消录取  确认后可取消录用该用户，信息中心会提醒用户‘已被商家取消录用’。同时该用户也将被移除聊天群组
+                            showAlertDialog( null , getString(R.string.cacel_resume_or_not), Action.UNRESUME, userVO, v,
+                                    R.string.yes , R.string.no);
+
+                        } else if (apply == GroupSettingRequest.UserVO.APPLY_UNLOOK || apply == GroupSettingRequest.UserVO.APPLY_LOOKED) {
+                            //录取 已录用的人员，点击取消录用，弹窗提示“确认取消录用改用，取消后该用户将被移除聊天群组”——取消，确认
+                            showAlertDialog( null , getString(R.string.cacel_resume_or_not_and_remove_from_group), Action.RESUME, userVO , v,
+                                R.string.ok, R.string.cancel);
+
+                        }
+                    }
+                }
+            });
+
+            holder.head.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    GroupSettingRequest.UserVO userVO = (GroupSettingRequest.UserVO)v.getTag();
+                    Toast.makeText(GroupResumeSettingActivity.this, "go to user detail", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+
+        public void showAlertDialog(String title, String message,final Action action, final GroupSettingRequest.UserVO userVO, final View v,
+                                    int positiveRes, int negativeRes) {
+
+            CustomDialog.Builder builder = new CustomDialog.Builder(GroupResumeSettingActivity.this);
+            builder.setMessage(message);
+            builder.setTitle(title);
+            builder.setPositiveButton(positiveRes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    showWait(true);
+                    if(action == Action.UNRESUME || action == Action.REJECT){
+                        ArrayList<Integer> userIds = new ArrayList<>();
+                        userIds.add(userVO.userId);
+                        new GroupSettingRequest().reject(userIds , groupId, queue, new DefaultCallback(){
+                            @Override
+                            public void success(Object obj) {
+                                super.success(obj);
+                                new Thread(new Runnable() {
+                                    public void run() {
+                                        try {
+                                            EMGroupManager.getInstance()
+                                                    .removeUserFromGroup(groupId,
+                                                            String.valueOf(userVO.userId));
+                                            runOnUiThread(new Runnable() {
+                                                public void run() {
+                                                    data.remove(userVO);
+                                                    updateTip();
+                                                    adapter.notifyDataSetChanged();
+                                                    showWait(false);
+                                                }
+                                            });
+                                        } catch (final Exception e) {
+                                            runOnUiThread(new Runnable() {
+                                                public void run() {
+                                                    showWait(false);
+                                                    Toast.makeText(getApplicationContext(),
+                                                            "退出群聊失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                        }
+                                    }
+                                }).start();
+                            }
+
+                            @Override
+                            public void failed(Object obj) {
+                                super.failed(obj);
+                                showWait(false);
+                                Toast.makeText(GroupResumeSettingActivity.this, getString(R.string.action_failed) , Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }else if(action == Action.RESUME){
+                        ArrayList<Integer> userIds = new ArrayList<>();
+                        userIds.add(userVO.userId);
+                        new GroupSettingRequest().approve(userIds , groupId, queue, new DefaultCallback(){
+                            @Override
+                            public void success(Object obj) {
+                                super.success(obj);
+                                userVO.apply = GroupSettingRequest.UserVO.APPLY_OK;
+                                ((Button)v).setText(R.string.cancel_resume);
+                                updateTip();
+                                showWait(false);
+                            }
+
+                            @Override
+                            public void failed(Object obj) {
+                                super.failed(obj);
+                                showWait(false);
+                                Toast.makeText(GroupResumeSettingActivity.this, getString(R.string.action_failed) , Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+                }
+            });
+
+            builder.setNegativeButton(negativeRes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+
+                }
+            });
+            builder.create().show();
+        }
+
+
+    }
+
+    private static enum  Action{
+        RESUME,
+        UNRESUME , REJECT
     }
 
     private class ViewHolder{

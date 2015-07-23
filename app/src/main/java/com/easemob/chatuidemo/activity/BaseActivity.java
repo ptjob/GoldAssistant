@@ -29,11 +29,13 @@ import com.easemob.chat.EMMessage;
 import com.easemob.chat.EMMessage.Type;
 import com.easemob.chatuidemo.utils.CommonUtils;
 import com.easemob.util.EasyUtils;
+import com.quark.utils.WaitDialog;
 import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends FragmentActivity {
     private static final int notifiId = 11;
     protected NotificationManager notificationManager;
+    protected WaitDialog dialog;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -90,6 +92,21 @@ public class BaseActivity extends FragmentActivity {
         notificationManager.cancel(notifiId);
     }
 
+
+
+
+    protected void showWait(boolean isShow) {
+        if (isShow) {
+            if (null == dialog) {
+                dialog = new WaitDialog(this);
+            }
+            dialog.show();
+        } else {
+            if (null != dialog) {
+                dialog.dismiss();
+            }
+        }
+    }
     /**
      * 返回
      * 
