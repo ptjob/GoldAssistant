@@ -38,7 +38,7 @@
             android:layout_width="84dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textColor="#ffffff"
+            android:textColor="@color/common_orange"
             android:textSize="20sp"
             android:text="@string/recharge"
             android:background="#fe8a00"/>

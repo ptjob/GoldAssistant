@@ -209,4 +209,6 @@
 
     <color name="btn_txt_color">#ffffff</color>
     <color name="common_gray">#c7c8cd</color>
+
+    <color name="common_orange">#fa8e00</color>
 </resources>

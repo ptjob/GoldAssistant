@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.parttime.base.LocalInitActivity;
 import com.parttime.base.WithTitleActivity;
 import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.net.BaseRequest;
@@ -39,7 +40,7 @@ import me.maxwin.view.XListView;
 /**
  * Created by cjz on 2015/7/16.
  */
-public class MyFansActivity extends WithTitleActivity implements XListView.IXListViewListener{
+public class MyFansActivity extends LocalInitActivity implements XListView.IXListViewListener{
     private static final int PAGE_SIZE = 10;
     @ViewInject(R.id.xlv_my_fans)
     private XListView lv;
@@ -140,12 +141,6 @@ public class MyFansActivity extends WithTitleActivity implements XListView.IXLis
         loadLocalData();
         loadData();
     }
-
-    private void loadLocalData(){
-        SharePreferenceUtil spu = SharePreferenceUtil.getInstance(this);
-        cId = spu.loadStringSharedPreference(SharedPreferenceConstants.COMPANY_ID);
-    }
-
 
     @Override
     protected void initViews() {

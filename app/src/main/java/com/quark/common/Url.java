@@ -356,6 +356,9 @@ public class Url {
 	// 我的钱包
 	public static final String MY_BALANCE = HOST + SUBJECT
 			+ "/CompanyCenter/myWallet";
+
+	public static final String MY_RECEVED_PRAISE = HOST + SUBJECT
+			+ "/CompanyCenter/myComments";
 	// 取回诚意金
 	public static final String TAKE_EARNEST_MONEY = HOST2 + SUBJECT
 			+ "/UserCenter/take_earnest_moeny";

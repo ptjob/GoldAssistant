@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.parttime.base.LocalInitActivity;
 import com.parttime.base.WithTitleActivity;
 import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.net.BaseRequest;
@@ -35,7 +36,7 @@ import me.maxwin.view.XListView;
 /**
  * Created by cjz on 2015/7/14.
  */
-public class MyWalletActivity extends WithTitleActivity implements XListView.IXListViewListener{
+public class MyWalletActivity extends LocalInitActivity implements XListView.IXListViewListener{
     private static final int PAGE_SIZE = 10;
     @ViewInject(R.id.tv_balance)
     private TextView tvBalance;
@@ -44,7 +45,6 @@ public class MyWalletActivity extends WithTitleActivity implements XListView.IXL
     @ViewInject(R.id.xlv)
     private XListView xlv;
 
-    private String cId;
     private int pageIndex = 1;
     private int totalRecord;
 
@@ -151,10 +151,6 @@ public class MyWalletActivity extends WithTitleActivity implements XListView.IXL
         }
         walletItems.addAll(datas);
         adapter.notifyDataSetChanged();
-    }
-
-    private void loadLocalData(){
-        cId = SharePreferenceUtil.getInstance(this).loadStringSharedPreference(SharedPreferenceConstants.COMPANY_ID);
     }
 
     private void loadData(){
