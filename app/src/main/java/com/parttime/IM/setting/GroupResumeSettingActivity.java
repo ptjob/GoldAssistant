@@ -443,15 +443,13 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                         GroupSettingRequest.UserVO userVO = (GroupSettingRequest.UserVO)v.getTag();
                         int apply = userVO.apply;
                         if (apply == GroupSettingRequest.UserVO.APPLY_OK) {
-                            //取消录取  确认后可取消录用该用户，信息中心会提醒用户‘已被商家取消录用’。同时该用户也将被移除聊天群组
-                            showAlertDialog( null , getString(R.string.cacel_resume_or_not), Action.UNRESUME, userVO, v,
-                                    R.string.yes , R.string.no);
-
+                            //取消录取  已录用的人员，点击取消录用，弹窗提示“确认取消录用改用，取消后该用户将被移除聊天群组”——取消，确认
+                            showAlertDialog( null , getString(R.string.cacel_resume_or_not_and_remove_from_group), Action.UNRESUME, userVO ,
+                                    R.string.ok, R.string.cancel);
                         } else if (apply == GroupSettingRequest.UserVO.APPLY_UNLOOK || apply == GroupSettingRequest.UserVO.APPLY_LOOKED) {
-                            //录取 已录用的人员，点击取消录用，弹窗提示“确认取消录用改用，取消后该用户将被移除聊天群组”——取消，确认
-                            showAlertDialog( null , getString(R.string.cacel_resume_or_not_and_remove_from_group), Action.RESUME, userVO , v,
-                                R.string.ok, R.string.cancel);
-
+                            //录取   确认后可取消录用该用户，信息中心会提醒用户‘已被商家取消录用’。同时该用户也将被移除聊天群组
+                            showAlertDialog( null , getString(R.string.cacel_resume_or_not), Action.RESUME, userVO,
+                                    R.string.yes , R.string.no);
                         }
                     }
                 }
@@ -467,7 +465,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         }
 
 
-        public void showAlertDialog(String title, String message,final Action action, final GroupSettingRequest.UserVO userVO, final View v,
+        public void showAlertDialog(String title, String message,final Action action, final GroupSettingRequest.UserVO userVO,
                                     int positiveRes, int negativeRes) {
 
             CustomDialog.Builder builder = new CustomDialog.Builder(GroupResumeSettingActivity.this);
@@ -480,7 +478,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                     if(action == Action.UNRESUME || action == Action.REJECT){
                         ArrayList<Integer> userIds = new ArrayList<>();
                         userIds.add(userVO.userId);
-                        new GroupSettingRequest().reject(userIds , groupId, queue, new DefaultCallback(){
+                        new GroupSettingRequest().cancelResume(userIds , groupId, queue, new DefaultCallback(){
                             @Override
                             public void success(Object obj) {
                                 super.success(obj);
@@ -527,8 +525,8 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                             public void success(Object obj) {
                                 super.success(obj);
                                 userVO.apply = GroupSettingRequest.UserVO.APPLY_OK;
-                                ((Button)v).setText(R.string.cancel_resume);
                                 updateTip();
+                                notifyDataSetChanged();
                                 showWait(false);
                             }
 

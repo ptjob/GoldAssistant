@@ -302,7 +302,7 @@ public class MainTabActivity extends FragmentActivity implements
 								userlist);
 						// 存入db
 						UserDao dao = new UserDao(MainTabActivity.this);
-						List<com.easemob.chatuidemo.domain.User> users = new ArrayList<com.easemob.chatuidemo.domain.User>(
+						List<com.easemob.chatuidemo.domain.User> users = new ArrayList<>(
 								userlist.values());
 						dao.saveContactList(users);
 						//

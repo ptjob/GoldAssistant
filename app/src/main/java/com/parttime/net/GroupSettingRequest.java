@@ -129,7 +129,7 @@ public class GroupSettingRequest extends BaseRequest {
             }
         }
         Map<String, String> map = new HashMap<>();
-        map.put("user_ids", stringBuilder.toString());
+        map.put("user_id", stringBuilder.toString());
         map.put("group_id", groupId);
 
         request(Url.COMPANY_APPROVEACTIVITY,map, queue, new Callback() {
@@ -144,6 +144,43 @@ public class GroupSettingRequest extends BaseRequest {
             }
         }) ;
     }
+
+
+    /**
+     * 取消录取
+     * @param userIds List<Integer>
+     * @param groupId String
+     * @param queue RequestQueue
+     * @param callback DefaultCallback
+     */
+    public void cancelResume(List<Integer> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback){
+        StringBuilder stringBuilder = new StringBuilder();
+        int size = userIds.size();
+        for(int i= 0 ; i < size; i ++){
+            int userId = userIds.get(i);
+            if(i < size - 1){
+                stringBuilder.append(userId).append(",");
+            }else{
+                stringBuilder.append(userId);
+            }
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", stringBuilder.toString());
+        map.put("group_id", groupId);
+
+        request(Url.COMPANY_CANCELAPPROVEACTIVITY,map, queue, new Callback() {
+            @Override
+            public void success(Object obj) {
+                callback.success(obj);
+            }
+
+            @Override
+            public void failed(Object obj) {
+                callback.failed(obj);
+            }
+        }) ;
+    }
+
 
     /**
      * 拒绝人员
@@ -164,7 +201,7 @@ public class GroupSettingRequest extends BaseRequest {
             }
         }
         Map<String, String> map = new HashMap<>();
-        map.put("user_ids", stringBuilder.toString());
+        map.put("user_id", stringBuilder.toString());
         map.put("group_id", groupId);
 
         request(Url.COMPANY_REJECTACTIVITY,map, queue, new Callback() {

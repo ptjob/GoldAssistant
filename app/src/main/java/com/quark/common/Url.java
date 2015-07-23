@@ -313,6 +313,9 @@ public class Url {
     // 录取人员3.0
     public static final String COMPANY_APPROVEACTIVITY = HOST + SUBJECT
 			+ "/Activity/approveActivity";
+	// 取消录取人员3.0
+    public static final String COMPANY_CANCELAPPROVEACTIVITY = HOST + SUBJECT
+			+ "/Activity/companyCancelApply";
 	// 拒绝人员3.0
     public static final String COMPANY_REJECTACTIVITY = HOST + SUBJECT
 			+ "/Activity/rejectActivity";
