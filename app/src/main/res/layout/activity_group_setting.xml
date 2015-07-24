@@ -16,7 +16,7 @@
         android:background="@color/c_363636"
         android:textColor="@android:color/white" />
 
-    <ListView
+    <com.parttimejob.swipe.SwipeListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listView"

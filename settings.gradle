@@ -1,1 +1,1 @@
-include ':app', ':citylistview', ':xlistview'
+include ':app', ':citylistview', ':xlistview', ':swip'

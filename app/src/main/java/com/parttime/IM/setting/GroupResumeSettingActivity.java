@@ -17,7 +17,6 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -30,25 +29,22 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.carson.constant.ConstantForSaveList;
-import com.easemob.EMCallBack;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead2;
 import com.parttime.constants.ActivityExtraAndKeys;
-import com.parttime.login.FindPJLoginActivity;
-import com.parttime.main.MainTabActivity;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.utils.SharePreferenceUtil;
+import com.parttimejob.swipe.SwipeListView;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.HuanxinUser;
@@ -72,7 +68,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
 
     private ActivityHead2 headView;
     private TextView tip; //显示已录取和待处理的人数
-    private ListView listView ;
+    private SwipeListView listView ;
     private Dialog more;
 
     private SettingAdapter adapter = new SettingAdapter();;
@@ -109,7 +105,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         headView.imgRight2.setOnClickListener(this);
 
         tip = (TextView) findViewById(R.id.tip);
-        listView = (ListView) findViewById(R.id.listView);
+        listView = (SwipeListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
     }
 
@@ -340,13 +336,33 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         }
 
         @Override
+        public int getItemViewType(int position) {
+            GroupSettingRequest.UserVO userVO = getItem(position);
+            if(userVO.apply == GroupSettingRequest.UserVO.APPLY_OK){
+                return 0 ;
+            }else{
+                return 1;
+            }
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 2;
+        }
+
+        @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view ;
             ViewHolder holder;
             if(convertView == null){
-                view = getLayoutInflater().inflate(R.layout.activity_group_setting_item,parent,false);
-
                 holder = new ViewHolder();
+                if(getItem(position).apply == GroupSettingRequest.UserVO.APPLY_OK) {
+                    view = getLayoutInflater().inflate(R.layout.activity_group_setting_item_swip, parent, false);
+                    holder.reject = (Button)view.findViewById(R.id.reject);
+                }else{
+                    view = getLayoutInflater().inflate(R.layout.activity_group_setting_item_swip2, parent, false);
+                }
+
                 holder.head = (ImageView) view.findViewById(R.id.head);
                 holder.name = (TextView) view.findViewById(R.id.name);
                 holder.resumeStatus = (TextView) view.findViewById(R.id.resume_status);
@@ -491,6 +507,11 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                                             runOnUiThread(new Runnable() {
                                                 public void run() {
                                                     data.remove(userVO);
+                                                    GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
+                                                    if(appliantResult != null){
+                                                        appliantResult.userList.remove(userVO);
+                                                        appliantResult.approvedCount  --;
+                                                    }
                                                     updateTip();
                                                     adapter.notifyDataSetChanged();
                                                     showWait(false);
@@ -566,6 +587,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                 moneyAccountStatus; // 诚意金/实名认证
         public LinearLayout reputationValueStar; //信誉值
         public Button resumeButton;
+        public Button reject;//拒绝
 
     }
 
