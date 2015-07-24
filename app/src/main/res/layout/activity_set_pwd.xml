@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/title"/>
+    <TextView
+        style="@style/FormTitle"
+        android:layout_marginTop="20dp"
+        android:text="@string/new_pwd"/>
+    <com.parttime.widget.EditItem
+        android:id="@+id/ei_new_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@color/white"
+        app:ei_hint="@string/unfill"
+        app:ei_nameShow="false" />
+
+    <Button
+        android:id="@+id/btn_finish"
+        style="@style/CommonButton.Blue"
+        android:text="@string/finish"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>

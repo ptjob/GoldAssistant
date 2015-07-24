@@ -339,6 +339,9 @@
     <string name="new_pwd">新密码</string>
     <string name="contact_customer_service_for_validaion_code">什么，收不到短信验证码？请联系客服！</string>
     <string name="friendly_tips">温馨提示</string>
+    <string name="please_enter_validate_code">请输入验证码</string>
+    <string name="change_pwd">变更密码</string>
+    <string name="telephone_num">手机号</string>
 
     <!-- 招人Tab -->
     <string name="publish_job">发布兼职</string>

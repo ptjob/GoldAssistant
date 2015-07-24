@@ -85,12 +85,21 @@ public class Url {
 	public static final String USER_coment = HOST + SUBJECT
 			+ "/UserCenter/feed_back";
 
+	public static final String COMPANY_FORGET_PWD = HOST + SUBJECT
+			 + "/Message/companyForgetCode";
+
 
 	public static final String SUGGEST = HOST + SUBJECT
 			+ "/CompanyCenter/feedback";
 
 	public static final String MODIFY_PWD = HOST + SUBJECT
 			+ "/CompanyCenter/modifyPassword";
+
+	public static final String FORGET_PWD = HOST + SUBJECT
+			+ "/CompanyCenter/forgetPassword";
+
+	public static final String MODIFY_TELEPHONE_NUM = HOST + SUBJECT
+			+ "/Message/companyTelCode";
 
 	// 商家验证资料
 	public static final String COMPANY_yanzheng = HOST + SUBJECT

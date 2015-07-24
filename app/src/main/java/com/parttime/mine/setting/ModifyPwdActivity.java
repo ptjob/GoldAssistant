@@ -55,7 +55,7 @@ public class ModifyPwdActivity extends LocalInitActivity implements Callback{
         showWait(true);
         Map<String, String> params = new HashMap<String, String>();
         params.put("old_password", JiaoyanUtil.MD5(eiOldPwd.getValue().trim()));
-        params.put("new_passwod", JiaoyanUtil.MD5(eiNewPwd.getValue().trim()));
+        params.put("new_password", JiaoyanUtil.MD5(eiNewPwd.getValue().trim()));
         params.put("user_id", getCompanyId());
         new BaseRequest().request(Url.MODIFY_PWD, params, VolleySington.getInstance().getRequestQueue(), this);
     }

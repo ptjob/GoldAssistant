@@ -36,13 +36,26 @@
                 android:layout_marginTop="20dp"
                 app:ei_name="@string/new_phone_number"/>
 
-            <com.parttime.widget.EditItem
-                android:id="@+id/ei_validation_code"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/form_item_height"
-                android:background="@color/white"
-                android:layout_marginTop="20dp"
-                app:ei_name="@string/validation_code"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.parttime.widget.EditItem
+                    android:id="@+id/ei_validation_code"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/form_item_height"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:layout_marginTop="20dp"
+                    app:ei_name="@string/validation_code"/>
+                <ImageView
+                    android:id="@+id/iv_code_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/selector_vefify_state"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone"/>
+            </LinearLayout>
             
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -63,7 +76,8 @@
                         style="@style/CommonButton.Blue"
                         android:text="@string/next_step"
                         android:layout_marginLeft="10dp"
-                        android:layout_width="110dp"/>
+                        android:layout_width="110dp"
+                        android:enabled="false"/>
                 </LinearLayout>
 
             </RelativeLayout>

@@ -4,10 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.carson.constant.ConstantForSaveList;
@@ -24,13 +26,17 @@ import com.quark.ui.widget.CustomDialog;
 import com.quark.utils.Util;
 import com.quark.volley.VolleySington;
 
+import org.w3c.dom.CDATASection;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by cjz on 2015/7/24.
  */
-public class ModifyCellphoneActivity extends WithTitleActivity{
+public class ModifyCellphoneActivity extends WithTitleActivity implements TextWatcher{
+
+    private static final int CODE_LEN = 6;
 
     @ViewInject(R.id.ei_original_phone_number)
     private EditItem eiOriginalNumber;
@@ -48,7 +54,18 @@ public class ModifyCellphoneActivity extends WithTitleActivity{
     @ViewInject(R.id.tv_failed_to_get_code)
     private TextView tvFailedToGet;
 
+    @ViewInject(R.id.iv_code_ok)
+    private ImageView ivVerifyStatus;
+
     private CustomDialog dlg;
+
+    private String phoneNum;
+    private String code;
+    private String pwd;
+    private String newPhoneNum;
+
+    private int lastLen;
+    private boolean everReachLen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_modify_cellphone);
@@ -61,33 +78,33 @@ public class ModifyCellphoneActivity extends WithTitleActivity{
         super.initViews();
         left(TextView.class, R.string.back);
         center(R.string.modify_phone_number);
+        eiCode.addTextChangeListener(this);
     }
 
-    private boolean validate(){
-
-        if(!Util.isMobileNO(eiOriginalNumber.getValue().trim())){
+    private boolean validatePhoneNum(){
+        phoneNum = eiOriginalNumber.getValue().trim();
+        if(!Util.isMobileNO(phoneNum)){
             showToast(R.string.phone_number_format_wrong);
             return false;
         }
-        return false;
+        return true;
     }
 
     @OnClick(R.id.btn_get_code)
     public void getCode(View v){
-//        if(!validate()){
-//            return;
-//        }
+        if(!validatePhoneNum()){
+            return;
+        }
         btnGetCode.setEnabled(false);
         showWait(true);
         Map<String, String> map = new HashMap<String, String>();
-//        map.put("telephone", eiOriginalNumber.getValue().trim());
-//        map.put("code", code);
-        map.put("telephone", eiNewNumber.getValue().trim());
-        new BaseRequest().request(Url.COMPANY_SEND_TEL_CODE, map, VolleySington.getInstance().getRequestQueue(), new Callback() {
+        map.put("telephone", phoneNum);
+        new BaseRequest().request(Url.MODIFY_TELEPHONE_NUM, map, VolleySington.getInstance().getRequestQueue(), new Callback() {
             @Override
             public void success(Object obj) {
                 showWait(false);
-                finish();
+                btnNext.setEnabled(true);
+//                finish();
             }
 
             @Override
@@ -95,6 +112,20 @@ public class ModifyCellphoneActivity extends WithTitleActivity{
                 showWait(false);
             }
         });
+    }
+
+    private boolean validate(){
+        pwd = eiLoginPwd.getValue().trim();
+        newPhoneNum = eiNewNumber.getValue().trim();
+
+        return true;
+    }
+
+    @OnClick(R.id.btn_next)
+    public void next(View v){
+        if(!validate()){
+            return;
+        }
     }
 
     @OnClick(R.id.tv_failed_to_get_code)
@@ -129,6 +160,27 @@ public class ModifyCellphoneActivity extends WithTitleActivity{
         super.finish();
     }
 
+    private void verifyCode(){
+        code = eiCode.getValue();
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("telephone", phoneNum);
+        params.put("code", code);
+        new BaseRequest().request(Url.MESSAGE_VALIDATE, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
+            @Override
+            public void success(Object obj) {
+                if(!everReachLen){
+                    ivVerifyStatus.setVisibility(View.VISIBLE);
+                }
+                ivVerifyStatus.setSelected(true);
+            }
+
+            @Override
+            public void failed(Object obj) {
+                ivVerifyStatus.setSelected(false);
+            }
+        });
+    }
+
     @Override
     protected ViewGroup getLeftWrapper() {
         return null;
@@ -142,5 +194,30 @@ public class ModifyCellphoneActivity extends WithTitleActivity{
     @Override
     protected TextView getCenter() {
         return null;
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        int length = s.length();
+        if(length == CODE_LEN){
+            if(lastLen < CODE_LEN){
+                verifyCode();
+            }
+        }else {
+            if(lastLen == CODE_LEN){
+                ivVerifyStatus.setSelected(false);
+            }
+        }
+
     }
 }

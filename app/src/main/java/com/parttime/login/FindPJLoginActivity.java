@@ -174,8 +174,9 @@ public class FindPJLoginActivity extends BaseActivity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(FindPJLoginActivity.this,
-						ForgetPwdActivity.class);
-				startActivity(intent);
+//						ForgetPwdActivity.class);
+						com.parttime.login.ForgetPwdActivity.class);
+						startActivity(intent);
 			}
 		});
 	}

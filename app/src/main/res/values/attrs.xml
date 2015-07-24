@@ -115,8 +115,10 @@
         <attr name="ei_name" format="string"/>
         <attr name="ei_value" format="string"/>
         <attr name="ei_hint" format="string"/>
+        <attr name="ei_title" format="string"/>
         <attr name="ei_divider_stroke_width" format="dimension"/>
         <attr name="ei_topDividerShow" format="boolean"/>
         <attr name="ei_bottomDividerShow" format="boolean"/>
+        <attr name="ei_nameShow" format="boolean"/>
     </declare-styleable>
 </resources>
