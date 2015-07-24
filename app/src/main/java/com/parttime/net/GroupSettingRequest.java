@@ -2,15 +2,12 @@ package com.parttime.net;
 
 import com.android.volley.RequestQueue;
 import com.carson.constant.ConstantForSaveList;
-import com.quark.common.JsonUtil;
 import com.quark.common.Url;
-import com.quark.model.HuanxinUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +61,11 @@ public class GroupSettingRequest extends BaseRequest {
                         userVO.isCommented = jsonObject.getInt("is_commented");
                         userVO.earnestMoney = jsonObject.getInt("earnest_money");
                         userVO.certification = jsonObject.getInt("certification");
-                        userVOs.add(userVO);
+                        if(userVO.apply != UserVO.APPLY_REJECT) {
+                            userVOs.add(userVO);
+                        }else{
+                            appliantResult.unApprovedCount --;
+                        }
                     }
                     appliantResult.userList = userVOs;
                     if (userVOs.size() > 0) {

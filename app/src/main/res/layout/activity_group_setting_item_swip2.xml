@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.parttimejob.swipe.SwipeItem xmlns:android="http://schemas.android.com/apk/res/android"
+                                        xmlns:swipe="http://schemas.android.com/apk/res-auto"
+                                        android:id="@+id/swipe_item"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:descendantFocusability="blocksDescendants"
+                                        android:focusable="false"
+                                        swipe:mainview="@layout/activity_group_setting_item"
+                                        swipe:right_layout="wrap">
+</com.parttimejob.swipe.SwipeItem>

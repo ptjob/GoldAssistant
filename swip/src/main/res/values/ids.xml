@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="item_swipeitem" type="id"></item>
+
+    <item name="swipe_item" type="id"></item>
+
+</resources>

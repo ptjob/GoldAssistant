@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="swipeitem1">
+        <attr name="swipeview" format="reference" />
+        <attr name="mainview1" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="groupitem">
+        <attr name="iconbackground" format="reference" />
+        <attr name="iconforground" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="slideitem">
+        <attr name="iconsl" format="reference" />
+        <attr name="text" format="string" />
+    </declare-styleable>
+    <declare-styleable name="swipeitem">
+        <attr name="swipeview_right" format="reference" />
+        <attr name="swipeview_left" format="reference" />
+        <attr name="mainview" format="reference"></attr>
+
+        <attr name="left_layout" format="string" />
+        <attr name="right_layout" format="string" />
+    </declare-styleable>
+
+</resources>
