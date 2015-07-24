@@ -7,22 +7,32 @@
     <TextView
         android:id="@+id/tv_join_in_qq_group"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center" />
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:textSize="13sp"
+        android:paddingTop="9dp"
+        android:text="@string/welcome_to_join_in_qq_group"/>
 
     <com.parttime.widget.CountingEditText
+        android:id="@+id/cet_suggestion"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="179dp"
         app:cet_maxLen="200"
         android:background="#ffffff"
         android:gravity="top"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:hint="@string/enter_suggestion_hint"/>
 
     <Button
         android:id="@+id/btn_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/CommonButton.Blue"
+        android:layout_marginTop="15dp"
         android:layout_gravity="center_horizontal"
-        android:text="@string/button_send"/>
+        android:layout_marginBottom="15dp"
+        android:text="@string/button_send"
+        android:enabled="false"/>
 
 </LinearLayout>

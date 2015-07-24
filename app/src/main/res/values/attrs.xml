@@ -110,4 +110,13 @@
         <attr name="rv_total_score" format="integer"/>
         <attr name="rv_inner_margin" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="EditItem">
+        <attr name="ei_name" format="string"/>
+        <attr name="ei_value" format="string"/>
+        <attr name="ei_hint" format="string"/>
+        <attr name="ei_divider_stroke_width" format="dimension"/>
+        <attr name="ei_topDividerShow" format="boolean"/>
+        <attr name="ei_bottomDividerShow" format="boolean"/>
+    </declare-styleable>
 </resources>

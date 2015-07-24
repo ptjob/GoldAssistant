@@ -414,6 +414,26 @@
         <item name="android:layout_marginLeft">@dimen/common_margin</item>
     </style>
 
+    <style name="EditItem_Common">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    
+    <style name="EditItem_Common.Name">
+        <item name="android:textColor">#c7c6ca</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginLeft">@dimen/common_margin</item>
+    </style>
+
+    <style name="EditItem_Common.Value">
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
 
     <style name="CommonButton">
         <item name="android:layout_width">@dimen/btn_width</item>
@@ -424,6 +444,10 @@
 
     <style name="CommonButton.Blue">
         <item name="android:background">@drawable/selector_btn_blue</item>
+    </style>
+
+    <style name="CommonButton.Orange">
+        <item name="android:background">@drawable/selector_btn_orange</item>
     </style>
 
     <!-- 表单 -->

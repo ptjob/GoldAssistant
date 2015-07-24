@@ -85,6 +85,13 @@ public class Url {
 	public static final String USER_coment = HOST + SUBJECT
 			+ "/UserCenter/feed_back";
 
+
+	public static final String SUGGEST = HOST + SUBJECT
+			+ "/CompanyCenter/feedback";
+
+	public static final String MODIFY_PWD = HOST + SUBJECT
+			+ "/CompanyCenter/modifyPassword";
+
 	// 商家验证资料
 	public static final String COMPANY_yanzheng = HOST + SUBJECT
 			+ "/AgentCenter/company_certificatoin";

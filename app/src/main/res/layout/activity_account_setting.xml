@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/form_item_height"
         android:background="@drawable/item_selector"
-        app:form_title="@string/modify_phone_number"/>
+        app:form_title="@string/modify_phone_number"
+        app:topLine_shown="false"/>
     <com.parttime.widget.FormItem
         android:id="@+id/fi_modify_pwd"
         android:layout_width="match_parent"

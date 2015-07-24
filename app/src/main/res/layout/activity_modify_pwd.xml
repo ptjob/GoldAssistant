@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/title"/>
+    <com.parttime.widget.EditItem
+        android:id="@+id/ei_old_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@color/white"
+        android:layout_marginTop="20dp"
+        app:ei_name="@string/old_pwd"/>
+    <com.parttime.widget.EditItem
+        android:id="@+id/ei_new_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@color/white"
+        android:layout_marginTop="20dp"
+        app:ei_name="@string/new_pwd"/>
+
+    <Button
+        android:id="@+id/btn_finish"
+        style="@style/CommonButton.Blue"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/finish" />
+
+</LinearLayout>

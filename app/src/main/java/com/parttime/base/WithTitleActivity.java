@@ -1,5 +1,8 @@
 package com.parttime.base;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -8,8 +11,10 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.carson.constant.ConstantForSaveList;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.BaseActivity;
+import com.quark.ui.widget.CustomDialog;
 
 import java.lang.reflect.Constructor;
 
@@ -21,6 +26,7 @@ public abstract class WithTitleActivity extends BaseActivity {
     private ViewGroup leftWrapper;
     private ViewGroup rightWrapper;
     private TextView center;
+
 
     protected abstract ViewGroup getLeftWrapper();
     protected abstract ViewGroup getRightWrapper();
@@ -34,6 +40,17 @@ public abstract class WithTitleActivity extends BaseActivity {
 
     protected void initViews(){
 
+    }
+
+    public CustomDialog createDialog(String title, final String msg, String positive, DialogInterface.OnClickListener positiveClick, String negative, DialogInterface.OnClickListener negativeClick) {
+
+        CustomDialog.Builder builder = new CustomDialog.Builder(this);
+        builder.setMessage(msg);
+        builder.setTitle(title);
+        builder.setPositiveButton(positive,
+                positiveClick);
+        builder.setNegativeButton(negative, negativeClick);
+        return builder.create();
     }
 
     protected void center(int txtId){

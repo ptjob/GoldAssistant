@@ -93,7 +93,8 @@
                 style="@style/CommonButton.Blue"
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/done"/>
+                android:text="@string/done"
+                android:layout_marginBottom="15dp"/>
         </LinearLayout>
     </ScrollView>
 

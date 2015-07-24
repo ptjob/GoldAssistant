@@ -1,10 +1,12 @@
 package com.parttime.mine.setting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.base.WithTitleActivity;
@@ -23,6 +25,7 @@ public class AccountSettingActivity extends WithTitleActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_account_setting);
+        ViewUtils.inject(this);
         super.onCreate(savedInstanceState);
     }
 
@@ -50,12 +53,12 @@ public class AccountSettingActivity extends WithTitleActivity{
 
     @OnClick(R.id.fi_modify_phone_number)
     private void modifyPhone(View v){
-
+        startActivity(new Intent(this, ModifyCellphoneActivity.class));
     }
 
     @OnClick(R.id.fi_modify_pwd)
     private void modifyPwd(View v){
-
+        startActivity(new Intent(this, ModifyPwdActivity.class));
     }
 
 }

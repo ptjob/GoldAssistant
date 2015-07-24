@@ -21,7 +21,7 @@ import com.qingmu.jianzhidaren.R;
 /**
  * Created by cjz on 2015/7/12.
  */
-public class CountingEditText extends EditText implements TextWatcher{
+public class CountingEditText extends EditText {
     private boolean initExecuted;
 
     protected Context context;
@@ -96,10 +96,13 @@ public class CountingEditText extends EditText implements TextWatcher{
 
         paddingBottom = getPaddingBottom();
         paddingRight = getPaddingRight();
+        int paddingTop = getPaddingTop();
+        int paddingLeft = getPaddingLeft();
 
         spaceInBar = (countBarHeight - countTextSize) / 2;
         paddingSet = true;
-        super.setPadding(0, 0, 0, countBarHeight + paddingBottom);
+
+        super.setPadding(paddingLeft, paddingTop, paddingRight, countBarHeight + paddingBottom);
     }
 
     @Override
@@ -124,18 +127,4 @@ public class CountingEditText extends EditText implements TextWatcher{
         canvas.drawText(text, measuredWidth - paddingRight - txtWidth, measuredHeight - paddingBottom - spaceInBar + getScrollY(), paint);
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        invalidate();
-    }
 }

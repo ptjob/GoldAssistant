@@ -890,6 +890,18 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
+        
+        <activity android:name="com.parttime.mine.setting.ModifyCellphoneActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"/>
+
+        <activity android:name="com.parttime.mine.setting.ModifyPwdActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"/>
 
         <!-- 发布兼职 -->
         <activity
