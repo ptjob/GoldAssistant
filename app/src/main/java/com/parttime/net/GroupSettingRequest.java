@@ -91,6 +91,11 @@ public class GroupSettingRequest extends BaseRequest {
 
     public static class UserVO{
 
+        public static int APPLY_OK = 1;
+        public static int APPLY_UNLOOK = 0;
+        public static int APPLY_LOOKED = 3;
+        public static int APPLY_REJECT = 2;
+
         public int userId;  //活动ID
         public String creditworthiness; //信誉值  对10取整
         public String picture; //头像
@@ -107,16 +112,16 @@ public class GroupSettingRequest extends BaseRequest {
 
     /**
      *  录取人员
-     * @param userIds List<String>
+     * @param userIds List<Integer>
      * @param groupId String
      * @param queue RequestQueue
      * @param callback DefaultCallback
      */
-    public void approve(List<String> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback){
+    public void approve(List<Integer> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback){
         StringBuilder stringBuilder = new StringBuilder();
         int size = userIds.size();
         for(int i= 0 ; i < size; i ++){
-            String userId = userIds.get(i);
+            int userId = userIds.get(i);
             if(i < size - 1){
                 stringBuilder.append(userId).append(",");
             }else{
@@ -124,7 +129,7 @@ public class GroupSettingRequest extends BaseRequest {
             }
         }
         Map<String, String> map = new HashMap<>();
-        map.put("user_ids", stringBuilder.toString());
+        map.put("user_id", stringBuilder.toString());
         map.put("group_id", groupId);
 
         request(Url.COMPANY_APPROVEACTIVITY,map, queue, new Callback() {
@@ -140,18 +145,19 @@ public class GroupSettingRequest extends BaseRequest {
         }) ;
     }
 
+
     /**
-     * 拒绝人员
-     * @param userIds List<String>
+     * 取消录取
+     * @param userIds List<Integer>
      * @param groupId String
      * @param queue RequestQueue
      * @param callback DefaultCallback
      */
-    public void reject(List<String> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback){
+    public void cancelResume(List<Integer> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback){
         StringBuilder stringBuilder = new StringBuilder();
         int size = userIds.size();
         for(int i= 0 ; i < size; i ++){
-            String userId = userIds.get(i);
+            int userId = userIds.get(i);
             if(i < size - 1){
                 stringBuilder.append(userId).append(",");
             }else{
@@ -159,7 +165,43 @@ public class GroupSettingRequest extends BaseRequest {
             }
         }
         Map<String, String> map = new HashMap<>();
-        map.put("user_ids", stringBuilder.toString());
+        map.put("user_id", stringBuilder.toString());
+        map.put("group_id", groupId);
+
+        request(Url.COMPANY_CANCELAPPROVEACTIVITY,map, queue, new Callback() {
+            @Override
+            public void success(Object obj) {
+                callback.success(obj);
+            }
+
+            @Override
+            public void failed(Object obj) {
+                callback.failed(obj);
+            }
+        }) ;
+    }
+
+
+    /**
+     * 拒绝人员
+     * @param userIds List<Integer>
+     * @param groupId String
+     * @param queue RequestQueue
+     * @param callback DefaultCallback
+     */
+    public void reject(List<Integer> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback){
+        StringBuilder stringBuilder = new StringBuilder();
+        int size = userIds.size();
+        for(int i= 0 ; i < size; i ++){
+            int userId = userIds.get(i);
+            if(i < size - 1){
+                stringBuilder.append(userId).append(",");
+            }else{
+                stringBuilder.append(userId);
+            }
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", stringBuilder.toString());
         map.put("group_id", groupId);
 
         request(Url.COMPANY_REJECTACTIVITY,map, queue, new Callback() {
