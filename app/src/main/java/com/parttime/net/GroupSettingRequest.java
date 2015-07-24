@@ -63,6 +63,8 @@ public class GroupSettingRequest extends BaseRequest {
                         userVO.certification = jsonObject.getInt("certification");
                         if(userVO.apply != UserVO.APPLY_REJECT) {
                             userVOs.add(userVO);
+                        }else{
+                            appliantResult.unApprovedCount --;
                         }
                     }
                     appliantResult.userList = userVOs;
