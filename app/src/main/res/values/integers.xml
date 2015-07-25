@@ -4,4 +4,6 @@
     <integer name="work_require_min_length">10</integer>
     <integer name="work_address_max_length">20</integer>
     <integer name="work_address_min_length">4</integer>
+    <integer name="measurements_min_value">60</integer>
+    <integer name="measurements_max_value">120</integer>
 </resources>

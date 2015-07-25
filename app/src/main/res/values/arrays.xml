@@ -10,6 +10,10 @@
     <string-array name="salary_unit">
         <item>日薪</item>
         <item>时薪</item>
+        <item>月薪</item>
+        <item>按次</item>
+        <item>按单</item>
+        <item>面议</item>
     </string-array>
 
     <string-array name="work_types">
@@ -28,5 +32,23 @@
         <item>充场</item>
         <item>演艺</item>
         <item>其他</item>
+    </string-array>
+    
+    <string-array name="height">
+        <item>140</item>
+        <item>145</item>
+        <item>150</item>
+        <item>155</item>
+        <item>160</item>
+        <item>165</item>
+        <item>170</item>
+        <item>175</item>
+        <item>180</item>
+        <item>185</item>
+        <item>190</item>
+        <item>195</item>
+        <item>200</item>
+        <item>205</item>
+        <item>210</item>
     </string-array>
 </resources>

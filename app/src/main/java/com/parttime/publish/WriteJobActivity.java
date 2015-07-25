@@ -16,16 +16,23 @@ import android.widget.TextView;
 
 import com.parttime.common.activity.ChooseListActivity;
 import com.parttime.common.head.ActivityHead;
-import com.parttime.net.BaseRequest;
-import com.parttime.net.Callback;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.PublishRequest;
 import com.parttime.pojo.PartJob;
 import com.parttime.pojo.SalaryUnit;
+import com.parttime.utils.ActionUtils;
+import com.parttime.utils.ApplicationUtils;
 import com.parttime.utils.CheckUtils;
 import com.parttime.utils.FormatUtils;
 import com.parttime.utils.IntentManager;
+import com.parttime.utils.TimeUtils;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.BaseActivity;
 import com.quark.ui.widget.ActionSheet;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * 发布兼职页
@@ -42,7 +49,7 @@ public class WriteJobActivity extends BaseActivity implements
     private TextView mTxtMoreRequire;
     private TextView mTxtBeginTime, mTxtEndTime, mTxtPayType, mTxtWorkArea;
     private TextView mTxtSalaryUnit, mTxtLanguage, mTxtHeight, mTxtMeasurements;
-    private TextView mTxtWorkRequireTip;
+    private TextView mTxtWorkRequireTip, mTxtSalaryUnitTip;
     private EditText mEditJobTitle, mEditWorkAddress, mEditSalary;
     private EditText mEditHeadSum, mEditMaleNum, mEditFemaleNum;
     private EditText mEditWorkRequire;
@@ -62,6 +69,7 @@ public class WriteJobActivity extends BaseActivity implements
         initControls();
         bindListener();
         bindData();
+        refreshSalaryControls();
     }
 
     private void bindData() {
@@ -154,6 +162,7 @@ public class WriteJobActivity extends BaseActivity implements
         mTxtHeight = (TextView) findViewById(R.id.txt_height);
         mTxtMeasurements = (TextView) findViewById(R.id.txt_measurements);
         mTxtWorkRequireTip = (TextView) findViewById(R.id.edittxt_work_require_tip);
+        mTxtSalaryUnitTip = (TextView) findViewById(R.id.txt_salary_unit_tip);
 
         mEditJobTitle = (EditText) findViewById(R.id.edittxt_job_title);
         mEditWorkAddress = (EditText) findViewById(R.id.edittxt_work_address);
@@ -183,12 +192,32 @@ public class WriteJobActivity extends BaseActivity implements
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.txt_begin_time:
-                ActionSheet.showSheetTime4(this, this, this,
-                        mTxtBeginTime);
+                String beginTime = mTxtBeginTime.getText().toString();
+                Calendar calendarBeginTime = Calendar.getInstance();
+                if (!CheckUtils.isEmpty(beginTime)) {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TimeUtils.DATE_FORMAT_YMD);
+                    try {
+                        calendarBeginTime.setTime(simpleDateFormat.parse(beginTime));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                ActionUtils.selectDate(this, mTxtBeginTime, calendarBeginTime, getString(R.string.publish_job_label_begin_time));
                 break;
             case R.id.txt_end_time:
-                ActionSheet.showSheetTime4(this, this, this,
-                        mTxtEndTime);
+                String endTime = mTxtEndTime.getText().toString();
+                Calendar calendarEndTime = Calendar.getInstance();
+                calendarEndTime.add(Calendar.DATE, 1);
+
+                if (!CheckUtils.isEmpty(endTime)) {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TimeUtils.DATE_FORMAT_YMD);
+                    try {
+                        calendarEndTime.setTime(simpleDateFormat.parse(endTime));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                ActionUtils.selectDate(this, mTxtEndTime, calendarEndTime, getString(R.string.publish_job_label_end_time));
                 break;
             case R.id.txt_pay_type:
                 mTxtSelectTemp = mTxtPayType;
@@ -216,8 +245,14 @@ public class WriteJobActivity extends BaseActivity implements
                         mTxtLanguage);
                 break;
             case R.id.txt_height:
+                mTxtSelectTemp = mTxtHeight;
+                String[] heightArray = getResources().getStringArray(R.array.height);
+                IntentManager.openChoooseListActivity(WriteJobActivity.this,
+                        getString(R.string.publish_job_label_height),
+                        heightArray, REQUEST_TXT_SELECT);
                 break;
             case R.id.txt_measurements:
+                ActionUtils.selectMeasurements(this, mTxtMeasurements);
                 break;
             default:
                 break;
@@ -238,12 +273,52 @@ public class WriteJobActivity extends BaseActivity implements
                         String result = data.getStringExtra(ChooseListActivity.EXTRA_RESULT);
                         if (mTxtSelectTemp != null) {
                             mTxtSelectTemp.setText(result);
+                            if (mTxtSelectTemp == mTxtSalaryUnit) {
+                                refreshSalaryControls();
+                            }
                         }
                     }
                     break;
                 default:
                     break;
             }
+        }
+    }
+
+    /**
+     * 刷新薪酬单位关系
+     */
+    private void refreshSalaryControls() {
+        SalaryUnit salaryUnit = SalaryUnit.parse(mTxtSalaryUnit.getText().toString());
+        if (salaryUnit == SalaryUnit.FACE_TO_FACE) {
+            mEditSalary.setText(R.string.publish_job_salary_unit_face_to_face);
+            mEditSalary.setEnabled(false);
+        } else {
+            if (mEditSalary.getText().toString().equals(getString(R.string.publish_job_salary_unit_face_to_face))) {
+                mEditSalary.setText("");
+            }
+            mEditSalary.setEnabled(true);
+        }
+
+        switch (salaryUnit) {
+            case DAY:
+                mTxtSalaryUnitTip.setText(R.string.publish_job_salary_unit_day);
+                break;
+            case HOUR:
+                mTxtSalaryUnitTip.setText(R.string.publish_job_salary_unit_hour);
+                break;
+            case MONTH:
+                mTxtSalaryUnitTip.setText(R.string.publish_job_salary_unit_month);
+                break;
+            case TIMES:
+                mTxtSalaryUnitTip.setText(R.string.publish_job_salary_unit_times);
+                break;
+            case CASES:
+                mTxtSalaryUnitTip.setText(R.string.publish_job_salary_unit_cases);
+                break;
+            case FACE_TO_FACE:
+                mTxtSalaryUnitTip.setText("");
+                break;
         }
     }
 
@@ -304,11 +379,31 @@ public class WriteJobActivity extends BaseActivity implements
             return false;
         }
 
+        // 判断开始时间是否早于今天
+        try {
+            if (TimeUtils.beforeToday(beginTime, TimeUtils.DATE_FORMAT_YMD)) {
+                showToast(R.string.publish_job_begin_time_warn);
+                return false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         String endTime;
         endTime = verifyStr = mTxtEndTime.getText().toString();
         if (CheckUtils.isEmpty(verifyStr)) {
-            showToast(getString(R.string.publish_job_form_uninput_warn_format, getString(R.string.publish_job_label_begin_time)));
+            showToast(getString(R.string.publish_job_form_uninput_warn_format, getString(R.string.publish_job_label_end_time)));
             return false;
+        }
+
+        // 判断结束时间是否早于开始时间
+        try {
+            if (TimeUtils.before(endTime, beginTime, TimeUtils.DATE_FORMAT_YMD)) {
+                showToast(R.string.publish_job_end_time_warn);
+                return false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         verifyStr = mTxtPayType.getText().toString();
@@ -335,11 +430,13 @@ public class WriteJobActivity extends BaseActivity implements
             showToast(getString(R.string.publish_job_form_uninput_warn_format, getString(R.string.publish_job_label_salary)));
             return false;
         } else {
-            try {
-                Integer.parseInt(verifyStr);
-            } catch (NumberFormatException e) {
-                showToast(getString(R.string.publish_job_form_salary_format_error));
-                return false;
+            if (SalaryUnit.parse(mTxtSalaryUnit.getText().toString()) != SalaryUnit.FACE_TO_FACE) {
+                try {
+                    Integer.parseInt(verifyStr);
+                } catch (NumberFormatException e) {
+                    showToast(getString(R.string.publish_job_form_salary_format_error));
+                    return false;
+                }
             }
         }
 
@@ -360,20 +457,49 @@ public class WriteJobActivity extends BaseActivity implements
     }
 
     private void publish() {
-       
+        PartJob partJob = buildPartJob();
+
+        showWait(true);
+        new PublishRequest().publish(partJob, queue, new DefaultCallback() {
+            @Override
+            public void success(Object obj) {
+                super.success(obj);
+                showWait(false);
+                showToast(R.string.publish_job_success);
+                IntentManager.goToMainTabActivity(WriteJobActivity.this);
+            }
+
+            @Override
+            public void failed(Object obj) {
+                super.failed(obj);
+                showWait(false);
+                showToast(R.string.publish_job_fail);
+            }
+        });
     }
 
     private void preview() {
+        PartJob partJob = buildPartJob();
+
+        IntentManager.openJobDetailActivity(this, partJob);
+    }
+
+    private PartJob buildPartJob() {
         PartJob partJob = new PartJob();
+        partJob.companyId = ApplicationUtils.getLoginId();
+        partJob.companyName = ApplicationUtils.getLoginName();
         partJob.type = type;
         partJob.title = FormatUtils.formatStr(mEditJobTitle.getText().toString());
         partJob.beginTime = FormatUtils.formatStr(mTxtBeginTime.getText().toString());
         partJob.endTime = FormatUtils.formatStr(mTxtEndTime.getText().toString());
         partJob.payType = FormatUtils.formatStr(mTxtPayType.getText().toString());
+        partJob.city = ApplicationUtils.getCity();
         partJob.area = FormatUtils.formatStr(mTxtWorkArea.getText().toString());
         partJob.address = FormatUtils.formatStr(mEditWorkAddress.getText().toString());
-        partJob.salary = FormatUtils.parseToInt(mEditSalary.getText().toString());
         partJob.salaryUnit = SalaryUnit.parse(FormatUtils.formatStr(mTxtSalaryUnit.getText().toString()));
+        if (partJob.salaryUnit != SalaryUnit.FACE_TO_FACE) {
+            partJob.salary = FormatUtils.parseToInt(mEditSalary.getText().toString());
+        }
         partJob.apartSex = mRadioSexLimited.isChecked();
         if (partJob.apartSex) {
             String maleNumStr = mEditMaleNum.getText().toString();
@@ -389,6 +515,21 @@ public class WriteJobActivity extends BaseActivity implements
         partJob.workRequire =  FormatUtils.formatStr(mEditWorkRequire.getText().toString());
         partJob.isShowTel = mRadioShowTel.isChecked();
 
+        String heightTxt = mTxtHeight.getText().toString();
+        if (!CheckUtils.isEmpty(heightTxt)) {
+            // 设置了身高
+            partJob.height = Integer.valueOf(heightTxt);
+        }
+
+        String measurementsTxt = mTxtMeasurements.getText().toString();
+        if (!CheckUtils.isEmpty(measurementsTxt)) {
+            // 设置了三围
+            String[] measurementsArray = measurementsTxt.split("、");
+            partJob.bust = Integer.valueOf(measurementsArray[0].substring(2));
+            partJob.beltline = Integer.valueOf(measurementsArray[1].substring(2));
+            partJob.hipline = Integer.valueOf(measurementsArray[2].substring(2));
+        }
+
         if (mRadioNeedHealthProve.isChecked() || mRadioUnNeedHealthProve.isChecked()) {
             // 选择了是否要健康证
             partJob.healthProve = mRadioNeedHealthProve.isChecked();
@@ -399,7 +540,6 @@ public class WriteJobActivity extends BaseActivity implements
             // 设置了擅长的语言
             partJob.language = language;
         }
-
-        IntentManager.openJobDetailActivity(this, partJob);
+        return partJob;
     }
 }

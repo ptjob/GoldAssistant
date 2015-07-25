@@ -30,7 +30,7 @@
                 style="@style/FormInput"
                 android:layout_height="match_parent"
                 android:hint="@string/uninput"
-                android:text="测试兼职标题"/>
+                android:text="测试兼职标题" />
 
             <ImageView style="@style/PublicLineH" />
 
@@ -60,7 +60,7 @@
                 android:id="@+id/txt_end_time"
                 style="@style/FormSelect"
                 android:hint="@string/unselect"
-                android:text="2015-08-07"/>
+                android:text="2015-08-07" />
 
             <ImageView style="@style/PublicLineH" />
 
@@ -75,7 +75,7 @@
                 android:id="@+id/txt_pay_type"
                 style="@style/FormSelect"
                 android:hint="@string/unselect"
-                android:text="日结"/>
+                android:text="日结" />
 
             <ImageView style="@style/PublicLineH" />
 
@@ -90,7 +90,7 @@
                 android:id="@+id/txt_work_area"
                 style="@style/FormSelect"
                 android:hint="@string/unselect"
-                android:text="南山区"/>
+                android:text="南山区" />
 
             <ImageView style="@style/PublicLineH" />
 
@@ -104,9 +104,9 @@
             <EditText
                 android:id="@+id/edittxt_work_address"
                 style="@style/FormInput"
-                android:maxLength="@integer/work_address_max_length"
                 android:hint="@string/publish_job_hint_work_address"
-                android:text="南山区科技园高新中二道软件园二期12栋501"/>
+                android:maxLength="@integer/work_address_max_length"
+                android:text="南山区科技园高新中二道软件园二期12栋501" />
 
             <ImageView style="@style/PublicLineH" />
 
@@ -122,14 +122,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/edittxt_salary"
-                    style="@style/FormInput"
+                <FrameLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:hint="@string/uninput"
-                    android:inputType="number"
-                    android:text="200"/>
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/edittxt_salary"
+                        style="@style/FormInput"
+                        android:layout_height="match_parent"
+                        android:hint="@string/uninput"
+                        android:inputType="number"
+                        android:text="200" />
+
+                    <TextView
+                        android:id="@+id/txt_salary_unit_tip"
+                        style="@style/FormLabel.Unit" />
+                </FrameLayout>
+
 
                 <ImageView style="@style/PublicLineV" />
 
@@ -138,7 +148,7 @@
                     style="@style/FormSelect"
                     android:layout_weight="1"
                     android:hint="@string/publish_job_hint_salary_unit"
-                    android:text="日薪"/>
+                    android:text="日薪" />
 
             </LinearLayout>
 
@@ -198,7 +208,7 @@
                     android:layout_weight="1"
                     android:hint="@string/canblank"
                     android:inputType="number"
-                    android:text="12"/>
+                    android:text="12" />
 
                 <ImageView style="@style/PublicLineH" />
             </LinearLayout>
@@ -281,7 +291,7 @@
 技能要求
 能够熟练使用Microsoft Office办公软件
 熟悉计算机、手机的基本结构，并能够自主维护
-具备市场营销、人力资源、统计学等方面的知识"/>
+具备市场营销、人力资源、统计学等方面的知识" />
 
                 <TextView
                     android:id="@+id/edittxt_work_require_tip"
@@ -394,10 +404,21 @@
 
                 <ImageView style="@style/PublicLineH" />
 
-                <TextView
-                    android:id="@+id/txt_height"
-                    style="@style/FormSelect"
-                    android:hint="@string/unselect" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txt_height"
+                        style="@style/FormSelect"
+                        android:layout_gravity="center|left"
+                        android:hint="@string/unselect" />
+
+                    <TextView
+                        style="@style/FormLabel.Unit"
+                        android:text="以上" />
+
+                </FrameLayout>
 
                 <ImageView style="@style/PublicLineH" />
 
@@ -421,8 +442,8 @@
 
             <Button
                 android:id="@+id/btn_publish"
-                android:text="@string/publish"
-                style="@style/FormBlueButton" />
+                style="@style/FormBlueButton"
+                android:text="@string/publish" />
 
             <View style="@style/FormDivider" />
 

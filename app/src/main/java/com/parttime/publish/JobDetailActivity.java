@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.parttime.common.head.ActivityHead;
 import com.parttime.pojo.PartJob;
+import com.parttime.pojo.SalaryUnit;
 import com.parttime.utils.CheckUtils;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.BaseActivity;
@@ -60,7 +61,30 @@ public class JobDetailActivity extends BaseActivity {
 
         mTxtType.setText(partJob.type);
         mTxtTitle.setText(partJob.title);
-        mTxtSalary.setText("" + partJob.salary);
+        if (partJob.salaryUnit == SalaryUnit.FACE_TO_FACE) {
+            mTxtSalary.setText(R.string.publish_job_salary_unit_face_to_face);
+        } else {
+            String salaryUnit = "";
+            switch (partJob.salaryUnit) {
+                case DAY:
+                    salaryUnit = getString(R.string.publish_job_salary_unit_day);
+                    break;
+                case HOUR:
+                    salaryUnit = getString(R.string.publish_job_salary_unit_hour);
+                    break;
+                case MONTH:
+                    salaryUnit = getString(R.string.publish_job_salary_unit_month);
+                    break;
+                case TIMES:
+                    salaryUnit = getString(R.string.publish_job_salary_unit_times);
+                    break;
+                case CASES:
+                    salaryUnit = getString(R.string.publish_job_salary_unit_cases);
+                    break;
+            }
+            mTxtSalary.setText(partJob.salary + " " + salaryUnit);
+        }
+
         mTxtCompany.setText(partJob.companyName);
         mTxtWorkArea.setText(partJob.area);
         mTxtWorkTime.setText(getString(R.string.job_detail_work_time_format, partJob.beginTime, partJob.endTime));

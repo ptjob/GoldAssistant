@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffffff"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_line_0.5"
+        android:background="#d4d4d4" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/time_picker_title_height"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textColor="@color/time_picker_tile_text_color"
+        android:text="sdgsdgsdg"
+        android:textSize="16dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_line_0.5"
+        android:background="#d4d4d4" />
+
+    <LinearLayout
+        android:id="@+id/ll_wheel_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/time_picker_top_item_height"
+        android:background="@color/time_picker_top_item_background_color">
+
+        <TextView
+            android:id="@+id/txt_cancel"
+            android:layout_width="@dimen/time_picker_top_item_touchable_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="@color/time_picker_btn_text"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/txt_ok"
+            android:layout_width="@dimen/time_picker_top_item_touchable_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="@string/ok"
+            android:textColor="@color/time_picker_btn_text"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+
+</LinearLayout>

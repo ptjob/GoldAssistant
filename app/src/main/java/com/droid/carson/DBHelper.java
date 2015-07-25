@@ -31,8 +31,10 @@ public class DBHelper extends SQLiteOpenHelper {
      * android.os.Environment.getExternalStorageDirectory().getAbsolutePath() +
      * "/arthurcn/drivertest/packfiles/";
      */
-    private static String DB_NAME = "meituan_cities.db";
-    private static String ASSETS_NAME = "meituan_cities.db";
+    // private static String DB_NAME = "meituan_cities.db";
+    private static String DB_NAME = "qm_cities.db";
+//    private static String ASSETS_NAME = "meituan_cities.db";
+    private static String ASSETS_NAME = "qm_cities.db";
     private SQLiteDatabase myDataBase = null;
     private final Context myContext;
 

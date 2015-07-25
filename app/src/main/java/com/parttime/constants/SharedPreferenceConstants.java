@@ -11,4 +11,5 @@ public class SharedPreferenceConstants {
 
     public static final String USER_TYPE = "user_type";
     public static final String COMPANY_ID = "userId";
+    public static final String COMPANY_NAME = "IM_NIKENAME";
 }

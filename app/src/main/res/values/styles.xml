@@ -664,6 +664,14 @@
         <item name="android:textColor">@color/black_1</item>
     </style>
 
+    <style name="FormLabel.Unit">
+        <item name="android:layout_gravity">center|left</item>
+        <item name="android:layout_marginLeft">55dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/black_1</item>
+        <item name="android:textSize">@dimen/form_text_size_0</item>
+    </style>
+
     <!-- end 表单 -->
 
 </resources>

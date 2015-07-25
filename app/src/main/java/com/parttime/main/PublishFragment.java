@@ -23,6 +23,7 @@ import com.carson.constant.ConstantForSaveList;
 import com.droid.carson.Activity01;
 import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.publish.JobTypeActivity;
+import com.parttime.utils.ApplicationUtils;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -40,7 +41,7 @@ public class PublishFragment extends Fragment implements View.OnClickListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public static final String DEF_CITY = "深圳";
+
     public static final String DEF_LOCATION_FAIL = "定位失败";
     public static final int REQUEST_CODE_LOCATION = 100;
 
@@ -128,8 +129,7 @@ public class PublishFragment extends Fragment implements View.OnClickListener {
 
     private void bindCity(View view) {
         // 当前城市
-        city = SharePreferenceUtil.getInstance(getActivity()).loadStringSharedPreference(SharedPreferenceConstants.CITY, DEF_CITY);
-        mTxtCity.setText(city);
+        mTxtCity.setText(ApplicationUtils.getCity());
     }
 
 
@@ -175,8 +175,7 @@ public class PublishFragment extends Fragment implements View.OnClickListener {
                 if ((city != null) && (!city.equals(""))) {
                     mTxtCity.setText(city);
                     // 跟原来保存的城市对比
-                    String old_city = SharePreferenceUtil.getInstance(getActivity()).loadStringSharedPreference(
-                            SharedPreferenceConstants.CITY, DEF_CITY);
+                    String old_city = ApplicationUtils.getCity();
                     ConstantForSaveList.change_city = !old_city.equals(city);
                     SharePreferenceUtil.getInstance(getActivity()).saveSharedPreferences(SharedPreferenceConstants.CITY, city);
                     // requestChangeCity();

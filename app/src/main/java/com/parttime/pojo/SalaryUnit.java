@@ -1,5 +1,8 @@
 package com.parttime.pojo;
 
+import com.qingmu.jianzhidaren.R;
+import com.quark.jianzhidaren.ApplicationControl;
+
 /**
  * 薪酬类型
  * Created by wyw on 2015/7/20.
@@ -22,20 +25,27 @@ public enum SalaryUnit {
      */
     TIMES,
     /**
+     * 按单
+     */
+    CASES,
+    /**
      * 面议
      */
     FACE_TO_FACE;
 
     public static SalaryUnit parse(String name) {
-        if (name.equals("日薪")) {
+        String[] salaryUnitArray = ApplicationControl.getInstance().getResources().getStringArray(R.array.salary_unit);
+        if (name.equals(salaryUnitArray[0])) {
             return SalaryUnit.DAY;
-        } else if (name.equals("时薪")) {
+        } else if (name.equals(salaryUnitArray[1])) {
             return SalaryUnit.HOUR;
-        } else if (name.equals("月薪")) {
+        } else if (name.equals(salaryUnitArray[2])) {
             return SalaryUnit.MONTH;
-        } else if (name.equals("按次")) {
+        } else if (name.equals(salaryUnitArray[3])) {
             return SalaryUnit.TIMES;
-        } else if (name.equals("面议")) {
+        } else if (name.equals(salaryUnitArray[4])) {
+            return SalaryUnit.CASES;
+        } else if (name.equals(salaryUnitArray[5])) {
             return SalaryUnit.FACE_TO_FACE;
         } else {
             return null;

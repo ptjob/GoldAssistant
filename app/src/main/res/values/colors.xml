@@ -35,6 +35,17 @@
     <color name="form_bg">#ffffff</color>
     <color name="form_orange">#ee8c0e</color>
 
+    <!-- 滚轮选择器 -->
+    <!-- TIME PICKER -->
+    <color name="time_picker_title_rect_stroke_color">#d4d4d4</color>
+    <color name="time_picker_center_rect_stroke_color">#cdcdcd</color>
+    <color name="time_picker_top_item_text_color">#eb5939</color>
+    <color name="time_picker_tile_text_color">#999999</color>
+    <color name="time_picker_top_item_background_color">#ffffff</color>
+    <color name="time_picker_title_background_color">#f9f9f9</color>
+    <color name="time_picker_btn_text">#eb5939</color>
+    <!-- TIME PICKER -->
+
     <color name="liulanhenji">#F6F6F6</color>
     <color name="guanli_common_color">#1b1d29</color>
     <!-- 管理广场兼职活动状态 -->

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="error_request_net_fail">你的网络不够给力，获取数据失败！</string>
+    <string name="error_operation_fail">操作失败</string>
+
+
+</resources>
