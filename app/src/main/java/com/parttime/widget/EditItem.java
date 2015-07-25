@@ -24,8 +24,6 @@ public class EditItem extends FrameLayout{
     private Context context;
     private LayoutInflater inflater;
 
-    private View viewMainPart;
-    private TextView tvTitle;
     private TextView tvName;
     private EditText etValue;
 
@@ -84,8 +82,6 @@ public class EditItem extends FrameLayout{
         inflater = LayoutInflater.from(context);
 
         View root = inflater.inflate(R.layout.view_edit_item, this, false);
-        viewMainPart = root.findViewById(R.id.rl_main_part);
-        tvTitle = (TextView) root.findViewById(R.id.edit_item_title);
         tvName = (TextView) root.findViewById(R.id.edit_item_name);
         etValue = (EditText) root.findViewById(R.id.edit_item_value);
 
@@ -97,25 +93,9 @@ public class EditItem extends FrameLayout{
             assignXmlAttrs(attrs);
         }
 
-
-        RelativeLayout.LayoutParams rllp = (RelativeLayout.LayoutParams) viewMainPart.getLayoutParams();
-        if(rllp == null){
-            rllp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-            viewMainPart.setLayoutParams(rllp);
-        }
-//        rllp.topMargin = titleMargin;
-//
-//        if(titleShow){
-//            tvTitle.setVisibility(View.VISIBLE);
-//        }
-
         if(!nameShow){
             tvName.setVisibility(View.GONE);
         }
-
-//        if(title != null){
-//            tvTitle.setText(title);
-//        }
 
         if(name != null){
             tvName.setText(name);
@@ -141,6 +121,9 @@ public class EditItem extends FrameLayout{
             hint = typedArray.getString(R.styleable.EditItem_ei_hint);
             value = typedArray.getString(R.styleable.EditItem_ei_value);
             nameShow = typedArray.getBoolean(R.styleable.EditItem_ei_nameShow, nameShow);
+            topDividerShown = typedArray.getBoolean(R.styleable.EditItem_ei_topDividerShow, topDividerShown);
+            bottomDividerShown = typedArray.getBoolean(R.styleable.EditItem_ei_bottomDividerShow, bottomDividerShown);
+            dividerLayoutHeight = typedArray.getDimensionPixelSize(R.styleable.EditItem_ei_divider_stroke_width, dividerLayoutHeight);
 //            titleShow = typedArray.getBoolean(R.styleable.EditItem_ei_titleShow, titleShow);
 //            titleMargin = typedArray.getDimensionPixelSize(R.styleable.EditItem_ei_titleMargin, titleMargin);
         }

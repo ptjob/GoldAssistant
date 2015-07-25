@@ -98,8 +98,14 @@ public class Url {
 	public static final String FORGET_PWD = HOST + SUBJECT
 			+ "/CompanyCenter/forgetPassword";
 
-	public static final String MODIFY_TELEPHONE_NUM = HOST + SUBJECT
+	public static final String MESSAGE_MODIFY_TELEPHONE_NUM = HOST + SUBJECT
 			+ "/Message/companyTelCode";
+
+	public static final String COMPANY_MODIFY_TELEPHONE_NUM = HOST + SUBJECT
+			+ "/CompanyCenter/modifyTelephone";
+
+	public static final String COMPANY_UPDATE_INTRO = HOST + SUBJECT
+			+ "/CompanyCenter/updateResume";
 
 	// 商家验证资料
 	public static final String COMPANY_yanzheng = HOST + SUBJECT

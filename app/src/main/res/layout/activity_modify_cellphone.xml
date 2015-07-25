@@ -36,26 +36,44 @@
                 android:layout_marginTop="20dp"
                 app:ei_name="@string/new_phone_number"/>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <com.parttime.widget.EditItem
-                    android:id="@+id/ei_validation_code"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/form_item_height"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:layout_marginTop="20dp"
-                    app:ei_name="@string/validation_code"/>
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_marginTop="20dp"
+                >
+
                 <ImageView
                     android:id="@+id/iv_code_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/selector_vefify_state"
-                    android:layout_gravity="center_vertical"
+                    android:scaleType="center"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/common_margin"
                     android:visibility="gone"/>
-            </LinearLayout>
+                <com.parttime.widget.EditItem
+                    android:id="@+id/ei_validation_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/form_item_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/iv_code_ok"
+                    android:background="@color/white"
+                    app:ei_topDividerShow="false"
+                    app:ei_bottomDividerShow="false"
+                    app:ei_name="@string/validation_code"/>
+                <include layout="@layout/view_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_width"
+                    android:layout_above="@id/ei_validation_code"/>
+                <include layout="@layout/view_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_width"
+                    android:layout_below="@id/ei_validation_code"/>
+
+            </RelativeLayout>
             
             <RelativeLayout
                 android:layout_width="match_parent"

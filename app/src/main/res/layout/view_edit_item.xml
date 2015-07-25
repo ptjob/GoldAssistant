@@ -2,27 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+
     <TextView
-        android:id="@+id/edit_item_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/common_margin"
-        android:visibility="gone"/>
+        android:id="@+id/edit_item_name"
+        style="@style/EditItem_Common.Name" />
 
-    <RelativeLayout
-        android:id="@+id/rl_main_part"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/edit_item_title">
+    <EditText
+        android:id="@+id/edit_item_value"
+        style="@style/EditItem_Common.Value"
+        android:layout_toRightOf="@id/edit_item_name" />
 
-        <TextView
-            android:id="@+id/edit_item_name"
-            style="@style/EditItem_Common.Name" />
-
-        <EditText
-            android:id="@+id/edit_item_value"
-            style="@style/EditItem_Common.Value"
-            android:layout_toRightOf="@id/edit_item_name" />
-
-    </RelativeLayout>
 </RelativeLayout>

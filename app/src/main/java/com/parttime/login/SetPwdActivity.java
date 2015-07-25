@@ -16,6 +16,7 @@ import com.parttime.base.WithTitleActivity;
 import com.parttime.main.MainTabActivity;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
+import com.parttime.net.ErrorHandler;
 import com.parttime.widget.EditItem;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -102,5 +103,6 @@ public class SetPwdActivity extends WithTitleActivity implements Callback{
     @Override
     public void failed(Object obj) {
         showWait(false);
+        new ErrorHandler(SetPwdActivity.this, obj).showToast();
     }
 }

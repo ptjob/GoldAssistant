@@ -15,6 +15,7 @@ import com.parttime.base.LocalInitActivity;
 import com.parttime.base.WithTitleActivity;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
+import com.parttime.net.ErrorHandler;
 import com.parttime.widget.CountingEditText;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -81,6 +82,7 @@ public class SuggestionActivity extends LocalInitActivity implements Callback, T
     @Override
     public void failed(Object obj) {
         showWait(false);
+        new ErrorHandler(SuggestionActivity.this, obj).showToast();
     }
 
     @Override

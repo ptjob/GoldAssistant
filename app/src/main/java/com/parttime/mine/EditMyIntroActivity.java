@@ -29,10 +29,14 @@ import com.carson.constant.ConstantForSaveList;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.base.LocalInitActivity;
 import com.parttime.base.WithTitleActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.main.MainTabActivity;
+import com.parttime.net.BaseRequest;
+import com.parttime.net.Callback;
+import com.parttime.net.ErrorHandler;
 import com.parttime.type.AccountType;
 import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.widget.CountingEditText;
@@ -42,16 +46,19 @@ import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.image.UploadImg;
 import com.quark.utils.Util;
+import com.quark.volley.VolleySington;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cjz on 2015/7/12.
  */
-public class EditMyIntroActivity extends WithTitleActivity {
+public class EditMyIntroActivity extends LocalInitActivity {
     private static final String IMAGE_FILE_NAME = "faceImage.jpg";
 
     private static final int IMAGE_REQUEST_CODE = 0;
@@ -69,7 +76,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
     private ImageView ivHead;
 
     private Bitmap userPhotoBmp = null;
-    private String userId;
+//    private String userId;
     private int userType;
     private Bitmap head;
 //    private List<Object> workTypes;
@@ -118,9 +125,10 @@ public class EditMyIntroActivity extends WithTitleActivity {
     }
 
     protected void loadLocalData(){
-        userId = SharePreferenceUtil.getInstance(this).loadStringSharedPreference("userId");
+        super.loadLocalData();
+//        userId = SharePreferenceUtil.getInstance(this).loadStringSharedPreference("userId");
         userType = SharePreferenceUtil.getInstance(this).loadIntSharedPreference(SharedPreferenceConstants.USER_TYPE, -1);
-        head = ContactImageLoader.get(userId);
+        head = ContactImageLoader.get(getCompanyId());
     }
 
     protected void loadData(){
@@ -131,6 +139,47 @@ public class EditMyIntroActivity extends WithTitleActivity {
                 slWorkTypes.add(workTypes[i]);
             }
 
+        }
+    }
+
+    @OnClick(R.id.btn_finish)
+    public void submit(View v){
+        showWait(true);
+        Map<String, String> params = new HashMap<>() ;
+        params.put("company_id", getCompanyId());
+        params.put("introduction", cetIntro.getText().toString());
+        if(userType == AccountType.AGENT){
+            params.put("hire_type", makeWorkTypesString());
+        }
+        new BaseRequest().request(Url.COMPANY_UPDATE_INTRO, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
+            @Override
+            public void success(Object obj) {
+                showWait(false);
+                finish();
+            }
+
+            @Override
+            public void failed(Object obj) {
+                showWait(false);
+                new ErrorHandler(EditMyIntroActivity.this, obj).showToast();
+            }
+        });
+    }
+
+    private String makeWorkTypesString(){
+        List<String> selectedValues = slWorkTypes.getSelectedValues();
+        if(selectedValues != null){
+            StringBuilder sb = new StringBuilder();
+            int index = 0;
+            for(String s : selectedValues){
+                if(index++ > 0){
+                    sb.append("/");
+                }
+                sb.append(s);
+            }
+            return sb.toString();
+        }else {
+            return null;
         }
     }
 
@@ -400,7 +449,7 @@ public class EditMyIntroActivity extends WithTitleActivity {
                                 + MainTabActivity.token;
                         UploadImg.getImageToView(this, data,
                                 ivHead, uploadAvatarUrl, null, null,
-                                null, "avatar", null, "company_id", userId,
+                                null, "avatar", null, "company_id", getCompanyId(),
                                 null);
                     }
                     break;

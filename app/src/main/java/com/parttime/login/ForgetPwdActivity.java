@@ -16,6 +16,7 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.base.LocalInitActivity;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
+import com.parttime.net.ErrorHandler;
 import com.parttime.widget.EditItem;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -74,18 +75,20 @@ public class ForgetPwdActivity extends LocalInitActivity{
         if(!validatePhoneNum()){
             return;
         }
+        showWait(true);
         phoneNum = eiPhone.getValue().trim();
         Map<String, String> params = new HashMap<String, String>();
         params.put("telephone", phoneNum);
         new BaseRequest().request(Url.COMPANY_FORGET_PWD, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
             @Override
             public void success(Object obj) {
-                showToast("ok");
+                showWait(false);
             }
 
             @Override
             public void failed(Object obj) {
-
+                showWait(false);
+                new ErrorHandler(ForgetPwdActivity.this, obj).showToast();
             }
         });
     }
@@ -122,6 +125,7 @@ public class ForgetPwdActivity extends LocalInitActivity{
             @Override
             public void failed(Object obj) {
                 showWait(false);
+                new ErrorHandler(ForgetPwdActivity.this, obj).showToast();
             }
         });
     }

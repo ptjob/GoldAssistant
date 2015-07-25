@@ -13,6 +13,7 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.base.LocalInitActivity;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
+import com.parttime.net.ErrorHandler;
 import com.parttime.widget.EditItem;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -84,5 +85,6 @@ public class ModifyPwdActivity extends LocalInitActivity implements Callback{
     @Override
     public void failed(Object obj) {
         showWait(false);
+        new ErrorHandler(this, obj).showToast();
     }
 }

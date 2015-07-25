@@ -15,6 +15,7 @@ import com.easemob.EMCallBack;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.base.IntentManager;
 import com.parttime.base.WithTitleActivity;
 import com.parttime.login.FindPJLoginActivity;
 import com.parttime.main.MainTabActivity;
@@ -95,14 +96,7 @@ public class SettingActivity extends WithTitleActivity{
 								/*if (FindPJLoginActivity.instance != null) {
 									FindPJLoginActivity.instance.finish();
 								}*/
-
-                                Intent intent = new Intent(SettingActivity.this, FindPJLoginActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-
-                                if (MainTabActivity.instens != null) {
-                                    MainTabActivity.instens.finish();
-                                }
+                                IntentManager.intentToLoginActivity(SettingActivity.this);
                             }
 
                         });

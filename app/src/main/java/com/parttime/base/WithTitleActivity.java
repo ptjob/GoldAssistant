@@ -42,16 +42,6 @@ public abstract class WithTitleActivity extends BaseActivity {
 
     }
 
-    public CustomDialog createDialog(String title, final String msg, String positive, DialogInterface.OnClickListener positiveClick, String negative, DialogInterface.OnClickListener negativeClick) {
-
-        CustomDialog.Builder builder = new CustomDialog.Builder(this);
-        builder.setMessage(msg);
-        builder.setTitle(title);
-        builder.setPositiveButton(positive,
-                positiveClick);
-        builder.setNegativeButton(negative, negativeClick);
-        return builder.create();
-    }
 
     protected void center(int txtId){
         if(center == null){

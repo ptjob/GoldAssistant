@@ -141,6 +141,12 @@ public class SelectLayout extends CommonShowItemLayout implements View.OnClickLi
     }
 
     public List<String> getSelectedValues(){
-        return new ArrayList<String>(valueMap.values());
+        List<String> list = new ArrayList<>();
+        if(selectedIndexes != null){
+            for(Integer i : selectedIndexes){
+                list.add(valueMap.get(i));
+            }
+        }
+        return list;
     }
 }

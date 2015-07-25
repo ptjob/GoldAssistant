@@ -1,6 +1,7 @@
 package com.quark.jianzhidaren;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.ToastUtil;
 import com.quark.common.ValidateHelper;
+import com.quark.ui.widget.CustomDialog;
 import com.quark.utils.WaitDialog;
 import com.quark.volley.VolleySington;
 import com.umeng.analytics.MobclickAgent;
@@ -162,4 +164,14 @@ public abstract class BaseActivity extends Activity {
 	}
 
 
+	public CustomDialog createDialog(String title, final String msg, String positive, DialogInterface.OnClickListener positiveClick, String negative, DialogInterface.OnClickListener negativeClick) {
+
+		CustomDialog.Builder builder = new CustomDialog.Builder(this);
+		builder.setMessage(msg);
+		builder.setTitle(title);
+		builder.setPositiveButton(positive,
+				positiveClick);
+		builder.setNegativeButton(negative, negativeClick);
+		return builder.create();
+	}
 }
