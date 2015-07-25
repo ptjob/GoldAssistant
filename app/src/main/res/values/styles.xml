@@ -3,6 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/c_F5F5F5</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="appActivity" parent="android:style/Theme.Black.NoTitleBar.Fullscreen" type="text/css">

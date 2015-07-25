@@ -6,6 +6,8 @@ package com.parttime.constants;
  */
 public class ActivityExtraAndKeys {
 
+    public static final String USER_ID = "user_id";
+
     public static class ExtraLogin{
         public static String key = "";
     }
@@ -19,4 +21,7 @@ public class ActivityExtraAndKeys {
         public static String PENDING = "pending"; //待处理
         public static String GROUPID = "groupId";
     }
+
+
+
 }

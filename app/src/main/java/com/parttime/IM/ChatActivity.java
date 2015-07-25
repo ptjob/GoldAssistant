@@ -95,7 +95,7 @@ import com.easemob.util.PathUtil;
 import com.easemob.util.VoiceRecorder;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.parttime.IM.setting.GroupResumeSettingActivity;
+import com.parttime.IM.activitysetting.GroupResumeSettingActivity;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
@@ -114,9 +114,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
-import java.net.URL;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 

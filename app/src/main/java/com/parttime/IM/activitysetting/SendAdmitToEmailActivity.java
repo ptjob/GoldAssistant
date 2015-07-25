@@ -1,7 +1,5 @@
-package com.parttime.IM.setting;
+package com.parttime.IM.activitysetting;
 
-import android.content.DialogInterface;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -24,7 +22,6 @@ import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.utils.ValidateUtils;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
-import com.quark.utils.NetWorkCheck;
 import com.quark.volley.VolleySington;
 
 public class SendAdmitToEmailActivity extends BaseActivity implements View.OnClickListener {

@@ -475,59 +475,56 @@
             android:name="com.parttime.IM.ChatActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <!-- 群通知设置 -->
         <activity
             android:name="com.parttime.IM.EditGroupNoticeActivity"
             android:label="@string/title_activity_edit_group_notice"
-            android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:screenOrientation="portrait" >
         </activity>
         <!-- 群组设置 -->
         <activity
-            android:name="com.parttime.IM.setting.GroupResumeSettingActivity"
+            android:name="com.parttime.IM.activitysetting.GroupResumeSettingActivity"
             android:label="@string/title_activity_edit_group_notice"
-            android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.parttime.IM.setting.GroupSettingActivity"
+            android:name="com.parttime.IM.activitysetting.GroupSettingActivity"
             android:label="@string/title_activity_group_setting"
-            android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.parttime.IM.setting.GroupGagActivity"
+            android:name="com.parttime.IM.activitysetting.GroupGagActivity"
             android:label="@string/title_activity_group_gag"
-            android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.parttime.IM.setting.ResumeBatchManagementActivity"
+            android:name="com.parttime.IM.activitysetting.ResumeBatchManagementActivity"
             android:label="@string/title_activity_resume_batch_management"
-            android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.parttime.IM.setting.SendAdmitToEmailActivity"
+            android:name="com.parttime.IM.activitysetting.SendAdmitToEmailActivity"
             android:label="@string/title_activity_send_admit_to_email"
-            android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:screenOrientation="portrait">
+        </activity>
+        <!--普通群设置-->
+        <activity
+            android:name="com.parttime.addresslist.UserDetailActivity"
+            android:label="@string/title_activity_user_detail"
+            android:screenOrientation="portrait">
         </activity>
         <!-- 添加好友 -->
         <activity
             android:name="com.parttime.addresslist.AddContactActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:screenOrientation="portrait">
         </activity>
-        <!--官方账号-->
+        <!-- 官方账号 -->
         <activity
             android:name="com.parttime.addresslist.PublicCountListActivity"
             android:label="@string/title_activity_public_count_list"
-            android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide">
+            android:screenOrientation="portrait">
         </activity>
         <!-- 群组详情 -->
         <activity
@@ -890,30 +887,30 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        
-        <activity android:name="com.parttime.mine.setting.ModifyCellphoneActivity"
+        <activity
+            android:name="com.parttime.mine.setting.ModifyCellphoneActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-
-        <activity android:name="com.parttime.mine.setting.ModifyPwdActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.mine.setting.ModifyPwdActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-
-        <activity android:name="com.parttime.login.ForgetPwdActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.login.ForgetPwdActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="com.parttime.login.SetPwdActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.login.SetPwdActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
 
         <!-- 发布兼职 -->
         <activity

@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.parttime.IM.setting;
+package com.parttime.IM.activitysetting;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -37,6 +37,7 @@ import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
+import com.parttime.addresslist.UserDetailActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead2;
 import com.parttime.constants.ActivityExtraAndKeys;
@@ -91,8 +92,6 @@ public class GroupResumeSettingActivity extends BaseActivity implements
 
         initView();
 
-        bindView();
-
 		instance = this;
 
 	}
@@ -109,7 +108,6 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         listView.setAdapter(adapter);
     }
 
-
     private void bindView(){
 
         if(groupId != null) {
@@ -122,9 +120,8 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             tip.setText(getString(R.string.admitted_pending_tip,appliantResult.approvedCount,appliantResult.unApprovedCount));
             data.addAll(appliantResult.userList);
             adapter.notifyDataSetChanged();
-        }else{
-            getGroupApliantResult(groupId);
         }
+        getGroupApliantResult(groupId);
         // 保证每次进详情看到的都是最新的group
         //updateGroup();
     }
@@ -146,9 +143,13 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                 super.success(obj);
                 if (obj instanceof GroupSettingRequest.AppliantResult) {
                     GroupSettingRequest.AppliantResult result = (GroupSettingRequest.AppliantResult) obj;
-                    tip.setText(getString(R.string.admitted_pending_tip,result.approvedCount,result.unApprovedCount));
-                    data.addAll(result.userList);
-                    adapter.notifyDataSetChanged();
+                    tip.setText(getString(R.string.admitted_pending_tip, result.approvedCount, result.unApprovedCount));
+                    List<GroupSettingRequest.UserVO> userVOs = result.userList;
+                    if(result.userList != null) {
+                        data.clear();
+                        data.addAll(userVOs);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
         });
@@ -220,7 +221,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
     @Override
 	protected void onResume() {
 		super.onResume();
-
+        bindView();
 	}
 
 	@Override
@@ -475,7 +476,12 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                 @Override
                 public void onClick(View v) {
                     GroupSettingRequest.UserVO userVO = (GroupSettingRequest.UserVO)v.getTag();
-                    Toast.makeText(GroupResumeSettingActivity.this, "go to user detail", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(GroupResumeSettingActivity.this, UserDetailActivity.class);
+                    intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID , groupId);
+                    if(userVO != null) {
+                        intent.putExtra(ActivityExtraAndKeys.USER_ID, String.valueOf(userVO.userId));
+                    }
+                    startActivity(intent);
                 }
             });
         }
@@ -501,9 +507,9 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                                 new Thread(new Runnable() {
                                     public void run() {
                                         try {
-                                            EMGroupManager.getInstance()
+                                            /*EMGroupManager.getInstance()
                                                     .removeUserFromGroup(groupId,
-                                                            String.valueOf(userVO.userId));
+                                                            String.valueOf(userVO.userId));*/
                                             runOnUiThread(new Runnable() {
                                                 public void run() {
                                                     data.remove(userVO);

@@ -1,11 +1,11 @@
-package com.parttime.IM.setting;
+package com.parttime.IM.activitysetting;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMGroup;
@@ -15,15 +15,17 @@ import com.easemob.chatuidemo.db.MessageSetDao;
 import com.parttime.common.head.ActivityHead;
 import com.parttime.constants.ActionConstants;
 import com.parttime.constants.ActivityExtraAndKeys;
+import com.parttime.net.GroupSettingRequest;
+import com.parttime.pojo.BaseUser;
 import com.parttime.pojo.MessageSet;
 import com.parttime.widget.SetItem;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
-import com.quark.utils.NetWorkCheck;
 import com.quark.volley.VolleySington;
 
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 public class GroupSettingActivity extends BaseActivity implements View.OnClickListener {
 
@@ -113,6 +115,20 @@ public class GroupSettingActivity extends BaseActivity implements View.OnClickLi
                 disturbSet();
                 break;
             case R.id.gag:
+                ConstantForSaveList.userIdUserCache.clear();
+                Map<String,GroupSettingRequest.AppliantResult> groupAppliantCache = ConstantForSaveList.groupAppliantCache;
+                GroupSettingRequest.AppliantResult appliantResult = groupAppliantCache.get(groupId);
+                if(appliantResult != null && appliantResult.userList != null && appliantResult.userList.size() > 0){
+                    for(GroupSettingRequest.UserVO userVO : appliantResult.userList){
+                        if(userVO != null){
+                            BaseUser baseUser = new BaseUser();
+                            baseUser.userId = userVO.userId;
+                            baseUser.name = userVO.name;
+                            baseUser.picture = userVO.picture;
+                            ConstantForSaveList.userIdUserCache.put(String.valueOf(userVO.userId),baseUser);
+                        }
+                    }
+                }
                 Intent intent = new Intent(this, GroupGagActivity.class);
                 intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID, groupId);
                 startActivity(intent);
@@ -141,10 +157,6 @@ public class GroupSettingActivity extends BaseActivity implements View.OnClickLi
     }
 
     public void disturbSet(){
-        //先判断网络状态
-        if (! NetWorkCheck.isOpenNetwork(this)) {
-            Toast.makeText(getApplicationContext(), getString(R.string.no_net_tip), Toast.LENGTH_SHORT).show();
-        }
 
         if(isDisturb){
             List<String> pingbiListGroup = EMChatManager.getInstance()

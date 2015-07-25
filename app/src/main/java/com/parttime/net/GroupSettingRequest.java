@@ -2,6 +2,7 @@ package com.parttime.net;
 
 import com.android.volley.RequestQueue;
 import com.carson.constant.ConstantForSaveList;
+import com.parttime.pojo.BaseUser;
 import com.quark.common.Url;
 
 import org.json.JSONArray;
@@ -90,14 +91,14 @@ public class GroupSettingRequest extends BaseRequest {
         public int unApprovedCount; //未确认人数
     }
 
-    public static class UserVO{
+    public static class UserVO extends BaseUser{
 
         public static int APPLY_OK = 1;
         public static int APPLY_UNLOOK = 0;
         public static int APPLY_LOOKED = 3;
         public static int APPLY_REJECT = 2;
 
-        public int userId;  //活动ID
+        public int userId;  //环信ID
         public String creditworthiness; //信誉值  对10取整
         public String picture; //头像
         public String name;     //姓名
@@ -109,6 +110,23 @@ public class GroupSettingRequest extends BaseRequest {
         public int isCommented; //评价状态（0-未评价，1-已评价）
         public int earnestMoney;    //诚意金
         public int certification;   //认证状态  0:未认证 1:已提交认证 2:认证通过 3:认证不通过
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof UserVO)) return false;
+
+            UserVO userVO = (UserVO) o;
+
+            if (userId != userVO.userId) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            return userId;
+        }
     }
 
     /**

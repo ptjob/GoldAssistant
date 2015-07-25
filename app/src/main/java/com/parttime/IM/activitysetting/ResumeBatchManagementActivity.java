@@ -1,6 +1,7 @@
-package com.parttime.IM.setting;
+package com.parttime.IM.activitysetting;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -19,19 +20,23 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.carson.constant.ConstantForSaveList;
 import com.easemob.chatuidemo.activity.BaseActivity;
+import com.parttime.addresslist.UserDetailActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead2;
 import com.parttime.constants.ActivityExtraAndKeys;
+import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
+import com.parttime.net.ResponseBaseCommonError;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
-import com.quark.utils.NetWorkCheck;
+import com.quark.ui.widget.CustomDialog;
 import com.quark.volley.VolleySington;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 public class ResumeBatchManagementActivity extends BaseActivity implements View.OnClickListener {
 
@@ -123,15 +128,21 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
                 pass();
                 break;
             case R.id.refused:
-                refused();
+                showAlertDialog(null , getString(R.string.reject_resume_or_not_and_remove_from_group), R.string.ok, R.string.cancel);
                 break;
             case R.id.img_right2:
                 //全选
                 int size = data.size();
+                int checkNum = checkedMap.size() ;
+                if(size == checkNum) {
+                    return;
+                }
                 for(int i = 0 ; i < size ; i ++ ){
                     BatchUserVO batchUserVO = data.get(i);
+                    batchUserVO.checked = true;
                     checkedMap.put(i, batchUserVO);
                 }
+                adapter.notifyDataSetChanged();
                 break;
         }
     }
@@ -144,13 +155,72 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
             return ;
         }
 
-        Collection<BatchUserVO> userVOs = checkedMap.values();
+        final Collection<BatchUserVO> batchUserVOs = checkedMap.values();
+        ArrayList<Integer> userIds = new ArrayList<>();
+        for(BatchUserVO batchUserVO : batchUserVOs){
+            if(batchUserVO == null){
+                continue;
+            }
+            userIds.add(batchUserVO.userId);
+        }
 
+        showWait(true);
         //发送到服务器，调用通过接口
+        new GroupSettingRequest().approve(userIds, groupId, queue, new DefaultCallback(){
+            @Override
+            public void success(Object obj) {
+                //更新缓存
+                GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
+                if(appliantResult != null) {
+                    List<GroupSettingRequest.UserVO> userVOList = appliantResult.userList;
+                    if(userVOList != null){
+                        for(BatchUserVO batchUserVO : batchUserVOs){
+                            if(userVOList.contains(batchUserVO)){
+                                userVOList.remove(batchUserVO);
+                            }
+                        }
+                    }
+                    appliantResult.approvedCount = (appliantResult.approvedCount + batchUserVOs.size());
+                    appliantResult.unApprovedCount = (appliantResult.unApprovedCount - batchUserVOs.size());
+                }
+                //成功之后，刷新列表
+                data.removeAll(batchUserVOs);
+                checkedMap.clear();
+                adapter.notifyDataSetChanged();
+                showWait(false);
+            }
 
-        //成功之后，刷新列表
-        data.removeAll(userVOs);
-        adapter.notifyDataSetChanged();
+            @Override
+            public void failed(Object obj) {
+                if(obj instanceof ResponseBaseCommonError){
+                    Toast.makeText(ResumeBatchManagementActivity.this, ((ResponseBaseCommonError)obj).msg, Toast.LENGTH_SHORT).show();
+                }
+                showWait(false);
+            }
+        });
+
+
+    }
+
+    public void showAlertDialog(String title, String message,
+                                int positiveRes, int negativeRes) {
+
+        CustomDialog.Builder builder = new CustomDialog.Builder(ResumeBatchManagementActivity.this);
+        builder.setMessage(message);
+        builder.setTitle(title);
+        builder.setPositiveButton(positiveRes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                refused();
+            }
+        });
+
+        builder.setNegativeButton(negativeRes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 
     private void refused() {
@@ -161,12 +231,51 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
             return ;
         }
 
-        Collection<BatchUserVO> userVOs = checkedMap.values();
+        final Collection<BatchUserVO> batchUserVOs = checkedMap.values();
+        ArrayList<Integer> userIds = new ArrayList<>();
+        for(BatchUserVO batchUserVO : batchUserVOs){
+            if(batchUserVO == null){
+                continue;
+            }
+            userIds.add(batchUserVO.userId);
+        }
 
-        //发送到服务器,提出群组
+        showWait(true);
+        //发送到服务器,提出群组(服务端处理)
+        new GroupSettingRequest().reject(userIds, groupId, queue, new DefaultCallback(){
+            @Override
+            public void success(Object obj) {
+                //更新缓存
+                GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
+                if(appliantResult != null) {
+                    List<GroupSettingRequest.UserVO> userVOList = appliantResult.userList;
+                    if(userVOList != null){
+                        for(BatchUserVO batchUserVO : batchUserVOs){
+                            if(userVOList.contains(batchUserVO)){
+                                userVOList.remove(batchUserVO);
+                            }
+                        }
+                    }
+                    appliantResult.unApprovedCount = (appliantResult.unApprovedCount - batchUserVOs.size());
+                }
+                checkedMap.clear();
+                //成功之后，刷新列表
+                data.removeAll(batchUserVOs);
+                adapter.notifyDataSetChanged();
+                showWait(false);
+            }
+
+            @Override
+            public void failed(Object obj) {
+                if(obj instanceof ResponseBaseCommonError){
+                    Toast.makeText(ResumeBatchManagementActivity.this, ((ResponseBaseCommonError)obj).msg, Toast.LENGTH_SHORT).show();
+                }
+                showWait(false);
+            }
+        });
 
         //成功之后，刷新列表
-        data.removeAll(userVOs);
+        data.removeAll(batchUserVOs);
         adapter.notifyDataSetChanged();
     }
 
@@ -202,12 +311,14 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
                 holder.moneyAccountStatus = (TextView) view.findViewById(R.id.money_account_status);
                 holder.reputationValueStar = (LinearLayout) view.findViewById(R.id.reputation_value_star_container);
                 holder.checkBox = (CheckBox) view.findViewById(R.id.checkBox);
-                holder.checkBox.setOnClickListener(checkBoxClick);
 
+                view.setTag(holder);
             }else{
                 view = convertView;
                 holder = (ViewHolder)convertView.getTag();
             }
+
+            holder.checkBox.setOnClickListener(checkBoxClick);
 
             bindData(position, holder, view);
 
@@ -236,8 +347,8 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
 
             holder.name.setText(batchUserVO.name);
 
+            holder.head.setTag(batchUserVO);
             holder.checkBox.setTag(position);
-
             holder.checkBox.setVisibility(View.VISIBLE);
 
             //设置诚意金和认证
@@ -267,8 +378,24 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
             String creditworthiness = batchUserVO.creditworthiness;
             addStars(creditworthiness, holder.reputationValueStar);
 
+            if(checkedMap.get(position) != null){
+                holder.checkBox.setChecked(true);
+            }else{
+                holder.checkBox.setChecked(false);
+            }
 
-
+            holder.head.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BatchUserVO batchUserVO = (BatchUserVO)v.getTag();
+                    Intent intent = new Intent(ResumeBatchManagementActivity.this, UserDetailActivity.class);
+                    intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID , groupId);
+                    if(batchUserVO != null) {
+                        intent.putExtra(ActivityExtraAndKeys.USER_ID, String.valueOf(batchUserVO.userId));
+                    }
+                    startActivity(intent);
+                }
+            });
         }
     }
 
@@ -279,10 +406,13 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
             BatchUserVO batchUserVO = adapter.getItem(position);
             if(v instanceof  CheckBox){
                 CheckBox cb = (CheckBox)v;
-                if(cb.isChecked()){
+                //点击checkBox时，checkBox点击之后的状态
+                if(! cb.isChecked()){ //
                     checkedMap.remove(position);
+                    batchUserVO.checked = false;
                 }else{
                     checkedMap.put(position, batchUserVO);
+                    batchUserVO.checked = true;
                 }
             }
         }

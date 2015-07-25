@@ -1,10 +1,8 @@
-package com.parttime.IM.setting;
+package com.parttime.IM.activitysetting;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,11 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
 import com.easemob.exceptions.EaseMobException;
+import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead;
 import com.parttime.constants.ActivityExtraAndKeys;
+import com.parttime.pojo.BaseUser;
 import com.qingmu.jianzhidaren.R;
 import com.quark.utils.NetWorkCheck;
 import com.quark.volley.VolleySington;
@@ -27,6 +28,7 @@ import com.quark.volley.VolleySington;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class GroupGagActivity extends BaseActivity {
 
@@ -35,7 +37,7 @@ public class GroupGagActivity extends BaseActivity {
 
     private UngagAdapter adapter = new UngagAdapter();
 
-    private ArrayList<String> userIds = new ArrayList<>();
+    private ArrayList<AdapterVO> adapterVOs = new ArrayList<>();
 
     private String groupId;
 
@@ -72,7 +74,19 @@ public class GroupGagActivity extends BaseActivity {
                         Collections.sort(blockedList);
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                userIds.addAll(blockedList);
+                                Map<String, BaseUser> userIdPictureMap = ConstantForSaveList.userIdUserCache;
+                                for(String userId : blockedList) {
+                                    AdapterVO vo = new AdapterVO();
+                                    vo.userId = userId;
+                                    if(userIdPictureMap != null){
+                                        BaseUser baseUser = userIdPictureMap.get(userId);
+                                        if(baseUser != null) {
+                                            vo.picture = baseUser.picture;
+                                            vo.name = baseUser.name;
+                                        }
+                                    }
+                                    adapterVOs.add(vo);
+                                }
                                 adapter.notifyDataSetChanged();
                             }
                         });
@@ -92,16 +106,23 @@ public class GroupGagActivity extends BaseActivity {
     private void bindData() {
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //清除保存的UserId和picture
+        ConstantForSaveList.userIdUserCache.clear();
+    }
+
     class UngagAdapter extends BaseAdapter{
 
         @Override
         public int getCount() {
-            return userIds.size();
+            return adapterVOs.size();
         }
 
         @Override
-        public String getItem(int position) {
-            return userIds.get(position);
+        public AdapterVO getItem(int position) {
+            return adapterVOs.get(position);
         }
 
         @Override
@@ -121,6 +142,8 @@ public class GroupGagActivity extends BaseActivity {
                 holder.name = (TextView)view.findViewById(R.id.name);
                 holder.unGag = (Button)view.findViewById(R.id.ungag);
 
+                view.setTag(holder);
+
             }else{
                 view = convertView;
                 holder = (ViewHolder) view.getTag();
@@ -132,7 +155,18 @@ public class GroupGagActivity extends BaseActivity {
         }
 
         private void bindItemData(ViewHolder holder , int position) {
-            holder.name.setText(getItem(position));
+            AdapterVO itemVo = getItem(position);
+            //设置头像
+            String head = itemVo.picture;
+            if (! TextUtils.isEmpty(head)) {
+                // 默认加载本地图片
+                ContactImageLoader.loadNativePhoto(String.valueOf(itemVo.userId),
+                        head, holder.picture, queue);
+            } else {
+                holder.picture.setImageResource(R.drawable.default_avatar);
+            }
+
+            holder.name.setText(itemVo.name);
             holder.unGag.setTag(position);
             holder.unGag.setOnClickListener(new View.OnClickListener(){
 
@@ -143,20 +177,28 @@ public class GroupGagActivity extends BaseActivity {
                     }
                     try {
                         int position = (int)v.getTag();
-                        String tobeRemoveUser = getItem(position);
-                        // 移出黑民单
+                        AdapterVO itemVo = getItem(position);
+                        String tobeRemoveUser = itemVo.userId;
+                        // 移出禁言
                         EMGroupManager.getInstance().unblockUser(groupId, tobeRemoveUser);
-                        userIds.remove(tobeRemoveUser);
+                        adapterVOs.remove(itemVo);
+                        adapter.notifyDataSetChanged();
                     } catch (EaseMobException ignore) {
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(getApplicationContext(), "移出失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), R.string.action_failed, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 }
             });
         }
+    }
+
+    class AdapterVO{
+        String userId;
+        String name;
+        String picture;
     }
 
     class ViewHolder{
