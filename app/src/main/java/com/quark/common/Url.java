@@ -350,9 +350,9 @@ public class Url {
 	// 校验验证码是否正确
 	public static final String MESSAGE_VALIDATE = HOST + SUBJECT
 			+ "/Message/validate";
-	// 获取服务端好友列表
+	// 获取环信好友列表 3.0
 	public static final String FRIEND_LIST = HOST + SUBJECT
-			+ "/Activity/friendList";
+			+ "/Huanxin/friendList";
 	// 经纪人首页获取红点状态
 	public static final String BROKER_MAIN_PAGE = HOST + SUBJECT
 			+ "/AgentCenter/mainPage";

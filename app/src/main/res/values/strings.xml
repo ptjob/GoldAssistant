@@ -20,6 +20,7 @@
     <string name="pass">通过</string>
     <string name="refused">拒绝</string>
     <string name="no_net_tip">网络连接失败，请确认网络连接</string>
+    <string name="format_error">格式不正确</string>
     <string name="action_failed">操作失败</string>
 
     <!-- 主界面 -->
@@ -126,6 +127,7 @@
     <string name="cacel_resume_or_not">确认录用</string>
     <string name="cacel_resume_or_not_and_remove_from_group">确认取消录用，取消后该用户将被移除聊天群组</string>
     <string name="group_setting_send_email">发送已录取人员名单至您的邮箱</string>
+    <string name="send_approve_username_to_email">发送已录取人员名单</string>
     <string name="your_email">您的电子邮箱</string>
     <string name="enter_email">请在此输入您的邮箱地址</string>
     <string name="already_send_to_email">已发送您的邮箱，请查收</string>

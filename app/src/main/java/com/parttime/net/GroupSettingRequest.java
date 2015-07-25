@@ -222,14 +222,16 @@ public class GroupSettingRequest extends BaseRequest {
      * 发送录取人员到邮箱
      * @param email String
      * @param groupId String
+     * @param groupName String
      * @param queue RequestQueue
      * @param callback DefaultCallback
      */
-    public void sendAdmitUserToEmail(String email, String groupId,  RequestQueue queue , final DefaultCallback callback){
+    public void sendAdmitUserToEmail(String email, String groupId, String groupName, RequestQueue queue , final DefaultCallback callback){
 
         Map<String, String> map = new HashMap<>();
         map.put("email", email);
         map.put("group_id", groupId);
+        map.put("group_name", groupName);
 
         request(Url.COMPANY_GETGROUPEXCEL,map, queue, new Callback() {
             @Override

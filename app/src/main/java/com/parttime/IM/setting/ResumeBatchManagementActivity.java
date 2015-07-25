@@ -17,9 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.carson.constant.ConstantForSaveList;
 import com.easemob.chatuidemo.activity.BaseActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead2;
+import com.parttime.constants.ActivityExtraAndKeys;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
@@ -39,8 +41,10 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
 
     private BatchAdapter adapter = new BatchAdapter();
 
-    private ArrayList<GroupSettingRequest.UserVO> data = new ArrayList<>();
-    private HashMap<Integer,GroupSettingRequest.UserVO> checkedMap = new HashMap<>();
+    private ArrayList<BatchUserVO> data = new ArrayList<>();
+    private HashMap<Integer,BatchUserVO> checkedMap = new HashMap<>();
+
+    private String groupId;
 
     protected RequestQueue queue = VolleySington.getInstance().getRequestQueue();
     private SharePreferenceUtil sp;
@@ -72,6 +76,21 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
     }
 
     private void bindData() {
+        groupId = getIntent().getStringExtra(ActivityExtraAndKeys.GroupSetting.GROUPID);
+        GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
+        if(appliantResult != null){
+            for(GroupSettingRequest.UserVO userVO : appliantResult.userList){
+                if(userVO == null){
+                    continue;
+                }
+                if(userVO.apply == GroupSettingRequest.UserVO.APPLY_UNLOOK ||
+                        userVO.apply == GroupSettingRequest.UserVO.APPLY_LOOKED){
+                    BatchUserVO batchUserVO = new BatchUserVO(userVO);
+                    data.add(batchUserVO);
+                }
+            }
+            adapter.notifyDataSetChanged();
+        }
     }
 
 
@@ -110,18 +129,14 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
                 //全选
                 int size = data.size();
                 for(int i = 0 ; i < size ; i ++ ){
-                    GroupSettingRequest.UserVO userVO = data.get(i);
-                    checkedMap.put(i, userVO);
+                    BatchUserVO batchUserVO = data.get(i);
+                    checkedMap.put(i, batchUserVO);
                 }
                 break;
         }
     }
 
     private void pass() {
-        //检查网络
-        if (! NetWorkCheck.isOpenNetwork(this)) {
-            Toast.makeText(getApplicationContext(), getString(R.string.no_net_tip), Toast.LENGTH_SHORT).show();
-        }
 
         //检查选中数量
         if(checkedMap.size() == 0){
@@ -129,7 +144,7 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
             return ;
         }
 
-        Collection<GroupSettingRequest.UserVO> userVOs = checkedMap.values();
+        Collection<BatchUserVO> userVOs = checkedMap.values();
 
         //发送到服务器，调用通过接口
 
@@ -139,10 +154,6 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
     }
 
     private void refused() {
-        //检查网络
-        if (! NetWorkCheck.isOpenNetwork(this)) {
-            Toast.makeText(getApplicationContext(), getString(R.string.no_net_tip), Toast.LENGTH_SHORT).show();
-        }
 
         //检查选中数量
         if(checkedMap.size() == 0){
@@ -150,7 +161,7 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
             return ;
         }
 
-        Collection<GroupSettingRequest.UserVO> userVOs = checkedMap.values();
+        Collection<BatchUserVO> userVOs = checkedMap.values();
 
         //发送到服务器,提出群组
 
@@ -168,7 +179,7 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
         }
 
         @Override
-        public GroupSettingRequest.UserVO getItem(int position) {
+        public BatchUserVO getItem(int position) {
             return data.get(position);
         }
 
@@ -204,32 +215,59 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
         }
 
         private void bindData(int position, ViewHolder holder, View view) {
-            GroupSettingRequest.UserVO userVO = getItem(position);
-            if(userVO == null){
+            BatchUserVO batchUserVO = getItem(position);
+            if(batchUserVO == null){
                 view.setVisibility(View.GONE);
             }else{
                 view.setVisibility(View.VISIBLE);
             }
 
             //设置头像
-            String head = userVO.picture;
+            String head = batchUserVO.picture;
             if (! TextUtils.isEmpty(head)) {
                 // 默认加载本地图片
-                ContactImageLoader.loadNativePhoto(String.valueOf(userVO.userId),
+                ContactImageLoader.loadNativePhoto(String.valueOf(batchUserVO.userId),
                         head, holder.head, queue);
-                sp.loadStringSharedPreference(userVO.userId
-                        + "realname", userVO.name);
+                sp.loadStringSharedPreference(batchUserVO.userId
+                        + "realname", batchUserVO.name);
             } else {
                 holder.head.setImageResource(R.drawable.default_avatar);
             }
 
-            holder.name.setText(userVO.name);
+            holder.name.setText(batchUserVO.name);
 
             holder.checkBox.setTag(position);
-            //int moneyStatus = userVO.moneyStatus;
-            //int accountStatus = userVO.accountStatus;
 
-            String creditworthiness = userVO.creditworthiness;
+            holder.checkBox.setVisibility(View.VISIBLE);
+
+            //设置诚意金和认证
+            StringBuilder moneyAndCertification = new StringBuilder();
+            int moneyStatus = batchUserVO.earnestMoney;
+            int accountStatus = batchUserVO.certification;
+            if(moneyStatus == 0) {
+                moneyAndCertification.append(getString(R.string.no_money));
+            }else {
+                moneyAndCertification.append(getString(R.string.had_money));
+            }
+            moneyAndCertification.append("/");
+
+            if(accountStatus == 0){
+                moneyAndCertification.append(getString(R.string.no_certification));
+            }else if(accountStatus == 1){
+                moneyAndCertification.append(getString(R.string.submit_certification));
+            }else if(accountStatus == 2){
+                moneyAndCertification.append(getString(R.string.had_certification));
+            }else if(accountStatus == 3){
+                moneyAndCertification.append(getString(R.string.reject_certification));
+            }
+            //这里与管理界面不一样需要注意，设置诚意金认证
+            holder.resumeStatus.setText(moneyAndCertification.toString());
+
+            //设置信誉
+            String creditworthiness = batchUserVO.creditworthiness;
+            addStars(creditworthiness, holder.reputationValueStar);
+
+
 
         }
     }
@@ -238,13 +276,13 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
         @Override
         public void onClick(View v) {
             int position = (int)v.getTag();
-            GroupSettingRequest.UserVO userVO = adapter.getItem(position);
+            BatchUserVO batchUserVO = adapter.getItem(position);
             if(v instanceof  CheckBox){
                 CheckBox cb = (CheckBox)v;
                 if(cb.isChecked()){
                     checkedMap.remove(position);
                 }else{
-                    checkedMap.put(position, userVO);
+                    checkedMap.put(position, batchUserVO);
                 }
             }
         }
@@ -258,6 +296,48 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
         public LinearLayout reputationValueStar; //信誉值
         public CheckBox checkBox;
 
+    }
+
+
+    private class BatchUserVO extends GroupSettingRequest.UserVO {
+        boolean checked;
+
+        public BatchUserVO(GroupSettingRequest.UserVO userVO) {
+
+            BatchUserVO batchUserVO = this;
+            batchUserVO.userId = userVO.userId;
+            batchUserVO.apply = userVO.apply;
+            batchUserVO.creditworthiness = userVO.creditworthiness;
+            batchUserVO.picture = userVO.picture;
+            batchUserVO.name = userVO.name;
+            batchUserVO.sex = userVO.sex;
+            batchUserVO.age = userVO.age;
+            batchUserVO.telephone = userVO.telephone;
+            batchUserVO.ableComment = userVO.ableComment;
+            batchUserVO.isCommented = userVO.isCommented;
+            batchUserVO.earnestMoney = userVO.earnestMoney;
+            batchUserVO.certification = userVO.certification;
+        }
+    }
+
+    public void addStars(String creditworthiness,LinearLayout container){
+        int cre = Integer.valueOf(creditworthiness);
+        container.removeAllViews();
+        int num = cre / 10 ;
+        for(int i = 0 ; i < num; i ++){
+            container.addView(newStar());
+        }
+
+    }
+
+    private ImageView newStar(){
+        ImageView star = new ImageView(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        star.setLayoutParams(params);
+        star.setImageResource(R.drawable.ee_27);
+        return star;
     }
 
 }

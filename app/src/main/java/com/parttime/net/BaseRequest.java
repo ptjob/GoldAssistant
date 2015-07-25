@@ -1,5 +1,7 @@
 package com.parttime.net;
 
+import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -9,7 +11,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.google.gson.Gson;
+import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
+import com.quark.jianzhidaren.ApplicationControl;
+import com.quark.utils.NetWorkCheck;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +36,11 @@ public class BaseRequest {
      *                 failed 回调：obj 是 ResponseBaseCommonError or JSONException or VolleyError
      */
     public void request(String url, final Map<String,String> reqParams, RequestQueue queue , final Callback callback){
+        //检查网络状态
+        if (! NetWorkCheck.isOpenNetwork(ApplicationControl.getInstance())) {
+            Toast.makeText(ApplicationControl.getInstance(), ApplicationControl.getInstance().getString(R.string.no_net_tip), Toast.LENGTH_SHORT).show();
+            return ;
+        }
         StringRequest request = new StringRequest(Request.Method.POST,url
                 , new Response.Listener<String>() {
             @Override

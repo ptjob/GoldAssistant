@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.parttime.IM.setting.ResumeBatchManagementActivity">
+    tools:context="com.parttime.IM.setting.ResumeBatchManagementActivity"
+    android:background="@color/c_F5F5F5">
 
     <include layout="@layout/activity_common_head2" android:id="@+id/title"/>
 

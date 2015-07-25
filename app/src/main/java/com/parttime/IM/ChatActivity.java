@@ -112,7 +112,11 @@ import com.quark.volley.VolleySington;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -240,13 +244,14 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             String description = group.getDescription();
             if(! TextUtils.isEmpty(description)){
                 try {
+                    description = URLDecoder.decode(description,"UTF-8");
                     GroupDescription gd = new Gson().fromJson(description, GroupDescription.class);
                     if (gd != null && gd.type == GroupDescription.ACTIVITY_GROUP ||
                             gd.type == GroupDescription.ACTIVITY_CONSULTATION_GROUP) {
                         //获取报名列表
                         getGroupApliantResult(toChatUsername);
                     }
-                }catch(IllegalStateException | JsonSyntaxException ignore){
+                }catch(IllegalStateException | JsonSyntaxException |UnsupportedEncodingException ignore){
                     Log.e(TAG, "description format is error , description = " + description);
                 }
             }
