@@ -17,6 +17,7 @@ import com.parttime.base.WithTitleActivity;
 import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
+import com.parttime.net.ErrorHandler;
 import com.parttime.pojo.Fans;
 import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.widget.RankView;
@@ -57,6 +58,7 @@ public class MyFansActivity extends LocalInitActivity implements XListView.IXLis
     private Callback cbAdd = new Callback() {
         @Override
         public void success(Object obj) {
+            showWait(false);
             JSONObject json = (JSONObject) obj;
             try {
                 List<Fans> fs  = new ArrayList<Fans>();
@@ -85,7 +87,8 @@ public class MyFansActivity extends LocalInitActivity implements XListView.IXLis
 
         @Override
         public void failed(Object obj) {
-
+            showWait(false);
+            new ErrorHandler(MyFansActivity.this, obj).showToast();
         }
     };
 
@@ -119,7 +122,7 @@ public class MyFansActivity extends LocalInitActivity implements XListView.IXLis
 
         @Override
         public void failed(Object obj) {
-
+            lv.stopLoadMore();
         }
     };
 
@@ -160,7 +163,7 @@ public class MyFansActivity extends LocalInitActivity implements XListView.IXLis
 
     private void load(Callback cb){
         Map<String, String> params = new HashMap<String, String>();
-        params.put("company_id", cId);
+        params.put("company_id", getCompanyId());
         params.put("pn", pageIndex + "");
         params.put("page_size", PAGE_SIZE + "");
         new BaseRequest().request(Url.MY_FOLLOWERS_LIST, params, VolleySington.getInstance()
