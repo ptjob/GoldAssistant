@@ -2,6 +2,7 @@ package com.parttime.IM.activitysetting;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.android.volley.RequestQueue;
@@ -28,6 +29,8 @@ import java.util.List;
 import java.util.Map;
 
 public class GroupSettingActivity extends BaseActivity implements View.OnClickListener {
+
+    private final String TAG = "GroupSettingActivity";
 
     private ActivityHead headView;
     private SetItem top, //置顶
@@ -93,7 +96,7 @@ public class GroupSettingActivity extends BaseActivity implements View.OnClickLi
 
         List<String> disturbListGroup = EMChatManager.getInstance()
                 .getChatOptions().getReceiveNoNotifyGroup();
-        if(disturbListGroup.contains(groupId)){
+        if(disturbListGroup != null && disturbListGroup.contains(groupId)){
             undisturb.setRightImage(R.drawable.settings_btn_switch_on);
             isDisturb = true;
         }else{
@@ -122,7 +125,7 @@ public class GroupSettingActivity extends BaseActivity implements View.OnClickLi
                     for(GroupSettingRequest.UserVO userVO : appliantResult.userList){
                         if(userVO != null){
                             BaseUser baseUser = new BaseUser();
-                            baseUser.userId = userVO.userId;
+                            baseUser.userId = String.valueOf(userVO.userId);
                             baseUser.name = userVO.name;
                             baseUser.picture = userVO.picture;
                             ConstantForSaveList.userIdUserCache.put(String.valueOf(userVO.userId),baseUser);
@@ -147,7 +150,10 @@ public class GroupSettingActivity extends BaseActivity implements View.OnClickLi
             messageSet.type = groupType;
             messageSet.isTop = true;
             messageSet.createTime = System.currentTimeMillis();
-            dao.save(messageSet);
+            long result = dao.save(messageSet);
+            if(result <= 0 ){
+                Log.i(TAG,"to top failed");
+            }
             top.setRightImage(R.drawable.settings_btn_switch_on);
         }else{
             dao.delete(groupId, groupType);

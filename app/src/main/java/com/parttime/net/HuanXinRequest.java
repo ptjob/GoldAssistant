@@ -1,14 +1,7 @@
 package com.parttime.net;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
-import com.google.gson.Gson;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.model.HuanxinUser;

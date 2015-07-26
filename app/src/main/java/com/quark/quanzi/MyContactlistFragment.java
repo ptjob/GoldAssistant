@@ -46,6 +46,7 @@ import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
 import com.easemob.exceptions.EaseMobException;
 import com.parttime.IM.ChatActivity;
+import com.parttime.constants.ApplicationConstants;
 import com.parttime.main.PinyinComparatorByHeader;
 import com.parttime.main.PinyinComparator;
 import com.parttime.net.DefaultCallback;
@@ -330,7 +331,7 @@ public class MyContactlistFragment extends BaseActivity {
 					&& !entry.getKey().equals(Constant.PUBLIC_COUNT)
 					&& !blackList.contains(entry.getKey())) {
 				// 这里有bug，会有好友列表有uid,没有名字的情况
-				if (!entry.getKey().equals("jianzhidaren")) {
+				if (!entry.getKey().equals(ApplicationConstants.JZDR)) {
 					// userName ==nick 都是u661或者c221之类的
 					// head 是u或者c
 					contactList.add(entry.getValue());

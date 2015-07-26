@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.carson.constant.ConstantForSaveList;
+import com.parttime.constants.ActivityExtraAndKeys;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -96,8 +98,14 @@ public class ContactImageLoader {
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap arg0) {
-                        String picName = url;
-                        imageView.setImageBitmap(LoadImage.toRoundBitmap(arg0));
+                        String picture = null;
+                        Object obj = imageView.getTag(R.id.picture);
+                        if(obj instanceof String) {
+                            picture = (String)obj;
+                        }
+                        if(url.equals(picture) || TextUtils.isEmpty(picture)) {
+                            imageView.setImageBitmap(LoadImage.toRoundBitmap(arg0));
+                        }
 
                         boolean sdCardExist = Environment.getExternalStorageState()
                                 .equals(android.os.Environment.MEDIA_MOUNTED); //判断sd卡是否存在
@@ -110,7 +118,7 @@ public class ContactImageLoader {
                             if (!mePhotoFold.exists()) {
                                 mePhotoFold.mkdirs();
                             }
-                            output = new FileOutputStream(Image_Path + picName);
+                            output = new FileOutputStream(Image_Path + url);
                             arg0.compress(Bitmap.CompressFormat.JPEG, 100,
                                     output);
                             output.flush();

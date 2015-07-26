@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.carson.constant.ConstantForSaveList;
+import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
@@ -396,10 +397,10 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             String head = userVO.picture;
             if (! TextUtils.isEmpty(head)) {
                 // 默认加载本地图片
+                holder.head.setTag(R.id.picture,head);
                 ContactImageLoader.loadNativePhoto(String.valueOf(userVO.userId),
                         head, holder.head,queue);
-                sp.loadStringSharedPreference(userVO.userId
-                        + "realname", userVO.name);
+                sp.loadStringSharedPreference(userVO.userId+ "realname", userVO.name);
             } else {
                 holder.head.setImageResource(R.drawable.default_avatar);
             }
@@ -480,6 +481,10 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                     intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID , groupId);
                     if(userVO != null) {
                         intent.putExtra(ActivityExtraAndKeys.USER_ID, String.valueOf(userVO.userId));
+                    }
+                    if(EMChatManager.getInstance().getCurrentUser()
+                            .equals(group.getOwner())){
+                        intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPOWNER, true);
                     }
                     startActivity(intent);
                 }

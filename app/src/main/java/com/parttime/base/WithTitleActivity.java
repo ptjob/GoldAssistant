@@ -23,9 +23,9 @@ import java.lang.reflect.Constructor;
  */
 public abstract class WithTitleActivity extends BaseActivity {
 
-    private ViewGroup leftWrapper;
-    private ViewGroup rightWrapper;
-    private TextView center;
+    public ViewGroup leftWrapper;
+    public ViewGroup rightWrapper;
+    public TextView center;
 
 
     protected abstract ViewGroup getLeftWrapper();

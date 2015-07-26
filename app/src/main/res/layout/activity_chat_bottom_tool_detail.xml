@@ -133,7 +133,8 @@ android:visibility="gone" >
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="64dp"
@@ -157,6 +158,38 @@ android:visibility="gone" >
                 android:text="视频"
                 android:textColor="#727171" />
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_management_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp" >
+
+                <ImageView
+                    android:id="@+id/imgv_activity_management"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_centerInParent="true"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/chat_video_selector" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/activity_management"
+                android:textColor="#727171" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -171,7 +204,8 @@ android:visibility="gone" >
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="64dp"
@@ -202,7 +236,8 @@ android:visibility="gone" >
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="64dp"

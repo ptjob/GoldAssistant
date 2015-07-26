@@ -104,6 +104,9 @@
     <!-- IM -->
     <string name="group_notice">群通知</string>
     <string name="content_text_count">%1$s/%2$s</string>
+    <string name="activity_management">活动管理</string>
+    <string name="call_customer_service">致电客服</string>
+    <string name="parttime_scchool">兼职学堂</string>
 
     <!-- 编辑群通知 -->
     <string name="group_notice_function_declare">群通知是XXX的功能</string>
@@ -116,6 +119,8 @@
     <string name="admitted_pending_tip">已录取%1$d人/待处理%2$d人</string>
     <string name="already_resume">已录取</string>
     <string name="unresume">待处理</string>
+    <string name="commented">已评价</string>
+    <string name="uncomment">未评价</string>
     <string name="resume">录取</string>
     <string name="cancel_resume">取消录取</string>
     <string name="group_setting_batch">批量管理</string>
@@ -140,6 +145,7 @@
     <string name="group_not_allow_send_msg">禁言管理</string>
     <string name="group_cancel_gag">取消禁言</string>
     <string name="pls_check_first">请先选择</string>
+    <string name="update_success">更新成功</string>
 
     <!-- 通讯录 -->
     <string name="create_new_group">创建群</string>

@@ -46,6 +46,7 @@ import com.easemob.chatuidemo.Constant;
 import com.parttime.IM.ChatActivity;
 import com.easemob.chatuidemo.domain.User;
 import com.lidroid.xutils.ViewUtils;
+import com.parttime.constants.ApplicationConstants;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
@@ -166,7 +167,7 @@ public class UserInfo extends BaseActivity {
 				// 如果是好友关系则跳转到发送消息界面,反之则发送好友请求
 				if (friendFlag) {
 					UserInfo.this.finish();
-					if (!"jianzhidaren".equals(hxId)) {
+					if (!ApplicationConstants.JZDR.equals(hxId)) {
 						startActivity(new Intent(UserInfo.this,
 								ChatActivity.class).putExtra("userId", hxId));
 					}
@@ -218,7 +219,7 @@ public class UserInfo extends BaseActivity {
 						&& !entry.getKey().equals(Constant.PUBLIC_COUNT)
                         ) {
 					// 这里有bug，会有好友列表有uid,没有名字的情况
-					if (!entry.getKey().equals("jianzhidaren")) {
+					if (!entry.getKey().equals(ApplicationConstants.JZDR)) {
 						// userName ==nick 都是u661或者c221之类的
 						// head 是u或者c
 						friendList.add(entry.getValue());

@@ -66,6 +66,7 @@ import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.utils.SmileUtils;
 import com.easemob.util.DateUtils;
+import com.parttime.constants.ApplicationConstants;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.MessageSet;
@@ -145,6 +146,9 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
     private void bindValue(int position, ViewHolder holder) {
         // 获取与此用户/群组的会话
         EMConversation conversation = getItem(position);
+        if(conversation == null){
+            return ;
+        }
         // 获取用户username或者群组groupid
         String username = conversation.getUserName();
         List<EMGroup> groups = EMGroupManager.getInstance().getAllGroups();
@@ -182,7 +186,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
             holder.quit.setVisibility(View.GONE);
             // 本地或者服务器获取用户详情，以用来显示头像和nick
             // 先加载本地头像和名字
-            if (username.equals("jianzhidaren")) {
+            if (username.equals(ApplicationConstants.JZDR)) {
                 holder.name.setText("兼职达人团队");
                 Drawable draw1 = tcontext.getResources().getDrawable(
                         R.drawable.job_photo);
@@ -190,7 +194,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
                 Bitmap bitmap = bd.getBitmap();
                 Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
                 holder.avatar.setImageBitmap(bit);
-            } else if (username.equals("caiwu")) {
+            } else if (username.equals(ApplicationConstants.CAIWU)) {
                 holder.name.setText("财务小管家");
                 Drawable draw1 = tcontext.getResources().getDrawable(
                         R.drawable.custom_caiwu);
@@ -198,7 +202,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
                 Bitmap bitmap = bd.getBitmap();
                 Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
                 holder.avatar.setImageBitmap(bit);
-            } else if (username.equals("dingyue")) {
+            } else if (username.equals(ApplicationConstants.DINGYUE)) {
                 holder.name.setText("订阅小助手");
                 Drawable draw1 = tcontext.getResources().getDrawable(
                         R.drawable.custom_xiaozhushou);
@@ -206,7 +210,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
                 Bitmap bitmap = bd.getBitmap();
                 Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
                 holder.avatar.setImageBitmap(bit);
-            } else if (username.equals("kefu")) {
+            } else if (username.equals(ApplicationConstants.KEFU)) {
                 holder.name.setText("兼职达人客服");
                 Drawable draw1 = tcontext.getResources().getDrawable(
                         R.drawable.custom_kefu);
@@ -214,7 +218,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
                 Bitmap bitmap = bd.getBitmap();
                 Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
                 holder.avatar.setImageBitmap(bit);
-            } else if (username.equals("tongzhi")) {
+            } else if (username.equals(ApplicationConstants.TONGZHI)) {
                 holder.name.setText("通知中心");
                 Drawable draw1 = tcontext.getResources().getDrawable(
                         R.drawable.custom_tongzhi);
