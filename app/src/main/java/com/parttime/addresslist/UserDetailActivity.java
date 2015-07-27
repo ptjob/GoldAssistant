@@ -25,10 +25,9 @@ import java.util.List;
 
 public class UserDetailActivity extends WithTitleActivity implements View.OnClickListener {
 
-    private Dialog more;
-
     private String groupId;
     private String userId;
+    private boolean isGroupOwner = false;
     //0:没有获取成功 1:禁言 2:非禁言
     private int forbiddenValue = 0;
 
@@ -52,6 +51,13 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
     private void bindData() {
         groupId = getIntent().getStringExtra(ActivityExtraAndKeys.GroupSetting.GROUPID);
         userId = getIntent().getStringExtra(ActivityExtraAndKeys.USER_ID);
+        isGroupOwner = getIntent().getBooleanExtra(ActivityExtraAndKeys.GroupSetting.GROUPOWNER,false);
+
+        if(isGroupOwner){
+            rightWrapper.setVisibility(View.VISIBLE);
+        }else{
+            rightWrapper.setVisibility(View.GONE);
+        }
 
         new Thread(new Runnable() {
 
@@ -118,16 +124,7 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
     }
 
     private Dialog showMore() {
-
-        if(more != null){
-            if(more.isShowing()){
-                more.dismiss();
-            }else{
-                more.show();
-            }
-            return more;
-        }
-        more = new Dialog(this, R.style.ActionSheet);
+        final Dialog more = new Dialog(this, R.style.ActionSheet);
         LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(
                 R.layout.activity_person_detail_more, null);
         final int cFullFillWidth = 10000;
@@ -156,14 +153,21 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
             public void onClick(View v) {
                 more.dismiss();
                 showWait(true);
-                try {
-                    EMGroupManager.getInstance().blockUser(groupId,
-                            userId);
-                    forbiddenValue = 1;
-                } catch (EaseMobException e) {
-                    e.printStackTrace();
-                }
-                showWait(false);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            EMGroupManager.getInstance().blockUser(groupId,
+                                    userId);
+                            forbiddenValue = 1;
+                        } catch (EaseMobException e) {
+                            e.printStackTrace();
+                        }
+                        showWait(false);
+                    }
+                }).start();
+
+
             }
         });
 
@@ -174,14 +178,20 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
             public void onClick(View v) {
                 more.dismiss();
                 showWait(true);
-                try {
-                    EMGroupManager.getInstance().unblockUser(groupId,
-                            userId);
-                    forbiddenValue = 2;
-                } catch (EaseMobException e) {
-                    e.printStackTrace();
-                }
-                showWait(false);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            EMGroupManager.getInstance().unblockUser(groupId,
+                                    userId);
+                            forbiddenValue = 2;
+                        } catch (EaseMobException e) {
+                            e.printStackTrace();
+                        }
+                        showWait(false);
+                    }
+                }).start();
+
             }
         });
 

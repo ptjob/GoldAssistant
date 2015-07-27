@@ -344,6 +344,9 @@ public class Url {
 	// 发送录取人员到邮箱 3.0
     public static final String COMPANY_GETGROUPEXCEL = HOST + SUBJECT
 			+ "/Activity/getGroupExcel";
+	// 更新群通告    3.0
+    public static final String GROUP_MODIFYGROUPDESC = HOST + SUBJECT
+			+ "/Activity/modifyGroupDesc";
 	// 是否被拉黑(包括上传版本信息)
 	public static final String COMPANY_FORBIDDEN = HOST + SUBJECT
 			+ "/CompanyCenter/isForbidden";

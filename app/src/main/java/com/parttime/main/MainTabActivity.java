@@ -2195,7 +2195,8 @@ public class MainTabActivity extends FragmentActivity implements
             String action = intent.getAction();
             //刷新置顶
             if(ActionConstants.ACTION_MESSAGE_TO_TOP.equals(action)){
-                messageAndAddressFragment.reflashMessageTop();
+                 MessageAndAddressFragment.isReflashMessageSetTop = true;
+
             }
         }
     }

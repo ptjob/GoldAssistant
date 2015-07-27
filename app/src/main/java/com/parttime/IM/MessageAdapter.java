@@ -73,9 +73,11 @@ import com.easemob.util.FileUtils;
 import com.easemob.util.LatLng;
 import com.easemob.util.TextFormater;
 import com.parttime.common.Image.ContactImageLoader;
+import com.parttime.constants.ApplicationConstants;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
+import com.parttime.pojo.GroupDescription;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.ToastUtil;
@@ -130,13 +132,13 @@ public class MessageAdapter extends BaseAdapter {
 	// reference to conversation object in chatsdk
 	private EMConversation conversation;
 
-	private Context context;
+	private ChatActivity context;
 	RequestQueue queue = VolleySington.getInstance().getRequestQueue();
 
 	private Map<String, Timer> timers = new Hashtable<>();
     List<MessageData> messageData = Collections.synchronizedList(new ArrayList<MessageData>());
 
-	public MessageAdapter(Context context, String username, int chatType) {
+	public MessageAdapter(ChatActivity context, String username, int chatType) {
 		this.username = username;
 		this.context = context;
 		inflater = LayoutInflater.from(context);
@@ -174,12 +176,15 @@ public class MessageAdapter extends BaseAdapter {
                 data.message = message;
 
                 String contactUID = message.getFrom();
+                contactUID = contactUID.replace("c","").replace("u","");
                 GroupSettingRequest.UserVO userVO = temp.get(contactUID);
                 if(userVO != null){
                     data.userId = contactUID;
                     data.name = userVO.name;
                     data.picture = userVO.picture;
                     data.apply = userVO.apply;
+                    data.ableComment = userVO.ableComment;
+                    data.isCommented = userVO.isCommented;
                 }
 
                 messageData.add(data);
@@ -315,7 +320,8 @@ public class MessageAdapter extends BaseAdapter {
 
 	@SuppressLint("NewApi")
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		final EMMessage message = getItem(position).message;
+        MessageData messageData = getItem(position);
+		final EMMessage message = messageData.message;
 		ChatType chatType = message.getChatType();
 		final ViewHolder holder;
 		if (convertView == null) {
@@ -335,6 +341,7 @@ public class MessageAdapter extends BaseAdapter {
 							.findViewById(R.id.msg_status);
 					holder.tv_userId = (TextView) convertView
 							.findViewById(R.id.tv_userid);
+                    holder.resumeStatus = (TextView)convertView.findViewById(R.id.resume_status);
 				} catch (Exception ignore) {
 				}
 
@@ -352,6 +359,7 @@ public class MessageAdapter extends BaseAdapter {
 							.findViewById(R.id.tv_chatcontent);
 					holder.tv_userId = (TextView) convertView
 							.findViewById(R.id.tv_userid);
+                    holder.resumeStatus = (TextView)convertView.findViewById(R.id.resume_status);
 				} catch (Exception ignore) {
 				}
 
@@ -394,6 +402,7 @@ public class MessageAdapter extends BaseAdapter {
 							.findViewById(R.id.tv_userid);
 					holder.iv_read_status = (ImageView) convertView
 							.findViewById(R.id.iv_unread_voice);
+                    holder.resumeStatus = (TextView)convertView.findViewById(R.id.resume_status);
 				} catch (Exception ignore) {
 				}
 			} else if (message.getType() == EMMessage.Type.LOCATION) {
@@ -408,6 +417,7 @@ public class MessageAdapter extends BaseAdapter {
 							.findViewById(R.id.msg_status);
 					holder.tv_userId = (TextView) convertView
 							.findViewById(R.id.tv_userid);
+                    holder.resumeStatus = (TextView)convertView.findViewById(R.id.resume_status);
 				} catch (Exception ignore) {
 				}
 			} else if (message.getType() == EMMessage.Type.VIDEO) {
@@ -473,7 +483,7 @@ public class MessageAdapter extends BaseAdapter {
 		// holder.tv_userId.setText(message.getFrom());
 		{ // 用username代替nick
 			// 先判断图片是否在本地已经保存,若存在则不加载
-			if (message.getFrom().equals("jianzhidaren")) {
+			if (message.getFrom().equals(ApplicationConstants.JZDR)) {
 				// message.getFrom()带了u或者c
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.job_photo);
@@ -481,28 +491,28 @@ public class MessageAdapter extends BaseAdapter {
 				Bitmap bitmap = bd.getBitmap();
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
-			} else if ("caiwu".equals(message.getFrom())) {
+			} else if (ApplicationConstants.CAIWU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_caiwu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
-			} else if ("dingyue".equals(message.getFrom())) {
+			} else if (ApplicationConstants.DINGYUE.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_xiaozhushou);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
-			} else if ("kefu".equals(message.getFrom())) {
+			} else if (ApplicationConstants.KEFU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_kefu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
-			} else if ("tongzhi".equals(message.getFrom())) {
+			} else if (ApplicationConstants.TONGZHI.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_tongzhi);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
@@ -513,6 +523,28 @@ public class MessageAdapter extends BaseAdapter {
 				loadNativePhoto(message.getFrom(), holder.head_iv,
 						holder.tv_userId);
 			}
+
+            //判断是不是活动群
+            GroupDescription gd = context.groupDescription;
+            if(gd != null && (gd.type == GroupDescription.ACTIVITY_GROUP || gd.type == GroupDescription.ACTIVITY_CONSULTATION_GROUP)){
+                holder.resumeStatus.setVisibility(View.VISIBLE);
+                if(messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_NO){
+                    if (messageData.apply == GroupSettingRequest.UserVO.APPLY_OK) {
+                        holder.resumeStatus.setText(R.string.already_resume);
+                    } else if (messageData.apply == GroupSettingRequest.UserVO.APPLY_UNLOOK ||
+                            messageData.apply == GroupSettingRequest.UserVO.APPLY_LOOKED) {
+                        holder.resumeStatus.setText(R.string.unresume);
+                    }
+                }else if(messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_OK){
+                    if (messageData.isCommented == GroupSettingRequest.UserVO.ISCOMMENT_NO) {
+                        holder.resumeStatus.setText(R.string.uncomment);
+                    } else if (messageData.isCommented == GroupSettingRequest.UserVO.ISCOMMENT_OK) {
+                        holder.resumeStatus.setText(R.string.commented);
+                    }
+                }
+            }else{
+                holder.resumeStatus.setVisibility(View.GONE);
+            }
 		}
 		// 发送方 单聊 如果是发送的消息并且不是群聊消息，显示已读textview
 		if (message.direct == EMMessage.Direct.SEND
@@ -539,7 +571,7 @@ public class MessageAdapter extends BaseAdapter {
 					}
 				}
 			}
-			if (message.getFrom().equals("jianzhidaren")) {
+			if (message.getFrom().equals(ApplicationConstants.JZDR)) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.job_photo);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
@@ -547,28 +579,28 @@ public class MessageAdapter extends BaseAdapter {
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
 				// getNick(message.getFrom(), holder.head_iv, null);
-			} else if ("caiwu".equals(message.getFrom())) {
+			} else if (ApplicationConstants.CAIWU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_caiwu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
-			} else if ("dingyue".equals(message.getFrom())) {
+			} else if (ApplicationConstants.DINGYUE.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_xiaozhushou);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
-			} else if ("kefu".equals(message.getFrom())) {
+			} else if (ApplicationConstants.KEFU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_kefu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
-			} else if ("tongzhi".equals(message.getFrom())) {
+			} else if (ApplicationConstants.TONGZHI.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_tongzhi);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
@@ -595,7 +627,7 @@ public class MessageAdapter extends BaseAdapter {
 					}
 				}
 			}
-			if (message.getFrom().equals("jianzhidaren")) {
+			if (message.getFrom().equals(ApplicationConstants.JZDR)) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.job_photo);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
@@ -603,28 +635,28 @@ public class MessageAdapter extends BaseAdapter {
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
 				// getNick(message.getFrom(), holder.head_iv, null);
-			} else if ("caiwu".equals(message.getFrom())) {
+			} else if (ApplicationConstants.CAIWU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_caiwu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
-			} else if ("dingyue".equals(message.getFrom())) {
+			} else if (ApplicationConstants.DINGYUE.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_xiaozhushou);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
-			} else if ("kefu".equals(message.getFrom())) {
+			} else if (ApplicationConstants.KEFU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_kefu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
 				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
 				holder.head_iv.setImageBitmap(bit);
-			} else if ("tongzhi".equals(message.getFrom())) {
+			} else if (ApplicationConstants.TONGZHI.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_tongzhi);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
@@ -721,15 +753,15 @@ public class MessageAdapter extends BaseAdapter {
 			holder.head_iv.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if ("jianzhidaren".equals(message.getFrom())) {
+					if (ApplicationConstants.JZDR.equals(message.getFrom())) {
 						ToastUtil.showShortToast("兼职达人团队");
-					} else if ("caiwu".equals(message.getFrom())) {
+					} else if (ApplicationConstants.CAIWU.equals(message.getFrom())) {
 						ToastUtil.showShortToast("财务小管家");
-					} else if ("dingyue".equals(message.getFrom())) {
+					} else if (ApplicationConstants.DINGYUE.equals(message.getFrom())) {
 						ToastUtil.showShortToast("订阅小助手");
-					} else if ("kefu".equals(message.getFrom())) {
+					} else if (ApplicationConstants.KEFU.equals(message.getFrom())) {
 						ToastUtil.showShortToast("兼职达人客服");
-					} else if ("tongzhi".equals(message.getFrom())) {
+					} else if (ApplicationConstants.TONGZHI.equals(message.getFrom())) {
 						ToastUtil.showShortToast("通知中心");
 					} else {
 						// Intent intent = new Intent(activity, UserInfo.class);
@@ -1737,6 +1769,7 @@ public class MessageAdapter extends BaseAdapter {
 		ImageView staus_iv;
 		ImageView head_iv;
 		TextView tv_userId;
+        TextView resumeStatus;
 		ImageView playBtn;
 		TextView timeLength;
 		TextView size;
@@ -1902,7 +1935,9 @@ public class MessageAdapter extends BaseAdapter {
         public String userId ;
         public String picture; //头像
         public String name;     //姓名
-        public int apply ;      //录取状态（0-没查看，1-已录取，2-、已拒绝，3-已查看）
+        public int apply = -1 ;      //录取状态（0-没查看，1-已录取，2-、已拒绝，3-已查看）
+        public int ableComment; //是否可评价（0-否，1-是)
+        public int isCommented; //评价状态（0-未评价，1-已评价）
 
         public EMMessage message;
     }

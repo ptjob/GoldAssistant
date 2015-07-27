@@ -35,6 +35,7 @@ import com.easemob.chatuidemo.Constant;
 import com.parttime.addresslist.ContactAdapter;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
+import com.parttime.constants.ApplicationConstants;
 import com.parttime.main.PinyinComparator;
 import com.parttime.main.PinyinComparatorByHeader;
 import com.parttime.net.DefaultCallback;
@@ -122,7 +123,7 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 			Entry<String, User> entry = iterator.next();
 			if (!entry.getKey().equals(Constant.NEW_FRIENDS_USERNAME)
 					&& !entry.getKey().equals(Constant.GROUP_USERNAME))
-				if (!entry.getKey().equals("jianzhidaren")) {
+				if (!entry.getKey().equals(ApplicationConstants.JZDR)) {
 					contactList.add(entry.getValue());
 				}
 		}

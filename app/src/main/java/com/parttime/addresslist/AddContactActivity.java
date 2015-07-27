@@ -184,7 +184,7 @@ public class AddContactActivity extends BaseActivity {
 						showWait(false);
 						try {
 							JSONObject js = new JSONObject(response);
-							JSONArray jss = js.getJSONArray("Response");
+							JSONArray jss = js.getJSONArray("userList");
 							for (int i = 0; i < jss.length(); i++) {
 								HuanxinUser user = (HuanxinUser) JsonUtil
 										.jsonToBean(jss.getJSONObject(i),
@@ -210,7 +210,7 @@ public class AddContactActivity extends BaseActivity {
 					@Override
 					public void onErrorResponse(VolleyError arg0) {
 						showWait(false);
-						users = new ArrayList<HuanxinUser>();
+						users = new ArrayList<>();
 						adapter = new HuanxingSearchUserAdapter(
 								AddContactActivity.this, users,
 								AddContactActivity.this);

@@ -20,13 +20,17 @@ import com.easemob.exceptions.EaseMobException;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead;
 import com.parttime.constants.ActivityExtraAndKeys;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.BaseUser;
 import com.qingmu.jianzhidaren.R;
+import com.quark.model.HuanxinUser;
 import com.quark.utils.NetWorkCheck;
 import com.quark.volley.VolleySington;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +79,8 @@ public class GroupGagActivity extends BaseActivity {
                         runOnUiThread(new Runnable() {
                             public void run() {
                                 Map<String, BaseUser> userIdPictureMap = ConstantForSaveList.userIdUserCache;
+                                StringBuilder requestData = new StringBuilder();
+                                final HashMap<String , AdapterVO> temp = new HashMap<>();
                                 for(String userId : blockedList) {
                                     AdapterVO vo = new AdapterVO();
                                     vo.userId = userId;
@@ -83,11 +89,43 @@ public class GroupGagActivity extends BaseActivity {
                                         if(baseUser != null) {
                                             vo.picture = baseUser.picture;
                                             vo.name = baseUser.name;
+                                        }else{
+                                            requestData.append(userId).append(",");
                                         }
+                                    }else{
+                                        requestData.append(userId).append(",");
                                     }
-                                    adapterVOs.add(vo);
+                                    if(TextUtils.isEmpty(vo.name)){
+                                        temp.put(userId, vo);
+                                    }else {
+                                        adapterVOs.add(vo);
+                                    }
                                 }
-                                adapter.notifyDataSetChanged();
+                                //从普通群组过来的数据可能存在没有用户信息的情况
+                                if(requestData.length() > 0){
+                                    String requestD = requestData.subSequence(0, requestData.length() - 1).toString();
+                                    //获取环信用户信息
+                                    new HuanXinRequest().getHuanxinUserList(requestD, queue , new DefaultCallback(){
+                                        @Override
+                                        public void success(Object obj) {
+                                            ArrayList<HuanxinUser> huanxinUsers = (ArrayList<HuanxinUser>)obj;
+                                            if(huanxinUsers != null && huanxinUsers.size() > 0){
+                                                for(HuanxinUser huanxinUser : huanxinUsers){
+                                                    String userId = huanxinUser.getUid();
+                                                    AdapterVO vo = temp.get(userId);
+                                                    if(vo != null){
+                                                        vo.name = huanxinUser.getName();
+                                                        vo.picture = huanxinUser.getAvatar();
+                                                        adapterVOs.add(vo);
+                                                    }
+                                                }
+                                                adapter.notifyDataSetChanged();
+                                            }
+                                        }
+                                    });
+                                }else {
+                                    adapter.notifyDataSetChanged();
+                                }
                             }
                         });
                     }
@@ -175,21 +213,37 @@ public class GroupGagActivity extends BaseActivity {
                     if (! NetWorkCheck.isOpenNetwork(GroupGagActivity.this)) {
                         Toast.makeText(getApplicationContext(), getString(R.string.no_net_tip), Toast.LENGTH_SHORT).show();
                     }
-                    try {
-                        int position = (int)v.getTag();
-                        AdapterVO itemVo = getItem(position);
-                        String tobeRemoveUser = itemVo.userId;
-                        // 移出禁言
-                        EMGroupManager.getInstance().unblockUser(groupId, tobeRemoveUser);
-                        adapterVOs.remove(itemVo);
-                        adapter.notifyDataSetChanged();
-                    } catch (EaseMobException ignore) {
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast.makeText(getApplicationContext(), R.string.action_failed, Toast.LENGTH_SHORT).show();
+
+                    int position = (int)v.getTag();
+                    final AdapterVO itemVo = getItem(position);
+                    final String tobeRemoveUser = itemVo.userId;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                // 移出禁言
+                                EMGroupManager.getInstance().unblockUser(groupId, tobeRemoveUser);
+                                EMGroupManager.getInstance().addUsersToGroup(groupId,
+                                        new String[]{tobeRemoveUser});
+                            } catch (EaseMobException ignore) {
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), R.string.action_failed, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
-                        });
-                    }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    adapterVOs.remove(itemVo);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            });
+
+                        }
+                    }).start();
+
+
                 }
             });
         }

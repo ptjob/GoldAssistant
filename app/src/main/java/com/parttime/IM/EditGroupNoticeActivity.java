@@ -2,26 +2,51 @@ package com.parttime.IM;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMGroup;
+import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
+import com.easemob.exceptions.EaseMobException;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.parttime.common.head.ActivityHead;
+import com.parttime.constants.ActivityExtraAndKeys;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.GroupSettingRequest;
+import com.parttime.pojo.GroupDescription;
 import com.qingmu.jianzhidaren.R;
+import com.quark.volley.VolleySington;
+
+import org.apache.http.protocol.HTTP;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 public class EditGroupNoticeActivity extends BaseActivity implements View.OnClickListener{
 
-    private static final int MAX_COUNT = 10;
+    private final String TAG = "EditGroupNoticeActivity";
+
+    private static final int MAX_COUNT = 140;
 
     private EditText noticeContent;
     private TextView contentCount;
     private Button done;
 
-    private String groupNotice = null;
+    private GroupDescription groupNotice;
+    private String groupId;
+
+    protected RequestQueue queue = VolleySington.getInstance().getRequestQueue();
 
 
     @Override
@@ -31,7 +56,7 @@ public class EditGroupNoticeActivity extends BaseActivity implements View.OnClic
 
         initValue();
 
-        setValue();
+        bindData();
 
         setListener();
     }
@@ -48,10 +73,24 @@ public class EditGroupNoticeActivity extends BaseActivity implements View.OnClic
 
     }
 
-    private void setValue() {
-        groupNotice = "";
-        noticeContent.setText(groupNotice);
-        contentCount.setText(getString(R.string.content_text_count,groupNotice.length(),MAX_COUNT));
+    private void bindData() {
+        groupId = getIntent().getStringExtra(ActivityExtraAndKeys.GroupSetting.GROUPID);
+        String description = getIntent().getStringExtra(ActivityExtraAndKeys.ChatGroupNotice.GROUP_NOTICE_CONTENT);
+        if(! TextUtils.isEmpty(description)) {
+            try {
+                description = URLDecoder.decode(description, "UTF-8");
+                groupNotice = new Gson().fromJson(description, GroupDescription.class);
+            } catch (IllegalStateException | JsonSyntaxException | UnsupportedEncodingException ignore) {
+                Log.e(TAG, "description format is error , description = " + description);
+            }
+        }
+        if(groupNotice != null) {
+            noticeContent.setText(groupNotice.info);
+            contentCount.setText(getString(R.string.content_text_count,groupNotice.info.length(),MAX_COUNT));
+        }else{
+            contentCount.setText(getString(R.string.content_text_count,0,MAX_COUNT));
+        }
+
     }
 
     private void setListener(){
@@ -63,8 +102,40 @@ public class EditGroupNoticeActivity extends BaseActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.done:
-                Toast.makeText(EditGroupNoticeActivity.this,"commit",Toast.LENGTH_SHORT).show();
-                ;
+                String info = noticeContent.getText().toString();
+                /*if(groupNotice != null) {
+                    groupNotice.info = info;
+                    String desc = new Gson().toJson(groupNotice);
+                    try {
+                        desc = URLEncoder.encode(desc,HTTP.UTF_8);*/
+                        new GroupSettingRequest().updateGroupDescription(groupId, EMChatManager.getInstance().getCurrentUser(),info,null,queue, new DefaultCallback(){
+                            @Override
+                            public void success(Object obj) {
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            EMGroup group = EMGroupManager.getInstance().getGroupFromServer(groupId);
+                                            EMGroupManager.getInstance().createOrUpdateLocalGroup(group);
+                                        } catch (EaseMobException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }).start();
+
+                                Toast.makeText(EditGroupNoticeActivity.this,R.string.update_success , Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void failed(Object obj) {
+                                Toast.makeText(EditGroupNoticeActivity.this,R.string.action_failed , Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                   /* } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }*/
         }
     }
 

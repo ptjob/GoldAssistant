@@ -137,17 +137,23 @@ public abstract class BaseActivity extends Activity {
 		ToastUtil.showShortToast(resid);
 	}
 
-	protected void showWait(boolean isShow) {
-		if (isShow) {
-			if (null == dialog) {
-				dialog = new WaitDialog(this);
-			}
-			dialog.show();
-		} else {
-			if (null != dialog) {
-				dialog.dismiss();
-			}
-		}
+	protected void showWait(final boolean isShow) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (isShow) {
+                    if (null == dialog) {
+                        dialog = new WaitDialog(BaseActivity.this);
+                    }
+                    dialog.show();
+                } else {
+                    if (null != dialog) {
+                        dialog.dismiss();
+                    }
+                }
+            }
+        });
+
 	}
 
 	@Override

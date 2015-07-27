@@ -41,7 +41,6 @@ public class PasteEditText extends EditText{
     public PasteEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-        // TODO Auto-generated constructor stub
     }
 
     public PasteEditText(Context context, AttributeSet attrs, int defStyle) {
@@ -76,9 +75,6 @@ public class PasteEditText extends EditText{
         if(!TextUtils.isEmpty(text) && text.toString().startsWith(ChatActivity.COPY_IMAGE)){
             setText("");
         }
-//        else if(!TextUtils.isEmpty(text)){
-//        	setText(SmileUtils.getSmiledText(getContext(), text),BufferType.SPANNABLE);
-//        }
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
     }
     
