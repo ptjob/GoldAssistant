@@ -18,6 +18,7 @@ import com.parttime.common.activity.ChooseListActivity;
 import com.parttime.common.head.ActivityHead;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.PublishRequest;
+import com.parttime.net.ResponseBaseCommonError;
 import com.parttime.pojo.PartJob;
 import com.parttime.pojo.SalaryUnit;
 import com.parttime.utils.ActionUtils;
@@ -473,7 +474,8 @@ public class WriteJobActivity extends BaseActivity implements
             public void failed(Object obj) {
                 super.failed(obj);
                 showWait(false);
-                showToast(R.string.publish_job_fail);
+                ResponseBaseCommonError error = (ResponseBaseCommonError) obj;
+                showToast(getString(R.string.publish_job_fail) + "：" + error.msg);
             }
         });
     }

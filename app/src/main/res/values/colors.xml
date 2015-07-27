@@ -34,6 +34,8 @@
     <color name="form_button_pressed">#31709a</color>
     <color name="form_bg">#ffffff</color>
     <color name="form_orange">#ee8c0e</color>
+    <color name="form_radio_orange_checked">#fe8a00</color>
+    <color name="form_radio_orange_unchecked">#f2f2f2</color>
 
     <!-- 滚轮选择器 -->
     <!-- TIME PICKER -->
