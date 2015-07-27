@@ -6,6 +6,8 @@
 
     <include layout="@layout/activity_common_head" />
 
+    <ImageView style="@style/PublicLineH_1" />
+
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -22,7 +24,7 @@
             android:gravity="center"
             android:text="@string/job_manage_tab_recruit"
             android:textColor="@color/color_form_checkbox_text"
-            android:textSize="30px" />
+            android:textSize="17sp" />
 
         <ImageView style="@style/PublicLineV_1" />
 
@@ -36,7 +38,7 @@
             android:gravity="center"
             android:text="@string/job_manage_tab_auditing"
             android:textColor="@color/color_form_checkbox_text"
-            android:textSize="30px" />
+            android:textSize="17sp" />
 
         <ImageView style="@style/PublicLineV_1" />
 
@@ -50,7 +52,7 @@
             android:gravity="center"
             android:text="@string/job_manage_tab_undercarriage"
             android:textColor="@color/color_form_checkbox_text"
-            android:textSize="30px" />
+            android:textSize="17sp" />
     </RadioGroup>
 
     <ImageView style="@style/PublicLineH_1" />

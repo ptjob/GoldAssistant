@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.parttime.publish.vo.JobManageListVo;
 import com.qingmu.jianzhidaren.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,7 @@ public class JobManageListAdapter extends BaseAdapter {
     public JobManageListAdapter(Context context) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(mContext);
+        mData = new ArrayList<>();
     }
 
     public void setAll(List<JobManageListVo> data) {
@@ -32,17 +34,17 @@ public class JobManageListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return mData != null ? mData.size() : 0;
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return mData != null ? mData.get(i) : null;
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return mData != null ? mData.get(i).jobId : 0;
     }
 
     @Override
@@ -60,8 +62,13 @@ public class JobManageListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
+        JobManageListVo jobManageListVo = mData.get(i);
+        viewHolder.mTxtJobTitle.setText(jobManageListVo.jobTitle);
+        viewHolder.mTxtView.setText(mContext.getString(R.string.job_manage_view_count_format, jobManageListVo.view));
+        viewHolder.mTxtHand.setText(mContext.getString(R.string.job_manage_hand_count_format, jobManageListVo.hand));
+        viewHolder.mTxtHire.setText(mContext.getString(R.string.job_manage_hire_count_format, jobManageListVo.hire));
 
-        return null;
+        return view;
     }
 
     private class ViewHolder {

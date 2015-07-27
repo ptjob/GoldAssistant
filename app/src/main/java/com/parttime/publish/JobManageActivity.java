@@ -7,6 +7,7 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 
+import com.parttime.common.head.ActivityHead;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.PublishRequest;
 import com.parttime.net.ResponseBaseCommonError;
@@ -82,6 +83,8 @@ public class JobManageActivity extends BaseActivity implements AdapterView.OnIte
         mRadioAuditing = (RadioButton) findViewById(R.id.radio_auditing);
         mRadioUndercarriage = (RadioButton) findViewById(R.id.radio_undercarriage);
 
+        ActivityHead activityHead = new ActivityHead(this);
+        activityHead.setCenterTxt1(R.string.job_manage_title);
 
     }
 

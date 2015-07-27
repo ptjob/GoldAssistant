@@ -454,6 +454,7 @@
     <string name="job_detail_measurements_format">胸%1$dcm/腰%2$dcm/腿%3$dcm</string>
 
     <!-- 管理兼职 -->
+    <string name="job_manage_title">管理兼职</string>
     <string name="job_manage_tab_recruit">招人中</string>
     <string name="job_manage_tab_auditing">待审核</string>
     <string name="job_manage_tab_undercarriage">已下架</string>
@@ -472,6 +473,7 @@
     <string name="title_activity_send_admit_to_email">SendAdmitToEmailActivity</string>
     <string name="title_activity_public_count_list">PublicCountListActivity</string>
     <string name="title_activity_user_detail">UserDetailActivity</string>
+
 
 
 </resources>

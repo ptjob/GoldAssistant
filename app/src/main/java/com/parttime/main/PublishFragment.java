@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.droid.carson.Activity01;
 import com.parttime.constants.SharedPreferenceConstants;
+import com.parttime.publish.JobManageActivity;
 import com.parttime.publish.JobTypeActivity;
 import com.parttime.utils.ApplicationUtils;
 import com.parttime.utils.SharePreferenceUtil;
@@ -34,6 +35,7 @@ import java.util.Map;
 
 /**
  * 招人主界面
+ *
  * @author wyw
  */
 public class PublishFragment extends Fragment implements View.OnClickListener {
@@ -101,6 +103,13 @@ public class PublishFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), JobTypeActivity.class));
+            }
+        });
+
+        view.findViewById(R.id.btn_manage_job).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), JobManageActivity.class));
             }
         });
 
