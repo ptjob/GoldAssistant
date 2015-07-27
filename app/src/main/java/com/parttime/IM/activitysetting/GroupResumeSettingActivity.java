@@ -359,10 +359,10 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             if(convertView == null){
                 holder = new ViewHolder();
                 if(getItem(position).apply == GroupSettingRequest.UserVO.APPLY_OK) {
+                    view = getLayoutInflater().inflate(R.layout.activity_group_setting_item_swip2, parent, false);
+                }else{
                     view = getLayoutInflater().inflate(R.layout.activity_group_setting_item_swip, parent, false);
                     holder.reject = (Button)view.findViewById(R.id.reject);
-                }else{
-                    view = getLayoutInflater().inflate(R.layout.activity_group_setting_item_swip2, parent, false);
                 }
 
                 holder.head = (ImageView) view.findViewById(R.id.head);
@@ -446,6 +446,9 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             String creditworthiness = userVO.creditworthiness;
             addStars(creditworthiness, holder.reputationValueStar);
 
+            if(holder.reject != null){
+                holder.reject.setTag(userVO);
+            }
 
             setListener(holder);
         }
@@ -489,6 +492,18 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                     startActivity(intent);
                 }
             });
+
+            if(holder.reject != null) {
+                holder.reject.setOnClickListener(new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        GroupSettingRequest.UserVO userVO = (GroupSettingRequest.UserVO)v.getTag();
+                        showAlertDialog(null, getString(R.string.reject_one_resume_or_not_and_remove_from_group), Action.UNRESUME, userVO,
+                                R.string.ok, R.string.cancel);
+                    }
+                });
+            }
         }
 
 

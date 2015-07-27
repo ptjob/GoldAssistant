@@ -12,14 +12,14 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 public abstract class MaskedImage extends ImageView {
-	private static final Xfermode MASK_XFERMODE;
+	/*private static final Xfermode MASK_XFERMODE;
 	private Bitmap mask;
 	private Paint paint;
 
 	static {
 		PorterDuff.Mode localMode = PorterDuff.Mode.DST_IN;
 		MASK_XFERMODE = new PorterDuffXfermode(localMode);
-	}
+	}*/
 
 	public MaskedImage(Context paramContext) {
 		super(paramContext);
@@ -36,7 +36,8 @@ public abstract class MaskedImage extends ImageView {
 	public abstract Bitmap createMask();
 
 	protected void onDraw(Canvas paramCanvas) {
-		Drawable localDrawable = getDrawable();
+        super.onDraw(paramCanvas);
+		/*Drawable localDrawable = getDrawable();
 		if (localDrawable == null)
 			return;
 		try {
@@ -69,6 +70,6 @@ public abstract class MaskedImage extends ImageView {
 			StringBuilder localStringBuilder = new StringBuilder()
 					.append("Attempting to draw with recycled bitmap. View ID = ");
 			System.out.println("localStringBuilder=="+localStringBuilder);
-		}
+		}*/
 	}
 }

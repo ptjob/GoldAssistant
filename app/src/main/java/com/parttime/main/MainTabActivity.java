@@ -189,12 +189,12 @@ public class MainTabActivity extends FragmentActivity implements
 	public static String token = "notoken";
 	private int[] resIdActive = new int[] {
             R.drawable.tab_btn_group_sel,
-			R.drawable.tab_btn_manage_sel,
-			R.drawable.tab_btn_setting_sel };
+			R.drawable.tab2_on,
+			R.drawable.tab_btn_manage_sel };
 	private int[] resId = new int[] {
             R.drawable.tab_btn_group_nor,
-            R.drawable.tab_btn_manage_nor,
-			R.drawable.tab_btn_settings_nor };
+            R.drawable.tab2_off,
+			R.drawable.tab_btn_manage_nor };
 
 	private int currentVerCode;// 当前应用版本号
 	private String isForce, isAlert;// 是否强制更新,是否弹框更新 : 1表示是

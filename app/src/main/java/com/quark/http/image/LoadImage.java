@@ -164,7 +164,8 @@ public class LoadImage {
         return null;
     }
     public static Bitmap toRoundBitmap(Bitmap bitmap) {
-        return getRoundedCornerBitmap(bitmap);
+        //return getRoundedCornerBitmap(bitmap);
+        return bitmap;
     }
 
     /**

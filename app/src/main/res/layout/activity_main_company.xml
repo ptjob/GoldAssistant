@@ -83,7 +83,7 @@
                     style="@style/bNavText"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/tab_btn_function_nor"
+                    android:drawableTop="@drawable/tab2_off"
                     android:gravity="center"
                     android:text="@string/hiring"
                     android:textColor="@color/menu_huise" />
@@ -121,7 +121,7 @@
                 style="@style/bNavText"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:drawableTop="@drawable/tab_btn_settings_nor"
+                android:drawableTop="@drawable/tab_btn_manage_nor"
                 android:gravity="center"
                 android:text="@string/mine"
                 android:textColor="@color/menu_huise" />
