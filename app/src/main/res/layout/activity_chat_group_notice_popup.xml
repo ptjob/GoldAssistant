@@ -27,5 +27,6 @@
         android:id="@+id/edit"
         android:drawableLeft="@drawable/ee_1"
         android:drawablePadding="15dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
 </LinearLayout>

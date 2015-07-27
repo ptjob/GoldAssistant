@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.carson.constant.ConstantForSaveList;
+import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMGroup;
+import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
 import com.parttime.addresslist.UserDetailActivity;
 import com.parttime.common.Image.ContactImageLoader;
@@ -393,6 +396,12 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
                     if(batchUserVO != null) {
                         intent.putExtra(ActivityExtraAndKeys.USER_ID, String.valueOf(batchUserVO.userId));
                     }
+                    EMGroup group = EMGroupManager.getInstance().getGroup(groupId);
+                    if(EMChatManager.getInstance().getCurrentUser()
+                            .equals(group.getOwner())){
+                        intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPOWNER, true);
+                    }
+
                     startActivity(intent);
                 }
             });

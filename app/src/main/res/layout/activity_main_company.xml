@@ -48,12 +48,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="20dip"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="18dip"
+                    android:layout_marginRight="36dip"
                     android:background="@drawable/unread_count_bg"
                     android:gravity="center"
                     android:text="9"
                     android:textColor="@android:color/white"
-                    android:textSize="9sp"
+                    android:textSize="9dp"
                     android:visibility="invisible" />
             </RelativeLayout>
 
@@ -93,7 +93,7 @@
                     android:layout_width="11dip"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="27dip"
+                    android:layout_marginRight="36dip"
                     android:layout_marginTop="-3dip"
                     android:src="@drawable/unread_count_bg"
                     android:visibility="gone" />

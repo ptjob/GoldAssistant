@@ -450,7 +450,7 @@ public class EditMyIntroActivity extends LocalInitActivity {
                         UploadImg.getImageToView(this, data,
                                 ivHead, uploadAvatarUrl, null, null,
                                 null, "avatar", null, "company_id", getCompanyId(),
-                                null);
+                                null, null);
                     }
                     break;
             }

@@ -15,7 +15,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,7 +28,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
@@ -37,16 +35,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
-import com.easemob.EMCallBack;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.parttime.login.FindPJLoginActivity;
 import com.parttime.mine.EditMyIntroActivity;
 import com.parttime.mine.FreshManGuideActivity;
 import com.parttime.mine.MyFansActivity;
 import com.parttime.mine.MyWalletActivity;
 import com.parttime.mine.PraiseRecvedActivity;
-import com.parttime.mine.RealNameCertActivity;
+import com.parttime.mine.RealNameCertSelectActivity;
 import com.parttime.mine.SuggestionActivity;
 import com.parttime.mine.setting.SettingActivity;
 import com.parttime.net.BaseRequest;
@@ -58,23 +54,18 @@ import com.qingmu.jianzhidaren.R;
 import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.fragment.company.BaseFragment;
-import com.quark.http.image.LoadImage;
 import com.quark.image.UploadImg;
-import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.Function;
-import com.quark.model.HuanxinUser;
 import com.quark.ui.widget.CommonWidget;
 import com.quark.ui.widget.CustomDialog;
 import com.quark.utils.Util;
 import com.quark.utils.WaitDialog;
 import com.quark.volley.VolleySington;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -142,7 +133,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 		if(function != null){
 			tvName.setText(function.getName());
 //			tvScore.setText(getString(R.string.x_scores, function.getPoint()));
-			rvRank.rank((int) /*function.getPoint()*/4);
+			rvRank.rank((int) function.getPoint());
 			String certString = getCertString();
 			tvCertState.setText(certString);
 			fiMyFans.setValue(getString(R.string.x_ge_in_chinese, function.getFollowers()));
@@ -832,7 +823,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 						UploadImg.getImageToView(getActivity(), data,
 								ivHead, uploadAvatarUrl, null, null,
 								null, "avatar", null, "company_id", company_id,
-								null);
+								null, null);
 					}
 					break;
 			}
@@ -913,7 +904,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void realNameCert(){
-        goToActivity(RealNameCertActivity.class);
+        goToActivity(RealNameCertSelectActivity.class);
 	}
 
 	private void freshManGuide(){

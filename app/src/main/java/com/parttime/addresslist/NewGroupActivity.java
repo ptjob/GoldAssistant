@@ -29,7 +29,13 @@ import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.AlertDialog;
 import com.easemob.chatuidemo.activity.BaseActivity;
 import com.easemob.exceptions.EaseMobException;
+import com.google.gson.Gson;
+import com.parttime.constants.ActivityExtraAndKeys;
+import com.parttime.pojo.GroupDescription;
 import com.qingmu.jianzhidaren.R;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class NewGroupActivity extends BaseActivity {
 	private EditText groupNameEditText;
@@ -99,7 +105,16 @@ public class NewGroupActivity extends BaseActivity {
 					String groupName = groupNameEditText.getText().toString()
 							.trim();
 					String desc = introductionEditText.getText().toString();
-					String[] members = data.getStringArrayExtra("newmembers");
+                    GroupDescription gd = new GroupDescription();
+                    gd.type = GroupDescription.ACTIVITY_ADDRESSBOOK_GROUP;
+                    gd.info = desc;
+                    desc = new Gson().toJson(gd);
+                    try {
+                        desc = URLEncoder.encode(desc,"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    String[] members = data.getStringArrayExtra(ActivityExtraAndKeys.Addressbook.MEMBER);
 					try {
 						if (checkBox.isChecked()) {
 							// 创建公开群，此种方式创建的群，可以自由加入
@@ -126,7 +141,7 @@ public class NewGroupActivity extends BaseActivity {
 							public void run() {
 								progressDialog.dismiss();
 								Toast.makeText(NewGroupActivity.this, "创建群组失败",
-										1).show();
+										Toast.LENGTH_LONG).show();
 							}
 						});
 					}

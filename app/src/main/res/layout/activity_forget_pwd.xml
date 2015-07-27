@@ -7,7 +7,6 @@
 
     <TextView
         style="@style/FormTitle"
-        android:layout_marginTop="20dp"
         android:text="@string/telephone_num"/>
     <com.parttime.widget.EditItem
         android:id="@+id/ei_phone_num"
@@ -20,7 +19,6 @@
 
     <TextView
         style="@style/FormTitle"
-        android:layout_marginTop="20dp"
         android:text="@string/validation_code"/>
     <com.parttime.widget.EditItem
         android:id="@+id/ei_code"

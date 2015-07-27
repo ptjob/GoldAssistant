@@ -647,7 +647,7 @@ public class IntroduceFragment extends BaseFragment implements
 					UploadImg.getImageToView(getActivity(), data,
 							cover_user_photo, uploadAvatarUrl, null, null,
 							null, "avatar", null, "company_id", company_id,
-							null);
+							null, null);
 				}
 				break;
 			}

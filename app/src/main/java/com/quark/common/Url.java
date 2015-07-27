@@ -126,16 +126,16 @@ public class Url {
 
 	// 商家身份证正面图片
 	public static final String COMPANY_uploadIdcard_zheng = HOST + SUBJECT
-			+ "/AgentCenter/upload_identity_front";
+			+ "/CompanyCenter/uploadIdentityFront";
 	// 商家身份证反面图片
 	public static final String COMPANY_uploadIdcard_fan = HOST + SUBJECT
-			+ "/AgentCenter/upload_identity_verso";
+			+ "/CompanyCenter/uploadIdentityVerso";
 	// 商家营业执照图片
 	public static final String COMPANY_uploadyinyzz = HOST + SUBJECT
-			+ "/AgentCenter/upload_company_picture";
+			+ "/CompanyCenter/uploadCompanyPicture";
 	// 商家审核提交
 	public static final String COMPANY_shenheSubmit = HOST + SUBJECT
-			+ "/AgentCenter/commit_authentication";
+			+ "/CompanyCenter/commitAuthentication";
 	// 31 展示我的简历
 	public static final String USER_jianli_show = HOST + SUBJECT
 			+ "/UserCenter/show_resume";
@@ -344,6 +344,9 @@ public class Url {
 	// 发送录取人员到邮箱 3.0
     public static final String COMPANY_GETGROUPEXCEL = HOST + SUBJECT
 			+ "/Activity/getGroupExcel";
+	// 更新群通告    3.0
+    public static final String GROUP_MODIFYGROUPDESC = HOST + SUBJECT
+			+ "/Activity/modifyGroupDesc";
 	// 是否被拉黑(包括上传版本信息)
 	public static final String COMPANY_FORBIDDEN = HOST + SUBJECT
 			+ "/CompanyCenter/isForbidden";

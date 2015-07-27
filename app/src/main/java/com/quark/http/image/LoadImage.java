@@ -5,12 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
+import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.util.DisplayMetrics;
 import android.widget.ImageView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -23,125 +22,159 @@ import com.quark.volley.VolleySington;
 
 public class LoadImage {
 
-	/**
-	 * 图片加载变圆形
-	 */
-	static RequestQueue queue = VolleySington.getInstance().getRequestQueue();
+    /**
+     * 图片加载变圆形
+     */
+    static RequestQueue queue = VolleySington.getInstance().getRequestQueue();
 
-	public static void loadImage(Object urlob, final ImageView imageView,
-			final Activity activity) {
+    public static void loadImage(Object urlob, final ImageView imageView,
+                                 final Activity activity) {
 
-		String url = urlob.toString();
-		ImageRequest imgRequest = new ImageRequest(url,
-				new Response.Listener<Bitmap>() {
-					@Override
-					public void onResponse(Bitmap arg0) {
-						// TODO Auto-generated method stub
+        String url = urlob.toString();
+        ImageRequest imgRequest = new ImageRequest(url,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap arg0) {
+                        // TODO Auto-generated method stub
 
-						// imageView.setImageBitmap(arg0);
-						// imageView.setImageBitmap(toRoundCorner(arg0,
-						// 2,activity));
-						imageView.setImageBitmap(toRoundBitmap(arg0));
-					}
-				}, 300, 200, Bitmap.Config.ARGB_8888,
-				new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError arg0) {
+                        // imageView.setImageBitmap(arg0);
+                        // imageView.setImageBitmap(toRoundCorner(arg0,
+                        // 2,activity));
+                        imageView.setImageBitmap(toRoundBitmap(arg0));
+                    }
+                }, 300, 200, Bitmap.Config.ARGB_8888,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError arg0) {
 
-					}
-				});
-		queue.add(imgRequest);
-		imgRequest.setRetryPolicy(new DefaultRetryPolicy(ConstantForSaveList.DEFAULTRETRYTIME*1000, 1, 1.0f));
+                    }
+                });
+        queue.add(imgRequest);
+        imgRequest.setRetryPolicy(new DefaultRetryPolicy(ConstantForSaveList.DEFAULTRETRYTIME*1000, 1, 1.0f));
 
-	}
+    }
 
-	/**
-	 * 图片加载变圆形
-	 */
-	public static void loadImage(Object urlob, final ImageView imageView) {
+    /**
+     * 图片加载变圆形
+     */
+    public static void loadImage(Object urlob, final ImageView imageView) {
 
-		String url = urlob.toString();
-		ImageRequest imgRequest = new ImageRequest(url,
-				new Response.Listener<Bitmap>() {
-					@Override
-					public void onResponse(Bitmap arg0) {
-						// TODO Auto-generated method stub
+        String url = urlob.toString();
+        ImageRequest imgRequest = new ImageRequest(url,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap arg0) {
+                        // TODO Auto-generated method stub
 
-						// imageView.setImageBitmap(arg0);
-						imageView.setImageBitmap(toRoundCorner(arg0, 2));
-					}
-				}, 300, 200, Bitmap.Config.ARGB_8888,
-				new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError arg0) {
+                        // imageView.setImageBitmap(arg0);
+                        imageView.setImageBitmap(toRoundBitmap(arg0));
+                    }
+                }, 300, 200, Bitmap.Config.ARGB_8888,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError arg0) {
 
-					}
-				});
-		queue.add(imgRequest);
-	}
+                    }
+                });
+        queue.add(imgRequest);
+    }
 
-	public static Bitmap toRoundCorner(Bitmap bitmap, float pixels,
-			Activity activity) {
-		DisplayMetrics metric = new DisplayMetrics();
-		activity.getWindowManager().getDefaultDisplay().getMetrics(metric);
+    /*public static Bitmap toRoundCorner(Bitmap bitmap, float pixels,
+                                       Activity activity) {
+        DisplayMetrics metric = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metric);
 
-		float density = metric.density; // 密度（0.75 / 1.0 / 1.5）
-		int aa = (int) (75 * density);
-		Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-				bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-		Canvas canvas = new Canvas(output);
+        float density = metric.density; // 密度（0.75 / 1.0 / 1.5）
+        int aa = (int) (75 * density);
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
 
-		final int color = 0xff424242;
-		final Paint paint = new Paint();
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
 
-		final Rect rect = new Rect(0, 0, aa, aa);
-		final RectF rectF = new RectF(rect);
-		final float roundPx = pixels;
+        final Rect rect = new Rect(0, 0, aa, aa);
+        final RectF rectF = new RectF(rect);
+        final float roundPx = pixels;
 
-		paint.setAntiAlias(true);
-		canvas.drawARGB(0, 0, 0, 0);
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
 
-		paint.setColor(color);
+        paint.setColor(color);
 
-		canvas.drawRoundRect(rectF, bitmap.getWidth() / pixels,
-				bitmap.getWidth() / pixels, paint);
-		paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-		canvas.drawBitmap(bitmap, rect, rect, paint);
-		return output;
-	}
+        canvas.drawRoundRect(rectF, bitmap.getWidth() / pixels,
+                bitmap.getWidth() / pixels, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return output;
+    }*/
 
-	public static Bitmap toRoundCorner(Bitmap bitmap, float pixels) {
-		Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-				bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-		Canvas canvas = new Canvas(output);
+   /* public static Bitmap toRoundCorner(Bitmap bitmap, float pixels) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
 
-		final int color = 0xff424242;
-		final Paint paint = new Paint();
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
 
-		final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-		final RectF rectF = new RectF(rect);
-		final float roundPx = pixels;
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+        final float roundPx = pixels;
 
-		paint.setAntiAlias(true);
-		canvas.drawARGB(0, 0, 0, 0);
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
 
-		paint.setColor(color);
+        paint.setColor(color);
 
-		canvas.drawRoundRect(rectF, bitmap.getWidth() / pixels,
-				bitmap.getHeight() / pixels, paint);
-		paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-		canvas.drawBitmap(bitmap, rect, rect, paint);
-		return output;
-	}
+        canvas.drawRoundRect(rectF, bitmap.getWidth() / pixels,
+                bitmap.getHeight() / pixels, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return output;
+    }
+*/
+    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
 
-	/**
-	 * 转换图片成圆形
-	 * 
-	 * @param bitmap
-	 *            传入Bitmap对象
-	 * @return
-	 */
-	public static Bitmap toRoundBitmap(Bitmap bitmap) {
+        try {
+            int min = Math.min(bitmap.getWidth(), bitmap.getHeight());
+            Bitmap output = Bitmap.createBitmap(min, min, Config.ARGB_8888);
+            Canvas canvas = new Canvas(output);
+
+            final int color = 0xff424242;
+            final Paint paint = new Paint();
+
+            final Rect rect = new Rect(0, 0, min, min);
+            final RectF rectF = new RectF(rect);
+
+            final float roundPx = 20;
+
+            paint.setAntiAlias(true);
+            canvas.drawARGB(0, 0, 0, 0);
+            paint.setColor(color);
+            canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+            paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+            canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            canvas.drawBitmap(bitmap, rect, rect, paint);
+
+            return output;
+        } catch (OutOfMemoryError e) {
+
+        }
+        return null;
+    }
+    public static Bitmap toRoundBitmap(Bitmap bitmap) {
+        return getRoundedCornerBitmap(bitmap);
+    }
+
+    /**
+     * 转换图片成圆形
+     *
+     * @param bitmap
+     *            传入Bitmap对象
+     * @return
+     */
+	/*public static Bitmap toRoundBitmap(Bitmap bitmap) {
 		int width = bitmap.getWidth();
 		int height = bitmap.getHeight();
 		float roundPx;
@@ -198,5 +231,5 @@ public class LoadImage {
 		canvas.drawBitmap(bitmap, src, dst, paint); // 以Mode.SRC_IN模式合并bitmap和已经draw了的Circle
 
 		return output;
-	}
+	}*/
 }

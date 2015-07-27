@@ -54,6 +54,7 @@ import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
 import com.parttime.addresslist.PublicCountListActivity;
+import com.parttime.constants.ApplicationConstants;
 import com.parttime.main.adapter.ChatAllHistoryAdapter;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
@@ -103,6 +104,7 @@ public class MessageAndAddressFragment extends Fragment {
 	private Sidebar sidebar;
 	private List<String> blackList;
     private Map<String, MessageSet> messageSetMap;
+    public  static boolean isReflashMessageSetTop = false;
 	ArrayList<HuanxinUser> usersNick = new ArrayList<>();
 	// =========转拼音========
 	private CharacterParser characterParser;
@@ -222,6 +224,7 @@ public class MessageAndAddressFragment extends Fragment {
         //对列表更具置顶设置排序
         sortMessages(conversationList, messageSetMap);
         messageListView = (ListView) page1.findViewById(R.id.list);
+        filterAdapterData();
         messageAdapter = new ChatAllHistoryAdapter(getActivity(), 1, conversationList);
         messageAdapter.messageSetMap = messageSetMap;
 
@@ -243,6 +246,19 @@ public class MessageAndAddressFragment extends Fragment {
                 return false;
             }
         });
+    }
+
+    /**
+     * 过滤掉脏数据
+     */
+    private void filterAdapterData() {
+        ArrayList<EMConversation> dirtyData = new ArrayList<>();
+        for(EMConversation emConversation : conversationList){
+            if(emConversation == null){
+                dirtyData.add(emConversation);
+            }
+        }
+        conversationList.removeAll(dirtyData);
     }
 
     private void initAddressView() {
@@ -295,7 +311,10 @@ public class MessageAndAddressFragment extends Fragment {
 
         for(Entry<String ,MessageSet> entry : messageSetMap.entrySet()){
             String key = entry.getKey();
-            conversationList.add(0, temp.get(key));
+            EMConversation emConversation = temp.get(key);
+            if(emConversation != null) {
+                conversationList.add(0, emConversation);
+            }
         }
     }
 
@@ -407,6 +426,12 @@ public class MessageAndAddressFragment extends Fragment {
             message.refresh();
             message.updateUnreadNotication();
             addressbook.dealdd();
+
+            if(isReflashMessageSetTop) {
+                reflashMessageTop();
+                isReflashMessageSetTop = false;
+            }
+
         }
 
     }
@@ -804,7 +829,7 @@ public class MessageAndAddressFragment extends Fragment {
                         && !entry.getKey().equals(Constant.PUBLIC_COUNT)
                         && !blackList.contains(entry.getKey())) {
                     // 这里有bug，会有好友列表有uid,没有名字的情况
-                    if (!entry.getKey().equals("jianzhidaren")) {
+                    if (!entry.getKey().equals(ApplicationConstants.JZDR)) {
                         // userName ==nick 都是u661或者c221之类的
                         // head 是u或者c
                         contactList.add(entry.getValue());

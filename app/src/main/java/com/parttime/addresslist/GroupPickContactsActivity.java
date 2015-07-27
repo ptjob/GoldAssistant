@@ -40,6 +40,8 @@ import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.activity.BaseActivity;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.widget.Sidebar;
+import com.parttime.constants.ActivityExtraAndKeys;
+import com.parttime.constants.ApplicationConstants;
 import com.parttime.main.PinyinComparator;
 import com.parttime.main.PinyinComparatorByHeader;
 import com.parttime.net.DefaultCallback;
@@ -112,7 +114,7 @@ public class GroupPickContactsActivity extends BaseActivity {
 			if (!user.getUsername().equals(Constant.NEW_FRIENDS_USERNAME)
 					&& !user.getUsername().equals(Constant.GROUP_USERNAME)
                     && !user.getUsername().equals(Constant.PUBLIC_COUNT)) {
-				if (!user.getUsername().equals("jianzhidaren")) {
+				if (!user.getUsername().equals(ApplicationConstants.JZDR)) {
 					alluserList.add(user);
 				}
 			}
@@ -160,8 +162,10 @@ public class GroupPickContactsActivity extends BaseActivity {
 	 */
 	public void save(View v) {
 		if (NetWorkCheck.isOpenNetwork(GroupPickContactsActivity.this)) {
-			setResult(RESULT_OK, new Intent().putExtra("newmembers",
-					getToBeAddMembers().toArray(new String[0])));
+            Intent intent = new Intent();
+            String[] member = getToBeAddMembers().toArray(new String[0]);
+            intent.putExtra(ActivityExtraAndKeys.Addressbook.MEMBER, member);
+			setResult(RESULT_OK, intent);
 			finish();
 		} else {
 			Toast.makeText(getApplicationContext(), "请检查网络连接设置", Toast.LENGTH_SHORT).show();
@@ -175,12 +179,11 @@ public class GroupPickContactsActivity extends BaseActivity {
 	 * @return
 	 */
 	private List<String> getToBeAddMembers() {
-		List<String> members = new ArrayList<String>();
+		List<String> members = new ArrayList<>();
 		if (contactAdapter == null) {
 			return members;
 		}
-		if (contactAdapter.getCount() == 1)
-			return members;
+
 		int length = contactAdapter.isCheckedArray.length;
 		for (int i = 0; i < length; i++) {
 			String username = contactAdapter.getItem(i).getUsername();

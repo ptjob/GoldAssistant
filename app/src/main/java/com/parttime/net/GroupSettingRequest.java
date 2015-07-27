@@ -1,5 +1,7 @@
 package com.parttime.net;
 
+import android.text.TextUtils;
+
 import com.android.volley.RequestQueue;
 import com.carson.constant.ConstantForSaveList;
 import com.parttime.pojo.BaseUser;
@@ -97,6 +99,11 @@ public class GroupSettingRequest extends BaseRequest {
         public static int APPLY_UNLOOK = 0;
         public static int APPLY_LOOKED = 3;
         public static int APPLY_REJECT = 2;
+
+        public static int ABLECOMMENT_NO = 0;
+        public static int ABLECOMMENT_OK = 1;
+        public static int ISCOMMENT_NO = 0;
+        public static int ISCOMMENT_OK = 1;
 
         public int userId;  //环信ID
         public String creditworthiness; //信誉值  对10取整
@@ -264,6 +271,36 @@ public class GroupSettingRequest extends BaseRequest {
         }) ;
     }
 
+    /**
+     * 更新群通告
+     * @param groupId  群组ID
+     * @param updaterName 修改者姓名
+     * @param info 通告内容
+     * @param title 通告标题
+     * @param queue RequestQueue
+     * @param callback DefaultCallback
+     */
+    public void updateGroupDescription(String groupId, String updaterName,String info, String title ,RequestQueue queue , final DefaultCallback callback){
+        Map<String, String> map = new HashMap<>();
+        map.put("group_id", groupId);
+        map.put("name", updaterName);
+        map.put("info", info);
+        if(!TextUtils.isEmpty(title)) {
+            map.put("title", title);
+        }
+
+        request(Url.GROUP_MODIFYGROUPDESC,map, queue, new Callback() {
+            @Override
+            public void success(Object obj) {
+                callback.success(obj);
+            }
+
+            @Override
+            public void failed(Object obj) {
+                callback.failed(obj);
+            }
+        }) ;
+    }
 
 
 }

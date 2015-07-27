@@ -78,9 +78,7 @@ import com.easemob.chat.VoiceMessageBody;
 import com.easemob.chatuidemo.activity.BaiduMapActivity;
 import com.easemob.chatuidemo.activity.BaseActivity;
 import com.easemob.chatuidemo.activity.ForwardMessageActivity;
-import com.easemob.chatuidemo.activity.GroupDetailsActivity;
-import com.easemob.chatuidemo.activity.ImageGridActivity;
-import com.easemob.chatuidemo.activity.VoiceCallActivity;
+import com.parttime.addresslist.NormalGroupSettingActivity;
 import com.easemob.chatuidemo.adapter.ExpressionAdapter;
 import com.easemob.chatuidemo.adapter.ExpressionPagerAdapter;
 import com.easemob.chatuidemo.adapter.VoicePlayClickListener;
@@ -96,6 +94,7 @@ import com.easemob.util.VoiceRecorder;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.parttime.IM.activitysetting.GroupResumeSettingActivity;
+import com.parttime.constants.ApplicationConstants;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
@@ -174,17 +173,18 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     private View buttonPressToSpeak;
     // private ViewPager expressionViewpager;
     private LinearLayout emojiIconContainer;
-    private LinearLayout btnContainer;
-    private ImageView locationImgview;
+    private LinearLayout btnContainer,activityDetailContainer;
+    private ImageView locationImgview , activityManagementImgview;
     private View more;
     private ImageView iv_emoticons_normal;
     private ImageView iv_emoticons_checked;
-    private RelativeLayout edittext_layout;
+    private RelativeLayout edittextLayout;
     private ProgressBar loadmorePB;
     private Button btnMore;
     private LinearLayout container_zidingyi_msg;// 分享兼职布局,商家端隐藏、客户端显示
-    TextView nameVeiw;
+    private TextView nameVeiw;
     private RelativeLayout topLayout;
+    private ChatBottomBarHelper chatBottomBarHelper;
 
     private ClipboardManager clipboard;
     private InputMethodManager manager;
@@ -207,7 +207,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     };
 
     // 给谁发送消息
-    private String toChatUsername;
+    protected String toChatUsername;
     private File cameraFile;
     public static int resendPos;
     private boolean isloading;
@@ -221,6 +221,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     private EMGroup group;
     private String user_id;// id 商家or用户
     protected String noticeContent;
+    protected GroupDescription groupDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,23 +236,30 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         IntentFilter filter = new IntentFilter();
         filter.addAction(COM_CARSON_SHARE_JIANZHI);
         registerReceiver(receiveBroadCast, filter);
-        if(ConstantForSaveList.groupAppliantCache.get(toChatUsername) == null
-                && chatType != CHATTYPE_SINGLE //群聊
-                && group != null
-                ){
+        if(group != null) {
             String description = group.getDescription();
-            if(! TextUtils.isEmpty(description)){
+            noticeContent = group.getDescription();
+            if(! TextUtils.isEmpty(description)) {
                 try {
-                    description = URLDecoder.decode(description,"UTF-8");
-                    GroupDescription gd = new Gson().fromJson(description, GroupDescription.class);
-                    if (gd != null && gd.type == GroupDescription.ACTIVITY_GROUP ||
-                            gd.type == GroupDescription.ACTIVITY_CONSULTATION_GROUP) {
-                        //获取报名列表
-                        getGroupApliantResult(toChatUsername);
-                    }
-                }catch(IllegalStateException | JsonSyntaxException |UnsupportedEncodingException ignore){
+                    description = URLDecoder.decode(description, "UTF-8");
+                    groupDescription = new Gson().fromJson(description, GroupDescription.class);
+                } catch (IllegalStateException | JsonSyntaxException | UnsupportedEncodingException ignore) {
                     Log.e(TAG, "description format is error , description = " + description);
                 }
+            }
+        }
+        if(ConstantForSaveList.groupAppliantCache.get(toChatUsername) == null
+                && chatType != CHATTYPE_SINGLE //群聊
+                ){
+
+            try {
+                if (groupDescription != null && (groupDescription.type == GroupDescription.ACTIVITY_GROUP ||
+                        groupDescription.type == GroupDescription.ACTIVITY_CONSULTATION_GROUP)) {
+                    activityDetailContainer.setVisibility(View.VISIBLE);
+                    //获取报名列表
+                    getGroupApliantResult(toChatUsername);
+                }
+            }catch(IllegalStateException | JsonSyntaxException ignore){
             }
         }
     }
@@ -266,13 +274,15 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         listView = (ListView) findViewById(R.id.list);
         mEditTextContent = (PasteEditText) findViewById(R.id.et_sendmessage);
         buttonSetModeKeyboard = findViewById(R.id.btn_set_mode_keyboard);
-        edittext_layout = (RelativeLayout) findViewById(R.id.edittext_layout);
+        edittextLayout = (RelativeLayout) findViewById(R.id.edittext_layout);
         buttonSetModeVoice = findViewById(R.id.btn_set_mode_voice);
         buttonSend = findViewById(R.id.btn_send);
         buttonPressToSpeak = findViewById(R.id.btn_press_to_speak);
         expressionViewpager = (ViewPager) findViewById(R.id.vPager);
         emojiIconContainer = (LinearLayout) findViewById(R.id.ll_face_container);
         btnContainer = (LinearLayout) findViewById(R.id.ll_btn_container);
+        activityDetailContainer = (LinearLayout) findViewById(R.id.activity_management_container);
+        activityManagementImgview = (ImageView) findViewById(R.id.imgv_activity_management);
         locationImgview = (ImageView) findViewById(R.id.btn_location);
         iv_emoticons_normal = (ImageView) findViewById(R.id.iv_emoticons_normal);
         iv_emoticons_checked = (ImageView) findViewById(R.id.iv_emoticons_checked);
@@ -287,7 +297,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         topLayout.setBackgroundColor(getResources().getColor(
                 R.color.guanli_common_color));
         more = findViewById(R.id.more);
-        edittext_layout.setBackgroundResource(R.drawable.input_bar_bg_normal);
+        edittextLayout.setBackgroundResource(R.drawable.input_bar_bg_normal);
 
         // 动画资源文件,用于录制语音时
         micImages = new Drawable[] {
@@ -304,7 +314,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                 getResources().getDrawable(R.drawable.record_animate_11),
                 getResources().getDrawable(R.drawable.record_animate_12),
                 getResources().getDrawable(R.drawable.record_animate_13),
-                getResources().getDrawable(R.drawable.record_animate_14), };
+                getResources().getDrawable(R.drawable.record_animate_14),
+        };
 
         // 表情list
         reslist = getExpressionRes(35);
@@ -315,7 +326,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         views.add(gv1);
         views.add(gv2);
         expressionViewpager.setAdapter(new ExpressionPagerAdapter(views));
-        edittext_layout.requestFocus();
+        edittextLayout.requestFocus();
         voiceRecorder = new VoiceRecorder(micImageHandler);
         buttonPressToSpeak.setOnTouchListener(new PressToSpeakListen());
         mEditTextContent.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -323,10 +334,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    edittext_layout
+                    edittextLayout
                             .setBackgroundResource(R.drawable.input_bar_bg_active);
                 } else {
-                    edittext_layout
+                    edittextLayout
                             .setBackgroundResource(R.drawable.input_bar_bg_normal);
                 }
 
@@ -336,9 +347,9 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 
             @Override
             public void onClick(View v) {
-                edittext_layout
+                edittextLayout
                         .setBackgroundResource(R.drawable.input_bar_bg_active);
-                more.setVisibility(View.GONE);
+                moreGone();
                 iv_emoticons_normal.setVisibility(View.VISIBLE);
                 iv_emoticons_checked.setVisibility(View.INVISIBLE);
                 emojiIconContainer.setVisibility(View.GONE);
@@ -376,6 +387,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         activityInstance = this;
         iv_emoticons_normal.setOnClickListener(this);
         iv_emoticons_checked.setOnClickListener(this);
+        btnMore.setOnClickListener(this);
         // position = getIntent().getIntExtra("position", -1);
         clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -387,17 +399,19 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         chatType = getIntent().getIntExtra("chatType", CHATTYPE_SINGLE);
         if (chatType == CHATTYPE_SINGLE) { // 单聊
             toChatUsername = getIntent().getStringExtra("userId");
+
             if (toChatUsername != null && !"".equals(toChatUsername)) {
-                if ("jianzhidaren".equals(toChatUsername)) {
-                    sp.saveSharedPreferences("jianzhidaren" + "realname", "兼职达人团队");
-                } else if ("caiwu".equals(toChatUsername)) {
-                    sp.saveSharedPreferences("caiwu" + "realname", "财务小管家");
-                } else if ("dingyue".equals(toChatUsername)) {
-                    sp.saveSharedPreferences("dingyue" + "realname", "订阅小助手");
-                } else if ("kefu".equals(toChatUsername)) {
-                    sp.saveSharedPreferences("kefu" + "realname", "兼职达人客服");
-                } else if ("tongzhi".equals(toChatUsername)) {
-                    sp.saveSharedPreferences("tongzhi" + "realname", "通知中心");
+                if (ApplicationConstants.JZDR.equals(toChatUsername)) {
+                    sp.saveSharedPreferences(ApplicationConstants.JZDR + "realname", "兼职达人团队");
+                    chatBottomBarHelper = new ChatBottomBarHelper(this);
+                } else if (ApplicationConstants.CAIWU.equals(toChatUsername)) {
+                    sp.saveSharedPreferences(ApplicationConstants.CAIWU + "realname", "财务小管家");
+                } else if (ApplicationConstants.DINGYUE.equals(toChatUsername)) {
+                    sp.saveSharedPreferences(ApplicationConstants.DINGYUE + "realname", "订阅小助手");
+                } else if (ApplicationConstants.KEFU.equals(toChatUsername)) {
+                    sp.saveSharedPreferences(ApplicationConstants.KEFU + "realname", "兼职达人客服");
+                } else if (ApplicationConstants.TONGZHI.equals(toChatUsername)) {
+                    sp.saveSharedPreferences(ApplicationConstants.TONGZHI + "realname", "通知中心");
                 }
             }
 
@@ -502,7 +516,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 hideKeyboard();
-                more.setVisibility(View.GONE);
+                moreGone();
                 iv_emoticons_normal.setVisibility(View.VISIBLE);
                 iv_emoticons_checked.setVisibility(View.INVISIBLE);
                 emojiIconContainer.setVisibility(View.GONE);
@@ -735,22 +749,27 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             iv_emoticons_checked.setVisibility(View.INVISIBLE);
             btnContainer.setVisibility(View.VISIBLE);
             emojiIconContainer.setVisibility(View.GONE);
-            more.setVisibility(View.GONE);
+            moreGone();
 
         } else if (id == R.id.btn_video) {
             // 点击摄像图标
-            Intent intent = new Intent(ChatActivity.this,
+            /*Intent intent = new Intent(ChatActivity.this,
                     ImageGridActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_SELECT_VIDEO);
+            startActivityForResult(intent, REQUEST_CODE_SELECT_VIDEO);*/
         } else if (id == R.id.btn_file) { // 点击文件图标
-            selectFileFromLocal();
+            //selectFileFromLocal();
+
         } else if (id == R.id.btn_voice_call) { // 点击语音电话图标
-            if (!EMChatManager.getInstance().isConnected())
+            /*if (!EMChatManager.getInstance().isConnected())
                 Toast.makeText(this, "尚未连接至服务器，请稍后重试", Toast.LENGTH_SHORT).show();
             else
                 startActivity(new Intent(ChatActivity.this,
                         VoiceCallActivity.class).putExtra("username",
-                        toChatUsername).putExtra("isComingCall", false));
+                        toChatUsername).putExtra("isComingCall", false));*/
+
+        }else if(id == R.id.imgv_activity_management){ //活动管理
+            Toast.makeText(ChatActivity.this, " go to activity management ", Toast.LENGTH_SHORT).show();
+
         } else if (id == R.id.btn_zidingyi_msg) {
             // 先到选择我的收藏界面,选择兼职发送
             Intent intent = new Intent(ChatActivity.this,
@@ -761,6 +780,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             // 发送自定义图文消息
             // sendZiDingyiMsg("荷尔美试吃促销 110元/日", "1000人/日", "深圳", "05-17",
             // "05-27", "1001");
+        }else if(id == R.id.btn_more){
+            more(view);
         }
     }
 
@@ -1143,9 +1164,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
      * @param view View
      */
     public void setModeVoice(View view) {
-        hideKeyboard();
-        edittext_layout.setVisibility(View.GONE);
-        more.setVisibility(View.GONE);
+
+        edittextLayout.setVisibility(View.GONE);
         view.setVisibility(View.GONE);
         buttonSetModeKeyboard.setVisibility(View.VISIBLE);
         buttonSend.setVisibility(View.GONE);
@@ -1155,6 +1175,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         iv_emoticons_checked.setVisibility(View.INVISIBLE);
         btnContainer.setVisibility(View.VISIBLE);
         emojiIconContainer.setVisibility(View.GONE);
+        moreGone();
+        hideKeyboard();
 
     }
 
@@ -1173,8 +1195,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         // }
         // }
         // });
-        edittext_layout.setVisibility(View.VISIBLE);
-        more.setVisibility(View.GONE);
+        edittextLayout.setVisibility(View.VISIBLE);
+        moreGone();
         view.setVisibility(View.GONE);
         buttonSetModeVoice.setVisibility(View.VISIBLE);
         // mEditTextContent.setVisibility(View.VISIBLE);
@@ -1221,12 +1243,16 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
      * @param view View
      */
     public void toGroupDetails(View view) {
-        /*startActivityForResult(
-                (new Intent(this, GroupDetailsActivity.class).putExtra(
-                        "groupId", toChatUsername)), REQUEST_CODE_GROUP_DETAIL);*/
-        startActivityForResult(
-                (new Intent(this, GroupResumeSettingActivity.class).putExtra(
-                        "groupId", toChatUsername)), REQUEST_CODE_GROUP_DETAIL);
+        if (groupDescription != null && (groupDescription.type == GroupDescription.ACTIVITY_GROUP ||
+                groupDescription.type == GroupDescription.ACTIVITY_CONSULTATION_GROUP)) {
+            startActivityForResult(
+                    (new Intent(this, GroupResumeSettingActivity.class).putExtra(
+                            "groupId", toChatUsername)), REQUEST_CODE_GROUP_DETAIL);
+        }else{
+            startActivityForResult(
+                    (new Intent(this, NormalGroupSettingActivity.class).putExtra(
+                            "groupId", toChatUsername)), REQUEST_CODE_GROUP_DETAIL);
+        }
     }
 
     /**
@@ -1236,11 +1262,11 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
      */
     public void more(View view) {
         if (more.getVisibility() == View.GONE) {
-            System.out.println("more gone");
-            hideKeyboard();
             more.setVisibility(View.VISIBLE);
             btnContainer.setVisibility(View.VISIBLE);
             emojiIconContainer.setVisibility(View.GONE);
+            hideKeyboard();
+            btnMore.setBackgroundResource(R.drawable.search_clear_pressed);
         } else {
             if (emojiIconContainer.getVisibility() == View.VISIBLE) {
                 emojiIconContainer.setVisibility(View.GONE);
@@ -1248,11 +1274,17 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                 iv_emoticons_normal.setVisibility(View.VISIBLE);
                 iv_emoticons_checked.setVisibility(View.INVISIBLE);
             } else {
-                more.setVisibility(View.GONE);
+                moreGone();
+                btnMore.setBackgroundResource(R.drawable.type_select_btn);
             }
 
         }
 
+    }
+
+    private void moreGone() {
+        more.setVisibility(View.GONE);
+        btnMore.setBackgroundResource(R.drawable.type_select_btn);
     }
 
     /**
@@ -1263,7 +1295,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     public void editClick(View v) {
         listView.setSelection(listView.getCount() - 1);
         if (more.getVisibility() == View.VISIBLE) {
-            more.setVisibility(View.GONE);
+            moreGone();
             iv_emoticons_normal.setVisibility(View.VISIBLE);
             iv_emoticons_checked.setVisibility(View.INVISIBLE);
         }
@@ -1630,7 +1662,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     @Override
     public void onBackPressed() {
         if (more.getVisibility() == View.VISIBLE) {
-            more.setVisibility(View.GONE);
+            moreGone();
             iv_emoticons_normal.setVisibility(View.VISIBLE);
             iv_emoticons_checked.setVisibility(View.INVISIBLE);
         } else {
@@ -1754,8 +1786,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                     if (toChatUsername.equals(groupId)) {
                         Toast.makeText(ChatActivity.this, "你被群创建者从此群中移除", Toast.LENGTH_SHORT)
                                 .show();
-                        if (GroupDetailsActivity.instance != null)
-                            GroupDetailsActivity.instance.finish();
+                        if (NormalGroupSettingActivity.instance != null)
+                            NormalGroupSettingActivity.instance.finish();
                         finish();
                     }
                 }
@@ -1770,8 +1802,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                     if (toChatUsername.equals(groupId)) {
                         Toast.makeText(ChatActivity.this, "当前群聊已被群创建者解散", Toast.LENGTH_SHORT)
                                 .show();
-                        if (GroupDetailsActivity.instance != null)
-                            GroupDetailsActivity.instance.finish();
+                        if (NormalGroupSettingActivity.instance != null)
+                            NormalGroupSettingActivity.instance.finish();
                         finish();
                     }
                 }

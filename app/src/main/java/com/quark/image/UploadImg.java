@@ -146,7 +146,7 @@ public class UploadImg {
 			final ImageView imageView, String url, final Button warning,
 			String paramsOneName, String paramsOneValue, String fileParams,
 			String paramsTwoValeu, String paramsThreeName,
-			String paramsThreeValeu, final ProgressBar loadProBar) {
+			String paramsThreeValeu, final ProgressBar loadProBar, final OnUploadListener uploadListener) {
 		if (context != null) {
 			// showWait(true,context);
 		}
@@ -187,6 +187,9 @@ public class UploadImg {
 						}
 						// context.sendBroadcast(new
 						// Intent("com.carson.uploadpic"));
+						if(uploadListener != null){
+							uploadListener.success();
+						}
 						Toast mToast = Toast.makeText(context, "上传成功", 0);
 						mToast.setGravity(Gravity.CENTER, 0, 0);
 						mToast.show();
@@ -229,6 +232,9 @@ public class UploadImg {
 					public void onFailure(HttpException error, String msg) {
 						// context.sendBroadcast(new
 						// Intent("com.carson.uploadpic"));
+						if(uploadListener != null){
+							uploadListener.fail();
+						}
 						Toast mToast = Toast.makeText(context, "上传失败，请重试", 0);
 						mToast.setGravity(Gravity.CENTER, 0, 0);
 						mToast.show();
@@ -393,7 +399,7 @@ public class UploadImg {
 			ImageView img, String url, Button warning, String paramsOneName,
 			String paramsOneValue, String paramsTwoName, String paramsTwoValeu,
 			String paramsThreeName, String paramsThreeValeu,
-			ProgressBar loadProBar) {
+			ProgressBar loadProBar, OnUploadListener uploadListener) {
 
 		// 有的手机如Htc intent.getextras()为空
 		Bundle extras = data.getExtras();
@@ -418,7 +424,7 @@ public class UploadImg {
 					uploadpic(activity, imagePath, img, url, warning,
 							paramsOneName, paramsOneValue, paramsTwoName,
 							paramsTwoValeu, paramsThreeName, paramsThreeValeu,
-							loadProBar);
+							loadProBar, uploadListener);
 				}
 			} else {
 			}
@@ -446,12 +452,17 @@ public class UploadImg {
 					uploadpic(activity, imagePath, img, url, warning,
 							paramsOneName, paramsOneValue, paramsTwoName,
 							paramsTwoValeu, paramsThreeName, paramsThreeValeu,
-							loadProBar);
+							loadProBar, uploadListener);
 				}
 			} else {
 			}
 
 		}
+	}
+
+	public static interface OnUploadListener {
+		void success();
+		void fail();
 	}
 
 }

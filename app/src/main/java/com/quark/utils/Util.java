@@ -207,4 +207,10 @@ public class Util {
 			return false;
 		}
 	}
+
+	public static boolean isName(String str){
+		Pattern p = Pattern.compile("^[\\u4E00-\\u9FFF]+$");
+		Matcher matcher = p.matcher(str);
+		return matcher.matches();
+	}
 }

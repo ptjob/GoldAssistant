@@ -135,7 +135,8 @@
 
     <dimen name="rank_view_inner_margin_default">2dp</dimen>
 
-    <dimen name="form_title_margin_default">6dp</dimen>
+    <dimen name="form_title_margin_bottom_default">9dp</dimen>
+    <dimen name="form_title_margin_top_default">9dp</dimen>
 
     <!-- 招人 -->
     <dimen name="job_type_content_padding_left_right">37dp</dimen>

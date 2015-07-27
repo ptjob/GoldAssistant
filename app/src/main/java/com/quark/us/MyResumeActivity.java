@@ -1156,42 +1156,42 @@ public class MyResumeActivity extends BaseActivity implements
 							UploadImg.getImageToView(MyResumeActivity.this,
 									data, button1, uploadPicUrl, null, "type",
 									type, "file", null, "user_id", userId,
-									loadProgressBar);
+									loadProgressBar, null);
 						}
 						if (type.equals("2")) {
 							loadProgressBar.setVisibility(View.VISIBLE);
 							UploadImg.getImageToView(MyResumeActivity.this,
 									data, button2, uploadPicUrl, null, "type",
 									type, "file", null, "user_id", userId,
-									loadProgressBar);
+									loadProgressBar, null);
 						}
 						if (type.equals("3")) {
 							loadProgressBar.setVisibility(View.VISIBLE);
 							UploadImg.getImageToView(MyResumeActivity.this,
 									data, button3, uploadPicUrl, null, "type",
 									type, "file", null, "user_id", userId,
-									loadProgressBar);
+									loadProgressBar, null);
 						}
 						if (type.equals("4")) {
 							loadProgressBar.setVisibility(View.VISIBLE);
 							UploadImg.getImageToView(MyResumeActivity.this,
 									data, button4, uploadPicUrl, null, "type",
 									type, "file", null, "user_id", userId,
-									loadProgressBar);
+									loadProgressBar, null);
 						}
 						if (type.equals("5")) {
 							loadProgressBar.setVisibility(View.VISIBLE);
 							UploadImg.getImageToView(MyResumeActivity.this,
 									data, button5, uploadPicUrl, null, "type",
 									type, "file", null, "user_id", userId,
-									loadProgressBar);
+									loadProgressBar,  null);
 						}
 						if (type.equals("6")) {
 							loadProgressBar.setVisibility(View.VISIBLE);
 							UploadImg.getImageToView(MyResumeActivity.this,
 									data, button6, uploadPicUrl, null, "type",
 									type, "file", null, "user_id", userId,
-									loadProgressBar);
+									loadProgressBar, null);
 						}
 					} else {
 					}
