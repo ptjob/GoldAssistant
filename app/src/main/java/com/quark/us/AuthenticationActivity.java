@@ -637,13 +637,13 @@ public class AuthenticationActivity extends BaseActivity implements
 						UploadImg.getImageToView(AuthenticationActivity.this,
 								data, pic_idCard, uploadidUrl,
 								icon_warn_idCard, "company_id", userId,
-								"identity_front", null, null, null, proBar1);
+								"identity_front", null, null, null, proBar1, null);
 					} else if (option == 2) {
 						proBar2.setVisibility(View.VISIBLE);
 						UploadImg.getImageToView(AuthenticationActivity.this,
 								data, pic_idCard_back, uploadidUrl,
 								icon_warn_idCard_back, "company_id", userId,
-								"identity_verso", null, null, null, proBar2);
+								"identity_verso", null, null, null, proBar2, null);
 					}
 
 				}

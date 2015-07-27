@@ -126,16 +126,16 @@ public class Url {
 
 	// 商家身份证正面图片
 	public static final String COMPANY_uploadIdcard_zheng = HOST + SUBJECT
-			+ "/AgentCenter/upload_identity_front";
+			+ "/CompanyCenter/uploadIdentityFront";
 	// 商家身份证反面图片
 	public static final String COMPANY_uploadIdcard_fan = HOST + SUBJECT
-			+ "/AgentCenter/upload_identity_verso";
+			+ "/CompanyCenter/uploadIdentityVerso";
 	// 商家营业执照图片
 	public static final String COMPANY_uploadyinyzz = HOST + SUBJECT
-			+ "/AgentCenter/upload_company_picture";
+			+ "/CompanyCenter/uploadCompanyPicture";
 	// 商家审核提交
 	public static final String COMPANY_shenheSubmit = HOST + SUBJECT
-			+ "/AgentCenter/commit_authentication";
+			+ "/CompanyCenter/commitAuthentication";
 	// 31 展示我的简历
 	public static final String USER_jianli_show = HOST + SUBJECT
 			+ "/UserCenter/show_resume";

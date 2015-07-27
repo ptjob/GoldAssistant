@@ -852,7 +852,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="com.parttime.mine.RealNameCertActivity"
+            android:name="com.parttime.mine.RealNameCertSelectActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
@@ -908,6 +908,13 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="com.parttime.login.SetPwdActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+
+        <activity
+            android:name="com.parttime.mine.PersonalCertSubmitActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"

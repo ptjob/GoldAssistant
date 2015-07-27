@@ -312,6 +312,25 @@
     <string name="real_name_certed">已实名认证</string>
     <string name="real_name_not_certed">未实名认证</string>
 
+
+    <!-- 实名认证 -->
+    <string name="your_info_only_for_auth">您的资料仅被实名认证</string>
+    <string name="promiss_to_protect_personal_info">兼职达人不会向外界泄露您的个人信息</string>
+    <string name="boss_name">负责人姓名</string>
+    <string name="boss_id_card">负责人身份证号</string>
+    <string name="click_to_upload">点击上传</string>
+    <string name="submit_to_check">提交审核</string>
+    <string name="enterprise_register_id">企业注册号</string>
+    <string name="front_of_id_card">身份证正面图</string>
+    <string name="back_of_id_card">身份证背面图</string>
+    <string name="open_license_front">营业执照正面图</string>
+    <string name="please_enter_name">请填写姓名</string>
+    <string name="please_enter_id_card_num">请填写身份证号</string>
+    <string name="please_upload_id_card">请上传图片</string>
+    <string name="name_should_be_chinese">哎呀，名字应该是汉字哦</string>
+    <string name="please_enter_id_in_format">哎呀，请输入正确的身份证号码</string>
+
+
     <!-- 我的钱包 -->
     <string name="account_balance">账户余额（元）</string>
     <string name="recharge">充值</string>
