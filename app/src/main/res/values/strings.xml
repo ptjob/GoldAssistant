@@ -22,6 +22,9 @@
     <string name="no_net_tip">网络连接失败，请确认网络连接</string>
     <string name="format_error">格式不正确</string>
     <string name="action_failed">操作失败</string>
+    <string name="business">商家</string>
+    <string name="activity_group">活动群</string>
+    <string name="gold_assistant">金牌助理</string>
 
     <!-- 主界面 -->
     <string name="hiring">招人</string>

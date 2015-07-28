@@ -2,25 +2,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/list_item_layout"
     android:layout_width="match_parent"
-    android:layout_height="59dp"
-    android:gravity="center_vertical" >
+    android:layout_height="62dp"
+    android:gravity="center_vertical">
 
     <RelativeLayout
         android:id="@+id/avatar_container"
-        android:layout_width="59dp"
+        android:layout_width="62dp"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true" >
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <!-- 原本是 ImageView -->
 
-        <com.quark.http.image.CircularImage
-            android:id="@+id/avatar"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/default_avatar" />
+        <FrameLayout
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <com.quark.http.image.CircularImage
+                android:id="@+id/avatar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/default_avatar" />
+            <TextView
+                android:id="@+id/avatar_tag"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:text=""
+                android:layout_gravity="center_horizontal|bottom"
+                android:gravity="center_horizontal"
+                android:textSize="9dp"
+                android:visibility="gone"/>
+        </FrameLayout>
         <!--<ImageView
             android:id="@+id/avatar"
             android:layout_width="45dp"
@@ -36,10 +53,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="2dp"
+            android:minHeight="10dp"
+            android:minWidth="10dp"
             android:layout_marginTop="3dp"
             android:background="@drawable/unread_count_bg"
             android:gravity="center"
-            android:text="7"
+            android:text=""
             android:textColor="@android:color/white"
             android:textSize="12sp"
             />
@@ -49,9 +68,11 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/avatar_container"
+        android:layout_toEndOf="@id/avatar_container"
         android:ellipsize="end"
         android:maxLength="12"
         android:singleLine="true"
@@ -64,19 +85,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="7dp"
-        android:layout_marginTop="6dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="12dp"
         android:textColor="#888888"
         android:textSize="13sp"
-        android:text="time"/>
+        android:text=""
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"/>
 
     <ImageView
         android:id="@+id/msg_state"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="7dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_toRightOf="@id/avatar_container"
         android:src="@drawable/msg_state_fail_resend"
         android:visibility="gone" />
@@ -86,24 +110,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@id/time"
+        android:layout_toLeftOf="@id/quit"
+        android:layout_toStartOf="@id/quit"
         android:layout_toRightOf="@id/msg_state"
+        android:layout_toEndOf="@+id/msg_state"
         android:ellipsize="end"
-        android:padding="7dp"
         android:singleLine="true"
         android:textColor="#888888"
         android:textSize="14sp"
-        android:text="message"/>
+        android:text=""
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp" />
 
     <ImageView
         android:id="@+id/quit"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="7dp"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/msg_state_fail_resend"
-        android:visibility="visible" />
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/jingyin"
+        android:visibility="visible"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"/>
 
 </RelativeLayout>

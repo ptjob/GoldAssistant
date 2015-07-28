@@ -11,18 +11,19 @@
     <LinearLayout
         android:id="@+id/menu_layout"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:background="@color/body_color"
         android:gravity="center"
-        android:paddingTop="4dp"
-        android:weightSum="0.9" >
+        android:weightSum="0.9"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp">
 
    
         <LinearLayout
             android:id="@+id/l_two"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
             android:layout_gravity="center"
             android:layout_weight="0.3"
             android:background="@color/body_color"
@@ -30,15 +31,24 @@
             android:orientation="vertical" >
 
             <RelativeLayout
+                android:id="@+id/tv2_container"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="44dp">
 
+                <ImageView android:id="@+id/tv2_img"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/tab_btn_group_nor"/>
                 <TextView
                     android:id="@+id/tv2"
                     style="@style/bNavText"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/tab_btn_group_nor"
+                    android:layout_below="@+id/tv2_img"
+                    android:layout_marginTop="3dp"
+                    android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:text="@string/message"
                     android:textColor="@color/menu_huise" />
@@ -47,27 +57,30 @@
                     android:id="@+id/unread_company_quanzi_number"
                     android:layout_width="wrap_content"
                     android:layout_height="20dip"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="36dip"
+                    android:layout_marginRight="36dp"
+                    android:layout_marginEnd="36dp"
+                    android:layout_marginTop="0dp"
                     android:background="@drawable/unread_count_bg"
                     android:gravity="center"
                     android:text="9"
                     android:textColor="@android:color/white"
                     android:textSize="9dp"
-                    android:visibility="invisible" />
+                    android:visibility="visible"
+                    android:layout_alignParentRight="true" />
             </RelativeLayout>
 
             <ImageView
                 android:id="@+id/tv2_boomt"
                 android:layout_width="fill_parent"
                 android:layout_height="1.5dp"
-                android:background="@color/body_color" />
+                android:background="@color/body_color"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/l_three"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_weight="0.3"
             android:background="@color/body_color"
@@ -75,16 +88,23 @@
             android:orientation="vertical" >
 
             <RelativeLayout
+                android:id="@+id/tv3_container"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
+                android:layout_height="48dp" >
+                <ImageView android:id="@+id/tv3_img"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/tab2_off"/>
                 <TextView
                     android:id="@+id/tv3"
                     style="@style/bNavText"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/tab2_off"
+                    android:layout_below="@+id/tv3_img"
                     android:gravity="center"
+                    android:layout_marginTop="3dp"
                     android:text="@string/hiring"
                     android:textColor="@color/menu_huise" />
 
@@ -103,34 +123,47 @@
                 android:id="@+id/tv3_boomt"
                 android:layout_width="fill_parent"
                 android:layout_height="1.5dp"
-                android:background="@color/body_color" />
+                android:background="@color/body_color"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/l_four"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_weight="0.3"
             android:background="@color/body_color"
             android:gravity="center"
             android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/tv4"
-                style="@style/bNavText"
+            <RelativeLayout
+                android:id="@+id/tv4_container"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:drawableTop="@drawable/tab_btn_manage_nor"
-                android:gravity="center"
-                android:text="@string/mine"
-                android:textColor="@color/menu_huise" />
+                android:layout_height="48dp" >
+                <ImageView android:id="@+id/tv4_img"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/tab_btn_manage_nor"/>
+                <TextView
+                    android:id="@+id/tv4"
+                    style="@style/bNavText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv4_img"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:text="@string/mine"
+                    android:textColor="@color/menu_huise" />
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/tv4_boomt"
                 android:layout_width="fill_parent"
                 android:layout_height="1.5dp"
-                android:background="@color/body_color" />
+                android:background="@color/body_color"
+                android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 

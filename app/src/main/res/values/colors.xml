@@ -209,9 +209,14 @@
     <color name="choose_type">#9FCE42</color>
     <color name="choose_paytype">#FBC42C</color>
 
+
+
     <!--消息列表-->
     <!--置顶背景颜色-->
-    <color name="message_top">#FFE8AB</color>
+    <color name="message_top">#EEF0F4</color>
+    <color name="business">#4BA4DE</color>
+    <color name="activity_group">#FF5D56</color>
+    <color name="gold_assistant">#FE8800</color>
 
 
     <color name="divider_color">#e2e2e2</color>

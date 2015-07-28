@@ -180,11 +180,11 @@ public class MainTabActivity extends FragmentActivity implements
 
 	// =========环信end===========
 	public static MainTabActivity instens;
-	private TextView  tv2, tv3, tv4;
 	private ImageView  tv2_boom, tv3_boom, tv4_boom;
 	private FragmentManager fm;
 	private static PAGER mPager = PAGER.MESSAGE;
 	private List<TextView> lists = new ArrayList<>();
+	private List<ImageView> tabImgList = new ArrayList<>();
 	private List<ImageView> lists_boom = new ArrayList<>();
 	public static String token = "notoken";
 	private int[] resIdActive = new int[] {
@@ -383,12 +383,24 @@ public class MainTabActivity extends FragmentActivity implements
 		
 		// 未查看消息记录条数
 		unread_msg_tv = (TextView) findViewById(R.id.unread_company_quanzi_number);
-		tv2 = (TextView) findViewById(R.id.tv2);
-		tv3 = (TextView) findViewById(R.id.tv3);
-		tv4 = (TextView) findViewById(R.id.tv4);
-		tv2.setOnClickListener(bNavClickListner);
-		tv3.setOnClickListener(bNavClickListner);
-		tv4.setOnClickListener(bNavClickListner);
+
+		View tv2Container = findViewById(R.id.tv2_container);
+        tv2Container.setTag(R.id.tv2);
+        tv2Container.setOnClickListener(bNavClickListner);
+		View tv3Container = findViewById(R.id.tv3_container);
+        tv3Container.setTag(R.id.tv3);
+        tv3Container.setOnClickListener(bNavClickListner);
+		View tv4Container = findViewById(R.id.tv4_container);
+        tv4Container.setTag(R.id.tv4);
+        tv4Container.setOnClickListener(bNavClickListner);
+
+        TextView tv2 = (TextView) findViewById(R.id.tv2);
+        TextView tv3 = (TextView) findViewById(R.id.tv3);
+        TextView tv4 = (TextView) findViewById(R.id.tv4);
+
+        ImageView tv2Img = (ImageView) findViewById(R.id.tv2_img);
+        ImageView tv3Img = (ImageView) findViewById(R.id.tv3_img);
+        ImageView tv4Img = (ImageView) findViewById(R.id.tv4_img);
 
 		tv2_boom = (ImageView) findViewById(R.id.tv2_boomt);
 		tv3_boom = (ImageView) findViewById(R.id.tv3_boomt);
@@ -401,6 +413,10 @@ public class MainTabActivity extends FragmentActivity implements
 		lists.add(tv3);
 		lists.add(tv4);
 
+        tabImgList.add(tv2Img);
+        tabImgList.add(tv3Img);
+        tabImgList.add(tv4Img);
+
 		if (lists_boom.size() > 0) {
 			lists_boom.clear();
 		}
@@ -408,13 +424,13 @@ public class MainTabActivity extends FragmentActivity implements
 		lists_boom.add(tv3_boom);
 		lists_boom.add(tv4_boom);
 
-        updatebNav(R.id.tv2);
+        updatebNav(PAGER.MESSAGE.getResId());
 	}
 
 	private View.OnClickListener bNavClickListner = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			mPager = PAGER.getPager(v.getId());
+			mPager = PAGER.getPager((int)v.getTag());
 			selectedFragment(mPager);
 		}
 	};
@@ -609,18 +625,20 @@ public class MainTabActivity extends FragmentActivity implements
 	@SuppressLint("ResourceAsColor")
 	public void updatebNav(int vid) {
 		int len = lists.size();
-		TextView view = null;
+		TextView view ;
 		for (int i = 0; i < len; i++) {
 			view = lists.get(i);
 			if (view.getId() == vid) {
-				view.setCompoundDrawablesWithIntrinsicBounds(0, resIdActive[i],
-						0, 0);
+				/*view.setCompoundDrawablesWithIntrinsicBounds(0, resIdActive[i],
+						0, 0);*/
+                tabImgList.get(i).setImageResource(resIdActive[i]);
 				lists.get(i).setTextColor(
 						android.graphics.Color.parseColor("#F8943C"));
 				lists_boom.get(i).setBackgroundColor(
 						android.graphics.Color.parseColor("#F8943C"));
 			} else {
-				view.setCompoundDrawablesWithIntrinsicBounds(0, resId[i], 0, 0);
+				/*view.setCompoundDrawablesWithIntrinsicBounds(0, resId[i], 0, 0);*/
+                tabImgList.get(i).setImageResource(resId[i]);
 				lists.get(i).setTextColor(
 						android.graphics.Color.parseColor("#5B5B5B"));
 				lists_boom.get(i).setBackgroundColor(
