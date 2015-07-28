@@ -385,6 +385,14 @@ public class MessageAdapter extends BaseAdapter {
 					holder.tv_job_zhaomurenshu = (TextView) convertView// 工作招募人数
 							.findViewById(R.id.tv_job_zhaomu_renshu);
 				}
+                /*关于新版本兼职活动分享：
+                    判断是否是分享的图文格式用 message.getStringAttribute("share_job"),
+                    若值为"1"，则是新的分享，里面包含字段有:
+                    activityId:活动id
+                    activityJobPlace:工作区域
+                    activityTitle:活动标题
+                    activitySalary:薪资(如:100元/天)
+                    都是String类型的字段解析，对应到messageAdapter中更改，之前的解析仍然保留！*/
 
 			} else if (message.getType() == EMMessage.Type.VOICE) {
 				try {

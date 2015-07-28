@@ -26,6 +26,9 @@
     <string name="modify">修改</string>
     <string name="shelves">下架</string>
     <string name="expedited">加急</string>
+    <string name="business">商家</string>
+    <string name="activity_group">活动群</string>
+    <string name="gold_assistant">金牌助理</string>
 
     <!-- 主界面 -->
     <string name="hiring">招人</string>

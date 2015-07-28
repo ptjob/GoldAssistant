@@ -131,13 +131,13 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 					.findViewById(R.id.list_item_layout);
 			convertView.setTag(holder);
 		}
-		if (position % 2 == 0) {
+		/*if (position % 2 == 0) {
 			holder.list_item_layout
 					.setBackgroundResource(R.drawable.mm_listitem);
 		} else {
 			holder.list_item_layout
 					.setBackgroundResource(R.drawable.mm_listitem_grey);
-		}
+		}*/
         bindValue(position, holder);
 
 
