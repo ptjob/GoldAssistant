@@ -32,6 +32,14 @@ public class JobManageListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void addAll(List<JobManageListVo> jobManageListVoList) {
+        if (mData == null) {
+            mData = new ArrayList<>();
+        }
+        mData.addAll(jobManageListVoList);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return mData != null ? mData.size() : 0;
@@ -70,6 +78,8 @@ public class JobManageListAdapter extends BaseAdapter {
 
         return view;
     }
+
+
 
     private class ViewHolder {
         private TextView mTxtJobTitle;

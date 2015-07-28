@@ -13,19 +13,23 @@ import com.parttime.net.PublishRequest;
 import com.parttime.net.ResponseBaseCommonError;
 import com.parttime.publish.adapter.JobManageListAdapter;
 import com.parttime.publish.vo.PublishActivityListVo;
+import com.parttime.utils.IntentManager;
+import com.parttime.widget.BaseXListView;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.BaseActivity;
+
+import me.maxwin.view.XListView;
 
 /**
  * 兼职管理界面
  * Created by wyw on 2015/7/26.
  */
-public class JobManageActivity extends BaseActivity implements AdapterView.OnItemClickListener, CompoundButton.OnCheckedChangeListener {
+public class JobManageActivity extends BaseActivity implements AdapterView.OnItemClickListener, CompoundButton.OnCheckedChangeListener, XListView.IXListViewListener {
 
 
     public static final int PAGE_COUNT = 20;
 
-    private ListView mListViewMain;
+    private BaseXListView mListViewMain;
     private RadioButton mRadioRecruit;
     private RadioButton mRadioAuditing;
     private RadioButton mRadioUndercarriage;
@@ -40,7 +44,16 @@ public class JobManageActivity extends BaseActivity implements AdapterView.OnIte
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mAdapterMain.setAll(mCurrentVo.jobManageListVoList);
+                    if (mCurrentVo.pageNumber == 1) {
+                        mAdapterMain.setAll(mCurrentVo.jobManageListVoList);
+                        mListViewMain.updateRefreshTime();
+                    } else {
+                        mAdapterMain.addAll(mCurrentVo.jobManageListVoList);
+                    }
+
+                    mListViewMain.setLoadOver(mCurrentVo.jobManageListVoList.size(), PAGE_COUNT);
+                    mListViewMain.stopRefresh();
+                    mListViewMain.stopLoadMore();
                 }
             });
         }
@@ -75,10 +88,12 @@ public class JobManageActivity extends BaseActivity implements AdapterView.OnIte
         mRadioRecruit.setOnCheckedChangeListener(this);
         mRadioAuditing.setOnCheckedChangeListener(this);
         mRadioUndercarriage.setOnCheckedChangeListener(this);
+
+        mListViewMain.setXListViewListener(this);
     }
 
     private void initControls() {
-        mListViewMain = (ListView) findViewById(R.id.listview_main);
+        mListViewMain = (BaseXListView) findViewById(R.id.listview_main);
         mRadioRecruit = (RadioButton) findViewById(R.id.radio_recruit);
         mRadioAuditing = (RadioButton) findViewById(R.id.radio_auditing);
         mRadioUndercarriage = (RadioButton) findViewById(R.id.radio_undercarriage);
@@ -95,7 +110,13 @@ public class JobManageActivity extends BaseActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+        int position = i - 1;
+        if (position < mAdapterMain.getCount()) {
+            long jobId = mAdapterMain.getItemId(position);
+            IntentManager.openJobDetailActivity(this, (int) jobId);
+        } else {
+            showToast(R.string.error_date_and_refresh);
+        }
     }
 
     @Override
@@ -110,22 +131,37 @@ public class JobManageActivity extends BaseActivity implements AdapterView.OnIte
         refreshListView();
     }
 
+    private void loadMore() {
+        refreshListView();
+    }
+
     private void refreshListView() {
         if (mRadioRecruit.isChecked()) {
             // 招人中
-            if (mCurrentVo == null) {
-                new PublishRequest().publishActivityList(1, PAGE_COUNT, PublishRequest.PUBLISH_ACTIVITY_LIST_TYPE_RECRUIT, queue, mDefaultCallback);
-            }
+            new PublishRequest().publishActivityList(getNextPageNumber(), PAGE_COUNT, PublishRequest.PUBLISH_ACTIVITY_LIST_TYPE_RECRUIT, queue, mDefaultCallback);
         } else if (mRadioAuditing.isChecked()) {
             // 待审核
-            if (mCurrentVo == null) {
-                new PublishRequest().publishActivityList(1, PAGE_COUNT, PublishRequest.PUBLISH_ACTIVITY_LIST_TYPE_AUDITING, queue, mDefaultCallback);
-            }
+            new PublishRequest().publishActivityList(getNextPageNumber(), PAGE_COUNT, PublishRequest.PUBLISH_ACTIVITY_LIST_TYPE_AUDITING, queue, mDefaultCallback);
         } else {
             // 已下架
-            if (mCurrentVo == null) {
-                new PublishRequest().publishActivityList(1, PAGE_COUNT, PublishRequest.PUBLISH_ACTIVITY_LIST_TYPE_UNDERCARRIAGE, queue, mDefaultCallback);
-            }
+            new PublishRequest().publishActivityList(getNextPageNumber(), PAGE_COUNT, PublishRequest.PUBLISH_ACTIVITY_LIST_TYPE_UNDERCARRIAGE, queue, mDefaultCallback);
         }
     }
+
+    // 获取下一页页码
+    private int getNextPageNumber() {
+        return mCurrentVo == null ? 1 : mCurrentVo.pageNumber + 1;
+    }
+
+    @Override
+    public void onRefresh() {
+        refreshFirstPage();
+    }
+
+    @Override
+    public void onLoadMore() {
+        loadMore();
+    }
+
+
 }

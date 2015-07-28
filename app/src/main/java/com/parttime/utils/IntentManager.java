@@ -31,10 +31,9 @@ public class IntentManager {
         context.startActivity(intent);
     }
 
-    public static void openJobDetailActivity(Context context, int jobId, int companyId) {
+    public static void openJobDetailActivity(Context context, int jobId) {
         Intent intent = new Intent(context, JobDetailActivity.class);
         intent.putExtra(JobDetailActivity.EXTRA_ID, jobId);
-        intent.putExtra(JobDetailActivity.EXTRA_COMPANY_ID, companyId);
         context.startActivity(intent);
     }
 

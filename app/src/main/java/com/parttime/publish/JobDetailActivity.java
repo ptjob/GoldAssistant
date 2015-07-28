@@ -24,7 +24,6 @@ public class JobDetailActivity extends BaseActivity {
     }
 
     public static final String EXTRA_ID = "id";
-    public static final String EXTRA_COMPANY_ID = "company_id";
     public static final String EXTRA_PART_JOB = "part_job";
 
 
@@ -35,7 +34,6 @@ public class JobDetailActivity extends BaseActivity {
     private LinearLayout mLLHeightContainer, mLLMeasurementsContainer, mLLLanguageContainer, mLLHealthProveContainer;
 
     private int id;
-    private int companyId;
     private PartJob partJob;
     private Type type;
 
@@ -167,7 +165,6 @@ public class JobDetailActivity extends BaseActivity {
 
     private void initIntent() {
         id = getIntent().getIntExtra(EXTRA_ID, -1);
-        companyId = getIntent().getIntExtra(EXTRA_COMPANY_ID, -1);
         if (id == -1) {
             partJob = (PartJob) getIntent().getSerializableExtra(EXTRA_PART_JOB);
             type = Type.REVIEW;

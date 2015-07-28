@@ -22,6 +22,10 @@
     <string name="no_net_tip">网络连接失败，请确认网络连接</string>
     <string name="format_error">格式不正确</string>
     <string name="action_failed">操作失败</string>
+    <string name="refresh">刷新</string>
+    <string name="modify">修改</string>
+    <string name="shelves">下架</string>
+    <string name="expedited">加急</string>
 
     <!-- 主界面 -->
     <string name="hiring">招人</string>
@@ -437,6 +441,9 @@
     <string name="publish_job_salary_unit_face_to_face">面议</string>
 
     <!-- 活动详情 -->
+    <string name="job_detail_job_status_label">活动状态</string>
+    <string name="job_detail_view_count_label">浏览人数</string>
+    <string name="job_detail_hand_count_label">报名人数</string>
     <string name="job_detail_company_label">发布商家</string>
     <string name="job_detail_work_area_label">所在区域</string>
     <string name="job_detail_work_time_label">工作时间</string>
