@@ -534,19 +534,21 @@ public class MessageAdapter extends BaseAdapter {
             //判断是不是活动群
             GroupDescription gd = context.groupDescription;
             if(gd != null && (gd.type == GroupDescription.ACTIVITY_GROUP || gd.type == GroupDescription.ACTIVITY_CONSULTATION_GROUP)){
-                holder.resumeStatus.setVisibility(View.VISIBLE);
-                if(messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_OK){
-                    if (messageData.apply == GroupSettingRequest.UserVO.APPLY_OK) {
-                        holder.resumeStatus.setText(R.string.already_resume);
-                    } else if (messageData.apply == GroupSettingRequest.UserVO.APPLY_UNLOOK ||
-                            messageData.apply == GroupSettingRequest.UserVO.APPLY_LOOKED) {
-                        holder.resumeStatus.setText(R.string.unresume);
-                    }
-                }else if(messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_NO){
-                    if (messageData.isCommented == GroupSettingRequest.UserVO.ISCOMMENT_NO) {
-                        holder.resumeStatus.setText(R.string.uncomment);
-                    } else if (messageData.isCommented == GroupSettingRequest.UserVO.ISCOMMENT_OK) {
-                        holder.resumeStatus.setText(R.string.commented);
+                if(holder.resumeStatus != null) {
+                    holder.resumeStatus.setVisibility(View.VISIBLE);
+                    if (messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_OK) {
+                        if (messageData.apply == GroupSettingRequest.UserVO.APPLY_OK) {
+                            holder.resumeStatus.setText(R.string.already_resume);
+                        } else if (messageData.apply == GroupSettingRequest.UserVO.APPLY_UNLOOK ||
+                                messageData.apply == GroupSettingRequest.UserVO.APPLY_LOOKED) {
+                            holder.resumeStatus.setText(R.string.unresume);
+                        }
+                    } else if (messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_NO) {
+                        if (messageData.isCommented == GroupSettingRequest.UserVO.ISCOMMENT_NO) {
+                            holder.resumeStatus.setText(R.string.uncomment);
+                        } else if (messageData.isCommented == GroupSettingRequest.UserVO.ISCOMMENT_OK) {
+                            holder.resumeStatus.setText(R.string.commented);
+                        }
                     }
                 }
             }else{
