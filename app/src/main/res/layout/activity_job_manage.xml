@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_common_head" />
+
+    <ImageView style="@style/PublicLineH_1" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_recruit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_radio_orange"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/job_manage_tab_recruit"
+            android:textColor="@color/color_form_checkbox_text"
+            android:textSize="17sp" />
+
+        <ImageView style="@style/PublicLineV_1" />
+
+        <RadioButton
+            android:id="@+id/radio_auditing"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_radio_orange"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/job_manage_tab_auditing"
+            android:textColor="@color/color_form_checkbox_text"
+            android:textSize="17sp" />
+
+        <ImageView style="@style/PublicLineV_1" />
+
+        <RadioButton
+            android:id="@+id/radio_undercarriage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_radio_orange"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/job_manage_tab_undercarriage"
+            android:textColor="@color/color_form_checkbox_text"
+            android:textSize="17sp" />
+    </RadioGroup>
+
+    <ImageView style="@style/PublicLineH_1" />
+
+    <com.parttime.widget.BaseXListView
+        android:id="@+id/listview_main"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0" />
+
+</LinearLayout>

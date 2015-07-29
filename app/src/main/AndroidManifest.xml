@@ -959,6 +959,12 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 
+        <!-- 管理兼职 -->
+        <activity
+            android:name="com.parttime.publish.JobManageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+
         <!-- 公共页面 -->
         <activity
             android:name="com.parttime.common.activity.ChooseListActivity"

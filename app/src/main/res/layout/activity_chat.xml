@@ -21,7 +21,8 @@
             android:layout_height="0.5dp"
             android:background="@color/gray_normal" />
 
-        <include layout="@layout/activity_chat_bottom_tool_bar"/>
+        <include layout="@layout/activity_chat_bottom_toolbar"/>
+        <include layout="@layout/activity_chat_bottom_public_account_toolbar"/>
 
         <include layout="@layout/activity_chat_bottom_tool_detail"/>
     </LinearLayout>

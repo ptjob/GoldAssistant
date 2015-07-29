@@ -22,6 +22,13 @@
     <string name="no_net_tip">网络连接失败，请确认网络连接</string>
     <string name="format_error">格式不正确</string>
     <string name="action_failed">操作失败</string>
+    <string name="refresh">刷新</string>
+    <string name="modify">修改</string>
+    <string name="shelves">下架</string>
+    <string name="expedited">加急</string>
+    <string name="business">商家</string>
+    <string name="activity_group">活动群</string>
+    <string name="gold_assistant">金牌助理</string>
 
     <!-- 主界面 -->
     <string name="hiring">招人</string>
@@ -132,6 +139,7 @@
     <string name="reject_certification">认证不通过</string>
     <string name="cacel_resume_or_not">确认录用</string>
     <string name="cacel_resume_or_not_and_remove_from_group">确认取消录用，取消后该用户将被移除聊天群组</string>
+    <string name="reject_one_resume_or_not_and_remove_from_group">确认拒绝，拒绝后该用户将被移除聊天群组</string>
     <string name="reject_resume_or_not_and_remove_from_group">确认拒绝他们，拒绝后他们将被移除聊天群组</string>
     <string name="group_setting_send_email">发送已录取人员名单至您的邮箱</string>
     <string name="send_approve_username_to_email">发送已录取人员名单</string>
@@ -443,7 +451,7 @@
     <string name="publish_job_measurements_dialog_title">请选择胸围、腰围和臀围</string>
     <string name="publish_job_measurements_format">胸围%1$s、腰围%2$s、臀围%3$s</string>
     <string name="publish_job_success">发布成功</string>
-    <string name="publish_job_fail">发布失败，请重试</string>
+    <string name="publish_job_fail">发布失败</string>
 
     <string name="publish_job_salary_unit_day">元/天</string>
     <string name="publish_job_salary_unit_hour">元/时</string>
@@ -453,6 +461,9 @@
     <string name="publish_job_salary_unit_face_to_face">面议</string>
 
     <!-- 活动详情 -->
+    <string name="job_detail_job_status_label">活动状态</string>
+    <string name="job_detail_view_count_label">浏览人数</string>
+    <string name="job_detail_hand_count_label">报名人数</string>
     <string name="job_detail_company_label">发布商家</string>
     <string name="job_detail_work_area_label">所在区域</string>
     <string name="job_detail_work_time_label">工作时间</string>
@@ -471,7 +482,13 @@
     <string name="job_detail_measurements_format">胸%1$dcm/腰%2$dcm/腿%3$dcm</string>
 
     <!-- 管理兼职 -->
-
+    <string name="job_manage_title">管理兼职</string>
+    <string name="job_manage_tab_recruit">招人中</string>
+    <string name="job_manage_tab_auditing">待审核</string>
+    <string name="job_manage_tab_undercarriage">已下架</string>
+    <string name="job_manage_view_count_format">%1$d次浏览</string>
+    <string name="job_manage_hand_count_format">报名%1$d人</string>
+    <string name="job_manage_hire_count_format">已招%1$d人</string>
 
     <!-- 兼职广场 -->
 
@@ -484,5 +501,7 @@
     <string name="title_activity_send_admit_to_email">SendAdmitToEmailActivity</string>
     <string name="title_activity_public_count_list">PublicCountListActivity</string>
     <string name="title_activity_user_detail">UserDetailActivity</string>
+
+
 
 </resources>

@@ -13,6 +13,7 @@ import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
 import com.easemob.chatuidemo.db.MessageSetDao;
+import com.easemob.exceptions.EaseMobException;
 import com.parttime.common.head.ActivityHead;
 import com.parttime.constants.ActionConstants;
 import com.parttime.constants.ActivityExtraAndKeys;
@@ -165,6 +166,18 @@ public class GroupSettingActivity extends BaseActivity implements View.OnClickLi
     public void disturbSet(){
 
         if(isDisturb){
+           /* new Thread(new Runnable(){
+
+                @Override
+                public void run() {
+                    try {
+                        EMGroupManager.getInstance().unblockGroupMessage(groupId);
+                    } catch (EaseMobException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();*/
+
             List<String> pingbiListGroup = EMChatManager.getInstance()
                     .getChatOptions().getReceiveNoNotifyGroup();
             if (pingbiListGroup != null) {
@@ -177,6 +190,18 @@ public class GroupSettingActivity extends BaseActivity implements View.OnClickLi
             isDisturb = false;
             undisturb.setRightImage(R.drawable.settings_btn_switch_off);
         }else{
+            /*new Thread(new Runnable(){
+
+                @Override
+                public void run() {
+                    try {
+                        EMGroupManager.getInstance().unblockGroupMessage(groupId);
+                    } catch (EaseMobException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();*/
+
             List<String> pingbiListGroup = EMChatManager.getInstance()
                     .getChatOptions().getReceiveNoNotifyGroup();
             pingbiListGroup.add(groupId);

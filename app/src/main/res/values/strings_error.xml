@@ -3,6 +3,6 @@
 
     <string name="error_request_net_fail">你的网络不够给力，获取数据失败！</string>
     <string name="error_operation_fail">操作失败</string>
-
+    <string name="error_date_and_refresh">数据异常，请重新加载</string>
 
 </resources>

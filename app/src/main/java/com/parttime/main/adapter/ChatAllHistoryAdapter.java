@@ -56,6 +56,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
+import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMContact;
 import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMGroup;
@@ -130,13 +131,13 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 					.findViewById(R.id.list_item_layout);
 			convertView.setTag(holder);
 		}
-		if (position % 2 == 0) {
+		/*if (position % 2 == 0) {
 			holder.list_item_layout
 					.setBackgroundResource(R.drawable.mm_listitem);
 		} else {
 			holder.list_item_layout
 					.setBackgroundResource(R.drawable.mm_listitem_grey);
-		}
+		}*/
         bindValue(position, holder);
 
 
@@ -155,12 +156,20 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
         EMContact contact = null;
         boolean isGroup = false;
         boolean isMsgBlocked = false;
+        boolean isMsgGag = false;
         for (EMGroup group : groups) {
             if (group.getGroupId().equals(username)) {
                 isGroup = true;
                 contact = group;
                 isMsgBlocked = group.getMsgBlocked();
                 break;
+            }
+        }
+        List<String> pingbiListGroup = EMChatManager.getInstance()
+                .getChatOptions().getReceiveNoNotifyGroup();
+        if (pingbiListGroup != null) {
+            if (pingbiListGroup.contains(username)) {
+                isMsgGag = true;
             }
         }
 
@@ -178,6 +187,11 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
             holder.name.setText(contact.getNick() != null ? contact.getNick()
                     : username);
             if(isMsgBlocked){
+                holder.quit.setVisibility(View.VISIBLE);
+            }else{
+                holder.quit.setVisibility(View.GONE);
+            }
+            if(isMsgGag){
                 holder.quit.setVisibility(View.VISIBLE);
             }else{
                 holder.quit.setVisibility(View.GONE);

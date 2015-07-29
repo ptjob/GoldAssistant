@@ -21,7 +21,7 @@ public class CircularImage extends MaskedImage {
 	}
 
 	public Bitmap createMask() {
-		int i = getWidth();
+		/*int i = getWidth();
 		int j = getHeight();
 		Bitmap.Config localConfig = Bitmap.Config.ARGB_8888;
 		Bitmap localBitmap = Bitmap.createBitmap(i, j, localConfig);
@@ -32,7 +32,9 @@ public class CircularImage extends MaskedImage {
 		float f2 = getHeight();
 		RectF localRectF = new RectF(0.0F, 0.0F, f1, f2);
 		localCanvas.drawOval(localRectF, localPaint);
+        localCanvas.drawRoundRect(localRectF,20F,20F,localPaint);
 		
-		return localBitmap;
+		return localBitmap;*/
+        return null;
 	}
 }

@@ -340,6 +340,7 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
             String head = batchUserVO.picture;
             if (! TextUtils.isEmpty(head)) {
                 // 默认加载本地图片
+                holder.head.setTag(R.id.picture,head);
                 ContactImageLoader.loadNativePhoto(String.valueOf(batchUserVO.userId),
                         head, holder.head, queue);
                 sp.loadStringSharedPreference(batchUserVO.userId

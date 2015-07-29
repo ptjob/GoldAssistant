@@ -3,6 +3,7 @@ package com.parttime.addresslist;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +22,9 @@ import com.parttime.base.WithTitleActivity;
 import com.parttime.constants.ActivityExtraAndKeys;
 import com.qingmu.jianzhidaren.R;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class UserDetailActivity extends WithTitleActivity implements View.OnClickListener {
 
@@ -31,11 +34,21 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
     //0:没有获取成功 1:禁言 2:非禁言
     private int forbiddenValue = 0;
 
+    private ViewPager viewPager ;
+
+    private UserDetailPagerAdapter adapter ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_user_detail);
         super.onCreate(savedInstanceState);
 
+        initView();
+
+        bindData();
+    }
+
+    private void initView() {
         left(TextView.class, R.string.back);
         right(TextView.class, R.string.more ,new View.OnClickListener() {
             @Override
@@ -45,7 +58,20 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
         });
         center(R.string.user_detail);
 
-        bindData();
+        viewPager = (ViewPager)findViewById(R.id.viewPager);
+
+        LinkedHashSet<String> set = new LinkedHashSet<>();
+        set.add("1");
+        set.add("2");
+        set.add("3");
+        set.add("4");
+        set.add("5");
+        set.add("6");
+        set.add("7");
+        set.add("8");
+        adapter = new UserDetailPagerAdapter(getSupportFragmentManager());
+        adapter.setData(set);
+        viewPager.setAdapter(adapter);
     }
 
     private void bindData() {

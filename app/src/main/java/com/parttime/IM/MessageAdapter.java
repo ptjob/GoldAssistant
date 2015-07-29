@@ -385,6 +385,14 @@ public class MessageAdapter extends BaseAdapter {
 					holder.tv_job_zhaomurenshu = (TextView) convertView// 工作招募人数
 							.findViewById(R.id.tv_job_zhaomu_renshu);
 				}
+                /*关于新版本兼职活动分享：
+                    判断是否是分享的图文格式用 message.getStringAttribute("share_job"),
+                    若值为"1"，则是新的分享，里面包含字段有:
+                    activityId:活动id
+                    activityJobPlace:工作区域
+                    activityTitle:活动标题
+                    activitySalary:薪资(如:100元/天)
+                    都是String类型的字段解析，对应到messageAdapter中更改，之前的解析仍然保留！*/
 
 			} else if (message.getType() == EMMessage.Type.VOICE) {
 				try {
@@ -489,36 +497,35 @@ public class MessageAdapter extends BaseAdapter {
 						R.drawable.job_photo);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+				holder.head_iv.setImageBitmap(bitmap);
 			} else if (ApplicationConstants.CAIWU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_caiwu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+
+				holder.head_iv.setImageBitmap(bitmap);
 			} else if (ApplicationConstants.DINGYUE.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_xiaozhushou);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+
+				holder.head_iv.setImageBitmap(bitmap);
 			} else if (ApplicationConstants.KEFU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_kefu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+
+				holder.head_iv.setImageBitmap(bitmap);
 			} else if (ApplicationConstants.TONGZHI.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_tongzhi);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+
+				holder.head_iv.setImageBitmap(bitmap);
 			} else {
 				loadNativePhoto(message.getFrom(), holder.head_iv,
 						holder.tv_userId);
@@ -528,14 +535,14 @@ public class MessageAdapter extends BaseAdapter {
             GroupDescription gd = context.groupDescription;
             if(gd != null && (gd.type == GroupDescription.ACTIVITY_GROUP || gd.type == GroupDescription.ACTIVITY_CONSULTATION_GROUP)){
                 holder.resumeStatus.setVisibility(View.VISIBLE);
-                if(messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_NO){
+                if(messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_OK){
                     if (messageData.apply == GroupSettingRequest.UserVO.APPLY_OK) {
                         holder.resumeStatus.setText(R.string.already_resume);
                     } else if (messageData.apply == GroupSettingRequest.UserVO.APPLY_UNLOOK ||
                             messageData.apply == GroupSettingRequest.UserVO.APPLY_LOOKED) {
                         holder.resumeStatus.setText(R.string.unresume);
                     }
-                }else if(messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_OK){
+                }else if(messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_NO){
                     if (messageData.isCommented == GroupSettingRequest.UserVO.ISCOMMENT_NO) {
                         holder.resumeStatus.setText(R.string.uncomment);
                     } else if (messageData.isCommented == GroupSettingRequest.UserVO.ISCOMMENT_OK) {
@@ -576,37 +583,37 @@ public class MessageAdapter extends BaseAdapter {
 						R.drawable.job_photo);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+
+				holder.head_iv.setImageBitmap(bitmap);
 				// getNick(message.getFrom(), holder.head_iv, null);
 			} else if (ApplicationConstants.CAIWU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_caiwu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+
+				holder.head_iv.setImageBitmap(bitmap);
 			} else if (ApplicationConstants.DINGYUE.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_xiaozhushou);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+
+				holder.head_iv.setImageBitmap(bitmap);
 			} else if (ApplicationConstants.KEFU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_kefu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+
+				holder.head_iv.setImageBitmap(bitmap);
 			} else if (ApplicationConstants.TONGZHI.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_tongzhi);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+
+				holder.head_iv.setImageBitmap(bitmap);
 			} else {
 				loadNativePhoto(message.getFrom(), holder.head_iv, null);
 			}
@@ -632,37 +639,32 @@ public class MessageAdapter extends BaseAdapter {
 						R.drawable.job_photo);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+				holder.head_iv.setImageBitmap(bitmap);
 				// getNick(message.getFrom(), holder.head_iv, null);
 			} else if (ApplicationConstants.CAIWU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_caiwu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+				holder.head_iv.setImageBitmap(bitmap);
 			} else if (ApplicationConstants.DINGYUE.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_xiaozhushou);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+				holder.head_iv.setImageBitmap(bitmap);
 			} else if (ApplicationConstants.KEFU.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_kefu);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+				holder.head_iv.setImageBitmap(bitmap);
 			} else if (ApplicationConstants.TONGZHI.equals(message.getFrom())) {
 				Drawable draw1 = context.getResources().getDrawable(
 						R.drawable.custom_tongzhi);
 				BitmapDrawable bd = (BitmapDrawable) draw1;
 				Bitmap bitmap = bd.getBitmap();
-				Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-				holder.head_iv.setImageBitmap(bit);
+				holder.head_iv.setImageBitmap(bitmap);
 			} else {
 				loadNativePhoto(message.getFrom(), holder.head_iv, null);
 			}

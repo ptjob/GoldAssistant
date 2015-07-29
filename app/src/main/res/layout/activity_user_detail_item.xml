@@ -4,12 +4,13 @@
                 android:layout_height="match_parent"
                 tools:context="com.parttime.addresslist.UserDetailActivity">
 
-    <include layout="@layout/title" android:id="@+id/title"/>
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="fill_parent"
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title"/>
-
-
+        android:text="New Text"
+        android:id="@+id/test"
+        android:textSize="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
