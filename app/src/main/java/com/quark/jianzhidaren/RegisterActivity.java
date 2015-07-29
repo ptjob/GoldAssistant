@@ -22,6 +22,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -48,24 +49,31 @@ import com.easemob.util.HanziToPinyin;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.base.WithTitleActivity;
+import com.parttime.login.RegisterInfoActivity;
 import com.parttime.main.MainTabActivity;
+import com.parttime.net.BaseRequest;
+import com.parttime.net.Callback;
+import com.parttime.utils.CountDownTimer;
+import com.parttime.widget.EditItem;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.ui.widget.CustomDialog;
 import com.quark.utils.Util;
+import com.quark.volley.VolleySington;
 import com.umeng.analytics.MobclickAgent;
 
 /**
- * 
+ *
  * @ClassName: RegisterActivity
  * @Description: TODO
  * @author howe
  * @date 2015-1-9 下午5:11:49
- * 
+ *
  */
-public class RegisterActivity extends BaseActivity implements OnClickListener {
+public class RegisterActivity extends WithTitleActivity implements CountDownTimer.TimeTick, TextWatcher{
 
-	@ViewInject(R.id.telephone)
+	/*@ViewInject(R.id.telephone)
 	private EditText telephone;
 	// 发送验证码按钮
 	@ViewInject(R.id.code)
@@ -83,15 +91,33 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	@ViewInject(R.id.regin)
 	private Button regin;
 	@ViewInject(R.id.code_vetify_imv)
-	private ImageView codeVetifyImv;
+	private ImageView codeVetifyImv;*/
+
+	private static final int CODE_LEN = 6;
+
+	@ViewInject(R.id.ei_phone_num)
+	private EditItem eiPhone;
+	@ViewInject(R.id.ei_code)
+	private EditItem eiCode;
+
+	@ViewInject(R.id.btn_get_code)
+	private Button btnGetCode;
+	@ViewInject(R.id.btn_next)
+	private Button btnNext;
+
+	@ViewInject(R.id.tv_failed_to_get_code)
+	private TextView tvFailToGetCode;
+
+	@ViewInject(R.id.iv_code_ok)
+	private ImageView ivVerify;
 
 	String telephoneStr;
 	String telephoneStrTemp;
 	String nameStr;
 	String inputcodeStr;
-	String passwordStr;
+//	String passwordStr;
 	String againpasswordStr;
-	String codeStr;
+//	String codeStr;
 	String codeStrget;
 	String url;// 注册url
 	String sendMSMUrl;
@@ -110,93 +136,60 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	private long current_time;// 点击发送验证码的时候
 	private boolean codeFlag;// 验证码是否正确
 
+
+
+	private CountDownTimer countDownTimer;
+
+	private String code;
+	private int lastLen;
+	private boolean everReachLen;
+
+	@Override
+	protected ViewGroup getLeftWrapper() {
+		return null;
+	}
+
+	@Override
+	protected ViewGroup getRightWrapper() {
+		return null;
+	}
+
+	@Override
+	protected TextView getCenter() {
+		return null;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.register);
 		ViewUtils.inject(this);
-		setTitle(getResources().getString(R.string.regist_regist));
-		setBackButton();
-		setTopTitle(getResources().getString(R.string.regist_regist));
-		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
-		url = Url.COMPANY_REGIST + "?token=" + MainTabActivity.token;
-		loginUrl = Url.COMPANY_LOGIN + "?token=" + MainTabActivity.token;
-		sendMSMUrl = Url.COMPANY_SENDMSM + "?token="
-				+ MainTabActivity.token;
-		jiaoyanUrl = Url.MESSAGE_VALIDATE + "?token="
-				+ MainTabActivity.token;
-		TextView tx = (TextView) findViewById(R.id.rgtext);
-		tx.setOnClickListener(new OnClickListener() {
+		super.onCreate(savedInstanceState);
 
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setClass(RegisterActivity.this, AgreementActivity.class);
-				startActivity(intent);
-			}
-		});
+//		TextView tx = (TextView) findViewById(R.id.rgtext);
+//		tx.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent();
+//				intent.setClass(RegisterActivity.this, AgreementActivity.class);
+//				startActivity(intent);
+//			}
+//		});
 
-		// 监听验证码框内容改变
-		inputcode.addTextChangedListener(new TextWatcher() {
+	}
 
-			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {
-
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1,
-					int arg2, int arg3) {
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable arg0) {
-				if (arg0 != null && !"".equals(arg0.toString())) {
-					if (arg0.toString().length() != 6) {
-						// 验证码不是6位
-						codeVetifyImv.setImageResource(R.drawable.vertify_no);
-						codeVetifyImv.setVisibility(View.VISIBLE);
-					} else {
-						// 验证码是6位的时候先判断是否符合规则
-						if (JiaoyanUtil.vertifyCode(arg0.toString())) {
-							// 访问服务端验证验证码是否正确
-							// 先判断是否输入了正确的手机
-							telephoneStr = telephone.getText().toString();
-							if (Util.isMobileNO(telephoneStr)) {
-								vertifyCode(arg0.toString());
-							} else {
-								showToast(getResources().getString(
-										R.string.regist_edt_right_tel));
-							}
-						} else {
-							showToast(getResources().getString(
-									R.string.regist_code_error));
-						}
-
-					}
-
-				} else {
-					codeVetifyImv.setVisibility(View.GONE);
-				}
-
-			}
-		});
-		// 收不到验证码
-		TextView cant_get_code_tv = (TextView) findViewById(R.id.cant_get_code_tv);
-		cant_get_code_tv.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				showAlertKefuDialog("什么，收不到短信验证码？请联系客服！", "温馨提示");
-			}
-		});
+	@Override
+	protected void initViews() {
+		super.initViews();
+		center(R.string.register);
+		left(TextView.class, R.string.back);
+		eiCode.addTextChangeListener(this);
 	}
 
 	/**
 	 * 验证验证码是否正确
-	 * 
-	 */
+	 *
+	 *//*
 	private void vertifyCode(final String code) {
 		StringRequest request = new StringRequest(Request.Method.POST,
 				jiaoyanUrl, new Response.Listener<String>() {
@@ -253,12 +246,12 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		queue.add(request);
 		request.setRetryPolicy(new DefaultRetryPolicy(
 				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
-	}
+	}*/
 
 	/**
 	 * 联系客服
 	 */
-	public void showAlertKefuDialog(String str, final String str2) {
+	/*public void showAlertKefuDialog(String str, final String str2) {
 
 		CustomDialog.Builder builder = new CustomDialog.Builder(this);
 		builder.setMessage(str);
@@ -282,7 +275,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			}
 		});
 		builder.create().show();
-	}
+	}*/
 
 	public void showAlertDialog(String str, final String str2) {
 
@@ -357,7 +350,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			protected Map<String, String> getParams() throws AuthFailureError {
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("telephone", telephoneStr);
-				map.put("password", JiaoyanUtil.MD5(passwordStr));
+				map.put("password", JiaoyanUtil.MD5(/*passwordStr*/null));
 				return map;
 			}
 		};
@@ -491,7 +484,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 							edit.putString("IM_NIKENAME", IM_NIKENAME);
 							// 记住密码供下次登陆
 							edit.putString("remember_tele", telephoneStr);
-							edit.putString("remember_pwd", passwordStr);
+							edit.putString("remember_pwd", /*passwordStr*/null);
 							edit.commit();
 							Intent intent = new Intent();
 							intent.setClass(RegisterActivity.this,
@@ -528,7 +521,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 
 	/**
 	 * 设置hearder属性，方便通讯中对联系人按header分类显示，以及通过右侧ABCD...字母栏快速定位联系人
-	 * 
+	 *
 	 * @param username
 	 * @param user
 	 */
@@ -587,33 +580,30 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		});
 	}
 
-	@OnClick(R.id.code)
+	@OnClick(R.id.btn_get_code)
 	public void sendMSM(View view) {
-		telephoneStr = telephone.getText().toString();
+		telephoneStr = eiPhone.getValue().trim();
 		if (Util.isMobileNO(telephoneStr)) {
 			telephoneStrTemp = telephoneStr;
-			current_time = System.currentTimeMillis();
-			if (current_time - ConstantForSaveList.regist_time > 60 * 1000) {
-				code.setClickable(false);
-				handler.postDelayed(runnable, 1000);
-				sendMSM();
-			} else {
-				showToast("一分钟内请勿重复提交^_^");
-				code.setClickable(false);
-				handler.postDelayed(runnable2, 10);
-			}
+			btnGetCode.setEnabled(false);
+			countDownTimer = new CountDownTimer(60, this);
+			countDownTimer.start();
+			sendMSM();
+
 		} else {
 			showToast(getResources().getString(R.string.regist_edt_right_tel));
 		}
 	}
 
-	@OnClick(R.id.regin)
-	public void reginOnclick(View v) {
-		telephoneStr = telephone.getText().toString();
-		passwordStr = password.getText().toString().trim();
-		nameStr = name.getText().toString();
-		codeStr = inputcode.getText().toString();
-		if (check()) {
+	@OnClick(R.id.btn_next)
+	public void next(View v) {
+//		if()
+
+		Intent intent= new Intent(this, RegisterInfoActivity.class);
+		intent.putExtra(RegisterInfoActivity.EXTRA_TELEPHONE, telephoneStr);
+		intent.putExtra(RegisterInfoActivity.EXTRA_CODE, code);
+		startActivity(intent);
+		/*if (check()) {
 			showWait(true);
 			MobclickAgent.onEvent(RegisterActivity.this, "onclick3", "立即注册");
 			StringRequest request = new StringRequest(Request.Method.POST, url,
@@ -679,7 +669,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			request.setRetryPolicy(new DefaultRetryPolicy(
 					ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
 
-		}
+		}*/
 	}
 
 	public boolean check() {
@@ -692,7 +682,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		// showToast(getResources().getString(R.string.regist_code_error));
 		// return false;
 		// }
-		if (!codeFlag) {
+		/*if (!codeFlag) {
 			showToast(getResources().getString(R.string.regist_code_error));
 			return false;
 		}
@@ -729,13 +719,29 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			recLen = 1;
 			code.setClickable(true);
 			return false;
-		}
+		}*/
 
 		return true;
 	}
 
 	public void sendMSM() {
+		showWait(true);
 		MobclickAgent.onEvent(RegisterActivity.this, "onclick2", "注册发送验证码");
+		Map<String, String> params = new HashMap<>();
+		params.put("telephone", telephoneStr);
+		new BaseRequest().request(Url.MESSAGE_COMPANY_REGISTER, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
+			@Override
+			public void success(Object obj) {
+				showWait(false);
+				btnNext.setEnabled(true);
+			}
+
+			@Override
+			public void failed(Object obj) {
+				showWait(false);
+			}
+		});
+
 		StringRequest request2 = new StringRequest(Request.Method.POST,
 				sendMSMUrl, new Response.Listener<String>() {
 					@Override
@@ -778,42 +784,31 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 
 	}
 
-	// 倒计时
-	int recLen = 60;
-	Handler handler = new Handler();
-	Runnable runnable = new Runnable() {
-		@Override
-		public void run() {
-			recLen--;
-			if (recLen > 0) {
-				code.setText(getResources().getString(R.string.regist_wait)
-						+ recLen
-						+ getResources().getString(R.string.regist_second));
-				handler.postDelayed(this, 1000);
-			} else {
-				code.setText(getResources().getString(R.string.regist_sendcode));
-				recLen = 60;
-				code.setClickable(true);
+	private void verifyCode(){
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("telephone", telephoneStr);
+		params.put("code", code);
+		new BaseRequest().request(Url.MESSAGE_VALIDATE, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
+			@Override
+			public void success(Object obj) {
+				if (!everReachLen) {
+					ivVerify.setVisibility(View.VISIBLE);
+					everReachLen = true;
+				}
+				ivVerify.setSelected(true);
+				btnNext.setEnabled(true);
 			}
-		}
-	};
-	long recLen2 = 60;
-	Runnable runnable2 = new Runnable() {
-		@Override
-		public void run() {
-			recLen2--;
-			if (recLen2 > 0) {
-				code.setText(getResources().getString(R.string.regist_wait)
-						+ recLen2
-						+ getResources().getString(R.string.regist_second));
-				handler.postDelayed(this, 1000);
-			} else {
-				code.setText(getResources().getString(R.string.regist_sendcode));
-				recLen2 = 60;
-				code.setClickable(true);
+
+			@Override
+			public void failed(Object obj) {
+				if (!everReachLen) {
+					ivVerify.setVisibility(View.VISIBLE);
+					everReachLen = true;
+				}
+				ivVerify.setSelected(false);
 			}
-		}
-	};
+		});
+	}
 
 	// ====倒計時end===========
 	@Override
@@ -822,8 +817,70 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		queue.cancelAll(TAG);
 	}
 
-	@Override
-	public void onClick(View v) {
+	private String acquireAgain;
 
+	@Override
+	public void ticking(final int secondsLeft) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if(acquireAgain == null){
+					acquireAgain = getString(R.string.acquire_again);
+				}
+				btnGetCode.setText(acquireAgain + "(" + secondsLeft + ")");
+			}
+		});
+	}
+
+	@Override
+	public void stoped() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				btnGetCode.setText(R.string.get_validation_code);
+			}
+		});
+	}
+
+	@Override
+	public void paused() {
+
+	}
+
+	@Override
+	public void cancelled() {
+
+	}
+
+	@Override
+	public void goOn() {
+
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+	}
+
+	@Override
+	public void afterTextChanged(Editable s) {
+		code = eiCode.getValue();
+		int length = s.length();
+		if(length == CODE_LEN){
+			if(lastLen < CODE_LEN){
+				verifyCode();
+			}
+		}else {
+			if(lastLen == CODE_LEN){
+				ivVerify.setSelected(false);
+				btnNext.setEnabled(false);
+			}
+		}
+		lastLen = length;
 	}
 }

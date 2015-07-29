@@ -47,6 +47,7 @@ import com.parttime.mine.SuggestionActivity;
 import com.parttime.mine.setting.SettingActivity;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
+import com.parttime.net.ErrorHandler;
 import com.parttime.type.AccountType;
 import com.parttime.widget.FormItem;
 import com.parttime.widget.RankView;
@@ -55,6 +56,7 @@ import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.fragment.company.BaseFragment;
 import com.quark.image.UploadImg;
+import com.quark.jianzhidaren.BaseActivity;
 import com.quark.model.Function;
 import com.quark.ui.widget.CommonWidget;
 import com.quark.ui.widget.CustomDialog;
@@ -904,7 +906,49 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void realNameCert(){
-        goToActivity(RealNameCertSelectActivity.class);
+		showWait(true);
+		Map<String, String> params = new HashMap<>();
+		params.put("company_id", user_id);
+		new BaseRequest().request(Url.COMPANY_SHOW_AUTH, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
+			@Override
+			public void success(Object obj) {
+				if(getActivity() != null && isAdded()) {
+					showWait(false);
+					try {
+						JSONObject json = (JSONObject) obj;
+						JSONObject companyInfo = json.getJSONObject("companyInfo");
+						int type = companyInfo.getInt("type");
+						String name = companyInfo.getString("name");
+						String identity = companyInfo.getString("identity");
+						String identityFront = companyInfo.getString("identity_front");
+						String identityBack = companyInfo.getString("identity_verso");
+						int status = companyInfo.getInt("status");
+						if(status != 2){
+//							Intent intent = new Intent(getActivity(), )
+						}else {
+
+						}
+
+						    /*
+    1:待审核  2：审核通过 3：审核不通过
+0:尚未提交审核
+     */
+
+					} catch (Exception e) {
+						new ErrorHandler((BaseActivity) getActivity(), e);
+					}
+				}
+			}
+
+			@Override
+			public void failed(Object obj) {
+				if(getActivity() != null && isAdded()) {
+					showWait(false);
+					new ErrorHandler((BaseActivity) getActivity(), obj).showToast();
+				}
+			}
+		});
+		goToActivity(RealNameCertSelectActivity.class);
 	}
 
 	private void freshManGuide(){

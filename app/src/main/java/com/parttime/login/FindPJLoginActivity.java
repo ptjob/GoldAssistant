@@ -267,14 +267,14 @@ public class FindPJLoginActivity extends BaseActivity {
 	}
 
 	public boolean check() {
-		if (!Util.isMobileNO(telephoneStr)) {
+		/*if (!Util.isMobileNO(telephoneStr)) {
 			showToast("请输入正确手机号码");
 			return false;
 		}
 		if (!Util.isEmpty(passwordStr)) {
 			showToast("请输入密码");
 			return false;
-		}
+		}*/
 		return true;
 	}
 

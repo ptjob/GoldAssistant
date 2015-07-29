@@ -90,6 +90,7 @@ import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.fragment.company.ManageFragmentCompany;
 import com.quark.jianzhidaren.ApplicationControl;
+import com.quark.jianzhidaren.BaseActivity;
 import com.quark.jianzhidaren.EnterActivity;
 import com.quark.jianzhidaren.LaheiPageActivity;
 import com.quark.model.Function;
@@ -125,7 +126,7 @@ import java.util.UUID;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
-public class MainTabActivity extends FragmentActivity implements
+public class MainTabActivity extends BaseActivity implements
 		AMapLocationListener {
 
 

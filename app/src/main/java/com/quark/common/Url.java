@@ -88,6 +88,9 @@ public class Url {
 	public static final String COMPANY_FORGET_PWD = HOST + SUBJECT
 			 + "/Message/companyForgetCode";
 
+	public static final String MESSAGE_COMPANY_REGISTER = HOST + SUBJECT
+			+ "/Message/companyRegistCode";
+
 
 	public static final String SUGGEST = HOST + SUBJECT
 			+ "/CompanyCenter/feedback";
@@ -123,6 +126,9 @@ public class Url {
 	// 用户审核提交
 	public static final String USER_shenheSubmit = HOST + SUBJECT
 			+ "/UserCenter/commit_authentication";
+
+	public static final String COMPANY_SHOW_AUTH = HOST + SUBJECT
+			+ "/CompanyCenter/showAuthentication";
 
 	// 商家身份证正面图片
 	public static final String COMPANY_uploadIdcard_zheng = HOST + SUBJECT

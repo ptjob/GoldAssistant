@@ -1,26 +1,14 @@
 package com.parttime.mine;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.carson.constant.ConstantForSaveList;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -30,50 +18,46 @@ import com.parttime.widget.EditItem;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.image.UploadImg;
-import com.quark.ui.widget.ActionSheet;
 import com.quark.utils.Util;
 import com.quark.volley.VolleySington;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by cjz on 2015/7/26.
+ * Created by cjz on 2015/7/27.
  */
-public class PersonalCertSubmitActivity extends UpLoadPicActivity implements ActionSheet.OnActionSheetSelected {
-    private static final int IMAGE_REQUEST_CODE = 0;
-    private static final int CAMERA_REQUEST_CODE = 1;
-    private static final int RESULT_REQUEST_CODE = 2;
-
-    private static final String IMAGE_FILE_NAME = "faceImage.jpg";//
-
+public class EnterpriseCertSubmitActivity extends UpLoadPicActivity{
     @ViewInject(R.id.ei_boss_name)
     private EditItem eiBossName;
     @ViewInject(R.id.ei_boss_id_card)
     private EditItem eiBossIdCard;
+    @ViewInject(R.id.ei_enterprise_reg_id)
+    private EditItem eiRegId;
     @ViewInject(R.id.fl_id_front)
-    private FrameLayout flIdFront;
+    private FrameLayout flFront;
     @ViewInject(R.id.fl_id_back)
-    private FrameLayout flIdBack;
+    private FrameLayout flBack;
+    @ViewInject(R.id.fl_enterprise_reg_id)
+    private FrameLayout flRegId;
+
     @ViewInject(R.id.iv_id_front)
     private ImageView ivIdFront;
     @ViewInject(R.id.iv_id_back)
     private ImageView ivIdBack;
+    @ViewInject(R.id.iv_enterprise_reg_id)
+    private ImageView ivRegId;
     @ViewInject(R.id.btn_submit)
     private Button btnSummit;
     @ViewInject(R.id.ll_front_text)
     private LinearLayout llFrontText;
     @ViewInject(R.id.ll_back_text)
     private LinearLayout llBackText;
+    @ViewInject(R.id.ll_enterprise_reg_id)
+    private LinearLayout llRegIdText;
 
+    private boolean idFrontUploaded, idBackUploaded, idRegIdUploaded;
 
-    private Bitmap userPhotoBmp = null;//
-    private int option = 1;//
-    private String uploadidUrl;
-
-    private boolean idFrontUploaded, idBackUploaded;
 
     UploadImg.OnUploadListener frontUploadListener = new UploadImg.OnUploadListener() {
         @Override
@@ -101,9 +85,23 @@ public class PersonalCertSubmitActivity extends UpLoadPicActivity implements Act
         }
     };
 
+    UploadImg.OnUploadListener regIdUploadListener = new UploadImg.OnUploadListener() {
+
+        @Override
+        public void success() {
+            llRegIdText.setVisibility(View.GONE);
+            idRegIdUploaded = true;
+        }
+
+        @Override
+        public void fail() {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_personal_cert_submit);
+        setContentView(R.layout.activity_enterprise_cert_submit);
         ViewUtils.inject(this);
         super.onCreate(savedInstanceState);
     }
@@ -111,10 +109,19 @@ public class PersonalCertSubmitActivity extends UpLoadPicActivity implements Act
     @Override
     protected void initViews() {
         super.initViews();
-        center(R.string.personal_cert);
+        center(R.string.enterprise_cert);
         left(TextView.class, R.string.back);
     }
 
+//    @OnClick(R.id.fl_id_front)
+//    public void uploadFront(View v){
+//
+//    }
+//
+//    @OnClick(R.id.fl_id_back)
+//    public void uploadBack(View v){
+//
+//    }
 
     @OnClick(R.id.btn_submit)
     public void submit(View v){
@@ -126,7 +133,8 @@ public class PersonalCertSubmitActivity extends UpLoadPicActivity implements Act
         params.put("company_id", getCompanyId());
         params.put("name", eiBossName.getValue().trim());
         params.put("identity", eiBossIdCard.getValue().trim());
-        params.put("type", "" + 1);
+        params.put("company_code", eiRegId.getValue().trim());
+        params.put("type", "" + accountType);
         new BaseRequest().request(Url.COMPANY_shenheSubmit, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
             @Override
             public void success(Object obj) {
@@ -161,11 +169,25 @@ public class PersonalCertSubmitActivity extends UpLoadPicActivity implements Act
             return false;
         }
 
+        String regId = eiRegId.getValue().trim();
+        if(Util.isEmpty(regId)){
+            showToast(R.string.please_enter_reg_id);
+            return false;
+        }
+
+
         if(!idFrontUploaded || !idBackUploaded){
             showToast(R.string.please_upload_id_card);
             return false;
         }
         return true;
+    }
+
+
+    @OnClick(R.id.fl_enterprise_reg_id)
+    public void uploadRegId(View v){
+        option = 3;
+        UploadImg.showSheetPic(this, this, this, this);
     }
 
     @Override
@@ -184,21 +206,13 @@ public class PersonalCertSubmitActivity extends UpLoadPicActivity implements Act
     }
 
     @Override
-    public void onClick(int whichButton) {
-
-    }
-
-    @Override
-    public void onCancel(DialogInterface dialog) {
-
-    }
-
-    @Override
     protected int getOption(View clicked) {
-        if(clicked == flIdFront){
+        if(clicked == flFront){
             return 1;
-        }else if(clicked == flIdBack){
+        }else if(clicked == flBack){
             return 2;
+        }else if(clicked == flRegId){
+            return 3;
         }
         return 0;
     }
@@ -209,10 +223,11 @@ public class PersonalCertSubmitActivity extends UpLoadPicActivity implements Act
             return Url.COMPANY_uploadIdcard_zheng;
         }else if(option == 2){
             return Url.COMPANY_uploadIdcard_fan;
+        }else if(option == 3){
+            return Url.COMPANY_uploadyinyzz;
         }
         return null;
     }
-
 
     @Override
     protected ImageView getImageViewToShowUploadPic(int option) {
@@ -224,6 +239,8 @@ public class PersonalCertSubmitActivity extends UpLoadPicActivity implements Act
             case 2:
                 iv = ivIdBack;
                 break;
+            case 3:
+                iv = ivRegId;
             default:
 
         }
@@ -233,17 +250,6 @@ public class PersonalCertSubmitActivity extends UpLoadPicActivity implements Act
 
     @Override
     protected UploadImg.OnUploadListener getUploadListener(int option) {
-        UploadImg.OnUploadListener listener;
-        switch (option){
-            case 1:
-                listener = frontUploadListener;
-                break;
-            case 2:
-                listener = backUploadListener;
-                break;
-            default:
-                listener = null;
-        }
-        return listener;
+        return null;
     }
 }
