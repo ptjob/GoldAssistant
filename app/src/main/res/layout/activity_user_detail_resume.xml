@@ -1,10 +1,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.parttime.addresslist.UserDetailActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.parttime.addresslist.UserDetailActivity"
+    android:visibility="visible">
     <TextView
-        android:id="@+id/test"
+        android:id="@+id/summary_key"
+        android:layout_width="wrap_content"
+        style="@style/detail_item_key"
+        android:layout_height="40dp"
+        android:text="@string/summary"/>
+    <TextView
+        android:id="@+id/summary_value"
+        android:layout_width="wrap_content"
+        style="@style/detail_item_value"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/summary_key"
+        android:layout_toEndOf="@+id/summary_key"
+        android:text="@string/summary"/>
+    <ImageView
+        android:id="@+id/summary_key_line"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="1dp"
+        android:layout_below="@+id/summary_key"
+        android:background="@drawable/line_item_dividing"/>
 </RelativeLayout>

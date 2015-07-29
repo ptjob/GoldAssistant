@@ -1,0 +1,131 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.parttime.addresslist.UserDetailActivity"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:text="@string/user_performance"
+        android:gravity="center"
+        android:textSize="13sp"
+        android:background="#F2F2F2"
+        android:id="@+id/user_performance" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/star_off"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                />
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/star_off"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                />
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/star_off"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                />
+            <ImageView
+                android:id="@+id/star4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/star_off"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:text="优秀"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/appraise_detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:text="@string/appraise_detail"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:background="#F2F2F2"
+            android:id="@+id/textView2"
+            android:layout_gravity="center_horizontal" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            <EditText
+                android:id="@+id/appraise_content"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/content_text_count"
+                android:id="@+id/appraise_text_count_tip"
+                android:textSize="13sp"
+                android:textColor="#beb5b8"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="right|bottom" />
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="提交"
+        android:id="@+id/submit"
+        style="@style/FormBlueButton"
+        android:paddingRight="80dp"
+        android:paddingLeft="80dp"
+        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="*评价完成后不能变更"
+        android:textSize="15sp"
+        android:textColor="#999"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>

@@ -174,7 +174,20 @@
     <string name="age">年龄</string>
     <string name="picture_num">共%1$s张</string>
     <string name="reputation">信誉</string>
-
+    <string name="education">学历</string>
+    <string name="height">身高</string>
+    <string name="other">其他</string>
+    <string name="three_dimensional">三维</string>
+    <string name="appraise">评价</string>
+    <string name="expend">展开</string>
+    <string name="call">打电话</string>
+    <string name="send_msg">发私信</string>
+    <string name="user_performance">该用户表现如何?</string>
+    <string name="appraise_detail">评价详情</string>
+    <string name="send_add_friend">发送好友申请</string>
+    <string name="to_msg">发起会话</string>
+    <string name="delete_friend">删除好友</string>
+    <string name="summary">简介</string>
 
     <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
     <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
