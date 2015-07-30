@@ -17,6 +17,7 @@ import com.qingmu.jianzhidaren.R;
  * Created by cjz on 2015/7/14.
  */
 public class RealNameCertSelectActivity extends WithTitleActivity{
+    public static final String EXTRA_IS_AGENT = "extra_is_agent";
 
     @ViewInject(R.id.btn_personal_cert)
     private Button btnPersonalCert;
@@ -44,7 +45,7 @@ public class RealNameCertSelectActivity extends WithTitleActivity{
 
     @OnClick(R.id.btn_enterprise_cert)
     public void enterpriseCert(View v){
-
+        startActivity(new Intent(this, EnterpriseCertSubmitActivity.class));
     }
 
     @Override

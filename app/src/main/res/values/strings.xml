@@ -305,9 +305,12 @@
     <string name="x_ge_in_chinese">%1$d</string>
     <string name="x_rmb">￥ %1$.2f</string>
     <string name="not_certed">未认证</string>
+    <string name="certed">已认证</string>
     <string name="personal_certed">已个人认证</string>
     <string name="enterprise_certed">已企业认证</string>
+    <string name="agent_certed">已经纪人认证</string>
     <string name="x_scores">评分 %1$.2f/5</string>
+    <string name="scores">评分</string>
     <string name="wait_while_uploading_avatar">正在上传头像,请稍候。</string>
 
     <!-- 我的简介 -->
@@ -316,6 +319,7 @@
     <string name="enter_your_intro_here">请在此输入您的自我介绍</string>
     <string name="preview">预览</string>
     <string name="select_work_types_tips">承招类型（最多选五个）</string>
+    <string name="preview_intro">简介预览</string>
 
     <!-- 我的粉丝 -->
     <string name="credit_value">信誉值</string>
@@ -406,6 +410,9 @@
     <string name="havent_read_the_agreement">还没阅读《用户协议》吗？</string>
     <string name="i_am_girl">我是女生</string>
     <string name="i_am_boy">我是男生</string>
+    <string name="login_tel">登录手机</string>
+    <string name="qing_mu_company">青木科技有限公司</string>
+
 
     <!-- 招人Tab -->
     <string name="publish_job">发布兼职</string>

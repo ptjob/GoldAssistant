@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.carson.constant.JiaoyanUtil;
+import com.droid.carson.Activity01;
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMContactManager;
@@ -49,6 +51,7 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.main.MainTabActivity;
 import com.parttime.net.ResponseBaseCommonError;
+import com.parttime.type.AccountType;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
@@ -74,20 +77,23 @@ public class FindPJLoginActivity extends BaseActivity {
     public static final String EXTRA_USER_ID = "userId";
     public static final String EXTRA_REMEMBER_TELE = "remember_tele";
     public static final String EXTRA_REMEMBER_PWD = "remember_pwd";
-    private Button login, regin, forgetPwd;
+    private Button login, regin;
+	private TextView forgetPwd;
 	static String url;
 	private ImageView logoImv;// 图标 商家端的头像换为红色、用户端蓝色
-	private TextView logoTextView;// 找兼职、招兼职
+//	private TextView logoTextView;// 找兼职、招兼职
 	private String telephoneStr;
 	private String passwordStr;
-	LineEditText telephoneView;
-	LineEditText passwordView;
+	EditText telephoneView;
+	EditText passwordView;
 	public static FindPJLoginActivity instance;
 	private SharedPreferences sp;
 	// 环信
 	private boolean progressShow;
 	private boolean autoLogin = false;
 	private String carson_user_id;// 判断是否保存的用户
+
+	private boolean showAnim;
 
 	@Override
 	protected void onResume() {
@@ -112,21 +118,21 @@ public class FindPJLoginActivity extends BaseActivity {
 				return;
 			}
 		}
-		setContentView(R.layout.entry_findpartjob);
+		setContentView(R.layout.activity_login_v3);
 		getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);// 隐藏软键盘
 		ViewUtils.inject(this);
 		instance = this;
 		logoImv = (ImageView) findViewById(R.id.login_logo_imv);
-		logoTextView = (TextView) findViewById(R.id.lognText);
-		logoTextView.setText(R.string.recruit_part_time);
+//		logoTextView = (TextView) findViewById(R.id.lognText);
+//		logoTextView.setText(R.string.recruit_part_time);
 		logoImv.setBackgroundResource(R.drawable.login_logo_c);
-		Button button = (Button) findViewById(R.id.look);
-		button.setVisibility(View.GONE);
+//		Button button = (Button) findViewById(R.id.look);
+//		button.setVisibility(View.GONE);
 		url = Url.COMPANY_LOGIN ;
 
-		telephoneView = (LineEditText) findViewById(R.id.telephone);
-		passwordView = (LineEditText) findViewById(R.id.password);
+		telephoneView = (EditText) findViewById(R.id.et_tel);
+		passwordView = (EditText) findViewById(R.id.et_pwd);
 		// 设置默认帐号、密码
 		String remember_tele = sp.getString(EXTRA_REMEMBER_TELE, "");
 		String remember_pwd = sp.getString(EXTRA_REMEMBER_PWD, "");
@@ -137,7 +143,7 @@ public class FindPJLoginActivity extends BaseActivity {
 		}
 
 		// 登陆
-		login = (Button) findViewById(R.id.login);
+		login = (Button) findViewById(R.id.btn_login);
 		login.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -154,7 +160,7 @@ public class FindPJLoginActivity extends BaseActivity {
 			}
 		});
 		// 注册
-		regin = (Button) findViewById(R.id.regin);
+		regin = (Button) findViewById(R.id.btn_register);
 		regin.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -167,7 +173,7 @@ public class FindPJLoginActivity extends BaseActivity {
 		});
 
 		// 忘记密码
-		forgetPwd = (Button) findViewById(R.id.forgetPwd);
+		forgetPwd = (TextView) findViewById(R.id.tv_forget_pwd);
 		forgetPwd.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -232,6 +238,10 @@ public class FindPJLoginActivity extends BaseActivity {
                                 IM_AVATAR = jsonts.getString("IM_AVATAR");
                                 IM_NIKENAME = jsonts.getString("IM_NIKENAME");
 								int type = jsonts.getInt("type");
+								if(type == AccountType.AGENT){
+									showAnim = true;
+								}
+//								showAnim = true;
 								SharePreferenceUtil.getInstance(FindPJLoginActivity.this).saveSharedPreferences(SharedPreferenceConstants.USER_TYPE, type);
 								loginIM(IM_USERID, IM_PASSWORD);
 
@@ -267,25 +277,25 @@ public class FindPJLoginActivity extends BaseActivity {
 	}
 
 	public boolean check() {
-		/*if (!Util.isMobileNO(telephoneStr)) {
+		if (!Util.isMobileNO(telephoneStr)) {
 			showToast("请输入正确手机号码");
 			return false;
 		}
 		if (!Util.isEmpty(passwordStr)) {
 			showToast("请输入密码");
 			return false;
-		}*/
+		}
 		return true;
 	}
 
-	// 随便看看
+	/*// 随便看看
 	@OnClick(R.id.look)
 	public void lookOnclick(View v) {
 		Intent intent = new Intent();
 		intent.setClass(FindPJLoginActivity.this, MainTabActivity.class);
 		startActivity(intent);
 		FindPJLoginActivity.this.finish();
-	}
+	}*/
 
 	// 环信 登陆
 	private void loginIM(String userName, String passWord) {
@@ -427,11 +437,16 @@ public class FindPJLoginActivity extends BaseActivity {
 							edit.putString("remember_tele", telephoneStr);
 							edit.putString("remember_pwd", passwordStr);
 							edit.commit();
-							Intent intent = new Intent();
-							intent.setClass(FindPJLoginActivity.this,
-									MainTabActivity.class);
-							startActivity(intent);
-							finish();
+
+							if(showAnim){
+								startActivity(new Intent(FindPJLoginActivity.this, ShowAnimActivity.class));
+							}else {
+								Intent intent = new Intent();
+								intent.setClass(FindPJLoginActivity.this,
+										MainTabActivity.class);
+								startActivity(intent);
+								finish();
+							}
 						}
 
 						@Override

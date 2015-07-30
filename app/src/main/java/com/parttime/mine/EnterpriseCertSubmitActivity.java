@@ -28,6 +28,10 @@ import java.util.Map;
  * Created by cjz on 2015/7/27.
  */
 public class EnterpriseCertSubmitActivity extends UpLoadPicActivity{
+    public static final String EXTRA_CERT_STATUS = "extra_cert_status";
+    public static final String EXTRA_IS_AGENT = "extra_is_agent";
+
+
     @ViewInject(R.id.ei_boss_name)
     private EditItem eiBossName;
     @ViewInject(R.id.ei_boss_id_card)

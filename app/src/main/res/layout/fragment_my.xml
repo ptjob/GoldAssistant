@@ -38,7 +38,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/iv_head"
-                    android:layout_alignTop="@id/iv_head"
                     android:textSize="15sp"
                     android:layout_marginTop="18dp"
                     android:text="Businessman"/>
@@ -58,7 +57,8 @@
                     android:layout_below="@id/rv_rank"
                     android:layout_marginTop="9dp"
                     android:textColor="#fff"
-                    android:text="@string/not_certed"/>
+                    android:text="@string/not_certed"
+                    android:background="@color/c_4BA4DE"/>
                 
                 <TextView
                     android:id="@+id/tv_sincere"

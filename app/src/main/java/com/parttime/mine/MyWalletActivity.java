@@ -1,6 +1,7 @@
 package com.parttime.mine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.base.LocalInitActivity;
 import com.parttime.base.WithTitleActivity;
 import com.parttime.constants.SharedPreferenceConstants;
@@ -21,6 +23,7 @@ import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.volley.VolleySington;
+import com.thirdparty.alipay.RechargeActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -168,6 +171,12 @@ public class MyWalletActivity extends LocalInitActivity implements XListView.IXL
 
     private void updateViews(){
         tvBalance.setText(balance + "");
+    }
+
+
+    @OnClick(R.id.tv_recharge)
+    public void recharget(View v){
+        startActivity(new Intent(this, RechargeActivity.class));
     }
 
     @Override

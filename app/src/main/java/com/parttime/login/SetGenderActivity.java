@@ -6,10 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.droid.carson.Activity01;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.parttime.base.IntentManager;
 import com.parttime.base.WithTitleActivity;
+import com.parttime.net.BaseRequest;
+import com.parttime.net.Callback;
 import com.qingmu.jianzhidaren.R;
+import com.quark.common.Url;
+import com.quark.volley.VolleySington;
+
+import org.json.JSONException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by cjz on 2015/7/29.
@@ -25,12 +36,15 @@ public class SetGenderActivity extends WithTitleActivity{
     private String name;
     private String pwdEncoded;
 
+    private String gender;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_set_gender);
         ViewUtils.inject(this);
         super.onCreate(savedInstanceState);
+        getIntentData();
     }
 
     private void getIntentData(){
@@ -50,12 +64,42 @@ public class SetGenderActivity extends WithTitleActivity{
 
     @OnClick(R.id.fl_male)
     public void male(View v){
-        showToast("male");
+//        showToast("male");
+//        startActivity(new Intent(this, Activity01.class));
+        gender = "1";
+        register();
     }
 
     @OnClick(R.id.fl_female)
     public void female(View v){
-        showToast("female");
+//        showToast("female");
+//        startActivity(new Intent(this, Activity01.class));
+        gender = "0";
+        register();
+    }
+
+    private void register(){
+        showWait(true);
+        Map<String, String> params = new HashMap<>();
+        params.put("telephone", telephone);
+        params.put("name", name);
+        params.put("password", pwdEncoded);
+        params.put("code", code);
+        params.put("city", "深圳");
+        params.put("sex", gender);
+        new BaseRequest().request(Url.COMPANY_REGISTER, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
+            @Override
+            public void success(Object obj) throws JSONException {
+                showWait(false);
+                IntentManager.intentToLoginActivity(SetGenderActivity.this);
+            }
+
+            @Override
+            public void failed(Object obj) {
+                showWait(false);
+                IntentManager.intentToLoginActivity(SetGenderActivity.this);
+            }
+        });
     }
 
     @Override

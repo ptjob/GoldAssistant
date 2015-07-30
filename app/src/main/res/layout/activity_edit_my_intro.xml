@@ -16,12 +16,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!--<com.quark.http.image.CircularImage
-                    android:id="@+id/cover_user_photo"
-                    android:layout_width="95dip"
-                    android:layout_height="95dip"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginTop="3dp" />-->
                 <FrameLayout
                     android:layout_width="@dimen/head_img_edge"
                     android:layout_height="@dimen/head_img_edge"
@@ -69,12 +63,14 @@
                 android:hint="@string/enter_your_intro_here"/>
             
             <TextView
+                android:id="@+id/tv_work_types_title"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:textSize="13sp"
                 android:paddingTop="9dp"
                 android:gravity="center_horizontal"
-                android:text="@string/select_work_types_tips"/>
+                android:text="@string/select_work_types_tips"
+                android:visibility="gone"/>
 
 
             <com.parttime.widget.SelectLayout
@@ -86,7 +82,8 @@
                 app:sl_textColor="@color/select_layout_text_color"
                 app:sl_textSize="14sp"
                 app:sl_itemBackground="@drawable/selector_select_item"
-                app:sl_maxSelectCount="5"/>
+                app:sl_maxSelectCount="5"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_finish"
