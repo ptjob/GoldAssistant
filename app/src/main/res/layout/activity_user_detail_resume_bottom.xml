@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="49dp"
-    tools:context="com.parttime.addresslist.UserDetailActivity"
+    tools:context="com.parttime.addresslist.userdetail.UserDetailActivity"
     android:orientation="horizontal"
-    android:visibility="visible">
+    android:visibility="gone">
     <LinearLayout
         android:id="@+id/call_container"
         android:layout_width="49dp"

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/dx_checkbox_gray_on" android:state_checked="true"/>
-    <item android:drawable="@drawable/dx_checkbox_off" android:state_checked="false"/>
-    <item android:drawable="@drawable/dx_checkbox_off"/>
+    <item android:drawable="@drawable/other_btn_off" android:state_checked="true"/>
+    <item android:drawable="@drawable/other_btn_on" android:state_checked="false"/>
+    <item android:drawable="@drawable/other_btn_on"/>
 
 </selector>	

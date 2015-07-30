@@ -23,7 +23,7 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
-import com.parttime.addresslist.UserDetailActivity;
+import com.parttime.addresslist.userdetail.UserDetailActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead2;
 import com.parttime.constants.ActivityExtraAndKeys;

@@ -34,17 +34,16 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.carson.constant.ConstantForSaveList;
-import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
-import com.parttime.addresslist.UserDetailActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead2;
 import com.parttime.constants.ActivityExtraAndKeys;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
+import com.parttime.utils.IntentManager;
 import com.parttime.utils.SharePreferenceUtil;
 import com.parttimejob.swipe.SwipeListView;
 import com.qingmu.jianzhidaren.R;
@@ -480,16 +479,23 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                 @Override
                 public void onClick(View v) {
                     GroupSettingRequest.UserVO userVO = (GroupSettingRequest.UserVO)v.getTag();
-                    Intent intent = new Intent(GroupResumeSettingActivity.this, UserDetailActivity.class);
-                    intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID , groupId);
-                    if(userVO != null) {
-                        intent.putExtra(ActivityExtraAndKeys.USER_ID, String.valueOf(userVO.userId));
+
+                    ArrayList<String> userIds = null;
+                    if(data != null && data.size() > 0){
+                        userIds = new ArrayList<>();
+                        for (GroupSettingRequest.UserVO vo : data){
+                            if(vo == null){
+                                continue;
+                            }
+                            userIds.add(String.valueOf(vo.userId));
+                        }
                     }
-                    if(EMChatManager.getInstance().getCurrentUser()
-                            .equals(group.getOwner())){
-                        intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPOWNER, true);
-                    }
-                    startActivity(intent);
+
+                    IntentManager.toUserDetailFromActivityGroup(GroupResumeSettingActivity.this,
+                            groupId,
+                            userVO,
+                            userIds,
+                            group.getOwner());
                 }
             });
 

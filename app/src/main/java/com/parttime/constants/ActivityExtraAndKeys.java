@@ -32,5 +32,10 @@ public class ActivityExtraAndKeys {
         public static String MEMBER = "member";
     }
 
+    public static class UserDetail{
+        public static String FROM_AND_STATUS = "from_and_status";
+        public static String SELECTED_USER_ID = "select_user_id";
+    }
+
 
 }

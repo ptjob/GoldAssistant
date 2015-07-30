@@ -2,19 +2,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.parttime.addresslist.UserDetailActivity"
-    android:visibility="visible">
+    tools:context="com.parttime.addresslist.userdetail.UserDetailActivity"
+    android:visibility="gone">
+
+    <RelativeLayout android:id="@+id/appraise_container"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        >
+        <TextView
+            android:id="@+id/appraise_key"
+            android:layout_width="wrap_content"
+            style="@style/detail_item_key"
+            android:textColor="@color/detail_info_value_text_color"
+            android:layout_height="40dp"
+            android:text="@string/appraise"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            style="@style/detail_item_value"
+            android:text="@string/expend"
+            android:id="@+id/expend"
+            android:layout_marginRight="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toLeftOf="@+id/expend_checked"
+            android:layout_toStartOf="@+id/expend_checked"
+            />
+        <CheckBox
+            android:id="@+id/expend_checked"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            style="@style/Checkbox_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="12dp"
+            android:layout_marginEnd="12dp"/>
+    </RelativeLayout>
+    <!--存放评论的值-->
+    <LinearLayout
+        android:id="@+id/appraise_value_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appraise_container"
+        android:orientation="vertical"
+        android:visibility="gone">
+    </LinearLayout>
+
     <TextView
         android:id="@+id/summary_key"
         android:layout_width="wrap_content"
         style="@style/detail_item_key"
         android:layout_height="40dp"
+        android:layout_below="@+id/appraise_value_container"
         android:text="@string/summary"/>
     <TextView
         android:id="@+id/summary_value"
         android:layout_width="wrap_content"
         style="@style/detail_item_value"
         android:layout_height="40dp"
+        android:layout_below="@+id/appraise_value_container"
         android:layout_toRightOf="@+id/summary_key"
         android:layout_toEndOf="@+id/summary_key"
         android:text="@string/summary"/>

@@ -512,7 +512,7 @@
         </activity>
         <!--普通群设置-->
         <activity
-            android:name="com.parttime.addresslist.UserDetailActivity"
+            android:name="com.parttime.addresslist.userdetail.UserDetailActivity"
             android:label="@string/title_activity_user_detail"
             android:screenOrientation="portrait">
         </activity>

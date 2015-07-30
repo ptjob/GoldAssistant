@@ -1,9 +1,10 @@
-package com.parttime.addresslist;
+package com.parttime.addresslist.userdetail;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,21 +23,24 @@ import com.parttime.base.WithTitleActivity;
 import com.parttime.constants.ActivityExtraAndKeys;
 import com.qingmu.jianzhidaren.R;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 public class UserDetailActivity extends WithTitleActivity implements View.OnClickListener {
 
-    private String groupId;
-    private String userId;
-    private boolean isGroupOwner = false;
+    public String groupId;
+    public boolean isGroupOwner = false;
+    public FromAndStatus fromAndStatus;
+    public String userId;//当前显示的UserId
     //0:没有获取成功 1:禁言 2:非禁言
     private int forbiddenValue = 0;
 
     private ViewPager viewPager ;
 
     private UserDetailPagerAdapter adapter ;
+
+    private LinkedHashSet<String> set;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,38 +64,65 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
 
         viewPager = (ViewPager)findViewById(R.id.viewPager);
 
-        LinkedHashSet<String> set = new LinkedHashSet<>();
-        set.add("1");
-        set.add("2");
-        set.add("3");
-        set.add("4");
-        set.add("5");
-        set.add("6");
-        set.add("7");
-        set.add("8");
-        adapter = new UserDetailPagerAdapter(getSupportFragmentManager());
-        adapter.setData(set);
-        viewPager.setAdapter(adapter);
+
     }
 
     private void bindData() {
         groupId = getIntent().getStringExtra(ActivityExtraAndKeys.GroupSetting.GROUPID);
-        userId = getIntent().getStringExtra(ActivityExtraAndKeys.USER_ID);
+        String fas = getIntent().getStringExtra(ActivityExtraAndKeys.UserDetail.FROM_AND_STATUS);
+        userId = getIntent().getStringExtra(ActivityExtraAndKeys.UserDetail.SELECTED_USER_ID);
         isGroupOwner = getIntent().getBooleanExtra(ActivityExtraAndKeys.GroupSetting.GROUPOWNER,false);
+        ArrayList<String> userIds = getIntent().getStringArrayListExtra(ActivityExtraAndKeys.USER_ID);
 
-        if(isGroupOwner){
+        if(isGroupOwner && userIds != null && userIds.size() > 0){
             rightWrapper.setVisibility(View.VISIBLE);
+            //初始化更多的禁言管理的数据
+            if(!TextUtils.isEmpty(userId)){
+                initUserBlock(userId);
+            }
         }else{
             rightWrapper.setVisibility(View.GONE);
         }
 
+        if(fas != null){
+            fromAndStatus = FromAndStatus.valueOf(fas);
+        }else{
+            fromAndStatus = FromAndStatus.FROM_ACTIVITY_GROUP_VIEW_RESUME;
+        }
+
+        int viewPagerCurrentItem = -1;
+        set = new LinkedHashSet<>();
+        if(userIds != null && userIds.size() > 0){
+            for(String userId : userIds){
+                if(TextUtils.isEmpty(userId)){
+                    continue;
+                }
+                set.add(userId);
+            }
+            viewPagerCurrentItem = userIds.indexOf(userId);
+        }
+
+        adapter = new UserDetailPagerAdapter(getSupportFragmentManager(),this);
+        adapter.setData(set);
+        adapter.fromAndStatus = fromAndStatus;
+        viewPager.setAdapter(adapter);
+        //设置当前页显示的user
+        if(viewPagerCurrentItem > -1){
+            viewPager.setCurrentItem(viewPagerCurrentItem);
+        }
+
+
+    }
+
+    public void initUserBlock(final String userId){
+        this.userId = userId;
         new Thread(new Runnable() {
 
             public void run() {
                 try {
                     List<String> blockedList = EMGroupManager.getInstance()
                             .getBlockedUsers(groupId);
-                    if (blockedList != null) {
+                    if (blockedList != null ) {
                         if(blockedList.contains(userId)){
                             forbiddenValue = 1;
                         }else{
@@ -122,19 +153,14 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -252,5 +278,13 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
         more.show();
 
         return more;
+    }
+
+    public static enum FromAndStatus{
+        FROM_NORMAL_GROUP_AND_NOT_FRIEND, //从普通群组过来 不是好友
+        FROM_NORMAL_GROUP_AND_IS_FRIEND,  //从普通群组过来 是好友
+        FROM_ACTIVITY_GROUP_AND_NOT_FINISH, //从活动群过来 活动没有结束
+        FROM_ACTIVITY_GROUP_AND_IS_FINISH, //从活动群过来 活动已结束
+        FROM_ACTIVITY_GROUP_VIEW_RESUME,  //查看简历
     }
 }
