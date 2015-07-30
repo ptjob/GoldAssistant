@@ -10,12 +10,14 @@
         android:id="@+id/fl_male"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/c_4BA4DE">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
             android:layout_marginBottom="22dp"
+            android:scaleType="fitStart"
             android:src="@drawable/boy"/>
         <TextView
             android:layout_width="match_parent"
@@ -30,12 +32,14 @@
         android:id="@+id/fl_female"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/c_FF5D56">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="19dp"
             android:layout_marginBottom="19dp"
+            android:scaleType="fitEnd"
             android:src="@drawable/girl"
             android:layout_gravity="right"/>
         <TextView

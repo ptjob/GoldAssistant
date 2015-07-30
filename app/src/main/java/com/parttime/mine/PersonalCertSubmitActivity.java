@@ -43,9 +43,8 @@ import java.util.Map;
  * Created by cjz on 2015/7/26.
  */
 public class PersonalCertSubmitActivity extends UpLoadPicActivity implements ActionSheet.OnActionSheetSelected {
-    private static final int IMAGE_REQUEST_CODE = 0;
-    private static final int CAMERA_REQUEST_CODE = 1;
-    private static final int RESULT_REQUEST_CODE = 2;
+    public static final String EXTRA_CERT_STATUS = "extra_cert_status";
+    public static final String EXTRA_IS_AGENT = "extra_is_agent";
 
     private static final String IMAGE_FILE_NAME = "faceImage.jpg";//
 

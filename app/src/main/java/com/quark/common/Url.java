@@ -117,6 +117,9 @@ public class Url {
 	public static final String USER_yanzheng = HOST + SUBJECT
 			+ "/UserCenter/show_authentication";
 
+	public static final String COMPANY_REGISTER = HOST + SUBJECT
+			+ "/CompanyCenter/registe";
+
 	// 用户上传正面身份证
 	public static final String USER_uploadIdcard_zheng = HOST + SUBJECT
 			+ "/UserCenter/upload_identity_font";
@@ -148,6 +151,9 @@ public class Url {
 	// 32 用户更新简历
 	public static final String USER_jianli_submit = HOST + SUBJECT
 			+ "/UserCenter/update_resume";
+
+	public static final String COMPANY_SHOW_INTRO = HOST + SUBJECT
+			+ "/CompanyCenter/showResume";
 	// 29 上传我的照片
 	public static final String USER_jianli_uploadmypic = HOST + SUBJECT
 			+ "/UserCenter/upload_my_avatar";

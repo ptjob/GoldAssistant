@@ -49,6 +49,7 @@ import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
 import com.parttime.net.ErrorHandler;
 import com.parttime.type.AccountType;
+import com.parttime.type.CertType;
 import com.parttime.widget.FormItem;
 import com.parttime.widget.RankView;
 import com.qingmu.jianzhidaren.R;
@@ -79,6 +80,7 @@ import java.util.Map;
  */
 public class MyFragment extends BaseFragment implements OnClickListener {
 	private static final String IMAGE_FILE_NAME = "faceImage.jpg";// 图片名称
+
 
 	private static final int CERT_PASSED = 2;
 
@@ -138,6 +140,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 			rvRank.rank((int) function.getPoint());
 			String certString = getCertString();
 			tvCertState.setText(certString);
+			tvCertState.setText(getCertStringForIcon());
 			fiMyFans.setValue(getString(R.string.x_ge_in_chinese, function.getFollowers()));
 			fiMyBalance.setValue(getString(R.string.x_rmb, function.getMoney()));
 			fiRealNameCert.setValue(certString);
@@ -147,17 +150,29 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	private String getCertString(){
 		if(function != null){
 			int company_status = function.getCompany_status();
-			if(company_status == CERT_PASSED){
+			if(company_status == CertType.CERT_PASSED){
 				int type = function.getType();
 				if(type == AccountType.PERSONAL){
 					return getString(R.string.personal_certed);
 				}else if(type == AccountType.ENTERPRISE){
 					return getString(R.string.enterprise_certed);
+				}else if(type == AccountType.AGENT){
+					return getString(R.string.agent_certed);
 				}
 			}
 		}
 		return getString(R.string.not_certed);
 
+	}
+
+	public String getCertStringForIcon(){
+		if(function != null){
+			int company_status = function.getCompany_status();
+			if(company_status == CertType.CERT_PASSED){
+				return getString(R.string.certed);
+			}
+		}
+		return getString(R.string.not_certed);
 	}
 
 	private void getMyInfo(){
@@ -948,7 +963,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 				}
 			}
 		});
-		goToActivity(RealNameCertSelectActivity.class);
+//		goToActivity(RealNameCertSelectActivity.class);
 	}
 
 	private void freshManGuide(){

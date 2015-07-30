@@ -840,6 +840,13 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="com.parttime.mine.PreviewMyIntroActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="com.parttime.mine.MyWalletActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -929,6 +936,20 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 
         <activity
+            android:name="com.parttime.mine.PersonalCertedActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+
+        <activity
+            android:name="com.parttime.mine.EnterpriseCertedActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+
+        <activity
             android:name="com.parttime.login.RegisterInfoActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
@@ -941,6 +962,14 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
+
+        <activity
+            android:name="com.parttime.login.ShowAnimActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+
 
 
 

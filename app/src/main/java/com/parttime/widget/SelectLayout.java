@@ -135,6 +135,22 @@ public class SelectLayout extends CommonShowItemLayout implements View.OnClickLi
         }
     }
 
+    public void setSelected(boolean selected, int index){
+        View v = getChildAt(index);
+        if(!selected){
+            v.setSelected(selected);
+            selectedIndexes.remove(index);
+        }else {
+            if(selectedIndexes.size() >= maxCount){
+                return;
+            }else {
+                v.setSelected(selected);
+                selectedIndexes.add(index);
+            }
+        }
+
+    }
+
     public List<Integer> getSelectedIndexes(){
 
         return new ArrayList<Integer>(selectedIndexes);

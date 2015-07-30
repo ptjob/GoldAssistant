@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/agent_anim_1" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_2" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_3" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_4" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_5" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_6" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_7" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_8" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_9" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_10" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_11" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_12" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_13" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_14" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_15" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_16" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_17" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_18" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_19" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_20" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_21" android:duration="91"/>
+    <item android:drawable="@drawable/agent_anim_22" android:duration="91"/>
+</animation-list>

@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.carson.constant.ConstantForSaveList;
+import com.google.gson.Gson;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -37,6 +38,7 @@ import com.parttime.main.MainTabActivity;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
 import com.parttime.net.ErrorHandler;
+import com.parttime.pojo.AccountInfo;
 import com.parttime.type.AccountType;
 import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.widget.CountingEditText;
@@ -48,9 +50,13 @@ import com.quark.image.UploadImg;
 import com.quark.utils.Util;
 import com.quark.volley.VolleySington;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,19 +81,24 @@ public class EditMyIntroActivity extends LocalInitActivity {
     @ViewInject(R.id.iv_head_image)
     private ImageView ivHead;
 
+    @ViewInject(R.id.tv_work_types_title)
+    private TextView tvWorkTypeTitle;
+
     private Bitmap userPhotoBmp = null;
 //    private String userId;
     private int userType;
     private Bitmap head;
 //    private List<Object> workTypes;
-    private String[] workTypes;
+//    private String[] workTypes;
+    private List<String> workTypes = new ArrayList<>();
+    AccountInfo accountInfo;
 
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        loadLocalData();
+//        loadLocalData();
         setContentView(R.layout.activity_edit_my_intro);
 
         super.onCreate(savedInstanceState);
@@ -97,16 +108,28 @@ public class EditMyIntroActivity extends LocalInitActivity {
     @Override
     protected void initViews(){
         left(TextView.class, R.string.back);
-        right(TextView.class, R.string.preview);
+        right(TextView.class, R.string.preview, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditMyIntroActivity.this, PreviewMyIntroActivity.class);
+                intent.putExtra(PreviewMyIntroActivity.EXTRA_ACCOUNT_INFO, accountInfo);
+                startActivity(intent);
+            }
+        });
         center(R.string.edit_intro);
         ViewUtils.inject(this);
         if(head != null) {
             ivHead.setImageBitmap(head);
         }
-        if(userType == AccountType.AGENT){
+        checkWhetherAgent();
+    }
 
+    private void checkWhetherAgent(){
+        if(userType == AccountType.AGENT){
+            tvWorkTypeTitle.setVisibility(View.VISIBLE);
             slWorkTypes.setVisibility(View.VISIBLE);
         }
+        initWorkTypes();
     }
 
     @Override
@@ -124,21 +147,60 @@ public class EditMyIntroActivity extends LocalInitActivity {
         return null;
     }
 
+    @Override
     protected void loadLocalData(){
         super.loadLocalData();
 //        userId = SharePreferenceUtil.getInstance(this).loadStringSharedPreference("userId");
-        userType = SharePreferenceUtil.getInstance(this).loadIntSharedPreference(SharedPreferenceConstants.USER_TYPE, -1);
+        userType = getUserType();
         head = ContactImageLoader.get(getCompanyId());
     }
 
     protected void loadData(){
-        if(userType == AccountType.AGENT){
-            workTypes = getResources().getStringArray(R.array.work_types);
-
-            for(int i = 0; i < workTypes.length; ++i){
-                slWorkTypes.add(workTypes[i]);
+        Map<String, String> params = new HashMap<>();
+        params.put("company_id", getCompanyId());
+        new BaseRequest().request(Url.COMPANY_SHOW_INTRO, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
+            @Override
+            public void success(Object obj) throws JSONException {
+                JSONObject json = (JSONObject) obj;
+                JSONObject companyInfo = json.getJSONObject("companyInfo");
+                accountInfo = new Gson().fromJson(companyInfo.toString(), AccountInfo.class);
+                updateViews();
             }
 
+            @Override
+            public void failed(Object obj) {
+                new ErrorHandler(EditMyIntroActivity.this, obj).showToast();
+            }
+        });
+    }
+
+    private void updateViews(){
+        cetIntro.setText(accountInfo.introduction);
+        checkWhetherAgent();
+        if(accountInfo.type == AccountType.AGENT && accountInfo.hire_type != null) {
+            String[] split = accountInfo.hire_type.split("/");
+            if (split != null) {
+                int index;
+                for (String s : split) {
+                    index = workTypes.indexOf(s);
+                    if (index != -1) {
+                        slWorkTypes.setSelected(true, index);
+                    }
+                }
+            }
+        }
+    }
+
+    protected void initWorkTypes(){
+        if(userType == AccountType.AGENT){
+            String[] stringArray = getResources().getStringArray(R.array.work_types);
+            List<String> strings = Arrays.asList(stringArray);
+            workTypes.clear();
+            workTypes.addAll(strings);
+            slWorkTypes.removeAllViews();
+            for(String wt : workTypes){
+                slWorkTypes.add(wt);
+            }
         }
     }
 
