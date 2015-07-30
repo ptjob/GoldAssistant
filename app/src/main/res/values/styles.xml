@@ -89,7 +89,7 @@
     <!--个人详情-->
     <style name="detail_item_key">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">39dp</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:textColor">@color/detail_info_key_text_color</item>
         <item name="android:textSize">@dimen/detail_info_key_text_size</item>
         <item name="android:gravity">center</item>

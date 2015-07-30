@@ -65,9 +65,8 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.activity_user_detail_item, container, false);
-
-            //TextView tv = (TextView)rootView.findViewById(R.id.test);
-            //tv.setText(userId);
+            UserDetailViewHelper helper = new UserDetailViewHelper();
+            helper.initView(rootView);
             return rootView;
         }
 

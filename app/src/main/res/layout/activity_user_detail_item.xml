@@ -19,39 +19,43 @@
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="120dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_toLeftOf="@+id/images_container"
                     android:layout_toStartOf="@+id/images_container"
                     >
-                    <LinearLayout android:id="@+id/name_container"
+                    <RelativeLayout android:id="@+id/name_container"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content">
                         <TextView
-                            android:layout_height="wrap_content"
+                            android:id="@+id/name_key"
+                            android:layout_height="40dp"
                             style="@style/detail_item_key"
                             android:text="@string/name"
                             />
                         <TextView
                             android:id="@+id/name"
                             android:layout_width="wrap_content"
-                            android:layout_height="39dp"
+                            android:layout_height="40dp"
                             style="@style/detail_item_value"
+                            android:layout_toRightOf="@+id/name_key"
+                            android:layout_toEndOf="@+id/name_key"
                             android:text="用户名"/>
-                    </LinearLayout>
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@drawable/line_item_dividing"/>
-                    <LinearLayout android:id="@+id/sex_container"
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@drawable/line_item_dividing"
+                            android:layout_below="@+id/name_key"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout android:id="@+id/sex_container"
                                   android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"
-                                  android:orientation="horizontal">
+                                  android:layout_height="wrap_content">
                         <TextView
-                            android:layout_height="wrap_content"
+                            android:id="@+id/sex_key"
+                            android:layout_height="40dp"
                             style="@style/detail_item_key"
                             android:text="@string/sex"
                             />
@@ -60,18 +64,22 @@
                             android:layout_width="wrap_content"
                             android:layout_height="39dp"
                             style="@style/detail_item_value"
+                            android:layout_toRightOf="@+id/sex_key"
+                            android:layout_toEndOf="@+id/sex_key"
                             android:text="性别"/>
-                    </LinearLayout>
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@drawable/line_item_dividing"/>
-                    <LinearLayout android:id="@+id/age_container"
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@drawable/line_item_dividing"
+                            android:layout_below="@+id/sex_key"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout android:id="@+id/age_container"
                                   android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"
-                                  android:orientation="horizontal">
+                                  android:layout_height="wrap_content">
                         <TextView
-                            android:layout_height="wrap_content"
+                            android:id="@+id/age_key"
+                            android:layout_height="40dp"
                             style="@style/detail_item_key"
                             android:text="@string/sex"
                             />
@@ -80,12 +88,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="39dp"
                             style="@style/detail_item_value"
+                            android:layout_toRightOf="@+id/age_key"
+                            android:layout_toEndOf="@+id/age_key"
                             android:text="年龄"/>
-                    </LinearLayout>
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@drawable/line_item_dividing"/>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/age_key"
+                            android:background="@drawable/line_item_dividing"/>
+                    </RelativeLayout>
+
                 </LinearLayout>
                 <FrameLayout
                     android:id="@+id/images_container"
@@ -112,149 +124,167 @@
 
             </RelativeLayout>
             <!--学历-->
-            <TextView
-                android:id="@+id/education_key"
-                android:layout_width="wrap_content"
-                style="@style/detail_item_key"
-                android:layout_height="40dp"
-                android:layout_below="@+id/name_age_sex_container"
-                android:text="@string/education"/>
-            <TextView
-                android:id="@+id/education_value"
-                android:layout_width="wrap_content"
-                style="@style/detail_item_value"
-                android:layout_height="40dp"
-                android:layout_below="@+id/reputation_line"
-                android:layout_toRightOf="@+id/education_key"
-                android:layout_toEndOf="@+id/education_key"
-                android:text="@string/education"/>
-            <ImageView
-                android:id="@+id/education_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/education_key"
-                android:background="@drawable/line_item_dividing"/>
+        <RelativeLayout android:id="@+id/education_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name_age_sex_container">
+                <TextView
+                    android:id="@+id/education_key"
+                    android:layout_width="wrap_content"
+                    style="@style/detail_item_key"
+                    android:layout_height="40dp"
+                    android:text="@string/education"/>
+                <TextView
+                    android:id="@+id/education_value"
+                    android:layout_width="wrap_content"
+                    style="@style/detail_item_value"
+                    android:layout_height="40dp"
+                    android:layout_toRightOf="@+id/education_key"
+                    android:layout_toEndOf="@+id/education_key"
+                    android:text="@string/education"/>
+                <ImageView
+                    android:id="@+id/education_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/education_key"
+                    android:background="@drawable/line_item_dividing"/>
+            </RelativeLayout>
             <!--身高-->
-            <TextView
-                android:id="@+id/height_key"
-                android:layout_width="wrap_content"
-                style="@style/detail_item_key"
-                android:layout_height="40dp"
-                android:layout_below="@+id/education_line"
-                android:text="@string/height"/>
-            <TextView
-                android:id="@+id/height_value"
-                android:layout_width="wrap_content"
-                style="@style/detail_item_value"
-                android:layout_height="40dp"
-                android:layout_below="@+id/education_line"
-                android:layout_toRightOf="@+id/height_key"
-                android:layout_toEndOf="@+id/height_key"
-                android:text="@string/height"/>
-            <ImageView
-                android:id="@+id/height_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/height_key"
-                android:background="@drawable/line_item_dividing"/>
+            <RelativeLayout android:id="@+id/height_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/education_container">
+                <TextView
+                    android:id="@+id/height_key"
+                    android:layout_width="wrap_content"
+                    style="@style/detail_item_key"
+                    android:layout_height="40dp"
+                    android:text="@string/height"/>
+                <TextView
+                    android:id="@+id/height_value"
+                    android:layout_width="wrap_content"
+                    style="@style/detail_item_value"
+                    android:layout_height="40dp"
+                    android:layout_toRightOf="@+id/height_key"
+                    android:layout_toEndOf="@+id/height_key"
+                    android:text="@string/height"/>
+                <ImageView
+                    android:id="@+id/height_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/height_key"
+                    android:background="@drawable/line_item_dividing"/>
+            </RelativeLayout>
             <!--其他-->
-            <TextView
-                android:id="@+id/other_key"
-                android:layout_width="wrap_content"
-                style="@style/detail_item_key"
-                android:layout_height="40dp"
-                android:layout_below="@+id/height_line"
-                android:text="@string/other"/>
-            <TextView
-                android:id="@+id/other_value"
-                android:layout_width="wrap_content"
-                style="@style/detail_item_value"
-                android:layout_height="40dp"
-                android:layout_below="@+id/height_line"
-                android:layout_toRightOf="@+id/other_key"
-                android:layout_toEndOf="@+id/other_key"
-                android:text="@string/other"/>
-            <ImageView
-                android:id="@+id/other_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/other_key"
-                android:background="@drawable/line_item_dividing"/>
+            <RelativeLayout android:id="@+id/other_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/height_container">
+                <TextView
+                    android:id="@+id/other_key"
+                    android:layout_width="wrap_content"
+                    style="@style/detail_item_key"
+                    android:layout_height="40dp"
+                    android:text="@string/other"/>
+                <TextView
+                    android:id="@+id/other_value"
+                    android:layout_width="wrap_content"
+                    style="@style/detail_item_value"
+                    android:layout_height="40dp"
+                    android:layout_toRightOf="@+id/other_key"
+                    android:layout_toEndOf="@+id/other_key"
+                    android:text="@string/other"/>
+                <ImageView
+                    android:id="@+id/other_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/other_key"
+                    android:background="@drawable/line_item_dividing"/>
+            </RelativeLayout>
             <!--三维-->
-            <TextView
-                android:id="@+id/three_dimensional_key"
-                android:layout_width="wrap_content"
-                style="@style/detail_item_key"
-                android:layout_height="40dp"
-                android:layout_below="@+id/other_line"
-                android:text="@string/three_dimensional"/>
-            <TextView
-                android:id="@+id/three_dimensional_value"
-                android:layout_width="wrap_content"
-                style="@style/detail_item_value"
-                android:layout_height="40dp"
-                android:layout_below="@+id/other_line"
-                android:layout_toRightOf="@+id/three_dimensional_key"
-                android:layout_toEndOf="@+id/three_dimensional_key"
-                android:text="@string/three_dimensional"/>
-            <ImageView
-                android:id="@+id/three_dimensional_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/three_dimensional_key"
-                android:background="@drawable/line_item_dividing"/>
+            <RelativeLayout android:id="@+id/three_dimensional_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/other_container">
+                <TextView
+                    android:id="@+id/three_dimensional_key"
+                    android:layout_width="wrap_content"
+                    style="@style/detail_item_key"
+                    android:layout_height="40dp"
+                    android:text="@string/three_dimensional"/>
+                <TextView
+                    android:id="@+id/three_dimensional_value"
+                    android:layout_width="wrap_content"
+                    style="@style/detail_item_value"
+                    android:layout_height="40dp"
+                    android:layout_toRightOf="@+id/three_dimensional_key"
+                    android:layout_toEndOf="@+id/three_dimensional_key"
+                    android:text="@string/three_dimensional"/>
+                <ImageView
+                    android:id="@+id/three_dimensional_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/three_dimensional_key"
+                    android:background="@drawable/line_item_dividing"/>
+            </RelativeLayout>
             <!--信誉-->
-            <TextView
-                android:id="@+id/reputation_key"
-                android:layout_width="wrap_content"
-                style="@style/detail_item_key"
-                android:layout_height="40dp"
-                android:layout_marginTop="12dp"
-                android:layout_below="@+id/three_dimensional_line"
-                android:text="@string/reputation"/>
-            <LinearLayout
-                android:id="@+id/reputation_value_container"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_below="@+id/three_dimensional_line"
-                android:layout_toRightOf="@+id/reputation_key"
-                android:layout_toEndOf="@+id/reputation_key"
-                android:orientation="horizontal"/>
-            <ImageView
-                android:id="@+id/reputation_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/reputation_key"
-                android:background="@drawable/line_item_dividing"/>
+            <RelativeLayout android:id="@+id/reputation_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/three_dimensional_container">
+                <TextView
+                    android:id="@+id/reputation_key"
+                    android:layout_width="wrap_content"
+                    style="@style/detail_item_key"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/reputation"/>
+                <LinearLayout
+                    android:id="@+id/reputation_value_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_toRightOf="@+id/reputation_key"
+                    android:layout_toEndOf="@+id/reputation_key"
+                    android:orientation="horizontal"/>
+                <ImageView
+                    android:id="@+id/reputation_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/reputation_key"
+                    android:background="@drawable/line_item_dividing"/>
+            </RelativeLayout>
             <!--认证-->
-            <TextView
-                android:id="@+id/certification_key"
-                android:layout_width="wrap_content"
-                style="@style/detail_item_key"
-                android:layout_height="40dp"
-                android:layout_below="@+id/reputation_line"
-                android:text="@string/renzheng"/>
-            <TextView
-                android:id="@+id/certification_value"
-                android:layout_width="wrap_content"
-                style="@style/detail_item_value"
-                android:layout_height="40dp"
-                android:layout_below="@+id/reputation_line"
-                android:layout_toRightOf="@+id/certification_key"
-                android:layout_toEndOf="@+id/certification_key"
-                android:text="@string/renzheng"/>
-            <ImageView
-                android:id="@+id/certification_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/certification_key"
-                android:background="@drawable/line_item_dividing"/>
+            <RelativeLayout android:id="@+id/certification_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/reputation_container">
+                <TextView
+                    android:id="@+id/certification_key"
+                    android:layout_width="wrap_content"
+                    style="@style/detail_item_key"
+                    android:layout_height="40dp"
+                    android:text="@string/renzheng"/>
+                <TextView
+                    android:id="@+id/certification_value"
+                    android:layout_width="wrap_content"
+                    style="@style/detail_item_value"
+                    android:layout_height="40dp"
+                    android:layout_toRightOf="@+id/certification_key"
+                    android:layout_toEndOf="@+id/certification_key"
+                    android:text="@string/renzheng"/>
+                <ImageView
+                    android:id="@+id/certification_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/certification_key"
+                    android:background="@drawable/line_item_dividing"/>
+            </RelativeLayout>
 
             <RelativeLayout android:id="@+id/appraise_container"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="12dp"
-                android:layout_below="@+id/certification_line">
+                android:layout_below="@+id/certification_container">
                 <TextView
                     android:id="@+id/appraise_key"
                     android:layout_width="wrap_content"
@@ -300,7 +330,7 @@
                 android:orientation="vertical">
                 <include layout="@layout/activity_user_detail_resume" android:id="@+id/resume_content_container"/>
                 <include layout="@layout/activity_user_detail_friend" android:id="@+id/friend_content_container"/>
-                <include layout="@layout/activity_user_detail_evaluation" android:id="@+id/add_friend_content_container"/>
+                <include layout="@layout/activity_user_detail_evaluation" android:id="@+id/evaluation_container"/>
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
