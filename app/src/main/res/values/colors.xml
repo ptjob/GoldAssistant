@@ -148,6 +148,10 @@
     <color name="result_view">#b0000000</color>
     <color name="possible_result_points">#66E001</color>
 
+
+    <!--个人详情-->
+    <color name="detail_info_key_text_color">#999999</color>
+    <color name="detail_info_value_text_color">#363636</color>
     <!-- 环信 -->
     <!-- 改成橙色 -->
     <!-- <color name="common_top_bar_blue">#4ebcd3</color> -->

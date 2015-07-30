@@ -1,0 +1,97 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="49dp"
+    tools:context="com.parttime.addresslist.UserDetailActivity"
+    android:orientation="horizontal"
+    android:visibility="visible">
+    <LinearLayout
+        android:id="@+id/call_container"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/dianhua"
+            />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:text="@string/call"
+            android:id="@+id/call" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/send_msg_container"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/duanxin"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:text="@string/send_msg"
+            android:id="@+id/send_msg" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/unhandle_container"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="49dp"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="49dp"
+            android:text="@string/refused"
+            android:layout_weight="1"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:background="#ff5d56"
+            android:gravity="center"
+            android:id="@+id/reject" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="49dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:background="#4ba4de"
+            android:textColor="@android:color/white"
+            android:text="@string/pass"
+            android:id="@+id/pass" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:text="@string/cancel_resume"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:background="@color/c_363636"
+        android:textColor="@android:color/white"
+        android:layout_weight="2"
+        android:id="@+id/cancel_resume"
+        android:visibility="visible"/>
+</LinearLayout>

@@ -59,6 +59,8 @@
     <dimen name="defaul_icon_size_border">145px</dimen>
     <dimen name="defaul_icon_size">140px</dimen>
     <dimen name="defaul_icon_size_my_data">116px</dimen>
+    <dimen name="detail_info_key_text_size">15sp</dimen>
+    <dimen name="detail_info_value_text_size">15sp</dimen>
 <!-- 列表头像 -->
     <dimen name="defaul_icon_size_small_border">120px</dimen>
     <dimen name="defaul_icon_size_small">117px</dimen>

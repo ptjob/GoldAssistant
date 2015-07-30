@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.parttime.addresslist.UserDetailActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send_add_friend"
+        android:id="@+id/send_add_friend"
+        style="@style/FormBlueButton"
+        android:paddingRight="80dp"
+        android:paddingLeft="80dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/friend_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/to_msg"
+            android:id="@+id/to_msg"
+            style="@style/FormBlueButton"
+            android:paddingRight="80dp"
+            android:paddingLeft="80dp"
+            android:layout_marginTop="20dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_friend"
+            android:id="@+id/delete_friend"
+            style="@style/FormBlueButton"
+            android:paddingRight="80dp"
+            android:paddingLeft="80dp"
+            android:layout_marginTop="20dp" />
+    </LinearLayout>
+
+</LinearLayout>

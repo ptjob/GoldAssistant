@@ -1,6 +1,5 @@
 package com.parttime.addresslist;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.qingmu.jianzhidaren.R;
 
@@ -67,11 +65,11 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.activity_user_detail_item, container, false);
-            userId = getArguments().getString(ARG_USER_ID);
-            TextView tv = (TextView)rootView.findViewById(R.id.test);
-            tv.setText(userId);
+            UserDetailViewHelper helper = new UserDetailViewHelper();
+            helper.initView(rootView);
             return rootView;
         }
+
     }
 
 }
