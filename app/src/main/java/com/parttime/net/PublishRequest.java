@@ -1,7 +1,9 @@
 package com.parttime.net;
 
 import com.android.volley.RequestQueue;
+import com.parttime.pojo.JobAuthType;
 import com.parttime.pojo.PartJob;
+import com.parttime.pojo.SalaryUnit;
 import com.parttime.publish.vo.JobManageListVo;
 import com.parttime.publish.vo.PublishActivityListVo;
 import com.parttime.utils.ApplicationUtils;
@@ -118,6 +120,53 @@ public class PublishRequest extends BaseRequest {
                 publishActivityListVo.jobManageListVoList = jobManageListVoList;
 
                 callback.success(publishActivityListVo);
+            }
+
+            @Override
+            public void failed(Object obj) {
+                callback.failed(obj);
+            }
+        });
+    }
+
+    public void publishActivityDetail(int jobId, RequestQueue requestQueue, final DefaultCallback callback) {
+        HashMap<String, String> reqParams = new HashMap<>();
+        reqParams.put("company_id", String.valueOf(ApplicationUtils.getLoginId()));
+        reqParams.put("activity_id", String.valueOf(jobId));
+
+        String url = Url.COMPANY_MyJianzhi_detail;
+
+        request(url, reqParams, requestQueue, new Callback() {
+            @Override
+            public void success(Object obj) throws JSONException {
+                JSONObject activityDetail = ((JSONObject) obj).getJSONObject("activityDetail");
+                PartJob partJob = new PartJob();
+                partJob.id = activityDetail.getInt("activity_id");
+                partJob.companyId = activityDetail.getInt("company_id");
+                partJob.isStart = activityDetail.getInt("isStart") != 0;
+                partJob.companyName = activityDetail.getString("company_name");
+                partJob.type = activityDetail.getString("type");
+                partJob.title = activityDetail.getString("title");
+                partJob.beginTime = activityDetail.getString("start_time");
+                partJob.endTime = activityDetail.getString("end_time");
+                partJob.area = activityDetail.getString("county");
+                partJob.address = activityDetail.getString("address");
+                partJob.salary = activityDetail.getInt("pay");
+                partJob.salaryUnit = SalaryUnit.parse(activityDetail.getInt("pay_type"));
+                partJob.payType = activityDetail.getString("pay_form");
+                partJob.apartSex = activityDetail.getInt("apart_sex") != 0;
+                if (partJob.apartSex) {
+                    partJob.maleNum = activityDetail.getInt("male_count");
+                    partJob.femaleNum = activityDetail.getInt("female_count");
+                } else {
+                    partJob.headSum = activityDetail.getInt("head_count");
+                }
+                partJob.workRequire = activityDetail.getString("require_info");
+                // partJob.isShowTel = activityDetail.get
+                partJob.jobAuthType = JobAuthType.parse(activityDetail.getInt("status"));
+                partJob.viewCount = activityDetail.getInt("view_count");
+                partJob.handCount = activityDetail.getInt("head_count");
+                callback.success(partJob);
             }
 
             @Override

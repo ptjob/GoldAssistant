@@ -51,4 +51,23 @@ public enum SalaryUnit {
             return null;
         }
     }
+
+    public static SalaryUnit parse(int value) {
+        switch (value) {
+            case 0:
+                return DAY;
+            case 1:
+                return HOUR;
+            case 2:
+                return MONTH;
+            case 3:
+                return TIMES;
+            case 4:
+                return CASES;
+            case 5:
+                return FACE_TO_FACE;
+            default:
+                return DAY;
+        }
+    }
 }

@@ -26,6 +26,11 @@ public class PartJob implements Serializable {
     public int femaleNum;
     public String workRequire;
     public boolean isShowTel;
+    public JobAuthType jobAuthType;
+    public int viewCount;
+    public int handCount;
+    public boolean isStart;
+
 
     /* 更多要求里面的 */
     /**

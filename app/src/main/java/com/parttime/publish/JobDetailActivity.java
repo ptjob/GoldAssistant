@@ -6,6 +6,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.parttime.common.head.ActivityHead;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.PublishRequest;
+import com.parttime.net.ResponseBaseCommonError;
 import com.parttime.pojo.PartJob;
 import com.parttime.pojo.SalaryUnit;
 import com.parttime.utils.CheckUtils;
@@ -20,18 +23,21 @@ import com.quark.utils.Logger;
 public class JobDetailActivity extends BaseActivity {
 
     enum Type {
-        REVIEW
+        REVIEW,
+        DETAIL
     }
 
     public static final String EXTRA_ID = "id";
     public static final String EXTRA_PART_JOB = "part_job";
 
 
+    private TextView mTxtStatus, mTxtViewCount, mTxtHandCount;
     private TextView mTxtType, mTxtTitle, mTxtSalary, mTxtCompany, mTxtWorkArea, mTxtWorkTime;
     private TextView mTxtPayType, mTxtHeadSum, mTxtWorkAddress, mTxtWorkRequire;
     private TextView mTxtHeight, mTxtMeasurements, mTxtHealthProve, mTxtLanguage;
-    private LinearLayout mLLCompanyContainer, mLLMoreRequireContainer;
+    private LinearLayout mLLDeclareContainer, mLLCompanyContainer, mLLMoreRequireContainer;
     private LinearLayout mLLHeightContainer, mLLMeasurementsContainer, mLLLanguageContainer, mLLHealthProveContainer;
+    private ActivityHead activityHead;
 
     private int id;
     private PartJob partJob;
@@ -51,6 +57,23 @@ public class JobDetailActivity extends BaseActivity {
     private void bindData() {
         if (type == Type.REVIEW) {
             bindWithPartJob();
+        } else if (type == Type.DETAIL) {
+            showWait(true);
+            new PublishRequest().publishActivityDetail(id, queue, new DefaultCallback() {
+                @Override
+                public void success(Object obj) {
+                    showWait(false);
+                    partJob = (PartJob) obj;
+                    bindWithPartJob();
+                }
+
+                @Override
+                public void failed(Object obj) {
+                    showWait(false);
+                    ResponseBaseCommonError error = (ResponseBaseCommonError) obj;
+                    showToast(error.msg);
+                }
+            });
         }
     }
 
@@ -63,22 +86,24 @@ public class JobDetailActivity extends BaseActivity {
             mTxtSalary.setText(R.string.publish_job_salary_unit_face_to_face);
         } else {
             String salaryUnit = "";
-            switch (partJob.salaryUnit) {
-                case DAY:
-                    salaryUnit = getString(R.string.publish_job_salary_unit_day);
-                    break;
-                case HOUR:
-                    salaryUnit = getString(R.string.publish_job_salary_unit_hour);
-                    break;
-                case MONTH:
-                    salaryUnit = getString(R.string.publish_job_salary_unit_month);
-                    break;
-                case TIMES:
-                    salaryUnit = getString(R.string.publish_job_salary_unit_times);
-                    break;
-                case CASES:
-                    salaryUnit = getString(R.string.publish_job_salary_unit_cases);
-                    break;
+            if (partJob.salaryUnit != null) {
+                switch (partJob.salaryUnit) {
+                    case DAY:
+                        salaryUnit = getString(R.string.publish_job_salary_unit_day);
+                        break;
+                    case HOUR:
+                        salaryUnit = getString(R.string.publish_job_salary_unit_hour);
+                        break;
+                    case MONTH:
+                        salaryUnit = getString(R.string.publish_job_salary_unit_month);
+                        break;
+                    case TIMES:
+                        salaryUnit = getString(R.string.publish_job_salary_unit_times);
+                        break;
+                    case CASES:
+                        salaryUnit = getString(R.string.publish_job_salary_unit_cases);
+                        break;
+                }
             }
             mTxtSalary.setText(partJob.salary + " " + salaryUnit);
         }
@@ -93,6 +118,36 @@ public class JobDetailActivity extends BaseActivity {
             mTxtHeadSum.setText(getString(R.string.job_detail_head_sum_format, partJob.headSum));
         }
         mTxtWorkAddress.setText(partJob.address);
+        if (type == Type.DETAIL) {
+            mLLDeclareContainer.setVisibility(View.VISIBLE);
+            String status = "";
+            switch (partJob.jobAuthType) {
+                case DELETE:
+                case FAIL_TO_PASS:
+                    status = getString(R.string.job_detail_status_fail);
+                    break;
+                case PASS:
+                    if (partJob.isStart) {
+                        status = getString(R.string.job_detail_status_start);
+                    } else {
+                        status = getString(R.string.job_detail_status_pass);
+                    }
+                    break;
+                case READY_TO_PASS:
+                    if (partJob.isStart) {
+                        status = getString(R.string.job_detail_status_start);
+                    } else {
+                        status = getString(R.string.job_detail_status_ready);
+                    }
+                    break;
+            }
+            mTxtStatus.setText(status);
+
+            mTxtViewCount.setText(getString(R.string.job_detail_view_count_format, partJob.viewCount));
+            mTxtHandCount.setText(getString(R.string.job_detail_hand_count_format, partJob.handCount));
+        } else {
+            mLLDeclareContainer.setVisibility(View.GONE);
+        }
         if (partJob.isHasMoreRequire()) {
             mLLMoreRequireContainer.setVisibility(View.VISIBLE);
             if (partJob.height != null) {
@@ -130,10 +185,21 @@ public class JobDetailActivity extends BaseActivity {
     }
 
     private void bindListener() {
-
+        activityHead.setRightTxtOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                share();
+            }
+        });
     }
 
+
+
     private void initControls() {
+
+        mTxtStatus = (TextView) findViewById(R.id.txt_job_status);
+        mTxtViewCount = (TextView) findViewById(R.id.txt_view_count);
+        mTxtHandCount = (TextView) findViewById(R.id.txt_hand_count);
 
         mTxtType = (TextView) findViewById(R.id.txt_type);
         mTxtTitle = (TextView) findViewById(R.id.txt_title);
@@ -149,6 +215,7 @@ public class JobDetailActivity extends BaseActivity {
         mTxtMeasurements = (TextView) findViewById(R.id.txt_measurements);
         mTxtHealthProve = (TextView) findViewById(R.id.txt_health_prove);
         mTxtLanguage = (TextView) findViewById(R.id.txt_language);
+        mLLDeclareContainer = (LinearLayout) findViewById(R.id.ll_job_declare_container);
         mLLCompanyContainer = (LinearLayout) findViewById(R.id.ll_company_container);
         mLLMoreRequireContainer = (LinearLayout) findViewById(R.id.ll_more_require_container);
         mLLHeightContainer = (LinearLayout) findViewById(R.id.ll_height_container);
@@ -156,10 +223,13 @@ public class JobDetailActivity extends BaseActivity {
         mLLLanguageContainer = (LinearLayout) findViewById(R.id.ll_language_container);
         mLLHealthProveContainer = (LinearLayout) findViewById(R.id.ll_health_prove_container);
 
-        ActivityHead activityHead = new ActivityHead(this);
+        activityHead = new ActivityHead(this);
         activityHead.initHead(this);
         if (type == Type.REVIEW) {
             activityHead.setCenterTxt1(R.string.publish_job_preview_title);
+        } else if (type == Type.DETAIL) {
+            activityHead.setCenterTxt1(R.string.publish_job_detail_title);
+            activityHead.setRightTxt(R.string.share);
         }
     }
 
@@ -168,11 +238,18 @@ public class JobDetailActivity extends BaseActivity {
         if (id == -1) {
             partJob = (PartJob) getIntent().getSerializableExtra(EXTRA_PART_JOB);
             type = Type.REVIEW;
+        } else {
+            type = Type.DETAIL;
         }
     }
 
     @Override
     public void setBackButton() {
 
+    }
+
+    // 点击分享按钮触发
+    private void share() {
+        showToast("分享");
     }
 }
