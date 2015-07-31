@@ -32,7 +32,8 @@
                     android:background="@color/divider_color"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp">
+                    android:layout_height="45dp"
+                    android:background="@color/white">
                     <ImageView
                         android:id="@+id/iv_phone_icon"
                         android:layout_width="21dp"
@@ -62,7 +63,8 @@
                     android:background="@color/divider_color"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp">
+                    android:layout_height="45dp"
+                    android:background="@color/white">
                     <ImageView
                         android:id="@+id/iv_pwd_icon"
                         android:layout_width="21dp"
