@@ -202,10 +202,10 @@ public class Url {
 			+ "/AgentCenter/chargeLog";
 	// 获取订单号
 	public static final String COMPANY_recharge_lproduct = HOST + SUBJECT
-			+ "/AgentCenter/product";
+			+ "/CompanyCenter/product";
 	// 同步充值 结果
 	public static final String COMPANY_recharge_AliPay = HOST + SUBJECT
-			+ "/AgentCenter/AliPay";
+			+ "/CompanyCenter/AliPayAsynNotify";
 	// 异步通知
 	public static final String COMPANY_recharge_AliPayAsynNotify = HOST
 			+ SUBJECT + "/AgentCenter/AliPayAsynNotify";

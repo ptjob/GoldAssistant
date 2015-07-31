@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/title"/>
+    <TextView
+        style="@style/FormTitle"
+        android:text="@string/recharge_amount"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/divider_color"/>
+    
+    <com.parttime.widget.SingleSelectLayout
+        android:id="@+id/ssl_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@color/white"
+        app:csil_columnCount="3"
+        app:csil_itemHeight="24dp"
+        app:csil_horizontalInnerMargin="10dp"
+        app:csil_verticleInnerMargin="10dp"
+        app:sl_textColor="@color/select_layout_text_color"
+        app:sl_itemBackground="@drawable/selector_bg_white_orange"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/divider_color"/>
+
+    <TextView
+        style="@style/FormTitle"
+        android:text="@string/recharge_way"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/divider_color"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/iv_alipay_icon"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/zhifubao"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alipay"
+            android:layout_toRightOf="@id/iv_alipay_icon"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"/>
+        
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/xuanle"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/divider_color"/>
+
+    <Button
+        android:id="@+id/btn_pay"
+        style="@style/CommonButton.Orange"
+        android:text="@string/confirm_to_pay"
+        android:layout_marginTop="20dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

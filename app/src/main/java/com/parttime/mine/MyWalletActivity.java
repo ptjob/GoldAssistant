@@ -14,16 +14,12 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.base.LocalInitActivity;
-import com.parttime.base.WithTitleActivity;
-import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
 import com.parttime.pojo.WalletItem;
-import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
 import com.quark.volley.VolleySington;
-import com.thirdparty.alipay.RechargeActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

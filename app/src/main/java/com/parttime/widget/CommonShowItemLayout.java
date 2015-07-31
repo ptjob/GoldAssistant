@@ -20,9 +20,9 @@ public class CommonShowItemLayout extends ViewGroup{
     private int itemHeight;
     private int itemWidth;
 
-    private Context context;
+    protected Context context;
 
-    private boolean initExecuted;
+    protected boolean initExecuted;
 
     public CommonShowItemLayout(Context context) {
         super(context);
@@ -57,12 +57,13 @@ public class CommonShowItemLayout extends ViewGroup{
         }
     }
 
-    private void init(Context context, AttributeSet attrs){
+    protected void init(Context context, AttributeSet attrs){
         this.context = context;
         Resources res = context.getResources();
         horizontalInnerMargin = res.getDimensionPixelSize(R.dimen.csil_horizontal_inner_margin_default);
         verticleInnerMargin = res.getDimensionPixelSize(R.dimen.csil_verticle_inner_margin_default);
         itemHeight = res.getDimensionPixelSize(R.dimen.csil_item_height_default);
+        columnCount = 3;
 
         if(attrs != null){
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CommonShowItemLayout);
@@ -70,7 +71,7 @@ public class CommonShowItemLayout extends ViewGroup{
                 horizontalInnerMargin = typedArray.getDimensionPixelSize(R.styleable.CommonShowItemLayout_csil_horizontalInnerMargin, horizontalInnerMargin);
                 verticleInnerMargin = typedArray.getDimensionPixelSize(R.styleable.CommonShowItemLayout_csil_verticleInnerMargin, verticleInnerMargin);
                 itemHeight = typedArray.getDimensionPixelSize(R.styleable.CommonShowItemLayout_csil_itemHeight, itemHeight);
-                columnCount = typedArray.getInt(R.styleable.CommonShowItemLayout_csil_columnCount, 3);
+                columnCount = typedArray.getInt(R.styleable.CommonShowItemLayout_csil_columnCount, columnCount);
             }
         }
     }
@@ -144,7 +145,7 @@ public class CommonShowItemLayout extends ViewGroup{
 //
 //            result = specSize;
 //        } else {
-        if(specMode == MeasureSpec.AT_MOST || specMode == MeasureSpec.EXACTLY){
+        if( specMode == MeasureSpec.EXACTLY){
             result = specSize;
         }else {
             int childCount = getChildCount();

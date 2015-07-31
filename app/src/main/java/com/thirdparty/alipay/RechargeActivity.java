@@ -59,7 +59,7 @@ public class RechargeActivity extends BaseActivity {
 	private Boolean changeedGroup = false;
 	ListViewForScrollView comment_list;
 	ArrayList<String> rechargeList = new ArrayList<String>();
-	private String url;
+//	private String url;
 	private String OrderIdUrl;
 	private String aliPayResultUrl;
 	private String userId;
@@ -138,7 +138,7 @@ public class RechargeActivity extends BaseActivity {
 		userId = sp.getString("userId", "");
 
 		setBackButton();
-		url = Url.COMPANY_recharge_log + "?token=" + MainTabActivity.token;
+//		url = Url.COMPANY_recharge_log + "?token=" + MainTabActivity.token;
 		OrderIdUrl = Url.COMPANY_recharge_lproduct + "?token="
 				+ MainTabActivity.token;
 		aliPayResultUrl = Url.COMPANY_recharge_AliPay + "?token="
@@ -150,7 +150,7 @@ public class RechargeActivity extends BaseActivity {
 		radioGroup2 = (RadioGroup) findViewById(R.id.orderBy2);
 		radioGroup2
 				.setOnCheckedChangeListener(new MyRadioGroupOnCheckedChangedListener());
-		getRechargeLog();
+//		getRechargeLog();
 		Button submit = (Button) findViewById(R.id.submit);
 		submit.setOnClickListener(submintListener);
 	}
@@ -214,45 +214,45 @@ public class RechargeActivity extends BaseActivity {
 		return true;
 	}
 
-	public void getRechargeLog() {
-		showWait(true);
-		StringRequest request = new StringRequest(Request.Method.POST, url,
-				new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						showWait(false);
-						try {
-							JSONObject js = new JSONObject(response);
-							JSONArray jss = js.getJSONArray("chargeLog");
-							for (int i = 0; i < jss.length(); i++) {
-								rechargeList.add(jss.getJSONObject(i)
-										.getString("info"));
-							}
-							initadatpe();
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				}, new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError volleyError) {
-						showWait(false);
-						showToast("你的网络不够给力，获取数据失败！");
-					}
-				}) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("company_id", userId + "");
-
-				return map;
-			}
-		};
-		queue.add(request);
-		request.setRetryPolicy(new DefaultRetryPolicy(
-				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
-
-	}
+//	public void getRechargeLog() {
+//		showWait(true);
+//		StringRequest request = new StringRequest(Request.Method.POST, url,
+//				new Response.Listener<String>() {
+//					@Override
+//					public void onResponse(String response) {
+//						showWait(false);
+//						try {
+//							JSONObject js = new JSONObject(response);
+//							JSONArray jss = js.getJSONArray("chargeLog");
+//							for (int i = 0; i < jss.length(); i++) {
+//								rechargeList.add(jss.getJSONObject(i)
+//										.getString("info"));
+//							}
+//							initadatpe();
+//						} catch (JSONException e) {
+//							e.printStackTrace();
+//						}
+//					}
+//				}, new Response.ErrorListener() {
+//					@Override
+//					public void onErrorResponse(VolleyError volleyError) {
+//						showWait(false);
+//						showToast("你的网络不够给力，获取数据失败！");
+//					}
+//				}) {
+//			@Override
+//			protected Map<String, String> getParams() throws AuthFailureError {
+//				Map<String, String> map = new HashMap<String, String>();
+//				map.put("company_id", userId + "");
+//
+//				return map;
+//			}
+//		};
+//		queue.add(request);
+//		request.setRetryPolicy(new DefaultRetryPolicy(
+//				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
+//
+//	}
 
 	public void getOrderId() {
 		showWait(true);

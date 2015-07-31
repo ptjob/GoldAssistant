@@ -26,8 +26,6 @@ import java.util.Set;
  * Created by cjz on 2015/7/20.
  */
 public class SelectLayout extends CommonShowItemLayout implements View.OnClickListener{
-    private Context context;
-    private boolean initExecuted;
 
     private int textSize;
 
@@ -39,47 +37,32 @@ public class SelectLayout extends CommonShowItemLayout implements View.OnClickLi
     private int itemBgColor;
     private int itemBgResId;
 
-    private int maxCount = 5;
+    protected int maxCount = 5;
 
 //    private List<Integer> selectedIndexes = new ArrayList<Integer>();
 //    private List<String> selecteds = new ArrayList<String>();
-    private Set<Integer> selectedIndexes = new LinkedHashSet<Integer>();
-    private Map<Integer, String> valueMap = new HashMap<Integer, String>();
+    protected Set<Integer> selectedIndexes = new LinkedHashSet<Integer>();
+    protected Map<Integer, String> valueMap = new HashMap<Integer, String>();
 
     public SelectLayout(Context context) {
         super(context);
-        if(!initExecuted){
-            initExecuted = true;
-            init(context, null);
-        }
     }
 
     public SelectLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        if(!initExecuted){
-            initExecuted = true;
-            init(context, attrs);
-        }
     }
 
     public SelectLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        if(!initExecuted){
-            initExecuted = true;
-            init(context, attrs);
-        }
     }
 
     public SelectLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        if(!initExecuted){
-            initExecuted = true;
-            init(context, attrs);
-        }
     }
 
-    private void init(Context context, AttributeSet attrs){
-        this.context = context;
+    @Override
+    protected void init(Context context, AttributeSet attrs){
+        super.init(context, attrs);
         Resources res = context.getResources();
         textSize = (int) (res.getDisplayMetrics().density * 15);
         textColor = 0xff333333;
