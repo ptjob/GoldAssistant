@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.UserDetailRequest;
 import com.parttime.pojo.UserDetailVO;
 import com.qingmu.jianzhidaren.R;
 
@@ -25,7 +27,7 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
     private HashMap<String, UserDetailVO> cache = new HashMap<>();
     public UserDetailActivity.FromAndStatus fromAndStatus;
 
-    private UserDetailActivity userDetailActivity;
+    public UserDetailActivity userDetailActivity;
 
     public UserDetailPagerAdapter(FragmentManager fm, UserDetailActivity userDetailActivity) {
         super(fm);
@@ -83,7 +85,7 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.activity_user_detail_item, container, false);
-            UserDetailViewHelper helper = new UserDetailViewHelper(this,userDetailPagerAdapter);
+            final UserDetailViewHelper helper = new UserDetailViewHelper(this,userDetailPagerAdapter);
             if(UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_NOT_FRIEND == userDetailPagerAdapter.fromAndStatus) {
                 helper.initView(rootView, UserDetailViewHelper.InitContent.INIT_FRIEND);
             }else if(UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_IS_FRIEND == userDetailPagerAdapter.fromAndStatus) {
@@ -92,6 +94,24 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
                 helper.initView(rootView, UserDetailViewHelper.InitContent.INIT_RESUME);
             }else if(UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_IS_FINISH == userDetailPagerAdapter.fromAndStatus) {
                 helper.initView(rootView, UserDetailViewHelper.InitContent.INIT_APPRAISE);
+            }
+            UserDetailVO userDetailVO = userDetailPagerAdapter.cache.get(userId);
+            if(userDetailVO != null){
+                helper.reflesh(userDetailVO);
+            }else {
+                new UserDetailRequest().getUserDetail(userId,
+                        userDetailPagerAdapter.userDetailActivity.groupId,
+                        userDetailPagerAdapter.userDetailActivity.queue,
+                        new DefaultCallback() {
+                            @Override
+                            public void success(Object obj) {
+                                if (obj != null && obj instanceof UserDetailVO) {
+                                    UserDetailVO vo = (UserDetailVO) obj;
+                                    userDetailPagerAdapter.cache.put(userId, vo);
+                                    helper.reflesh(vo);
+                                }
+                            }
+                        });
             }
             return rootView;
         }

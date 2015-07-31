@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.exceptions.EaseMobException;
 import com.parttime.IM.activitysetting.GroupSettingActivity;
@@ -42,11 +43,13 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
 
     private LinkedHashSet<String> set;
 
+    public RequestQueue queue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_user_detail);
         super.onCreate(savedInstanceState);
-
+        queue = super.queue;
         initView();
 
         bindData();

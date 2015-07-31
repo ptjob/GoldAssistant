@@ -314,6 +314,9 @@ public class Url {
 	// 环信用户信息
 	public static final String HUANXIN_user_info = HOST + SUBJECT
 			+ "/Huanxin/user_info";
+	// 用户详细信息 3.0
+	public static final String USER_DETAIL_INFO = HOST + SUBJECT
+			+ "/Activity/applicantInfo";
 	// 检查是否放飞机
 	public static final String USER_user_feiji = HOST + SUBJECT
 			+ "/UserCenter/is_run_over";
