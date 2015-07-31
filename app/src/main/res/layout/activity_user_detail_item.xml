@@ -43,7 +43,7 @@
                             style="@style/detail_item_value"
                             android:layout_toRightOf="@+id/name_key"
                             android:layout_toEndOf="@+id/name_key"
-                            android:text="用户名"/>
+                            android:text=""/>
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -67,7 +67,7 @@
                             style="@style/detail_item_value"
                             android:layout_toRightOf="@+id/sex_key"
                             android:layout_toEndOf="@+id/sex_key"
-                            android:text="性别"/>
+                            android:text=""/>
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -82,7 +82,7 @@
                             android:id="@+id/age_key"
                             android:layout_height="40dp"
                             style="@style/detail_item_key"
-                            android:text="@string/sex"
+                            android:text="@string/age"
                             />
                         <TextView
                             android:id="@+id/age"
@@ -91,7 +91,7 @@
                             style="@style/detail_item_value"
                             android:layout_toRightOf="@+id/age_key"
                             android:layout_toEndOf="@+id/age_key"
-                            android:text="年龄"/>
+                            android:text=""/>
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -142,7 +142,7 @@
                     android:layout_height="40dp"
                     android:layout_toRightOf="@+id/education_key"
                     android:layout_toEndOf="@+id/education_key"
-                    android:text="@string/education"/>
+                    android:text=""/>
                 <ImageView
                     android:id="@+id/education_line"
                     android:layout_width="match_parent"
@@ -168,7 +168,7 @@
                     android:layout_height="40dp"
                     android:layout_toRightOf="@+id/height_key"
                     android:layout_toEndOf="@+id/height_key"
-                    android:text="@string/height"/>
+                    android:text=""/>
                 <ImageView
                     android:id="@+id/height_line"
                     android:layout_width="match_parent"
@@ -194,7 +194,7 @@
                     android:layout_height="40dp"
                     android:layout_toRightOf="@+id/other_key"
                     android:layout_toEndOf="@+id/other_key"
-                    android:text="@string/other"/>
+                    android:text=""/>
                 <ImageView
                     android:id="@+id/other_line"
                     android:layout_width="match_parent"
@@ -220,7 +220,7 @@
                     android:layout_height="40dp"
                     android:layout_toRightOf="@+id/three_dimensional_key"
                     android:layout_toEndOf="@+id/three_dimensional_key"
-                    android:text="@string/three_dimensional"/>
+                    android:text=""/>
                 <ImageView
                     android:id="@+id/three_dimensional_line"
                     android:layout_width="match_parent"
@@ -272,7 +272,7 @@
                     android:layout_height="40dp"
                     android:layout_toRightOf="@+id/certification_key"
                     android:layout_toEndOf="@+id/certification_key"
-                    android:text="@string/renzheng"/>
+                    android:text=""/>
                 <ImageView
                     android:id="@+id/certification_line"
                     android:layout_width="match_parent"

@@ -5,6 +5,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.parttime.pojo.UserDetailVO;
 import com.qingmu.jianzhidaren.R;
 
 /**
@@ -100,8 +101,22 @@ public class UserDetailViewHelper {
 
     }
 
-    public void initData(){
-
+    /**
+     * 刷新数据
+     * @param vo UserDetailVO
+     */
+    public void reflesh(UserDetailVO vo) {
+        nameTxt.setText(vo.name);
+        String birthdate = vo.birthdate;
+        ageTxt.setText(birthdate);
+        sexTxt.setText(vo.sex == 0 ? "女": (vo.sex == 1 ? "男":"未知"));
+        educationTxt.setText(vo.education);
+        heightTxt.setText(vo.height);
+        //otherTxt.setText(vo.);
+        threeDimensionalTxt.setText(vo.bbh);
+        int earnestMoney = vo.earnest_money;
+        int certification = vo.certification;
+        certificationTxt.setText("");
     }
 
 
