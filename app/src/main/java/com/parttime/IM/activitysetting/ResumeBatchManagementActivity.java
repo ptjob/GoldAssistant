@@ -23,6 +23,7 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
+import com.parttime.addresslist.Utils;
 import com.parttime.addresslist.userdetail.UserDetailActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead2;
@@ -380,7 +381,7 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
 
             //设置信誉
             String creditworthiness = batchUserVO.creditworthiness;
-            addStars(creditworthiness, holder.reputationValueStar);
+            Utils.addStars(creditworthiness, holder.reputationValueStar, ResumeBatchManagementActivity.this, R.drawable.ee_27);
 
             if(checkedMap.get(position) != null){
                 holder.checkBox.setChecked(true);
@@ -458,26 +459,6 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
             batchUserVO.earnestMoney = userVO.earnestMoney;
             batchUserVO.certification = userVO.certification;
         }
-    }
-
-    public void addStars(String creditworthiness,LinearLayout container){
-        int cre = Integer.valueOf(creditworthiness);
-        container.removeAllViews();
-        int num = cre / 10 ;
-        for(int i = 0 ; i < num; i ++){
-            container.addView(newStar());
-        }
-
-    }
-
-    private ImageView newStar(){
-        ImageView star = new ImageView(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        star.setLayoutParams(params);
-        star.setImageResource(R.drawable.ee_27);
-        return star;
     }
 
 }

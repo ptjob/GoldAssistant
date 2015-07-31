@@ -37,6 +37,7 @@ import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
+import com.parttime.addresslist.Utils;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead2;
 import com.parttime.constants.ActivityExtraAndKeys;
@@ -443,7 +444,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
 
             //设置信誉
             String creditworthiness = userVO.creditworthiness;
-            addStars(creditworthiness, holder.reputationValueStar);
+            Utils.addStars(creditworthiness, holder.reputationValueStar, GroupResumeSettingActivity.this, R.drawable.ee_27);
 
             if(holder.reject != null){
                 holder.reject.setTag(userVO);
@@ -621,26 +622,6 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         public Button resumeButton;
         public Button reject;//拒绝
 
-    }
-
-    public void addStars(String creditworthiness,LinearLayout container){
-        int cre = Integer.valueOf(creditworthiness);
-        container.removeAllViews();
-        int num = cre / 10 ;
-        for(int i = 0 ; i < num; i ++){
-            container.addView(newStar());
-        }
-
-    }
-
-    private ImageView newStar(){
-        ImageView star = new ImageView(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        star.setLayoutParams(params);
-        star.setImageResource(R.drawable.ee_27);
-        return star;
     }
 
 }

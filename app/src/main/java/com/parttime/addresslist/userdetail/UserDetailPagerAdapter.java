@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.UserDetailRequest;
 import com.parttime.pojo.UserDetailVO;
+import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
 
     public static class UserDetailFragment extends Fragment{
         private static final String ARG_USER_ID = "userId";
-        private String userId;
+        protected String userId;
         UserDetailPagerAdapter userDetailPagerAdapter;
 
         /**
@@ -86,18 +87,24 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.activity_user_detail_item, container, false);
             final UserDetailViewHelper helper = new UserDetailViewHelper(this,userDetailPagerAdapter);
-            if(UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_NOT_FRIEND == userDetailPagerAdapter.fromAndStatus) {
-                helper.initView(rootView, UserDetailViewHelper.InitContent.INIT_FRIEND);
-            }else if(UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_IS_FRIEND == userDetailPagerAdapter.fromAndStatus) {
-                helper.initView(rootView, UserDetailViewHelper.InitContent.INIT_FRIEND);
-            }else if(UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_NOT_FINISH == userDetailPagerAdapter.fromAndStatus) {
-                helper.initView(rootView, UserDetailViewHelper.InitContent.INIT_RESUME);
-            }else if(UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_IS_FINISH == userDetailPagerAdapter.fromAndStatus) {
-                helper.initView(rootView, UserDetailViewHelper.InitContent.INIT_APPRAISE);
+            UserDetailViewHelper.InitContent initContent = null;
+            if(BuildConfig.DEBUG){ //for test
+                userDetailPagerAdapter.fromAndStatus = UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_NOT_FINISH;
             }
+            if(UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_NOT_FRIEND == userDetailPagerAdapter.fromAndStatus) {
+                initContent = UserDetailViewHelper.InitContent.INIT_FRIEND;
+            }else if(UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_IS_FRIEND == userDetailPagerAdapter.fromAndStatus) {
+                initContent = UserDetailViewHelper.InitContent.INIT_FRIEND;
+            }else if(UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_NOT_FINISH == userDetailPagerAdapter.fromAndStatus) {
+                initContent = UserDetailViewHelper.InitContent.INIT_RESUME;
+            }else if(UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_IS_FINISH == userDetailPagerAdapter.fromAndStatus) {
+                initContent = UserDetailViewHelper.InitContent.INIT_APPRAISE;
+            }
+            helper.initView(rootView, initContent);
+            final UserDetailViewHelper.InitContent initContent2 = initContent;
             UserDetailVO userDetailVO = userDetailPagerAdapter.cache.get(userId);
             if(userDetailVO != null){
-                helper.reflesh(userDetailVO);
+                helper.reflesh(userDetailVO, initContent);
             }else {
                 new UserDetailRequest().getUserDetail(userId,
                         userDetailPagerAdapter.userDetailActivity.groupId,
@@ -108,7 +115,7 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
                                 if (obj != null && obj instanceof UserDetailVO) {
                                     UserDetailVO vo = (UserDetailVO) obj;
                                     userDetailPagerAdapter.cache.put(userId, vo);
-                                    helper.reflesh(vo);
+                                    helper.reflesh(vo , initContent2);
                                 }
                             }
                         });

@@ -116,10 +116,15 @@
                         android:layout_gravity="center"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="88dp"
                         android:layout_height="wrap_content"
                         android:text="@string/picture_num"
                         android:id="@+id/picture_num"
+                        android:gravity="center"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:background="@color/c_979797"
+                        android:textColor="@android:color/white"
                         android:layout_gravity="center_horizontal|bottom"/>
                 </FrameLayout>
 
@@ -238,14 +243,15 @@
                     android:layout_width="wrap_content"
                     style="@style/detail_item_key"
                     android:layout_height="40dp"
-                    android:layout_marginTop="12dp"
+                    android:gravity="center"
                     android:text="@string/reputation"/>
-                <LinearLayout
+                <com.parttime.widget.RankView
                     android:id="@+id/reputation_value_container"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_toRightOf="@+id/reputation_key"
                     android:layout_toEndOf="@+id/reputation_key"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"/>
                 <ImageView
                     android:id="@+id/reputation_line"
@@ -300,5 +306,4 @@
         layout="@layout/activity_user_detail_resume_bottom"
         android:layout_alignParentBottom="true"
         />
-
 </RelativeLayout>

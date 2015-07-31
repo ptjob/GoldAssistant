@@ -105,8 +105,8 @@
         <activity
             android:name="com.parttime.main.MainTabActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.parttime.login.FindPJLoginActivity"
@@ -503,29 +503,29 @@
         <activity
             android:name="com.parttime.IM.activitysetting.ResumeBatchManagementActivity"
             android:label="@string/title_activity_resume_batch_management"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.parttime.IM.activitysetting.SendAdmitToEmailActivity"
             android:label="@string/title_activity_send_admit_to_email"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
-        <!--普通群设置-->
+        <!-- 普通群设置 -->
         <activity
             android:name="com.parttime.addresslist.userdetail.UserDetailActivity"
             android:label="@string/title_activity_user_detail"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <!-- 添加好友 -->
         <activity
             android:name="com.parttime.addresslist.AddContactActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <!-- 官方账号 -->
         <activity
             android:name="com.parttime.addresslist.PublicCountListActivity"
             android:label="@string/title_activity_public_count_list"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <!-- 群组详情 -->
         <activity
@@ -616,7 +616,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
-
+        <activity
+            android:name="com.parttime.common.Image.ImageShowActivity"
+            android:label="@string/title_activity_image_show"
+            android:screenOrientation="portrait">
+        </activity>
         <!-- 公开的群聊列表 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.PublicGroupsActivity"
@@ -840,7 +844,6 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name="com.parttime.mine.PreviewMyIntroActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -900,8 +903,8 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.parttime.mine.setting.ModifyPwdActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -920,49 +923,42 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
         <activity
             android:name="com.parttime.mine.PersonalCertSubmitActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
         <activity
             android:name="com.parttime.mine.EnterpriseCertSubmitActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
         <activity
             android:name="com.parttime.mine.PersonalCertedActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
         <activity
             android:name="com.parttime.mine.EnterpriseCertedActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
         <activity
             android:name="com.parttime.login.RegisterInfoActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
         <activity
             android:name="com.parttime.login.SetGenderActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
         <activity
             android:name="com.parttime.login.ShowAnimActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -976,10 +972,6 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
-
-
-
 
         <!-- 发布兼职 -->
         <activity
@@ -1006,7 +998,7 @@
             android:name="com.parttime.common.activity.ChooseListActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
+        
     </application>
 
 </manifest>

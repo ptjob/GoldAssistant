@@ -232,7 +232,7 @@ public class AddContactActivity extends BaseActivity {
 				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
 	}
 
-	protected void showWait(boolean isShow) {
+	public void showWait(boolean isShow) {
 		if (isShow) {
 			if (null == dialog) {
 				dialog = new WaitDialog(this);

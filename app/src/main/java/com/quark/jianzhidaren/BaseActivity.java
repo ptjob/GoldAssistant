@@ -139,7 +139,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		ToastUtil.showShortToast(resid);
 	}
 
-	protected void showWait(final boolean isShow) {
+	public void showWait(final boolean isShow) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

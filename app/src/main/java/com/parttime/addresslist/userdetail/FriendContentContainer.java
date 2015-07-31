@@ -3,6 +3,7 @@ package com.parttime.addresslist.userdetail;
 import android.view.View;
 import android.widget.Button;
 
+import com.parttime.pojo.UserDetailVO;
 import com.qingmu.jianzhidaren.R;
 
 /**
@@ -29,6 +30,10 @@ public class FriendContentContainer{
         sendAddFriend = (Button)view.findViewById(R.id.send_add_friend);
         toMsg = (Button)view.findViewById(R.id.to_msg);
         deleteFriend = (Button)view.findViewById(R.id.delete_friend);
+
+    }
+
+    public void reflesh(UserDetailVO vo) {
 
     }
 }

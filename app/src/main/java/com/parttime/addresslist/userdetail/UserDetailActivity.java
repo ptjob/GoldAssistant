@@ -24,6 +24,7 @@ import com.parttime.base.WithTitleActivity;
 import com.parttime.constants.ActivityExtraAndKeys;
 import com.qingmu.jianzhidaren.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -72,7 +73,7 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
 
     private void bindData() {
         groupId = getIntent().getStringExtra(ActivityExtraAndKeys.GroupSetting.GROUPID);
-        String fas = getIntent().getStringExtra(ActivityExtraAndKeys.UserDetail.FROM_AND_STATUS);
+        Serializable serializable = getIntent().getSerializableExtra(ActivityExtraAndKeys.UserDetail.FROM_AND_STATUS);
         userId = getIntent().getStringExtra(ActivityExtraAndKeys.UserDetail.SELECTED_USER_ID);
         isGroupOwner = getIntent().getBooleanExtra(ActivityExtraAndKeys.GroupSetting.GROUPOWNER,false);
         ArrayList<String> userIds = getIntent().getStringArrayListExtra(ActivityExtraAndKeys.USER_ID);
@@ -87,9 +88,10 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
             rightWrapper.setVisibility(View.GONE);
         }
 
-        if(fas != null){
-            fromAndStatus = FromAndStatus.valueOf(fas);
-        }else{
+        if(serializable != null && serializable instanceof FromAndStatus){
+            fromAndStatus = (FromAndStatus)serializable;
+        }
+        if(fromAndStatus == null){
             fromAndStatus = FromAndStatus.FROM_ACTIVITY_GROUP_VIEW_RESUME;
         }
 
@@ -276,7 +278,7 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
         lp.y = -1000;
         lp.gravity = Gravity.BOTTOM;
         more.onWindowAttributesChanged(lp);
-        more.setCanceledOnTouchOutside(false);
+        more.setCanceledOnTouchOutside(true);
         more.setContentView(layout);
         more.show();
 

@@ -1,18 +1,30 @@
 package com.parttime.addresslist.userdetail;
 
+import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.parttime.addresslist.Utils;
+import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.pojo.UserDetailVO;
+import com.parttime.utils.IntentManager;
+import com.parttime.utils.TimeUtils;
+import com.parttime.widget.RankView;
 import com.qingmu.jianzhidaren.R;
+import com.quark.jianzhidaren.ApplicationControl;
+
+import java.util.ArrayList;
 
 /**
  *
  * Created by luhua on 2015/7/30.
  */
-public class UserDetailViewHelper {
+public class UserDetailViewHelper implements View.OnClickListener {
 
     public RelativeLayout nameContainer,
             sexContainer,
@@ -27,10 +39,10 @@ public class UserDetailViewHelper {
             resumeContainer; //简历容器
 
     public LinearLayout
-            reputationValueContainer,//信誉值容器
-
             friendContainer,        //好友容器
             evaluationContainer;    //评价容器
+
+    public RankView reputationValueContainer;//信誉值容器
 
 
     public TextView nameTxt,
@@ -40,7 +52,12 @@ public class UserDetailViewHelper {
             heightTxt,
             otherTxt,
             threeDimensionalTxt,
-            certificationTxt;
+            certificationTxt,
+            pictureNum  //图片数量
+                    ;
+
+
+    public ImageView head;
 
     public ResumeContentContainer resumeContentContainer;
     public FriendContentContainer friendContentContainer;
@@ -55,7 +72,7 @@ public class UserDetailViewHelper {
     }
 
     //数据区域
-
+    ArrayList<String> pictures;
 
 
     public void initView(View view,InitContent initContent){
@@ -71,7 +88,7 @@ public class UserDetailViewHelper {
         resumeContainer = (RelativeLayout)view.findViewById(R.id.resume_content_container);
 
 
-        reputationValueContainer = (LinearLayout)view.findViewById(R.id.reputation_value_star_container);
+        reputationValueContainer = (RankView)view.findViewById(R.id.reputation_value_container);
         friendContainer = (LinearLayout)view.findViewById(R.id.friend_content_container);
         evaluationContainer = (LinearLayout)view.findViewById(R.id.evaluation_container);
 
@@ -83,12 +100,14 @@ public class UserDetailViewHelper {
         otherTxt = (TextView)view.findViewById(R.id.other_value);
         threeDimensionalTxt = (TextView)view.findViewById(R.id.three_dimensional_value);
         certificationTxt = (TextView)view.findViewById(R.id.certification_value);
+        pictureNum = (TextView)view.findViewById(R.id.picture_num);
 
+        head = (ImageView)view.findViewById(R.id.head);
 
         if(initContent == InitContent.INIT_RESUME){//初始化简历
             resumeContainer.setVisibility(View.VISIBLE);
             resumeContentContainer = new ResumeContentContainer(userDetailFragment,userDetailPagerAdapter);
-            resumeContentContainer.initView(resumeContainer);
+            resumeContentContainer.initView(view);
         }else if(initContent == InitContent.INIT_FRIEND){//初始化好友
             friendContainer.setVisibility(View.VISIBLE);
             friendContentContainer = new FriendContentContainer(userDetailFragment,userDetailPagerAdapter);
@@ -99,24 +118,114 @@ public class UserDetailViewHelper {
             appraiseContentContainer.initView(evaluationContainer);
         }
 
+        setListener();
+    }
+
+    private void setListener() {
+        head.setOnClickListener(this);
     }
 
     /**
      * 刷新数据
      * @param vo UserDetailVO
      */
-    public void reflesh(UserDetailVO vo) {
+    public void reflesh(UserDetailVO vo,InitContent initContent) {
+
+        pictures = new ArrayList<>();
+        String picture1 = vo.picture_1;
+        if(!TextUtils.isEmpty(picture1)){
+            ContactImageLoader.loadNativePhoto(userDetailFragment.userId,picture1,head, userDetailPagerAdapter.userDetailActivity.queue);
+            pictures.add(picture1);
+        }
+        String picture2 = vo.picture_2;
+        if(!TextUtils.isEmpty(picture2)){
+            pictures.add(picture2);
+        }
+        String picture3 = vo.picture_3;
+        if(!TextUtils.isEmpty(picture3)){
+            pictures.add(picture3);
+        }
+        String picture4 = vo.picture_4;
+        if(!TextUtils.isEmpty(picture4)){
+            pictures.add(picture4);
+        }
+        String picture5 = vo.picture_5;
+        if(!TextUtils.isEmpty(picture5)){
+            pictures.add(picture5);
+        }
+        String picture6 = vo.picture_6;
+        if(!TextUtils.isEmpty(picture6)){
+            pictures.add(picture6);
+        }
+        pictureNum.setText(ApplicationControl.getInstance().getString(R.string.picture_num,pictures.size()));
+
+
         nameTxt.setText(vo.name);
         String birthdate = vo.birthdate;
-        ageTxt.setText(birthdate);
+        long birthTime = TimeUtils.getTime(birthdate, TimeUtils.pattern1);
+        int age = (int)(System.currentTimeMillis() - birthTime) / (1000*60*60*24);
+        if(age > 0 ) {
+            ageTxt.setText(String.valueOf(age +  1));
+        }
         sexTxt.setText(vo.sex == 0 ? "女": (vo.sex == 1 ? "男":"未知"));
         educationTxt.setText(vo.education);
-        heightTxt.setText(vo.height);
-        //otherTxt.setText(vo.);
+        heightTxt.setText(String.valueOf(vo.height));
+        String other;
+        if(vo.health_record == 0){
+            other = "无健康证";
+        }else{
+            other = "有健康证";
+        }
+        otherTxt.setText(other);
         threeDimensionalTxt.setText(vo.bbh);
-        int earnestMoney = vo.earnest_money;
+        StringBuilder certificationStr = new StringBuilder();
         int certification = vo.certification;
-        certificationTxt.setText("");
+        if(certification == 0){
+            certificationStr.append("未认证");
+        }else if(certification == 1){
+            certificationStr.append("已提交认证");
+        }else if(certification == 2){
+            certificationStr.append("已实名认证");
+        }else if(certification == 3){
+            certificationStr.append("认证不通过");
+        }
+        if(certificationStr.length() > 0){
+            certificationStr.append("/");
+        }
+        int earnestMoney = vo.earnest_money;
+        if(earnestMoney == 0){
+            certificationStr.append("未交诚意金");
+        }else if(earnestMoney ==1){
+            certificationStr.append("已交诚意金");
+        }
+        certificationTxt.setText(certificationStr.toString());
+
+        //化信誉值
+        //Utils.addStars(vo.creditworthiness, reputationValueContainer, userDetailPagerAdapter.userDetailActivity, R.drawable.ee_27);
+        int num = (int)Math.round(vo.creditworthiness * 1.0 / 10);
+        reputationValueContainer.rank(num);
+
+        if(initContent == InitContent.INIT_RESUME){//初始化简历
+            resumeContentContainer.reflesh(vo);
+        }else if(initContent == InitContent.INIT_FRIEND){//初始化好友
+            friendContentContainer.reflesh(vo);
+        }else if(initContent == InitContent.INIT_APPRAISE){//初始化评价
+            appraiseContentContainer.reflesh(vo);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.head:
+                ArrayList<String> userIds = new ArrayList<>();
+                int size = pictures.size();
+                for(int i = 0 ; i < size; i ++){
+                    userIds.add(userDetailFragment.userId);
+                }
+                IntentManager.intentToImageShow(userDetailFragment.userDetailPagerAdapter.userDetailActivity,pictures,userIds);
+                break;
+        }
     }
 
 

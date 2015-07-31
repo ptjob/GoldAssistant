@@ -251,7 +251,7 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 
 	}
 
-	protected void showWait(boolean isShow) {
+	public void showWait(boolean isShow) {
 		if (isShow) {
 			if (null == dialog) {
 				dialog = new WaitDialog(this);

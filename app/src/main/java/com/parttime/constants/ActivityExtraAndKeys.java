@@ -37,5 +37,9 @@ public class ActivityExtraAndKeys {
         public static String SELECTED_USER_ID = "select_user_id";
     }
 
+    public static class ImageShow{
+        public static String PICTURES = "pictures";
+    }
+
 
 }

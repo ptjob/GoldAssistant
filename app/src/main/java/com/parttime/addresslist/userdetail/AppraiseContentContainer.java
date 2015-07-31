@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.parttime.pojo.UserDetailVO;
 import com.qingmu.jianzhidaren.R;
 
 /**
@@ -43,5 +44,12 @@ public class AppraiseContentContainer{
         appraiseTextCountTip = (TextView)view.findViewById(R.id.appraise_text_count_tip);
 
         submit = (Button)view.findViewById(R.id.submit);
+
+        //进来不显示，点击星评价之后，如果小于四颗星显示
+        appraiseDetailContainer.setVisibility(View.GONE);
+    }
+
+    public void reflesh(UserDetailVO vo) {
+
     }
 }

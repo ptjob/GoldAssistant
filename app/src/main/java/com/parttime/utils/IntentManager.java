@@ -7,12 +7,14 @@ import android.content.Intent;
 import com.easemob.chat.EMChatManager;
 import com.parttime.IM.activitysetting.GroupResumeSettingActivity;
 import com.parttime.addresslist.userdetail.UserDetailActivity;
+import com.parttime.common.Image.ImageShowActivity;
 import com.parttime.common.activity.ChooseListActivity;
 import com.parttime.constants.ActivityExtraAndKeys;
 import com.parttime.main.MainTabActivity;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.pojo.PartJob;
 import com.parttime.publish.JobDetailActivity;
+import com.quark.jianzhidaren.ApplicationControl;
 
 import java.util.ArrayList;
 
@@ -76,6 +78,13 @@ public class IntentManager {
 
     public static void goToMainTabActivity(Context context){
         Intent intent = new Intent(context, MainTabActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void intentToImageShow(Context context,ArrayList<String> pictures, ArrayList<String> userIds) {
+        Intent intent = new Intent(context, ImageShowActivity.class);
+        intent.putStringArrayListExtra(ActivityExtraAndKeys.USER_ID,userIds);
+        intent.putStringArrayListExtra(ActivityExtraAndKeys.ImageShow.PICTURES,pictures);
         context.startActivity(intent);
     }
 }

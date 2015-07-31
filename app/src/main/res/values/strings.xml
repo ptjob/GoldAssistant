@@ -164,7 +164,7 @@
     <string name="group_chat">群聊</string>
     <string name="apply_notify">申请与通知</string>
 
-    <!--联系人详情-->
+    <!-- 联系人详情 -->
     <string name="forbidden_talk">禁言</string>
     <string name="cancel_forbidden_talk">取消禁言</string>
     <string name="update_group_notice">修改群备注</string>
@@ -350,7 +350,6 @@
     <string name="real_name_certed">已实名认证</string>
     <string name="real_name_not_certed">未实名认证</string>
 
-
     <!-- 实名认证 -->
     <string name="your_info_only_for_auth">您的资料仅被实名认证</string>
     <string name="promiss_to_protect_personal_info">兼职达人不会向外界泄露您的个人信息</string>
@@ -368,7 +367,6 @@
     <string name="please_upload_id_card">请上传图片</string>
     <string name="name_should_be_chinese">哎呀，名字应该是汉字哦</string>
     <string name="please_enter_id_in_format">哎呀，请输入正确的身份证号码</string>
-
 
     <!-- 我的钱包 -->
     <string name="account_balance">账户余额（元）</string>
@@ -440,7 +438,6 @@
     <string name="login_tel">登录手机</string>
     <string name="qing_mu_company">青木科技有限公司</string>
 
-
     <!-- 招人Tab -->
     <string name="publish_job">发布兼职</string>
     <string name="manage_job">管理兼职</string>
@@ -487,7 +484,6 @@
     <string name="publish_job_measurements_format">胸围%1$s、腰围%2$s、臀围%3$s</string>
     <string name="publish_job_success">发布成功</string>
     <string name="publish_job_fail">发布失败</string>
-
     <string name="publish_job_salary_unit_day">元/天</string>
     <string name="publish_job_salary_unit_hour">元/时</string>
     <string name="publish_job_salary_unit_month">元/月</string>
@@ -542,7 +538,6 @@
     <string name="title_activity_send_admit_to_email">SendAdmitToEmailActivity</string>
     <string name="title_activity_public_count_list">PublicCountListActivity</string>
     <string name="title_activity_user_detail">UserDetailActivity</string>
-
-
+    <string name="title_activity_image_show">ImageShowActivity</string>
 
 </resources>
