@@ -37,7 +37,6 @@ import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.activity.BaseActivity;
-import com.parttime.addresslist.Utils;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.common.head.ActivityHead2;
 import com.parttime.constants.ActivityExtraAndKeys;
@@ -46,6 +45,7 @@ import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.utils.IntentManager;
 import com.parttime.utils.SharePreferenceUtil;
+import com.parttime.widget.RankView;
 import com.parttimejob.swipe.SwipeListView;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
@@ -57,16 +57,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
+ *
  * @ClassName: GroupResumeSettingActivity
  * @Description: 群管理
  *
  */
 public class GroupResumeSettingActivity extends BaseActivity implements
-		View.OnClickListener {
-	private static final String TAG = "GroupResumeSettingActivity";
+        View.OnClickListener {
+    private static final String TAG = "GroupResumeSettingActivity";
 
-	public static GroupResumeSettingActivity instance;
+    public static GroupResumeSettingActivity instance;
 
     private ActivityHead2 headView;
     private TextView tip; //显示已录取和待处理的人数
@@ -76,26 +76,26 @@ public class GroupResumeSettingActivity extends BaseActivity implements
     private SettingAdapter adapter = new SettingAdapter();;
 
     protected RequestQueue queue = VolleySington.getInstance().getRequestQueue();
-	private SharePreferenceUtil sp;
+    private SharePreferenceUtil sp;
 
     private ArrayList<GroupSettingRequest.UserVO> data = new ArrayList<>();
     private String groupId;
     private EMGroup group;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_group_setting);
-		sp = SharePreferenceUtil.getInstance(ApplicationControl.getInstance());
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_group_setting);
+        sp = SharePreferenceUtil.getInstance(ApplicationControl.getInstance());
 
         Intent intent = getIntent();
         groupId = intent.getStringExtra(ActivityExtraAndKeys.GroupSetting.GROUPID);
 
         initView();
 
-		instance = this;
+        instance = this;
 
-	}
+    }
 
     private void initView() {
         headView = new ActivityHead2(this);
@@ -220,16 +220,16 @@ public class GroupResumeSettingActivity extends BaseActivity implements
     }
 
     @Override
-	protected void onResume() {
-		super.onResume();
+    protected void onResume() {
+        super.onResume();
         bindView();
-	}
+    }
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-	}
+    }
 
     @Override
     public void onClick(View v) {
@@ -290,14 +290,14 @@ public class GroupResumeSettingActivity extends BaseActivity implements
 
         setting.setOnClickListener(new OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(GroupResumeSettingActivity.this, GroupSettingActivity.class);
-                    intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID,groupId);
-                    startActivity(intent);
-                    more.dismiss();
-                }
-            });
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GroupResumeSettingActivity.this, GroupSettingActivity.class);
+                intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID,groupId);
+                startActivity(intent);
+                more.dismiss();
+            }
+        });
 
         cancel.setOnClickListener(new OnClickListener() {
 
@@ -368,8 +368,9 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                 holder.head = (ImageView) view.findViewById(R.id.head);
                 holder.name = (TextView) view.findViewById(R.id.name);
                 holder.resumeStatus = (TextView) view.findViewById(R.id.resume_status);
-                holder.moneyAccountStatus = (TextView) view.findViewById(R.id.money_account_status);
-                holder.reputationValueStar = (LinearLayout) view.findViewById(R.id.reputation_value_star_container);
+                holder.moneyStatus = (TextView) view.findViewById(R.id.money_status);
+                holder.accountStatus = (TextView) view.findViewById(R.id.account_status);
+                holder.rankView = (RankView) view.findViewById(R.id.reputation_value_star_container);
                 holder.resumeButton = (Button) view.findViewById(R.id.button);
 
                 view.setTag(holder);
@@ -412,26 +413,34 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             int apply = userVO.apply;
             if(apply == GroupSettingRequest.UserVO.APPLY_OK){
                 holder.resumeStatus.setText(R.string.already_resume);
+                holder.resumeStatus.setSelected(true);
                 holder.resumeButton.setText(R.string.cancel_resume);
+                holder.resumeButton.setSelected(true);
             }else if(apply == GroupSettingRequest.UserVO.APPLY_UNLOOK || apply == GroupSettingRequest.UserVO.APPLY_LOOKED){
                 holder.resumeStatus.setText(R.string.unresume);
+                holder.resumeStatus.setSelected(false);
                 holder.resumeButton.setText(R.string.resume);
+                holder.resumeButton.setSelected(false);
             }
             holder.resumeButton.setTag(userVO);
             holder.head.setTag(userVO);
 
             //设置诚意金和认证
-            StringBuilder moneyAndCertification = new StringBuilder();
+//            StringBuilder moneyAndCertification = new StringBuilder();
             int moneyStatus = userVO.earnestMoney;
             int accountStatus = userVO.certification;
             if(moneyStatus == 0) {
-                moneyAndCertification.append(getString(R.string.no_money));
+//                moneyAndCertification.append(getString(R.string.no_money));
+                holder.moneyStatus.setText(getString(R.string.no_money));
+                holder.moneyStatus.setSelected(false);
             }else {
-                moneyAndCertification.append(getString(R.string.had_money));
+//                moneyAndCertification.append(getString(R.string.had_money));
+                holder.moneyStatus.setText(getString(R.string.had_money));
+                holder.moneyStatus.setSelected(false);
             }
-            moneyAndCertification.append("/");
+//            moneyAndCertification.append("/");
 
-            if(accountStatus == 0){
+            /*if(accountStatus == 0){
                 moneyAndCertification.append(getString(R.string.no_certification));
             }else if(accountStatus == 1){
                 moneyAndCertification.append(getString(R.string.submit_certification));
@@ -439,12 +448,21 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                 moneyAndCertification.append(getString(R.string.had_certification));
             }else if(accountStatus == 3){
                 moneyAndCertification.append(getString(R.string.reject_certification));
+            }*/
+            if(accountStatus == 2){
+                holder.accountStatus.setText(getString(R.string.had_certification));
+                holder.accountStatus.setSelected(true);
+            }else {
+                holder.accountStatus.setText(getString(R.string.no_certification));
+                holder.accountStatus.setSelected(false);
             }
-            holder.moneyAccountStatus.setText(moneyAndCertification.toString());
+//            holder.moneyStatus.setText(moneyAndCertification.toString());
 
             //设置信誉
             String creditworthiness = userVO.creditworthiness;
-            Utils.addStars(creditworthiness, holder.reputationValueStar, GroupResumeSettingActivity.this, R.drawable.ee_27);
+//            Utils.addStars(creditworthiness, holder.reputationValueStar, GroupResumeSettingActivity.this, R.drawable.ee_27);
+            holder.rankView.setTotalScore(Integer.valueOf(creditworthiness) / 10);
+            holder.rankView.rank(0);
 
             if(holder.reject != null){
                 holder.reject.setTag(userVO);
@@ -617,8 +635,10 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         public ImageView head; //头像
         public TextView name, //名字
                 resumeStatus, //简历状态
-                moneyAccountStatus; // 诚意金/实名认证
-        public LinearLayout reputationValueStar; //信誉值
+                moneyStatus,  // 诚意金/实名认证
+                accountStatus;
+        //        public LinearLayout reputationValueStar; //信誉值
+        public RankView rankView;
         public Button resumeButton;
         public Button reject;//拒绝
 

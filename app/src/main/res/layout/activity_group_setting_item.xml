@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp">
+    android:paddingLeft="@dimen/group_member_item_padding"
+    android:paddingTop="@dimen/group_member_item_padding"
+    android:paddingBottom="@dimen/group_member_item_padding"
+    android:paddingRight="15dp">
 
 
 
@@ -15,18 +18,15 @@
             android:id="@+id/head_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingTop="5dp"
-            android:onClick="back" >
+            android:onClick="back"
+            android:layout_marginRight="10dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
                 android:id="@+id/head"
-                android:background="@drawable/contact_list_selected"/>
+                android:scaleType="center"/>
+            <!--android:background="@drawable/contact_list_selected"-->
         </LinearLayout>
 
 
@@ -35,6 +35,8 @@
             android:layout_height="wrap_content"
             android:text="name"
             android:id="@+id/name"
+            android:textSize="17sp"
+            android:textColor="@color/txt_color_black"
             android:layout_toRightOf="@+id/head_container"
             android:layout_toEndOf="@+id/head_container"/>
 
@@ -44,27 +46,62 @@
             android:text="resume_status"
             android:id="@+id/resume_status"
             android:layout_below="@+id/name"
+            android:layout_marginTop="4dp"
             android:layout_toRightOf="@+id/head_container"
-            android:layout_toEndOf="@+id/head_container"/>
+            android:layout_toEndOf="@+id/head_container"
+            android:textSize="12sp"
+            android:textColor="@color/color_selected_blue_unselected_red"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="money status/account status"
-            android:id="@+id/money_account_status"
+            android:id="@+id/money_status"
             android:layout_below="@+id/resume_status"
             android:layout_toRightOf="@+id/head_container"
-            android:layout_toEndOf="@+id/head_container"/>
+            android:layout_toEndOf="@+id/head_container"
+            android:textSize="12sp"
+            android:textColor="@color/color_selected_gray5_unselected_gray3"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reputation_value"
-            android:id="@+id/reputation_value"
-            android:layout_below="@+id/money_account_status"
-            android:layout_toRightOf="@+id/head_container"
-            android:layout_toEndOf="@+id/head_container"/>
+            android:text="money status/account status"
+            android:id="@+id/account_status"
+            android:layout_alignTop="@id/money_status"
+            android:layout_toRightOf="@+id/money_status"
+            android:layout_toEndOf="@+id/money_status"
+            android:layout_marginLeft="10dp"
+            android:textSize="12sp"
+            android:textColor="@color/color_selected_gray5_unselected_gray3"/>
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp"
+            android:layout_below="@+id/money_status"
+            android:layout_toRightOf="@+id/head_container"
+            android:layout_toEndOf="@+id/head_container">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reputation_value"
+                android:id="@+id/reputation_value"
+                android:textSize="12sp"
+                android:textColor="@color/txt_color_black"/>
+            <com.parttime.widget.RankView
+                android:id="@+id/reputation_value_star_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="7dp"
+                app:rv_empty_img="@drawable/redstar_fill"
+                app:rv_item_width="14dp"
+                app:rv_item_height="14dp"/>
+        </LinearLayout>
+
+
+        <!--<LinearLayout
             android:id="@+id/reputation_value_star_container"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
@@ -74,7 +111,9 @@
             android:layout_toEndOf="@+id/reputation_value"
             >
 
-            </LinearLayout>
+            </LinearLayout>-->
+
+
 
 
     </RelativeLayout>
@@ -92,6 +131,7 @@
             android:text=""
             android:id="@+id/button"
             android:layout_centerInParent="true"
+            style="@style/ButtonInForm.BlueGray"
             android:visibility="gone"/>
 
         <CheckBox
