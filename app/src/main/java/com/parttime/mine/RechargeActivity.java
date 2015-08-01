@@ -265,6 +265,7 @@ public class RechargeActivity extends LocalInitActivity {
         // 设置未付款交易的超时时间
         // 默认30分钟，一旦超时，该笔交易就会自动被关闭。
         // 取值范围：1m～15d。
+
         // m-分钟，h-小时，d-天，1c-当天（无论交易何时创建，都在0点关闭）。
         // 该参数数值不接受小数点，如1.5h，可转换为90m。
         orderInfo += "&it_b_pay=\"30m\"";

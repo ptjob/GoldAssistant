@@ -179,17 +179,37 @@ public class GroupSettingRequest extends BaseRequest {
      * @param queue RequestQueue
      * @param callback DefaultCallback
      */
-    public void cancelResume(List<Integer> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback){
+    public void cancelResume(List<Object> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback){
         StringBuilder stringBuilder = new StringBuilder();
         int size = userIds.size();
         for(int i= 0 ; i < size; i ++){
-            int userId = userIds.get(i);
+            Object userId = userIds.get(i);
             if(i < size - 1){
                 stringBuilder.append(userId).append(",");
             }else{
                 stringBuilder.append(userId);
             }
         }
+        cancelResume(groupId, queue, callback, stringBuilder);
+    }
+/*
+
+    public void cancelResume(List<String> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int size = userIds.size();
+        for (int i = 0; i < size; i++) {
+            String userId = userIds.get(i);
+            if (i < size - 1) {
+                stringBuilder.append(userId).append(",");
+            } else {
+                stringBuilder.append(userId);
+            }
+        }
+        cancelResume(groupId, queue, callback, stringBuilder);
+    }
+*/
+
+    private void cancelResume(String groupId, RequestQueue queue, final DefaultCallback callback, StringBuilder stringBuilder) {
         Map<String, String> map = new HashMap<>();
         map.put("user_id", stringBuilder.toString());
         map.put("group_id", groupId);
