@@ -108,9 +108,6 @@ public class HuanXinRequest extends BaseRequest{
                         us.setName("未知好友");
                     }
                     usersNick.add(us);
-                    if (usersNick.size() > 0) {
-                        ConstantForSaveList.usersNick = usersNick;// 保存缓存
-                    }
                     callback.success(usersNick);
                 } catch (JSONException e) {
                     callback.failed(e);

@@ -162,12 +162,18 @@ public class UserDetailViewHelper implements View.OnClickListener {
         pictureNum.setText(ApplicationControl.getInstance().getString(R.string.picture_num,pictures.size()));
 
         nameTxt.setText(vo.name);
-        String birthdate = vo.birthdate;
-        if(!TextUtils.isEmpty(birthdate)){
-            long birthTime = TimeUtils.getTime(birthdate, TimeUtils.pattern1);
-            int age = (int) (System.currentTimeMillis() - birthTime) / (1000 * 60 * 60 * 24);
-            if (age > 0) {
-                ageTxt.setText(String.valueOf(age + 1));
+        if(initContent == InitContent.INIT_FRIEND){
+            if(vo.age > 0) {
+                ageTxt.setText(String.valueOf(vo.age));
+            }
+        }else {
+            String birthdate = vo.birthdate;
+            if (!TextUtils.isEmpty(birthdate)) {
+                long birthTime = TimeUtils.getTime(birthdate, TimeUtils.pattern1);
+                int age = (int) (System.currentTimeMillis() - birthTime) / (1000 * 60 * 60 * 24);
+                if (age > 0) {
+                    ageTxt.setText(String.valueOf(age + 1));
+                }
             }
         }
         sexTxt.setText(vo.sex == 0 ? "女": (vo.sex == 1 ? "男":"未知"));

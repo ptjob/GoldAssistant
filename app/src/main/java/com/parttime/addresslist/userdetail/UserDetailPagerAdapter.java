@@ -167,6 +167,7 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
                                         userDetailVO.creditworthiness = huanxinUser.creditworthiness;
                                         userDetailVO.earnest_money = huanxinUser.earnest_money;
                                         userDetailVO.certification = huanxinUser.certification;
+                                        userDetailVO.age = huanxinUser.age;
                                         userDetailPagerAdapter.cache.put(huanxinUser.getUid(), userDetailVO);
                                         helper.reflesh(userDetailVO, initContent);
                                     }

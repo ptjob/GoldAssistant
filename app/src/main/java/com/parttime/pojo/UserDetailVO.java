@@ -11,6 +11,7 @@ public class UserDetailVO {
    public String identity_verso;// 14327791466188mwf9x.jpg, varchar(255) COMMENT '身份证照片反面'
     public String note; //: null, 声请加入活动群填写的内容
     public String birthdate; //: 2015-05-28, date COMMENT '生日'
+    public int age;
     public String education; //: 初中, varchar(255) COMMENT '学历:小学，初中，高中，职业高中，技校，中专，大专，本科
             //sophistication_before; // : 0,int(11) COMMENT '资料完善度：0-100.上一个记录'
            // app_version: , varchar(255) COMMENT 'app版本'
