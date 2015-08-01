@@ -11,15 +11,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.carson.constant.ConstantForSaveList;
 import com.parttime.IM.ChatActivity;
+import com.parttime.IM.activitysetting.GroupResumeSettingActivity;
+import com.parttime.IM.activitysetting.GroupSettingUtils;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.pojo.UserDetailVO;
 import com.qingmu.jianzhidaren.R;
+import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.ui.widget.CustomDialog;
-
-import java.util.ArrayList;
 
 /**
  * 简历容器
@@ -72,7 +72,7 @@ public  class ResumeContentContainer implements View.OnClickListener{
         pass = (TextView)view.findViewById(R.id.pass);
 
         appraiseContainer.setVisibility(View.VISIBLE);
-        appraiseValueContainer.setVisibility(View.VISIBLE);
+        appraiseValueContainer.setVisibility(View.GONE);
         resumeBottomContainer.setVisibility(View.VISIBLE);
 
         callContainer.setOnClickListener(this);
@@ -99,15 +99,51 @@ public  class ResumeContentContainer implements View.OnClickListener{
             case R.id.send_msg_container:
                 activity.startActivity(new Intent(activity,
                         ChatActivity.class).putExtra("userId",
-                        userDetailFragment.userId));
+                        "c"+userDetailFragment.userId));
                 break;
             case R.id.cancel_resume:
-                break;
-            case R.id.reject:
-                break;
-            case R.id.pass:
-                break;
+            case R.id.reject:{
+                GroupResumeSettingActivity.Action action = null ;
+                if(v.getId() == R.id.cancel_resume){
+                    action = GroupResumeSettingActivity.Action.UNRESUME;
+                }else if(v.getId() == R.id.reject){
+                    action = GroupResumeSettingActivity.Action.REJECT;
+                }
+                GroupSettingRequest.UserVO vo = userDetailVO.toUserVO();
+                //取消录取  已录用的人员，点击取消录用，弹窗提示“确认取消录用改用，取消后该用户将被移除聊天群组”——取消，确认
+                new GroupSettingUtils().showAlertDialog(activity,
+                        null,
+                        ApplicationControl.getInstance().getString(R.string.cacel_resume_or_not_and_remove_from_group),
+                        action,vo ,
+                        R.string.ok, R.string.cancel,
+                        userDetailFragment.userId, activity.groupId, activity.queue,
+                        new DefaultCallback(){
+                            @Override
+                            public void success(Object obj) {
+                                userDetailPagerAdapter.userIds.remove(userDetailFragment.userId);
+                                activity.adapter.notifyDataSetChanged();
+                            }
+                        });
+                break;}
+            case R.id.pass:{
+                GroupSettingRequest.UserVO vo = userDetailVO.toUserVO();
+                //录取   确认后可取消录用该用户，信息中心会提醒用户‘已被商家取消录用’。同时该用户也将被移除聊天群组
+                new GroupSettingUtils().showAlertDialog(activity,
+                        null ,
+                        ApplicationControl.getInstance().getString(R.string.cacel_resume_or_not),
+                        GroupResumeSettingActivity.Action.RESUME, vo,
+                        R.string.yes , R.string.no,
+                        userDetailFragment.userId, activity.groupId, activity.queue,
+                        new DefaultCallback(){
+                            @Override
+                            public void success(Object obj) {
+                                showResumedView();
+                                activity.adapter.notifyDataSetChanged();
+                            }
+                        });
+                break;}
             case R.id.expend_checked:
+                appraiseValueContainer.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -115,6 +151,22 @@ public  class ResumeContentContainer implements View.OnClickListener{
     public void reflesh(UserDetailVO vo) {
         this.userDetailVO = vo;
         summaryValue.setText(vo.summary);
+        int apply = vo.apply;
+        if(apply == 0 || apply == 3){//（0-没查看，1-已录取，2-、已拒绝，3-已查看）
+            showUnResumeView();
+        }else if(apply == 1){//已录取
+            showResumedView();
+        }
+    }
+
+    private void showUnResumeView() {
+        unhandleContainer.setVisibility(View.VISIBLE);
+        cancelResume.setVisibility(View.GONE);
+    }
+
+    private void showResumedView() {
+        unhandleContainer.setVisibility(View.GONE);
+        cancelResume.setVisibility(View.VISIBLE);
     }
 
     public void showDialog(String title, String message,final Action action,

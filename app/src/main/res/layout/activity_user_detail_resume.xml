@@ -60,7 +60,7 @@
         android:id="@+id/summary_value"
         android:layout_width="wrap_content"
         style="@style/detail_item_value"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/appraise_value_container"
         android:layout_toRightOf="@+id/summary_key"
         android:layout_toEndOf="@+id/summary_key"

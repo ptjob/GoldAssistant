@@ -15,7 +15,6 @@ package com.parttime.IM.activitysetting;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,7 +29,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.carson.constant.ConstantForSaveList;
@@ -50,7 +48,6 @@ import com.parttimejob.swipe.SwipeListView;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.HuanxinUser;
-import com.quark.ui.widget.CustomDialog;
 import com.quark.volley.VolleySington;
 
 import java.util.ArrayList;
@@ -461,16 +458,40 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                 @Override
                 public void onClick(View v) {
                     if(v instanceof Button) {
-                        GroupSettingRequest.UserVO userVO = (GroupSettingRequest.UserVO)v.getTag();
+                        final GroupSettingRequest.UserVO userVO = (GroupSettingRequest.UserVO)v.getTag();
                         int apply = userVO.apply;
                         if (apply == GroupSettingRequest.UserVO.APPLY_OK) {
                             //取消录取  已录用的人员，点击取消录用，弹窗提示“确认取消录用改用，取消后该用户将被移除聊天群组”——取消，确认
-                            showAlertDialog( null , getString(R.string.cacel_resume_or_not_and_remove_from_group), Action.UNRESUME, userVO ,
-                                    R.string.ok, R.string.cancel);
+                            new GroupSettingUtils().showAlertDialog( GroupResumeSettingActivity.this,
+                                    null ,
+                                    getString(R.string.cacel_resume_or_not_and_remove_from_group),
+                                    Action.UNRESUME, userVO ,
+                                    R.string.ok, R.string.cancel,
+                                    String.valueOf(userVO.userId), groupId, queue,
+                                    new DefaultCallback(){
+                                        @Override
+                                        public void success(Object obj) {
+                                            data.remove(userVO);
+                                            updateTip();
+                                            adapter.notifyDataSetChanged();
+                                        }
+                                    });
                         } else if (apply == GroupSettingRequest.UserVO.APPLY_UNLOOK || apply == GroupSettingRequest.UserVO.APPLY_LOOKED) {
                             //录取   确认后可取消录用该用户，信息中心会提醒用户‘已被商家取消录用’。同时该用户也将被移除聊天群组
-                            showAlertDialog( null , getString(R.string.cacel_resume_or_not), Action.RESUME, userVO,
-                                    R.string.yes , R.string.no);
+                            new GroupSettingUtils().showAlertDialog( GroupResumeSettingActivity.this,
+                                    null ,
+                                    getString(R.string.cacel_resume_or_not),
+                                    Action.RESUME, userVO,
+                                    R.string.yes , R.string.no,
+                                    String.valueOf(userVO.userId), groupId, queue,
+                                    new DefaultCallback(){
+                                        @Override
+                                        public void success(Object obj) {
+                                            userVO.apply = GroupSettingRequest.UserVO.APPLY_OK;
+                                            updateTip();
+                                            notifyDataSetChanged();
+                                        }
+                                    });
                         }
                     }
                 }
@@ -505,112 +526,31 @@ public class GroupResumeSettingActivity extends BaseActivity implements
 
                     @Override
                     public void onClick(View v) {
-                        GroupSettingRequest.UserVO userVO = (GroupSettingRequest.UserVO)v.getTag();
-                        showAlertDialog(null, getString(R.string.reject_one_resume_or_not_and_remove_from_group), Action.UNRESUME, userVO,
-                                R.string.ok, R.string.cancel);
+                        final GroupSettingRequest.UserVO userVO = (GroupSettingRequest.UserVO)v.getTag();
+                        new GroupSettingUtils().showAlertDialog( GroupResumeSettingActivity.this,
+                                null ,
+                                getString(R.string.reject_one_resume_or_not_and_remove_from_group),
+                                Action.REJECT, userVO ,
+                                R.string.ok, R.string.cancel,
+                                String.valueOf(userVO.userId), groupId, queue,
+                                new DefaultCallback(){
+                                    @Override
+                                    public void success(Object obj) {
+                                        data.remove(userVO);
+                                        updateTip();
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                });
                     }
                 });
             }
         }
 
-
-        public void showAlertDialog(String title, String message,final Action action, final GroupSettingRequest.UserVO userVO,
-                                    int positiveRes, int negativeRes) {
-
-            CustomDialog.Builder builder = new CustomDialog.Builder(GroupResumeSettingActivity.this);
-            builder.setMessage(message);
-            builder.setTitle(title);
-            builder.setPositiveButton(positiveRes, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    showWait(true);
-                    if(action == Action.UNRESUME || action == Action.REJECT){
-                        ArrayList<Integer> userIds = new ArrayList<>();
-                        userIds.add(userVO.userId);
-                        new GroupSettingRequest().cancelResume(userIds , groupId, queue, new DefaultCallback(){
-                            @Override
-                            public void success(Object obj) {
-                                super.success(obj);
-                                new Thread(new Runnable() {
-                                    public void run() {
-                                        try {
-                                            /*EMGroupManager.getInstance()
-                                                    .removeUserFromGroup(groupId,
-                                                            String.valueOf(userVO.userId));*/
-                                            runOnUiThread(new Runnable() {
-                                                public void run() {
-                                                    data.remove(userVO);
-                                                    GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
-                                                    if(appliantResult != null){
-                                                        appliantResult.userList.remove(userVO);
-                                                        appliantResult.approvedCount  --;
-                                                    }
-                                                    updateTip();
-                                                    adapter.notifyDataSetChanged();
-                                                    showWait(false);
-                                                }
-                                            });
-                                        } catch (final Exception e) {
-                                            runOnUiThread(new Runnable() {
-                                                public void run() {
-                                                    showWait(false);
-                                                    Toast.makeText(getApplicationContext(),
-                                                            "退出群聊失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                                                }
-                                            });
-                                        }
-                                    }
-                                }).start();
-                            }
-
-                            @Override
-                            public void failed(Object obj) {
-                                super.failed(obj);
-                                showWait(false);
-                                Toast.makeText(GroupResumeSettingActivity.this, getString(R.string.action_failed) , Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-                    }else if(action == Action.RESUME){
-                        ArrayList<Integer> userIds = new ArrayList<>();
-                        userIds.add(userVO.userId);
-                        new GroupSettingRequest().approve(userIds , groupId, queue, new DefaultCallback(){
-                            @Override
-                            public void success(Object obj) {
-                                super.success(obj);
-                                userVO.apply = GroupSettingRequest.UserVO.APPLY_OK;
-                                updateTip();
-                                notifyDataSetChanged();
-                                showWait(false);
-                            }
-
-                            @Override
-                            public void failed(Object obj) {
-                                super.failed(obj);
-                                showWait(false);
-                                Toast.makeText(GroupResumeSettingActivity.this, getString(R.string.action_failed) , Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-                    }
-                }
-            });
-
-            builder.setNegativeButton(negativeRes, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-
-                }
-            });
-            builder.create().show();
-        }
-
-
     }
 
-    private static enum  Action{
+    public static enum  Action{
         RESUME,
-        UNRESUME , REJECT
+        UNRESUME , Action, REJECT
     }
 
     private class ViewHolder{

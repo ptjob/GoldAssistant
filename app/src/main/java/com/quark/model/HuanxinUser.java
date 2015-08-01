@@ -19,6 +19,13 @@ public class HuanxinUser implements Serializable {
      */
     private int type ; //用户类型
 	private String namePinyin;  //名字转化为拼音 为了列表显示
+
+    public int creditworthiness; //信誉
+    public int sex ; //
+    public int earnest_money; //诚意金
+    public int certification; //认证状态
+    public String city; //城市
+
 	
 	public String getNamePinyin() {
 		return namePinyin;
