@@ -99,7 +99,6 @@ public class GroupSettingUtils {
                             userVO.apply = GroupSettingRequest.UserVO.APPLY_OK;
                             GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
                             if(appliantResult != null){
-                                appliantResult.userList.remove(userVO);
                                 appliantResult.approvedCount++;
                                 appliantResult.unApprovedCount --;
                             }
