@@ -781,7 +781,7 @@ public class NormalGroupSettingActivity extends BaseActivity implements
                                                 .equals(group.getOwner())){
                                             intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPOWNER, true);
                                         }
-                                        intent.putExtra(ActivityExtraAndKeys.UserDetail.FROM_AND_STATUS, UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_IS_FRIEND);
+                                        intent.putExtra(ActivityExtraAndKeys.UserDetail.FROM_AND_STATUS, UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_FRIEND);
 										startActivity(intent);
 									}
 								}

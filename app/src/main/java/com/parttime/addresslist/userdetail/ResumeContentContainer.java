@@ -121,6 +121,7 @@ public  class ResumeContentContainer implements View.OnClickListener{
                             @Override
                             public void success(Object obj) {
                                 userDetailPagerAdapter.userIds.remove(userDetailFragment.userId);
+                                userDetailPagerAdapter.cache.remove(userDetailFragment.userId);
                                 activity.adapter.notifyDataSetChanged();
                             }
                         });

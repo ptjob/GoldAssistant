@@ -1089,9 +1089,11 @@ public class MessageAndAddressFragment extends Fragment {
                         // startActivity(new Intent(getActivity(),
                         // ChatActivity.class).putExtra("userId",
                         // contactAdapter.getItem(position).getUsername()));
-                        startActivity(new Intent(getActivity(),
-                                ChatActivity.class).putExtra("userId",
-                                usersNick.get(position).getUid()));
+                        if(position < usersNick.size()) {
+                            startActivity(new Intent(getActivity(),
+                                    ChatActivity.class).putExtra("userId",
+                                    usersNick.get(position).getUid()));
+                        }
                     }
                 } else {
                     ToastUtil.showShortToast("当前网络不可用，请检查网络连接");

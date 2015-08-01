@@ -1,5 +1,7 @@
 package com.parttime.pojo;
 
+import android.text.TextUtils;
+
 import com.parttime.net.GroupSettingRequest;
 
 /**
@@ -62,6 +64,7 @@ public class UserDetailVO {
 
     public GroupSettingRequest.UserVO toUserVO(){
         GroupSettingRequest.UserVO userVO = new GroupSettingRequest.UserVO();
+        userVO.userId = id;
         return userVO;
     }
 

@@ -128,19 +128,19 @@ public class HuanxingSearchUserAdapter extends BaseAdapter {
 				// carson 更改判定条件是uid
 				// ApplicationControl.getInstance().getUserName()得到的是uid，应该跟list.getUid对比
 				if (ApplicationControl.getInstance().getUserName()
-						.equals(list.get(i).getUid())) {
-					context.startActivity(new Intent(context, AlertDialog.class)
-							.putExtra("msg", "不能添加自己"));
-					return;
-				}
+                        .equals(list.get(i).getUid())) {
+                    context.startActivity(new Intent(context, AlertDialog.class)
+                            .putExtra("msg", "不能添加自己"));
+                    return;
+                }
 
-				if (ApplicationControl.getInstance().getContactList()
-						.containsKey(list.get(i).getUid())) {
-					context.startActivity(new Intent(context, AlertDialog.class)
-							.putExtra("msg", "此用户已是你的好友"));
-					return;
-				}
-				showAlertDialog("留言", "留言", i);
+                if (ApplicationControl.getInstance().getContactList()
+                        .containsKey(list.get(i).getUid())) {
+                    context.startActivity(new Intent(context, AlertDialog.class)
+                            .putExtra("msg", "此用户已是你的好友"));
+                    return;
+                }
+                showAlertDialog("留言", "留言", i);
 
 			}
 		});

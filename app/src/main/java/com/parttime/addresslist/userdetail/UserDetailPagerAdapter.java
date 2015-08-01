@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +34,11 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
     public UserDetailActivity.FromAndStatus fromAndStatus;
 
     public UserDetailActivity userDetailActivity;
+    FragmentManager fm ;
 
     public UserDetailPagerAdapter(FragmentManager fm, UserDetailActivity userDetailActivity) {
         super(fm);
+        this.fm = fm;
         this.userDetailActivity = userDetailActivity;
     }
 
@@ -50,6 +54,36 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
         userDetailActivity.initUserBlock(userId);
         UserDetailFragment fragment = UserDetailFragment.newInstance(userId);
         fragment.userDetailPagerAdapter = this;
+        return fragment;
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        //得到缓存的fragment
+        Fragment fragment = (Fragment) super.instantiateItem(container,
+                position);
+        //得到tag，这点很重要
+        String fragmentTag = fragment.getTag();
+
+
+        /*if (fragmentsUpdateFlag[position % fragmentsUpdateFlag.length]) {
+            //如果这个fragment需要更新
+
+            FragmentTransaction ft = fm.beginTransaction();
+            //移除旧的fragment
+            ft.remove(fragment);
+            //换成新的fragment
+            fragment = fragments[position % fragments.length];
+            //添加新fragment时必须用前面获得的tag，这点很重要
+            ft.add(container.getId(), fragment, fragmentTag);
+            ft.attach(fragment);
+            ft.commit();
+
+            //复位更新标志
+            fragmentsUpdateFlag[position % fragmentsUpdateFlag.length] = false;
+        }*/
+
+
         return fragment;
     }
 
@@ -92,11 +126,9 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
             final UserDetailViewHelper helper = new UserDetailViewHelper(this, userDetailPagerAdapter);
             UserDetailViewHelper.InitContent initContent = null;
             if (BuildConfig.DEBUG) { //for test
-                userDetailPagerAdapter.fromAndStatus = UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_IS_FRIEND;
+                userDetailPagerAdapter.fromAndStatus = UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_NOT_FINISH;
             }
-            if (UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_NOT_FRIEND == userDetailPagerAdapter.fromAndStatus) {
-                initContent = UserDetailViewHelper.InitContent.INIT_FRIEND;
-            } else if (UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_IS_FRIEND == userDetailPagerAdapter.fromAndStatus) {
+            if (UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_FRIEND == userDetailPagerAdapter.fromAndStatus) {
                 initContent = UserDetailViewHelper.InitContent.INIT_FRIEND;
             } else if (UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_NOT_FINISH == userDetailPagerAdapter.fromAndStatus) {
                 initContent = UserDetailViewHelper.InitContent.INIT_RESUME;
@@ -126,14 +158,13 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
                                 }
                             });
                 }
-            } else if (UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_NOT_FRIEND == userDetailPagerAdapter.fromAndStatus ||
-                    UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_IS_FRIEND == userDetailPagerAdapter.fromAndStatus) {
+            } else if (UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_FRIEND == userDetailPagerAdapter.fromAndStatus) {
                 initHuanxinUserData(userId, helper, initContent2);
             }
             return rootView;
         }
 
-        private void initHuanxinUserData(String userId, final UserDetailViewHelper helper, final UserDetailViewHelper.InitContent initContent) {
+        private void initHuanxinUserData(final String userId, final UserDetailViewHelper helper, final UserDetailViewHelper.InitContent initContent) {
 
 
             if (userId != null) {
@@ -141,15 +172,7 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
                 if(userDetailVO != null){
                     helper.reflesh(userDetailVO, initContent);
                 }else {
-                    /*StringBuilder userIdsStr = new StringBuilder();
-                    int size = userIds.size();
-                    for (int i = 0; i < size; i++) {
-                        if(i < size -1 ) {
-                            userIdsStr.append(userIds.get(i)).append(",");
-                        }else{
-                            userIdsStr.append(userIds.get(i));
-                        }
-                    }*/
+
                     new HuanXinRequest().getHuanxinUserDetailList(userId, userDetailPagerAdapter.userDetailActivity.queue, new DefaultCallback() {
                         @Override
                         public void success(Object obj) {
@@ -160,7 +183,11 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
                                 if (list.size() == 1) {
                                     for (HuanxinUser huanxinUser : list) {
                                         UserDetailVO userDetailVO = new UserDetailVO();
-                                        userDetailVO.userId = huanxinUser.getUid();
+                                        if(TextUtils.isEmpty(huanxinUser.getUid())) {
+                                            userDetailVO.userId = userId;
+                                        }else{
+                                            userDetailVO.userId = huanxinUser.getUid();
+                                        }
                                         userDetailVO.name = huanxinUser.getName();
                                         userDetailVO.picture_1 = huanxinUser.getAvatar();
                                         userDetailVO.sex = huanxinUser.sex;

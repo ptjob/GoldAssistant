@@ -287,8 +287,7 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
     }
 
     public static enum FromAndStatus{
-        FROM_NORMAL_GROUP_AND_NOT_FRIEND, //从普通群组过来 不是好友
-        FROM_NORMAL_GROUP_AND_IS_FRIEND,  //从普通群组过来 是好友
+        FROM_NORMAL_GROUP_AND_FRIEND, //从普通群组过来 不是好友   //从普通群组过来 是好友
         FROM_ACTIVITY_GROUP_AND_NOT_FINISH, //从活动群过来 活动没有结束
         FROM_ACTIVITY_GROUP_AND_IS_FINISH, //从活动群过来 活动已结束
         FROM_ACTIVITY_GROUP_VIEW_RESUME,  //查看简历
