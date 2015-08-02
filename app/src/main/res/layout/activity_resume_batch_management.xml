@@ -26,12 +26,16 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/title_height"
             android:text="@string/pass"
+            android:background="@drawable/selector_form_blue_no_corner_button"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:id="@+id/pass" />
         <Button
             android:layout_width="0dp"
             android:layout_height="@dimen/title_height"
             android:text="@string/refused"
+            android:background="@drawable/selector_form_button_red_no_corner"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:id="@+id/refused" />
     </LinearLayout>

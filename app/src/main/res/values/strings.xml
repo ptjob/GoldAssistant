@@ -157,6 +157,7 @@
     <string name="group_cancel_gag">取消禁言</string>
     <string name="pls_check_first">请先选择</string>
     <string name="update_success">更新成功</string>
+    <string name="check_all">全选</string>
 
     <!-- 通讯录 -->
     <string name="create_new_group">创建群</string>

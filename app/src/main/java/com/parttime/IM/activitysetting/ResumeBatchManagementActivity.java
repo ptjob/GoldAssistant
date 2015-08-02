@@ -32,6 +32,7 @@ import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.ResponseBaseCommonError;
 import com.parttime.utils.SharePreferenceUtil;
+import com.parttime.widget.RankView;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.ui.widget.CustomDialog;
@@ -73,8 +74,8 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
     private void initView() {
         headView = new ActivityHead2(this);
         headView.setCenterTxt1(R.string.group_setting_batch);
-        headView.setImgRight2(R.drawable.settings_selected);
-        headView.imgRight2.setOnClickListener(this);
+        headView.setTxtRight2Text(R.string.check_all);
+        headView.txtRight2.setOnClickListener(this);
         pass = (Button)findViewById(R.id.pass);
         refused = (Button)findViewById(R.id.refused);
         listView = (ListView) findViewById(R.id.listView);
@@ -314,8 +315,9 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
                 holder.resumeStatus = (TextView) view.findViewById(R.id.resume_status);
                 holder.moneyStatus = (TextView) view.findViewById(R.id.money_status);
                 holder.accountStatus = (TextView) view.findViewById(R.id.account_status);
-                holder.reputationValueStar = (LinearLayout) view.findViewById(R.id.reputation_value_star_container);
+                holder.reputationValueStar = (RankView) view.findViewById(R.id.reputation_value_star_container);
                 holder.checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+                holder.resumeStatus.setVisibility(View.GONE);
 
                 view.setTag(holder);
             }else{
@@ -393,7 +395,9 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
 
             //设置信誉
             String creditworthiness = batchUserVO.creditworthiness;
-            Utils.addStars(creditworthiness, holder.reputationValueStar, ResumeBatchManagementActivity.this, R.drawable.ee_27);
+            //Utils.addStars(creditworthiness, holder.reputationValueStar, ResumeBatchManagementActivity.this, R.drawable.ee_27);
+            holder.reputationValueStar.setTotalScore(Integer.valueOf(creditworthiness) / 10);
+            holder.reputationValueStar.rank(0);
 
             if(checkedMap.get(position) != null){
                 holder.checkBox.setChecked(true);
@@ -447,7 +451,7 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
                 resumeStatus, //简历状态
                 moneyStatus, // 诚意金/实名认证
                 accountStatus;
-        public LinearLayout reputationValueStar; //信誉值
+        public RankView reputationValueStar; //信誉值
         public CheckBox checkBox;
 
     }

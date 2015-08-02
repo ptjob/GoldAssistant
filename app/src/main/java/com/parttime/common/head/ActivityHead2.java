@@ -19,7 +19,8 @@ public class ActivityHead2 extends ActivityHead {
 
     public TextView centerTxt2;
     public RelativeLayout imgRightContainer1, imgRightContainer2;
-    public ImageView imgRight1 , imgRight2;
+    public ImageView imgRight1;
+    public TextView txtRight2;
     public ProgressBar progressBar;
 
     public ActivityHead2(Activity activity){
@@ -33,7 +34,7 @@ public class ActivityHead2 extends ActivityHead {
         imgRightContainer1 = (RelativeLayout)activity.findViewById(R.id.container_right1_image);
         imgRightContainer2 = (RelativeLayout)activity.findViewById(R.id.container_right2_image);
         imgRight1 = (ImageView)activity.findViewById(R.id.img_right1);
-        imgRight2 = (ImageView)activity.findViewById(R.id.img_right2);
+        txtRight2 = (TextView)activity.findViewById(R.id.img_right2);
         progressBar = (ProgressBar)activity.findViewById(R.id.progressBar);
 
     }
@@ -58,8 +59,13 @@ public class ActivityHead2 extends ActivityHead {
         imgRightContainer1.setVisibility(View.GONE);
     }
 
-    public void setImgRight2(int resDrawable){
-        imgRight2.setImageResource(resDrawable);
+    public void setTxtRight2(int resDrawable){
+        txtRight2.setBackgroundResource(resDrawable);
+        imgRightContainer2.setVisibility(View.VISIBLE);
+    }
+
+    public void setTxtRight2Text(int resStr){
+        txtRight2.setText(resStr);
         imgRightContainer2.setVisibility(View.VISIBLE);
     }
 
