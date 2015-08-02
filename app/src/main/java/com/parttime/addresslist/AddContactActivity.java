@@ -60,7 +60,8 @@ public class AddContactActivity extends BaseActivity {
 	private EditText editText;
 	private LinearLayout searchedUserLayout;
 	private TextView nameText;
-	private Button searchBtn;
+//	private Button searchBtn;
+	private Button btnSearch;
 	private ImageView avatar;
 	private InputMethodManager inputMethodManager;
 	private String toAddUsername;
@@ -88,7 +89,8 @@ public class AddContactActivity extends BaseActivity {
 		editText = (EditText) findViewById(R.id.edit_note);
 		searchedUserLayout = (LinearLayout) findViewById(R.id.ll_user);
 		nameText = (TextView) findViewById(R.id.name);
-		searchBtn = (Button) findViewById(R.id.search);
+//		searchBtn = (Button) findViewById(R.id.search);
+		btnSearch = (Button) findViewById(R.id.tv_search);
 		avatar = (ImageView) findViewById(R.id.avatar);
 		inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 	}
@@ -102,9 +104,9 @@ public class AddContactActivity extends BaseActivity {
 	 */
 	public void searchContact(View v) {
 		name = editText.getText().toString();
-		String saveText = searchBtn.getText().toString();
+		String saveText = btnSearch.getText().toString();
 
-		if (getString(R.string.button_search).equals(saveText)) {
+		if (getString(R.string.search).equals(saveText)) {
 			toAddUsername = name;
 			if (TextUtils.isEmpty(name)) {
 				startActivity(new Intent(this, AlertDialog.class).putExtra(

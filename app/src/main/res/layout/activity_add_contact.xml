@@ -22,7 +22,7 @@
             android:textColor="#fff"
             android:textSize="18sp" />
 
-        <Button
+        <!--<Button
             android:id="@+id/search"
             android:layout_width="54dp"
             android:layout_height="match_parent"
@@ -32,21 +32,55 @@
             android:onClick="searchContact"
             android:text="@string/button_search"
             android:textColor="#fff"
-            android:textSize="16sp" />
+            android:textSize="16sp" />-->
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/edit_note"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="39dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/button_normal_shape"
-        android:ellipsize="end"
-        android:hint="请输入好友的用户名/手机号"
-        android:paddingLeft="5dp"
-        android:singleLine="true"
-        android:textColorHint="#b3b3b3"
-        android:textSize="18sp" />
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp">
+        <Button
+            android:id="@+id/tv_search"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/search"
+            android:textSize="15dp"
+            android:textColor="@color/common_txt_color"
+            android:background="@color/common_orange"
+            android:layout_alignParentRight="true"
+            android:onClick="searchContact" />
+        <EditText
+            android:id="@+id/edit_note"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:layout_toLeftOf="@id/tv_search"
+            android:layout_alignParentLeft="true"
+
+            android:background="@null"
+            android:ellipsize="end"
+            android:hint="请输入好友的用户名/手机号"
+            android:paddingLeft="15dp"
+            android:singleLine="true"
+            android:textColorHint="@color/txt_color_gray"
+            android:textColor="@color/txt_color_black"
+            android:textSize="15dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_width"
+            android:background="@color/edit_text_divider"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@id/edit_note"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_width"
+            android:background="@color/edit_text_divider"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@id/edit_note"/>
+    </RelativeLayout>
+
+
 
     <ListView
         android:id="@+id/list"

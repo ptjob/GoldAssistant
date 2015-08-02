@@ -251,5 +251,9 @@
     <color name="common_gray_4">@color/c_979797</color>
     <color name="common_gray_5">@color/c_363636</color>
 
+    <color name="gray_block">@color/common_gray_1</color>
     <color name="txt_color_black">@color/c_363636</color>
+    <color name="txt_color_gray">@color/common_gray_3</color>
+    <color name="form_divider">@color/common_gray_2</color>
+    <color name="edit_text_divider">@color/common_gray_3</color>
 </resources>

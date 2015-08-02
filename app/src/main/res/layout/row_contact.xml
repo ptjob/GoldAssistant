@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/contact_item_height"
     android:background="@android:color/transparent"
     android:orientation="vertical" >
 
+    <!--android:background="#E0E0E0"-->
     <TextView
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#E0E0E0"
-        android:paddingBottom="2dp"
+        android:layout_height="23dp"
+        android:background="@color/gray_block"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
+        android:textColor="@color/txt_color_black"
+        android:gravity="center_vertical"
+        android:textSize="15dp"
         android:visibility="gone" />
 
     <RelativeLayout
@@ -22,13 +22,13 @@
         android:layout_height="60dp"
         android:background="@drawable/mm_listitem"
         android:duplicateParentState="true" >
-<!-- 原本是 ImageView -->
+        <!-- 原本是 ImageView -->
         <com.quark.http.image.CircularImage
             android:id="@+id/avatar"
-            android:layout_width="43dp"
-            android:layout_height="43dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="11dp"
+            android:layout_marginLeft="10dp"
             android:scaleType="fitXY"
             android:src="@drawable/default_avatar" />
 
@@ -44,7 +44,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/name"
@@ -53,8 +53,8 @@
                     android:layout_marginRight="4dp"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:textColor="#323232"
-                    android:textSize="16sp" />
+                    android:textColor="@color/txt_color_black"
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <TextView
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="35dp"
             android:background="@drawable/unread_count_bg"
             android:gravity="center"
             android:visibility="invisible"

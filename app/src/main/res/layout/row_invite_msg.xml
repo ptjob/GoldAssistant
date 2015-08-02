@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/contact_item_height"
     android:background="@drawable/mm_listitem_grey"
     android:orientation="vertical" >
 
@@ -20,11 +20,12 @@
 
             <com.quark.http.image.CircularImage
                 android:id="@+id/avatar"
-                android:layout_width="43dp"
-                android:layout_height="43dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/default_avatar" />
+                android:src="@drawable/default_avatar"/>
         </RelativeLayout>
 
         <TextView
@@ -34,8 +35,11 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="6dp"
             android:layout_toRightOf="@id/avatar_container"
-            android:textColor="#000"
-            android:textSize="16sp" />
+            android:layout_marginRight="4dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/txt_color_black"
+            android:textSize="16dp"/>
 
         <ImageView
             android:id="@+id/msg_state"
@@ -58,8 +62,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:padding="7dp"
-            android:textColor="#888888"
-            android:textSize="14sp" />
+            android:textColor="@color/txt_color_gray"
+            android:textSize="14dp" />
 
         <LinearLayout
             android:id="@+id/user_sure_refuse"

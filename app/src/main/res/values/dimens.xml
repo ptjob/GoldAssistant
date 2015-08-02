@@ -155,5 +155,6 @@
     <!-- 群成员界面 -->
     <dimen name="group_member_item_padding">10dp</dimen>
     <dimen name="group_memberr_head_edge">83dp</dimen>
+    <dimen name="contact_item_height">55dp</dimen>
 
 </resources>
