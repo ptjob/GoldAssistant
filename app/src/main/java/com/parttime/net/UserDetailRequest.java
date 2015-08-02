@@ -2,6 +2,7 @@ package com.parttime.net;
 
 import com.android.volley.RequestQueue;
 import com.google.gson.Gson;
+import com.parttime.pojo.CommentPage;
 import com.parttime.pojo.UserDetailVO;
 import com.quark.common.Url;
 
@@ -92,4 +93,54 @@ public class UserDetailRequest extends BaseRequest {
             }
         });
     }
+
+
+    /**
+     * 查询评论分页接口
+     * @param userId String
+     * @param currentPager int
+     * @param pageCount int
+     * @param queue RequestQueue
+     * @param callback DefaultCallback
+     */
+    public void commentPage(String userId, int currentPager,
+                        int pageCount,
+                        RequestQueue queue ,
+                        final DefaultCallback callback){
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        map.put("pn", String.valueOf(currentPager));
+        map.put("page_size", String.valueOf(pageCount));
+
+        request(Url.COMMENT_DETAIL_PAGER,map, queue, new Callback() {
+
+            @Override
+            public void success(Object obj) throws JSONException {
+                JSONObject js = null;
+                if (obj instanceof JSONObject) {
+                    js = (JSONObject) obj;
+                }
+                if (js == null) {
+                    callback.failed("");
+                    return;
+                }
+                try {
+                    JSONObject userInfo = js.getJSONObject("commentPage");
+                    String ui = userInfo.toString();
+                    CommentPage commentPage = new Gson().fromJson(ui, CommentPage.class);
+                    callback.success(commentPage);
+                } catch (JSONException e) {
+                    callback.failed(e);
+                }
+            }
+
+            @Override
+            public void failed(Object obj) {
+                callback.failed(obj);
+            }
+        });
+    }
+
+
+
 }

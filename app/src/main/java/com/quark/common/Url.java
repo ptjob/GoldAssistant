@@ -186,7 +186,7 @@ public class Url {
 			+ SUBJECT + "/Activity/preRefresh";
 	// 管理 –刷新
 	public static final String COMPANY_MyJianzhi_reflesh = HOST + SUBJECT
-			+ "/Activity/reflesh";
+			+ "/Activity/refresh";
     // 管理 -加急前
     public static final String COMPANY_MyJianzhi_preUrgent = HOST
             + SUBJECT +"/Activity/preUrgent";
@@ -328,6 +328,9 @@ public class Url {
 	// 评价用户 3.0
 	public static final String COMMENT_REQUIRE = HOST + SUBJECT
 			+ "/Activity/commentRequire";
+	// 评价用户获取分页接口 3.0
+	public static final String COMMENT_DETAIL_PAGER = HOST + SUBJECT
+			+ "/UserCenter/comment";
 	// 检查是否放飞机
 	public static final String USER_user_feiji = HOST + SUBJECT
 			+ "/UserCenter/is_run_over";

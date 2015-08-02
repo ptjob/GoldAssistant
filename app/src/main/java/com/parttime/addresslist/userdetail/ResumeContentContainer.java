@@ -16,6 +16,8 @@ import com.parttime.IM.activitysetting.GroupResumeSettingActivity;
 import com.parttime.IM.activitysetting.GroupSettingUtils;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
+import com.parttime.net.UserDetailRequest;
+import com.parttime.pojo.CommentPage;
 import com.parttime.pojo.CommentVO;
 import com.parttime.pojo.UserDetailVO;
 import com.parttime.widget.CommentView;
@@ -53,6 +55,8 @@ public  class ResumeContentContainer implements View.OnClickListener{
     UserDetailPagerAdapter userDetailPagerAdapter;
 
     UserDetailVO userDetailVO;
+    //分页对象
+    Pager pager;
 
     public ResumeContentContainer(UserDetailPagerAdapter.UserDetailFragment userDetailFragment,
                                   UserDetailPagerAdapter userDetailPagerAdapter) {
@@ -165,10 +169,51 @@ public  class ResumeContentContainer implements View.OnClickListener{
     }
 
     private void loadData() {
-        Pager pager = new Pager();
+        if(pager == null) {
+            pager = new Pager();
+        }
+
         activity.showWait(true);
-        addCommentView(new ArrayList<CommentVO>());
-        activity.showWait(false);
+        new UserDetailRequest().commentPage(userDetailFragment.userId,
+                pager.currentPage ++ , pager.pageCount,
+                activity.queue,
+                new DefaultCallback(){
+                    @Override
+                    public void success(Object obj) {
+                        if(obj != null && obj instanceof CommentPage){
+                            CommentPage commentPage = (CommentPage)obj;
+                            List<CommentPage.DetailItem> list = commentPage.list;
+                            if(list != null){
+                                ArrayList<CommentVO> commentVOs = new ArrayList<>();
+                                for (CommentPage.DetailItem detailItem : list){
+                                    if(detailItem == null){
+                                        continue;
+                                    }
+                                    CommentVO commentVO = new CommentVO();
+                                    commentVO.comment = detailItem.comment;
+                                    commentVO.groupName = detailItem.title;
+                                    commentVO.remark = detailItem.remark;
+                                    commentVOs.add(commentVO);
+                                }
+                                addCommentView(commentVOs);
+                                if(commentPage.totalPage == commentPage.pageNumber){
+                                    loadingMore.setVisibility(View.GONE);
+                                }else{
+                                    loadingMore.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        }
+                        activity.showWait(false);
+                    }
+
+                    @Override
+                    public void failed(Object obj) {
+                        Toast.makeText(activity,activity.getString(R.string.listLoadingError),Toast.LENGTH_SHORT ).show();
+                        activity.showWait(false);
+                    }
+                });
+
+
     }
 
     private void addCommentView(List<CommentVO> commentVoList){
@@ -251,9 +296,8 @@ public  class ResumeContentContainer implements View.OnClickListener{
     }
 
     private class Pager{
-        int currentPage = 0;
-        int pageCount = 10 ;
-        int currentId = 0;
+        int currentPage = 1;
+        int pageCount = 5 ;
     }
 
 }

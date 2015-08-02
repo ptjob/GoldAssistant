@@ -25,6 +25,9 @@
     <color name="black_1">#363636</color>
     <color name="black_2">#c4c4c4</color>
 
+    <!--title-->
+    <color name="top_background">@color/c_363636</color>
+
     <!-- 按钮 -->
     <color name="public_button_hollow_normal_solod">#ffffff</color>
     <color name="public_button_hollow_stroke">#e2e2e2</color>
