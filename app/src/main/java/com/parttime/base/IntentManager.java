@@ -1,14 +1,14 @@
 package com.parttime.base;
 
-import android.app.Activity;
 import android.content.Intent;
 
 import com.parttime.login.FindPJLoginActivity;
 import com.parttime.main.MainTabActivity;
-import com.parttime.mine.EnterpriseCertSubmitActivity;
-import com.parttime.mine.EnterpriseCertedActivity;
-import com.parttime.mine.PersonalCertSubmitActivity;
+import com.parttime.mine.BeforeCertedActivity;
+import com.parttime.mine.AfterCertedActivity;
 import com.parttime.mine.PersonalCertedActivity;
+import com.parttime.mine.RealNameCertSelectActivity;
+import com.parttime.pojo.CertVo;
 import com.quark.jianzhidaren.BaseActivity;
 
 /**
@@ -26,29 +26,22 @@ public class IntentManager {
         }
     }
 
-    public static void intentToPersonalCertSubmitActivity(BaseActivity activity, int certStatus, int isAgent){
-        Intent intent = new Intent(activity, PersonalCertSubmitActivity.class);
-        intent.putExtra(PersonalCertSubmitActivity.EXTRA_CERT_STATUS, certStatus);
-        intent.putExtra(PersonalCertSubmitActivity.EXTRA_IS_AGENT, isAgent);
+    public static void intentToRealNameSelectActivity(BaseActivity activity, CertVo vo){
+        Intent intent = new Intent(activity, RealNameCertSelectActivity.class);
+        intent.putExtra(RealNameCertSelectActivity.EXTRA_CERT_VO, vo);
         activity.startActivity(intent);
     }
 
-    public static void intentToEnterpriseCertSubmitActivity(BaseActivity activity, int certStatus, int isAgent){
-        Intent intent = new Intent(activity, EnterpriseCertSubmitActivity.class);
-        intent.putExtra(EnterpriseCertSubmitActivity.EXTRA_CERT_STATUS, certStatus);
-        intent.putExtra(EnterpriseCertSubmitActivity.EXTRA_IS_AGENT, isAgent);
+    public static void intentToBeforeCertedActivity(BaseActivity activity, CertVo vo){
+        Intent intent = new Intent(activity, BeforeCertedActivity.class);
+        intent.putExtra(BeforeCertedActivity.EXTRA_CERT_VO, vo);
         activity.startActivity(intent);
     }
 
-    public static void intentToPersonalCertedActivity(BaseActivity activity, int isAgent){
-        Intent intent = new Intent(activity, PersonalCertedActivity.class);
-        intent.putExtra(PersonalCertedActivity.EXTRA_IS_AGENT, isAgent);
-        activity.startActivity(intent);
-    }
 
-    public static void intentToEnterpriseCertedActivity(BaseActivity activity, int isAgent){
-        Intent intent = new Intent(activity, EnterpriseCertedActivity.class);
-        intent.putExtra(EnterpriseCertedActivity.EXTRA_IS_AGENT, isAgent);
+    public static void intentToAfterCertedActivity(BaseActivity activity, CertVo vo){
+        Intent intent = new Intent(activity, AfterCertedActivity.class);
+        intent.putExtra(AfterCertedActivity.EXTRA_CERT_VO, vo);
         activity.startActivity(intent);
     }
 

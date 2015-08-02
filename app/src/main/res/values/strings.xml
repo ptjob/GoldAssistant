@@ -357,6 +357,7 @@
     <string name="boss_id_card">负责人身份证号</string>
     <string name="click_to_upload">点击上传</string>
     <string name="submit_to_check">提交审核</string>
+    <string name="update_to_enterprise_cert">升级为企业认证</string>
     <string name="enterprise_register_id">企业注册号</string>
     <string name="front_of_id_card">身份证正面图</string>
     <string name="back_of_id_card">身份证背面图</string>
@@ -367,6 +368,7 @@
     <string name="please_upload_id_card">请上传图片</string>
     <string name="name_should_be_chinese">哎呀，名字应该是汉字哦</string>
     <string name="please_enter_id_in_format">哎呀，请输入正确的身份证号码</string>
+    <string name="waiting_for_checking">审核中</string>
 
     <!-- 我的钱包 -->
     <string name="account_balance">账户余额（元）</string>
@@ -393,6 +395,7 @@
     <!-- 设置 -->
     <string name="account_setting">账号设置</string>
     <string name="clear_cache">清除缓存</string>
+    <string name="clear_success">清理成功</string>
     <string name="give_a_praise">赏个好评</string>
     <string name="about">关于</string>
     <string name="modify_phone_number">修改手机号码</string>

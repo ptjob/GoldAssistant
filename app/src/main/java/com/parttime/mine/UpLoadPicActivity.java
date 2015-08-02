@@ -44,7 +44,7 @@ public abstract class UpLoadPicActivity extends LocalInitActivity implements Act
     protected String uploadidUrl;
 
 
-    protected int accountType;
+//    protected int accountType;
     /*
     1:待审核  2：审核通过 3：审核不通过
 0:尚未提交审核
@@ -53,14 +53,7 @@ public abstract class UpLoadPicActivity extends LocalInitActivity implements Act
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getIntentData();
         super.onCreate(savedInstanceState);
-    }
-
-    protected Intent getIntentData(){
-        Intent intent = getIntent();
-        accountType = intent.getIntExtra(EXTRA_ACCOUNT_TYPE, 0);
-        return intent;
     }
 
     /**
@@ -233,6 +226,11 @@ public abstract class UpLoadPicActivity extends LocalInitActivity implements Act
                                     data, getImageViewToShowUploadPic(option), getUploadUrl(2),
                                     null, "company_id", getCompanyId(),
                                     "identity_verso", null, null, null, null, getUploadListener(option));
+                        } else if(option == 3){
+                            UploadImg.getImageToView(this,
+                                    data, getImageViewToShowUploadPic(option), getUploadUrl(3),
+                                    null, "company_id", getCompanyId(),
+                                    "company_picture", null, null, null, null, getUploadListener(option));
                         }
 
                     }

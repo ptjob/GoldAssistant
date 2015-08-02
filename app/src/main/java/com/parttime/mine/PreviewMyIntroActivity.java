@@ -14,7 +14,7 @@ import com.parttime.base.WithTitleActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.pojo.AccountInfo;
 import com.parttime.type.AccountType;
-import com.parttime.type.CertType;
+import com.parttime.type.CertStatus;
 import com.parttime.widget.RankView;
 import com.qingmu.jianzhidaren.R;
 
@@ -72,7 +72,7 @@ public class PreviewMyIntroActivity extends WithTitleActivity {
 
         tvName.setText(accountInfo.name);
         rvRank.rank(accountInfo.point);
-        if(accountInfo.status == CertType.CERT_PASSED){
+        if(accountInfo.status == CertStatus.CERT_PASSED){
             ivCerted.setVisibility(View.VISIBLE);
         }
         if(accountInfo.type != AccountType.AGENT){
