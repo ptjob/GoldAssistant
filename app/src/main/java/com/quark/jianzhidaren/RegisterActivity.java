@@ -838,6 +838,7 @@ public class RegisterActivity extends WithTitleActivity implements CountDownTime
 			@Override
 			public void run() {
 				btnGetCode.setText(R.string.get_validation_code);
+				btnGetCode.setEnabled(true);
 			}
 		});
 	}

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
+import com.parttime.login.SetGenderActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.ToastUtil;
 import com.quark.common.ValidateHelper;
@@ -119,15 +120,16 @@ public abstract class BaseActivity extends com.easemob.chatuidemo.activity.BaseA
 
 	/**
 	 * Toast 方法
-	 * 
+	 *
 	 * @param msg
 	 */
-	public void showToast(String msg) {
+	public SetGenderActivity.RegParams showToast(String msg) {
 		if (ValidateHelper.isEmptyString(msg)) {
-			return;
+			return null;
 		}
 
 		ToastUtil.showShortToast(msg);
+		return null;
 	}
 
 	public void showToast(int resid) {

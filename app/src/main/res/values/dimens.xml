@@ -115,7 +115,7 @@
     <dimen name="form_item_icon_edge">22dp</dimen>
 
     <dimen name="title_height">49dp</dimen>
-    <dimen name="title_padding">17dp</dimen>
+    <dimen name="title_padding">10dp</dimen>
     <dimen name="head_img_edge">83dp</dimen>
 
     <dimen name="my_intro_block_height">130dp</dimen>
