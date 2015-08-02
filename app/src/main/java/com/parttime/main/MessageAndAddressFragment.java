@@ -794,8 +794,9 @@ public class MessageAndAddressFragment extends Fragment {
                 } else {
                     // filledData();
                     if (ConstantForSaveList.usersNick != null
-                            && ConstantForSaveList.usersNick.size() > 2) {
-                        // 去除前2个申请与通知、群聊
+                            && ConstantForSaveList.usersNick.size() > 3) {
+                        // 去除前2个申请与通知、群聊、公共账号
+                        ConstantForSaveList.usersNick.remove(0);
                         ConstantForSaveList.usersNick.remove(0);
                         ConstantForSaveList.usersNick.remove(0);
                         if (ConstantForSaveList.usersNick.size() == contactList
@@ -973,7 +974,6 @@ public class MessageAndAddressFragment extends Fragment {
                         usersNick.addAll(list);
                         if (usersNick.size() > 0) {
                             ConstantForSaveList.usersNick = usersNick;// 保存缓存
-
                         }
                         filledData(); // 转化拼音
                     }
@@ -984,28 +984,35 @@ public class MessageAndAddressFragment extends Fragment {
         public void setlist() {
             // 设置adapter
             // 快速点击可能出现getActivity()为空
-            if (getActivity() == null)
+            if (getActivity() == null) {
                 return;
-            contactAdapter = new ContactAdapter(getActivity(),
-                    R.layout.row_contact, contactList, sidebar, usersNick);
-            contactlistView.setAdapter(contactAdapter);
-            contactlistView.setOnItemClickListener(contactItemClick);
-
-            contactlistView.setOnTouchListener(new OnTouchListener() {
-
+            }
+            getActivity().runOnUiThread(new Runnable() {
                 @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    // 隐藏软键盘
-                    if (getActivity().getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
-                        if (getActivity().getCurrentFocus() != null)
-                            inputMethodManager.hideSoftInputFromWindow(
-                                    getActivity().getCurrentFocus()
-                                            .getWindowToken(),
-                                    InputMethodManager.HIDE_NOT_ALWAYS);
-                    }
-                    return false;
+                public void run() {
+                    contactAdapter = new ContactAdapter(getActivity(),
+                            R.layout.row_contact, contactList, sidebar, usersNick);
+                    contactlistView.setAdapter(contactAdapter);
+                    contactlistView.setOnItemClickListener(contactItemClick);
+
+                    contactlistView.setOnTouchListener(new OnTouchListener() {
+
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            // 隐藏软键盘
+                            if (getActivity().getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
+                                if (getActivity().getCurrentFocus() != null)
+                                    inputMethodManager.hideSoftInputFromWindow(
+                                            getActivity().getCurrentFocus()
+                                                    .getWindowToken(),
+                                            InputMethodManager.HIDE_NOT_ALWAYS);
+                            }
+                            return false;
+                        }
+                    });
                 }
             });
+
         }
 
         /**
@@ -1041,6 +1048,7 @@ public class MessageAndAddressFragment extends Fragment {
             HuanxinUser nullhx = new HuanxinUser();
             nullhx.setNamePinyin("aaa");
             nullhx.setName("aaa");
+            usersNick.add(0, nullhx);
             usersNick.add(0, nullhx);
             usersNick.add(0, nullhx);
 

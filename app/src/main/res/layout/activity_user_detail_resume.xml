@@ -40,28 +40,40 @@
             android:layout_marginEnd="12dp"/>
     </RelativeLayout>
     <!--存放评论的值-->
-    <LinearLayout
-        android:id="@+id/appraise_value_container"
+    <LinearLayout android:id="@+id/appraise_value_main_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/appraise_container"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/appraise_value_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+        </LinearLayout>
+        <TextView android:id="@+id/loading_more"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/loading_more"
+            android:textColor="@color/c_C7C8CD"/>
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/summary_key"
         android:layout_width="wrap_content"
         style="@style/detail_item_key"
         android:layout_height="40dp"
-        android:layout_below="@+id/appraise_value_container"
+        android:layout_below="@+id/appraise_value_main_container"
         android:text="@string/summary"/>
     <TextView
         android:id="@+id/summary_value"
         android:layout_width="wrap_content"
         style="@style/detail_item_value"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/appraise_value_container"
+        android:layout_below="@+id/appraise_value_main_container"
         android:layout_toRightOf="@+id/summary_key"
         android:layout_toEndOf="@+id/summary_key"
         android:text=""/>
