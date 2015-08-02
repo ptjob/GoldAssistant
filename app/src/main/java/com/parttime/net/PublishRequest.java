@@ -165,7 +165,7 @@ public class PublishRequest extends BaseRequest {
                 // partJob.isShowTel = activityDetail.get
                 partJob.jobAuthType = JobAuthType.parse(activityDetail.getInt("status"));
                 partJob.viewCount = activityDetail.getInt("view_count");
-                partJob.handCount = activityDetail.getInt("head_count");
+                partJob.handCount = activityDetail.getInt("apply_count");
                 callback.success(partJob);
             }
 
@@ -174,5 +174,102 @@ public class PublishRequest extends BaseRequest {
                 callback.failed(obj);
             }
         });
+    }
+
+    public void preRefresh(int jobId, RequestQueue requestQueue, final DefaultCallback callback) {
+        HashMap<String, String> reqParams = new HashMap<>();
+        reqParams.put("company_id", String.valueOf(ApplicationUtils.getLoginId()));
+        reqParams.put("activity_id", String.valueOf(jobId));
+
+        String url = Url.COMPANY_MyJianzhi_previewReflesh;
+
+        request(url, reqParams, requestQueue, callback);
+    }
+
+    public void refresh(int jobId, RequestQueue requestQueue, final DefaultCallback callback) {
+        HashMap<String, String> reqParams = new HashMap<>();
+        reqParams.put("company_id", String.valueOf(ApplicationUtils.getLoginId()));
+        reqParams.put("activity_id", String.valueOf(jobId));
+
+        String url = Url.COMPANY_MyJianzhi_reflesh;
+
+        request(url, reqParams, requestQueue, callback);
+    }
+
+    public void preUrgent(int jobId, RequestQueue requestQueue, final DefaultCallback callback) {
+        HashMap<String, String> reqParams = new HashMap<>();
+        reqParams.put("company_id", String.valueOf(ApplicationUtils.getLoginId()));
+        reqParams.put("activity_id", String.valueOf(jobId));
+
+        String url = Url.COMPANY_MyJianzhi_preUrgent;
+
+        request(url, reqParams, requestQueue, callback);
+    }
+
+    public void setUrgent(int jobId, RequestQueue requestQueue, final DefaultCallback callback) {
+        HashMap<String, String> reqParams = new HashMap<>();
+        reqParams.put("company_id", String.valueOf(ApplicationUtils.getLoginId()));
+        reqParams.put("activity_id", String.valueOf(jobId));
+
+        String url = Url.COMPANY_MyJianzhi_setUrgent;
+
+        request(url, reqParams, requestQueue, callback);
+    }
+
+    public void modify(PartJob partJob, RequestQueue requestQueue, DefaultCallback callback) {
+        HashMap<String, String> reqParams = new HashMap<>();
+        reqParams.put("type", partJob.type);
+        reqParams.put("title", partJob.title);
+        reqParams.put("start_time", partJob.beginTime);
+        reqParams.put("end_time", partJob.endTime);
+        reqParams.put("city", partJob.city);
+        reqParams.put("county", partJob.area);
+        reqParams.put("address", partJob.address);
+        reqParams.put("pay", String.valueOf(partJob.salary));
+        reqParams.put("pay_type", String.valueOf(partJob.salaryUnit.ordinal()));
+        reqParams.put("pay_form", partJob.payType);
+        int apartSexInt = partJob.apartSex ? 1 : 0;
+        reqParams.put("apart_sex", String.valueOf(apartSexInt));
+        if (partJob.apartSex) {
+            reqParams.put("male_count", String.valueOf(partJob.maleNum));
+            reqParams.put("female_count", String.valueOf(partJob.femaleNum));
+        } else {
+            reqParams.put("head_count", String.valueOf(partJob.headSum));
+        }
+        reqParams.put("require_info", partJob.workRequire);
+        int isShowTelInt = partJob.isShowTel ? 1 : 0;
+        reqParams.put("show_telephone", String.valueOf(isShowTelInt));
+        if (partJob.isHasMoreRequire()) {
+            if (partJob.height != null) {
+                reqParams.put("require_height", String.valueOf(partJob.height));
+            }
+            if (partJob.isHasMeasurements()) {
+                reqParams.put("require_bust", String.valueOf(partJob.bust));
+                reqParams.put("require_beltline", String.valueOf(partJob.beltline));
+                reqParams.put("require_hipline", String.valueOf(partJob.hipline));
+            }
+            if (partJob.healthProve != null) {
+                int healthProveInt = partJob.healthProve ? 1 : 0;
+                reqParams.put("require_health_rec", String.valueOf(healthProveInt));
+            }
+            if (CheckUtils.isEmpty(partJob.language)) {
+                reqParams.put("require_language", partJob.language);
+            }
+        }
+
+//        String url = Url.COMPANY_publish + "?token=" + MainTabActivity.token;
+        String url = Url.COMPANY_MyJianzhi_modifyCommit;
+
+        request(url, reqParams, requestQueue, callback);
+    }
+
+    public void shelve(int jobId, RequestQueue requestQueue, final DefaultCallback callback) {
+        HashMap<String, String> reqParams = new HashMap<>();
+        reqParams.put("company_id", String.valueOf(ApplicationUtils.getLoginId()));
+        reqParams.put("activity_id", String.valueOf(jobId));
+
+        String url = Url.COMPANY_MyJianzhi_cancelActivity;
+
+        request(url, reqParams, requestQueue, callback);
     }
 }

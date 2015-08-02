@@ -7,6 +7,7 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 
+import com.android.volley.VolleyError;
 import com.parttime.common.head.ActivityHead;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.PublishRequest;
@@ -61,8 +62,13 @@ public class JobManageActivity extends BaseActivity implements AdapterView.OnIte
         @Override
         public void failed(Object obj) {
             showWait(false);
-            ResponseBaseCommonError error = (ResponseBaseCommonError) obj;
-            showToast(error.msg);
+            if (obj instanceof ResponseBaseCommonError) {
+                ResponseBaseCommonError error = (ResponseBaseCommonError) obj;
+                showToast(error.msg);
+            } else if (obj instanceof VolleyError) {
+                VolleyError error = (VolleyError) obj;
+                showToast(error.getMessage());
+            }
         }
     };
 

@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.parttime.common.activity.ChooseListActivity;
 import com.parttime.common.head.ActivityHead;
 import com.parttime.net.DefaultCallback;
@@ -464,7 +465,6 @@ public class WriteJobActivity extends BaseActivity implements
         new PublishRequest().publish(partJob, queue, new DefaultCallback() {
             @Override
             public void success(Object obj) {
-                super.success(obj);
                 showWait(false);
                 showToast(R.string.publish_job_success);
                 IntentManager.goToMainTabActivity(WriteJobActivity.this);
@@ -472,10 +472,14 @@ public class WriteJobActivity extends BaseActivity implements
 
             @Override
             public void failed(Object obj) {
-                super.failed(obj);
                 showWait(false);
-                ResponseBaseCommonError error = (ResponseBaseCommonError) obj;
-                showToast(getString(R.string.publish_job_fail) + "：" + error.msg);
+                if (obj instanceof  ResponseBaseCommonError) {
+                    ResponseBaseCommonError error = (ResponseBaseCommonError) obj;
+                    showToast(getString(R.string.publish_job_fail) + "：" + error.msg);
+                } else if (obj instanceof VolleyError) {
+                    VolleyError error = (VolleyError) obj;
+                    showToast(error.getMessage());
+                }
             }
         });
     }

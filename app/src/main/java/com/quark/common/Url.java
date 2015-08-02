@@ -181,10 +181,16 @@ public class Url {
 			+ "/Activity/publishActivityDetail";
 	// 管理 –刷新前
 	public static final String COMPANY_MyJianzhi_previewReflesh = HOST
-			+ SUBJECT + "/Activity/preReflesh";
+			+ SUBJECT + "/Activity/preRefresh";
 	// 管理 –刷新
 	public static final String COMPANY_MyJianzhi_reflesh = HOST + SUBJECT
 			+ "/Activity/reflesh";
+    // 管理 -加急前
+    public static final String COMPANY_MyJianzhi_preUrgent = HOST
+            + SUBJECT +"/Activity/preUrgent";
+    // 加急
+    public static final String COMPANY_MyJianzhi_setUrgent = HOST
+            + SUBJECT +"/Activity/setUrgent";
 	// 管理 –取消兼职
 	public static final String COMPANY_MyJianzhi_cancelActivity = HOST
 			+ SUBJECT + "/Activity/cancelActivity";
