@@ -186,7 +186,7 @@ public class Url {
 			+ SUBJECT + "/Activity/preRefresh";
 	// 管理 –刷新
 	public static final String COMPANY_MyJianzhi_reflesh = HOST + SUBJECT
-			+ "/Activity/reflesh";
+			+ "/Activity/refresh";
     // 管理 -加急前
     public static final String COMPANY_MyJianzhi_preUrgent = HOST
             + SUBJECT +"/Activity/preUrgent";
