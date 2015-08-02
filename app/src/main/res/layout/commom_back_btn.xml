@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="45dip"
     android:layout_height="match_parent"
-    android:background="@color/top_background"
+    android:background="@drawable/shape_top_background"
     android:clickable="true"
     android:onClick="back" >
 
