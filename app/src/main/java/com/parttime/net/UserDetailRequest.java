@@ -59,4 +59,37 @@ public class UserDetailRequest extends BaseRequest {
             }
         });
     }
+
+    /**
+     * 评论人员
+     * @param userId String
+     * @param groupId String
+     * @param comment String 评价等级（优秀，良好，差评，放飞机）
+     * @param remark String 评语
+     * @param queue RequestQueue
+     * @param callback DefaultCallback
+     */
+    public void comment(String userId,String groupId,
+                        String comment, String remark,
+                        RequestQueue queue ,
+                        final DefaultCallback callback){
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        map.put("group_id", groupId);
+        map.put("comment", comment);
+        map.put("remark", remark);
+
+        request(Url.COMMENT_REQUIRE,map, queue, new Callback() {
+
+            @Override
+            public void success(Object obj) throws JSONException {
+                callback.success(obj);
+            }
+
+            @Override
+            public void failed(Object obj) {
+                callback.failed(obj);
+            }
+        });
+    }
 }

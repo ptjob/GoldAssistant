@@ -18,13 +18,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -46,15 +41,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMContact;
@@ -70,9 +62,9 @@ import com.easemob.util.DateUtils;
 import com.parttime.constants.ApplicationConstants;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
+import com.parttime.pojo.GroupDescription;
 import com.parttime.pojo.MessageSet;
 import com.qingmu.jianzhidaren.R;
-import com.quark.common.JsonUtil;
 import com.quark.common.Url;
 import com.quark.http.image.CircularImage;
 import com.quark.http.image.LoadImage;
@@ -107,6 +99,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 		this.tcontext = context;
 		sp = context.getSharedPreferences("jrdr.setting", context.MODE_PRIVATE);
 		realNames = new ArrayList<>();// 真实名字
+
 	}
 
 	@Override
@@ -119,6 +112,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 		if (holder == null) {
 			holder = new ViewHolder();
 			holder.name = (TextView) convertView.findViewById(R.id.name);
+			holder.avatarTag = (TextView) convertView.findViewById(R.id.avatar_tag);
 			holder.unreadLabel = (TextView) convertView
 					.findViewById(R.id.unread_msg_number);
 			holder.message = (TextView) convertView.findViewById(R.id.message);
@@ -181,11 +175,23 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
             }
         }
 
+        holder.avatarTag.setVisibility(View.GONE);
+
         if (isGroup) {
             // 群聊消息，显示群聊头像
             holder.avatar.setImageResource(R.drawable.group_icon);
             holder.name.setText(contact.getNick() != null ? contact.getNick()
                     : username);
+            Map<String,GroupDescription> cache = ConstantForSaveList.groupDescriptionMapCache;
+            if(cache != null && cache.get(username) != null){
+                GroupDescription groupDescription = cache.get(username);
+                int type = groupDescription.type;
+                if(type == GroupDescription.ACTIVITY_GROUP){
+                    holder.avatarTag.setText(R.string.activity_group);
+                    holder.avatarTag.setBackgroundResource(R.color.c_FF5C56);
+                    holder.avatarTag.setVisibility(View.VISIBLE);
+                }
+            }
             if(isMsgBlocked){
                 holder.quit.setVisibility(View.VISIBLE);
             }else{
@@ -400,6 +406,8 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 		TextView time;
 		/** 用户头像 */
 		CircularImage avatar;
+        /**每个条目的类型*/
+        TextView avatarTag;
 		/** 最后一条消息的发送状态 */
 		View msgState;
 		/** 整个list中每一行总布局 */

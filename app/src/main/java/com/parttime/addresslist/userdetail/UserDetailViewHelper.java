@@ -116,6 +116,12 @@ public class UserDetailViewHelper implements View.OnClickListener {
             friendContentContainer = new FriendContentContainer(userDetailFragment,userDetailPagerAdapter);
             friendContentContainer.initView(friendContainer);
         }else if(initContent == InitContent.INIT_APPRAISE){//初始化评价
+
+            educationContainer.setVisibility(View.GONE);
+            heightContainer.setVisibility(View.GONE);
+            otherContainer.setVisibility(View.GONE);
+            threeDimensionalContainer.setVisibility(View.GONE);
+
             evaluationContainer.setVisibility(View.VISIBLE);
             appraiseContentContainer = new AppraiseContentContainer(userDetailFragment,userDetailPagerAdapter);
             appraiseContentContainer.initView(evaluationContainer);

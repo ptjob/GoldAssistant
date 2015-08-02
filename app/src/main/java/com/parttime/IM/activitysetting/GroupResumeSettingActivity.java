@@ -45,6 +45,7 @@ import com.parttime.utils.IntentManager;
 import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.widget.RankView;
 import com.parttimejob.swipe.SwipeListView;
+import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.HuanxinUser;
@@ -70,7 +71,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
     private SwipeListView listView ;
     private Dialog more;
 
-    private SettingAdapter adapter = new SettingAdapter();;
+    private SettingAdapter adapter = new SettingAdapter();
 
     protected RequestQueue queue = VolleySington.getInstance().getRequestQueue();
     private SharePreferenceUtil sp;
@@ -78,6 +79,8 @@ public class GroupResumeSettingActivity extends BaseActivity implements
     private ArrayList<GroupSettingRequest.UserVO> data = new ArrayList<>();
     private String groupId;
     private EMGroup group;
+    private GroupSettingRequest.AppliantResult appliantResult;
+    private int isEnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,11 +116,23 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             List<String> count = group.getMembers();
             headView.setCenterTxt2(getString(R.string.group_member_number, count != null ? count.size() : 1));
         }
-        GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
+        appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
         if(appliantResult != null){
-            tip.setText(getString(R.string.admitted_pending_tip,appliantResult.approvedCount,appliantResult.unApprovedCount));
-            data.addAll(appliantResult.userList);
-            adapter.notifyDataSetChanged();
+            isEnd = appliantResult.isEnd;
+            if(BuildConfig.DEBUG){
+                isEnd = GroupSettingRequest.AppliantResult.YES_END;
+            }
+            if(isEnd == GroupSettingRequest.AppliantResult.NO_END) {
+                tip.setText(getString(R.string.admitted_pending_tip, appliantResult.approvedCount, appliantResult.unApprovedCount));
+                data.clear();
+                data.addAll(appliantResult.userList);
+                adapter.notifyDataSetChanged();
+            }else if(isEnd == GroupSettingRequest.AppliantResult.YES_END){ //活动结束
+                tip.setText(getString(R.string.admitted_pending_finished_tip, appliantResult.approvedCount, appliantResult.unApprovedCount));
+                data.clear();
+                data.addAll(appliantResult.userList);
+                adapter.notifyDataSetChanged();
+            }
         }
         getGroupApliantResult(groupId);
         // 保证每次进详情看到的都是最新的group
@@ -128,7 +143,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
      * 更新已录取，和待处理的数量
      */
     public void updateTip(){
-        GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
+        appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
         if(appliantResult != null) {
             tip.setText(getString(R.string.admitted_pending_tip, appliantResult.approvedCount, appliantResult.unApprovedCount));
         }
@@ -355,11 +370,15 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             ViewHolder holder;
             if(convertView == null){
                 holder = new ViewHolder();
-                if(getItem(position).apply == GroupSettingRequest.UserVO.APPLY_OK) {
-                    view = getLayoutInflater().inflate(R.layout.activity_group_setting_item_swip2, parent, false);
+                if(isEnd == GroupSettingRequest.AppliantResult.NO_END) {
+                    if (getItem(position).apply == GroupSettingRequest.UserVO.APPLY_OK) {
+                        view = getLayoutInflater().inflate(R.layout.activity_group_setting_item_swip2, parent, false);
+                    } else {
+                        view = getLayoutInflater().inflate(R.layout.activity_group_setting_item_swip, parent, false);
+                        holder.reject = (Button) view.findViewById(R.id.reject);
+                    }
                 }else{
-                    view = getLayoutInflater().inflate(R.layout.activity_group_setting_item_swip, parent, false);
-                    holder.reject = (Button)view.findViewById(R.id.reject);
+                    view = getLayoutInflater().inflate(R.layout.activity_group_setting_item_swip2, parent, false);
                 }
 
                 holder.head = (ImageView) view.findViewById(R.id.head);
@@ -406,18 +425,34 @@ public class GroupResumeSettingActivity extends BaseActivity implements
             holder.name.setText(userVO.name);
 
             holder.resumeButton.setVisibility(View.VISIBLE);
-            //待处理
-            int apply = userVO.apply;
-            if(apply == GroupSettingRequest.UserVO.APPLY_OK){
-                holder.resumeStatus.setText(R.string.already_resume);
-                holder.resumeStatus.setSelected(true);
-                holder.resumeButton.setText(R.string.cancel_resume);
-                holder.resumeButton.setSelected(true);
-            }else if(apply == GroupSettingRequest.UserVO.APPLY_UNLOOK || apply == GroupSettingRequest.UserVO.APPLY_LOOKED){
-                holder.resumeStatus.setText(R.string.unresume);
-                holder.resumeStatus.setSelected(false);
-                holder.resumeButton.setText(R.string.resume);
-                holder.resumeButton.setSelected(false);
+            if(isEnd == GroupSettingRequest.AppliantResult.NO_END) {
+                //待处理
+                int apply = userVO.apply;
+                if (apply == GroupSettingRequest.UserVO.APPLY_OK) {
+                    holder.resumeStatus.setText(R.string.already_resume);
+                    holder.resumeStatus.setSelected(true);
+                    holder.resumeButton.setText(R.string.cancel_resume);
+                    holder.resumeButton.setSelected(true);
+                } else if (apply == GroupSettingRequest.UserVO.APPLY_UNLOOK || apply == GroupSettingRequest.UserVO.APPLY_LOOKED) {
+                    holder.resumeStatus.setText(R.string.unresume);
+                    holder.resumeStatus.setSelected(false);
+                    holder.resumeButton.setText(R.string.resume);
+                    holder.resumeButton.setSelected(false);
+                }
+            }else{
+                int isCommented = userVO.isCommented;
+                if (isCommented == GroupSettingRequest.UserVO.ISCOMMENT_NO) {
+                    holder.resumeStatus.setText(R.string.uncomment);
+                    holder.resumeStatus.setSelected(false);
+                    holder.resumeButton.setText(R.string.go_comment);
+                    holder.resumeButton.setSelected(false);
+                    holder.resumeButton.setEnabled(true);
+                }else if (isCommented == GroupSettingRequest.UserVO.ISCOMMENT_OK){
+                    holder.resumeStatus.setText(R.string.commented);
+                    holder.resumeStatus.setSelected(true);
+                    holder.resumeButton.setText(R.string.commented);
+                    holder.resumeButton.setEnabled(false);
+                }
             }
             holder.resumeButton.setTag(userVO);
             holder.head.setTag(userVO);
@@ -477,39 +512,63 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                 public void onClick(View v) {
                     if(v instanceof Button) {
                         final GroupSettingRequest.UserVO userVO = (GroupSettingRequest.UserVO)v.getTag();
-                        int apply = userVO.apply;
-                        if (apply == GroupSettingRequest.UserVO.APPLY_OK) {
-                            //取消录取  已录用的人员，点击取消录用，弹窗提示“确认取消录用改用，取消后该用户将被移除聊天群组”——取消，确认
-                            new GroupSettingUtils().showAlertDialog( GroupResumeSettingActivity.this,
-                                    null ,
-                                    getString(R.string.cacel_resume_or_not_and_remove_from_group),
-                                    Action.UNRESUME, userVO ,
-                                    R.string.ok, R.string.cancel,
-                                    String.valueOf(userVO.userId), groupId, queue,
-                                    new DefaultCallback(){
-                                        @Override
-                                        public void success(Object obj) {
-                                            data.remove(userVO);
-                                            updateTip();
-                                            adapter.notifyDataSetChanged();
+                        if(isEnd == GroupSettingRequest.AppliantResult.NO_END) {
+                            int apply = userVO.apply;
+                            if (apply == GroupSettingRequest.UserVO.APPLY_OK) {
+                                //取消录取  已录用的人员，点击取消录用，弹窗提示“确认取消录用改用，取消后该用户将被移除聊天群组”——取消，确认
+                                new GroupSettingUtils().showAlertDialog( GroupResumeSettingActivity.this,
+                                        null ,
+                                        getString(R.string.cacel_resume_or_not_and_remove_from_group),
+                                        Action.UNRESUME, userVO ,
+                                        R.string.ok, R.string.cancel,
+                                        String.valueOf(userVO.userId), groupId, queue,
+                                        new DefaultCallback(){
+                                            @Override
+                                            public void success(Object obj) {
+                                                data.remove(userVO);
+                                                updateTip();
+                                                adapter.notifyDataSetChanged();
+                                            }
+                                        });
+                            } else if (apply == GroupSettingRequest.UserVO.APPLY_UNLOOK || apply == GroupSettingRequest.UserVO.APPLY_LOOKED) {
+                                //录取   确认后可取消录用该用户，信息中心会提醒用户‘已被商家取消录用’。同时该用户也将被移除聊天群组
+                                new GroupSettingUtils().showAlertDialog( GroupResumeSettingActivity.this,
+                                        null ,
+                                        getString(R.string.cacel_resume_or_not),
+                                        Action.RESUME, userVO,
+                                        R.string.yes , R.string.no,
+                                        String.valueOf(userVO.userId), groupId, queue,
+                                        new DefaultCallback(){
+                                            @Override
+                                            public void success(Object obj) {
+                                                userVO.apply = GroupSettingRequest.UserVO.APPLY_OK;
+                                                updateTip();
+                                                notifyDataSetChanged();
+                                            }
+                                        });
+                            }
+                        }else{
+                            int isCommented = userVO.isCommented;
+                            if (isCommented == GroupSettingRequest.UserVO.ISCOMMENT_NO) {
+                                ArrayList<String> userIds = null;
+                                if(data != null && data.size() > 0){
+                                    userIds = new ArrayList<>();
+                                    for (GroupSettingRequest.UserVO vo : data){
+                                        if(vo == null){
+                                            continue;
                                         }
-                                    });
-                        } else if (apply == GroupSettingRequest.UserVO.APPLY_UNLOOK || apply == GroupSettingRequest.UserVO.APPLY_LOOKED) {
-                            //录取   确认后可取消录用该用户，信息中心会提醒用户‘已被商家取消录用’。同时该用户也将被移除聊天群组
-                            new GroupSettingUtils().showAlertDialog( GroupResumeSettingActivity.this,
-                                    null ,
-                                    getString(R.string.cacel_resume_or_not),
-                                    Action.RESUME, userVO,
-                                    R.string.yes , R.string.no,
-                                    String.valueOf(userVO.userId), groupId, queue,
-                                    new DefaultCallback(){
-                                        @Override
-                                        public void success(Object obj) {
-                                            userVO.apply = GroupSettingRequest.UserVO.APPLY_OK;
-                                            updateTip();
-                                            notifyDataSetChanged();
-                                        }
-                                    });
+                                        userIds.add(String.valueOf(vo.userId));
+                                    }
+                                }
+                                if(userIds != null && userIds.size() > 0) {
+                                    IntentManager.toUserDetailFromActivityGroup(GroupResumeSettingActivity.this,
+                                            isEnd,
+                                            groupId,
+                                            userVO,
+                                            userIds,
+                                            group.getOwner());
+                                }
+                            }
                         }
                     }
                 }
@@ -531,11 +590,14 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                         }
                     }
 
-                    IntentManager.toUserDetailFromActivityGroup(GroupResumeSettingActivity.this,
-                            groupId,
-                            userVO,
-                            userIds,
-                            group.getOwner());
+                    if(userIds != null && userIds.size() > 0) {
+                        IntentManager.toUserDetailFromActivityGroup(GroupResumeSettingActivity.this,
+                                isEnd,
+                                groupId,
+                                userVO,
+                                userIds,
+                                group.getOwner());
+                    }
                 }
             });
 

@@ -60,6 +60,7 @@ public class UserDetailVO {
             //recently_login_time: 2015-07-30 16:03:28, datetime COMMENT '最近登录时间'
     public String comment;//: , 评价：优秀，中评，差评，放飞机 就对应现在的  4-1星
     //status: 2 int(11) COMMENT '0:删除(即为黑户),2-正常使用,3-放飞机,'
+    public String remark;
 
 
     public GroupSettingRequest.UserVO toUserVO(){

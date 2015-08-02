@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.pojo.BaseUser;
+import com.parttime.pojo.GroupDescription;
 import com.quark.model.GuangchangModle;
 import com.quark.model.HuanxinUser;
 
@@ -39,4 +40,6 @@ public class ConstantForSaveList {
     public static Map<String,GroupSettingRequest.AppliantResult> groupAppliantCache = new HashMap<>();
     //缓存群组的成员UseId和picture的映射，进入禁言管理的头像加载；1. 从活动群群设置进入，2.从普通群管理进入
     public static Map<String, BaseUser> userIdUserCache = new HashMap<>();
+    //缓存群组的类型
+    public static Map<String, GroupDescription> groupDescriptionMapCache = new HashMap<>();
 }

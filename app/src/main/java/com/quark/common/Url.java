@@ -319,6 +319,9 @@ public class Url {
 	// 用户详细信息 3.0
 	public static final String USER_DETAIL_INFO = HOST + SUBJECT
 			+ "/Activity/applicantInfo";
+	// 评价用户 3.0
+	public static final String COMMENT_REQUIRE = HOST + SUBJECT
+			+ "/Activity/commentRequire";
 	// 检查是否放飞机
 	public static final String USER_user_feiji = HOST + SUBJECT
 			+ "/UserCenter/is_run_over";

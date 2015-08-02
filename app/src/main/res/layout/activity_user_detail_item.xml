@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context="com.parttime.addresslist.userdetail.UserDetailActivity"
-                android:background="@android:color/white">
+                android:background="@color/user_detail_background">
 
     <ScrollView android:id="@+id/scroll"
         android:layout_width="match_parent"
