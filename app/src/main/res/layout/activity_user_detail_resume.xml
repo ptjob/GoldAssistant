@@ -8,7 +8,8 @@
     <RelativeLayout android:id="@+id/appraise_container"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
         >
         <TextView
             android:id="@+id/appraise_key"
@@ -44,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/appraise_container"
+        android:background="@android:color/white"
         android:orientation="vertical">
         <LinearLayout
             android:id="@+id/appraise_value_container"
@@ -61,26 +63,34 @@
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/summary_key"
-        android:layout_width="wrap_content"
-        style="@style/detail_item_key"
-        android:layout_height="40dp"
-        android:layout_below="@+id/appraise_value_main_container"
-        android:text="@string/summary"/>
-    <TextView
-        android:id="@+id/summary_value"
-        android:layout_width="wrap_content"
-        style="@style/detail_item_value"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/appraise_value_main_container"
-        android:layout_toRightOf="@+id/summary_key"
-        android:layout_toEndOf="@+id/summary_key"
-        android:text=""/>
-    <ImageView
-        android:id="@+id/summary_key_line"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/summary_key"
-        android:background="@drawable/line_item_dividing"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/appraise_value_main_container"
+        android:background="@android:color/white">
+        <TextView
+            android:id="@+id/summary_key"
+            android:layout_width="wrap_content"
+            style="@style/detail_item_key"
+            android:layout_height="40dp"
+            android:background="@android:color/white"
+            android:text="@string/summary"/>
+        <TextView
+            android:id="@+id/summary_value"
+            android:layout_width="wrap_content"
+            style="@style/detail_item_value"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/summary_key"
+            android:layout_toEndOf="@+id/summary_key"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:text=""/>
+        <ImageView
+            android:id="@+id/summary_key_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/summary_key"
+            android:background="@drawable/line_item_dividing"/>
+    </RelativeLayout>
 </RelativeLayout>
