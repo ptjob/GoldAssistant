@@ -54,8 +54,7 @@ public class ConstantForSaveListHelper {
                                 continue;
                             }
                             cache.put(groupId, groupDescription);
-                        }catch (Exception e){
-                            e.printStackTrace();
+                        }catch (Exception ignore){
                         }
                     }
                 }

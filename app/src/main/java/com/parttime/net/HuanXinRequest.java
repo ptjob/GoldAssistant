@@ -57,9 +57,7 @@ public class HuanXinRequest extends BaseRequest{
                         }
                         usersNick.add(us);
                     }
-                    if (usersNick.size() > 0) {
-                        ConstantForSaveList.usersNick = usersNick;// 保存缓存
-                    }
+
                     callback.success(usersNick);
                 } catch (JSONException e) {
                     callback.failed(e);

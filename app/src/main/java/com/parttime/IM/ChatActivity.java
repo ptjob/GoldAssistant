@@ -399,7 +399,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         chatType = getIntent().getIntExtra("chatType", CHATTYPE_SINGLE);
         if (chatType == CHATTYPE_SINGLE) { // 单聊
             toChatUsername = getIntent().getStringExtra("userId");
-            chatBottomBarHelper = new ChatBottomBarHelper(this);
+            //chatBottomBarHelper = new ChatBottomBarHelper(this);
             if (toChatUsername != null && !"".equals(toChatUsername)) {
                 if (ApplicationConstants.JZDR.equals(toChatUsername)) {
                     sp.saveSharedPreferences(ApplicationConstants.JZDR + "realname", "兼职达人团队");
