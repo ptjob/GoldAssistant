@@ -144,6 +144,7 @@ public  class ResumeContentContainer implements View.OnClickListener{
                         });
                 break;}
             case R.id.expend_checked:
+                //网络加载数据，动态加载
                 appraiseValueContainer.setVisibility(View.VISIBLE);
                 break;
         }

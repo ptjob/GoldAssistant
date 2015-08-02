@@ -125,11 +125,13 @@
     <string name="group_member_number">(%1$s)</string>
     <string name="reputation_value">信誉值</string>
     <string name="admitted_pending_tip">已录取%1$d人/待处理%2$d人</string>
+    <string name="admitted_pending_finished_tip">已评价%1$d人/待评价%2$d人</string>
     <string name="already_resume">已录取</string>
     <string name="unresume">待处理</string>
     <string name="commented">已评价</string>
     <string name="uncomment">未评价</string>
     <string name="resume">录取</string>
+    <string name="go_comment">去评价</string>
     <string name="cancel_resume">取消录取</string>
     <string name="group_setting_batch">批量管理</string>
     <string name="no_money">未交诚意金/</string>
@@ -189,6 +191,12 @@
     <string name="to_msg">发起会话</string>
     <string name="delete_friend">删除好友</string>
     <string name="summary">简介</string>
+    <string name="comment_excellent">优秀</string>
+    <string name="comment_good">良好</string>
+    <string name="comment_bad">差评</string>
+    <string name="comment_fly">放飞机</string>
+    <string name="comment_remark_hint">啊哦，您对该用户做出了放飞机评价请说明一下理由</string>
+    <string name="comment_fly_tips">您给放飞机评价，请输入至少10个字理由</string>
 
     <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
     <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>

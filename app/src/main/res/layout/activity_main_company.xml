@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv2_img"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="1.5dp"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:text="@string/message"
@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv3_img"
                     android:gravity="center"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="1.5dp"
                     android:text="@string/hiring"
                     android:textColor="@color/menu_huise" />
 
@@ -152,7 +152,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv4_img"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="1.5dp"
                     android:gravity="center"
                     android:text="@string/mine"
                     android:textColor="@color/menu_huise" />

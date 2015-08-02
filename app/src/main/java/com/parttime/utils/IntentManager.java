@@ -27,6 +27,7 @@ public class IntentManager {
      * 活动群跳转到用户详情界面
      */
     public static void toUserDetailFromActivityGroup(GroupResumeSettingActivity activity,
+                                                     int isEnd,
                                                      String groupId,
                                                      GroupSettingRequest.UserVO userVO,
                                                      ArrayList<String> userIds,
@@ -35,9 +36,9 @@ public class IntentManager {
         intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID , groupId);
         if(userVO != null) {
             intent.putExtra(ActivityExtraAndKeys.UserDetail.SELECTED_USER_ID, String.valueOf(userVO.userId));
-            if(userVO.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_NO) {
+            if(isEnd == GroupSettingRequest.AppliantResult.NO_END) {
                 intent.putExtra(ActivityExtraAndKeys.UserDetail.FROM_AND_STATUS, UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_NOT_FINISH);
-            }else if(userVO.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_OK) {
+            }else{
                 intent.putExtra(ActivityExtraAndKeys.UserDetail.FROM_AND_STATUS, UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_IS_FINISH);
             }
         }

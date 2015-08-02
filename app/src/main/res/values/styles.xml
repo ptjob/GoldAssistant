@@ -644,6 +644,11 @@
 
     </style>
 
+    <style name="Checkbox_redstar" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_redstar</item>
+
+    </style>
+
     <!-- 蓝色按钮 -->
     <style name="FormBlueButton">
         <item name="android:layout_width">@dimen/form_button_width</item>

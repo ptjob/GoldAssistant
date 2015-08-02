@@ -47,6 +47,7 @@ public class GroupSettingRequest extends BaseRequest {
                     AppliantResult appliantResult = new AppliantResult();
                     appliantResult.approvedCount = js.getInt("approved_count");
                     appliantResult.unApprovedCount = js.getInt("unapproved_count");
+                    appliantResult.isEnd = js.getInt("isEnd");
                     ArrayList<UserVO> userVOs = new ArrayList<>();
                     JSONArray jss = js.getJSONArray("userList");
                     for (int i = 0; i < jss.length(); i++) {
@@ -88,9 +89,15 @@ public class GroupSettingRequest extends BaseRequest {
     }
 
     public static class AppliantResult{ //报名列表
+
+        public static int NO_END = 0;
+        public static int YES_END = 1;
+
+
         public List<UserVO> userList;
         public int approvedCount; //已确认人数
         public int unApprovedCount; //未确认人数
+        public int isEnd; //：活动是否结束（0-否，1-是）
     }
 
     public static class UserVO extends BaseUser{

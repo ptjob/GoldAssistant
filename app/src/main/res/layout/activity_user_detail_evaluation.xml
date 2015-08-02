@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.parttime.addresslist.userdetail.UserDetailActivity"
     android:orientation="vertical"
-    android:visibility="gone">
+    android:visibility="visible">
 
 
     <TextView
@@ -13,7 +13,7 @@
         android:text="@string/user_performance"
         android:gravity="center"
         android:textSize="13sp"
-        android:background="#F2F2F2"
+        android:background="@color/user_detail_background"
         android:id="@+id/user_performance" />
 
     <LinearLayout
@@ -25,50 +25,64 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:gravity="center_horizontal">
-            <ImageView
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            android:gravity="center_horizontal"
+            android:background="@android:color/white">
+            <CheckBox
                 android:id="@+id/star1"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/star_off"
+                style="@style/Checkbox_redstar"
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
                 />
-            <ImageView
+            <CheckBox
                 android:id="@+id/star2"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/star_off"
+                style="@style/Checkbox_redstar"
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
                 />
-            <ImageView
+            <CheckBox
                 android:id="@+id/star3"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/star_off"
+                style="@style/Checkbox_redstar"
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
                 />
-            <ImageView
+            <CheckBox
                 android:id="@+id/star4"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/star_off"
+                style="@style/Checkbox_redstar"
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
                 />
         </LinearLayout>
         <TextView
+            android:id="@+id/star_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="17dp"
-            android:layout_marginTop="9dp"
             android:layout_marginBottom="12dp"
+            android:background="@android:color/white"
             android:gravity="center"
             android:text="优秀"/>
     </LinearLayout>
+
+
+    <TextView android:id="@+id/appraise_remark"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black"
+        android:text="ss"/>
+
 
     <LinearLayout
         android:id="@+id/appraise_detail_container"
@@ -76,23 +90,26 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="32dp"
             android:text="@string/appraise_detail"
             android:gravity="center"
             android:textSize="13sp"
-            android:background="#F2F2F2"
+            android:background="@color/user_detail_background"
             android:id="@+id/textView2"
             android:layout_gravity="center_horizontal" />
 
-        <FrameLayout
+        <FrameLayout android:id="@+id/edit_container"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="100dp"
+            android:background="@android:color/white">
             <EditText
                 android:id="@+id/appraise_content"
                 android:layout_width="match_parent"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
                 android:layout_height="100dp"
-                android:layout_gravity="center_horizontal" />
+                android:text=""/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -103,6 +120,7 @@
                 android:textColor="#beb5b8"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
                 android:layout_gravity="right|bottom" />
 
         </FrameLayout>
