@@ -328,6 +328,9 @@ public class Url {
 	// 评价用户 3.0
 	public static final String COMMENT_REQUIRE = HOST + SUBJECT
 			+ "/Activity/commentRequire";
+	// 评价用户获取分页接口 3.0
+	public static final String COMMENT_DETAIL_PAGER = HOST + SUBJECT
+			+ "/UserCenter/comment";
 	// 检查是否放飞机
 	public static final String USER_user_feiji = HOST + SUBJECT
 			+ "/UserCenter/is_run_over";
