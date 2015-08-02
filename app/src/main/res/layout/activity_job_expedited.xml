@@ -10,13 +10,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="你遇到了哪种情况？"
         android:layout_marginTop="9dp"
+        android:text="@string/job_expedited_label_reason"
         android:textColor="@color/c_979797"
         android:textSize="13sp" />
 
     <Button
+        android:id="@+id/btn_move_up"
+        style="@style/CommonButton.Red"
+        android:layout_marginTop="9dp"
+        android:onClick="moveUp"
+        android:text="@string/job_expedited_reason_1" />
+
+    <Button
+        android:id="@+id/btn_expansion"
         style="@style/CommonButton.Orange"
-        />
+        android:layout_marginTop="9dp"
+        android:onClick="expansion"
+        android:text="@string/job_expedited_reason_2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:gravity="center_horizontal"
+        android:text="@string/job_expedited_tip"
+        android:textColor="@color/c_979797"
+        android:textSize="13sp" />
 
 </LinearLayout>

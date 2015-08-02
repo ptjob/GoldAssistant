@@ -359,19 +359,21 @@ public class JobDetailActivity extends BaseActivity {
                 try {
                     JSONObject jss = (JSONObject) obj;
                     int status = jss.getInt("status");
-                    String money = jss.getString("money");
-                    String msg = jss.getString("alert_msg");
-                    String titile = jss.getString("alert_title");
-                    String other = jss.getString("alert_other");
-                    String cancle = jss.getString("alert_cancle");
+                    String msg = jss.getString("msg");
+                    String titile = jss.getString("title");
+                    String other = jss.getString("confirm");
+                    String cancle = jss.getString("cancel");
+
                     if (status == 1) {
                         // 状态1是当前可以免费刷新一次
                         refreshNow();
                     } else if (status == 2) {
+                        String money = jss.getString("money");
                         // 状态2是当前免费刷新次数用完,余额不足
                         showFeeRefreshAlertDialog(msg, titile, other,
                                 cancle, money, String.valueOf(status));
                     } else if (status == 3) {
+                        String money = jss.getString("money");
                         // 状态3表示当前免费刷新次数用完,有可用余额
                         showFeeRefreshAlertDialog(msg, titile, other,
                                 cancle, money, String.valueOf(status));
@@ -405,19 +407,21 @@ public class JobDetailActivity extends BaseActivity {
                 try {
                     JSONObject jss = (JSONObject) obj;
                     int status = jss.getInt("status");
-                    String money = jss.getString("money");
-                    String msg = jss.getString("alert_msg");
-                    String titile = jss.getString("alert_title");
-                    String other = jss.getString("alert_other");
-                    String cancle = jss.getString("alert_cancle");
+
+                    String msg = jss.getString("msg");
+                    String titile = jss.getString("title");
+                    String other = jss.getString("confirm");
+                    String cancle = jss.getString("cancel");
                     if (status == 1) {
                         // 状态1是当前可以免费加急一次
                         expeditedNow();
                     } else if (status == 2) {
+                        String money = jss.getString("money");
                         // 状态2是当前免费加急次数用完,余额不足
                         showFeeExpeditedAlertDialog(msg, titile, other,
                                 cancle, money, String.valueOf(status));
                     } else if (status == 3) {
+                        String money = jss.getString("money");
                         // 状态3表示当前免费加急次数用完,有可用余额
                         showFeeExpeditedAlertDialog(msg, titile, other,
                                 cancle, money, String.valueOf(status));

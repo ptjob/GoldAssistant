@@ -170,7 +170,7 @@ public class Activity01 extends Activity {
         try {
             dbHelper.createDataBase();
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.rawQuery("select * from city ", null);
+            Cursor cursor = db.rawQuery("select * from area ", null);
             City city;
             while (cursor.moveToNext()) {
                 city = new City(cursor.getString(1), cursor.getString(2));
@@ -199,7 +199,7 @@ public class Activity01 extends Activity {
         try {
             dbHelper.createDataBase();
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.rawQuery("select * from city", null);
+            Cursor cursor = db.rawQuery("select * from area", null);
             City city;
             while (cursor.moveToNext()) {
                 city = new City(cursor.getString(1), cursor.getString(2));

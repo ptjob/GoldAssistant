@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_common_head" />
+
+    <TextView
+        style="@style/FormLabel"
+        android:text="@string/job_expansion_label_num" />
+
+    <ImageView style="@style/PublicLineH_1" />
+
+    <EditText android:id="@+id/edittxt_expansion_num" style="@style/FormInput" />
+
+    <ImageView style="@style/PublicLineH_1" />
+
+    <Button
+        android:id="@+id/btn_expansion"
+        style="@style/CommonButton.Red"
+        android:layout_marginTop="9dp"
+        android:onClick="expansion"
+        android:text="@string/job_expansion_begin" />
+
+</LinearLayout>

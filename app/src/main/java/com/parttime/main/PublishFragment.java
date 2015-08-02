@@ -22,7 +22,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.droid.carson.Activity01;
 import com.parttime.constants.SharedPreferenceConstants;
+import com.parttime.publish.JobBrokerCharts;
 import com.parttime.publish.JobManageActivity;
+import com.parttime.publish.JobPlazaActivity;
 import com.parttime.publish.JobTypeActivity;
 import com.parttime.utils.ApplicationUtils;
 import com.parttime.utils.SharePreferenceUtil;
@@ -110,6 +112,20 @@ public class PublishFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), JobManageActivity.class));
+            }
+        });
+
+        view.findViewById(R.id.btn_job_plaza).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), JobPlazaActivity.class));
+            }
+        });
+
+        view.findViewById(R.id.btn_broker_charts).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), JobBrokerCharts.class));
             }
         });
 

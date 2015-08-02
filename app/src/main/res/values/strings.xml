@@ -537,6 +537,14 @@
     <string name="job_manage_view_count_format">%1$d次浏览</string>
     <string name="job_manage_hand_count_format">报名%1$d人</string>
     <string name="job_manage_hire_count_format">已招%1$d人</string>
+    <string name="job_expedited_title">加急招人</string>
+    <string name="job_expedited_label_reason">你遇到了哪种情况？</string>
+    <string name="job_expedited_reason_1">人员变动，我要补招</string>
+    <string name="job_expedited_reason_2">人招少了，我要扩招</string>
+    <string name="job_expedited_tip">加急招人是兼职大人为XX情况提供的XX服务\n第一次不要钱后面每次XX元\n它的作用是XX</string>
+    <string name="job_expansion_begin">开始加急招人</string>
+    <string name="job_expansion_label_num">扩招人数</string>
+    <string name="job_expantion_title">扩招</string>
 
     <!-- 兼职广场 -->
 
@@ -550,5 +558,6 @@
     <string name="title_activity_public_count_list">PublicCountListActivity</string>
     <string name="title_activity_user_detail">UserDetailActivity</string>
     <string name="title_activity_image_show">ImageShowActivity</string>
+
 
 </resources>

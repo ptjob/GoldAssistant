@@ -1,6 +1,5 @@
 package com.parttime.publish;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -9,10 +8,10 @@ import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.BaseActivity;
 
 /**
- * 加急招人界面
+ * 扩招界面
  * Created by wyw on 2015/8/2.
  */
-public class JobExpeditedActivity extends BaseActivity {
+public class JobExpansionActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +22,7 @@ public class JobExpeditedActivity extends BaseActivity {
     private void initControls() {
         ActivityHead activityHead = new ActivityHead(this);
         activityHead.initHead(this);
-        activityHead.setCenterTxt1(getString(R.string.job_expedited_title));
+        activityHead.setCenterTxt1(getString(R.string.job_expantion_title));
     }
 
     @Override
@@ -31,11 +30,6 @@ public class JobExpeditedActivity extends BaseActivity {
         super.onBackPressed();
     }
 
-    public void moveUp(View view) {
-    }
-
     public void expansion(View view) {
-        Intent intent = new Intent(this, JobExpeditedActivity.class);
-        startActivity(intent);
     }
 }

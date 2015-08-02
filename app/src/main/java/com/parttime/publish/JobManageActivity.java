@@ -78,6 +78,12 @@ public class JobManageActivity extends BaseActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_job_manage);
         initControls();
         bindListener();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         bindData();
     }
 
