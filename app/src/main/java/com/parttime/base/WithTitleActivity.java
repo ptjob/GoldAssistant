@@ -127,6 +127,7 @@ public abstract class WithTitleActivity extends BaseActivity {
 
     protected ImageButton mkIb(int resId){
         ImageButton ib = new ImageButton(this);
+        ib.setBackgroundColor(0x00000000);
         ib.setImageResource(resId);
         return ib;
     }

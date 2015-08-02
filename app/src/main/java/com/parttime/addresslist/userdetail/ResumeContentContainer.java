@@ -16,10 +16,17 @@ import com.parttime.IM.activitysetting.GroupResumeSettingActivity;
 import com.parttime.IM.activitysetting.GroupSettingUtils;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
+import com.parttime.net.UserDetailRequest;
+import com.parttime.pojo.CommentPage;
+import com.parttime.pojo.CommentVO;
 import com.parttime.pojo.UserDetailVO;
+import com.parttime.widget.CommentView;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.ui.widget.CustomDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 简历容器
@@ -38,7 +45,8 @@ public  class ResumeContentContainer implements View.OnClickListener{
     public TextView cancelResume,//取消录取
             summaryValue, //简介
             reject,
-            pass;
+            pass,
+            loadingMore;
 
     UserDetailActivity activity;
 
@@ -47,6 +55,8 @@ public  class ResumeContentContainer implements View.OnClickListener{
     UserDetailPagerAdapter userDetailPagerAdapter;
 
     UserDetailVO userDetailVO;
+    //分页对象
+    Pager pager;
 
     public ResumeContentContainer(UserDetailPagerAdapter.UserDetailFragment userDetailFragment,
                                   UserDetailPagerAdapter userDetailPagerAdapter) {
@@ -70,10 +80,12 @@ public  class ResumeContentContainer implements View.OnClickListener{
         cancelResume = (TextView)view.findViewById(R.id.cancel_resume);
         reject = (TextView)view.findViewById(R.id.reject);
         pass = (TextView)view.findViewById(R.id.pass);
+        loadingMore = (TextView)view.findViewById(R.id.loading_more);
 
         appraiseContainer.setVisibility(View.VISIBLE);
         appraiseValueContainer.setVisibility(View.GONE);
         resumeBottomContainer.setVisibility(View.VISIBLE);
+        loadingMore.setVisibility(View.GONE);
 
         callContainer.setOnClickListener(this);
         sendMsgContainer.setOnClickListener(this);
@@ -81,6 +93,7 @@ public  class ResumeContentContainer implements View.OnClickListener{
         reject.setOnClickListener(this);
         pass.setOnClickListener(this);
         checkBox.setOnClickListener(this);
+        loadingMore.setOnClickListener(this);
 
     }
 
@@ -143,11 +156,89 @@ public  class ResumeContentContainer implements View.OnClickListener{
                             }
                         });
                 break;}
+            case R.id.loading_more:
+                loadData();
+                break;
             case R.id.expend_checked:
                 //网络加载数据，动态加载
                 appraiseValueContainer.setVisibility(View.VISIBLE);
+                loadingMore.setVisibility(View.VISIBLE);
+                loadData();
                 break;
         }
+    }
+
+    private void loadData() {
+        if(pager == null) {
+            pager = new Pager();
+        }
+
+        activity.showWait(true);
+        new UserDetailRequest().commentPage(userDetailFragment.userId,
+                pager.currentPage ++ , pager.pageCount,
+                activity.queue,
+                new DefaultCallback(){
+                    @Override
+                    public void success(Object obj) {
+                        if(obj != null && obj instanceof CommentPage){
+                            CommentPage commentPage = (CommentPage)obj;
+                            List<CommentPage.DetailItem> list = commentPage.list;
+                            if(list != null){
+                                ArrayList<CommentVO> commentVOs = new ArrayList<>();
+                                for (CommentPage.DetailItem detailItem : list){
+                                    if(detailItem == null){
+                                        continue;
+                                    }
+                                    CommentVO commentVO = new CommentVO();
+                                    commentVO.comment = detailItem.comment;
+                                    commentVO.groupName = detailItem.title;
+                                    commentVO.remark = detailItem.remark;
+                                    commentVOs.add(commentVO);
+                                }
+                                addCommentView(commentVOs);
+                                if(commentPage.totalPage == commentPage.pageNumber){
+                                    loadingMore.setVisibility(View.GONE);
+                                }else{
+                                    loadingMore.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        }
+                        activity.showWait(false);
+                    }
+
+                    @Override
+                    public void failed(Object obj) {
+                        Toast.makeText(activity,activity.getString(R.string.listLoadingError),Toast.LENGTH_SHORT ).show();
+                        activity.showWait(false);
+                    }
+                });
+
+
+    }
+
+    private void addCommentView(List<CommentVO> commentVoList){
+        if(commentVoList == null){
+            return ;
+        }
+        for(CommentVO commentVO : commentVoList){
+            if(commentVO == null){
+                continue;
+            }
+            addCommentView(commentVO);
+        }
+
+    }
+
+    private void addCommentView(CommentVO commonVO) {
+        String comment = commonVO.comment;
+        String groupName = commonVO.groupName;
+        String remark = commonVO.remark;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        CommentView commentView = new CommentView(activity);
+        commentView.bindData(activity.getString(R.string.comment_excellent),
+                "活动" + groupName, "remark " + remark);
+        appraiseValueContainer.addView(commentView,params);
     }
 
     public void reflesh(UserDetailVO vo) {
@@ -202,6 +293,11 @@ public  class ResumeContentContainer implements View.OnClickListener{
 
     private static enum Action{
         MSG, CALL
+    }
+
+    private class Pager{
+        int currentPage = 1;
+        int pageCount = 5 ;
     }
 
 }

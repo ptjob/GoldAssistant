@@ -128,6 +128,7 @@ public class AppraiseContentContainer implements CompoundButton.OnCheckedChangeL
                 appraiseRemark.setVisibility(View.VISIBLE);
             }
             submit.setEnabled(false);
+            appraiseDetailContainer.setVisibility(View.GONE);
         }
     }
 
@@ -230,6 +231,16 @@ public class AppraiseContentContainer implements CompoundButton.OnCheckedChangeL
                         new ConstantForSaveListHelper().updateGroupAppliantCacheIsComment(
                                 activity.groupId,
                                 userDetailFragment.userId);
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                submit.setEnabled(false);
+                                appraiseRemark.setText(remark);
+                                appraiseRemark.setVisibility(View.VISIBLE);
+                                appraiseDetailContainer.setVisibility(View.GONE);
+                            }
+                        });
+
                         activity.showWait(false);
                     }
 

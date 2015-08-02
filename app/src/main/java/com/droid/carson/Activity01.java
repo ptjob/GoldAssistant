@@ -1,6 +1,7 @@
 package com.droid.carson;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -39,9 +40,12 @@ import android.widget.Toast;
 
 import com.droid.carson.Activity02.LocateIn;
 import com.droid.carson.MyLetterListView.OnTouchingLetterChangedListener;
+import com.parttime.base.WithTitleActivity;
 import com.qingmu.jianzhidaren.R;
+import com.quark.jianzhidaren.BaseActivity;
 
-public class Activity01 extends Activity {
+public class Activity01 extends WithTitleActivity implements OnItemClickListener{
+    public static final String EXTRA_TITLE = "extra_title";
     public static final String EXTRA_CITYLIST_CITY = "citylist_city";
     public static final String EXTRA_CITY = "city";
     private BaseAdapter adapter;
@@ -52,31 +56,64 @@ public class Activity01 extends Activity {
     private String[] sections;// 存放存在的汉语拼音首字母
     private Handler handler;
     private OverlayThread overlayThread; // 显示首字母对话框
-    private ArrayList<City> allCity_lists; // 所有城市列表
+    protected ArrayList<City> allCity_lists; // 所有城市列表
     private ArrayList<City> city_lists;// 城市列表
     ListAdapter.TopViewHolder topViewHolder;
     private String lngCityName = "定位失败";
-    private ImageButton backImb;// 返回
+//    private ImageButton backImb;// 返回
     private ClearEditText clearEdt;
     WindowManager windowManager;
-    private RelativeLayout topLayout;
+
+
+
+    @Override
+    protected ViewGroup getLeftWrapper() {
+        return null;
+    }
+
+    @Override
+    protected ViewGroup getRightWrapper() {
+        return null;
+    }
+
+    @Override
+    protected TextView getCenter() {
+        return null;
+    }
+
+    //    private RelativeLayout topLayout;
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main_main);
-        topLayout = (RelativeLayout) findViewById(R.id.title);
-        topLayout.setBackgroundColor(getResources().getColor(
-                R.color.guanli_common_color));
+        super.onCreate(savedInstanceState);
+
+
+//        topLayout = (RelativeLayout) findViewById(R.id.title);
+//        topLayout.setBackgroundColor(getResources().getColor(
+//                R.color.guanli_common_color));
+        Intent intent = getIntent();
+        if(intent != null){
+            String title = intent.getStringExtra(EXTRA_TITLE);
+            if(title != null){
+                center(title);
+                left(TextView.class, R.string.back);
+            }else {
+                left(ImageButton.class, R.drawable.back);
+            }
+        }else {
+            left(ImageButton.class, R.drawable.back);
+        }
+
         lngCityName = getIntent().getExtras()
                 .getString(EXTRA_CITYLIST_CITY, "定位失败");
-        backImb = (ImageButton) findViewById(R.id.backImb);
-        backImb.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                finish();
-            }
-        });
+//        backImb = (ImageButton) findViewById(R.id.backImb);
+//        backImb.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View arg0) {
+//                finish();
+//            }
+//        });
         clearEdt = (ClearEditText) findViewById(R.id.filter_edit);
         clearEdt.addTextChangedListener(new TextWatcher() {
 
@@ -106,24 +143,7 @@ public class Activity01 extends Activity {
         alphaIndexer = new HashMap<String, Integer>();
         handler = new Handler();
         overlayThread = new OverlayThread();
-        personList.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                String currentCity = allCity_lists.get(arg2).getName();
-                if (!"".equals(currentCity)) {
-                    // 这里要利用adapter.getItem(position)来获取当前position所对应的对象
-                    Toast.makeText(getApplication(),
-                            "成功切换到城市:" + allCity_lists.get(arg2).getName(),
-                            Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent();
-                    intent.putExtra(EXTRA_CITY, allCity_lists.get(arg2).getName());
-                    Activity01.this.setResult(RESULT_OK, intent);
-                    Activity01.this.finish();
-                }
-
-            }
-        });
+        personList.setOnItemClickListener(this);
         personList.setAdapter(adapter);
         initOverlay();
         hotCityInit();
@@ -236,6 +256,22 @@ public class Activity01 extends Activity {
     private void setAdapter(List<City> list) {
         adapter = new ListAdapter(this, list);
         personList.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String currentCity = allCity_lists.get(position).getName();
+        if (!"".equals(currentCity)) {
+            // 这里要利用adapter.getItem(position)来获取当前position所对应的对象
+            Toast.makeText(getApplication(),
+                    "成功切换到城市:" + allCity_lists.get(position).getName(),
+                    Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent();
+            intent.putExtra(EXTRA_CITY, allCity_lists.get(position).getName());
+            Activity01.this.setResult(RESULT_OK, intent);
+            Activity01.this.finish();
+        }
+
     }
 
     public class ListAdapter extends BaseAdapter {
@@ -510,4 +546,7 @@ public class Activity01 extends Activity {
 
     }
 
+    public static interface DiyAction extends Serializable {
+        void clicked(int index, String city, Serializable extra, BaseActivity activity);
+    }
 }

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="45dip"
     android:layout_height="match_parent"
-    android:background="@drawable/common_tab_bg"
+    android:background="@color/top_background"
     android:clickable="true"
     android:onClick="back" >
 
@@ -13,7 +13,8 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="11dp"
         android:scaleType="centerInside"
-        android:src="@drawable/back" />
+        android:src="@drawable/back"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/txt_head_left"
@@ -21,7 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="11dp"
+        android:textColor="@android:color/white"
         android:scaleType="centerInside"
-        android:visibility="gone"/>
+        android:text="@string/back"
+        android:visibility="visible"/>
 
 </LinearLayout>

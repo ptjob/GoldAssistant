@@ -126,7 +126,7 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
             final UserDetailViewHelper helper = new UserDetailViewHelper(this, userDetailPagerAdapter);
             UserDetailViewHelper.InitContent initContent = null;
             if (BuildConfig.DEBUG) { //for test
-                userDetailPagerAdapter.fromAndStatus = UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_IS_FINISH;
+                userDetailPagerAdapter.fromAndStatus = UserDetailActivity.FromAndStatus.FROM_ACTIVITY_GROUP_AND_NOT_FINISH;
             }
             if (UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_FRIEND == userDetailPagerAdapter.fromAndStatus) {
                 initContent = UserDetailViewHelper.InitContent.INIT_FRIEND;
