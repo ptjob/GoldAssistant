@@ -17,6 +17,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.base.IntentManager;
 import com.parttime.base.WithTitleActivity;
+import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.login.FindPJLoginActivity;
 import com.parttime.main.MainTabActivity;
 import com.parttime.widget.FormButton;
@@ -67,6 +68,19 @@ public class SettingActivity extends WithTitleActivity{
         ViewUtils.inject(this);
         center(R.string.setting);
         left(TextView.class, R.string.back);
+        getCacheSize();
+    }
+
+    private void getCacheSize(){
+//        new Thread(){
+//
+//            @Override
+//            public void run() {
+//                super.run();
+                long cacheSize = ContactImageLoader.getCacheSize();
+                fiClearCache.setValue(String.format("%.2fMB", cacheSize / (double) 1024 / 1024));
+//            }
+//        }.start();
     }
 
 
@@ -152,7 +166,23 @@ public class SettingActivity extends WithTitleActivity{
 
     @OnClick(R.id.fi_clear_cache)
     private void clearCache(View v){
+        new Thread(){
 
+            @Override
+            public void run() {
+                super.run();
+                ContactImageLoader.clearCache();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(!isFinishing()){
+                            getCacheSize();
+                            showToast(R.string.clear_success);
+                        }
+                    }
+                });
+            }
+        }.start();
     }
 
     @OnClick(R.id.fi_about)

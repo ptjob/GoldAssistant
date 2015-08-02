@@ -23,6 +23,7 @@ import com.parttime.IM.activitysetting.GroupSettingActivity;
 import com.parttime.base.WithTitleActivity;
 import com.parttime.constants.ActivityExtraAndKeys;
 import com.qingmu.jianzhidaren.R;
+import com.quark.volley.VolleySington;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,9 +39,9 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
     //0:没有获取成功 1:禁言 2:非禁言
     private int forbiddenValue = 0;
 
-    private ViewPager viewPager ;
+    public ViewPager viewPager ;
 
-    private UserDetailPagerAdapter adapter ;
+    public UserDetailPagerAdapter adapter ;
 
     private LinkedHashSet<String> set;
 
@@ -50,7 +51,7 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_user_detail);
         super.onCreate(savedInstanceState);
-        queue = super.queue;
+        queue = VolleySington.getInstance().getRequestQueue();
         initView();
 
         bindData();
@@ -286,8 +287,7 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
     }
 
     public static enum FromAndStatus{
-        FROM_NORMAL_GROUP_AND_NOT_FRIEND, //从普通群组过来 不是好友
-        FROM_NORMAL_GROUP_AND_IS_FRIEND,  //从普通群组过来 是好友
+        FROM_NORMAL_GROUP_AND_FRIEND, //从普通群组过来 不是好友   //从普通群组过来 是好友
         FROM_ACTIVITY_GROUP_AND_NOT_FINISH, //从活动群过来 活动没有结束
         FROM_ACTIVITY_GROUP_AND_IS_FINISH, //从活动群过来 活动已结束
         FROM_ACTIVITY_GROUP_VIEW_RESUME,  //查看简历

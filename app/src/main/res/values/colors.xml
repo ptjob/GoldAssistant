@@ -16,6 +16,9 @@
     <color name="c_A6CF4F">#A6CF4F</color> <!--  -->
     <color name="c_4BA4DE">#4BA4DE</color> <!--  -->
     <color name="c_979797">#979797</color> <!--  -->
+    <color name="c_FF5C56">#FF5C56</color>
+    <color name="c_56a0cf">#56a0cf</color>
+    <color name="c_f98a05">#f98a05</color>
 
     <!-- 文本 -->
     <color name="black_0">#000000</color>
@@ -149,10 +152,16 @@
     <color name="result_view">#b0000000</color>
     <color name="possible_result_points">#66E001</color>
 
-
     <!--个人详情-->
+    <color name="uncomment">#ff5c60</color>
+    <color name="commented">#5ba0c9</color>
+    <color name="user_detail_background">#F2F2F2</color>
     <color name="detail_info_key_text_color">#999999</color>
     <color name="detail_info_value_text_color">#363636</color>
+    <color name="comment_detail_execllent">#ec2134</color>
+    <color name="comment_detail_good">#9dc169</color>
+    <color name="comment_detail_bad">#7da1B9</color>
+    <color name="comment_detail_fly">#a1a5a4</color>
     <!-- 环信 -->
     <!-- 改成橙色 -->
     <!-- <color name="common_top_bar_blue">#4ebcd3</color> -->
@@ -234,4 +243,13 @@
     <color name="common_gray">#c7c8cd</color>
 
     <color name="common_orange">@color/c_FE8800</color>
+    <color name="common_red">@color/c_FF5D56</color>
+    <color name="common_blue">@color/c_4BA4DE</color>
+    <color name="common_gray_1">@color/c_F5F5F5</color>
+    <color name="common_gray_2">@color/c_E2E2E2</color>
+    <color name="common_gray_3">@color/c_C7C8CD</color>
+    <color name="common_gray_4">@color/c_979797</color>
+    <color name="common_gray_5">@color/c_363636</color>
+
+    <color name="txt_color_black">@color/c_363636</color>
 </resources>

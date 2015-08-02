@@ -20,8 +20,10 @@ public class Url {
 	private static final String SUBJECT = "app/v2_0";
 	private static final String SUBJECT1_2 = "app/v1_2";
 	// 获取图片url
-	public static final String GETPIC = "http://jzdr-test.oss-cn-shenzhen.aliyuncs.com/";
-	//public static final String GETPIC = "http://jzdr-pic.oss-cn-shenzhen.aliyuncs.com/";
+	//public static final String GETPIC = "http://jzdr-test.oss-cn-shenzhen.aliyuncs.com/";
+    //public static final String GETPIC = "http://jzdr-pic.oss-cn-shenzhen.aliyuncs.com/";
+	public static final String GETPIC = "http://test.image.jobdiy.cn/";
+	//public static final String GETPIC = "http://image.jobdiy.cn/";
 	// 8 用户登录
 	public static final String USER_LOGIN = HOST + SUBJECT + "/UserCenter/in";
 	// 9 用户注册
@@ -319,10 +321,13 @@ public class Url {
 			+ "/Huanxin/userBriefInfo";
 	// 环信用户信息
 	public static final String HUANXIN_user_info = HOST + SUBJECT
-			+ "/Huanxin/user_info";
+			+ "/Huanxin/userInfo";
 	// 用户详细信息 3.0
 	public static final String USER_DETAIL_INFO = HOST + SUBJECT
 			+ "/Activity/applicantInfo";
+	// 评价用户 3.0
+	public static final String COMMENT_REQUIRE = HOST + SUBJECT
+			+ "/Activity/commentRequire";
 	// 检查是否放飞机
 	public static final String USER_user_feiji = HOST + SUBJECT
 			+ "/UserCenter/is_run_over";

@@ -19,6 +19,56 @@ public class HuanxinUser implements Serializable {
      */
     private int type ; //用户类型
 	private String namePinyin;  //名字转化为拼音 为了列表显示
+
+    public int creditworthiness; //信誉
+    public int sex ; //
+    public int earnest_money; //诚意金
+    public int certification; //认证状态
+    public int age;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getEarnest_money() {
+        return earnest_money;
+    }
+
+    public void setEarnest_money(int earnest_money) {
+        this.earnest_money = earnest_money;
+    }
+
+    public int getCertification() {
+        return certification;
+    }
+
+    public void setCertification(int certification) {
+        this.certification = certification;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getSex() {
+
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
+    public String city; //城市
+
 	
 	public String getNamePinyin() {
 		return namePinyin;
@@ -51,6 +101,14 @@ public class HuanxinUser implements Serializable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getCreditworthiness() {
+        return creditworthiness;
+    }
+
+    public void setCreditworthiness(int creditworthiness) {
+        this.creditworthiness = creditworthiness;
     }
 
     @Override

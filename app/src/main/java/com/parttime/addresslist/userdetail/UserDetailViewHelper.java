@@ -1,15 +1,12 @@
 package com.parttime.addresslist.userdetail;
 
-import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.parttime.addresslist.Utils;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.pojo.UserDetailVO;
 import com.parttime.utils.IntentManager;
@@ -109,10 +106,22 @@ public class UserDetailViewHelper implements View.OnClickListener {
             resumeContentContainer = new ResumeContentContainer(userDetailFragment,userDetailPagerAdapter);
             resumeContentContainer.initView(view);
         }else if(initContent == InitContent.INIT_FRIEND){//初始化好友
+
+            educationContainer.setVisibility(View.GONE);
+            heightContainer.setVisibility(View.GONE);
+            otherContainer.setVisibility(View.GONE);
+            threeDimensionalContainer.setVisibility(View.GONE);
+
             friendContainer.setVisibility(View.VISIBLE);
             friendContentContainer = new FriendContentContainer(userDetailFragment,userDetailPagerAdapter);
             friendContentContainer.initView(friendContainer);
         }else if(initContent == InitContent.INIT_APPRAISE){//初始化评价
+
+            educationContainer.setVisibility(View.GONE);
+            heightContainer.setVisibility(View.GONE);
+            otherContainer.setVisibility(View.GONE);
+            threeDimensionalContainer.setVisibility(View.GONE);
+
             evaluationContainer.setVisibility(View.VISIBLE);
             appraiseContentContainer = new AppraiseContentContainer(userDetailFragment,userDetailPagerAdapter);
             appraiseContentContainer.initView(evaluationContainer);
@@ -130,7 +139,6 @@ public class UserDetailViewHelper implements View.OnClickListener {
      * @param vo UserDetailVO
      */
     public void reflesh(UserDetailVO vo,InitContent initContent) {
-
         pictures = new ArrayList<>();
         String picture1 = vo.picture_1;
         if(!TextUtils.isEmpty(picture1)){
@@ -159,13 +167,20 @@ public class UserDetailViewHelper implements View.OnClickListener {
         }
         pictureNum.setText(ApplicationControl.getInstance().getString(R.string.picture_num,pictures.size()));
 
-
         nameTxt.setText(vo.name);
-        String birthdate = vo.birthdate;
-        long birthTime = TimeUtils.getTime(birthdate, TimeUtils.pattern1);
-        int age = (int)(System.currentTimeMillis() - birthTime) / (1000*60*60*24);
-        if(age > 0 ) {
-            ageTxt.setText(String.valueOf(age +  1));
+        if(initContent == InitContent.INIT_FRIEND){
+            if(vo.age > 0) {
+                ageTxt.setText(String.valueOf(vo.age));
+            }
+        }else {
+            String birthdate = vo.birthdate;
+            if (!TextUtils.isEmpty(birthdate)) {
+                long birthTime = TimeUtils.getTime(birthdate, TimeUtils.pattern1);
+                int age = (int) (System.currentTimeMillis() - birthTime) / (1000 * 60 * 60 * 24);
+                if (age > 0) {
+                    ageTxt.setText(String.valueOf(age + 1));
+                }
+            }
         }
         sexTxt.setText(vo.sex == 0 ? "女": (vo.sex == 1 ? "男":"未知"));
         educationTxt.setText(vo.education);

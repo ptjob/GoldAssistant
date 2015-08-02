@@ -55,6 +55,7 @@ import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
 import com.parttime.addresslist.PublicCountListActivity;
 import com.parttime.constants.ApplicationConstants;
+import com.parttime.constants.ConstantForSaveListHelper;
 import com.parttime.main.adapter.ChatAllHistoryAdapter;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
@@ -529,8 +530,8 @@ public class MessageAndAddressFragment extends Fragment {
                 messageSetMap.remove(name);
             }
             new MessageSetDao(ApplicationControl.getInstance()).delete(name, type);
-			messageAdapter.notifyDataSetChanged();
-			// 长按聊天记录item,删除聊天记录
+            messageAdapterReflash();
+            // 长按聊天记录item,删除聊天记录
 			// 更新未读消息
 			if (MainTabActivity.isForeground) {
 				((MainTabActivity) getActivity()).updateUnreadMsg();
@@ -577,7 +578,7 @@ public class MessageAndAddressFragment extends Fragment {
             }
             //重新排序
             sortMessages(conversationList, messageSetMap);
-            messageAdapter.notifyDataSetChanged();
+            messageAdapterReflash();
         } else if(item.getItemId() == R.id.remove_from_top){
             EMConversation tobeDeleteCons = messageAdapter
                     .getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
@@ -592,10 +593,15 @@ public class MessageAndAddressFragment extends Fragment {
             message.sortConversationByLastChatTime(conversationList);
             //重新排序
             sortMessages(conversationList, messageSetMap);
-            messageAdapter.notifyDataSetChanged();
+            messageAdapterReflash();
         }
 		return super.onContextItemSelected(item);
 	}
+
+    private void messageAdapterReflash() {
+        ConstantForSaveListHelper.cacheGroupType();
+        messageAdapter.notifyDataSetChanged();
+    }
 
     /**
      * 刷新置顶设置
@@ -608,7 +614,7 @@ public class MessageAndAddressFragment extends Fragment {
                 messageSetMap.putAll(map);
                 //重新排序
                 sortMessages(conversationList, messageSetMap);
-                messageAdapter.notifyDataSetChanged();
+                messageAdapterReflash();
             } else if (messageSetMap.size() > map.size()) {
                 messageSetMap.clear();
                 messageSetMap.putAll(map);
@@ -616,7 +622,7 @@ public class MessageAndAddressFragment extends Fragment {
                 message.sortConversationByLastChatTime(conversationList);
                 //重新排序
                 sortMessages(conversationList, messageSetMap);
-                messageAdapter.notifyDataSetChanged();
+                messageAdapterReflash();
             }
         }
     }
@@ -631,7 +637,7 @@ public class MessageAndAddressFragment extends Fragment {
                 List<EMConversation> sd = loadConversationsWithRecentChat();
                 conversationList.addAll(sd);
                 sortMessages(conversationList,messageSetMap);
-                messageAdapter.notifyDataSetChanged();
+                messageAdapterReflash();
             }
         }
 
@@ -1089,9 +1095,11 @@ public class MessageAndAddressFragment extends Fragment {
                         // startActivity(new Intent(getActivity(),
                         // ChatActivity.class).putExtra("userId",
                         // contactAdapter.getItem(position).getUsername()));
-                        startActivity(new Intent(getActivity(),
-                                ChatActivity.class).putExtra("userId",
-                                usersNick.get(position).getUid()));
+                        if(position < usersNick.size()) {
+                            startActivity(new Intent(getActivity(),
+                                    ChatActivity.class).putExtra("userId",
+                                    usersNick.get(position).getUid()));
+                        }
                     }
                 } else {
                     ToastUtil.showShortToast("当前网络不可用，请检查网络连接");

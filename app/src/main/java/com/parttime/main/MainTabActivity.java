@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -598,7 +597,7 @@ public class MainTabActivity extends BaseActivity implements
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 		// 默认值为home页
-		int resId = intent.getIntExtra("resId", R.id.tv1);
+		int resId = intent.getIntExtra("resId", R.id.tv2);
 		if (resId == R.id.tv1) {
 			// login();
 		}

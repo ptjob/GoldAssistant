@@ -11,13 +11,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <ImageView
-                android:layout_width="160dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:src="@drawable/license"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:background="@color/common_blue">
+                <ImageView
+                    android:layout_width="68dp"
+                    android:layout_height="75dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/id_front"/>
+            </RelativeLayout>
+
 
             <TextView
                 style="@style/FormTitle"
@@ -151,23 +155,23 @@
                 </LinearLayout>
             </FrameLayout>-->
 
-            <Button
-                style="@style/CommonButton.Blue"
-                android:text="@string/submit_to_check"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="15dp"
-                android:text="@string/your_info_only_for_auth"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginBottom="15dp"
-                android:text="@string/promiss_to_protect_personal_info"/>
+            <!--<Button-->
+                <!--style="@style/CommonButton.Blue"-->
+                <!--android:text="@string/submit_to_check"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:layout_marginTop="20dp"/>-->
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:text="@string/your_info_only_for_auth"/>-->
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_marginBottom="15dp"-->
+                <!--android:text="@string/promiss_to_protect_personal_info"/>-->
 
         </LinearLayout>
     </ScrollView>

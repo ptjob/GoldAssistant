@@ -186,4 +186,14 @@ public class EditItem extends FrameLayout{
         etValue.addTextChangedListener(textWatcher);
     }
 
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        if(tvName != null){
+            tvName.setEnabled(enabled);
+        }
+        if(etValue != null){
+            etValue.setEnabled(enabled);
+        }
+    }
 }

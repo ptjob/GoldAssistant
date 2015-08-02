@@ -47,6 +47,7 @@ public class GroupSettingRequest extends BaseRequest {
                     AppliantResult appliantResult = new AppliantResult();
                     appliantResult.approvedCount = js.getInt("approved_count");
                     appliantResult.unApprovedCount = js.getInt("unapproved_count");
+                    appliantResult.isEnd = js.getInt("isEnd");
                     ArrayList<UserVO> userVOs = new ArrayList<>();
                     JSONArray jss = js.getJSONArray("userList");
                     for (int i = 0; i < jss.length(); i++) {
@@ -88,9 +89,15 @@ public class GroupSettingRequest extends BaseRequest {
     }
 
     public static class AppliantResult{ //报名列表
+
+        public static int NO_END = 0;
+        public static int YES_END = 1;
+
+
         public List<UserVO> userList;
         public int approvedCount; //已确认人数
         public int unApprovedCount; //未确认人数
+        public int isEnd; //：活动是否结束（0-否，1-是）
     }
 
     public static class UserVO extends BaseUser{
@@ -179,17 +186,37 @@ public class GroupSettingRequest extends BaseRequest {
      * @param queue RequestQueue
      * @param callback DefaultCallback
      */
-    public void cancelResume(List<Integer> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback){
+    public void cancelResume(List<Object> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback){
         StringBuilder stringBuilder = new StringBuilder();
         int size = userIds.size();
         for(int i= 0 ; i < size; i ++){
-            int userId = userIds.get(i);
+            Object userId = userIds.get(i);
             if(i < size - 1){
                 stringBuilder.append(userId).append(",");
             }else{
                 stringBuilder.append(userId);
             }
         }
+        cancelResume(groupId, queue, callback, stringBuilder);
+    }
+/*
+
+    public void cancelResume(List<String> userIds, String groupId,  RequestQueue queue , final DefaultCallback callback) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int size = userIds.size();
+        for (int i = 0; i < size; i++) {
+            String userId = userIds.get(i);
+            if (i < size - 1) {
+                stringBuilder.append(userId).append(",");
+            } else {
+                stringBuilder.append(userId);
+            }
+        }
+        cancelResume(groupId, queue, callback, stringBuilder);
+    }
+*/
+
+    private void cancelResume(String groupId, RequestQueue queue, final DefaultCallback callback, StringBuilder stringBuilder) {
         Map<String, String> map = new HashMap<>();
         map.put("user_id", stringBuilder.toString());
         map.put("group_id", groupId);

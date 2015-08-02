@@ -312,7 +312,8 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
                 holder.head = (ImageView) view.findViewById(R.id.head);
                 holder.name = (TextView) view.findViewById(R.id.name);
                 holder.resumeStatus = (TextView) view.findViewById(R.id.resume_status);
-                holder.moneyAccountStatus = (TextView) view.findViewById(R.id.money_account_status);
+                holder.moneyStatus = (TextView) view.findViewById(R.id.money_status);
+                holder.accountStatus = (TextView) view.findViewById(R.id.account_status);
                 holder.reputationValueStar = (LinearLayout) view.findViewById(R.id.reputation_value_star_container);
                 holder.checkBox = (CheckBox) view.findViewById(R.id.checkBox);
 
@@ -357,17 +358,21 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
             holder.checkBox.setVisibility(View.VISIBLE);
 
             //设置诚意金和认证
-            StringBuilder moneyAndCertification = new StringBuilder();
+//            StringBuilder moneyAndCertification = new StringBuilder();
             int moneyStatus = batchUserVO.earnestMoney;
             int accountStatus = batchUserVO.certification;
             if(moneyStatus == 0) {
-                moneyAndCertification.append(getString(R.string.no_money));
+//                moneyAndCertification.append(getString(R.string.no_money));
+                holder.moneyStatus.setText(getString(R.string.no_money));
+                holder.moneyStatus.setSelected(false);
             }else {
-                moneyAndCertification.append(getString(R.string.had_money));
+//                moneyAndCertification.append(getString(R.string.had_money));
+                holder.moneyStatus.setText(getString(R.string.had_money));
+                holder.moneyStatus.setSelected(true);
             }
-            moneyAndCertification.append("/");
+//            moneyAndCertification.append("/");
 
-            if(accountStatus == 0){
+            /*if(accountStatus == 0){
                 moneyAndCertification.append(getString(R.string.no_certification));
             }else if(accountStatus == 1){
                 moneyAndCertification.append(getString(R.string.submit_certification));
@@ -375,9 +380,16 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
                 moneyAndCertification.append(getString(R.string.had_certification));
             }else if(accountStatus == 3){
                 moneyAndCertification.append(getString(R.string.reject_certification));
+            }*/
+            if(accountStatus == 2){
+                holder.accountStatus.setText(getString(R.string.had_certification));
+                holder.accountStatus.setSelected(true);
+            }else {
+                holder.accountStatus.setText(getString(R.string.no_certification));
+                holder.accountStatus.setSelected(false);
             }
             //这里与管理界面不一样需要注意，设置诚意金认证
-            holder.resumeStatus.setText(moneyAndCertification.toString());
+//            holder.resumeStatus.setText(moneyAndCertification.toString());
 
             //设置信誉
             String creditworthiness = batchUserVO.creditworthiness;
@@ -433,7 +445,8 @@ public class ResumeBatchManagementActivity extends BaseActivity implements View.
         public ImageView head; //头像
         public TextView name, //名字
                 resumeStatus, //简历状态
-                moneyAccountStatus; // 诚意金/实名认证
+                moneyStatus, // 诚意金/实名认证
+                accountStatus;
         public LinearLayout reputationValueStar; //信誉值
         public CheckBox checkBox;
 

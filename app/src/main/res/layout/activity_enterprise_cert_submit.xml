@@ -87,7 +87,7 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/id_back"/>
                 <LinearLayout
-                    android:id="@+id/ll_id_back"
+                    android:id="@+id/ll_back_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -144,6 +144,7 @@
             </FrameLayout>
 
             <Button
+                android:id="@+id/btn_submit"
                 style="@style/CommonButton.Blue"
                 android:text="@string/submit_to_check"
                 android:layout_gravity="center_horizontal"

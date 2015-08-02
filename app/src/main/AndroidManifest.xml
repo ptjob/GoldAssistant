@@ -930,8 +930,9 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="com.parttime.mine.EnterpriseCertSubmitActivity"
+            android:name="com.parttime.mine.BeforeCertedActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
+            android:windowSoftInputMode="stateHidden"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
@@ -942,8 +943,9 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="com.parttime.mine.EnterpriseCertedActivity"
+            android:name="com.parttime.mine.AfterCertedActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
+            android:windowSoftInputMode="stateHidden"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />

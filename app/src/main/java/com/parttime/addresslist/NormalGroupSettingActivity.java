@@ -599,12 +599,12 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 
 		private int res;
 		public boolean isInDeleteMode;
-		private List<String> objects;
+		private ArrayList<String> objects;
 
 		public GridAdapter(Context context, int textViewResourceId,
 				List<String> objects) {
 			super(context, textViewResourceId, objects);
-			this.objects = objects;
+			this.objects = new ArrayList<>(objects);
 			res = textViewResourceId;
 			isInDeleteMode = false;
 		}
@@ -775,11 +775,13 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 										// 正常情况下点击user，可以进入用户详情
 										Intent intent = new Intent(NormalGroupSettingActivity.this,UserDetailActivity.class);
                                         intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID , groupId);
-                                        intent.putExtra(ActivityExtraAndKeys.USER_ID, username);
+                                        intent.putStringArrayListExtra(ActivityExtraAndKeys.USER_ID, objects);
+                                        intent.putExtra(ActivityExtraAndKeys.UserDetail.SELECTED_USER_ID,username );
                                         if(EMChatManager.getInstance().getCurrentUser()
                                                 .equals(group.getOwner())){
                                             intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPOWNER, true);
                                         }
+                                        intent.putExtra(ActivityExtraAndKeys.UserDetail.FROM_AND_STATUS, UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_FRIEND);
 										startActivity(intent);
 									}
 								}
@@ -904,7 +906,6 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 								exitBtn.setVisibility(View.VISIBLE);
 								deleteBtn.setVisibility(View.GONE);
                                 gag.setVisibility(View.GONE);
-
 							}
 
 						}

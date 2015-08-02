@@ -125,11 +125,13 @@
     <string name="group_member_number">(%1$s)</string>
     <string name="reputation_value">信誉值</string>
     <string name="admitted_pending_tip">已录取%1$d人/待处理%2$d人</string>
+    <string name="admitted_pending_finished_tip">已评价%1$d人/待评价%2$d人</string>
     <string name="already_resume">已录取</string>
     <string name="unresume">待处理</string>
     <string name="commented">已评价</string>
     <string name="uncomment">未评价</string>
     <string name="resume">录取</string>
+    <string name="go_comment">去评价</string>
     <string name="cancel_resume">取消录取</string>
     <string name="group_setting_batch">批量管理</string>
     <string name="no_money">未交诚意金/</string>
@@ -189,6 +191,12 @@
     <string name="to_msg">发起会话</string>
     <string name="delete_friend">删除好友</string>
     <string name="summary">简介</string>
+    <string name="comment_excellent">优秀</string>
+    <string name="comment_good">良好</string>
+    <string name="comment_bad">差评</string>
+    <string name="comment_fly">放飞机</string>
+    <string name="comment_remark_hint">啊哦，您对该用户做出了放飞机评价请说明一下理由</string>
+    <string name="comment_fly_tips">您给放飞机评价，请输入至少10个字理由</string>
 
     <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
     <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
@@ -357,6 +365,7 @@
     <string name="boss_id_card">负责人身份证号</string>
     <string name="click_to_upload">点击上传</string>
     <string name="submit_to_check">提交审核</string>
+    <string name="update_to_enterprise_cert">升级为企业认证</string>
     <string name="enterprise_register_id">企业注册号</string>
     <string name="front_of_id_card">身份证正面图</string>
     <string name="back_of_id_card">身份证背面图</string>
@@ -367,6 +376,7 @@
     <string name="please_upload_id_card">请上传图片</string>
     <string name="name_should_be_chinese">哎呀，名字应该是汉字哦</string>
     <string name="please_enter_id_in_format">哎呀，请输入正确的身份证号码</string>
+    <string name="waiting_for_checking">审核中</string>
 
     <!-- 我的钱包 -->
     <string name="account_balance">账户余额（元）</string>
@@ -393,6 +403,7 @@
     <!-- 设置 -->
     <string name="account_setting">账号设置</string>
     <string name="clear_cache">清除缓存</string>
+    <string name="clear_success">清理成功</string>
     <string name="give_a_praise">赏个好评</string>
     <string name="about">关于</string>
     <string name="modify_phone_number">修改手机号码</string>

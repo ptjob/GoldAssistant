@@ -109,6 +109,8 @@
         <attr name="rv_full_img" format="reference"/>
         <attr name="rv_total_score" format="integer"/>
         <attr name="rv_inner_margin" format="dimension"/>
+        <attr name="rv_item_width" format="dimension"/>
+        <attr name="rv_item_height" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="EditItem">

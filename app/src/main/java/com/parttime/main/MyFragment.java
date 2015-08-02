@@ -37,6 +37,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.carson.constant.ConstantForSaveList;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.parttime.base.IntentManager;
+import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.mine.EditMyIntroActivity;
 import com.parttime.mine.FreshManGuideActivity;
 import com.parttime.mine.MyFansActivity;
@@ -48,8 +50,9 @@ import com.parttime.mine.setting.SettingActivity;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
 import com.parttime.net.ErrorHandler;
+import com.parttime.pojo.CertVo;
 import com.parttime.type.AccountType;
-import com.parttime.type.CertType;
+import com.parttime.type.CertStatus;
 import com.parttime.widget.FormItem;
 import com.parttime.widget.RankView;
 import com.qingmu.jianzhidaren.R;
@@ -135,11 +138,13 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 
 	private void updateView(){
 		if(function != null){
+			String avatar = function.getAvatar();
+			ContactImageLoader.loadNativePhoto(null, avatar, ivHead, VolleySington.getInstance().getRequestQueue());
 			tvName.setText(function.getName());
 //			tvScore.setText(getString(R.string.x_scores, function.getPoint()));
 			rvRank.rank((int) function.getPoint());
 			String certString = getCertString();
-			tvCertState.setText(certString);
+//			tvCertState.setText(certString);
 			tvCertState.setText(getCertStringForIcon());
 			fiMyFans.setValue(getString(R.string.x_ge_in_chinese, function.getFollowers()));
 			fiMyBalance.setValue(getString(R.string.x_rmb, function.getMoney()));
@@ -150,8 +155,10 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	private String getCertString(){
 		if(function != null){
 			int company_status = function.getCompany_status();
-			if(company_status == CertType.CERT_PASSED){
-				int type = function.getType();
+			int type = function.getType();
+
+			if(company_status == CertStatus.CERT_PASSED){
+
 				if(type == AccountType.PERSONAL){
 					return getString(R.string.personal_certed);
 				}else if(type == AccountType.ENTERPRISE){
@@ -159,6 +166,8 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 				}else if(type == AccountType.AGENT){
 					return getString(R.string.agent_certed);
 				}
+			}else if(company_status == CertStatus.CERTING && type != AccountType.INIT){
+				return getString(R.string.waiting_for_checking);
 			}
 		}
 		return getString(R.string.not_certed);
@@ -168,7 +177,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	public String getCertStringForIcon(){
 		if(function != null){
 			int company_status = function.getCompany_status();
-			if(company_status == CertType.CERT_PASSED){
+			if(company_status == CertStatus.CERT_PASSED){
 				return getString(R.string.certed);
 			}
 		}
@@ -292,9 +301,13 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	 *
 	 */
 	private void loadHuncunFirst() {
+		Bitmap bitmap = ContactImageLoader.get(user_id);
+		if(bitmap != null){
+			ivHead.setImageBitmap(bitmap);
+		}
 //		TextView textView = (TextView) view.findViewById(R.id.name);
 //		textView.setText(sp.getString(company_id + "name", "未知"));
-		tvName.setText(sp.getString(company_id + "name", "未知"));
+//		tvName.setText(sp.getString(company_id + "name", "未知"));
 //		ImageView yan_img = (ImageView) view.findViewById(R.id.yan_img);
 //		if (sp.getInt(company_id + "status", 0) == 2) {
 //			yan_img.setImageResource(R.drawable.my_certified);
@@ -308,13 +321,13 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 //		cover_user_photo = (CircularImage) view
 //				.findViewById(R.id.cover_user_photo);
 
-		if (sp.getString("c" + company_id + "_photo", "") == null
-				|| sp.getString("c" + company_id + "_photo", "").equals("")) {
-			ivHead.setImageDrawable(getResources().getDrawable(
-					R.drawable.photo_male));
-		} else {
-			loadNativePhotoFirst();
-		}
+//		if (sp.getString("c" + company_id + "_photo", "") == null
+//				|| sp.getString("c" + company_id + "_photo", "").equals("")) {
+//			ivHead.setImageDrawable(getResources().getDrawable(
+//					R.drawable.photo_male));
+//		} else {
+//			loadNativePhotoFirst();
+//		}
 
 //		TextView renzheng = (TextView) view.findViewById(R.id.renzheng);
 //		if (sp.getInt(company_id + "status", 0) == 2) {
@@ -921,6 +934,16 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void realNameCert(){
+		if(function == null){
+			return;
+		}
+		if(function.getType() == AccountType.INIT){
+			CertVo vo = new CertVo();
+			vo.certStatus = CertStatus.NO_CERT;
+			vo.accountType = AccountType.INIT;
+			IntentManager.intentToRealNameSelectActivity((BaseActivity) getActivity(), vo);
+			return;
+		}
 		showWait(true);
 		Map<String, String> params = new HashMap<>();
 		params.put("company_id", user_id);
@@ -938,10 +961,28 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 						String identityFront = companyInfo.getString("identity_front");
 						String identityBack = companyInfo.getString("identity_verso");
 						int status = companyInfo.getInt("status");
-						if(status != 2){
-//							Intent intent = new Intent(getActivity(), )
-						}else {
+						String regId = null;
+						if(companyInfo.has("company_code")) {
+							regId = companyInfo.getString("company_code");
+						}
+						String regidPic = null;
+						if(companyInfo.has("company_picture")) {
+							regidPic = companyInfo.getString("company_picture");
+						}
+						CertVo certVo = new CertVo(type, status, name, identity, identityFront, identityBack, regId, regidPic);
+						if(status != CertStatus.CERT_PASSED){
+							IntentManager.intentToBeforeCertedActivity((BaseActivity) getActivity(), certVo);
 
+//							Intent intent = new Intent(getActivity(), )
+							/*if(type == AccountType.PERSONAL){
+
+							}else if(type == AccountType.ENTERPRISE){
+
+							}else if(type == AccountType.AGENT){
+
+							}*/
+						}else {
+							IntentManager.intentToAfterCertedActivity((BaseActivity) getActivity(), certVo);
 						}
 
 						    /*

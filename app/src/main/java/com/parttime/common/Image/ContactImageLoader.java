@@ -35,10 +35,17 @@ public class ContactImageLoader {
 
     private static final String TAG = "ContactImageLoader";
 
+    public static final String APP_PATH = Environment.getExternalStorageDirectory() + "/"
+            + "jzdr";
+
     public static final String Image_Path = Environment.getExternalStorageDirectory() + "/"
             + "jzdr/" + "image";
 
     public static Bitmap get(String id){
+        return get(id, null);
+    }
+
+    public static Bitmap get(String id, String imgName){
         boolean sdCardExist = Environment.getExternalStorageState()
                 .equals(android.os.Environment.MEDIA_MOUNTED); //判断sd卡是否存在
         if (! sdCardExist){
@@ -55,8 +62,13 @@ public class ContactImageLoader {
         SharePreferenceUtil sp = SharePreferenceUtil.getInstance(ApplicationControl.getInstance());
         // 当前聊天对象的头像更改,要先联网验证头像路径是否更改
 
-        File picture = new File(Image_Path,
-                sp.loadStringSharedPreference(id + "_photo", "c"));
+        File picture = null;
+        if(imgName != null){
+            picture = new File(Image_Path, imgName);
+        }else {
+            picture = new File(Image_Path,
+                    sp.loadStringSharedPreference(id + "_photo", "c"));
+        }
         if (! picture.isDirectory() && picture.exists()) {
             // 加载本地图片
             return  BitmapFactory.decodeFile(picture.getAbsolutePath());
@@ -74,14 +86,21 @@ public class ContactImageLoader {
     public static void loadNativePhoto(final String id, final String avatarUrl,
                                  final ImageView avatar, RequestQueue queue ) {
 
-        Bitmap bitmap = get(id);
+        loadNativePhoto(id, avatarUrl, avatar, R.drawable.default_avatar, queue);
+
+    }
+
+    public static void loadNativePhoto(final String id, final String avatarUrl,
+                                       final ImageView avatar, int defaultImgRes, RequestQueue queue ){
+        Bitmap bitmap = get(id, avatarUrl);
         if(bitmap == null){
-            avatar.setImageResource(R.drawable.default_avatar);
+            if(defaultImgRes > 0) {
+                avatar.setImageResource(defaultImgRes);
+            }
             loadpersonPic(queue, id, avatarUrl, avatar, 1);
         }else{
             avatar.setImageBitmap(LoadImage.toRoundBitmap(bitmap));
         }
-
     }
 
     /**
@@ -118,7 +137,7 @@ public class ContactImageLoader {
                             if (!mePhotoFold.exists()) {
                                 mePhotoFold.mkdirs();
                             }
-                            output = new FileOutputStream(Image_Path + url);
+                            output = new FileOutputStream(new File(Image_Path,  url));
                             arg0.compress(Bitmap.CompressFormat.JPEG, 100,
                                     output);
                             output.flush();
@@ -148,5 +167,43 @@ public class ContactImageLoader {
 
     }
 
+    public static long getCacheSize(){
+        if(!Environment.getExternalStorageState()
+                .equals(android.os.Environment.MEDIA_MOUNTED)) {
+            return 0;
+        }
+        File mePhotoFold = new File(Image_Path);
+        if(mePhotoFold.isDirectory() && mePhotoFold.exists()){
+            long total = 0;
+            File[] files = mePhotoFold.listFiles();
+            if(files != null){
+                for(File f : files){
+                    if(f.exists() && !f.isDirectory()){
+                        total += f.length();
+                    }
+                }
+            }
+            return total;
+        }
+        return 0;
+    }
+
+    public static void clearCache(){
+        if(!Environment.getExternalStorageState()
+                .equals(android.os.Environment.MEDIA_MOUNTED)) {
+            return ;
+        }
+        File mePhotoFold = new File(Image_Path);
+        if(mePhotoFold.isDirectory() && mePhotoFold.exists()){
+            File[] files = mePhotoFold.listFiles();
+            if(files != null){
+                for(File file : files){
+                    if(file.exists() && !file.isDirectory()){
+                        file.delete();
+                    }
+                }
+            }
+        }
+    }
 
 }

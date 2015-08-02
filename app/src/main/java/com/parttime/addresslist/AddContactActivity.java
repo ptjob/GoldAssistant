@@ -120,54 +120,7 @@ public class AddContactActivity extends BaseActivity {
 		}
 	}
 
-	/**
-	 * 添加contact
-	 * 
-	 * @param view
-	 */
-	// public void addContact(View view){
-	//
-	// if(ApplicationControl.getInstance().getUserName().equals(nameText.getText().toString())){
-	// startActivity(new Intent(this, AlertDialog.class).putExtra("msg",
-	// "不能添加自己"));
-	// return;
-	// }
-	//
-	// if(ApplicationControl.getInstance().getContactList().containsKey(nameText.getText().toString())){
-	// startActivity(new Intent(this, AlertDialog.class).putExtra("msg",
-	// "此用户已是你的好友"));
-	// return;
-	// }
-	//
-	// progressDialog = new ProgressDialog(this);
-	// progressDialog.setMessage("正在发送请求...");
-	// progressDialog.setCanceledOnTouchOutside(false);
-	// progressDialog.show();
-	//
-	// new Thread(new Runnable() {
-	// public void run() {
-	//
-	// try {
-	// //demo写死了个reason，实际应该让用户手动填入
-	// EMContactManager.getInstance().addContact(toAddUsername, "");
-	// AddContactActivity.this.runOnUiThread(new Runnable() {
-	// public void run() {
-	// progressDialog.dismiss();
-	// Toast.makeText(getApplicationContext(), "发送请求成功,等待对方验证", 1).show();
-	// }
-	// });
-	// } catch (final Exception e) {
-	// runOnUiThread(new Runnable() {
-	// public void run() {
-	// progressDialog.dismiss();
-	// Toast.makeText(getApplicationContext(), "请求添加好友失败:" + e.getMessage(),
-	// 1).show();
-	// }
-	// });
-	// }
-	// }
-	// }).start();
-	// }
+
 
 	public void back(View v) {
 		finish();

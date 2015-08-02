@@ -7,10 +7,8 @@
 
     <RelativeLayout
         android:id="@+id/avatar_container"
-        android:layout_width="62dp"
+        android:layout_width="66dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -19,12 +17,15 @@
         <FrameLayout
             android:layout_width="46dp"
             android:layout_height="46dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
             <com.quark.http.image.CircularImage
                 android:id="@+id/avatar"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
                 android:layout_centerVertical="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/default_avatar" />
@@ -32,9 +33,9 @@
                 android:id="@+id/avatar_tag"
                 android:layout_width="match_parent"
                 android:layout_height="12dp"
-                android:text=""
                 android:layout_gravity="center_horizontal|bottom"
                 android:gravity="center_horizontal"
+                android:textColor="@android:color/white"
                 android:textSize="9dp"
                 android:visibility="gone"/>
         </FrameLayout>
@@ -52,10 +53,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="3dp"
             android:minHeight="10dp"
             android:minWidth="10dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="2dp"
             android:background="@drawable/unread_count_bg"
             android:gravity="center"
             android:text=""
@@ -68,8 +69,6 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/avatar_container"
         android:layout_toEndOf="@id/avatar_container"
@@ -99,8 +98,6 @@
         android:layout_height="18dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
         android:layout_toRightOf="@id/avatar_container"
         android:src="@drawable/msg_state_fail_resend"
         android:visibility="gone" />
@@ -119,8 +116,6 @@
         android:textColor="#888888"
         android:textSize="14sp"
         android:text=""
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp" />
 
     <ImageView

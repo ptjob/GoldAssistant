@@ -46,8 +46,8 @@
             android:id="@+id/quanzi_shenqing_hongdian_imv"
             android:layout_width="11dip"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="-15dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="-8dp"
+            android:layout_marginTop="3dp"
             android:layout_toRightOf="@id/linearlayout"
             android:src="@drawable/unread_count_bg"
             android:visibility="gone" />

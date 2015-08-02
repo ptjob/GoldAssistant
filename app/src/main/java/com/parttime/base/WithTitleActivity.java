@@ -1,20 +1,14 @@
 package com.parttime.base;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.carson.constant.ConstantForSaveList;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.BaseActivity;
-import com.quark.ui.widget.CustomDialog;
 
 import java.lang.reflect.Constructor;
 

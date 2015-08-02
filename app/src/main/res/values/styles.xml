@@ -439,7 +439,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
-    
+
     <style name="EditItem_Common.Name">
         <item name="android:textColor">#c7c6ca</item>
         <item name="android:textSize">15sp</item>
@@ -468,6 +468,17 @@
 
     <style name="CommonButton.Orange">
         <item name="android:background">@drawable/selector_btn_orange</item>
+    </style>
+
+    <style name="ButtonInForm">
+        <item name="android:paddingLeft">13dp</item>
+        <item name="android:paddingRight">13dp</item>
+        <item name="android:textColor">@color/btn_txt_color</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ButtonInForm.BlueGray">
+        <item name="android:background">@drawable/selector_btn_bg_blue_gray</item>
     </style>
 
     <style name="FormTitle">
@@ -630,6 +641,11 @@
 
     <style name="Checkbox_arrow" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_arrow</item>
+
+    </style>
+
+    <style name="Checkbox_redstar" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_redstar</item>
 
     </style>
 
