@@ -14,6 +14,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -50,8 +51,12 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.main.MainTabActivity;
+import com.parttime.net.BaseRequest;
+import com.parttime.net.Callback;
+import com.parttime.net.ErrorHandler;
 import com.parttime.net.ResponseBaseCommonError;
 import com.parttime.type.AccountType;
+import com.parttime.utils.AndroidUtils;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
@@ -60,9 +65,11 @@ import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.jianzhidaren.BaseActivity;
 import com.quark.jianzhidaren.FeiJiPageActivity;
 import com.quark.jianzhidaren.ForgetPwdActivity;
+import com.quark.jianzhidaren.LaheiPageActivity;
 import com.quark.jianzhidaren.RegisterActivity;
 import com.quark.ui.widget.LineEditText;
 import com.quark.utils.Util;
+import com.quark.volley.VolleySington;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -211,7 +218,7 @@ public class FindPJLoginActivity extends BaseActivity {
 	}
 
 	private String token;
-	private int user_id;
+	private String user_id;
 	private String IM_PASSWORD;// 环信登陆密码
 	private String IM_USERID;// 环信登陆账户
 	private String IM_AVATAR;// 环信头像
@@ -232,18 +239,19 @@ public class FindPJLoginActivity extends BaseActivity {
                                 JSONObject jsonts = json
                                         .getJSONObject("loginResponse");
                                 token = jsonts.getString("token");
-                                user_id = jsonts.getInt("company_id");
+                                user_id = jsonts.getString("company_id");
                                 IM_PASSWORD = jsonts.getString("IM_PASSWORD");
                                 IM_USERID = jsonts.getString("IM_USERID");
                                 IM_AVATAR = jsonts.getString("IM_AVATAR");
                                 IM_NIKENAME = jsonts.getString("IM_NIKENAME");
 								int type = jsonts.getInt("type");
+
+
 								if(type == AccountType.AGENT){
 									showAnim = true;
 								}
 //								showAnim = true;
-								SharePreferenceUtil.getInstance(FindPJLoginActivity.this).saveSharedPreferences(SharedPreferenceConstants.USER_TYPE, type);
-								loginIM(IM_USERID, IM_PASSWORD);
+								checkForbidden(type);
 
 							} else {
                                 login.setClickable(true);
@@ -274,6 +282,43 @@ public class FindPJLoginActivity extends BaseActivity {
 		queue.add(request);
 		request.setRetryPolicy(new DefaultRetryPolicy(
 				ConstantForSaveList.DEFAULTRETRYTIME * 1000, 1, 1.0f));
+	}
+
+	private void checkForbidden(final int type){
+		Map<String, String> params = new HashMap<>();
+		params.put("company_id", user_id);
+		params.put("app_version", AndroidUtils.getVersionName(this));
+		params.put("phone_type", Build.MODEL);
+		params.put("os_version", Build.VERSION.SDK_INT + "");
+		new BaseRequest().request(Url.COMPANY_FORBIDDEN, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
+			@Override
+			public void success(Object obj) throws JSONException {
+				showWait(false);
+				JSONObject json = (JSONObject) obj;
+				int zt = json.getInt("zt");
+				if(zt == 2){
+					Intent intent = new Intent();
+					SharePreferenceUtil spu = SharePreferenceUtil.getInstance(FindPJLoginActivity.this);
+					spu.saveSharedPreferences("userId", "");
+					spu.saveSharedPreferences("token", "");
+					intent.setClass(FindPJLoginActivity.this,
+							LaheiPageActivity.class);
+					startActivity(intent);
+					finish();
+				}else {
+					SharePreferenceUtil.getInstance(FindPJLoginActivity.this).saveSharedPreferences(SharedPreferenceConstants.USER_TYPE, type);
+					loginIM(IM_USERID, IM_PASSWORD);
+				}
+
+
+			}
+
+			@Override
+			public void failed(Object obj) {
+				showWait(false);
+				new ErrorHandler(FindPJLoginActivity.this, obj).showToast();
+			}
+		});
 	}
 
 	public boolean check() {

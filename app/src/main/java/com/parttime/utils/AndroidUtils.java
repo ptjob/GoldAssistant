@@ -1,7 +1,10 @@
 package com.parttime.utils;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -24,5 +27,18 @@ public class AndroidUtils {
             point.y = display.getHeight();
         }
         return point;
+    }
+
+    public static String getVersionName(Context context) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), 0);
+            if(packageInfo != null) {
+                return packageInfo.versionName;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+        } catch (RuntimeException e) {
+        }
+        return null;
     }
 }
