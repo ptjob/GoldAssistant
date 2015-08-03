@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.parttime.addresslist.userdetail.UserDetailActivity"
     android:orientation="vertical"
-    android:visibility="visible">
+    android:visibility="gone">
 
 
     <TextView
