@@ -103,6 +103,12 @@ public class AddContactActivity extends BaseActivity implements TextWatcher {
 		nameText = (TextView) findViewById(R.id.name);
 //		searchBtn = (Button) findViewById(R.id.search);
 		btnSearch = (TextView) findViewById(R.id.tv_search);
+		btnSearch.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				searchContact(v);
+			}
+		});
 		avatar = (ImageView) findViewById(R.id.avatar);
 		inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 	}
