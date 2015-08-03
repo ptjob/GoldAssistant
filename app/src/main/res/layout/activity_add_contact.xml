@@ -34,8 +34,9 @@
             android:textColor="#fff"
             android:textSize="16sp" />-->
     </RelativeLayout>
+    <include layout="@layout/search_bar" android:id="@+id/search"/>
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="8dp">
@@ -78,7 +79,7 @@
             android:background="@color/edit_text_divider"
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@id/edit_note"/>
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 
 
