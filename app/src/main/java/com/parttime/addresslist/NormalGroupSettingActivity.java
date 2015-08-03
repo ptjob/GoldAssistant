@@ -14,6 +14,7 @@
 package com.parttime.addresslist;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -68,6 +69,7 @@ import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.BaseUser;
 import com.parttime.pojo.MessageSet;
+import com.parttime.utils.IntentManager;
 import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.widget.SetItem;
 import com.qingmu.jianzhidaren.R;
@@ -773,16 +775,7 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 												"您点击了自己", Toast.LENGTH_SHORT).show();
 									} else {
 										// 正常情况下点击user，可以进入用户详情
-										Intent intent = new Intent(NormalGroupSettingActivity.this,UserDetailActivity.class);
-                                        intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID , groupId);
-                                        intent.putStringArrayListExtra(ActivityExtraAndKeys.USER_ID, objects);
-                                        intent.putExtra(ActivityExtraAndKeys.UserDetail.SELECTED_USER_ID,username );
-                                        if(EMChatManager.getInstance().getCurrentUser()
-                                                .equals(group.getOwner())){
-                                            intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPOWNER, true);
-                                        }
-                                        intent.putExtra(ActivityExtraAndKeys.UserDetail.FROM_AND_STATUS, UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_FRIEND);
-										startActivity(intent);
+                                        IntentManager.intentToUseDetail(NormalGroupSettingActivity.this,username,groupId,objects,group.getOwner());
 									}
 								}
 
@@ -867,7 +860,8 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 			return convertView;
 		}
 
-		@Override
+
+        @Override
 		public int getCount() {
 			return super.getCount() + 2;
 		}

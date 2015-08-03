@@ -102,6 +102,8 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         headView.setTxtRight2Text(R.string.more);
         headView.progressBar.setVisibility(View.GONE);
         headView.txtRight2.setOnClickListener(this);
+        headView.imgRightContainer2.setOnClickListener(this);
+
 
         tip = (TextView) findViewById(R.id.tip);
         listView = (SwipeListView) findViewById(R.id.listView);
@@ -254,6 +256,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.img_right2:
+            case R.id.container_right2_image:
                 showMore();
                 break;
         }
@@ -452,13 +455,14 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                     holder.resumeButton.setText(R.string.resume);
                     holder.resumeButton.setSelected(false);
                 }
+                holder.resumeButton.setBackgroundResource(R.drawable.selector_btn_bg_blue_gray);
             }else{
                 int isCommented = userVO.isCommented;
                 if (isCommented == GroupSettingRequest.UserVO.ISCOMMENT_NO) {
                     holder.resumeStatus.setText(R.string.uncomment);
                     holder.resumeStatus.setSelected(false);
                     holder.resumeButton.setText(R.string.go_comment);
-                    holder.resumeButton.setSelected(false);
+
                     holder.resumeButton.setEnabled(true);
                 }else if (isCommented == GroupSettingRequest.UserVO.ISCOMMENT_OK){
                     holder.resumeStatus.setText(R.string.commented);
@@ -466,6 +470,8 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                     holder.resumeButton.setText(R.string.commented);
                     holder.resumeButton.setEnabled(false);
                 }
+                holder.resumeButton.setBackgroundResource(R.drawable.selector_btn_orange);
+
             }
             holder.resumeButton.setTag(userVO);
             holder.head.setTag(userVO);

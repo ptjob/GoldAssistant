@@ -26,7 +26,7 @@ public class IntentManager {
     /**
      * 活动群跳转到用户详情界面
      */
-    public static void toUserDetailFromActivityGroup(GroupResumeSettingActivity activity,
+    public static void toUserDetailFromActivityGroup(Activity activity,
                                                      int isEnd,
                                                      String groupId,
                                                      GroupSettingRequest.UserVO userVO,
@@ -52,6 +52,29 @@ public class IntentManager {
 
         activity.startActivity(intent);
     }
+
+    /**
+     * 普通群跳转到联系人详情
+     * @param activity Activity
+     * @param username String
+     * @param groupId String
+     * @param objects ArrayList<String>
+     * @param groupOwner String
+     */
+    public static void intentToUseDetail(Activity activity, String username,
+                                   String groupId, ArrayList<String> objects,String groupOwner) {
+        Intent intent = new Intent(activity,UserDetailActivity.class);
+        intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID , groupId);
+        intent.putStringArrayListExtra(ActivityExtraAndKeys.USER_ID, objects);
+        intent.putExtra(ActivityExtraAndKeys.UserDetail.SELECTED_USER_ID,username );
+        if(EMChatManager.getInstance().getCurrentUser()
+                .equals(groupOwner)){
+            intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPOWNER, true);
+        }
+        intent.putExtra(ActivityExtraAndKeys.UserDetail.FROM_AND_STATUS, UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_FRIEND);
+        activity.startActivity(intent);
+    }
+
 
     /**
      * 打开公共选择列表界面

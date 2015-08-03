@@ -12,4 +12,10 @@
             <corners android:radius="@dimen/btn_cornner_radius"/>
         </shape>
     </item>
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="@color/common_gray_3"/>
+            <corners android:radius="@dimen/btn_cornner_radius"/>
+        </shape>
+    </item>
 </selector>

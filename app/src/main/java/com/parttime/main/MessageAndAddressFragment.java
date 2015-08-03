@@ -182,6 +182,7 @@ public class MessageAndAddressFragment extends Fragment {
 					.getDrawable(R.drawable.quanzi_btn_bar_right_off));
 			contactsTv.setTextColor(getActivity().getResources().getColor(
 					R.color.body_color));
+            addContactView.setVisibility(View.GONE);
 		} else if (positon == 1) {
 			msgTv.setBackgroundDrawable(getActivity().getResources()
 					.getDrawable(R.drawable.quanzi_btn_bar_left_off));
@@ -191,6 +192,7 @@ public class MessageAndAddressFragment extends Fragment {
 					.getDrawable(R.drawable.quanzi_btn_bar_right_on));
 			contactsTv.setTextColor(getActivity().getResources().getColor(
 					R.color.guanli_common_color));
+            addContactView.setVisibility(View.VISIBLE);
 
 		}
 	}

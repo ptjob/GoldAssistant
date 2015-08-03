@@ -99,6 +99,7 @@ import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.GroupDescription;
+import com.parttime.utils.IntentManager;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.company.function.PersonAssessDetailActivity;
@@ -218,7 +219,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     private Drawable[] micImages;
     private int chatType;
     public String playMsgId;
-    private EMGroup group;
+    protected EMGroup group;
     private String user_id;// id 商家or用户
     protected String noticeContent;
     protected GroupDescription groupDescription;
@@ -294,8 +295,6 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         // 商家端隐藏分享兼职、用户端显示分享兼职
         container_zidingyi_msg = (LinearLayout) findViewById(R.id.container_zidingyi_msg);
         container_zidingyi_msg.setVisibility(View.GONE);
-        topLayout.setBackgroundColor(getResources().getColor(
-                R.color.guanli_common_color));
         more = findViewById(R.id.more);
 //        edittextLayout.setBackgroundResource(R.drawable.input_bar_bg_normal);
 
@@ -403,13 +402,14 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             if (toChatUsername != null && !"".equals(toChatUsername)) {
                 if (ApplicationConstants.JZDR.equals(toChatUsername)) {
                     sp.saveSharedPreferences(ApplicationConstants.JZDR + "realname", "兼职达人团队");
-                    chatBottomBarHelper = new ChatBottomBarHelper(this);
+
                 } else if (ApplicationConstants.CAIWU.equals(toChatUsername)) {
                     sp.saveSharedPreferences(ApplicationConstants.CAIWU + "realname", "财务小管家");
                 } else if (ApplicationConstants.DINGYUE.equals(toChatUsername)) {
                     sp.saveSharedPreferences(ApplicationConstants.DINGYUE + "realname", "订阅小助手");
                 } else if (ApplicationConstants.KEFU.equals(toChatUsername)) {
                     sp.saveSharedPreferences(ApplicationConstants.KEFU + "realname", "兼职达人客服");
+
                 } else if (ApplicationConstants.TONGZHI.equals(toChatUsername)) {
                     sp.saveSharedPreferences(ApplicationConstants.TONGZHI + "realname", "通知中心");
                 }
@@ -768,8 +768,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                         toChatUsername).putExtra("isComingCall", false));*/
 
         }else if(id == R.id.imgv_activity_management){ //活动管理
-            Toast.makeText(ChatActivity.this, " go to activity management ", Toast.LENGTH_SHORT).show();
-
+            IntentManager.openJobDetailActivity(activityInstance,0,toChatUsername);
         } else if (id == R.id.btn_zidingyi_msg) {
             // 先到选择我的收藏界面,选择兼职发送
             Intent intent = new Intent(ChatActivity.this,
