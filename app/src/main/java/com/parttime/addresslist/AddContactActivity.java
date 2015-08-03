@@ -26,7 +26,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -56,12 +58,12 @@ import com.quark.model.HuanxinUser;
 import com.quark.utils.WaitDialog;
 import com.quark.volley.VolleySington;
 
-public class AddContactActivity extends BaseActivity {
+public class AddContactActivity extends BaseActivity implements TextWatcher {
 	private EditText editText;
 	private LinearLayout searchedUserLayout;
 	private TextView nameText;
 //	private Button searchBtn;
-	private Button btnSearch;
+	private TextView btnSearch;
 	private ImageView avatar;
 	private InputMethodManager inputMethodManager;
 	private String toAddUsername;
@@ -76,21 +78,37 @@ public class AddContactActivity extends BaseActivity {
 	RelativeLayout topLayout;// 商家变灰色,用户不变
 	SharedPreferences sp;
 
+	private View clear;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_contact);
+		clear = findViewById(R.id.search_clear);
+		clear.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				editText.setText("");
+			}
+		});
 		topLayout = (RelativeLayout) findViewById(R.id.title);
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
 		topLayout.setBackgroundColor(getResources().getColor(
 				R.color.guanli_common_color));
 		searchUrl = Url.HUANXIN_search;
 		listView = (ListView) findViewById(R.id.list);
-		editText = (EditText) findViewById(R.id.edit_note);
+		editText = (EditText) findViewById(R.id.query);
+		editText.addTextChangedListener(this);
 		searchedUserLayout = (LinearLayout) findViewById(R.id.ll_user);
 		nameText = (TextView) findViewById(R.id.name);
 //		searchBtn = (Button) findViewById(R.id.search);
-		btnSearch = (Button) findViewById(R.id.tv_search);
+		btnSearch = (TextView) findViewById(R.id.tv_search);
+		btnSearch.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				searchContact(v);
+			}
+		});
 		avatar = (ImageView) findViewById(R.id.avatar);
 		inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 	}
@@ -200,4 +218,22 @@ public class AddContactActivity extends BaseActivity {
 		}
 	}
 
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+	}
+
+	@Override
+	public void afterTextChanged(Editable s) {
+		if(s.length() > 0){
+			clear.setVisibility(View.VISIBLE);
+		}else {
+			clear.setVisibility(View.GONE);
+		}
+	}
 }

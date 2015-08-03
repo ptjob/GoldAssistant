@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eee"
     android:orientation="vertical" >
+    <include layout="@layout/title"/>
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_top_bar"
         android:background="@color/common_top_bar_blue"
@@ -45,9 +46,107 @@
             android:textColor="#fff"
             android:textSize="14sp"
             android:visibility="gone"/>
-    </RelativeLayout>
+    </RelativeLayout>-->
 
-    <EditText
+    <TextView
+        style="@style/FormTitle"
+        android:text="@string/name_of_group"/>
+    <com.parttime.widget.EditItem
+        android:id="@+id/ei_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:background="@color/white"
+        app:ei_nameShow="false"
+        app:ei_hint="@string/please_enter_name_of_group"/>
+
+    <TextView
+        style="@style/FormTitle"
+        android:text="@string/notification_of_group"/>
+    
+    <com.parttime.widget.CountingEditText
+        android:id="@+id/cet_notification"
+        android:layout_width="match_parent"
+        android:layout_height="179dp"
+        android:background="@drawable/shape_intro_enter_bg"
+        android:gravity="top"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:cet_maxLen="140"
+        android:hint="@string/tips_of_notificaion_of_group"/>
+
+    <Button
+        style="@style/CommonButton.Orange"
+        android:onClick="chooseMember"
+        android:text="@string/pick_members_of_group"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button_normal_shape"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否公开"
+            android:textColor="#333"
+            android:layout_gravity="center_vertical"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            />
+
+        <CheckBox
+            android:id="@+id/cb_public"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/checkbox_bg_selector"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_open_invite"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button_normal_shape"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开放群成员邀请"
+            android:textColor="#333"
+            android:layout_gravity="center_vertical"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            />
+
+        <CheckBox
+            android:id="@+id/cb_member_inviter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/checkbox_bg_selector"
+            />
+
+    </LinearLayout>
+
+    <!--<EditText
         android:id="@+id/edit_group_name"
         android:layout_width="match_parent"
         android:layout_height="39dp"
@@ -57,7 +156,6 @@
         android:paddingLeft="5dp"
         android:singleLine="true"
         android:textSize="18sp" />
-
     <EditText
         android:id="@+id/edit_group_introduction"
         android:layout_width="match_parent"
@@ -74,68 +172,9 @@
         android:textSize="18sp" />
     
     
-    <LinearLayout 
-        android:layout_width="match_parent"
-       android:layout_height="39dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button_normal_shape"
-        android:visibility="gone"
-        >
-        <TextView 
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="是否公开"
-            android:textColor="#333"
-            android:layout_gravity="center_vertical"
-            android:textSize="18sp"
-            android:layout_weight="1"
-            />
-        
-        <CheckBox 
-            android:id="@+id/cb_public"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:layout_gravity="center_vertical"
-            android:button="@drawable/checkbox_bg_selector"
-            />
-        
-    </LinearLayout>
+
     
-    <LinearLayout 
-        android:id="@+id/ll_open_invite"
-        android:layout_width="match_parent"
-       android:layout_height="39dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button_normal_shape"
-        android:visibility="gone"
-        >
-        <TextView 
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开放群成员邀请"
-            android:textColor="#333"
-            android:layout_gravity="center_vertical"
-            android:textSize="18sp"
-            android:layout_weight="1"
-            />
-        
-        <CheckBox 
-            android:id="@+id/cb_member_inviter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:layout_gravity="center_vertical"
-            android:button="@drawable/checkbox_bg_selector"
-            />
-        
-    </LinearLayout>
+
 
 
     <Button
@@ -144,6 +183,6 @@
         android:text="@string/choose_member"
         android:id="@+id/choose_member"
         android:onClick="chooseMember"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal" />-->
 
 </LinearLayout>

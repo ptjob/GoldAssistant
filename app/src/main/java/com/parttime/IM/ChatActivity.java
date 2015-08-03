@@ -297,7 +297,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         topLayout.setBackgroundColor(getResources().getColor(
                 R.color.guanli_common_color));
         more = findViewById(R.id.more);
-        edittextLayout.setBackgroundResource(R.drawable.input_bar_bg_normal);
+//        edittextLayout.setBackgroundResource(R.drawable.input_bar_bg_normal);
 
         // 动画资源文件,用于录制语音时
         micImages = new Drawable[] {
@@ -329,26 +329,26 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         edittextLayout.requestFocus();
         voiceRecorder = new VoiceRecorder(micImageHandler);
         buttonPressToSpeak.setOnTouchListener(new PressToSpeakListen());
-        mEditTextContent.setOnFocusChangeListener(new OnFocusChangeListener() {
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    edittextLayout
-                            .setBackgroundResource(R.drawable.input_bar_bg_active);
-                } else {
-                    edittextLayout
-                            .setBackgroundResource(R.drawable.input_bar_bg_normal);
-                }
-
-            }
-        });
+//        mEditTextContent.setOnFocusChangeListener(new OnFocusChangeListener() {
+//
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus) {
+//                    edittextLayout
+//                            .setBackgroundResource(R.drawable.input_bar_bg_active);
+//                } else {
+//                    edittextLayout
+//                            .setBackgroundResource(R.drawable.input_bar_bg_normal);
+//                }
+//
+//            }
+//        });
         mEditTextContent.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                edittextLayout
-                        .setBackgroundResource(R.drawable.input_bar_bg_active);
+//                edittextLayout
+//                        .setBackgroundResource(R.drawable.input_bar_bg_active);
                 moreGone();
                 iv_emoticons_normal.setVisibility(View.VISIBLE);
                 iv_emoticons_checked.setVisibility(View.INVISIBLE);

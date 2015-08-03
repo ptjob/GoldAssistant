@@ -166,6 +166,12 @@
     <string name="public_count">官方账号</string>
     <string name="group_chat">群聊</string>
     <string name="apply_notify">申请与通知</string>
+    <string name="new_group">创建小组群</string>
+    <string name="name_of_group">群名称</string>
+    <string name="please_enter_name_of_group">请输入群名称</string>
+    <string name="notification_of_group">群公告（选填）</string>
+    <string name="tips_of_notificaion_of_group">请在此输入您想让群成员收到的通告</string>
+    <string name="pick_members_of_group">选择群成员</string>
 
     <!-- 联系人详情 -->
     <string name="forbidden_talk">禁言</string>

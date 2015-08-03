@@ -18,11 +18,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.easemob.chat.EMGroupManager;
@@ -30,27 +33,49 @@ import com.easemob.chatuidemo.activity.AlertDialog;
 import com.easemob.chatuidemo.activity.BaseActivity;
 import com.easemob.exceptions.EaseMobException;
 import com.google.gson.Gson;
+import com.parttime.base.WithTitleActivity;
 import com.parttime.constants.ActivityExtraAndKeys;
 import com.parttime.pojo.GroupDescription;
+import com.parttime.widget.CountingEditText;
+import com.parttime.widget.EditItem;
 import com.qingmu.jianzhidaren.R;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-public class NewGroupActivity extends BaseActivity {
-	private EditText groupNameEditText;
+public class NewGroupActivity extends WithTitleActivity {
+//	private EditText groupNameEditText;
 	private ProgressDialog progressDialog;
-	private EditText introductionEditText;
+//	private EditText introductionEditText;
 	private CheckBox checkBox;
 	private CheckBox memberCheckbox;
 	private LinearLayout openInviteContainer;
+
+	private EditItem eiName;
+	private CountingEditText eiNotification;
+
+	@Override
+	protected ViewGroup getLeftWrapper() {
+		return null;
+	}
+
+	@Override
+	protected ViewGroup getRightWrapper() {
+		return null;
+	}
+
+	@Override
+	protected TextView getCenter() {
+		return null;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_group);
-		groupNameEditText = (EditText) findViewById(R.id.edit_group_name);
-		introductionEditText = (EditText) findViewById(R.id.edit_group_introduction);
+		initView();
+		eiName = (EditItem) findViewById(R.id.ei_name);
+		eiNotification = (CountingEditText) findViewById(R.id.cet_notification);
 		checkBox = (CheckBox) findViewById(R.id.cb_public);
 		memberCheckbox = (CheckBox) findViewById(R.id.cb_member_inviter);
 		openInviteContainer = (LinearLayout) findViewById(R.id.ll_open_invite);
@@ -69,11 +94,16 @@ public class NewGroupActivity extends BaseActivity {
 		});
 	}
 
+	private void initView(){
+		center(R.string.new_group);
+		left(TextView.class, R.string.back);
+	}
+
 	/**
 	 * @param v
 	 */
 	public void chooseMember(View v) {
-		String name = groupNameEditText.getText().toString().trim();
+		String name = eiName.getValue().trim();
 		if (TextUtils.isEmpty(name)) {
 			Intent intent = new Intent(this, AlertDialog.class);
 			intent.putExtra("msg", "群组名称不能为空");
@@ -102,9 +132,9 @@ public class NewGroupActivity extends BaseActivity {
 				@Override
 				public void run() {
 					// 调用sdk创建群组方法
-					String groupName = groupNameEditText.getText().toString()
+					String groupName = eiName.getValue()
 							.trim();
-					String desc = introductionEditText.getText().toString();
+					String desc = eiNotification.getText().toString().trim();
                     GroupDescription gd = new GroupDescription();
                     gd.type = GroupDescription.ACTIVITY_ADDRESSBOOK_GROUP;
                     gd.info = desc;

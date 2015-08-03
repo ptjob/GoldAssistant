@@ -31,6 +31,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMConversation;
@@ -54,7 +55,7 @@ import com.quark.common.ToastUtil;
  * @date 2015-2-12 上午10:43:04
  * 
  */
-public class GroupsActivity extends BaseActivity implements TextWatcher {
+public class GroupsActivity extends BaseActivity implements TextWatcher, View.OnClickListener {
 	private ListView groupListView;
 	protected List<EMGroup> grouplist;
 	private GroupAdapter groupAdapter;
@@ -67,18 +68,29 @@ public class GroupsActivity extends BaseActivity implements TextWatcher {
 	private EMConversation conversation;// share分享的时候添加会话记录
 	private RelativeLayout topLayout;
     private EditText search;
+    private TextView tvSearch;
 
     CharacterParser characterParser;
+    private View clear;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_groups);
+        clear = findViewById(R.id.search_clear);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search.setText("");
+            }
+        });
 		topLayout = (RelativeLayout) findViewById(R.id.title);
         topLayout.setBackgroundColor(getResources().getColor(
                 R.color.guanli_common_color));
         search = (EditText) findViewById(R.id.query);
         search.addTextChangedListener(this);
+        tvSearch = (TextView) findViewById(R.id.tv_search);
+        tvSearch.setOnClickListener(this);
 		isFromShare = getIntent().getExtras().getBoolean("isFromShare", false);
 		if (isFromShare) {
 			activityId = getIntent().getExtras().getString("activityId");
@@ -242,6 +254,16 @@ public class GroupsActivity extends BaseActivity implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
+        if(s.length() > 0){
+            clear.setVisibility(View.VISIBLE);
+        }else {
+            clear.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        Editable s = search.getText();
         String enter = s.toString();
         if(grouplist != null){
             ArrayList<EMGroup> list = new ArrayList<>();
