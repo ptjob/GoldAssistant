@@ -38,6 +38,7 @@ public class JobDetailActivity extends BaseActivity {
     }
 
     public static final String EXTRA_ID = "id";
+    public static final String EXTRA_GROUP_ID = "group_id";
     public static final String EXTRA_PART_JOB = "part_job";
 
 
@@ -56,6 +57,7 @@ public class JobDetailActivity extends BaseActivity {
     private ActivityHead activityHead;
 
     private int id;
+    private String groupId;
     private PartJob partJob;
     private Type type;
 
@@ -75,7 +77,7 @@ public class JobDetailActivity extends BaseActivity {
             bindWithPartJob();
         } else if (type == Type.DETAIL) {
             showWait(true);
-            new PublishRequest().publishActivityDetail(id, queue, new DefaultCallback() {
+            new PublishRequest().publishActivityDetail(id, groupId, queue, new DefaultCallback() {
                 @Override
                 public void success(Object obj) {
                     showWait(false);
@@ -179,7 +181,8 @@ public class JobDetailActivity extends BaseActivity {
 
     private void initIntent() {
         id = getIntent().getIntExtra(EXTRA_ID, -1);
-        if (id == -1) {
+        groupId = getIntent().getStringExtra(EXTRA_GROUP_ID);
+        if (id <= 0 && CheckUtils.isEmpty(groupId)) {
             partJob = (PartJob) getIntent().getSerializableExtra(EXTRA_PART_JOB);
             type = Type.REVIEW;
         } else {
