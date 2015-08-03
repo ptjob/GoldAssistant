@@ -69,7 +69,6 @@ public class GroupResumeSettingActivity extends BaseActivity implements
     private ActivityHead2 headView;
     private TextView tip; //显示已录取和待处理的人数
     private SwipeListView listView ;
-    private Dialog more;
 
     private SettingAdapter adapter = new SettingAdapter();
 
@@ -100,9 +99,9 @@ public class GroupResumeSettingActivity extends BaseActivity implements
     private void initView() {
         headView = new ActivityHead2(this);
         headView.setCenterTxt1(R.string.group_member);
-        headView.setImgRight2(R.drawable.settings_selected);
+        headView.setTxtRight2Text(R.string.more);
         headView.progressBar.setVisibility(View.GONE);
-        headView.imgRight2.setOnClickListener(this);
+        headView.txtRight2.setOnClickListener(this);
 
         tip = (TextView) findViewById(R.id.tip);
         listView = (SwipeListView) findViewById(R.id.listView);
@@ -120,7 +119,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         if(appliantResult != null){
             isEnd = appliantResult.isEnd;
             if(BuildConfig.DEBUG){
-                isEnd = GroupSettingRequest.AppliantResult.YES_END;
+                //isEnd = GroupSettingRequest.AppliantResult.YES_END;
             }
             if(isEnd == GroupSettingRequest.AppliantResult.NO_END) {
                 tip.setText(getString(R.string.admitted_pending_tip, appliantResult.approvedCount, appliantResult.unApprovedCount));
@@ -145,7 +144,11 @@ public class GroupResumeSettingActivity extends BaseActivity implements
     public void updateTip(){
         appliantResult = ConstantForSaveList.groupAppliantCache.get(groupId);
         if(appliantResult != null) {
-            tip.setText(getString(R.string.admitted_pending_tip, appliantResult.approvedCount, appliantResult.unApprovedCount));
+            if(isEnd == GroupSettingRequest.AppliantResult.NO_END) {
+                tip.setText(getString(R.string.admitted_pending_tip, appliantResult.approvedCount, appliantResult.unApprovedCount));
+            }else if(isEnd == GroupSettingRequest.AppliantResult.YES_END) { //活动结束
+                tip.setText(getString(R.string.admitted_pending_finished_tip, appliantResult.approvedCount, appliantResult.unApprovedCount));
+            }
         }
     }
 
@@ -156,7 +159,11 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                 super.success(obj);
                 if (obj instanceof GroupSettingRequest.AppliantResult) {
                     GroupSettingRequest.AppliantResult result = (GroupSettingRequest.AppliantResult) obj;
-                    tip.setText(getString(R.string.admitted_pending_tip, result.approvedCount, result.unApprovedCount));
+                    if(isEnd == GroupSettingRequest.AppliantResult.NO_END) {
+                        tip.setText(getString(R.string.admitted_pending_tip, result.approvedCount, result.unApprovedCount));
+                    }else if(isEnd == GroupSettingRequest.AppliantResult.YES_END) { //活动结束
+                        tip.setText(getString(R.string.admitted_pending_finished_tip, result.approvedCount, result.unApprovedCount));
+                    }
                     List<GroupSettingRequest.UserVO> userVOs = result.userList;
                     if(result.userList != null) {
                         data.clear();
@@ -254,15 +261,15 @@ public class GroupResumeSettingActivity extends BaseActivity implements
 
 
     public Dialog showMore() {
-        if(more != null){
+        /*if(more != null){
             if(more.isShowing()){
                 more.dismiss();
             }else{
                 more.show();
             }
             return more;
-        }
-        more = new Dialog(this, R.style.ActionSheet);
+        }*/
+        final Dialog more = new Dialog(this, R.style.ActionSheet);
         LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(
                 R.layout.activity_group_setting_more, null);
         final int cFullFillWidth = 10000;
@@ -276,6 +283,12 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         TextView setting = (TextView) layout.findViewById(R.id.setting);
         //取消
         TextView cancel = (TextView) layout.findViewById(R.id.cancel);
+
+        if(isEnd == GroupSettingRequest.AppliantResult.NO_END) {
+            batch.setVisibility(View.VISIBLE);
+        }else if(isEnd == GroupSettingRequest.AppliantResult.YES_END) {
+            batch.setVisibility(View.GONE);
+        }
 
         // 批量处理
         batch.setOnClickListener(new OnClickListener() {
@@ -325,7 +338,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
         lp.y = -1000;
         lp.gravity = Gravity.BOTTOM;
         more.onWindowAttributesChanged(lp);
-        more.setCanceledOnTouchOutside(false);
+        more.setCanceledOnTouchOutside(true);
         more.setContentView(layout);
         more.show();
 

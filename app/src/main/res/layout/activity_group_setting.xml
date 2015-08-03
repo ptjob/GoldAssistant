@@ -13,7 +13,7 @@
         android:text=""
         android:gravity="center"
         android:id="@+id/tip"
-        android:background="@color/c_363636"
+        android:background="@color/public_button_hollow_pressed_solod"
         android:textColor="@android:color/white" />
 
     <com.parttimejob.swipe.SwipeListView
