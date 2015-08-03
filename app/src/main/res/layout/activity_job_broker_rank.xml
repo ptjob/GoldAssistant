@@ -2,13 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
-    <include layout="@layout/activity_common_head" />
-
-    <com.parttime.widget.BaseXListView
-        android:id="@+id/listview_main"
+    <RelativeLayout
+        android:id="@+id/quanzi_top_relayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="50dp"
+        android:background="@color/top_background"
+        android:gravity="center_vertical" >
+
+        <include layout="@layout/commom_back_btn" android:id="@+id/left_back"/>
+
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip" >
+
+            <TextView
+                android:id="@+id/fragment_quanzi_msg_tv"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/quanzi_btn_bar_left_on"
+                android:gravity="center"
+                android:text="排行榜"
+                android:textColor="@color/head_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/fragment_quanzi_contacts_tv"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/quanzi_btn_bar_right_off"
+                android:gravity="center"
+                android:text="我的"
+                android:textColor="@color/body_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/guidePages"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" />
 
 </LinearLayout>

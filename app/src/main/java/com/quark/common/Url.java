@@ -178,6 +178,9 @@ public class Url {
 	// 兼职管理列表
 	public static final String COMPANY_MyJianzhi_List = HOST + SUBJECT
 			+ "/Activity/publishActivityList";
+    // 兼职广场
+    public static final String COMPANY_Plaza_List = HOST + SUBJECT
+            + "/Activity/list";
 	// 管理 –兼职达人列表 – 兼职详情
 	public static final String COMPANY_MyJianzhi_detail = HOST + SUBJECT
 			+ "/Activity/publishActivityDetail";

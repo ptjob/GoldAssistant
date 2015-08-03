@@ -17,6 +17,7 @@ import com.parttime.pojo.PartJob;
 import com.parttime.pojo.SalaryUnit;
 import com.parttime.utils.CheckUtils;
 import com.qingmu.jianzhidaren.R;
+import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.jianzhidaren.BaseActivity;
 import com.quark.ui.widget.CustomDialog;
 import com.quark.ui.widget.CustomDialogThree;
@@ -203,27 +204,7 @@ public class JobDetailActivity extends BaseActivity {
         if (partJob.salaryUnit == SalaryUnit.FACE_TO_FACE) {
             mTxtSalary.setText(R.string.publish_job_salary_unit_face_to_face);
         } else {
-            String salaryUnit = "";
-            if (partJob.salaryUnit != null) {
-                switch (partJob.salaryUnit) {
-                    case DAY:
-                        salaryUnit = getString(R.string.publish_job_salary_unit_day);
-                        break;
-                    case HOUR:
-                        salaryUnit = getString(R.string.publish_job_salary_unit_hour);
-                        break;
-                    case MONTH:
-                        salaryUnit = getString(R.string.publish_job_salary_unit_month);
-                        break;
-                    case TIMES:
-                        salaryUnit = getString(R.string.publish_job_salary_unit_times);
-                        break;
-                    case CASES:
-                        salaryUnit = getString(R.string.publish_job_salary_unit_cases);
-                        break;
-                }
-            }
-            mTxtSalary.setText(partJob.salary + " " + salaryUnit);
+            mTxtSalary.setText(LabelUtils.getSalary(ApplicationControl.getInstance(), partJob.salaryUnit, partJob.salary));
         }
 
         mTxtCompany.setText(partJob.companyName);

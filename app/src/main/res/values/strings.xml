@@ -550,6 +550,11 @@
     <string name="job_expantion_title">扩招</string>
 
     <!-- 兼职广场 -->
+    <string name="job_plaza_title">最新兼职</string>
+    <string name="job_plaza_time_tag">暑假</string>
+    <string name="job_plaza_item_time_minutes_format">%1$d分钟前</string>
+    <string name="job_plaza_item_time_near_format">%1$d小时前</string>
+    <string name="job_plaza_item_time_day_format">%1$d天前</string>
 
 
     <!-- 经纪人排行榜 -->
