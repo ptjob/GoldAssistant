@@ -125,7 +125,7 @@ public class JobManageActivity extends BaseActivity implements AdapterView.OnIte
         int position = i - 1;
         if (position < mAdapterMain.getCount()) {
             long jobId = mAdapterMain.getItemId(position);
-            IntentManager.openJobDetailActivity(this, (int) jobId);
+            IntentManager.openJobDetailActivity(this, (int) jobId, "");
         } else {
             showToast(R.string.error_date_and_refresh);
         }

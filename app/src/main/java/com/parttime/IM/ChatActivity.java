@@ -1266,7 +1266,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             btnContainer.setVisibility(View.VISIBLE);
             emojiIconContainer.setVisibility(View.GONE);
             hideKeyboard();
-            btnMore.setBackgroundResource(R.drawable.search_clear_pressed);
+            //btnMore.setBackgroundResource(R.drawable.search_clear_pressed);
         } else {
             if (emojiIconContainer.getVisibility() == View.VISIBLE) {
                 emojiIconContainer.setVisibility(View.GONE);

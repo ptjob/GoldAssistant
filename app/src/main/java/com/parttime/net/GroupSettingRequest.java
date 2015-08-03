@@ -43,7 +43,7 @@ public class GroupSettingRequest extends BaseRequest {
                     callback.failed("");
                     return ;
                 }
-                try {
+                try {//unapproved_count=2
                     AppliantResult appliantResult = new AppliantResult();
                     appliantResult.approvedCount = js.getInt("approved_count");
                     appliantResult.unApprovedCount = js.getInt("unapproved_count");
@@ -65,10 +65,14 @@ public class GroupSettingRequest extends BaseRequest {
                         userVO.isCommented = jsonObject.getInt("is_commented");
                         userVO.earnestMoney = jsonObject.getInt("earnest_money");
                         userVO.certification = jsonObject.getInt("certification");
-                        if(userVO.apply != UserVO.APPLY_REJECT) {
-                            userVOs.add(userVO);
+                        if(appliantResult.isEnd == AppliantResult.NO_END){
+                            if(userVO.apply != UserVO.APPLY_REJECT) {
+                                userVOs.add(userVO);
+                            }else {
+                                appliantResult.unApprovedCount--;
+                            }
                         }else{
-                            appliantResult.unApprovedCount --;
+                            userVOs.add(userVO);
                         }
                     }
                     appliantResult.userList = userVOs;

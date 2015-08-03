@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ import java.util.List;
 /**
  * 简历容器
  */
-public  class ResumeContentContainer implements View.OnClickListener{
+public  class ResumeContentContainer implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
     public RelativeLayout appraiseContainer; //评价title容器
 
     public LinearLayout appraiseValueContainer,//评价容器
@@ -92,8 +93,9 @@ public  class ResumeContentContainer implements View.OnClickListener{
         cancelResume.setOnClickListener(this);
         reject.setOnClickListener(this);
         pass.setOnClickListener(this);
-        checkBox.setOnClickListener(this);
         loadingMore.setOnClickListener(this);
+
+        checkBox.setOnCheckedChangeListener(this);
 
     }
 
@@ -133,6 +135,9 @@ public  class ResumeContentContainer implements View.OnClickListener{
                         new DefaultCallback(){
                             @Override
                             public void success(Object obj) {
+                                reject.setEnabled(false);
+                                pass.setEnabled(false);
+                                cancelResume.setEnabled(false);
                                 userDetailPagerAdapter.userIds.remove(userDetailFragment.userId);
                                 userDetailPagerAdapter.cache.remove(userDetailFragment.userId);
                                 activity.adapter.notifyDataSetChanged();
@@ -159,23 +164,40 @@ public  class ResumeContentContainer implements View.OnClickListener{
             case R.id.loading_more:
                 loadData();
                 break;
+
+        }
+    }
+
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()){
             case R.id.expend_checked:
-                //网络加载数据，动态加载
-                appraiseValueContainer.setVisibility(View.VISIBLE);
-                loadingMore.setVisibility(View.VISIBLE);
-                loadData();
+                if(isChecked) {
+                    //网络加载数据，动态加载
+                    appraiseValueContainer.setVisibility(View.VISIBLE);
+                    //loadingMore.setVisibility(View.VISIBLE);
+                    loadData();
+                }else{
+                    //网络加载数据，动态加载
+                    appraiseValueContainer.setVisibility(View.GONE);
+                    loadingMore.setVisibility(View.GONE);
+                }
                 break;
         }
     }
 
+
     private void loadData() {
         if(pager == null) {
             pager = new Pager();
+        }else{
+            //if()
         }
 
         activity.showWait(true);
         new UserDetailRequest().commentPage(userDetailFragment.userId,
-                pager.currentPage ++ , pager.pageCount,
+                pager.currentPage , pager.pageCount,
                 activity.queue,
                 new DefaultCallback(){
                     @Override
@@ -184,6 +206,7 @@ public  class ResumeContentContainer implements View.OnClickListener{
                             CommentPage commentPage = (CommentPage)obj;
                             List<CommentPage.DetailItem> list = commentPage.list;
                             if(list != null){
+                                pager.currentPage ++;
                                 ArrayList<CommentVO> commentVOs = new ArrayList<>();
                                 for (CommentPage.DetailItem detailItem : list){
                                     if(detailItem == null){
@@ -196,11 +219,13 @@ public  class ResumeContentContainer implements View.OnClickListener{
                                     commentVOs.add(commentVO);
                                 }
                                 addCommentView(commentVOs);
-                                if(commentPage.totalPage == commentPage.pageNumber){
-                                    loadingMore.setVisibility(View.GONE);
-                                }else{
-                                    loadingMore.setVisibility(View.VISIBLE);
-                                }
+
+                            }
+                            if(commentPage.totalPage == commentPage.pageNumber ||
+                                    commentPage.totalPage < commentPage.pageNumber){
+                                loadingMore.setVisibility(View.GONE);
+                            }else{
+                                loadingMore.setVisibility(View.VISIBLE);
                             }
                         }
                         activity.showWait(false);

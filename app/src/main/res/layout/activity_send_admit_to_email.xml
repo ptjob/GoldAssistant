@@ -9,24 +9,33 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height"
+        android:layout_height="31dp"
         android:text="@string/your_email"
+        android:paddingLeft="15dp"
         android:layout_gravity="center_horizontal"
+        android:textSize="13sp"
         android:gravity="center_vertical"/>
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/form_item_height"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/email"
+        android:paddingLeft="15dp"
+        android:textSize="15sp"
+        android:background="@color/white"
         android:hint="@string/enter_email"
         android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="@string/done"
+        style="@style/FormOrangeButton"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/done"
         android:layout_gravity="center_horizontal" />
 

@@ -4,7 +4,7 @@
     android:id="@+id/title"
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_top_bar"
-    android:background="@color/top_bar_normal_bg"
+    android:background="@drawable/shape_top_background"
     android:gravity="center_vertical" >
 
     <include layout="@layout/commom_back_btn" android:id="@+id/left_back"/>

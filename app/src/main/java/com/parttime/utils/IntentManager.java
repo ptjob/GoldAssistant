@@ -71,9 +71,16 @@ public class IntentManager {
         context.startActivity(intent);
     }
 
-    public static void openJobDetailActivity(Context context, int jobId) {
+    /**
+     * 跳完活动详情页面
+     * @param context
+     * @param jobId 活动ID （二个传一个，不传时带 <= 0 的值）
+     * @param groupId 群组ID （二个传一个，不传时带""或者null ）
+     */
+    public static void openJobDetailActivity(Context context, int jobId, String groupId) {
         Intent intent = new Intent(context, JobDetailActivity.class);
         intent.putExtra(JobDetailActivity.EXTRA_ID, jobId);
+        intent.putExtra(JobDetailActivity.EXTRA_GROUP_ID, groupId);
         context.startActivity(intent);
     }
 

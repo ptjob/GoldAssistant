@@ -129,10 +129,14 @@ public class PublishRequest extends BaseRequest {
         });
     }
 
-    public void publishActivityDetail(int jobId, RequestQueue requestQueue, final DefaultCallback callback) {
+    public void publishActivityDetail(int jobId, String groupId, RequestQueue requestQueue, final DefaultCallback callback) {
         HashMap<String, String> reqParams = new HashMap<>();
         reqParams.put("company_id", String.valueOf(ApplicationUtils.getLoginId()));
-        reqParams.put("activity_id", String.valueOf(jobId));
+        if (jobId > 0) {
+            reqParams.put("activity_id", String.valueOf(jobId));
+        } else {
+            reqParams.put("group_id", groupId);
+        }
 
         String url = Url.COMPANY_MyJianzhi_detail;
 
