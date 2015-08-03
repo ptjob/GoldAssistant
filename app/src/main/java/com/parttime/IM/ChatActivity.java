@@ -183,7 +183,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     private ProgressBar loadmorePB;
     private Button btnMore;
     private LinearLayout container_zidingyi_msg;// 分享兼职布局,商家端隐藏、客户端显示
-    private TextView nameVeiw;
+    private TextView nameVeiw,memberNum;
     private RelativeLayout topLayout;
     private ChatBottomBarHelper chatBottomBarHelper;
 
@@ -387,6 +387,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         iv_emoticons_normal.setOnClickListener(this);
         iv_emoticons_checked.setOnClickListener(this);
         btnMore.setOnClickListener(this);
+
+        nameVeiw = (TextView) findViewById(R.id.name);
+        memberNum = (TextView) findViewById(R.id.number);
+
         // position = getIntent().getIntExtra("position", -1);
         clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -415,8 +419,6 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                 }
             }
 
-            // ((TextView) findViewById(R.id.name)).setText(toChatUsername);
-            nameVeiw = (TextView) findViewById(R.id.name);
             // 设置标题名字
             // 如果之前存在则读取本地数据,反之网络获取
             String chatName = sp.loadStringSharedPreference(toChatUsername + "realname", "");
@@ -425,8 +427,6 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
             } else {
                 getNick(toChatUsername, nameVeiw);
             }
-            // conversation =
-            // EMChatManager.getInstance().getConversation(toChatUsername,false);
         } else {
             // 群聊
             findViewById(R.id.container_right2_image).setVisibility(View.VISIBLE);
@@ -560,16 +560,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     }
 
     private void setGroupChatTitle() {
-        StringBuilder chatGroupNameAndMemberCount = new StringBuilder();
-        String groupName = group.getGroupName();
-        chatGroupNameAndMemberCount.append(groupName);
         //数量包括群主
         int memberCount = group.getAffiliationsCount();
-        if(memberCount > 0){
-            chatGroupNameAndMemberCount.append("(");
-            chatGroupNameAndMemberCount.append(memberCount).append(")");
-        }
-        ((TextView) findViewById(R.id.name)).setText(chatGroupNameAndMemberCount.toString());
+        nameVeiw.setText(group.getGroupName());
+        memberNum.setText(getString(R.string.group_member_number, memberCount != 0 ? memberCount : 1));
     }
 
     /**

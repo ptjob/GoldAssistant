@@ -800,8 +800,16 @@ public class MessageAdapter extends BaseAdapter {
 	}
 
     private void clickHead(EMMessage message) {
+
+        String groupOwner = null;
+        if( activity.group != null){
+            groupOwner = activity.group.getOwner() ;
+        }
+
+        boolean isGroupOwner = EMChatManager.getInstance().getCurrentUser()
+                .equals(groupOwner);
         GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(activity.toChatUsername);
-        if(appliantResult != null){
+        if(isGroupOwner && appliantResult != null){
             List<GroupSettingRequest.UserVO> userVOs = appliantResult.userList;
             ArrayList<String> userIds = null;
             GroupSettingRequest.UserVO userVO = null;
@@ -833,6 +841,7 @@ public class MessageAdapter extends BaseAdapter {
                     new ArrayList<>(activity.group.getMembers()),
                     activity.group.getOwner());
         }
+
         /*GroupDescription groupDescription = activity.groupDescription;
         if(groupDescription != null &&
                 (groupDescription.type == GroupDescription.ACTIVITY_GROUP
