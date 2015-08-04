@@ -13,14 +13,6 @@
  */
 package com.parttime.addresslist;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +23,6 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,6 +48,14 @@ import com.quark.common.Url;
 import com.quark.model.HuanxinUser;
 import com.quark.utils.WaitDialog;
 import com.quark.volley.VolleySington;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddContactActivity extends BaseActivity implements TextWatcher {
 	private EditText editText;
@@ -93,8 +92,6 @@ public class AddContactActivity extends BaseActivity implements TextWatcher {
 		});
 		topLayout = (RelativeLayout) findViewById(R.id.title);
 		sp = getSharedPreferences("jrdr.setting", MODE_PRIVATE);
-		topLayout.setBackgroundColor(getResources().getColor(
-				R.color.guanli_common_color));
 		searchUrl = Url.HUANXIN_search;
 		listView = (ListView) findViewById(R.id.list);
 		editText = (EditText) findViewById(R.id.query);
