@@ -56,6 +56,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/form_item_height"
         android:background="@color/white"
+        app:ei_topDividerShow="true"
+        app:ei_bottomDividerShow="true"
         app:ei_nameShow="false"
         app:ei_hint="@string/please_enter_name_of_group"/>
 
@@ -73,6 +75,9 @@
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
+        android:textSize="15dp"
+        android:textColorHint="@color/txt_color_gray"
+        android:textColor="@color/txt_color_black"
         app:cet_maxLen="140"
         android:hint="@string/tips_of_notificaion_of_group"/>
 

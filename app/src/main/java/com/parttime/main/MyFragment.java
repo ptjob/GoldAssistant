@@ -146,7 +146,10 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 			String certString = getCertString();
 //			tvCertState.setText(certString);
 			tvCertState.setText(getCertStringForIcon());
-			fiMyFans.setValue(getString(R.string.x_ge_in_chinese, function.getFollowers()));
+			if(function.getType() == AccountType.AGENT) {
+				fiMyFans.setValue(getString(R.string.x_ge_in_chinese, function.getFollowers()));
+				fiMyFans.setVisibility(View.VISIBLE);
+			}
 			fiMyBalance.setValue(getString(R.string.x_rmb, function.getMoney()));
 			fiRealNameCert.setValue(certString);
 		}

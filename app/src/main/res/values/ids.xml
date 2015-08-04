@@ -24,4 +24,7 @@
     <item name="form_item_value" type="id"/>
     <item name="form_item_arrow" type="id"/>
 
+    <item name="ll_im_block_recved" type="id"/>
+    <item name="ll_im_block_sent" type="id"/>
+
 </resources>

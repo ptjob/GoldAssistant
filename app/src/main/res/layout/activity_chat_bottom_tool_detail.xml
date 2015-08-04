@@ -145,6 +145,7 @@ android:visibility="gone" >
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="视频"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
                 android:textSize="13dp"
                 android:textColor="@color/txt_color_gray"  />
@@ -175,6 +176,7 @@ android:visibility="gone" >
                 android:gravity="center"
                 android:text="@string/activity_management"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
                 android:textSize="13dp"
                 android:textColor="@color/txt_color_gray" />
         </LinearLayout>

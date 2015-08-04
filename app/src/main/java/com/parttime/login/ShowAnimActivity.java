@@ -25,9 +25,9 @@ public class ShowAnimActivity extends BaseActivity implements Runnable{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_anim);
         ViewUtils.inject(this);
-//        AnimationDrawable anim = (AnimationDrawable) ivAnim.getBackground();
-//        anim.setOneShot(true);
-//        anim.start();
+        AnimationDrawable anim = (AnimationDrawable) ivAnim.getBackground();
+        anim.setOneShot(true);
+        anim.start();
         ivAnim.postDelayed(this, 2010);
     }
 

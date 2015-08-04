@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingTop="13dp" >
+    style="@style/ImMsgItemRoot" >
 
     <TextView
         android:id="@+id/timestamp"
@@ -22,13 +22,7 @@
 
         <ImageView
             android:id="@+id/iv_userhead"
-            android:layout_width="@dimen/size_avatar"
-            android:layout_height="@dimen/size_avatar"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="@dimen/margin_chat_activity"
-            android:scaleType="fitXY"
-            android:src="@drawable/default_avatar" />
+            style="@style/ImMsgAvatar.Recved" />
 
         <TextView
             android:id="@+id/tv_userid"
