@@ -14,7 +14,6 @@
 package com.parttime.addresslist;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,7 +28,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -61,7 +59,6 @@ import com.easemob.util.EMLog;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
 import com.parttime.IM.activitysetting.GroupGagActivity;
-import com.parttime.addresslist.userdetail.UserDetailActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.constants.ActionConstants;
 import com.parttime.constants.ActivityExtraAndKeys;
@@ -587,7 +584,7 @@ public class NormalGroupSettingActivity extends BaseActivity implements
         isExcuteOnCreate = false;
     }
 
-    class ViewHOld {
+    class ViewHold {
 		Button btn;
 	}
 
@@ -614,16 +611,16 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 		@Override
 		public View getView(final int position, View convertView,
 				final ViewGroup parent) {
-			ViewHOld viewhold;
+			ViewHold viewhold;
 			if (convertView == null) {
-				viewhold = new ViewHOld();
+				viewhold = new ViewHold();
 				convertView = LayoutInflater.from(getContext()).inflate(res,
 						null);
 				viewhold.btn = (Button) convertView
 						.findViewById(R.id.button_avatar);
 				convertView.setTag(viewhold);
 			} else {
-				viewhold = (ViewHOld) convertView.getTag();
+				viewhold = (ViewHold) convertView.getTag();
 			}
 
 			// 最后一个item，减人按钮
@@ -834,7 +831,7 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 						}
 					});
 
-					viewhold.btn
+					/*viewhold.btn
 							.setOnLongClickListener(new OnLongClickListener() {
 
 								@Override
@@ -854,7 +851,7 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 									}
 									return false;
 								}
-							});
+							});*/
 				}
 			}
 			return convertView;
