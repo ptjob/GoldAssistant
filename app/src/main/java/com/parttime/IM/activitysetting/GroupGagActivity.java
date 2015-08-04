@@ -201,7 +201,7 @@ public class GroupGagActivity extends BaseActivity {
                 ContactImageLoader.loadNativePhoto(String.valueOf(itemVo.userId),
                         head, holder.picture, queue);
             } else {
-                holder.picture.setImageResource(R.drawable.default_avatar);
+                holder.picture.setBackgroundResource(R.drawable.default_avatar);
             }
 
             holder.name.setText(itemVo.name);

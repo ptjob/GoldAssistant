@@ -435,7 +435,7 @@ public class GroupResumeSettingActivity extends BaseActivity implements
                         head, holder.head,queue);
                 sp.loadStringSharedPreference(userVO.userId+ "realname", userVO.name);
             } else {
-                holder.head.setImageResource(R.drawable.default_avatar);
+                holder.head.setBackgroundResource(R.drawable.default_avatar);
             }
 
             holder.name.setText(userVO.name);

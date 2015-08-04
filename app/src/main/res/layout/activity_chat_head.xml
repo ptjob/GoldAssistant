@@ -53,13 +53,13 @@ android:background="@drawable/shape_top_background">
         android:visibility="visible">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="9dp"
+            android:layout_marginRight="10dp"
             android:scaleType="centerInside"
-            android:src="@drawable/nav_btn_delete" />
+            android:src="@drawable/user_chat" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -71,13 +71,13 @@ android:background="@drawable/shape_top_background">
         android:visibility="gone">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="9dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ee_1" />
+            android:src="@drawable/selector_notice" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -89,12 +89,12 @@ android:background="@drawable/shape_top_background">
         android:visibility="gone" >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
-            android:src="@drawable/nav_friends_btn_chatsettings" />
+            android:src="@drawable/group_chat" />
     </RelativeLayout>
 </LinearLayout>
 </RelativeLayout>

@@ -7,16 +7,18 @@
         android:id="@+id/button_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="6dp"
         android:background="@android:color/transparent"
-        android:drawableTop="@drawable/smiley_add_btn_pressed"
-        android:ellipsize="end"
-        android:singleLine="true" />
+        android:drawableTop="@drawable/smiley_add_btn_nor"
+        android:drawablePadding="5dp"
+        android:ellipsize="end"/>
     <ImageView
         android:id="@+id/badge_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:src="@drawable/appitem_del_btn"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

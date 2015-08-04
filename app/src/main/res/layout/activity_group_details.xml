@@ -13,21 +13,7 @@
         android:background="@color/common_top_bar_blue"
         android:gravity="center_vertical" >
 
-        <LinearLayout
-            android:id="@+id/linear_layout"
-            android:layout_width="45dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/common_tab_bg"
-            android:onClick="back" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="9dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/back" />
-        </LinearLayout>
+        <include layout="@layout/activity_common_head" android:id="@+id/linear_layout"/>
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -42,11 +28,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_toLeftOf="@id/progressBar"
+            android:paddingLeft="45dp"
+            android:paddingRight="45dp"
             android:gravity="center"
-            android:layout_toRightOf="@id/linear_layout"
             android:ellipsize="end"
             android:singleLine="true"
+            android:text=""
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </RelativeLayout>
@@ -106,37 +93,40 @@
                 android:background="@drawable/item_selector"
                 app:form_left_txt="@string/group_msg_undisturb"
                 app:topLine_shown="false"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+                <Button
+                    android:id="@+id/btn_exit_grp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    style="@style/FormRedButton"
+                    android:paddingLeft="70dp"
+                    android:paddingRight="70dp"
+                    android:onClick="exitGroup"
+                    android:text="退出群聊"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/btn_exitdel_grp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    style="@style/FormRedButton"
+                    android:paddingLeft="70dp"
+                    android:paddingRight="70dp"
+                    android:onClick="exitDeleteGroup"
+                    android:text="解散群聊"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:background="#E6E6E6" />
-
-    <Button
-        android:id="@+id/btn_exit_grp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/common_tab_bg"
-        android:onClick="exitGroup"
-        android:paddingBottom="7dp"
-        android:paddingTop="7dp"
-        android:text="退出群聊"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/btn_exitdel_grp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/common_tab_bg"
-        android:onClick="exitDeleteGroup"
-        android:paddingBottom="7dp"
-        android:paddingTop="7dp"
-        android:text="解散群聊"
-        android:textSize="18sp"
-        android:visibility="gone" />
 
 </LinearLayout>

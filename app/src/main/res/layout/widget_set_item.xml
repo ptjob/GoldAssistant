@@ -9,6 +9,8 @@
 
     <ImageView
         android:id="@+id/form_item_off"
-        style="@style/FormItem_Common.FormItem_Kick_Off" />
+        style="@style/FormItem_Common.FormItem_Kick_Off"
+        android:layout_height="25dp"
+        />
 
 </RelativeLayout>

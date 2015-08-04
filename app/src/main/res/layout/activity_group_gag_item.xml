@@ -10,14 +10,14 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
-        android:padding="5dp"
+        android:padding="10dp"
         >
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/picture"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_launcher"/>
+            android:background="@drawable/default_avatar"/>
         </LinearLayout>
 
 
@@ -28,16 +28,21 @@
         android:text="New Text"
         android:id="@+id/name"
         android:singleLine="true"
+        android:layout_marginRight="10dp"
         android:layout_toRightOf="@+id/picture_container"
         android:layout_toEndOf="@+id/picture_container"
+        android:textSize="16dp"
         android:layout_centerVertical="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="73dp"
+        android:layout_height="26dp"
         android:text="@string/group_cancel_gag"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
         android:id="@+id/ungag"
+        style="@style/FormBlueButton"
+        android:textSize="13dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true" />

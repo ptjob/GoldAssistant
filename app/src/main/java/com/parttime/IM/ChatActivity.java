@@ -413,7 +413,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
                     sp.saveSharedPreferences(ApplicationConstants.DINGYUE + "realname", "订阅小助手");
                 } else if (ApplicationConstants.KEFU.equals(toChatUsername)) {
                     sp.saveSharedPreferences(ApplicationConstants.KEFU + "realname", "兼职达人客服");
-
+                    chatBottomBarHelper = new ChatBottomBarHelper(this);
                 } else if (ApplicationConstants.TONGZHI.equals(toChatUsername)) {
                     sp.saveSharedPreferences(ApplicationConstants.TONGZHI + "realname", "通知中心");
                 }
@@ -563,7 +563,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
         //数量包括群主
         int memberCount = group.getAffiliationsCount();
         nameVeiw.setText(group.getGroupName());
-        memberNum.setText(getString(R.string.group_member_number, memberCount != 0 ? memberCount : 1));
+        memberNum.setText(getString(R.string.group_member_number, memberCount > 0 ? memberCount : 1));
     }
 
     /**

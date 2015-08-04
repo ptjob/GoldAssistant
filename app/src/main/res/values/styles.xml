@@ -714,6 +714,11 @@
 
     </style>
 
+    <style name="Checkbox_Circle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_circle</item>
+
+    </style>
+
     <style name="Checkbox_redstar" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_redstar</item>
 

@@ -485,7 +485,7 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 							((TextView) findViewById(R.id.group_name))
 									.setText(group.getGroupName() + "("
 											+ group.getAffiliationsCount()
-											+ "人)");
+											+ ")");
 							progressDialog.dismiss();
 						}
 					});
@@ -810,7 +810,7 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 														.getGroupName()
 														+ "("
 														+ group.getAffiliationsCount()
-														+ "人)");
+														+ ")");
 											}
 										});
 									} catch (final Exception e) {
@@ -879,7 +879,7 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 							((TextView) findViewById(R.id.group_name))
 									.setText(group.getGroupName() + "("
 											+ group.getAffiliationsCount()
-											+ "人)");
+											+ ")");
 							loadingPB.setVisibility(View.INVISIBLE);
 							adapter = new GridAdapter(
 									NormalGroupSettingActivity.this, R.layout.grid,

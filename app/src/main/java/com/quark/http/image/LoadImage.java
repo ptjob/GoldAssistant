@@ -6,10 +6,13 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.PixelFormat;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -18,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.carson.constant.ConstantForSaveList;
+import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.volley.VolleySington;
 
 public class LoadImage {
@@ -40,7 +44,7 @@ public class LoadImage {
                         // imageView.setImageBitmap(arg0);
                         // imageView.setImageBitmap(toRoundCorner(arg0,
                         // 2,activity));
-                        imageView.setImageBitmap(toRoundBitmap(arg0));
+                        imageView.setBackgroundDrawable(bitmapToDrawable(arg0) );
                     }
                 }, 300, 200, Bitmap.Config.ARGB_8888,
                 new Response.ErrorListener() {
@@ -67,7 +71,7 @@ public class LoadImage {
                         // TODO Auto-generated method stub
 
                         // imageView.setImageBitmap(arg0);
-                        imageView.setImageBitmap(toRoundBitmap(arg0));
+                        imageView.setBackgroundDrawable(bitmapToDrawable(arg0));
                     }
                 }, 300, 200, Bitmap.Config.ARGB_8888,
                 new Response.ErrorListener() {
@@ -166,6 +170,10 @@ public class LoadImage {
     public static Bitmap toRoundBitmap(Bitmap bitmap) {
         //return getRoundedCornerBitmap(bitmap);
         return bitmap;
+    }
+
+    public static Drawable bitmapToDrawable(Bitmap bitmap){
+        return new BitmapDrawable(ApplicationControl.getInstance().getResources(),  bitmap);
     }
 
     /**

@@ -3,6 +3,8 @@ package com.parttime.common.Image;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -95,11 +97,11 @@ public class ContactImageLoader {
         Bitmap bitmap = get(id, avatarUrl);
         if(bitmap == null){
             if(defaultImgRes > 0) {
-                avatar.setImageResource(defaultImgRes);
+                avatar.setBackgroundResource(defaultImgRes);
             }
             loadpersonPic(queue, id, avatarUrl, avatar, 1);
         }else{
-            avatar.setImageBitmap(LoadImage.toRoundBitmap(bitmap));
+            avatar.setBackgroundDrawable(bitmapToDrawable(bitmap));
         }
     }
 
@@ -123,7 +125,7 @@ public class ContactImageLoader {
                             picture = (String)obj;
                         }
                         if(url.equals(picture) || TextUtils.isEmpty(picture)) {
-                            imageView.setImageBitmap(LoadImage.toRoundBitmap(arg0));
+                            imageView.setBackgroundDrawable(bitmapToDrawable(arg0));
                         }
 
                         boolean sdCardExist = Environment.getExternalStorageState()
@@ -204,6 +206,10 @@ public class ContactImageLoader {
                 }
             }
         }
+    }
+
+    public static Drawable bitmapToDrawable(Bitmap bitmap){
+        return new BitmapDrawable(ApplicationControl.getInstance().getResources(),  bitmap);
     }
 
 }
