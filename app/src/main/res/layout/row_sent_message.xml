@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingTop="13dp" >
+    style="@style/ImMsgItemRoot" >
 
     <TextView
         android:id="@+id/timestamp"
@@ -19,13 +19,7 @@
 
         <ImageView
             android:id="@+id/iv_userhead"
-            android:layout_width="@dimen/size_avatar"
-            android:layout_height="@dimen/size_avatar"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="@dimen/margin_chat_activity"
-            android:scaleType="fitXY" 
-             android:src="@drawable/default_avatar"
+            style="@style/ImMsgAvatar.Sent"
             />
 
 
@@ -36,25 +30,14 @@
             android:layout_height="wrap_content"
             android:text="@string/text_ack_msg"
             android:layout_alignRight="@+id/tv_chatcontent"
-            android:textSize="12sp"
+            android:textSize="12dp"
             android:visibility="gone"
-            />
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="@dimen/im_user_name_margin"/>
 
        <TextView
             android:id="@+id/tv_chatcontent"
-            style="@style/chat_content_date_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/margin_chat_activity"
-            android:layout_toLeftOf="@id/iv_userhead"
-            android:layout_below="@+id/tv_ack"
-            android:autoLink="web"
-            android:background="@drawable/chatto_bg"
-            android:gravity="left|center"
-            android:lineSpacingExtra="2dp"
-            android:maxWidth="225.0dip"
-            android:paddingLeft="8dip"
-            android:textSize="15sp" />
+            style="@style/ImContent.Sent" />
 
 
         <ImageView

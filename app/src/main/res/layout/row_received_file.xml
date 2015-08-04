@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="13dp" >
+    style="@style/ImMsgItemRoot" >
 
     <TextView
         android:id="@+id/timestamp"
@@ -23,13 +23,7 @@
 
         <ImageView
             android:id="@+id/iv_userhead"
-            android:layout_width="@dimen/size_avatar"
-            android:layout_height="@dimen/size_avatar"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="@dimen/margin_chat_activity"
-            android:onClick="contactDetails"
-            android:scaleType="fitXY" />
+            style="@style/ImMsgAvatar.Recved" />
 
         <TextView
             android:id="@+id/tv_userid"
@@ -37,6 +31,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_userhead" />
+
+        <TextView
+            android:id="@+id/resume_status"
+            style="@style/ImAdmitTxt" />
 
         <LinearLayout
             android:id="@+id/ll_file_container"

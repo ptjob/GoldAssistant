@@ -83,7 +83,8 @@
                 android:layout_height="@dimen/form_item_height"
                 android:background="@drawable/item_selector"
                 app:topLine_shown="false"
-                app:form_title="@string/my_fans"/>
+                app:form_title="@string/my_fans"
+                android:visibility="gone"/>
 
             <com.parttime.widget.FormItem
                 android:id="@+id/fi_my_balance"

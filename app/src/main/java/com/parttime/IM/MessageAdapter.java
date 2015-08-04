@@ -486,6 +486,14 @@ public class MessageAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
+//		if(chatType != ChatType.Chat){
+//			holder.tv_userId.setVisibility(View.GONE);
+//			holder.resumeStatus.setVisibility(View.GONE);
+//		}else {
+//			holder.tv_userId.setVisibility(View.VISIBLE);
+//			holder.resumeStatus.setVisibility(View.VISIBLE);
+//		}
+
 		// 群聊时，显示接收的消息的发送人的名称,接收方
 		if (chatType == ChatType.GroupChat
 				&& message.direct == EMMessage.Direct.RECEIVE)
@@ -528,6 +536,10 @@ public class MessageAdapter extends BaseAdapter {
 
 				holder.head_iv.setImageBitmap(bitmap);
 			} else {
+				holder.tv_userId.setVisibility(View.VISIBLE);
+				if(holder.resumeStatus != null) {
+					holder.resumeStatus.setVisibility(View.VISIBLE);
+				}
 				loadNativePhoto(message.getFrom(), holder.head_iv,
 						holder.tv_userId);
 			}
@@ -540,15 +552,19 @@ public class MessageAdapter extends BaseAdapter {
                     if (messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_OK) {
                         if (messageData.apply == GroupSettingRequest.UserVO.APPLY_OK) {
                             holder.resumeStatus.setText(R.string.already_resume);
+							holder.resumeStatus.setSelected(true);
                         } else if (messageData.apply == GroupSettingRequest.UserVO.APPLY_UNLOOK ||
                                 messageData.apply == GroupSettingRequest.UserVO.APPLY_LOOKED) {
                             holder.resumeStatus.setText(R.string.unresume);
+							holder.resumeStatus.setSelected(false);
                         }
                     } else if (messageData.ableComment == GroupSettingRequest.UserVO.ABLECOMMENT_NO) {
                         if (messageData.isCommented == GroupSettingRequest.UserVO.ISCOMMENT_NO) {
                             holder.resumeStatus.setText(R.string.uncomment);
+							holder.resumeStatus.setSelected(false);
                         } else if (messageData.isCommented == GroupSettingRequest.UserVO.ISCOMMENT_OK) {
                             holder.resumeStatus.setText(R.string.commented);
+							holder.resumeStatus.setSelected(true);
                         }
                     }
                 }

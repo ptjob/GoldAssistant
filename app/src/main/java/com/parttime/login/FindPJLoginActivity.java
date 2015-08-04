@@ -119,8 +119,13 @@ public class FindPJLoginActivity extends BaseActivity {
 			carson_user_id = sp.getString(EXTRA_USER_ID, "");
 			if (carson_user_id != null && !"".equals(carson_user_id)) {
 				autoLogin = true;
-				startActivity(new Intent(FindPJLoginActivity.this,
-						MainTabActivity.class));
+				int accountType = SharePreferenceUtil.getInstance(FindPJLoginActivity.this).loadIntSharedPreference(SharedPreferenceConstants.USER_TYPE);
+				if(accountType == AccountType.AGENT){
+					startActivity(new Intent(FindPJLoginActivity.this, ShowAnimActivity.class));
+				}else {
+					startActivity(new Intent(FindPJLoginActivity.this,
+							MainTabActivity.class));
+				}
 				FindPJLoginActivity.this.finish();
 				return;
 			}

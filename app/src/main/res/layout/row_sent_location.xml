@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingTop="13dp" >
+    style="@style/ImMsgItemRoot" >
 
     <TextView
         android:id="@+id/timestamp"
@@ -19,13 +19,7 @@
 
         <ImageView
             android:id="@+id/iv_userhead"
-            android:layout_width="@dimen/size_avatar"
-            android:layout_height="@dimen/size_avatar"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="@dimen/margin_chat_activity"
-            android:scaleType="fitXY" 
-             android:src="@drawable/default_avatar"
+            style="@style/ImMsgAvatar.Sent"
             />
         <TextView
             android:id="@+id/tv_ack"
@@ -34,7 +28,10 @@
             android:layout_height="wrap_content"
             android:text="@string/text_ack_msg"
             android:layout_alignRight="@+id/ll_location"
-            android:textSize="12sp"
+            android:textSize="12dp"
+            android:textColor="@color/txt_color_gray"
+            android:layout_marginRight="@dimen/im_user_name_margin"
+            android:layout_marginBottom="4dp"
             android:visibility="gone"
             />
 
@@ -42,10 +39,11 @@
             android:id="@+id/ll_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/margin_chat_activity"
+            android:layout_marginRight="@dimen/im_buble_margin"
             android:layout_toLeftOf="@id/iv_userhead"
             android:layout_below="@+id/tv_ack"
-            android:background="@drawable/chatto_bg" >
+            android:background="@drawable/chatto_bg"
+            android:layout_marginLeft="@dimen/im_buble_other_size_margin">
 
             <TextView
                 android:id="@+id/tv_location"

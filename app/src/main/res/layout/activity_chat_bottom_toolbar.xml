@@ -39,6 +39,8 @@
         android:id="@+id/btn_press_to_speak"
         android:layout_width="0dp"
         android:layout_height="36dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:background="@drawable/chat_press_speak_btn"
@@ -116,7 +118,7 @@
 
     <Button
         android:id="@+id/btn_send"
-        android:layout_width="28dp"
+        android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:layout_marginRight="9dp"
         android:layout_gravity="center_vertical"

@@ -247,6 +247,7 @@
     <color name="btn_txt_color">#ffffff</color>
     <color name="common_gray">#c7c8cd</color>
 
+    <color name="common_green">@color/c_A6CF4F</color>
     <color name="common_orange">@color/c_FE8800</color>
     <color name="common_red">@color/c_FF5D56</color>
     <color name="common_blue">@color/c_4BA4DE</color>
