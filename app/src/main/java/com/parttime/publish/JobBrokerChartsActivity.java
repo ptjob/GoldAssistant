@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.parttime.utils.ApplicationUtils;
 import com.qingmu.jianzhidaren.R;
 import com.quark.jianzhidaren.BaseActivity;
 
@@ -46,7 +47,7 @@ public class JobBrokerChartsActivity extends BaseActivity {
 
         pageViews = new ArrayList<>();
         jobBrokerChartsFragment = JobBrokerChartsFragment.newInstance();
-        jobBrokerMeFragment = JobBrokerMeFragment.newInstance();
+        jobBrokerMeFragment = JobBrokerDetailFragment.newInstance(ApplicationUtils.getLoginId());
         pageViews.add(jobBrokerChartsFragment);
         pageViews.add(jobBrokerMeFragment);
 
@@ -68,13 +69,24 @@ public class JobBrokerChartsActivity extends BaseActivity {
     }
 
     private class TabButtonClickListener implements View.OnClickListener {
-        public TabButtonClickListener(int i) {
+        private int index;
 
+        public TabButtonClickListener(int index) {
+            this.index = index;
         }
 
         @Override
         public void onClick(View view) {
-
+            if (index == 0) {
+                if (mTxtShare != null) {
+                    mTxtShare.setVisibility(View.GONE);
+                }
+            } else if (index == 1) {
+                if (mTxtShare != null) {
+                    mTxtShare.setVisibility(View.VISIBLE);
+                }
+            }
+            viewPager.setCurrentItem(index, true);
         }
     }
 
@@ -136,30 +148,5 @@ public class JobBrokerChartsActivity extends BaseActivity {
             mTxtShare.setVisibility(View.VISIBLE);
         }
 
-    }
-
-    /**
-     * button监听
-     */
-    class GuideButtonClickListener implements View.OnClickListener {
-        private int index = 0;
-
-        public GuideButtonClickListener(int i) {
-            index = i;
-        }
-
-        @Override
-        public void onClick(View v) {
-            if(index == 0){
-                if(mTxtShare != null){
-                    mTxtShare.setVisibility(View.GONE);
-                }
-            }else if(index == 1){
-                if(mTxtShare != null){
-                    mTxtShare.setVisibility(View.VISIBLE);
-                }
-            }
-            viewPager.setCurrentItem(index, true);
-        }
     }
 }

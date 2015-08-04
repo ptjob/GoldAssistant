@@ -155,7 +155,7 @@ public class Url {
 			+ "/UserCenter/update_resume";
 
 	public static final String COMPANY_SHOW_INTRO = HOST + SUBJECT
-			+ "/CompanyCenter/showResume";
+			+ "/CompanyCenter/`showResume";
 	// 29 上传我的照片
 	public static final String USER_jianli_uploadmypic = HOST + SUBJECT
 			+ "/UserCenter/upload_my_avatar";

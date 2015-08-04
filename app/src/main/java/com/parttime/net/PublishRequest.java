@@ -1,5 +1,7 @@
 package com.parttime.net;
 
+import android.util.Log;
+
 import com.android.volley.RequestQueue;
 import com.parttime.pojo.JobAuthType;
 import com.parttime.pojo.PartJob;
@@ -365,6 +367,7 @@ public class PublishRequest extends BaseRequest {
             @Override
             public void success(Object obj) throws JSONException {
                 JSONObject jsonObject = (JSONObject) obj;
+                Log.i("wyw", jsonObject.toString());
                 JSONObject activityPage = jsonObject.getJSONObject("agentPage");
                 JobBrokerChartsFragmentVo publishActivityListVo = new JobBrokerChartsFragmentVo();
                 publishActivityListVo.pageNumber = activityPage.getInt("pageNumber");
@@ -382,6 +385,8 @@ public class PublishRequest extends BaseRequest {
                         jobManageListVo.companyId = listItem.getInt("company_id");
                         jobManageListVo.name = listItem.getString("company_name");
                         jobManageListVo.picInfo = listItem.getString("avatar");
+                        jobManageListVo.hireType = listItem.getString("hire_type");
+                        jobManageListVo.fans = listItem.getInt("fans");
 
                         jobManageListVoList.add(jobManageListVo);
                     }

@@ -78,7 +78,7 @@ public class JobPlazaListAdapter extends BaseAdapter {
         JobPlazaListVo jobManageListVo = mData.get(i);
         viewHolder.mTxtJobTitle.setText(jobManageListVo.jobTitle);
         viewHolder.mImgViType.setImageDrawable(mContext.getResources().getDrawable(jobManageListVo.typeDrawableId));
-        viewHolder.mTxtType.setText(jobManageListVo.type);
+        viewHolder.mTxtType.setText(jobManageListVo.type == null ? "" : jobManageListVo.type);
         viewHolder.mImgViIsGuarantee.setVisibility(jobManageListVo.isGuarantee ? View.VISIBLE : View.GONE);
         viewHolder.mImgViIsSuper.setVisibility(jobManageListVo.isSuper ? View.VISIBLE : View.GONE);
         viewHolder.mImgViIsTime.setVisibility(jobManageListVo.isTime ? View.VISIBLE : View.GONE);

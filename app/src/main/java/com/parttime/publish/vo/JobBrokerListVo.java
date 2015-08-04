@@ -8,4 +8,7 @@ public class JobBrokerListVo {
     public int companyId;
     public String name;
     public String picInfo;
+    public String hireType;
+    public int fans;
+
 }
