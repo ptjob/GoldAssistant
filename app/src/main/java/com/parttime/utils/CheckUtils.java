@@ -1,5 +1,6 @@
 package com.parttime.utils;
 
+import android.app.Activity;
 import android.text.TextUtils;
 
 import java.util.List;
@@ -29,6 +30,13 @@ public class CheckUtils {
             return true;
         }
 
+        return false;
+    }
+
+    public static boolean isSafe(Activity activity) {
+        if (activity != null && !activity.isFinishing()) {
+            return true;
+        }
         return false;
     }
 }
