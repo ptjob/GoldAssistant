@@ -20,6 +20,8 @@
     <color name="c_56a0cf">#56a0cf</color>
     <color name="c_f98a05">#f98a05</color>
 
+    <color name="list_divider">#d8d8d8</color>
+
     <!-- 文本 -->
     <color name="black_0">#000000</color>
     <color name="black_1">#363636</color>
@@ -56,7 +58,7 @@
     <!-- TIME PICKER -->
 
     <color name="liulanhenji">#F6F6F6</color>
-    <color name="guanli_common_color">#1b1d29</color>
+    <color name="guanli_common_color">@color/top_background</color>
     <!-- 管理广场兼职活动状态 -->
     <color name="guanli_zhaorenzhong_color">#f85151</color>
     <!-- 管理广场招人 -->
@@ -178,7 +180,7 @@
     <color name="common_bottom_bar_normal_bg">#2d2f31</color>
     <color name="common_bottom_bar_selected_bg">#161718</color>
     <color name="common_botton_bar_blue">#2ea7e0</color>
-    <color name="common_bg">#fcfcfc</color>
+    <color name="common_bg">#ffffff</color>
     <color name="btn_pressed_green_solid">#B6DA53</color>
     <color name="divider_list">#cccccc</color>
 
