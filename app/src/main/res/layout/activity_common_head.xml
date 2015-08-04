@@ -25,6 +25,5 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="11dp"
         android:textColor="@color/white"
-        android:textSize="18sp"
         android:visibility="gone"/>
 </RelativeLayout>

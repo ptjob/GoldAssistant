@@ -1018,7 +1018,7 @@
         android:theme="@android:style/Theme.Light.NoTitleBar" />
 
         <activity
-            android:name="com.parttime.publish.JobBrokerCharts"
+            android:name="com.parttime.publish.JobBrokerChartsActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 

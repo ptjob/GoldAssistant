@@ -4,6 +4,8 @@ import com.android.volley.RequestQueue;
 import com.parttime.pojo.JobAuthType;
 import com.parttime.pojo.PartJob;
 import com.parttime.pojo.SalaryUnit;
+import com.parttime.publish.vo.JobBrokerChartsFragmentVo;
+import com.parttime.publish.vo.JobBrokerListVo;
 import com.parttime.publish.vo.JobManageListVo;
 import com.parttime.publish.vo.JobPlazaActivityListVo;
 import com.parttime.publish.vo.JobPlazaListVo;
@@ -333,6 +335,59 @@ public class PublishRequest extends BaseRequest {
                 }
 
                 publishActivityListVo.jobPlazaListVoList = jobManageListVoList;
+
+                callback.success(publishActivityListVo);
+            }
+
+            @Override
+            public void failed(Object obj) {
+                callback.failed(obj);
+            }
+        });
+    }
+
+    /**
+     * 经纪人列表
+     *
+     * @param page  页码号
+     * @param count 分页大小
+     * @param type  类型（1-招人中，2-审核中，3已下架）
+     */
+    public void agentList(int page, int count, int type,
+                          RequestQueue requestQueue, final DefaultCallback callback) {
+        HashMap<String, String> reqParams = new HashMap<>();
+        reqParams.put("city", ApplicationUtils.getCity());
+        reqParams.put("pn", String.valueOf(page));
+        reqParams.put("page_size", String.valueOf(count));
+
+        String url = Url.COMPANY_MyJianzhi_agentList;
+        request(url, reqParams, requestQueue, new Callback() {
+            @Override
+            public void success(Object obj) throws JSONException {
+                JSONObject jsonObject = (JSONObject) obj;
+                JSONObject activityPage = jsonObject.getJSONObject("agentPage");
+                JobBrokerChartsFragmentVo publishActivityListVo = new JobBrokerChartsFragmentVo();
+                publishActivityListVo.pageNumber = activityPage.getInt("pageNumber");
+                publishActivityListVo.pageSize = activityPage.getInt("pageSize");
+                publishActivityListVo.totlePage = activityPage.getInt("totalPage");
+                publishActivityListVo.totleRow = activityPage.getInt("totalRow");
+
+                JSONArray list = activityPage.getJSONArray("list");
+                List<JobBrokerListVo> jobManageListVoList = new ArrayList<>();
+
+                if (list != null) {
+                    for (int i = 0; i < list.length(); ++i) {
+                        JSONObject listItem = list.getJSONObject(i);
+                        JobBrokerListVo jobManageListVo = new JobBrokerListVo();
+                        jobManageListVo.companyId = listItem.getInt("company_id");
+                        jobManageListVo.name = listItem.getString("company_name");
+                        jobManageListVo.picInfo = listItem.getString("avatar");
+
+                        jobManageListVoList.add(jobManageListVo);
+                    }
+                }
+
+                publishActivityListVo.jobBrokerListVos = jobManageListVoList;
 
                 callback.success(publishActivityListVo);
             }

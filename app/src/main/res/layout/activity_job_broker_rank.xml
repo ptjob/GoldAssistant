@@ -44,6 +44,17 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/right_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="11dp"
+            android:textColor="@color/white"
+            android:text="分享"
+            android:visibility="gone"/>
+
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager
