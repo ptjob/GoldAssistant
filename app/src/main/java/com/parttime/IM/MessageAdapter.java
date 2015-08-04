@@ -78,6 +78,7 @@ import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.GroupDescription;
+import com.parttime.utils.IntentManager;
 import com.parttime.utils.SharePreferenceUtil;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.ToastUtil;
@@ -127,7 +128,7 @@ public class MessageAdapter extends BaseAdapter {
 
 	private String username;
 	private LayoutInflater inflater;
-	private Activity activity;
+	private ChatActivity activity;
 	private SharePreferenceUtil sp;
 	// reference to conversation object in chatsdk
 	private EMConversation conversation;
@@ -142,7 +143,7 @@ public class MessageAdapter extends BaseAdapter {
 		this.username = username;
 		this.context = context;
 		inflater = LayoutInflater.from(context);
-		activity = (Activity) context;
+		activity = context;
 		this.conversation = EMChatManager.getInstance().getConversation(
 				username);
         buildMessageData();
@@ -759,12 +760,12 @@ public class MessageAdapter extends BaseAdapter {
 
 				@Override
 				public boolean onLongClick(View v) {
-					Intent intent = new Intent(activity, AlertDialog.class);
+					/*Intent intent = new Intent(activity, AlertDialog.class);
 					intent.putExtra("msg", "移入到黑名单？");
 					intent.putExtra("cancel", true);
 					intent.putExtra("position", position);
 					activity.startActivityForResult(intent,
-							ChatActivity.REQUEST_CODE_ADD_TO_BLACKLIST);
+							ChatActivity.REQUEST_CODE_ADD_TO_BLACKLIST);*/
 					return true;
 				}
 			});
@@ -787,9 +788,7 @@ public class MessageAdapter extends BaseAdapter {
 						// Intent intent = new Intent(activity, UserInfo.class);
 						// intent.putExtra("hxId", message.getFrom());
 						// activity.startActivity(intent);
-						activity.startActivity(new Intent(activity,
-								ChatActivity.class).putExtra("userId",
-								message.getFrom()));
+                        clickHead(message);
 					}
 				}
 			});
@@ -816,7 +815,62 @@ public class MessageAdapter extends BaseAdapter {
 		return convertView;
 	}
 
-	/**
+    private void clickHead(EMMessage message) {
+
+        String groupOwner = null;
+        if( activity.group != null){
+            groupOwner = activity.group.getOwner() ;
+        }
+
+        boolean isGroupOwner = EMChatManager.getInstance().getCurrentUser()
+                .equals(groupOwner);
+        GroupSettingRequest.AppliantResult appliantResult = ConstantForSaveList.groupAppliantCache.get(activity.toChatUsername);
+        if(isGroupOwner && appliantResult != null){
+            List<GroupSettingRequest.UserVO> userVOs = appliantResult.userList;
+            ArrayList<String> userIds = null;
+            GroupSettingRequest.UserVO userVO = null;
+            if(userVOs != null && userVOs.size() > 0){
+                userIds = new ArrayList<>();
+                for (GroupSettingRequest.UserVO vo : userVOs){
+                    if(vo == null){
+                        continue;
+                    }
+                    userIds.add(String.valueOf(vo.userId));
+                    if(message.getFrom().contains(String.valueOf(vo.userId))){
+                        userVO = vo;
+                    }
+                }
+            }
+            if(userIds != null && userIds.size() > 0 && activity.group != null && userVO != null) {
+                IntentManager.toUserDetailFromActivityGroup(activity,
+                        appliantResult.isEnd,
+                        activity.toChatUsername,
+                        userVO,
+                        userIds,
+                        activity.group.getOwner());
+            }
+        }else{
+
+            IntentManager.intentToUseDetail(activity,
+                    message.getFrom(),
+                    username,
+                    new ArrayList<>(activity.group.getMembers()),
+                    activity.group.getOwner());
+        }
+
+        /*GroupDescription groupDescription = activity.groupDescription;
+        if(groupDescription != null &&
+                (groupDescription.type == GroupDescription.ACTIVITY_GROUP
+                        || groupDescription.type == GroupDescription.ACTIVITY_CONSULTATION_GROUP)){
+
+        }else {
+            activity.startActivity(new Intent(activity,
+                    ChatActivity.class).putExtra("userId",
+                    message.getFrom()));
+        }*/
+    }
+
+    /**
 	 * 文本消息
 	 * 
 	 * @param message EMMessage
@@ -1204,8 +1258,8 @@ public class MessageAdapter extends BaseAdapter {
 				return true;
 			}
 		});
-		if (((ChatActivity) activity).playMsgId != null
-				&& ((ChatActivity) activity).playMsgId.equals(message
+		if ((activity).playMsgId != null
+				&& (activity).playMsgId.equals(message
 						.getMsgId()) && VoicePlayClickListener.isPlaying) {
 			AnimationDrawable voiceAnimation;
 			if (message.direct == EMMessage.Direct.RECEIVE) {

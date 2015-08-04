@@ -3,7 +3,8 @@
     android:id="@+id/list_item_layout"
     android:layout_width="match_parent"
     android:layout_height="62dp"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:id="@+id/avatar_container"

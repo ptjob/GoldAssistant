@@ -13,9 +13,6 @@
  */
 package com.parttime.addresslist;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,6 +43,9 @@ import com.parttime.IM.ChatActivity;
 import com.qingmu.jianzhidaren.R;
 import com.quark.citylistview.CharacterParser;
 import com.quark.common.ToastUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -85,8 +85,6 @@ public class GroupsActivity extends BaseActivity implements TextWatcher, View.On
             }
         });
 		topLayout = (RelativeLayout) findViewById(R.id.title);
-        topLayout.setBackgroundColor(getResources().getColor(
-                R.color.guanli_common_color));
         search = (EditText) findViewById(R.id.query);
         search.addTextChangedListener(this);
         tvSearch = (TextView) findViewById(R.id.tv_search);

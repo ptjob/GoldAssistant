@@ -178,6 +178,9 @@ public class Url {
 	// 兼职管理列表
 	public static final String COMPANY_MyJianzhi_List = HOST + SUBJECT
 			+ "/Activity/publishActivityList";
+    // 兼职广场
+    public static final String COMPANY_Plaza_List = HOST + SUBJECT
+            + "/Activity/list";
 	// 管理 –兼职达人列表 – 兼职详情
 	public static final String COMPANY_MyJianzhi_detail = HOST + SUBJECT
 			+ "/Activity/publishActivityDetail";
@@ -205,6 +208,11 @@ public class Url {
 	// 管理 –修改发布兼职
 	public static final String COMPANY_MyJianzhi_modifyCommit = HOST + SUBJECT
 			+ "/Activity/modifyCommit";
+
+    // 招人 - 经纪人列表
+    public static final String COMPANY_MyJianzhi_agentList = HOST + SUBJECT
+            + "/CompanyCenter/agentList";
+
 	// 充值记录
 	public static final String COMPANY_recharge_log = HOST + SUBJECT
 			+ "/AgentCenter/chargeLog";

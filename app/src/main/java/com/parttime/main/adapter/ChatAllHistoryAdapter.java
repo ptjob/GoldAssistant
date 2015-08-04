@@ -172,7 +172,13 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
             if(messageSet != null){
                 holder.list_item_layout
                         .setBackgroundResource(R.drawable.mm_listitem_yellow);
+            }else{
+                holder.list_item_layout
+                        .setBackgroundResource(R.drawable.mm_listitem_default_white);
             }
+        }else{
+            holder.list_item_layout
+                    .setBackgroundResource(R.drawable.mm_listitem_default_white);
         }
 
         holder.avatarTag.setVisibility(View.GONE);

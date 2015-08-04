@@ -28,7 +28,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -60,7 +59,6 @@ import com.easemob.util.EMLog;
 import com.easemob.util.NetUtils;
 import com.parttime.IM.ChatActivity;
 import com.parttime.IM.activitysetting.GroupGagActivity;
-import com.parttime.addresslist.userdetail.UserDetailActivity;
 import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.constants.ActionConstants;
 import com.parttime.constants.ActivityExtraAndKeys;
@@ -68,6 +66,7 @@ import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.BaseUser;
 import com.parttime.pojo.MessageSet;
+import com.parttime.utils.IntentManager;
 import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.widget.SetItem;
 import com.qingmu.jianzhidaren.R;
@@ -585,7 +584,7 @@ public class NormalGroupSettingActivity extends BaseActivity implements
         isExcuteOnCreate = false;
     }
 
-    class ViewHOld {
+    class ViewHold {
 		Button btn;
 	}
 
@@ -612,16 +611,16 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 		@Override
 		public View getView(final int position, View convertView,
 				final ViewGroup parent) {
-			ViewHOld viewhold;
+			ViewHold viewhold;
 			if (convertView == null) {
-				viewhold = new ViewHOld();
+				viewhold = new ViewHold();
 				convertView = LayoutInflater.from(getContext()).inflate(res,
 						null);
 				viewhold.btn = (Button) convertView
 						.findViewById(R.id.button_avatar);
 				convertView.setTag(viewhold);
 			} else {
-				viewhold = (ViewHOld) convertView.getTag();
+				viewhold = (ViewHold) convertView.getTag();
 			}
 
 			// 最后一个item，减人按钮
@@ -773,16 +772,7 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 												"您点击了自己", Toast.LENGTH_SHORT).show();
 									} else {
 										// 正常情况下点击user，可以进入用户详情
-										Intent intent = new Intent(NormalGroupSettingActivity.this,UserDetailActivity.class);
-                                        intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID , groupId);
-                                        intent.putStringArrayListExtra(ActivityExtraAndKeys.USER_ID, objects);
-                                        intent.putExtra(ActivityExtraAndKeys.UserDetail.SELECTED_USER_ID,username );
-                                        if(EMChatManager.getInstance().getCurrentUser()
-                                                .equals(group.getOwner())){
-                                            intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPOWNER, true);
-                                        }
-                                        intent.putExtra(ActivityExtraAndKeys.UserDetail.FROM_AND_STATUS, UserDetailActivity.FromAndStatus.FROM_NORMAL_GROUP_AND_FRIEND);
-										startActivity(intent);
+                                        IntentManager.intentToUseDetail(NormalGroupSettingActivity.this,username,groupId,objects,group.getOwner());
 									}
 								}
 
@@ -841,7 +831,7 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 						}
 					});
 
-					viewhold.btn
+					/*viewhold.btn
 							.setOnLongClickListener(new OnLongClickListener() {
 
 								@Override
@@ -861,13 +851,14 @@ public class NormalGroupSettingActivity extends BaseActivity implements
 									}
 									return false;
 								}
-							});
+							});*/
 				}
 			}
 			return convertView;
 		}
 
-		@Override
+
+        @Override
 		public int getCount() {
 			return super.getCount() + 2;
 		}

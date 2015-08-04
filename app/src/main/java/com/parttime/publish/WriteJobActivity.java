@@ -302,26 +302,7 @@ public class WriteJobActivity extends BaseActivity implements
             mEditSalary.setEnabled(true);
         }
 
-        switch (salaryUnit) {
-            case DAY:
-                mTxtSalaryUnitTip.setText(R.string.publish_job_salary_unit_day);
-                break;
-            case HOUR:
-                mTxtSalaryUnitTip.setText(R.string.publish_job_salary_unit_hour);
-                break;
-            case MONTH:
-                mTxtSalaryUnitTip.setText(R.string.publish_job_salary_unit_month);
-                break;
-            case TIMES:
-                mTxtSalaryUnitTip.setText(R.string.publish_job_salary_unit_times);
-                break;
-            case CASES:
-                mTxtSalaryUnitTip.setText(R.string.publish_job_salary_unit_cases);
-                break;
-            case FACE_TO_FACE:
-                mTxtSalaryUnitTip.setText("");
-                break;
-        }
+        mTxtSalaryUnitTip.setText(LabelUtils.getSalaryUnit(this, salaryUnit));
     }
 
     /**
