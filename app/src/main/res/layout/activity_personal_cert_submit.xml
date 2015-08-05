@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/id_front"/>
-                <!--<LinearLayout
+                <LinearLayout
                     android:id="@+id/ll_front_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                         android:text="@string/front_of_id_card"
                         android:textSize="15sp"
                         android:textColor="@color/common_txt_color"/>
-                </LinearLayout>-->
+                </LinearLayout>
             </FrameLayout>
 
             <FrameLayout
@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/id_back"/>
-                <!--<LinearLayout
+                <LinearLayout
                     android:id="@+id/ll_back_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                         android:text="@string/back_of_id_card"
                         android:textSize="15sp"
                         android:textColor="@color/common_txt_color"/>
-                </LinearLayout>-->
+                </LinearLayout>
             </FrameLayout>
 
             <Button

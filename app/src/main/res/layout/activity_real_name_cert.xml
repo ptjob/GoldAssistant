@@ -6,9 +6,10 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="31.5dp"
+        android:layout_height="32dp"
         android:gravity="center"
-        android:textSize="13dp"
+        android:paddingTop="9dp"
+        android:textSize="13sp"
         android:text="@string/which_kind_of_cert"/>
 
     <Button
@@ -28,22 +29,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="13dp"
-        android:textColor="@color/txt_color_gray"
+        android:textSize="13sp"
         android:layout_marginTop="15dp"
-        android:text="@string/real_name_line_1"/>
+        android:text="@string/your_info_only_for_auth"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="13dp"
-        android:textColor="@color/txt_color_gray"
-        android:text="@string/real_name_line_2"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="13dp"
-        android:textColor="@color/txt_color_gray"
-        android:text="@string/real_name_line_3"/>
+        android:textSize="13sp"
+        android:text="@string/promiss_to_protect_personal_info"/>
 </LinearLayout>

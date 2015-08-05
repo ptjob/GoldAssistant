@@ -74,11 +74,9 @@ public class MyFansActivity extends LocalInitActivity implements XListView.IXLis
                         Fans fans = gson.fromJson(s, Fans.class);
                         fs.add(fans);
                     }
-                    int resultLen = list != null ? list.length() : 0;
 //                    updateViews(fs);
                     setDatas(fs, false);
                     updateViews();
-                    lv.setLoadOver(resultLen, PAGE_SIZE);
                     lv.stopRefresh();
                     showWait(false);
                 }
@@ -111,10 +109,9 @@ public class MyFansActivity extends LocalInitActivity implements XListView.IXLis
                         Fans fans = (Fans) JsonUtil.jsonToBean(list.getJSONObject(i), Fans.class);
                         fs.add(fans);
                     }
-                    int resultLen = list != null ? list.length() : 0;
                     setDatas(fs, true);
                     updateViews();
-                    lv.setLoadOver(resultLen, PAGE_SIZE);
+                    lv.setLoadOver(pageSize, PAGE_SIZE);
                     lv.stopLoadMore();
 
                 }
@@ -256,7 +253,7 @@ public class MyFansActivity extends LocalInitActivity implements XListView.IXLis
             holder.tvName.setText(fans.user_name + " " + (fans.sex == 1 ? male : female));
             holder.tvSincereMoney.setText(context.getString(fans.earnest_money == 1 ? R.string.sincere_money_paid : R.string.sincere_money_not_paid));
             holder.tvCertStatus.setText(context.getString(fans.certification == 2 ? R.string.real_name_certed : R.string.real_name_not_certed));
-            holder.rvCredit.setTotalScore(fans.creditworthiness / 10);
+            holder.rvCredit.rank(fans.creditworthiness / 10);
             return convertView;
         }
 

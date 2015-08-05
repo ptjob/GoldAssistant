@@ -19,7 +19,7 @@
                     android:layout_width="68dp"
                     android:layout_height="75dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/enterprise_certed"/>
+                    android:src="@drawable/id_front"/>
             </RelativeLayout>
 
 
@@ -41,7 +41,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/form_item_height"
                 app:ei_hint="@string/unfill"
-                app:ei_nameShow="false"
                 android:background="@color/white"/>
 
             <TextView
@@ -52,7 +51,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/form_item_height"
                 app:ei_hint="@string/unfill"
-                app:ei_nameShow="false"
                 android:background="@color/white"/>
 
             <!--<FrameLayout

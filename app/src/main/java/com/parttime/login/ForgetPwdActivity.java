@@ -14,11 +14,9 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.base.LocalInitActivity;
-import com.parttime.constants.ApplicationConstants;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
 import com.parttime.net.ErrorHandler;
-import com.parttime.utils.CountDownTimer;
 import com.parttime.widget.EditItem;
 import com.qingmu.jianzhidaren.R;
 import com.quark.common.Url;
@@ -32,9 +30,7 @@ import java.util.Map;
 /**
  * Created by cjz on 2015/7/24.
  */
-public class ForgetPwdActivity extends LocalInitActivity implements CountDownTimer.TimeTick{
-
-
+public class ForgetPwdActivity extends LocalInitActivity{
 
     @ViewInject(R.id.ei_phone_num)
     private EditItem eiPhone;
@@ -53,11 +49,6 @@ public class ForgetPwdActivity extends LocalInitActivity implements CountDownTim
     private String validateCode;
     private String phoneNum;
 
-    private static CountDownTimer countDownTimer;
-    private static long lastTime;
-
-    private String stringAgain;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_forget_pwd);
@@ -69,15 +60,6 @@ public class ForgetPwdActivity extends LocalInitActivity implements CountDownTim
         super.initViews();
         center(R.string.forgetPass);
         left(TextView.class, R.string.back);
-        if(System.currentTimeMillis() - lastTime < ApplicationConstants.PERIOD_FOR_GET_CODE){
-            btnGetCode.setEnabled(false);
-            if(countDownTimer != null){
-                countDownTimer.cancel();
-            }
-            countDownTimer = new CountDownTimer((int) ((ApplicationConstants.PERIOD_FOR_GET_CODE - System.currentTimeMillis() + lastTime) / 1000), this);
-            countDownTimer.start();
-        }
-
     }
 
     private boolean validatePhoneNum(){
@@ -94,26 +76,18 @@ public class ForgetPwdActivity extends LocalInitActivity implements CountDownTim
             return;
         }
         showWait(true);
-        btnGetCode.setEnabled(false);
         phoneNum = eiPhone.getValue().trim();
         Map<String, String> params = new HashMap<String, String>();
         params.put("telephone", phoneNum);
         new BaseRequest().request(Url.COMPANY_FORGET_PWD, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
             @Override
             public void success(Object obj) {
-                if(countDownTimer != null){
-                    countDownTimer.cancel();
-                }
-                countDownTimer = new CountDownTimer(ApplicationConstants.PERIOD_FOR_GET_CODE / 1000, ForgetPwdActivity.this);
-                countDownTimer.start();
-                lastTime = System.currentTimeMillis();
                 showWait(false);
             }
 
             @Override
             public void failed(Object obj) {
                 showWait(false);
-                btnGetCode.setEnabled(true);
                 new ErrorHandler(ForgetPwdActivity.this, obj).showToast();
             }
         });
@@ -193,45 +167,5 @@ public class ForgetPwdActivity extends LocalInitActivity implements CountDownTim
     @Override
     protected TextView getCenter() {
         return null;
-    }
-
-    @Override
-    public void ticking(final int secondsLeft) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (stringAgain == null) {
-                    stringAgain = getString(R.string.acquire_again);
-                }
-                btnGetCode.setText(stringAgain + "(" + secondsLeft + ")");
-            }
-        });
-
-    }
-
-    @Override
-    public void stoped() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                btnGetCode.setText(getString(R.string.get_validation_code));
-                btnGetCode.setEnabled(true);
-            }
-        });
-    }
-
-    @Override
-    public void paused() {
-
-    }
-
-    @Override
-    public void cancelled() {
-
-    }
-
-    @Override
-    public void goOn() {
-
     }
 }

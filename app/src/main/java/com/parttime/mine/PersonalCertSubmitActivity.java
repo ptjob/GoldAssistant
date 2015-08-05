@@ -62,9 +62,9 @@ public class PersonalCertSubmitActivity extends UpLoadPicActivity implements Act
     private ImageView ivIdBack;
     @ViewInject(R.id.btn_submit)
     private Button btnSummit;
-//    @ViewInject(R.id.ll_front_text)
-//    private LinearLayout llFrontText;
-//    @ViewInject(R.id.ll_back_text)
+    @ViewInject(R.id.ll_front_text)
+    private LinearLayout llFrontText;
+    @ViewInject(R.id.ll_back_text)
     private LinearLayout llBackText;
 
 
@@ -77,7 +77,7 @@ public class PersonalCertSubmitActivity extends UpLoadPicActivity implements Act
     UploadImg.OnUploadListener frontUploadListener = new UploadImg.OnUploadListener() {
         @Override
         public void success() {
-//            llFrontText.setVisibility(View.GONE);
+            llFrontText.setVisibility(View.GONE);
             idFrontUploaded = true;
         }
 

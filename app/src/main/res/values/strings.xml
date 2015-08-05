@@ -206,6 +206,8 @@
     <string name="comment_remark_hint">啊哦，您对该用户做出了放飞机评价请说明一下理由</string>
     <string name="comment_fly_tips">您给放飞机评价，请输入至少10个字理由</string>
     <string name="loading_more">加载更多</string>
+    <string name="group_remark">群备注</string>
+    <string name="update_group_remark">修改群备注</string>
 
     <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
     <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
@@ -371,9 +373,6 @@
     <!-- 实名认证 -->
     <string name="your_info_only_for_auth">您的资料仅被实名认证</string>
     <string name="promiss_to_protect_personal_info">兼职达人不会向外界泄露您的个人信息</string>
-    <string name="real_name_line_1">*实名认证将有助于您更快速地</string>
-    <string name="real_name_line_2">找到合适的兼职人员</string>
-    <string name="real_name_line_3">*兼职达人承诺不会向外界泄露您的认证信息</string>
     <string name="boss_name">负责人姓名</string>
     <string name="boss_id_card">负责人身份证号</string>
     <string name="click_to_upload">点击上传</string>
@@ -566,11 +565,11 @@
     <string name="job_plaza_item_time_near_format">%1$d小时前</string>
     <string name="job_plaza_item_time_day_format">%1$d天前</string>
 
-
     <!-- 经纪人排行榜 -->
     <string name="job_broker_detail_title">经纪人详情</string>
     <string name="job_broker_fans_format">粉丝：%1$d</string>
     <string name="job_broker_detail_hire_type_format">主营：%1$s</string>
+
 
     <string name="title_activity_group_setting">GroupSettingActivity</string>
     <string name="title_activity_group_gag">GroupGagActivity</string>
@@ -579,7 +578,7 @@
     <string name="title_activity_public_count_list">PublicCountListActivity</string>
     <string name="title_activity_user_detail">UserDetailActivity</string>
     <string name="title_activity_image_show">ImageShowActivity</string>
-
+    <string name="title_activity_group_update_remark">GroupUpdateRemarkActivity</string>
 
 
 </resources>
