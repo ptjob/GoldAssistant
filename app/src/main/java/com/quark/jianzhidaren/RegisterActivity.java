@@ -50,10 +50,12 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.base.WithTitleActivity;
+import com.parttime.constants.ApplicationConstants;
 import com.parttime.login.RegisterInfoActivity;
 import com.parttime.main.MainTabActivity;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
+import com.parttime.net.ErrorHandler;
 import com.parttime.utils.CountDownTimer;
 import com.parttime.widget.EditItem;
 import com.qingmu.jianzhidaren.R;
@@ -138,7 +140,8 @@ public class RegisterActivity extends WithTitleActivity implements CountDownTime
 
 
 
-	private CountDownTimer countDownTimer;
+	private static CountDownTimer countDownTimer;
+	private static long lastTime;
 
 	private String code;
 	private int lastLen;
@@ -184,6 +187,14 @@ public class RegisterActivity extends WithTitleActivity implements CountDownTime
 		center(R.string.register);
 		left(TextView.class, R.string.back);
 		eiCode.addTextChangeListener(this);
+
+		if(System.currentTimeMillis() - lastTime < ApplicationConstants.PERIOD_FOR_GET_CODE){
+			if(countDownTimer != null){
+				countDownTimer.cancel();
+			}
+			countDownTimer = new CountDownTimer((int) (ApplicationConstants.PERIOD_FOR_GET_CODE - System.currentTimeMillis() + lastTime), this);
+			countDownTimer.start();
+		}
 	}
 
 	/**
@@ -586,8 +597,6 @@ public class RegisterActivity extends WithTitleActivity implements CountDownTime
 		if (Util.isMobileNO(telephoneStr)) {
 			telephoneStrTemp = telephoneStr;
 			btnGetCode.setEnabled(false);
-			countDownTimer = new CountDownTimer(60, this);
-			countDownTimer.start();
 			sendMSM();
 
 		} else {
@@ -734,11 +743,16 @@ public class RegisterActivity extends WithTitleActivity implements CountDownTime
 			public void success(Object obj) {
 				showWait(false);
 				btnNext.setEnabled(true);
+				countDownTimer = new CountDownTimer(ApplicationConstants.PERIOD_FOR_GET_CODE / 1000, RegisterActivity.this);
+				lastTime = System.currentTimeMillis();
+				countDownTimer.start();
 			}
 
 			@Override
 			public void failed(Object obj) {
 				showWait(false);
+				btnGetCode.setEnabled(true);
+				new ErrorHandler(RegisterActivity.this, obj).showToast();
 			}
 		});
 

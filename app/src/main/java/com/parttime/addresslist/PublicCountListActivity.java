@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,8 +21,11 @@ import com.parttime.IM.ChatActivity;
 import com.parttime.common.head.ActivityHead;
 import com.qingmu.jianzhidaren.R;
 import com.quark.http.image.CircularImage;
+import com.quark.image.UploadImg;
+import com.quark.jianzhidaren.ApplicationControl;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class PublicCountListActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
@@ -134,21 +138,24 @@ public class PublicCountListActivity extends BaseActivity implements AdapterView
                         R.drawable.custom_kefu);
                 BitmapDrawable bd = (BitmapDrawable) draw1;
                 Bitmap bitmap = bd.getBitmap();
-                viewHolder.picture.setImageBitmap(bitmap);
+                Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
+                viewHolder.picture.setImageBitmap(bit);
             }else if(getString(R.string.caiwu).equals(user.getUsername())){
                 viewHolder.name.setText(getString(R.string.caiwu_value));
                 Drawable draw1 = getResources().getDrawable(
                         R.drawable.custom_caiwu);
                 BitmapDrawable bd = (BitmapDrawable) draw1;
                 Bitmap bitmap = bd.getBitmap();
-                viewHolder.picture.setImageBitmap(bitmap);
+                Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
+                viewHolder.picture.setImageBitmap(bit);
             }else if(getString(R.string.dingyue).equals(user.getUsername())){
                 viewHolder.name.setText(getString(R.string.dingyue_value));
                 Drawable draw1 = getResources().getDrawable(
                         R.drawable.custom_xiaozhushou);
                 BitmapDrawable bd = (BitmapDrawable) draw1;
                 Bitmap bitmap = bd.getBitmap();
-                viewHolder.picture.setImageBitmap(bitmap);
+                Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
+                viewHolder.picture.setImageBitmap(bit);
             }
 
 

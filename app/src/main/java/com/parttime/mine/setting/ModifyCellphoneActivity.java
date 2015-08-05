@@ -19,10 +19,12 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.parttime.base.IntentManager;
 import com.parttime.base.WithTitleActivity;
+import com.parttime.constants.ApplicationConstants;
 import com.parttime.constants.SharedPreferenceConstants;
 import com.parttime.net.BaseRequest;
 import com.parttime.net.Callback;
 import com.parttime.net.ErrorHandler;
+import com.parttime.utils.CountDownTimer;
 import com.parttime.utils.SharePreferenceUtil;
 import com.parttime.widget.EditItem;
 import com.qingmu.jianzhidaren.R;
@@ -39,7 +41,7 @@ import java.util.Map;
 /**
  * Created by cjz on 2015/7/24.
  */
-public class ModifyCellphoneActivity extends WithTitleActivity implements TextWatcher{
+public class ModifyCellphoneActivity extends WithTitleActivity implements TextWatcher, CountDownTimer.TimeTick{
 
     private static final int CODE_LEN = 6;
 
@@ -71,6 +73,10 @@ public class ModifyCellphoneActivity extends WithTitleActivity implements TextWa
 
     private int lastLen;
     private boolean everReachLen;
+
+
+    private static CountDownTimer countDownTimer;
+    private static long lastTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_modify_cellphone);
@@ -84,6 +90,14 @@ public class ModifyCellphoneActivity extends WithTitleActivity implements TextWa
         left(TextView.class, R.string.back);
         center(R.string.modify_phone_number);
         eiCode.addTextChangeListener(this);
+        if(System.currentTimeMillis() - lastTime < ApplicationConstants.PERIOD_FOR_GET_CODE){
+            btnGetCode.setEnabled(false);
+            if(countDownTimer != null){
+                countDownTimer.cancel();
+            }
+            countDownTimer = new CountDownTimer((int) ((ApplicationConstants.PERIOD_FOR_GET_CODE - System.currentTimeMillis() + lastTime) / 1000), this);
+            countDownTimer.start();
+        }
     }
 
 //    private boolean validatePhoneNum(){
@@ -108,6 +122,12 @@ public class ModifyCellphoneActivity extends WithTitleActivity implements TextWa
             @Override
             public void success(Object obj) {
                 showWait(false);
+                if(countDownTimer != null){
+                    countDownTimer.cancel();
+                }
+                countDownTimer = new CountDownTimer(ApplicationConstants.PERIOD_FOR_GET_CODE / 1000, ModifyCellphoneActivity.this);
+                countDownTimer.start();
+                lastTime = System.currentTimeMillis();
                 btnNext.setEnabled(true);
 //                finish();
             }
@@ -278,6 +298,46 @@ public class ModifyCellphoneActivity extends WithTitleActivity implements TextWa
             }
         }
         lastLen = length;
+
+    }
+
+    private String stringAgain;
+    @Override
+    public void ticking(final int secondsLeft) {
+        if(stringAgain == null){
+            stringAgain = getString(R.string.acquire_again);
+        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                btnGetCode.setText(stringAgain + "(" + secondsLeft + ")");
+            }
+        });
+    }
+
+    @Override
+    public void stoped() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                btnGetCode.setText(getString(R.string.get_validation_code));
+                btnGetCode.setEnabled(true);
+            }
+        });
+    }
+
+    @Override
+    public void paused() {
+
+    }
+
+    @Override
+    public void cancelled() {
+
+    }
+
+    @Override
+    public void goOn() {
 
     }
 }

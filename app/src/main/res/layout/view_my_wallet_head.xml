@@ -1,50 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/ll_balance_block"
-        android:layout_width="match_parent"
-        android:layout_height="84dp"
-        android:background="#f2f2f2"
-        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="83.5dp"
+        android:layout_weight="1"
+        android:background="@color/gray_block"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/common_margin">
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
+
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <TextView
                 android:id="@+id/tv_balance_name"
                 android:layout_width="wrap_content"
-                android:layout_height="37dp"
-                android:textSize="16sp"
-                android:paddingTop="10dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:textColor="@color/txt_color_black"
+                android:layout_marginTop="10dp"
                 android:text="@string/account_balance"/>
             <TextView
                 android:id="@+id/tv_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_balance_name"
-                android:textSize="36sp"
-                android:text="1024.00"/>
+                android:layout_marginTop="10dp"
+                android:textSize="36dp" />
 
         </RelativeLayout>
 
+        <include layout="@layout/view_divider"/>
 
-        <TextView
-            android:id="@+id/tv_recharge"
-            android:layout_width="84dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textColor="@color/common_txt_color"
-            android:textSize="20sp"
-            android:text="@string/recharge"
-            android:background="#fe8a00"/>
 
     </LinearLayout>
+    <TextView
+        android:id="@+id/tv_recharge"
+        android:layout_width="83.5dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@color/common_txt_color"
+        android:textSize="20dp"
+        android:text="@string/recharge"
+        android:background="@color/common_orange"/>
 
-    <include layout="@layout/view_divider"/>
 
 </LinearLayout>
