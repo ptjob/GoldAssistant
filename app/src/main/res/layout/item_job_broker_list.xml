@@ -33,8 +33,7 @@
     <com.quark.http.image.CircularImage
         android:id="@+id/imgvi_head"
         android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_launcher" />
+        android:layout_height="60dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

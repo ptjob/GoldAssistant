@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.parttime.common.Image.ContactImageLoader;
 import com.parttime.publish.vo.JobBrokerListVo;
 import com.parttime.utils.CheckUtils;
 import com.parttime.utils.SharePreferenceUtil;
@@ -29,11 +31,13 @@ public class JobBrokerListAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private List<JobBrokerListVo> mData;
+    private RequestQueue queue;
 
-    public JobBrokerListAdapter(Context context) {
+    public JobBrokerListAdapter(Context context, RequestQueue queue) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(mContext);
         mData = new ArrayList<>();
+        this.queue = queue;
     }
 
     public void setAll(List<JobBrokerListVo> data) {
@@ -101,9 +105,9 @@ public class JobBrokerListAdapter extends BaseAdapter {
                 viewHolder.mImgViRankPic.setVisibility(View.GONE);
                 break;
         }
-        loadNativePhoto(String.valueOf(jobBrokerListVo.companyId), viewHolder.mImgViHead);
+        ContactImageLoader.loadNativePhoto(String.valueOf(jobBrokerListVo.companyId), jobBrokerListVo.picInfo, viewHolder.mImgViHead, queue);
         viewHolder.mTxtFans.setText(mContext.getString(R.string.job_broker_fans_format, jobBrokerListVo.fans));
-        viewHolder.mTxtBrokerType.setText(CheckUtils.isEmpty(jobBrokerListVo.hireType) ? mContext.getString(R.string.none) : jobBrokerListVo.hireType);
+        viewHolder.mTxtBrokerType.setText(CheckUtils.isEmpty(jobBrokerListVo.hireType) || jobBrokerListVo.hireType.equals("null") ? mContext.getString(R.string.none) : jobBrokerListVo.hireType);
 
 //        viewHolder.mTxtJobTitle.setText(jobManageListVo.jobTitle);
 //        viewHolder.mTxtView.setText(mContext.getString(R.string.job_manage_view_count_format, jobManageListVo.view));
@@ -124,37 +128,4 @@ public class JobBrokerListAdapter extends BaseAdapter {
         private CircularImage mImgViHead;
     }
 
-    /**
-     * 加载本地头像和名字
-     */
-    private void loadNativePhoto(final String id, final CircularImage avatar) {
-        File mePhotoFold = new File(Environment.getExternalStorageDirectory()
-                + "/" + "jzdr/" + "image");
-        if (!mePhotoFold.exists()) {
-            mePhotoFold.mkdirs();
-        }
-        File picture_1 = new File(Environment.getExternalStorageDirectory()
-                + "/" + "jzdr/" + "image/" + SharePreferenceUtil.getInstance(mContext).loadStringSharedPreference(id + "_photo", "c"));
-
-        if (picture_1.exists()) {
-            // 加载本地图片
-            // Bitmap bb_bmp = MyResumeActivity.zoomImg(picture_1, 300, 300);
-            Bitmap bb_bmp = BitmapFactory.decodeFile(Environment
-                    .getExternalStorageDirectory()
-                    + "/"
-                    + "jzdr/"
-                    + "image/"
-                    + SharePreferenceUtil.getInstance(mContext).loadStringSharedPreference(id + "_photo", "c"));
-            if (bb_bmp != null) {
-                avatar.setImageBitmap(LoadImage.toRoundBitmap(bb_bmp));
-            } else {
-                avatar.setImageResource(R.drawable.default_avatar);
-                //getNick(id, avatar, name);
-            }
-        } else {
-            avatar.setImageResource(R.drawable.default_avatar);
-            //getNick(id, avatar, name);
-        }
-
-    }
 }

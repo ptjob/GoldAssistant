@@ -1018,12 +1018,20 @@
             android:name="com.parttime.publish.JobExpansionActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
+
+        <!-- 兼职广场 -->
         <activity
             android:name="com.parttime.publish.JobPlazaActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
+
+        <!-- 经纪人排行榜 -->
         <activity
             android:name="com.parttime.publish.JobBrokerChartsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.parttime.publish.JobBrokerDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 

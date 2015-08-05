@@ -566,7 +566,11 @@
     <string name="job_plaza_item_time_day_format">%1$d天前</string>
 
     <!-- 经纪人排行榜 -->
+    <string name="job_broker_detail_title">经纪人详情</string>
     <string name="job_broker_fans_format">粉丝：%1$d</string>
+    <string name="job_broker_detail_hire_type_format">主营：%1$s</string>
+
+
     <string name="title_activity_group_setting">GroupSettingActivity</string>
     <string name="title_activity_group_gag">GroupGagActivity</string>
     <string name="title_activity_resume_batch_management">ResumeBatchManagementActivity</string>
@@ -575,5 +579,6 @@
     <string name="title_activity_user_detail">UserDetailActivity</string>
     <string name="title_activity_image_show">ImageShowActivity</string>
     <string name="title_activity_group_update_remark">GroupUpdateRemarkActivity</string>
+
 
 </resources>

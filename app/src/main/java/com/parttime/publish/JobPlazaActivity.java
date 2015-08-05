@@ -71,13 +71,13 @@ public class JobPlazaActivity extends BaseActivity implements AdapterView.OnItem
         setContentView(R.layout.activity_job_plaza);
         initControls();
         bindListener();
-
+        bindData();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        bindData();
+
     }
 
     private void bindData() {

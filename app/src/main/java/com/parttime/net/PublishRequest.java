@@ -85,19 +85,34 @@ public class PublishRequest extends BaseRequest {
     }
 
     /**
-     * 已发布活动列表
+     * 我的已发布活动列表
      *
      * @param page  页码号
      * @param count 分页大小
-     * @param type  类型（1-招人中，2-审核中，3已下架）
+     * @param type  类型（1-招人中，2-审核中，3已下架，null是全部）
      */
-    public void publishActivityList(int page, int count, int type,
+    public void publishActivityList(int page, int count, Integer type,
                                     RequestQueue requestQueue, final DefaultCallback callback) {
+        int companyId = ApplicationUtils.getLoginId();
+        publishActivityList(companyId, page, count, type, requestQueue, callback);
+    }
+
+    /**
+     * 已发布活动列表
+     *
+     * @param companyId 指定商家
+     * @param page  页码号
+     * @param count 分页大小
+     * @param type  类型（1-招人中，2-审核中，3已下架，null是全部）
+     */
+    public void publishActivityList(int companyId, int page, int count, Integer type, RequestQueue requestQueue, final DefaultCallback callback) {
         HashMap<String, String> reqParams = new HashMap<>();
-        reqParams.put("company_id", String.valueOf(ApplicationUtils.getLoginId()));
+        reqParams.put("company_id", String.valueOf(companyId));
         reqParams.put("pn", String.valueOf(page));
         reqParams.put("page_size", String.valueOf(count));
-        reqParams.put("type", String.valueOf(type));
+        if (type != null) {
+            reqParams.put("type", String.valueOf(type));
+        }
 
         String url = Url.COMPANY_MyJianzhi_List;
         request(url, reqParams, requestQueue, new Callback() {
@@ -367,7 +382,6 @@ public class PublishRequest extends BaseRequest {
             @Override
             public void success(Object obj) throws JSONException {
                 JSONObject jsonObject = (JSONObject) obj;
-                Log.i("wyw", jsonObject.toString());
                 JSONObject activityPage = jsonObject.getJSONObject("agentPage");
                 JobBrokerChartsFragmentVo publishActivityListVo = new JobBrokerChartsFragmentVo();
                 publishActivityListVo.pageNumber = activityPage.getInt("pageNumber");

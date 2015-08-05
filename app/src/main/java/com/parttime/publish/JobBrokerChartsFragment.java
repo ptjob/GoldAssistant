@@ -15,6 +15,7 @@ import com.parttime.net.ResponseBaseCommonError;
 import com.parttime.publish.adapter.JobBrokerListAdapter;
 import com.parttime.publish.vo.JobBrokerChartsFragmentVo;
 import com.parttime.utils.CheckUtils;
+import com.parttime.utils.IntentManager;
 import com.parttime.widget.BaseXListView;
 import com.qingmu.jianzhidaren.R;
 import com.quark.fragment.company.BaseSupportFragment;
@@ -103,12 +104,12 @@ public class JobBrokerChartsFragment extends BaseSupportFragment implements Adap
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        bindData();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        bindData();
     }
 
     @Override
@@ -122,7 +123,7 @@ public class JobBrokerChartsFragment extends BaseSupportFragment implements Adap
     }
 
     private void bindData() {
-        mAdapterMain = new JobBrokerListAdapter(getActivity());
+        mAdapterMain = new JobBrokerListAdapter(getActivity(), queue);
         mListViewMain.setAdapter(mAdapterMain);
 
         refreshFirstPage();
@@ -149,8 +150,14 @@ public class JobBrokerChartsFragment extends BaseSupportFragment implements Adap
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+    public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+        int position = i - 1;
+        if (position < mAdapterMain.getCount()) {
+            long companyId = mAdapterMain.getItemId(position);
+            IntentManager.openBrokerDetailActivity(getActivity(), (int) companyId);
+        } else {
+            showToast(R.string.error_date_and_refresh);
+        }
     }
 
     @Override

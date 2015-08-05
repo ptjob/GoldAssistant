@@ -13,6 +13,7 @@ import com.parttime.constants.ActivityExtraAndKeys;
 import com.parttime.main.MainTabActivity;
 import com.parttime.net.GroupSettingRequest;
 import com.parttime.pojo.PartJob;
+import com.parttime.publish.JobBrokerDetailActivity;
 import com.parttime.publish.JobDetailActivity;
 import com.quark.jianzhidaren.ApplicationControl;
 
@@ -104,6 +105,17 @@ public class IntentManager {
         Intent intent = new Intent(context, JobDetailActivity.class);
         intent.putExtra(JobDetailActivity.EXTRA_ID, jobId);
         intent.putExtra(JobDetailActivity.EXTRA_GROUP_ID, groupId);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 打开经纪人详情页面
+     * @param context
+     * @param companyId
+     */
+    public static void openBrokerDetailActivity(Context context, int companyId) {
+        Intent intent = new Intent(context, JobBrokerDetailActivity.class);
+        intent.putExtra(JobBrokerDetailActivity.EXTRA_COMPANY_ID, companyId);
         context.startActivity(intent);
     }
 
