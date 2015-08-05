@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context="com.parttime.IM.activitysetting.SendAdmitToEmailActivity"
+              android:orientation="vertical"
+              android:background="@color/c_F5F5F5">
+
+    <include layout="@layout/activity_common_head"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:text="@string/group_remark"
+        android:paddingLeft="15dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="13sp"
+        android:gravity="center_vertical"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_item_height"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/name"
+        android:paddingLeft="15dp"
+        android:textSize="15sp"
+        android:background="@color/white"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="@string/done"
+        style="@style/FormOrangeButton"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/done"
+        android:layout_gravity="center_horizontal" />
+
+
+</LinearLayout>
