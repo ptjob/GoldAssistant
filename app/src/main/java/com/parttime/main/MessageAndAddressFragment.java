@@ -41,6 +41,7 @@ import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.chatuidemo.Constant;
+import com.parttime.IM.activitysetting.ChatSendMsgHelper;
 import com.parttime.addresslist.AddContactActivity;
 import com.parttime.addresslist.GroupsActivity;
 import com.easemob.chatuidemo.activity.NewFriendsMsgActivity;
@@ -60,6 +61,7 @@ import com.parttime.main.adapter.ChatAllHistoryAdapter;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.MessageSet;
+import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
 import com.quark.citylistview.CharacterParser;
 import com.quark.common.ToastUtil;
@@ -406,6 +408,9 @@ public class MessageAndAddressFragment extends Fragment {
 		@Override
 		public void onClick(View v) {
             if(index == 0){
+                if(BuildConfig.DEBUG){
+                    new ChatSendMsgHelper().sendShareActivity("1437837767605","6038","南山", "取钱", "1000元一天");
+                }
                 if(addContactView != null){
                     addContactView.setVisibility(View.GONE);
                 }

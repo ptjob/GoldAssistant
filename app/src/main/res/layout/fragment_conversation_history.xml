@@ -53,6 +53,6 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
         android:cacheColorHint="#00000000"
-        android:divider="@color/list_divider" />
+        android:divider="@drawable/line_item_dividing" />
 
 </LinearLayout>

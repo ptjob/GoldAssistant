@@ -155,7 +155,7 @@ public class Url {
 			+ "/UserCenter/update_resume";
 
 	public static final String COMPANY_SHOW_INTRO = HOST + SUBJECT
-			+ "/CompanyCenter/`showResume";
+			+ "/CompanyCenter/showResume";
 	// 29 上传我的照片
 	public static final String USER_jianli_uploadmypic = HOST + SUBJECT
 			+ "/UserCenter/upload_my_avatar";
@@ -336,6 +336,9 @@ public class Url {
 	// 评价用户 3.0
 	public static final String COMMENT_REQUIRE = HOST + SUBJECT
 			+ "/Activity/commentRequire";
+	// 设置用户备注 3.0
+	public static final String COMMENT_MODIFY_USER_ALIAS = HOST + SUBJECT
+			+ "/Activity/modifyUserAlias";
 	// 评价用户获取分页接口 3.0
 	public static final String COMMENT_DETAIL_PAGER = HOST + SUBJECT
 			+ "/UserCenter/comment";

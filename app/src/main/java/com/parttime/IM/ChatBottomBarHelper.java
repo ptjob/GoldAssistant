@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parttime.constants.ApplicationConstants;
 import com.qingmu.jianzhidaren.R;
 
 /**
@@ -56,7 +57,7 @@ public class ChatBottomBarHelper implements View.OnClickListener{
                 publicAccountBar.setVisibility(View.GONE);
                 break;
             case R.id.call_customer_service:
-                Intent intent=new Intent(Intent.ACTION_CALL, Uri.parse("tel:12345678901"));
+                Intent intent=new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+ ApplicationConstants.OFFICIAL_NUMBER));
                 activity.startActivity(intent);
                 break;
             case R.id.parttime_scchool:

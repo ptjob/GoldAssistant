@@ -5,11 +5,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.easemob.chatuidemo.activity.BaseActivity;
 import com.parttime.common.head.ActivityHead;
 import com.parttime.constants.ActivityExtraAndKeys;
+import com.parttime.net.DefaultCallback;
+import com.parttime.net.UserDetailRequest;
 import com.qingmu.jianzhidaren.R;
+import com.quark.jianzhidaren.BaseActivity;
 
 public class GroupUpdateRemarkActivity extends BaseActivity {
 
@@ -18,6 +21,7 @@ public class GroupUpdateRemarkActivity extends BaseActivity {
 
 
     private EditText name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +36,28 @@ public class GroupUpdateRemarkActivity extends BaseActivity {
             public void onClick(View v) {
                 String newName = name.getText().toString();
                 if(! newName.equals(oldName)){
+                    new UserDetailRequest().updateUserRemark(groupId,userId,newName,
+                            GroupUpdateRemarkActivity.this.queue , new DefaultCallback(){
+                        @Override
+                        public void success(Object obj) {
+                            GroupUpdateRemarkActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    finish();
+                                }
+                            });
+                        }
 
+                        @Override
+                        public void failed(Object obj) {
+                            Toast.makeText(GroupUpdateRemarkActivity.this, getString(R.string.action_failed), Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                }else{
+                    finish();
                 }
-                finish();
+
             }
         });
 

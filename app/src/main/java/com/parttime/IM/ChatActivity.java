@@ -1156,20 +1156,31 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
      *
      * @param view View
      */
-    public void setModeVoice(View view) {
+    public void setModeVoice(final View view) {
 
-        edittextLayout.setVisibility(View.GONE);
-        view.setVisibility(View.GONE);
-        buttonSetModeKeyboard.setVisibility(View.VISIBLE);
-        buttonSend.setVisibility(View.GONE);
-        btnMore.setVisibility(View.VISIBLE);
-        buttonPressToSpeak.setVisibility(View.VISIBLE);
-        iv_emoticons_normal.setVisibility(View.VISIBLE);
-        iv_emoticons_checked.setVisibility(View.INVISIBLE);
-        btnContainer.setVisibility(View.VISIBLE);
-        emojiIconContainer.setVisibility(View.GONE);
-        moreGone();
-        hideKeyboard();
+        micImageHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                edittextLayout.setVisibility(View.GONE);
+                view.setVisibility(View.GONE);
+                buttonSetModeKeyboard.setVisibility(View.VISIBLE);
+                buttonSend.setVisibility(View.GONE);
+                btnMore.setVisibility(View.VISIBLE);
+                buttonPressToSpeak.setVisibility(View.VISIBLE);
+                iv_emoticons_normal.setVisibility(View.VISIBLE);
+                iv_emoticons_checked.setVisibility(View.INVISIBLE);
+                btnContainer.setVisibility(View.VISIBLE);
+                emojiIconContainer.setVisibility(View.GONE);
+                moreGone();
+            }
+        });
+        micImageHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                hideKeyboard();
+            }
+        });
+
 
     }
 

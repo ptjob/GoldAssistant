@@ -185,4 +185,34 @@ public class UserDetailRequest extends BaseRequest {
         });
     }
 
+    /**
+     * 设置用户备注
+     * @param groupId String
+     * @param userId String
+     * @param remark String
+     * @param queue RequestQueue
+     * @param callback Callback
+     */
+    public void updateUserRemark(String groupId, String userId , String remark,
+                                 RequestQueue queue, final Callback callback){
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        map.put("group_id", groupId);
+        map.put("alias", remark);
+
+        request(Url.COMMENT_MODIFY_USER_ALIAS, map, queue, new Callback() {
+
+            @Override
+            public void success(Object obj) throws JSONException {
+                callback.success(obj);
+            }
+
+            @Override
+            public void failed(Object obj) {
+                callback.failed(obj);
+            }
+        });
+
+    }
+
 }
