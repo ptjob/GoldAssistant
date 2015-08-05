@@ -64,12 +64,12 @@ public class BeforeCertedActivity extends UpLoadPicActivity{
     private ImageView ivRegId;
     @ViewInject(R.id.btn_submit)
     private Button btnSummit;
-    @ViewInject(R.id.ll_front_text)
-    private LinearLayout llFrontText;
-    @ViewInject(R.id.ll_back_text)
-    private LinearLayout llBackText;
-    @ViewInject(R.id.ll_enterprise_reg_id)
-    private LinearLayout llRegIdText;
+//    @ViewInject(R.id.ll_front_text)
+//    private LinearLayout llFrontText;
+//    @ViewInject(R.id.ll_back_text)
+//    private LinearLayout llBackText;
+//    @ViewInject(R.id.ll_enterprise_reg_id)
+//    private LinearLayout llRegIdText;
 
     private boolean idFrontUploaded, idBackUploaded, idRegIdUploaded;
 //
@@ -82,7 +82,7 @@ public class BeforeCertedActivity extends UpLoadPicActivity{
     UploadImg.OnUploadListener frontUploadListener = new UploadImg.OnUploadListener() {
         @Override
         public void success() {
-            llFrontText.setVisibility(View.GONE);
+//            llFrontText.setVisibility(View.GONE);
             idFrontUploaded = true;
         }
 
@@ -95,7 +95,7 @@ public class BeforeCertedActivity extends UpLoadPicActivity{
     UploadImg.OnUploadListener backUploadListener = new UploadImg.OnUploadListener() {
         @Override
         public void success() {
-            llBackText.setVisibility(View.GONE);
+//            llBackText.setVisibility(View.GONE);
             idBackUploaded = true;
         }
 
@@ -109,7 +109,7 @@ public class BeforeCertedActivity extends UpLoadPicActivity{
 
         @Override
         public void success() {
-            llRegIdText.setVisibility(View.GONE);
+//            llRegIdText.setVisibility(View.GONE);
             idRegIdUploaded = true;
         }
 
@@ -161,16 +161,16 @@ public class BeforeCertedActivity extends UpLoadPicActivity{
         eiBossName.setValue(certVo.name);
         eiBossIdCard.setValue(certVo.idNum);
         if(!TextUtils.isEmpty(certVo.idFront)) {
-            llFrontText.setVisibility(View.GONE);
+//            llFrontText.setVisibility(View.GONE);
             ContactImageLoader.loadNativePhoto(null, certVo.idFront, ivIdFront, -1, VolleySington.getInstance().getRequestQueue());
         }
         if(!TextUtils.isEmpty(certVo.idBack)) {
-            llBackText.setVisibility(View.GONE);
+//            llBackText.setVisibility(View.GONE);
             ContactImageLoader.loadNativePhoto(null, certVo.idBack, ivIdBack, -1, VolleySington.getInstance().getRequestQueue());
         }
         if(certVo.accountType == AccountType.ENTERPRISE) {
             if (!TextUtils.isEmpty(certVo.regIdPic)) {
-                llRegIdText.setVisibility(View.GONE);
+//                llRegIdText.setVisibility(View.GONE);
                 ContactImageLoader.loadNativePhoto(null, certVo.regIdPic, ivRegId, -1, VolleySington.getInstance().getRequestQueue());
             }
         }

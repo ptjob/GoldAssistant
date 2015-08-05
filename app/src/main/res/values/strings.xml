@@ -371,6 +371,9 @@
     <!-- 实名认证 -->
     <string name="your_info_only_for_auth">您的资料仅被实名认证</string>
     <string name="promiss_to_protect_personal_info">兼职达人不会向外界泄露您的个人信息</string>
+    <string name="real_name_line_1">*实名认证将有助于您更快速地</string>
+    <string name="real_name_line_2">找到合适的兼职人员</string>
+    <string name="real_name_line_3">*兼职达人承诺不会向外界泄露您的认证信息</string>
     <string name="boss_name">负责人姓名</string>
     <string name="boss_id_card">负责人身份证号</string>
     <string name="click_to_upload">点击上传</string>

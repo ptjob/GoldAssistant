@@ -467,26 +467,29 @@
     </style>
 
     <style name="FormItem_Common.FormItem_Icon">
-        <item name="android:layout_width">@dimen/form_item_icon_edge</item>
-        <item name="android:layout_height">@dimen/form_item_icon_edge</item>
+        <item name="android:layout_width">@dimen/form_item_icon_width</item>
+        <item name="android:layout_height">@dimen/form_item_icon_height</item>
         <item name="android:layout_marginLeft">@dimen/form_item_margin_left</item>
         <item name="android:layout_alignParentLeft">true</item>
     </style>
 
     <style name="FormItem_Common.FormItem_Title">
         <item name="android:layout_marginLeft">@dimen/form_item_title_margin_left</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/txt_color_black</item>
     </style>
 
     <style name="FormItem_Common.FormItem_Arrow">
         <item name="android:src">@drawable/btn_go</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_marginRight">@dimen/form_item_margin_left</item>
-        <item name="android:layout_marginLeft">@dimen/commopn_inner_margin</item>
+        <item name="android:layout_marginLeft">15dp</item>
     </style>
 
     <style name="FormItem_Common.FormItem_Value">
         <item name="android:gravity">right</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/txt_color_gray</item>
     </style>
 
     <style name="FormItem_Common.FormItem_Kick_Off">
@@ -510,11 +513,12 @@
         <item name="android:textColor">#c7c6ca</item>
         <item name="android:textSize">15sp</item>
         <item name="android:layout_marginLeft">@dimen/common_margin</item>
+        <item name="android:layout_marginRight">15dp</item>
     </style>
 
     <style name="EditItem_Common.Value">
         <item name="android:textSize">15sp</item>
-        <item name="android:layout_marginLeft">15dp</item>
+        <!--<item name="android:layout_marginLeft">15dp</item>-->
         <item name="android:background">@null</item>
         <item name="android:singleLine">true</item>
         <item name="android:layout_width">match_parent</item>
