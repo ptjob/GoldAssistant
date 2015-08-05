@@ -20,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.exceptions.EaseMobException;
 import com.parttime.IM.activitysetting.GroupSettingActivity;
+import com.parttime.addresslist.GroupUpdateRemarkActivity;
 import com.parttime.base.WithTitleActivity;
 import com.parttime.constants.ActivityExtraAndKeys;
 import com.qingmu.jianzhidaren.R;
@@ -258,10 +259,14 @@ public class UserDetailActivity extends WithTitleActivity implements View.OnClic
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserDetailActivity.this, GroupSettingActivity.class);
-                intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID, groupId);
-                startActivity(intent);
-                more.dismiss();
+                if(adapter.cache != null && adapter.cache.get(userId) != null) {
+                    Intent intent = new Intent(UserDetailActivity.this, GroupUpdateRemarkActivity.class);
+                    intent.putExtra(ActivityExtraAndKeys.GroupSetting.GROUPID, groupId);
+                    intent.putExtra(ActivityExtraAndKeys.USER_ID, userId);
+                    intent.putExtra(ActivityExtraAndKeys.GroupUpdateRemark.USER_NAME, adapter.cache.get(userId).name);
+                    startActivity(intent);
+                    more.dismiss();
+                }
             }
         });
 

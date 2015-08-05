@@ -138,24 +138,21 @@ public class PublicCountListActivity extends BaseActivity implements AdapterView
                         R.drawable.custom_kefu);
                 BitmapDrawable bd = (BitmapDrawable) draw1;
                 Bitmap bitmap = bd.getBitmap();
-                Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-                viewHolder.picture.setImageBitmap(bit);
+                viewHolder.picture.setImageBitmap(bitmap);
             }else if(getString(R.string.caiwu).equals(user.getUsername())){
                 viewHolder.name.setText(getString(R.string.caiwu_value));
                 Drawable draw1 = getResources().getDrawable(
                         R.drawable.custom_caiwu);
                 BitmapDrawable bd = (BitmapDrawable) draw1;
                 Bitmap bitmap = bd.getBitmap();
-                Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-                viewHolder.picture.setImageBitmap(bit);
+                viewHolder.picture.setImageBitmap(bitmap);
             }else if(getString(R.string.dingyue).equals(user.getUsername())){
                 viewHolder.name.setText(getString(R.string.dingyue_value));
                 Drawable draw1 = getResources().getDrawable(
                         R.drawable.custom_xiaozhushou);
                 BitmapDrawable bd = (BitmapDrawable) draw1;
                 Bitmap bitmap = bd.getBitmap();
-                Bitmap bit = UploadImg.toRoundCorner(bitmap, 2);
-                viewHolder.picture.setImageBitmap(bit);
+                viewHolder.picture.setImageBitmap(bitmap);
             }
 
 

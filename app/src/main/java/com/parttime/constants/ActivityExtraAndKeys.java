@@ -25,6 +25,10 @@ public class ActivityExtraAndKeys {
         public static String GROUPOWNER = "group_OWNER";
     }
 
+    public static class GroupUpdateRemark{
+        public static String USER_NAME = "USER_NAME";
+    }
+
     /**
      * 通讯录
      */

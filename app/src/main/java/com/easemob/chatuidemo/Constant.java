@@ -19,5 +19,6 @@ public class Constant {
     public static final String PUBLIC_COUNT = "public_count";
 	public static final String MESSAGE_ATTR_IS_VOICE_CALL = "is_voice_call";
 	public static final String MESSAGE_ATTR_IS_EXTRA = "activityExtra";
+    public static final String MESSAGE_SHARE_JOB = "share_job";
 	public static final String ACCOUNT_REMOVED = "account_removed";
 }

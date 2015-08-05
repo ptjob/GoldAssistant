@@ -1,29 +1,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.parttime.IM.EditGroupNoticeActivity">
+    tools:context="com.parttime.IM.EditGroupNoticeActivity"
+    android:background="@color/c_F5F5F5">
     <include layout="@layout/activity_common_head"
         android:id="@+id/include" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:text="@string/group_notice_function_declare"
         android:layout_below="@+id/include"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
-        android:padding="5dp"
+        android:paddingLeft="15dp"
+        android:textSize="13sp"
         android:id="@+id/declare" />
 
     <FrameLayout android:id="@+id/notice_container"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@+id/declare">
+        android:layout_height="180dp"
+        android:layout_below="@+id/declare"
+        android:background="@color/white">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textMultiLine"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:textSize="15sp"
+            android:gravity="top|left"
+            android:hint="@string/group_notice_hint"
             android:id="@+id/notice_content"
+
             />
 
         <TextView
@@ -39,8 +48,12 @@
     </FrameLayout>
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        style="@style/FormOrangeButton"
+        android:layout_marginTop="20dp"
         android:text="@string/done"
+        android:paddingLeft="90dp"
+        android:paddingRight="90dp"
         android:id="@+id/done"
         android:layout_below="@+id/notice_container"
         android:layout_centerHorizontal="true" />

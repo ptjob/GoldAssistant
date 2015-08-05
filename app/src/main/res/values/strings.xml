@@ -120,6 +120,7 @@
     <!-- 编辑群通知 -->
     <string name="group_notice_function_declare">群通知是XXX的功能</string>
     <string name="group_notice_max_count_tip">限制输入数为%1$d</string>
+    <string name="group_notice_hint">请在此输入您想让群成员看到的通知</string>
 
     <!-- 群组设置 -->
     <string name="group_member">群成员</string>
@@ -174,7 +175,9 @@
     <string name="tips_of_notificaion_of_group">请在此输入您想让群成员收到的通告</string>
     <string name="pick_members_of_group">选择群成员</string>
 
+
     <!-- 联系人详情 -->
+    <string name="title_activity_group_update_remark">""</string>
     <string name="forbidden_talk">禁言</string>
     <string name="cancel_forbidden_talk">取消禁言</string>
     <string name="update_group_notice">修改群备注</string>
@@ -206,6 +209,8 @@
     <string name="comment_remark_hint">啊哦，您对该用户做出了放飞机评价请说明一下理由</string>
     <string name="comment_fly_tips">您给放飞机评价，请输入至少10个字理由</string>
     <string name="loading_more">加载更多</string>
+    <string name="group_remark">群备注</string>
+    <string name="update_group_remark">修改群备注</string>
 
     <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
     <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>

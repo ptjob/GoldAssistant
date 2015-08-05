@@ -101,6 +101,7 @@ import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.GroupDescription;
 import com.parttime.utils.IntentManager;
 import com.parttime.utils.SharePreferenceUtil;
+import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
 import com.quark.company.function.PersonAssessDetailActivity;
 import com.quark.jianzhidaren.ApplicationControl;
@@ -1255,11 +1256,26 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
      */
     public void more(View view) {
         if (more.getVisibility() == View.GONE) {
-            more.setVisibility(View.VISIBLE);
-            btnContainer.setVisibility(View.VISIBLE);
-            emojiIconContainer.setVisibility(View.GONE);
-            hideKeyboard();
-            //btnMore.setBackgroundResource(R.drawable.search_clear_pressed);
+            if(BuildConfig.DEBUG){
+                Log.i(TAG,"click more");
+            }
+            if (more.getVisibility() == View.GONE) {
+                micImageHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        more.setVisibility(View.VISIBLE);
+                        btnMore.setBackgroundResource(R.drawable.type_select_btn_pressed);
+                        btnContainer.setVisibility(View.VISIBLE);
+                        emojiIconContainer.setVisibility(View.GONE);
+                    }
+                });
+                micImageHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideKeyboard();
+                    }
+                });
+            }
         } else {
             if (emojiIconContainer.getVisibility() == View.VISIBLE) {
                 emojiIconContainer.setVisibility(View.GONE);

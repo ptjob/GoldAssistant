@@ -2,7 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@android:color/white"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:orientation="vertical">
 
 
@@ -16,17 +20,43 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="通知内容"
         android:id="@+id/group_notice_content"
-        android:layout_marginLeft="15dp" />
+        android:layout_marginLeft="14sp" />
 
-    <Button
+
+
+    <LinearLayout android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/edit"
-        android:id="@+id/edit"
-        android:drawableLeft="@drawable/ee_1"
-        android:drawablePadding="15dp"
+        android:orientation="horizontal"
+        android:background="@drawable/selector_form_button"
+        android:layout_marginTop="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:visibility="gone"/>
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/edit"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:paddingRight="20dp"
+            android:text="@string/edit"
+            style="@style/FormBlueButton"
+            android:gravity="center"
+            android:drawablePadding="15dp"
+            android:layout_gravity="center_horizontal"
+            />
+    </LinearLayout>
+
+
 </LinearLayout>
