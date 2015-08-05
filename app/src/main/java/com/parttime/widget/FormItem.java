@@ -25,9 +25,6 @@ public class FormItem extends FrameLayout{
     protected TextView tvValue;
     protected ImageView ivArrow;
 
-    protected View topDivider;
-    protected View bottomDivider;
-
     protected LayoutInflater inflater;
     protected Context context;
     private boolean initExecuted;
@@ -38,15 +35,6 @@ public class FormItem extends FrameLayout{
 
     protected boolean topDividerShown;
     protected boolean bottomDividerShown;
-
-    protected boolean topDividerLeftIndent;
-    protected boolean topDividerRightIndent;
-    protected boolean bottomDividerLeftIndent;
-    protected boolean bottomDividerRightIndent;
-    protected int topDividerLeftIndentValue;
-    protected int topDividerRightIndentValue;
-    protected int bottomDividerLeftIndentValue;
-    protected int bottomDividerRightIndentValue;
 
     public FormItem(Context context) {
         super(context);
@@ -100,73 +88,6 @@ public class FormItem extends FrameLayout{
         setClickable(true);
     }
 
-    public void setTopDividerIndent(boolean topLeft, boolean topRight){
-        topDividerLeftIndent = topLeft;
-        topDividerRightIndent = topRight;
-        updateTopDivider();
-    }
-
-    public void setBottomDividerIndent(boolean bottomLeft, boolean bottomRight){
-        bottomDividerLeftIndent = bottomLeft;
-        bottomDividerRightIndent = bottomRight;
-        updateBottomDivider();
-    }
-
-    protected void updateTopDivider(){
-        if(topDivider != null){
-            FrameLayout.LayoutParams fllp = (LayoutParams) topDivider.getLayoutParams();
-            if(topDividerLeftIndent){
-                fllp.leftMargin = topDividerLeftIndentValue;
-            }
-            if(topDividerRightIndent){
-                fllp.rightMargin = topDividerRightIndentValue;
-            }
-        }
-    }
-
-    protected void updateBottomDivider(){
-        if(bottomDivider != null){
-            FrameLayout.LayoutParams fllp = (LayoutParams) bottomDivider.getLayoutParams();
-            if(bottomDividerLeftIndent){
-                fllp.leftMargin = bottomDividerLeftIndentValue;
-            }
-            if(bottomDividerRightIndent){
-                fllp.rightMargin = bottomDividerRightIndentValue;
-            }
-        }
-    }
-
-    public void showTopDivider(){
-        if(topDivider == null){
-            topDivider = makeTopDivider();
-            addView(topDivider);
-        }else {
-            topDivider.setVisibility(View.VISIBLE);
-        }
-
-    }
-
-    public void hideTopDivider(){
-        if(topDivider != null){
-            topDivider.setVisibility(View.GONE);
-        }
-    }
-
-    public void showBottomDivider(){
-        if(bottomDivider == null){
-            bottomDivider = makeBotttomDidider();
-            addView(bottomDivider);
-        }else {
-            bottomDivider.setVisibility(View.VISIBLE);
-        }
-    }
-
-    public void hideBottomDivider(){
-        if(bottomDivider != null){
-            bottomDivider.setVisibility(View.GONE);
-        }
-    }
-
     private void checkDividers(){
         if(topDividerShown){
             addView(makeTopDivider());
@@ -177,7 +98,6 @@ public class FormItem extends FrameLayout{
     }
 
     private void assignXmlAttrs(AttributeSet attrs){
-        topDividerLeftIndentValue = topDividerRightIndentValue = bottomDividerLeftIndentValue = bottomDividerRightIndentValue = context.getResources().getDimensionPixelSize(R.dimen.form_item_margin_left);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FormItem);
         if(typedArray != null){
             Drawable drawable = typedArray.getDrawable(R.styleable.FormItem_form_icon);
@@ -205,19 +125,6 @@ public class FormItem extends FrameLayout{
 
             topDividerShown = typedArray.getBoolean(R.styleable.FormItem_topLine_shown, true);
             bottomDividerShown = typedArray.getBoolean(R.styleable.FormItem_bottomLine_shown, true);
-
-            topDividerLeftIndent = typedArray.getBoolean(R.styleable.FormItem_topLine_leftIndent, topDividerLeftIndent);
-            topDividerRightIndent = typedArray.getBoolean(R.styleable.FormItem_topLine_rightIndent, topDividerRightIndent);
-            bottomDividerLeftIndent = typedArray.getBoolean(R.styleable.FormItem_bottomLine_leftIndent, bottomDividerLeftIndent);
-            bottomDividerRightIndent = typedArray.getBoolean(R.styleable.FormItem_bottomLine_rightIndent, bottomDividerRightIndent);
-
-            topDividerLeftIndentValue = topDividerRightIndentValue
-                    = bottomDividerLeftIndentValue = bottomDividerRightIndentValue = typedArray.getDimensionPixelSize(R.styleable.FormItem_indentValue, topDividerLeftIndentValue);
-            topDividerLeftIndentValue = typedArray.getDimensionPixelSize(R.styleable.FormItem_topLine_leftIndentValue, topDividerLeftIndentValue);
-            topDividerRightIndentValue = typedArray.getDimensionPixelSize(R.styleable.FormItem_topLine_rightIndentValue, topDividerRightIndentValue);
-            bottomDividerLeftIndentValue = typedArray.getDimensionPixelSize(R.styleable.FormItem_bottomLine_leftIndentValue, bottomDividerLeftIndentValue);
-            bottomDividerRightIndentValue = typedArray.getDimensionPixelSize(R.styleable.FormItem_bottomLine_rightIndentValue, bottomDividerRightIndentValue);
-
         }
     }
 
@@ -231,12 +138,6 @@ public class FormItem extends FrameLayout{
         View divider = makeDivider();
         FrameLayout.LayoutParams fllp = new FrameLayout.LayoutParams(dividerLayoutWidth, dividerLayoutHeight);
         fllp.gravity = Gravity.TOP;
-        if(topDividerLeftIndent){
-            fllp.leftMargin = topDividerLeftIndentValue;
-        }
-        if(topDividerRightIndent){
-            fllp.rightMargin = topDividerRightIndentValue;
-        }
         divider.setLayoutParams(fllp);
         return divider;
     }
@@ -245,12 +146,6 @@ public class FormItem extends FrameLayout{
         View divider = makeDivider();
         FrameLayout.LayoutParams fllp = new FrameLayout.LayoutParams(dividerLayoutWidth, dividerLayoutHeight);
         fllp.gravity = Gravity.BOTTOM;
-        if(bottomDividerLeftIndent){
-            fllp.leftMargin = bottomDividerLeftIndentValue;
-        }
-        if(bottomDividerRightIndent){
-            fllp.rightMargin = bottomDividerRightIndentValue;
-        }
         divider.setLayoutParams(fllp);
         return divider;
     }

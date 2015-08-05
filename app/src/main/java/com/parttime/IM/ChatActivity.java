@@ -41,7 +41,6 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -78,7 +77,6 @@ import com.easemob.chat.VoiceMessageBody;
 import com.easemob.chatuidemo.activity.BaiduMapActivity;
 import com.easemob.chatuidemo.activity.BaseActivity;
 import com.easemob.chatuidemo.activity.ForwardMessageActivity;
-import com.parttime.addresslist.NormalGroupSettingActivity;
 import com.easemob.chatuidemo.adapter.ExpressionAdapter;
 import com.easemob.chatuidemo.adapter.ExpressionPagerAdapter;
 import com.easemob.chatuidemo.adapter.VoicePlayClickListener;
@@ -94,6 +92,7 @@ import com.easemob.util.VoiceRecorder;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.parttime.IM.activitysetting.GroupResumeSettingActivity;
+import com.parttime.addresslist.NormalGroupSettingActivity;
 import com.parttime.constants.ApplicationConstants;
 import com.parttime.net.DefaultCallback;
 import com.parttime.net.GroupSettingRequest;
@@ -101,6 +100,7 @@ import com.parttime.net.HuanXinRequest;
 import com.parttime.pojo.GroupDescription;
 import com.parttime.utils.IntentManager;
 import com.parttime.utils.SharePreferenceUtil;
+import com.qingmu.jianzhidaren.BuildConfig;
 import com.qingmu.jianzhidaren.R;
 import com.quark.company.function.PersonAssessDetailActivity;
 import com.quark.jianzhidaren.ApplicationControl;
@@ -1254,12 +1254,26 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
      * @param view View
      */
     public void more(View view) {
+        if(BuildConfig.DEBUG){
+            Log.i(TAG,"click more");
+        }
         if (more.getVisibility() == View.GONE) {
-            more.setVisibility(View.VISIBLE);
-            btnContainer.setVisibility(View.VISIBLE);
-            emojiIconContainer.setVisibility(View.GONE);
-            hideKeyboard();
-            //btnMore.setBackgroundResource(R.drawable.search_clear_pressed);
+            micImageHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    more.setVisibility(View.VISIBLE);
+                    btnMore.setBackgroundResource(R.drawable.type_select_btn_pressed);
+                    btnContainer.setVisibility(View.VISIBLE);
+                    emojiIconContainer.setVisibility(View.GONE);
+                }
+            });
+            micImageHandler.post(new Runnable() {
+                     @Override
+                     public void run() {
+                         hideKeyboard();
+                     }
+                 });
+
         } else {
             if (emojiIconContainer.getVisibility() == View.VISIBLE) {
                 emojiIconContainer.setVisibility(View.GONE);
