@@ -15,6 +15,7 @@ package com.parttime.IM;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
@@ -83,6 +84,7 @@ import com.qingmu.jianzhidaren.R;
 import com.quark.common.ToastUtil;
 import com.quark.guangchang.ActivityDetialActivity;
 import com.quark.http.image.LoadImage;
+import com.quark.image.UploadImg;
 import com.quark.jianzhidaren.ApplicationControl;
 import com.quark.model.HuanxinUser;
 import com.quark.volley.VolleySington;
@@ -119,8 +121,6 @@ public class MessageAdapter extends BaseAdapter {
 	private static final int MESSAGE_TYPE_RECV_VOICE_CALL = 13;
 	private static final int MESSAGE_TYPE_SENT_TXT_ZIDINGYI = 14;
 	private static final int MESSAGE_TYPE_RECV_TXT_ZIDINGYI = 15;
-	private static final int MESSAGE_TYPE_SENT_TXT_CUSTOMER_ACTIIVTY_SHARE = 16;
-	private static final int MESSAGE_TYPE_RECV_TXT_CUSTOMER_ACTIIVTY_SHARE = 17;
 
 	public static final String IMAGE_DIR = "chat/image/";
 	public static final String VOICE_DIR = "chat/audio/";
@@ -232,12 +232,8 @@ public class MessageAdapter extends BaseAdapter {
 					Constant.MESSAGE_ATTR_IS_VOICE_CALL, false)) {
 				if ("1".equals(message.getStringAttribute(
 						Constant.MESSAGE_ATTR_IS_EXTRA, "0"))) {
-                    return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_TXT_ZIDINGYI
-                            : MESSAGE_TYPE_SENT_TXT_ZIDINGYI;
-                } else if("1".equals(message.getStringAttribute(
-                        Constant.MESSAGE_SHARE_JOB, "0"))) {
-                    return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_TXT_CUSTOMER_ACTIIVTY_SHARE
-                            : MESSAGE_TYPE_SENT_TXT_CUSTOMER_ACTIIVTY_SHARE;
+					return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_TXT_ZIDINGYI
+							: MESSAGE_TYPE_SENT_TXT_ZIDINGYI;
 				} else {
 					return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_TXT
 							: MESSAGE_TYPE_SENT_TXT;
@@ -273,7 +269,7 @@ public class MessageAdapter extends BaseAdapter {
 	}
 
 	public int getViewTypeCount() {
-		return 18;
+		return 16;
 	}
 
 	private View createViewByMessage(EMMessage message) {
@@ -309,16 +305,10 @@ public class MessageAdapter extends BaseAdapter {
 			} else {
 				if ("1".equals(message.getStringAttribute(
 						Constant.MESSAGE_ATTR_IS_EXTRA, "0"))) {
-                    return message.direct == EMMessage.Direct.RECEIVE ? inflater
-                            .inflate(R.layout.row_received_message_zidingyi,
-                                    null) : inflater.inflate(
-                            R.layout.row_sent_message_zidingyi, null);
-                } else if ("1".equals(message.getStringAttribute(
-                        Constant.MESSAGE_SHARE_JOB, "0"))) {
-                    return message.direct == EMMessage.Direct.RECEIVE ? inflater
-                            .inflate(R.layout.row_received_message_share_job,
-                                    null) : inflater.inflate(
-                            R.layout.row_sent_message_share_job, null);
+					return message.direct == EMMessage.Direct.RECEIVE ? inflater
+							.inflate(R.layout.row_received_message_zidingyi,
+									null) : inflater.inflate(
+							R.layout.row_sent_message_zidingyi, null);
 				} else {
 					return message.direct == EMMessage.Direct.RECEIVE ? inflater
 							.inflate(R.layout.row_received_message, null)
@@ -385,7 +375,7 @@ public class MessageAdapter extends BaseAdapter {
 				// 拓展的消息体
 				if ("1".equals(message.getStringAttribute(
 						Constant.MESSAGE_ATTR_IS_EXTRA, "0"))) {
-					holder.customer_chat_layout = (RelativeLayout) convertView
+					holder.zidingyi_chat_layout = (RelativeLayout) convertView
 							.findViewById(R.id.zidingyi_chat_layout);// 拓展消息体
 					holder.tv = (TextView) convertView
 							.findViewById(R.id.tv_chatcontent);// 活动名称+工资
@@ -395,17 +385,15 @@ public class MessageAdapter extends BaseAdapter {
 							.findViewById(R.id.tv_job_date);
 					holder.tv_job_zhaomurenshu = (TextView) convertView// 工作招募人数
 							.findViewById(R.id.tv_job_zhaomu_renshu);
-				}else if("1".equals(message.getStringAttribute(
-                        Constant.MESSAGE_SHARE_JOB, "0"))){
-                    holder.tv = (TextView) convertView
-                            .findViewById(R.id.tv_chatcontent);// 活动名称+工资
-                    holder.tv_job_place = (TextView) convertView// 工作区域
-                            .findViewById(R.id.tv_job_place);
-                    holder.tv_job_time = (TextView) convertView// 工作时间
-                            .findViewById(R.id.tv_job_date);
-                    holder.tv_job_zhaomurenshu = (TextView) convertView// 工作招募人数
-                            .findViewById(R.id.tv_activity_detail);
-                }
+				}
+                /*关于新版本兼职活动分享：
+                    判断是否是分享的图文格式用 message.getStringAttribute("share_job"),
+                    若值为"1"，则是新的分享，里面包含字段有:
+                    activityId:活动id
+                    activityJobPlace:工作区域
+                    activityTitle:活动标题
+                    activitySalary:薪资(如:100元/天)
+                    都是String类型的字段解析，对应到messageAdapter中更改，之前的解析仍然保留！*/
 
 			} else if (message.getType() == EMMessage.Type.VOICE) {
 				try {
@@ -902,67 +890,40 @@ public class MessageAdapter extends BaseAdapter {
 		} else {
 			holder.tv.setText(span, BufferType.SPANNABLE);
 		}
-        // 如果是拓展消息的文本
+		// 如果是拓展消息的文本
 		if ("1".equals(message.getStringAttribute(
 				Constant.MESSAGE_ATTR_IS_EXTRA, "0"))) {
 
-            final String activityId = message.getStringAttribute("activityId",
-                    "");
-            String activityTitle = message.getStringAttribute("activityTitle",
-                    "");
-            String activityXinZi = message.getStringAttribute("activityXinZi",
-                    "");
-            String activityJobPlace = message.getStringAttribute(
-                    "activityJobPlace", "");
-            String activityStartTime = message.getStringAttribute(
-                    "activityStartTime", "");
-            String leftcount = message.getStringAttribute("leftCount", "0");
-            holder.tv.setText(activityTitle + activityXinZi);
-            holder.tv_job_place.setText("工作区域:" + activityJobPlace);
-            holder.tv_job_time.setText("工作时间:" + activityStartTime);
-            holder.tv_job_zhaomurenshu.setText("还差人数:" + leftcount + "人");
+			final String activityId = message.getStringAttribute("activityId",
+					"");
+			String activityTitle = message.getStringAttribute("activityTitle",
+					"");
+			String activityXinZi = message.getStringAttribute("activityXinZi",
+					"");
+			String activityJobPlace = message.getStringAttribute(
+					"activityJobPlace", "");
+			String activityStartTime = message.getStringAttribute(
+					"activityStartTime", "");
+			String leftcount = message.getStringAttribute("leftCount", "0");
+			holder.tv.setText(activityTitle + activityXinZi);
+			holder.tv_job_place.setText("工作区域:" + activityJobPlace);
+			holder.tv_job_time.setText("工作时间:" + activityStartTime);
+			holder.tv_job_zhaomurenshu.setText("还差人数:" + leftcount + "人");
 
-            holder.customer_chat_layout
-                    .setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View arg0) {
-                            // 跳转到活动详情界面
-                            Intent intent = new Intent();
-                            intent.setClass(context,
-                                    ActivityDetialActivity.class);
-                            intent.putExtra("activity_id", activityId);
-                            intent.putExtra("isComeFromGuangChang", false);
-                            context.startActivity(intent);
+			holder.zidingyi_chat_layout
+					.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View arg0) {
+							// 跳转到活动详情界面
+							Intent intent = new Intent();
+							intent.setClass(context,
+									ActivityDetialActivity.class);
+							intent.putExtra("activity_id", activityId);
+							intent.putExtra("isComeFromGuangChang", false);
+							context.startActivity(intent);
 
-                        }
-                    });
-        } else if("1".equals(message.getStringAttribute(
-                Constant.MESSAGE_SHARE_JOB, "0"))){
-            /*关于新版本兼职活动分享：
-                    判断是否是分享的图文格式用 message.getStringAttribute("share_job"),
-                    若值为"1"，则是新的分享，里面包含字段有:
-                    activityId:活动id
-                    activityJobPlace:工作区域
-                    activityTitle:活动标题
-                    activitySalary:薪资(如:100元/天)
-                    都是String类型的字段解析，对应到messageAdapter中更改，之前的解析仍然保留！*/
-            final String activityId = message.getStringAttribute("activityId","");
-            String activityJobPlace = message.getStringAttribute("activityJobPlace", "");
-            String activityTitle = message.getStringAttribute("activityTitle","");
-            String activitySalary = message.getStringAttribute("activitySalary","");
-
-            holder.tv.setText(activityJobPlace);
-            holder.tv_job_place.setText(activityTitle);
-            holder.tv_job_time.setText(activitySalary);
-            holder.tv_job_zhaomurenshu.setOnClickListener(new OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    IntentManager.openJobDetailActivity(activity,
-                            Integer.valueOf(activityId),
-                            activity.toChatUsername);
-                }
-            });
-
+						}
+					});
 		} else {
 			// 设置长按事件监听
 			holder.tv.setOnLongClickListener(new OnLongClickListener() {
@@ -1072,7 +1033,7 @@ public class MessageAdapter extends BaseAdapter {
 					holder.iv, filePath, null, message);
 		} else {
 			showImageView(ImageUtils.getThumbnailImagePath(filePath),
-                    holder.iv, filePath, IMAGE_DIR, message);
+					holder.iv, filePath, IMAGE_DIR, message);
 		}
 
 		switch (message.status) {
@@ -1286,17 +1247,17 @@ public class MessageAdapter extends BaseAdapter {
 		VoiceMessageBody voiceBody = (VoiceMessageBody) message.getBody();
 		holder.tv.setText(voiceBody.getLength() + "\"");
 		holder.iv.setOnClickListener(new VoicePlayClickListener(message,
-                holder.iv, holder.iv_read_status, this, activity, username));
+				holder.iv, holder.iv_read_status, this, activity, username));
 		holder.iv.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                activity.startActivityForResult((new Intent(activity,
-                                ContextMenu.class)).putExtra("position", position)
-                                .putExtra("type", EMMessage.Type.VOICE.ordinal()),
-                        ChatActivity.REQUEST_CODE_CONTEXT_MENU);
-                return true;
-            }
-        });
+			@Override
+			public boolean onLongClick(View v) {
+				activity.startActivityForResult((new Intent(activity,
+						ContextMenu.class)).putExtra("position", position)
+						.putExtra("type", EMMessage.Type.VOICE.ordinal()),
+						ChatActivity.REQUEST_CODE_CONTEXT_MENU);
+				return true;
+			}
+		});
 		if ((activity).playMsgId != null
 				&& (activity).playMsgId.equals(message
 						.getMsgId()) && VoicePlayClickListener.isPlaying) {
@@ -1515,7 +1476,7 @@ public class MessageAdapter extends BaseAdapter {
 		locationView.setText(locBody.getAddress());
 		LatLng loc = new LatLng(locBody.getLatitude(), locBody.getLongitude());
 		locationView.setOnClickListener(new MapClickListener(loc, locBody
-                .getAddress()));
+				.getAddress()));
 		locationView.setOnLongClickListener(new OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
@@ -1816,7 +1777,7 @@ public class MessageAdapter extends BaseAdapter {
 		} else {
 
 			new LoadImageTask().execute(thumbernailPath, localFullSizePath,
-                    remote, message.getChatType(), iv, activity, message);
+					remote, message.getChatType(), iv, activity, message);
 			return true;
 		}
 
@@ -1898,7 +1859,7 @@ public class MessageAdapter extends BaseAdapter {
 		TextView tv_file_size;
 		TextView tv_file_download_state;
 		// 拓展消息体
-		RelativeLayout customer_chat_layout;
+		RelativeLayout zidingyi_chat_layout;
 		TextView tv_job_place;// 工作地点
 		TextView tv_job_time;// 工作时间
 		TextView tv_job_zhaomurenshu;// 招募人数

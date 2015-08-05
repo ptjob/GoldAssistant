@@ -145,8 +145,9 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 			rvRank.rank((int) function.getPoint());
 			String certString = getCertString();
 //			tvCertState.setText(certString);
-			tvCertState.setText(getCertStringForIcon());
+			ivCertStatus.setSelected(function.getCompany_status() == CertStatus.CERT_PASSED);
 			if(function.getType() == AccountType.AGENT) {
+				fiMyIntro.setBottomDividerIndent(false, false);
 				fiMyFans.setValue(getString(R.string.x_ge_in_chinese, function.getFollowers()));
 				fiMyFans.setVisibility(View.VISIBLE);
 			}
@@ -272,7 +273,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	private RankView rvRank;
 
 	@ViewInject(R.id.tv_cert_state)
-	private TextView tvCertState;
+	private ImageView ivCertStatus;
 
 	@ViewInject(R.id.tv_title)
 	private TextView tvTitle;

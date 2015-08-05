@@ -76,7 +76,7 @@ public class CountingEditText extends EditText {
 
     private void init(Context context, AttributeSet attrs){
         this.context = context;
-        countTextColor = 0xff666666;
+        countTextColor = context.getResources().getColor(R.color.txt_color_gray);
         countTextSize = context.getResources().getDimensionPixelSize(R.dimen.counting_text_default_size);
         countBarHeight = context.getResources().getDimensionPixelSize(R.dimen.counting_bar_default_height);
 
