@@ -510,16 +510,6 @@
             android:label="@string/title_activity_send_admit_to_email"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name="com.parttime.addresslist.GroupUpdateRemarkActivity"
-            android:label="@string/title_activity_group_update_remark"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name="com.parttime.IM.VideoSurfaceActivity"
-            android:label="@string/title_activity_group_update_remark"
-            android:screenOrientation="portrait">
-        </activity>
         <!-- 普通群设置 -->
         <activity
             android:name="com.parttime.addresslist.userdetail.UserDetailActivity"
@@ -629,7 +619,7 @@
         <activity
             android:name="com.parttime.common.Image.ImageShowActivity"
             android:label="@string/title_activity_image_show"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
         </activity>
         <!-- 公开的群聊列表 -->
         <activity
@@ -942,10 +932,10 @@
         <activity
             android:name="com.parttime.mine.BeforeCertedActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
+            android:windowSoftInputMode="stateHidden"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:windowSoftInputMode="stateHidden" />
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="com.parttime.mine.PersonalCertedActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -955,10 +945,10 @@
         <activity
             android:name="com.parttime.mine.AfterCertedActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
+            android:windowSoftInputMode="stateHidden"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:windowSoftInputMode="stateHidden" />
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="com.parttime.login.RegisterInfoActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -984,6 +974,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         CitySelectActivity
+
         <activity
             android:name="com.parttime.mine.RechargeActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -1010,10 +1001,12 @@
             android:name="com.parttime.publish.JobManageActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
+
         <activity
             android:name="com.parttime.publish.JobExpeditedActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
+
         <activity
             android:name="com.parttime.publish.JobExpansionActivity"
             android:screenOrientation="portrait"
@@ -1040,7 +1033,7 @@
             android:name="com.parttime.common.activity.ChooseListActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
+        
     </application>
 
 </manifest>

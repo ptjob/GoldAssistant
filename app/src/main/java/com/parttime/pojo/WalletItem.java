@@ -8,4 +8,5 @@ public class WalletItem {
     public int type;
     public String pay_time;
     public int is_pay;
+    public double money;
 }

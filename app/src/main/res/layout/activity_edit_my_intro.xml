@@ -51,7 +51,7 @@
             <com.parttime.widget.CountingEditText
                 android:id="@+id/cet_intro"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="176dp"
                 app:cet_maxLen="500"
                 android:background="@drawable/shape_intro_enter_bg"
                 android:gravity="top"
@@ -80,9 +80,12 @@
                 android:layout_marginLeft="@dimen/common_margin"
                 android:layout_marginRight="@dimen/common_margin"
                 app:sl_textColor="@color/select_layout_text_color"
-                app:sl_textSize="14sp"
+                app:sl_textSize="14dp"
                 app:sl_itemBackground="@drawable/selector_select_item"
                 app:sl_maxSelectCount="5"
+                app:csil_itemHeight="33dp"
+                app:csil_horizontalInnerMargin="10dp"
+                app:csil_verticleInnerMargin="10dp"
                 android:visibility="gone"/>
 
             <Button

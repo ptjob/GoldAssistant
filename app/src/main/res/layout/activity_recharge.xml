@@ -11,7 +11,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_width"
-        android:background="@color/divider_color"/>
+        android:background="@color/form_divider"/>
     
     <com.parttime.widget.SingleSelectLayout
         android:id="@+id/ssl_amount"
@@ -23,7 +23,7 @@
         android:paddingBottom="10dp"
         android:background="@color/white"
         app:csil_columnCount="3"
-        app:csil_itemHeight="24dp"
+        app:csil_itemHeight="33dp"
         app:csil_horizontalInnerMargin="10dp"
         app:csil_verticleInnerMargin="10dp"
         app:sl_textColor="@color/select_layout_text_color"
@@ -32,7 +32,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_width"
-        android:background="@color/divider_color"/>
+        android:background="@color/form_divider"/>
 
     <TextView
         style="@style/FormTitle"

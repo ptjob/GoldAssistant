@@ -14,7 +14,7 @@
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_marginLeft="9dp"
-        android:background="@drawable/chatting_switcher_btn"
+        android:background="@drawable/backto"
         android:visibility="gone" />
 
     <Button
@@ -95,11 +95,13 @@
             android:layout_height="match_parent"
             android:layout_toLeftOf="@id/fl_emotion"
             android:background="@drawable/shape_im_edit"
-            android:paddingLeft="3dp"
             android:maxLines="3"
             android:minHeight="40dp"
             android:onClick="editClick"
             android:textSize="18sp" />
+
+
+
 
     </RelativeLayout>
 
@@ -111,7 +113,7 @@
         android:layout_height="28dp"
         android:layout_marginRight="9dp"
         android:layout_gravity="center_vertical"
-        android:background="@drawable/checkbox_chat_more"
+        android:background="@drawable/type_select_btn"
         android:onClick="more" />
 
     <Button

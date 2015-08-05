@@ -7,10 +7,9 @@
     <TextView
         android:id="@+id/tv_join_in_qq_group"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="31.5dp"
         android:gravity="center"
-        android:textSize="13sp"
-        android:paddingTop="9dp"
+        android:textSize="13dp"
         android:text="@string/welcome_to_join_in_qq_group"/>
 
     <com.parttime.widget.CountingEditText
@@ -18,6 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="179dp"
         app:cet_maxLen="200"
+        android:textSize="15dp"
+        android:textColor="@color/txt_color_black"
+        android:textColorHint="@color/txt_color_gray"
         android:background="#ffffff"
         android:gravity="top"
         android:paddingTop="10dp"
@@ -28,7 +30,7 @@
 
     <Button
         android:id="@+id/btn_send"
-        style="@style/CommonButton.Blue"
+        style="@style/CommonButton.Orange"
         android:layout_marginTop="15dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"

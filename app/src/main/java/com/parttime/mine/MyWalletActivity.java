@@ -75,9 +75,15 @@ public class MyWalletActivity extends LocalInitActivity implements XListView.IXL
                             wi = gson.fromJson(s, WalletItem.class);
                             wis.add(wi);
                         }
+
                         setDatas(wis, false);
                         updateViews();
+
+
                     }
+                    int resultLen = bills != null ? billPage.length() : 0;
+                    xlv.setLoadOver(resultLen, PAGE_SIZE);
+                    xlv.stopRefresh();
                 }
 
             } catch (JSONException e) {
@@ -117,9 +123,12 @@ public class MyWalletActivity extends LocalInitActivity implements XListView.IXL
                             wis.add(wi);
                         }
                         setDatas(wis, true);
-                        xlv.stopLoadMore();
+
                         updateViews();
                     }
+                    int resultLen = bills != null ? bills.length() : 0;
+                    xlv.setLoadOver(resultLen, PAGE_SIZE);
+                    xlv.stopLoadMore();
                 }
 
             } catch (JSONException e) {
@@ -248,7 +257,7 @@ public class MyWalletActivity extends LocalInitActivity implements XListView.IXL
                 convertView = inflater.inflate(R.layout.item_my_wallet, xlv, false);
                 holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
                 holder.tvType = (TextView) convertView.findViewById(R.id.tv_type);
-                holder.tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
+//                holder.tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
                 holder.tvTime = (TextView) convertView.findViewById(R.id.tv_time);
                 convertView.setTag(holder);
             }else {
@@ -256,6 +265,19 @@ public class MyWalletActivity extends LocalInitActivity implements XListView.IXL
             }
             WalletItem wi = (WalletItem) getItem(position);
             holder.tvTitle.setText(wi.title);
+            if(wi.pay_time != null){
+                String[] split = wi.pay_time.split("\\s+");
+                if(split != null && split.length > 0){
+                    holder.tvTime.setText(split[0]);
+                }else {
+                    holder.tvTime.setText("");
+                }
+            }else {
+                holder.tvTime.setText("");
+            }
+            holder.tvType.setText(wi.type == 1 ?  String.format("+%.2f", wi.money) : String.format("-%.2f", wi.money));
+            holder.tvType.setSelected(wi.type != 1);
+//            holder.tvType.
 //            holder.tvType.setText(wi.type);
             return convertView;
         }
@@ -264,7 +286,7 @@ public class MyWalletActivity extends LocalInitActivity implements XListView.IXL
             public TextView tvTitle;
             public TextView tvType;
             public TextView tvTime;
-            public TextView tvStatus;
+//            public TextView tvStatus;
         }
     }
 }
