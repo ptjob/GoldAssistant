@@ -85,25 +85,9 @@ public class AfterCertedActivity extends WithTitleActivity{
         initViewByStatus();
     }
 
-    private String getMaskString(String s){
-        if(s == null){
-            return null;
-        }
-        if(s.length() <= 2){
-            return s.replaceAll(".", "*");
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append(s.charAt(0));
-        for(int i = 0; i < s.length() - 1; ++i){
-            sb.append("*");
-        }
-        sb.append(s.charAt(s.length() - 1));
-        return sb.toString();
-    }
-
     private void initViewByStatus(){
         eiName.setValue(certVo.name);
-        eiIdNum.setValue(getMaskString(certVo.idNum));
+        eiIdNum.setValue(certVo.idNum);
         eiIdNum.setEnabled(false);
         eiName.setEnabled(false);
         if(certVo.accountType == AccountType.ENTERPRISE || !TextUtils.isEmpty(certVo.regId)){

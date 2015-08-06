@@ -3,7 +3,7 @@
 android:id="@+id/more"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:background="#ffffff"
+android:background="@color/c_F5F5F5"
 android:orientation="vertical"
 android:visibility="gone" >
 
@@ -168,7 +168,7 @@ android:visibility="gone" >
                 android:clickable="true"
                 android:onClick="onClick"
                 android:scaleType="fitCenter"
-                android:src="@drawable/chat_video_selector" />
+                android:src="@drawable/chat_activity_management_selector" />
 
             <TextView
                 android:layout_width="match_parent"

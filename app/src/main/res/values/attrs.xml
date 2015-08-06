@@ -67,15 +67,6 @@
         <attr name="form_title" format="string"/>
         <attr name="form_value" format="string"/>
         <attr name="form_tips" format="string"/>
-        <attr name="topLine_leftIndent" format="boolean"/>
-        <attr name="topLine_rightIndent" format="boolean"/>
-        <attr name="bottomLine_leftIndent" format="boolean"/>
-        <attr name="bottomLine_rightIndent" format="boolean"/>
-        <attr name="topLine_leftIndentValue" format="dimension"/>
-        <attr name="topLine_rightIndentValue" format="dimension"/>
-        <attr name="bottomLine_leftIndentValue" format="dimension"/>
-        <attr name="bottomLine_rightIndentValue" format="dimension"/>
-        <attr name="indentValue" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="FormSetting">

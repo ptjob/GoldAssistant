@@ -42,9 +42,7 @@
         android:layout_height="@dimen/form_item_height"
         android:layout_marginTop="@dimen/form_items_margin"
         android:gravity="center"
-        android:textColor="@color/common_txt_color"
-        android:textSize="15dp"
-        android:background="@drawable/selector_form_btn_red"
+        android:background="@drawable/item_selector"
         android:text="@string/button_logout"/>
 
 </LinearLayout>

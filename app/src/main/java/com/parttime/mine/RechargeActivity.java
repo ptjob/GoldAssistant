@@ -152,7 +152,7 @@ public class RechargeActivity extends LocalInitActivity {
         rechargeAmount = yuans[sslAmount.getSelectedindex()];
         Map<String, String> params = new HashMap<>();
         params.put("company_id", getCompanyId());
-        params.put("charge_money", rechargeAmount + "");
+        params.put("charge_money", /*rechargeAmount*/0.1 + "");
         params.put("charge_type", 0 + "");
         new BaseRequest().request(Url.COMPANY_recharge_lproduct, params, VolleySington.getInstance().getRequestQueue(), new Callback() {
             @Override
@@ -251,7 +251,7 @@ public class RechargeActivity extends LocalInitActivity {
 
         // 服务器异步通知页面路径
         orderInfo += "&notify_url=" + "\""
-                + Url.COMPANY_recharge_AliPay + "\"";
+                + Url.COMPANY_recharge_AliPayAsynNotify + "\"";
 
         // 服务接口名称， 固定值
         orderInfo += "&service=\"mobile.securitypay.pay\"";

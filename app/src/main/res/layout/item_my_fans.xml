@@ -18,8 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/iv_head"
         android:layout_marginLeft="@dimen/common_margin"
-        android:textSize="17dp"
-        android:textColor="@color/txt_color_black"
         android:text="用户名123"/>
 
     <TextView
@@ -28,8 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/tv_name"
         android:layout_below="@id/tv_name"
-        android:textSize="14dp"
-        android:textColor="@color/txt_color_black"
         android:layout_marginTop="4dp"
         android:text="未交诚意金"/>
 
@@ -39,8 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/tv_sincere_moneys"
         android:layout_alignTop="@id/tv_sincere_moneys"
-        android:textSize="14dp"
-        android:textColor="@color/txt_color_black"
         android:layout_marginLeft="10dp"/>
 
     <LinearLayout
@@ -56,20 +50,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textSize="14dp"
-            android:textColor="@color/txt_color_black"
             android:text="@string/credit_value"/>
 
         <com.parttime.widget.RankView
             android:id="@+id/rv_credit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="14dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            app:rv_item_width="14dp"
-            app:rv_item_height="14dp"
-            app:rv_full_img="@drawable/red_heart"
-            app:rv_empty_img="@drawable/red_heart" />
+            app:rv_total_score="5"/>
     </LinearLayout>
 
 

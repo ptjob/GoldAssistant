@@ -41,5 +41,9 @@ public class ActivityExtraAndKeys {
         public static String PICTURES = "pictures";
     }
 
+    public static class GroupUpdateRemark{
+        public static String USER_NAME = "USER_NAME";
+    }
+
 
 }

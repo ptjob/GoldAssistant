@@ -52,27 +52,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/id_front"/>
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/ll_front_text"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_gravity="center">-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--android:text="@string/click_to_upload"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/common_txt_color"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--android:text="@string/front_of_id_card"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/common_txt_color"/>-->
-                <!--</LinearLayout>-->
+                <LinearLayout
+                    android:id="@+id/ll_front_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/click_to_upload"
+                        android:textSize="15sp"
+                        android:textColor="@color/common_txt_color"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/front_of_id_card"
+                        android:textSize="15sp"
+                        android:textColor="@color/common_txt_color"/>
+                </LinearLayout>
             </FrameLayout>
 
             <FrameLayout
@@ -86,27 +86,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/id_back"/>
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/ll_back_text"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_gravity="center">-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--android:text="@string/click_to_upload"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/common_txt_color"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--android:text="@string/back_of_id_card"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/common_txt_color"/>-->
-                <!--</LinearLayout>-->
+                <LinearLayout
+                    android:id="@+id/ll_back_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/click_to_upload"
+                        android:textSize="15sp"
+                        android:textColor="@color/common_txt_color"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/back_of_id_card"
+                        android:textSize="15sp"
+                        android:textColor="@color/common_txt_color"/>
+                </LinearLayout>
             </FrameLayout>
 
             <FrameLayout
@@ -120,27 +120,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/license"/>
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/ll_enterprise_reg_id"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_gravity="center">-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--android:text="@string/click_to_upload"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/common_txt_color"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--android:text="@string/open_license_front"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/common_txt_color"/>-->
-                <!--</LinearLayout>-->
+                <LinearLayout
+                    android:id="@+id/ll_enterprise_reg_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/click_to_upload"
+                        android:textSize="15sp"
+                        android:textColor="@color/common_txt_color"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/open_license_front"
+                        android:textSize="15sp"
+                        android:textColor="@color/common_txt_color"/>
+                </LinearLayout>
             </FrameLayout>
 
             <Button
